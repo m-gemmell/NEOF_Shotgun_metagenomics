@@ -1,0 +1,33 @@
+--- 
+title: "Shotgun Metagenomics"
+author: "Sam Haldenby and Matthew Gemmell"
+date: "`r Sys.Date()`"
+site: bookdown::bookdown_site
+output: bookdown::gitbook
+documentclass: book
+bibliography: [book.bib, packages.bib]
+biblio-style: apalike
+link-citations: yes
+---
+
+```{r, fig.align = 'center',out.width= '30%', echo=FALSE }
+knitr::include_graphics(path = "figures/NEOF.png", auto_pdf = TRUE)
+``` 
+
+# Introduction
+```{r, fig.align = 'center',out.width= '20%', echo=FALSE }
+knitr::include_graphics(path = "figures/squid.png", auto_pdf = TRUE)
+``` 
+
+This practical session aims to introduce you to the analysis of Shotgun metagenomic data. The topics covered are:
+
+- Overview
+- Raw data
+- Trimming data
+- Taxonomic profiling
+- Functional profiling
+- Metagenome assembly
+- Gene prediction
+- Functional annotation
+- Co-assembly
+- Comparative analysis

@@ -1,0 +1,109 @@
+--- 
+title: "Shotgun Metagenomics"
+author: "Sam Haldenby and Matthew Gemmell"
+date: "`r Sys.Date()`"
+site: bookdown::bookdown_site
+output: bookdown::gitbook
+documentclass: book
+bibliography: [book.bib, packages.bib]
+biblio-style: apalike
+link-citations: yes
+---
+
+```{r, fig.align = 'center',out.width= '30%', echo=FALSE }
+knitr::include_graphics(path = "figures/NEOF.png", auto_pdf = TRUE)
+``` 
+
+# Introduction
+```{r, fig.align = 'center',out.width= '20%', echo=FALSE }
+knitr::include_graphics(path = "figures/squid.png", auto_pdf = TRUE)
+``` 
+
+This practical session aims to introduce you to the analysis of Shotgun metagenomic data. The topics covered are:
+
+- Overview
+- Raw data
+- Trimming data
+- Taxonomic profiling
+- Functional profiling
+- Metagenome assembly
+- Gene prediction
+- Functional annotation
+- Co-assembly
+- Comparative analysis
+
+<!--chapter:end:01-Shotgun_metagenomics.Rmd-->
+
+# Overview
+```{r, fig.align = 'center',out.width= '20%', echo=FALSE }
+knitr::include_graphics(path = "figures/overview.png", auto_pdf = TRUE)
+``` 
+
+## What is metagenomics?
+```{r, fig.align = 'center',out.width= '10%', echo=FALSE }
+knitr::include_graphics(path = "figures/what.png", auto_pdf = TRUE)
+``` 
+
+__Meta /ˈmɛtə/ : prefix meaning “higher” or “beyond”__
+
+Metagenomics is the study of genes and genetic material recovered from environmental samples (whether from the sea, soil, human gut, or anywhere else you can imagine). Unlike genomics, metagenomics deals with a multitude of usually diverse species rather than focussing on a single species/genome.
+
+## Why metagenomics?
+```{r, fig.align = 'center',out.width= '10%', echo=FALSE }
+knitr::include_graphics(path = "figures/why.png", auto_pdf = TRUE)
+``` 
+
+Microbes exist virtually everywhere on Earth, even in some of the most seemingly hostile environments. Every process on our planet is influenced in some way by the actions of microbes, and all higher organisms are intrinsically associated with microbial communities. 
+
+While much can be learned from studying the genome of a single microbial species in isolation, it does not provide us with any information regarding that species neighbours, i.e. what else is in its natural environment?  Metagenomics offers a top-down approach which allows researchers to investigate and understand interactions between species in different environments, thus providing a much broader and complete picture.
+
+## Metagenomics vs Metagenetics
+```{r, fig.align = 'center',out.width= '10%', echo=FALSE }
+knitr::include_graphics(path = "figures/16s_vs_shotgun.png", auto_pdf = TRUE)
+``` 
+
+Broadly speaking, there are two families of metagenomic analysis: 
+
+- __Amplicon-based__: This utilises sequencing data generated from amplified marker sequences, for example, regions of the 16S rRNA. Sequences are clustered together and taxonomically assigned to estimate the species abundance in a sample. This is sometimes referred to metagenetics, as it does not consist of any genomic analysis beyond the marker gene regions.
+- __Shotgun__: This utilises sequencing data generated from random fragments from total genomic DNA from environmental samples, rather than targeting specific genes. This approach allows for not only species abundance determination but direct functional analysis, too, due to having information on a wide range of genetic data sampled from the population. This is sometimes referenced as metagenomics, as it involves genome-wide analyses. Shotgun metagenomics is the focus of this practical session.
+
+## Tutorial overview
+```{r, fig.align = 'center',out.width= '10%', echo=FALSE }
+knitr::include_graphics(path = "figures/tutorial.png", auto_pdf = TRUE)
+``` 
+
+### Basics
+
+This tutorial and practical session focuses on performing a range of metagenomic analyses using shotgun sequence data from the Illumina platforms. 
+
+The analyses discussed here are by no means exhaustive and are instead intended to provide a sample of what can be done with a metagenomic dataset. 
+
+Virtually the entire tutorial will be carried out on the command line, which you will hopefully now be more comfortable with.
+
+### Structure
+
+We prefer to allow people to work at a pace that they are comfortable with rather than ensuring that everyone is at the same point of the tutorial at the same time. So, there will be no instructor telling you what to type and click: Instead, everything you require to carry out the practical is written in the document. Take your time; it's important to spend some time understanding why you are running the commands, rather than simply typing them out. 
+
+If at any point you are having trouble or have a question, let one of us know and we'll provide 1-to-1 assistance.
+
+### Content
+
+This practical is broken up into the following broad sections.
+
+1. __Raw data__: We will first link to a dataset that we have downloaded for this tutorial. We will take a quick look at what the sequence files look like and briefly discuss the origin of the samples.
+2. __Trimming data__: This entails preprocessing our data to ensure that it is of good quality.
+3. __Taxonomic profiling__: We will analyse the dataset to determine the species abundance in each sample. Following this, we will visualise the data and compare the samples.
+4. __Functional profiling__: We will analyse the dataset to determine the pathway abundance and completeness in each sample. Following this, we will visualise the data and compare the samples.
+5. __Metagenome assembly__: Here, we will move away from just analysing the reads directly and will assemble the metagenome into contigs. Prior to this, we will 'stitch' the reads together to ensure we get the best assembly possible.
+6. __Gene prediction__:  We will take our metagenome assembly, search for genes...
+7. __Functional annotation__: ...and then functionally annotate them with information from various databases. We will then visualise some of the output.
+8. __Co-assembly__: Instead of just looking at the functional composition of one metagenome sample, we will discuss methods of combining all samples to carry out a co-assembly and then obtain normalised gene coverage statistics for use in comparative analyses between samples.
+9. __Comparative analysis__: Using our data from the previous step, we will look at a couple of different ways of comparing the functional profiles of our samples
+All the analyses here are just examples of how you could interrogate a metagenomic dataset: There are, of course, many other ways to tackle such a set. 
+
+__Don't worry if you don't manage to finish the whole practical!__  
+
+The more commonly used analyses have been put at the front of the practical (Section 1-4) with the less standard ones being placed towards the end. We will provide you with all of the intermediate and results files on request.
+
+<!--chapter:end:02-Overview.Rmd-->
+
