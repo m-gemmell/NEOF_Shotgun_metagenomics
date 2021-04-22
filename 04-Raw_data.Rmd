@@ -1,0 +1,91 @@
+# Raw data
+```{r, fig.align = 'center',out.width= '20%', echo=FALSE }
+knitr::include_graphics(path = "figures/usb_stick.png", auto_pdf = TRUE)
+``` 
+
+The very first thing we need to do is to obtain a dataset to work with. The European Bioinformatics Institute (EBI) provides an excellent metagenomics resource (https://www.ebi.ac.uk/metagenomics/) which allows users to download publicly available metagenomic and metagenetic datasets.
+
+Have a browse of some of the projects by selecting one of the biomes on this page.
+
+We have selected a dataset from this site that consists of DNA shotgun data generated from 24 human faecal samples. 12 of these samples are from subjects who were fed a western diet and 12 are from subjects who were fed a Korean diet. This dataset comes from the EBI metagenomics resource (https://www.ebi.ac.uk/metagenomics/projects/ERP005558).
+
+## Obtaining the data
+```{r, fig.align = 'center',out.width= '15%', echo=FALSE }
+knitr::include_graphics(path = "figures/link.png", auto_pdf = TRUE)
+``` 
+
+First, we need to create a directory to put the data in and then change directory to it.
+
+```{bash eval=FALSE}
+mkdir 1-Raw
+cd 1-Raw
+```
+
+Now we can generate a symbolic link (i.e. shortcut) to the raw sequence data files, which will appear in the current directory:
+
+```{bash eval=FALSE}
+linkFiles
+```
+
+All that this command did is run a script which creates a ‘symbolic link’ (like a shortcut in Windows) to the read files that we will be using (The appendix of this document contains the commands used to download these files directly from the EBI metagenomics site) Now, check they are there with:
+
+```{bash eval=FALSE}
+ls
+```
+
+There should be six files in the directory, two for each sample in the dataset. e.g. `K1_R1.fastq.gz`
+
+The file ID has three components:
+
+- K1 is the sample ID. 
+- R1 is for the first reads in the Illumina reads pair (R2 is for the set corresponding to the other end of the reads). 
+- fastq.gz tells us that this is a zipped FASTQ file.
+
+The sample labelling indicates the type treatment samples. The three samples are:
+
+- __K1__: Fecal sample of individual of Korean diets
+- __K2__: Fecal sample of individual of Korean diets
+- __W1__: Fecal sample of individual of Western diets
+
+So, what do the R1 and R2 actually mean? With Illumina sequencing the vast majority of sequencing is paired end. i.e. DNA is first fragmented and both ends of each fragment are sequenced as shown here:
+
+```{r, fig.align = 'center',out.width= '40%', echo=FALSE }
+knitr::include_graphics(path = "figures/paired_reads.png", auto_pdf = TRUE)
+``` 
+
+This results in two sequences generated for each sequenced fragment: One reading in from the 3' end (R1) and the other reading in from the 5' end (R2).
+
+FASTQ is a sequence format much like FASTA, with the addition of quality scores. To see what a FASTQ file looks like, we can inspect the first few lines on one of our sequence files:
+
+```{bash eval=FALSE}
+zcat K1_R1.fastq.gz | head -n 4 | less -S
+```
+
+The pipe symbol ( `|` ) is used to pass the output of one command as input to the next command. So, this command (1) shows the unzipped contents of the FASTQ file, (2) displays only the first 4 lines, and (3) displays them without wrapping lines (with `–S`, for easy viewing).
+
+The lines displayed represent one FASTQ sequence entry, or one read of a read pair: The corresponding second read can be viewed by running the same command on K1_R2.fastq.gz. The first line is the read identifier, the second line is the sequence itself, the third line is a secondary header (which is usually left blank except for '+') and the fourth line is the sequence quality score: For each base in the sequence, there is a corresponding quality encoded in this string of characters.  __To return to the command prompt, press__ `q`. 
+
+Due to computational constraints, the files you have linked to are a subset of the original data (i.e. 1 million read pairs from each sample). At a later point in the tutorial, you will be asked to link to results derived from the full dataset for further processing.
+
+## Checking quality control
+```{r, fig.align = 'center',out.width= '15%', echo=FALSE }
+knitr::include_graphics(path = "figures/mangify_glass.png", auto_pdf = TRUE)
+``` 
+
+We can generate and visualise various sequence data metrics for quality control purposes using the FastQC. Run FastQC on one of the files:
+
+```{bash eval=FALSE}
+fastqc K1_R1.fastq.gz
+```
+
+Once completed, view the output (NB: The & runs the command in the background, therefore allowing you to continue to run commands while Firefox is still open):
+
+```{bash eval=FALSE}
+firefox K1_R1_fastqc.html &
+```
+
+The FastQC report contains a number of metrics. The first graph shows the sequence quality across the length of the reads: Note how it decreases as the length of the read increases. While this is normal with Illumina sequencing, we can improve the situation a bit...
+
+Briefly inspect the FastQC report for yourself – There are examples of typical (and atypical!) FastQC data in the appendix of this document
+
+Once you have finished looking, minimise the Firefox window.

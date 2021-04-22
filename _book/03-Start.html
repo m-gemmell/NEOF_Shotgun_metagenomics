@@ -4,11 +4,11 @@
 
   <meta charset="utf-8" />
   <meta http-equiv="X-UA-Compatible" content="IE=edge" />
-  <title>Chapter 2 Overview | Shotgun Metagenomics</title>
-  <meta name="description" content="Chapter 2 Overview | Shotgun Metagenomics" />
+  <title>Chapter 3 Before we start | Shotgun Metagenomics</title>
+  <meta name="description" content="Chapter 3 Before we start | Shotgun Metagenomics" />
   <meta name="generator" content="bookdown 0.21 and GitBook 2.6.7" />
 
-  <meta property="og:title" content="Chapter 2 Overview | Shotgun Metagenomics" />
+  <meta property="og:title" content="Chapter 3 Before we start | Shotgun Metagenomics" />
   <meta property="og:type" content="book" />
   
   
@@ -16,7 +16,7 @@
   
 
   <meta name="twitter:card" content="summary" />
-  <meta name="twitter:title" content="Chapter 2 Overview | Shotgun Metagenomics" />
+  <meta name="twitter:title" content="Chapter 3 Before we start | Shotgun Metagenomics" />
   
   
   
@@ -31,8 +31,8 @@
   <meta name="apple-mobile-web-app-status-bar-style" content="black" />
   
   
-<link rel="prev" href="01-Shotgun_metagenomics.html"/>
-<link rel="next" href="03-Start.html"/>
+<link rel="prev" href="02-Overview.html"/>
+<link rel="next" href="04-Raw_data.html"/>
 <script src="libs/header-attrs-2.6/header-attrs.js"></script>
 <script src="libs/jquery-2.2.3/jquery.min.js"></script>
 <link href="libs/gitbook-2.6.7/css/style.css" rel="stylesheet" />
@@ -178,73 +178,22 @@ code span.wa { color: #60a0b0; font-weight: bold; font-style: italic; } /* Warni
           <div class="page-inner">
 
             <section class="normal" id="section-">
-<div id="overview" class="section level1" number="2">
-<h1><span class="header-section-number">Chapter 2</span> Overview</h1>
-<p><img src="figures/overview.png" width="20%" style="display: block; margin: auto;" /></p>
-<div id="what-is-metagenomics" class="section level2" number="2.1">
-<h2><span class="header-section-number">2.1</span> What is metagenomics?</h2>
-<p><img src="figures/what.png" width="10%" style="display: block; margin: auto;" /></p>
-<p><strong>Meta /ˈmɛtə/ : prefix meaning “higher” or “beyond”</strong></p>
-<p>Metagenomics is the study of genes and genetic material recovered from environmental samples (whether from the sea, soil, human gut, or anywhere else you can imagine). Unlike genomics, metagenomics deals with a multitude of usually diverse species rather than focussing on a single species/genome.</p>
-</div>
-<div id="why-metagenomics" class="section level2" number="2.2">
-<h2><span class="header-section-number">2.2</span> Why metagenomics?</h2>
-<p><img src="figures/why.png" width="10%" style="display: block; margin: auto;" /></p>
-<p>Microbes exist virtually everywhere on Earth, even in some of the most seemingly hostile environments. Every process on our planet is influenced in some way by the actions of microbes, and all higher organisms are intrinsically associated with microbial communities.</p>
-<p>While much can be learned from studying the genome of a single microbial species in isolation, it does not provide us with any information regarding that species neighbours, i.e. what else is in its natural environment? Metagenomics offers a top-down approach which allows researchers to investigate and understand interactions between species in different environments, thus providing a much broader and complete picture.</p>
-</div>
-<div id="metagenomics-vs-metagenetics" class="section level2" number="2.3">
-<h2><span class="header-section-number">2.3</span> Metagenomics vs Metagenetics</h2>
-<p><img src="figures/16s_vs_shotgun.png" width="15%" style="display: block; margin: auto;" /></p>
-<p>Broadly speaking, there are two families of metagenomic analysis:</p>
-<ul>
-<li><strong>Amplicon-based</strong>: This utilises sequencing data generated from amplified marker sequences, for example, regions of the 16S rRNA. Sequences are clustered together and taxonomically assigned to estimate the species abundance in a sample. This is sometimes referred to metagenetics, as it does not consist of any genomic analysis beyond the marker gene regions.</li>
-<li><strong>Shotgun</strong>: This utilises sequencing data generated from random fragments from total genomic DNA from environmental samples, rather than targeting specific genes. This approach allows for not only species abundance determination but direct functional analysis, too, due to having information on a wide range of genetic data sampled from the population. This is sometimes referenced as metagenomics, as it involves genome-wide analyses. Shotgun metagenomics is the focus of this practical session.</li>
-</ul>
-</div>
-<div id="tutorial-overview" class="section level2" number="2.4">
-<h2><span class="header-section-number">2.4</span> Tutorial overview</h2>
-<p><img src="figures/tutorial.png" width="15%" style="display: block; margin: auto;" /></p>
-<div id="basics" class="section level3" number="2.4.1">
-<h3><span class="header-section-number">2.4.1</span> Basics</h3>
-<p>This tutorial and practical session focuses on performing a range of metagenomic analyses using shotgun sequence data from the Illumina platforms.</p>
-<p>The analyses discussed here are by no means exhaustive and are instead intended to provide a sample of what can be done with a metagenomic dataset.</p>
-<p>Virtually the entire tutorial will be carried out on the command line, which you will hopefully now be more comfortable with.</p>
-</div>
-<div id="structure" class="section level3" number="2.4.2">
-<h3><span class="header-section-number">2.4.2</span> Structure</h3>
-<p>We prefer to allow people to work at a pace that they are comfortable with rather than ensuring that everyone is at the same point of the tutorial at the same time. So, there will be no instructor telling you what to type and click: Instead, everything you require to carry out the practical is written in the document. Take your time; it’s important to spend some time understanding why you are running the commands, rather than simply typing them out.</p>
-<p>If at any point you are having trouble or have a question, let one of us know and we’ll provide 1-to-1 assistance.</p>
-</div>
-<div id="content" class="section level3" number="2.4.3">
-<h3><span class="header-section-number">2.4.3</span> Content</h3>
-<p><img src="figures/sections.png" width="10%" style="display: block; margin: auto;" /></p>
-<p>This practical is broken up into the following broad sections.</p>
-<ol style="list-style-type: decimal">
-<li><strong>Raw data</strong>: We will first link to a dataset that we have downloaded for this tutorial. We will take a quick look at what the sequence files look like and briefly discuss the origin of the samples.</li>
-<li><strong>Trimming data</strong>: This entails preprocessing our data to ensure that it is of good quality.</li>
-<li><strong>Taxonomic profiling</strong>: We will analyse the dataset to determine the species abundance in each sample. Following this, we will visualise the data and compare the samples.</li>
-<li><strong>Functional profiling</strong>: We will analyse the dataset to determine the pathway abundance and completeness in each sample. Following this, we will visualise the data and compare the samples.</li>
-<li><strong>Metagenome assembly</strong>: Here, we will move away from just analysing the reads directly and will assemble the metagenome into contigs. Prior to this, we will ‘stitch’ the reads together to ensure we get the best assembly possible.</li>
-<li><strong>Gene prediction</strong>: We will take our metagenome assembly, search for genes…</li>
-<li><strong>Functional annotation</strong>: …and then functionally annotate them with information from various databases. We will then visualise some of the output.</li>
-<li><strong>Co-assembly</strong>: Instead of just looking at the functional composition of one metagenome sample, we will discuss methods of combining all samples to carry out a co-assembly and then obtain normalised gene coverage statistics for use in comparative analyses between samples.</li>
-<li><strong>Comparative analysis</strong>: Using our data from the previous step, we will look at a couple of different ways of comparing the functional profiles of our samples
-All the analyses here are just examples of how you could interrogate a metagenomic dataset: There are, of course, many other ways to tackle such a set.</li>
-</ol>
-<p><strong>Don’t worry if you don’t manage to finish the whole practical!</strong></p>
-<p>The more commonly used analyses have been put at the front of the practical (Section 1-4) with the less standard ones being placed towards the end. We will provide you with all of the intermediate and results files on request.</p>
+<div id="before-we-start" class="section level1" number="3">
+<h1><span class="header-section-number">Chapter 3</span> Before we start</h1>
+<p><img src="figures/start.png" width="20%" style="display: block; margin: auto;" /></p>
+<p>During this practical you will use a number of installed programs and scripts. To ensure that the system knows where to look for the scripts, run the following command:</p>
+<div class="sourceCode" id="cb1"><pre class="sourceCode bash"><code class="sourceCode bash"><span id="cb1-1"><a href="03-Start.html#cb1-1" aria-hidden="true" tabindex="-1"></a><span class="bu">source</span> /pub21/sam/metagenomicsWorkshop2019.sh</span></code></pre></div>
+<p>Also, there’s a chance you’re currently not in your home directory, so let’s make sure you are with the following command:</p>
+<div class="sourceCode" id="cb2"><pre class="sourceCode bash"><code class="sourceCode bash"><span id="cb2-1"><a href="03-Start.html#cb2-1" aria-hidden="true" tabindex="-1"></a><span class="bu">cd</span> ~</span></code></pre></div>
 
-</div>
-</div>
 </div>
             </section>
 
           </div>
         </div>
       </div>
-<a href="01-Shotgun_metagenomics.html" class="navigation navigation-prev " aria-label="Previous page"><i class="fa fa-angle-left"></i></a>
-<a href="03-Start.html" class="navigation navigation-next " aria-label="Next page"><i class="fa fa-angle-right"></i></a>
+<a href="02-Overview.html" class="navigation navigation-prev " aria-label="Previous page"><i class="fa fa-angle-left"></i></a>
+<a href="04-Raw_data.html" class="navigation navigation-next " aria-label="Next page"><i class="fa fa-angle-right"></i></a>
     </div>
   </div>
 <script src="libs/gitbook-2.6.7/js/app.min.js"></script>

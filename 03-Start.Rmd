@@ -1,0 +1,16 @@
+# Before we start
+```{r, fig.align = 'center',out.width= '20%', echo=FALSE }
+knitr::include_graphics(path = "figures/start.png", auto_pdf = TRUE)
+``` 
+
+During this practical you will use a number of installed programs and scripts. To ensure that the system knows where to look for the scripts, run the following command:
+
+```{bash eval=FALSE}
+source /pub21/sam/metagenomicsWorkshop2019.sh
+```
+
+Also, there’s a chance you’re currently not in your home directory, so let’s make sure you are with the following command:
+
+```{bash eval=FALSE}
+cd ~
+```

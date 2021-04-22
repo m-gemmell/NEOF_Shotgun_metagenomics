@@ -22,7 +22,7 @@ Microbes exist virtually everywhere on Earth, even in some of the most seemingly
 While much can be learned from studying the genome of a single microbial species in isolation, it does not provide us with any information regarding that species neighbours, i.e. what else is in its natural environment?  Metagenomics offers a top-down approach which allows researchers to investigate and understand interactions between species in different environments, thus providing a much broader and complete picture.
 
 ## Metagenomics vs Metagenetics
-```{r, fig.align = 'center',out.width= '10%', echo=FALSE }
+```{r, fig.align = 'center',out.width= '15%', echo=FALSE }
 knitr::include_graphics(path = "figures/16s_vs_shotgun.png", auto_pdf = TRUE)
 ``` 
 
@@ -32,7 +32,7 @@ Broadly speaking, there are two families of metagenomic analysis:
 - __Shotgun__: This utilises sequencing data generated from random fragments from total genomic DNA from environmental samples, rather than targeting specific genes. This approach allows for not only species abundance determination but direct functional analysis, too, due to having information on a wide range of genetic data sampled from the population. This is sometimes referenced as metagenomics, as it involves genome-wide analyses. Shotgun metagenomics is the focus of this practical session.
 
 ## Tutorial overview
-```{r, fig.align = 'center',out.width= '10%', echo=FALSE }
+```{r, fig.align = 'center',out.width= '15%', echo=FALSE }
 knitr::include_graphics(path = "figures/tutorial.png", auto_pdf = TRUE)
 ``` 
 
@@ -51,6 +51,9 @@ We prefer to allow people to work at a pace that they are comfortable with rathe
 If at any point you are having trouble or have a question, let one of us know and we'll provide 1-to-1 assistance.
 
 ### Content
+```{r, fig.align = 'center',out.width= '10%', echo=FALSE }
+knitr::include_graphics(path = "figures/sections.png", auto_pdf = TRUE)
+``` 
 
 This practical is broken up into the following broad sections.
 

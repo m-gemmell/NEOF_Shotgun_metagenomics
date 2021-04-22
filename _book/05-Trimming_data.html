@@ -4,11 +4,11 @@
 
   <meta charset="utf-8" />
   <meta http-equiv="X-UA-Compatible" content="IE=edge" />
-  <title>Chapter 2 Overview | Shotgun Metagenomics</title>
-  <meta name="description" content="Chapter 2 Overview | Shotgun Metagenomics" />
+  <title>Chapter 5 Quality control | Shotgun Metagenomics</title>
+  <meta name="description" content="Chapter 5 Quality control | Shotgun Metagenomics" />
   <meta name="generator" content="bookdown 0.21 and GitBook 2.6.7" />
 
-  <meta property="og:title" content="Chapter 2 Overview | Shotgun Metagenomics" />
+  <meta property="og:title" content="Chapter 5 Quality control | Shotgun Metagenomics" />
   <meta property="og:type" content="book" />
   
   
@@ -16,7 +16,7 @@
   
 
   <meta name="twitter:card" content="summary" />
-  <meta name="twitter:title" content="Chapter 2 Overview | Shotgun Metagenomics" />
+  <meta name="twitter:title" content="Chapter 5 Quality control | Shotgun Metagenomics" />
   
   
   
@@ -31,8 +31,8 @@
   <meta name="apple-mobile-web-app-status-bar-style" content="black" />
   
   
-<link rel="prev" href="01-Shotgun_metagenomics.html"/>
-<link rel="next" href="03-Start.html"/>
+<link rel="prev" href="04-Raw_data.html"/>
+
 <script src="libs/header-attrs-2.6/header-attrs.js"></script>
 <script src="libs/jquery-2.2.3/jquery.min.js"></script>
 <link href="libs/gitbook-2.6.7/css/style.css" rel="stylesheet" />
@@ -178,64 +178,54 @@ code span.wa { color: #60a0b0; font-weight: bold; font-style: italic; } /* Warni
           <div class="page-inner">
 
             <section class="normal" id="section-">
-<div id="overview" class="section level1" number="2">
-<h1><span class="header-section-number">Chapter 2</span> Overview</h1>
-<p><img src="figures/overview.png" width="20%" style="display: block; margin: auto;" /></p>
-<div id="what-is-metagenomics" class="section level2" number="2.1">
-<h2><span class="header-section-number">2.1</span> What is metagenomics?</h2>
-<p><img src="figures/what.png" width="10%" style="display: block; margin: auto;" /></p>
-<p><strong>Meta /ˈmɛtə/ : prefix meaning “higher” or “beyond”</strong></p>
-<p>Metagenomics is the study of genes and genetic material recovered from environmental samples (whether from the sea, soil, human gut, or anywhere else you can imagine). Unlike genomics, metagenomics deals with a multitude of usually diverse species rather than focussing on a single species/genome.</p>
-</div>
-<div id="why-metagenomics" class="section level2" number="2.2">
-<h2><span class="header-section-number">2.2</span> Why metagenomics?</h2>
-<p><img src="figures/why.png" width="10%" style="display: block; margin: auto;" /></p>
-<p>Microbes exist virtually everywhere on Earth, even in some of the most seemingly hostile environments. Every process on our planet is influenced in some way by the actions of microbes, and all higher organisms are intrinsically associated with microbial communities.</p>
-<p>While much can be learned from studying the genome of a single microbial species in isolation, it does not provide us with any information regarding that species neighbours, i.e. what else is in its natural environment? Metagenomics offers a top-down approach which allows researchers to investigate and understand interactions between species in different environments, thus providing a much broader and complete picture.</p>
-</div>
-<div id="metagenomics-vs-metagenetics" class="section level2" number="2.3">
-<h2><span class="header-section-number">2.3</span> Metagenomics vs Metagenetics</h2>
-<p><img src="figures/16s_vs_shotgun.png" width="15%" style="display: block; margin: auto;" /></p>
-<p>Broadly speaking, there are two families of metagenomic analysis:</p>
+<div id="quality-control" class="section level1" number="5">
+<h1><span class="header-section-number">Chapter 5</span> Quality control</h1>
+<p><img src="figures/quality_trimming_and_filtering.png" width="30%" style="display: block; margin: auto;" /></p>
+<p>Now that we’ve obtained the raw data and had a look at it, we should now clean it up. With any sequencing data, it is very important to ensure that you use the highest quality data possible: Rubbish goes in, rubbish comes out. There are two main methods employed to clean sequence data, and a third method specific to some metagenomic datasets.</p>
 <ul>
-<li><strong>Amplicon-based</strong>: This utilises sequencing data generated from amplified marker sequences, for example, regions of the 16S rRNA. Sequences are clustered together and taxonomically assigned to estimate the species abundance in a sample. This is sometimes referred to metagenetics, as it does not consist of any genomic analysis beyond the marker gene regions.</li>
-<li><strong>Shotgun</strong>: This utilises sequencing data generated from random fragments from total genomic DNA from environmental samples, rather than targeting specific genes. This approach allows for not only species abundance determination but direct functional analysis, too, due to having information on a wide range of genetic data sampled from the population. This is sometimes referenced as metagenomics, as it involves genome-wide analyses. Shotgun metagenomics is the focus of this practical session.</li>
+<li>Remove low quality bases from the end of the reads. These are more likely to be incorrect, so are best trimmed off.</li>
+<li>Remove adapters. Sometimes sequencing adapters can be sequenced if the sequencing runs off the end of a fragment.</li>
+<li>Remove host sequences. If a metagenomic sample derives from a host species then it may be advisable to remove any reads associated with the host genome. Here, we do not need to do this, as the dataset contains barely any human genome sequences.</li>
 </ul>
+<div id="removing-adapters-and-low-quality-bases" class="section level2" number="5.1">
+<h2><span class="header-section-number">5.1</span> Removing adapters and low quality bases</h2>
+<p><img src="figures/hedge_trimming.png" width="15%" style="display: block; margin: auto;" /></p>
+<p>First go back to your home directory and create a new directory where we will clean the sequences up:</p>
+<div class="sourceCode" id="cb9"><pre class="sourceCode bash"><code class="sourceCode bash"><span id="cb9-1"><a href="05-Trimming_data.html#cb9-1" aria-hidden="true" tabindex="-1"></a><span class="bu">cd</span> ..</span></code></pre></div>
+<p>This will move you one directory up, i.e. back to your home directory. Alternatively, you could use <code>cd ~</code> which will take you to your home directory. This is a good idea if you ever get lost!</p>
+<div class="sourceCode" id="cb10"><pre class="sourceCode bash"><code class="sourceCode bash"><span id="cb10-1"><a href="05-Trimming_data.html#cb10-1" aria-hidden="true" tabindex="-1"></a><span class="fu">mkdir</span> 2-Trimmed</span>
+<span id="cb10-2"><a href="05-Trimming_data.html#cb10-2" aria-hidden="true" tabindex="-1"></a><span class="bu">cd</span> 2-Trimmed</span></code></pre></div>
+<p>You are now in your newly created directory. Here we will run Trim Galore! which carries out both of these steps.</p>
+<div class="sourceCode" id="cb11"><pre class="sourceCode bash"><code class="sourceCode bash"><span id="cb11-1"><a href="05-Trimming_data.html#cb11-1" aria-hidden="true" tabindex="-1"></a><span class="ex">trim_galore</span> --paired --quality 20 --stringency 4 <span class="kw">\</span></span>
+<span id="cb11-2"><a href="05-Trimming_data.html#cb11-2" aria-hidden="true" tabindex="-1"></a>   <span class="ex">../1-Raw/K1_R1.fastq.gz</span> ../1-Raw/K1_R2.fastq.gz</span></code></pre></div>
+<p>This is a longer command so we’ve split it across multiple commands (a <code>\</code> at the end of a line allows you to press return without running the command, meaning you can continue to add to that command. When this happens, the <code>$</code> changes to a <code>&gt;</code>. <strong>Note</strong> that if you do use the <code>\</code> character, the next character immediately after it must be return. If you use <code>\</code> in the middle of a line without pressing return afterwards, it will break the command!</p>
+<p>This command will remove any low quality regions from the end of both reads in each read pair (quality score &lt; 20). Additionally, if it detects four or more bases of a sequencing adapter, it will trim that off too. We use the two read files for sample K1 as input, from the previous directory we were in.</p>
+<p>Run this command two more times, but for the other two samples (K2 and W1)</p>
 </div>
-<div id="tutorial-overview" class="section level2" number="2.4">
-<h2><span class="header-section-number">2.4</span> Tutorial overview</h2>
-<p><img src="figures/tutorial.png" width="15%" style="display: block; margin: auto;" /></p>
-<div id="basics" class="section level3" number="2.4.1">
-<h3><span class="header-section-number">2.4.1</span> Basics</h3>
-<p>This tutorial and practical session focuses on performing a range of metagenomic analyses using shotgun sequence data from the Illumina platforms.</p>
-<p>The analyses discussed here are by no means exhaustive and are instead intended to provide a sample of what can be done with a metagenomic dataset.</p>
-<p>Virtually the entire tutorial will be carried out on the command line, which you will hopefully now be more comfortable with.</p>
+<div id="rename-the-files" class="section level2" number="5.2">
+<h2><span class="header-section-number">5.2</span> Rename the files</h2>
+<p><img src="figures/rename.png" width="15%" style="display: block; margin: auto;" /></p>
+<p>Once that is complete if you run:</p>
+<div class="sourceCode" id="cb12"><pre class="sourceCode bash"><code class="sourceCode bash"><span id="cb12-1"><a href="05-Trimming_data.html#cb12-1" aria-hidden="true" tabindex="-1"></a><span class="fu">ls</span></span></code></pre></div>
+<p>you will notice that we have a new bunch of files created: 2 new read files for each sample along with a trimming report for each file trimmed. However, the new names are needlessly long. e.g. K1_R1_val_R1.fq.gz could be shortened to K1_R1.fq.gz. So, we’ll rename all of the files with the mv command:</p>
+<div class="sourceCode" id="cb13"><pre class="sourceCode bash"><code class="sourceCode bash"><span id="cb13-1"><a href="05-Trimming_data.html#cb13-1" aria-hidden="true" tabindex="-1"></a><span class="fu">mv</span> K1_R1_val_1.fq.gz K1_R1.fq.gz</span>
+<span id="cb13-2"><a href="05-Trimming_data.html#cb13-2" aria-hidden="true" tabindex="-1"></a><span class="fu">mv</span> K1_R2_val_2.fq.gz K1_R2.fq.gz</span>
+<span id="cb13-3"><a href="05-Trimming_data.html#cb13-3" aria-hidden="true" tabindex="-1"></a><span class="fu">mv</span> K2_R1_val_1.fq.gz K2_R1.fq.gz</span>
+<span id="cb13-4"><a href="05-Trimming_data.html#cb13-4" aria-hidden="true" tabindex="-1"></a><span class="fu">mv</span> K2_R2_val_2.fq.gz K2_R2.fq.gz</span>
+<span id="cb13-5"><a href="05-Trimming_data.html#cb13-5" aria-hidden="true" tabindex="-1"></a><span class="fu">mv</span> W1_R1_val_1.fq.gz W1_R1.fq.gz</span>
+<span id="cb13-6"><a href="05-Trimming_data.html#cb13-6" aria-hidden="true" tabindex="-1"></a><span class="fu">mv</span> W1_R2_val_2.fq.gz W1_R2.fq.gz</span></code></pre></div>
+<p><strong>Tip</strong>: If you want to edit and reuse previous commands, press the up arrow key.</p>
+<p>Briefly inspect the log files to see how the trimming went (e.g. K1_R1.fastq.gz_trimming_report.txt)</p>
 </div>
-<div id="structure" class="section level3" number="2.4.2">
-<h3><span class="header-section-number">2.4.2</span> Structure</h3>
-<p>We prefer to allow people to work at a pace that they are comfortable with rather than ensuring that everyone is at the same point of the tutorial at the same time. So, there will be no instructor telling you what to type and click: Instead, everything you require to carry out the practical is written in the document. Take your time; it’s important to spend some time understanding why you are running the commands, rather than simply typing them out.</p>
-<p>If at any point you are having trouble or have a question, let one of us know and we’ll provide 1-to-1 assistance.</p>
-</div>
-<div id="content" class="section level3" number="2.4.3">
-<h3><span class="header-section-number">2.4.3</span> Content</h3>
-<p><img src="figures/sections.png" width="10%" style="display: block; margin: auto;" /></p>
-<p>This practical is broken up into the following broad sections.</p>
-<ol style="list-style-type: decimal">
-<li><strong>Raw data</strong>: We will first link to a dataset that we have downloaded for this tutorial. We will take a quick look at what the sequence files look like and briefly discuss the origin of the samples.</li>
-<li><strong>Trimming data</strong>: This entails preprocessing our data to ensure that it is of good quality.</li>
-<li><strong>Taxonomic profiling</strong>: We will analyse the dataset to determine the species abundance in each sample. Following this, we will visualise the data and compare the samples.</li>
-<li><strong>Functional profiling</strong>: We will analyse the dataset to determine the pathway abundance and completeness in each sample. Following this, we will visualise the data and compare the samples.</li>
-<li><strong>Metagenome assembly</strong>: Here, we will move away from just analysing the reads directly and will assemble the metagenome into contigs. Prior to this, we will ‘stitch’ the reads together to ensure we get the best assembly possible.</li>
-<li><strong>Gene prediction</strong>: We will take our metagenome assembly, search for genes…</li>
-<li><strong>Functional annotation</strong>: …and then functionally annotate them with information from various databases. We will then visualise some of the output.</li>
-<li><strong>Co-assembly</strong>: Instead of just looking at the functional composition of one metagenome sample, we will discuss methods of combining all samples to carry out a co-assembly and then obtain normalised gene coverage statistics for use in comparative analyses between samples.</li>
-<li><strong>Comparative analysis</strong>: Using our data from the previous step, we will look at a couple of different ways of comparing the functional profiles of our samples
-All the analyses here are just examples of how you could interrogate a metagenomic dataset: There are, of course, many other ways to tackle such a set.</li>
-</ol>
-<p><strong>Don’t worry if you don’t manage to finish the whole practical!</strong></p>
-<p>The more commonly used analyses have been put at the front of the practical (Section 1-4) with the less standard ones being placed towards the end. We will provide you with all of the intermediate and results files on request.</p>
+<div id="inspect-the-trimmed-data" class="section level2" number="5.3">
+<h2><span class="header-section-number">5.3</span> Inspect the trimmed data</h2>
+<p><img src="figures/magnify_glass_good.png" width="15%" style="display: block; margin: auto;" /></p>
+<p>To see what difference the trimming made, run FastQC again on the trimmed output file K1_R1.fq.gz and view it.</p>
+<div class="sourceCode" id="cb14"><pre class="sourceCode bash"><code class="sourceCode bash"><span id="cb14-1"><a href="05-Trimming_data.html#cb14-1" aria-hidden="true" tabindex="-1"></a><span class="ex">fastqc</span> K1_R1.fq.gz</span>
+<span id="cb14-2"><a href="05-Trimming_data.html#cb14-2" aria-hidden="true" tabindex="-1"></a><span class="ex">firefox</span> K1_R1_fastqc.html <span class="kw">&amp;</span></span></code></pre></div>
+<p>Inspect the FastQC report for yourself. How does it compare to the untrimmed data?</p>
+<p>Now that we have trimmed data, we can start the analyses!</p>
 
-</div>
 </div>
 </div>
             </section>
@@ -243,8 +233,8 @@ All the analyses here are just examples of how you could interrogate a metagenom
           </div>
         </div>
       </div>
-<a href="01-Shotgun_metagenomics.html" class="navigation navigation-prev " aria-label="Previous page"><i class="fa fa-angle-left"></i></a>
-<a href="03-Start.html" class="navigation navigation-next " aria-label="Next page"><i class="fa fa-angle-right"></i></a>
+<a href="04-Raw_data.html" class="navigation navigation-prev navigation-unique" aria-label="Previous page"><i class="fa fa-angle-left"></i></a>
+
     </div>
   </div>
 <script src="libs/gitbook-2.6.7/js/app.min.js"></script>

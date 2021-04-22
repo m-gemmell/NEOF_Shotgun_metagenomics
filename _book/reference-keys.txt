@@ -7,3 +7,11 @@ tutorial-overview
 basics
 structure
 content
+before-we-start
+raw-data
+obtaining-the-data
+checking-quality-control
+quality-control
+removing-adapters-and-low-quality-bases
+rename-the-files
+inspect-the-trimmed-data
