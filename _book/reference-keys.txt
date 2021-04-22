@@ -15,3 +15,9 @@ quality-control
 removing-adapters-and-low-quality-bases
 rename-the-files
 inspect-the-trimmed-data
+taxonomic-profiling
+running-kraken
+visualising-kraken-output
+krona-plot
+running-bracken
+lefse-biomarker-detection
