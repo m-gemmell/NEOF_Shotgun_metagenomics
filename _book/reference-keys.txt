@@ -21,3 +21,14 @@ visualising-kraken-output
 krona-plot
 running-bracken
 lefse-biomarker-detection
+functional-profiling
+a-demo-run-of-humann2
+statistical-comparison-between-samples
+combining-data
+renormalising-data
+visualisation
+finding-statistically-significant-differences
+metagenome-assembly
+a-primer-on-short-read-assembly
+stitching-read-pairs
+assembly

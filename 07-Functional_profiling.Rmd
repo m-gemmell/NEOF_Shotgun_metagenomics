@@ -1,0 +1,180 @@
+# Functional profiling
+```{r, fig.align = 'center',out.width= '30%', echo=FALSE }
+knitr::include_graphics(path = "figures/quality_trimming_and_filtering.png", auto_pdf = TRUE)
+``` 
+
+It is also possible to investigate functional differences between metagenome (and metatranscriptome) samples by directly interrogating the read data. We will now look at how this can be done with a package called HUMANn2 (The HMP Unified Metabolic Analysis Network 2), a pipeline designed to accurately profile the presence/absence and abundance of microbial pathways in metagenomic sequencing data.
+
+## A demo run of HUMANn2 
+
+First, we will carry out an example run of the software and briefly explore the output files. Make a new directory and move into it, after moving back to your home directory.
+
+```{bash eal=FALSE}
+cd ..
+mkdir 4-FunctionalProfiling
+cd 4-FunctionalProfiling
+```
+
+Now we will  perform the run with HUMANn2 so we can inspect the output files. First, copy over some test data. $DB is simply an alias used for a directory containing database files used in this tutorial.
+
+```{bash eval=FALSE}
+cp $DB/demo.fq.gz .
+```
+
+This is a demonstration FASTQ file that we will use. It will be small enough to run HUMANn2 in a reasonable time.
+
+```{bash eval=FALSE}
+humann2 \
+  --input demo.fq.gz \
+  --output demo.humann2 \ 
+  --threads 10
+```
+
+Here, we are telling the software to use demo.fq.gz as input and to create a new output directory where results will be generated. 
+
+As the software runs, you might notice that as part of the process, HUMANn2 runs MetaPhlAn2. The purpose of this is to identify what species are present in the sample, so that it can then tailor generate an appropriate database of genes (from those species) to map against. It will carry out this alignment against the gene database, then a protein database, and finally compute which gene families are present to determine which functional pathways are present and how abundant they are.
+
+Once the run has completed, change into the newly created output directory and list the files that are there.
+
+```{bash eval=FALSE}
+cd demo.humann2
+ls
+```
+
+You will see that there are three files and one directory. The directory (demo_humann2_temp) contains intermediate temporary files and can be disregarded here. Sometimes, these files can be useful for debugging, however. The three files are:
+
+- `demo_genefamilies.tsv`: A table file showing the number of reads mapping to each UniRef90 gene family, Values are normalised by the length of each gene family (i.e. RPK, or Reads per Kilobase). Additionally, the values are stratified so that they show the overall community abundance but also a breakdown of abundance per species detected. This allows researchers to delve into species specific functions, rather than only looking at the metagenomic functions as a whole,
+- `demo_pathabundance.tsv`: As above, a table file showing the normalised abundance of MetaCyc pathways. These abundances are calculated based on the UniRef90 gene family mapping data and are also stratified by species.
+- `demo_pathcoverage.tsv`: Similar to above, except instead of abundances of pathways, this table shows the coverage, or completeness, of pathways. For example, a pathway may contain 5 components (or genes/proteins)
+   - Pathway1 :         A → B → C → D → E		100% complete
+   - A species identified in the sample may only have four of the components, though, 	meaning that the pathway is only 80% complete (represented as 0.8)
+    - Pathway1 :         A → B → C → ~~D~~ → E		80% complete
+
+The basic format of these three output files is the same, so let's take a look at the pathway abundance table.
+
+```{bash eval=FALSE}
+less demo_pathabundance.tsv
+```
+
+You will see that there are two columns. The first shows the pathway (or UNMAPPED where reads could not be aligned, and UNINTEGRATED where reads could be aligned, but to targets not implicated in any pathways). The second column shows the abundance. Press `q` to exit and let's look at one specific pathway, COA-PWY-1 (a coenzyme A biosynthesis II pathway).
+
+```{bash eval=FALSE}
+grep COA-PWY-1 demo_pathabundance.tsv
+```
+
+This shows two entries with two different values, I.e.
+
+- COA-PWY-1: coenzyme A biosynthesis II (mammalian)	6.3694267516 
+- COA-PWY-1: coenzyme A biosynthesis II (mammalian)|g__Bacteroides.s__Bacteroides_vulgatus	4.7961630695
+
+This is an example of the species stratification mentioned above. The first line shows the abundance of this pathway across the whole sample, but the second line shows the abundance contributed from Bacteroides_vulgatis.
+
+Have a look at the other two output files; note the similar layout.
+
+Finally, return to the parent directory i.e. `4-FunctionalProfiling`
+
+```{bash eval=FALSE}
+cd ..
+```
+
+## Statistical comparison between samples
+
+Looking at the functional profile of one sample in isolation is usually not very informative. First, there is nothing to compare it to and second, there are no biological replicates. We will therefore use all the Korean and Western diet samples.
+
+It would take many hours to analyse all of the data using HUMANn2 and is outside of the scope of this practical. For this reason, samples were analysed prior to the workshop to generate the output files we covered above. For the purposes of this comparison, we will look at the pathway abundances only. First copy over the results data directory and have a look in it (when copying directories, we need to use –r with the cp command, to recursively copy all files across)
+
+```{bash eval=FALSE}
+cp –r $DB/DietPathAbundance .
+ls DietPathAbundance
+```
+
+You will see there are 12 files prefixed with K and 12 prefixed with W, for the Korean diet and Western diet samples, respectively. Take a look in one of the files; you might notice that there is no species stratification: The reason for this is for this test, all pathway abundances have been collapsed to a community level, ignoring differences in species. When you analyse your own data-sets, you can leave this stratification in to identify significant differences between functional profiles at a species level.
+
+### Combining data
+
+First, we need to combine these 24 tables into one large results table. HUMANn2 provides a tool to do this:
+
+```{bash eval=FALSE}
+humann2_join_tables --input DietPathAbundance/ --output diet.tsv
+```
+
+This command will look for all tables in the DietPathAbundance directory and generate a large, 24 column table called diet.tsv. You can take a look to see that this has worked correctly.
+
+```{bash eval=FALSE}
+less -S diet.tsv
+```
+
+### Renormalising data
+
+The next step is to renormalise the data. Currently, all of the abundance values are only normalised within each sample, i.e. accounting for the size of the pathways/length of genes. However, they are not normalised between samples, and this is very important. For example, if we had sequenced two samples, A and B, and we obtained 5 million reads for sample A and 20 million reads for sample B, without normalisation, it might look that there was up to 4x as much functional activity in sample B! To correct for this, we normalise the abundance values based on the number of reads in each samples, i.e. counts per million, or cpm. (We could also normalise to relative abundance where all abundances for each sample add up to 1).
+
+```{bash eval=FALSE}
+humann2_renorm_table \
+  --units cpm \
+  --input diet.tsv \
+  --special n \
+  --output diet.cpm.tsv
+```
+
+This command generates the normalised data in the new table `diet.cpm.tsv`. The `--special n` option tells the script to remove all unmapped and unassigned values from the table.
+
+### Visualisation
+Now that we have our data normalised, we can visualise the dataset to see how the two groups look, i.e. do samples in the same diet group appear to correlate well with each other and are they distinguishable from those from the other diet group? To do this, we will draw a PCA plot. So that the plot will show which samples are from which group, we will need to provide the script with some metadata. This has been prepared and can be copied over as follows
+
+```{bash eval=FALSE}
+cp $DB/diet.metadata.tsv .
+```
+
+This is a table file where the first column is the sample name with subsequent columns representing categories of metadata. Here, the column of interest is the second one, 'Diet', and samples are labelled as either 'Western' or 'Korean'. We can now run the PCA plot generation script and look at the result.
+```{bash eval=FALSE}
+PCA_plot.r diet.cpm.tsv diet.metadata.tsv Diet diet.pca.pdf
+```
+
+This command takes our data table as the first argument, our metadata table as the second argument, the metadata category of interest as the third argument and the output file as the final argument. 
+
+Now we can view the plot.
+
+```{bash eval=FALSE}
+okular diet.pca.pdf &
+```
+
+You should see 3 plots, each one plotting 2 of the first 3 principal components against each other. (see following image). The axis of each plot also shows how much of the overall variance that that particular component accounts for. Blue and red dots show the Western and Korean diet samples, respectively, and samples that cluster closely together are more similar to each other. 
+From this, we can see that there is some separation between the two dietary groups, but that they are not completely separated, i.e. there is some overlap. This can happen frequently with datasets such as this, that are likely to be much less controlled than laboratory samples and therefore show more between-group variance. 
+
+Is there anything unexpected about any of the samples, from these plots? If so, what might be a sensible course of action before proceeding with statistical analysis?
+
+### Finding statistically significant differences
+
+For the final part of this section, we will see if there are any statistically significant differences between the two sample groups. There are several ways in which this can be achieved but we will carry out a Kruskal-Wallis Test, using a script supplied with HUMAnN2. This script is suitable for test datasets but more robust methods should be used for other datasets (these will be discussed in day 3).  Before we can do this, we need to add the metadata for the samples to the data table itself, as a new row just below the header. 
+
+```{bash eval=FALSE}
+addMetadataToHumann2Table \
+  --table diet.cpm.tsv \
+  --metadata diet.metadata.tsv \
+  --output diet.cpm.anno.tsv
+```
+
+You can take a look at the new metadata-annotated table as follows.
+
+```{bash eval=FALSE}
+less -S diet.cpm.anno.tsv
+```
+
+Now we can run the statistical test.
+
+```{bash eval=FALSE}
+humann2_associate \
+  --input diet.cpm.anno.tsv \
+  --last-metadatum Group \
+  --focal-metadatum Diet \
+  --focal-type categorical \
+  --output diet.sigdif.tab
+```
+
+Besides the input and output arguments, we also tell the script which category to use (`--focal-metadatum`),  and what sort of category it is, i.e. whether it is continuous or categorical data (`--focal-type`). We also need to tell it what the last category of metadata is in the header so that it knows where the actual table data begins (`--last-metadatum`). Let's look at the results and see if there are any pathways which are significantly different in abundance between the Western and Korean diet groups.
+
+```{bash eval=FALSE}
+less -S diet.sigdif.tab
+```
+
+Here, there are 4 columns. Feature (i.e. pathway), Level means (mean abundance per group for that pathway), P-value, and Q-value (false-discovery rate adjusted P-value). By this test, there are 6 significantly (5% cut-off) differentially abundant pathways between the two groups. These would make an ideal starting point for further scientific investigation, but for this workshop, we will now leave this set and return to our original dataset!

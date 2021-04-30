@@ -1,0 +1,362 @@
+<!DOCTYPE html>
+<html lang="" xml:lang="">
+<head>
+
+  <meta charset="utf-8" />
+  <meta http-equiv="X-UA-Compatible" content="IE=edge" />
+  <title>Chapter 7 Functional profiling | Shotgun Metagenomics</title>
+  <meta name="description" content="Chapter 7 Functional profiling | Shotgun Metagenomics" />
+  <meta name="generator" content="bookdown 0.21 and GitBook 2.6.7" />
+
+  <meta property="og:title" content="Chapter 7 Functional profiling | Shotgun Metagenomics" />
+  <meta property="og:type" content="book" />
+  
+  
+  
+  
+
+  <meta name="twitter:card" content="summary" />
+  <meta name="twitter:title" content="Chapter 7 Functional profiling | Shotgun Metagenomics" />
+  
+  
+  
+
+<meta name="author" content="Sam Haldenby and Matthew Gemmell" />
+
+
+<meta name="date" content="2021-04-30" />
+
+  <meta name="viewport" content="width=device-width, initial-scale=1" />
+  <meta name="apple-mobile-web-app-capable" content="yes" />
+  <meta name="apple-mobile-web-app-status-bar-style" content="black" />
+  
+  
+<link rel="prev" href="06-Taxonomic_profiling.html"/>
+<link rel="next" href="08-Metagenome_assembly.html"/>
+<script src="libs/header-attrs-2.6/header-attrs.js"></script>
+<script src="libs/jquery-2.2.3/jquery.min.js"></script>
+<link href="libs/gitbook-2.6.7/css/style.css" rel="stylesheet" />
+<link href="libs/gitbook-2.6.7/css/plugin-table.css" rel="stylesheet" />
+<link href="libs/gitbook-2.6.7/css/plugin-bookdown.css" rel="stylesheet" />
+<link href="libs/gitbook-2.6.7/css/plugin-highlight.css" rel="stylesheet" />
+<link href="libs/gitbook-2.6.7/css/plugin-search.css" rel="stylesheet" />
+<link href="libs/gitbook-2.6.7/css/plugin-fontsettings.css" rel="stylesheet" />
+<link href="libs/gitbook-2.6.7/css/plugin-clipboard.css" rel="stylesheet" />
+
+
+
+
+
+
+
+
+
+
+
+<style type="text/css">
+pre > code.sourceCode { white-space: pre; position: relative; }
+pre > code.sourceCode > span { display: inline-block; line-height: 1.25; }
+pre > code.sourceCode > span:empty { height: 1.2em; }
+code.sourceCode > span { color: inherit; text-decoration: inherit; }
+pre.sourceCode { margin: 0; }
+@media screen {
+div.sourceCode { overflow: auto; }
+}
+@media print {
+pre > code.sourceCode { white-space: pre-wrap; }
+pre > code.sourceCode > span { text-indent: -5em; padding-left: 5em; }
+}
+pre.numberSource code
+  { counter-reset: source-line 0; }
+pre.numberSource code > span
+  { position: relative; left: -4em; counter-increment: source-line; }
+pre.numberSource code > span > a:first-child::before
+  { content: counter(source-line);
+    position: relative; left: -1em; text-align: right; vertical-align: baseline;
+    border: none; display: inline-block;
+    -webkit-touch-callout: none; -webkit-user-select: none;
+    -khtml-user-select: none; -moz-user-select: none;
+    -ms-user-select: none; user-select: none;
+    padding: 0 4px; width: 4em;
+    color: #aaaaaa;
+  }
+pre.numberSource { margin-left: 3em; border-left: 1px solid #aaaaaa;  padding-left: 4px; }
+div.sourceCode
+  {   }
+@media screen {
+pre > code.sourceCode > span > a:first-child::before { text-decoration: underline; }
+}
+code span.al { color: #ff0000; font-weight: bold; } /* Alert */
+code span.an { color: #60a0b0; font-weight: bold; font-style: italic; } /* Annotation */
+code span.at { color: #7d9029; } /* Attribute */
+code span.bn { color: #40a070; } /* BaseN */
+code span.bu { } /* BuiltIn */
+code span.cf { color: #007020; font-weight: bold; } /* ControlFlow */
+code span.ch { color: #4070a0; } /* Char */
+code span.cn { color: #880000; } /* Constant */
+code span.co { color: #60a0b0; font-style: italic; } /* Comment */
+code span.cv { color: #60a0b0; font-weight: bold; font-style: italic; } /* CommentVar */
+code span.do { color: #ba2121; font-style: italic; } /* Documentation */
+code span.dt { color: #902000; } /* DataType */
+code span.dv { color: #40a070; } /* DecVal */
+code span.er { color: #ff0000; font-weight: bold; } /* Error */
+code span.ex { } /* Extension */
+code span.fl { color: #40a070; } /* Float */
+code span.fu { color: #06287e; } /* Function */
+code span.im { } /* Import */
+code span.in { color: #60a0b0; font-weight: bold; font-style: italic; } /* Information */
+code span.kw { color: #007020; font-weight: bold; } /* Keyword */
+code span.op { color: #666666; } /* Operator */
+code span.ot { color: #007020; } /* Other */
+code span.pp { color: #bc7a00; } /* Preprocessor */
+code span.sc { color: #4070a0; } /* SpecialChar */
+code span.ss { color: #bb6688; } /* SpecialString */
+code span.st { color: #4070a0; } /* String */
+code span.va { color: #19177c; } /* Variable */
+code span.vs { color: #4070a0; } /* VerbatimString */
+code span.wa { color: #60a0b0; font-weight: bold; font-style: italic; } /* Warning */
+</style>
+
+<link rel="stylesheet" href="style.css" type="text/css" />
+</head>
+
+<body>
+
+
+
+  <div class="book without-animation with-summary font-size-2 font-family-1" data-basepath=".">
+
+    <div class="book-summary">
+      <nav role="navigation">
+
+<ul class="summary">
+<li><a>Shotgun Metagenomics</a></li>
+
+<li class="divider"></li>
+<li class="chapter" data-level="1" data-path="01-Shotgun_metagenomics.html"><a href="01-Shotgun_metagenomics.html"><i class="fa fa-check"></i><b>1</b> Introduction</a></li>
+<li class="chapter" data-level="2" data-path="02-Overview.html"><a href="02-Overview.html"><i class="fa fa-check"></i><b>2</b> Overview</a>
+<ul>
+<li class="chapter" data-level="2.1" data-path="02-Overview.html"><a href="02-Overview.html#what-is-metagenomics"><i class="fa fa-check"></i><b>2.1</b> What is metagenomics?</a></li>
+<li class="chapter" data-level="2.2" data-path="02-Overview.html"><a href="02-Overview.html#why-metagenomics"><i class="fa fa-check"></i><b>2.2</b> Why metagenomics?</a></li>
+<li class="chapter" data-level="2.3" data-path="02-Overview.html"><a href="02-Overview.html#metagenomics-vs-metagenetics"><i class="fa fa-check"></i><b>2.3</b> Metagenomics vs Metagenetics</a></li>
+<li class="chapter" data-level="2.4" data-path="02-Overview.html"><a href="02-Overview.html#tutorial-overview"><i class="fa fa-check"></i><b>2.4</b> Tutorial overview</a>
+<ul>
+<li class="chapter" data-level="2.4.1" data-path="02-Overview.html"><a href="02-Overview.html#basics"><i class="fa fa-check"></i><b>2.4.1</b> Basics</a></li>
+<li class="chapter" data-level="2.4.2" data-path="02-Overview.html"><a href="02-Overview.html#structure"><i class="fa fa-check"></i><b>2.4.2</b> Structure</a></li>
+<li class="chapter" data-level="2.4.3" data-path="02-Overview.html"><a href="02-Overview.html#content"><i class="fa fa-check"></i><b>2.4.3</b> Content</a></li>
+</ul></li>
+</ul></li>
+<li class="chapter" data-level="3" data-path="03-Start.html"><a href="03-Start.html"><i class="fa fa-check"></i><b>3</b> Before we start</a></li>
+<li class="chapter" data-level="4" data-path="04-Raw_data.html"><a href="04-Raw_data.html"><i class="fa fa-check"></i><b>4</b> Raw data</a>
+<ul>
+<li class="chapter" data-level="4.1" data-path="04-Raw_data.html"><a href="04-Raw_data.html#obtaining-the-data"><i class="fa fa-check"></i><b>4.1</b> Obtaining the data</a></li>
+<li class="chapter" data-level="4.2" data-path="04-Raw_data.html"><a href="04-Raw_data.html#checking-quality-control"><i class="fa fa-check"></i><b>4.2</b> Checking quality control</a></li>
+</ul></li>
+<li class="chapter" data-level="5" data-path="05-Trimming_data.html"><a href="05-Trimming_data.html"><i class="fa fa-check"></i><b>5</b> Quality control</a>
+<ul>
+<li class="chapter" data-level="5.1" data-path="05-Trimming_data.html"><a href="05-Trimming_data.html#removing-adapters-and-low-quality-bases"><i class="fa fa-check"></i><b>5.1</b> Removing adapters and low quality bases</a></li>
+<li class="chapter" data-level="5.2" data-path="05-Trimming_data.html"><a href="05-Trimming_data.html#rename-the-files"><i class="fa fa-check"></i><b>5.2</b> Rename the files</a></li>
+<li class="chapter" data-level="5.3" data-path="05-Trimming_data.html"><a href="05-Trimming_data.html#inspect-the-trimmed-data"><i class="fa fa-check"></i><b>5.3</b> Inspect the trimmed data</a></li>
+</ul></li>
+<li class="chapter" data-level="6" data-path="06-Taxonomic_profiling.html"><a href="06-Taxonomic_profiling.html"><i class="fa fa-check"></i><b>6</b> Taxonomic profiling</a>
+<ul>
+<li class="chapter" data-level="6.1" data-path="06-Taxonomic_profiling.html"><a href="06-Taxonomic_profiling.html#running-kraken"><i class="fa fa-check"></i><b>6.1</b> Running Kraken</a></li>
+<li class="chapter" data-level="6.2" data-path="06-Taxonomic_profiling.html"><a href="06-Taxonomic_profiling.html#visualising-kraken-output"><i class="fa fa-check"></i><b>6.2</b> Visualising Kraken output</a>
+<ul>
+<li class="chapter" data-level="6.2.1" data-path="06-Taxonomic_profiling.html"><a href="06-Taxonomic_profiling.html#krona-plot"><i class="fa fa-check"></i><b>6.2.1</b> Krona plot</a></li>
+</ul></li>
+<li class="chapter" data-level="6.3" data-path="06-Taxonomic_profiling.html"><a href="06-Taxonomic_profiling.html#running-bracken"><i class="fa fa-check"></i><b>6.3</b> Running Bracken</a></li>
+<li class="chapter" data-level="6.4" data-path="06-Taxonomic_profiling.html"><a href="06-Taxonomic_profiling.html#lefse-biomarker-detection"><i class="fa fa-check"></i><b>6.4</b> LEfSe biomarker detection</a></li>
+</ul></li>
+<li class="chapter" data-level="7" data-path="07-Functional_profiling.html"><a href="07-Functional_profiling.html"><i class="fa fa-check"></i><b>7</b> Functional profiling</a>
+<ul>
+<li class="chapter" data-level="7.1" data-path="07-Functional_profiling.html"><a href="07-Functional_profiling.html#a-demo-run-of-humann2"><i class="fa fa-check"></i><b>7.1</b> A demo run of HUMANn2</a></li>
+<li class="chapter" data-level="7.2" data-path="07-Functional_profiling.html"><a href="07-Functional_profiling.html#statistical-comparison-between-samples"><i class="fa fa-check"></i><b>7.2</b> Statistical comparison between samples</a>
+<ul>
+<li class="chapter" data-level="7.2.1" data-path="07-Functional_profiling.html"><a href="07-Functional_profiling.html#combining-data"><i class="fa fa-check"></i><b>7.2.1</b> Combining data</a></li>
+<li class="chapter" data-level="7.2.2" data-path="07-Functional_profiling.html"><a href="07-Functional_profiling.html#renormalising-data"><i class="fa fa-check"></i><b>7.2.2</b> Renormalising data</a></li>
+<li class="chapter" data-level="7.2.3" data-path="07-Functional_profiling.html"><a href="07-Functional_profiling.html#visualisation"><i class="fa fa-check"></i><b>7.2.3</b> Visualisation</a></li>
+<li class="chapter" data-level="7.2.4" data-path="07-Functional_profiling.html"><a href="07-Functional_profiling.html#finding-statistically-significant-differences"><i class="fa fa-check"></i><b>7.2.4</b> Finding statistically significant differences</a></li>
+</ul></li>
+</ul></li>
+<li class="chapter" data-level="8" data-path="08-Metagenome_assembly.html"><a href="08-Metagenome_assembly.html"><i class="fa fa-check"></i><b>8</b> Metagenome assembly</a>
+<ul>
+<li class="chapter" data-level="8.1" data-path="08-Metagenome_assembly.html"><a href="08-Metagenome_assembly.html#a-primer-on-short-read-assembly"><i class="fa fa-check"></i><b>8.1</b> A primer on short read assembly</a></li>
+<li class="chapter" data-level="8.2" data-path="08-Metagenome_assembly.html"><a href="08-Metagenome_assembly.html#stitching-read-pairs"><i class="fa fa-check"></i><b>8.2</b> Stitching read pairs</a></li>
+<li class="chapter" data-level="8.3" data-path="08-Metagenome_assembly.html"><a href="08-Metagenome_assembly.html#assembly"><i class="fa fa-check"></i><b>8.3</b> Assembly</a></li>
+</ul></li>
+<li class="divider"></li>
+<li><a href="https://github.com/rstudio/bookdown" target="blank">Published with bookdown</a></li>
+
+</ul>
+
+      </nav>
+    </div>
+
+    <div class="book-body">
+      <div class="body-inner">
+        <div class="book-header" role="navigation">
+          <h1>
+            <i class="fa fa-circle-o-notch fa-spin"></i><a href="./">Shotgun Metagenomics</a>
+          </h1>
+        </div>
+
+        <div class="page-wrapper" tabindex="-1" role="main">
+          <div class="page-inner">
+
+            <section class="normal" id="section-">
+<div id="functional-profiling" class="section level1" number="7">
+<h1><span class="header-section-number">Chapter 7</span> Functional profiling</h1>
+<p><img src="figures/quality_trimming_and_filtering.png" width="30%" style="display: block; margin: auto;" /></p>
+<p>It is also possible to investigate functional differences between metagenome (and metatranscriptome) samples by directly interrogating the read data. We will now look at how this can be done with a package called HUMANn2 (The HMP Unified Metabolic Analysis Network 2), a pipeline designed to accurately profile the presence/absence and abundance of microbial pathways in metagenomic sequencing data.</p>
+<div id="a-demo-run-of-humann2" class="section level2" number="7.1">
+<h2><span class="header-section-number">7.1</span> A demo run of HUMANn2</h2>
+<p>First, we will carry out an example run of the software and briefly explore the output files. Make a new directory and move into it, after moving back to your home directory.</p>
+<div class="sourceCode" id="cb34"><pre class="sourceCode bash"><code class="sourceCode bash"><span id="cb34-1"><a href="07-Functional_profiling.html#cb34-1" aria-hidden="true" tabindex="-1"></a><span class="bu">cd</span> ..</span>
+<span id="cb34-2"><a href="07-Functional_profiling.html#cb34-2" aria-hidden="true" tabindex="-1"></a><span class="fu">mkdir</span> 4-FunctionalProfiling</span>
+<span id="cb34-3"><a href="07-Functional_profiling.html#cb34-3" aria-hidden="true" tabindex="-1"></a><span class="bu">cd</span> 4-FunctionalProfiling</span></code></pre></div>
+<pre><code>## mkdir: cannot create directory â€˜4-FunctionalProfilingâ€™: File exists</code></pre>
+<p>Now we will perform the run with HUMANn2 so we can inspect the output files. First, copy over some test data. $DB is simply an alias used for a directory containing database files used in this tutorial.</p>
+<div class="sourceCode" id="cb36"><pre class="sourceCode bash"><code class="sourceCode bash"><span id="cb36-1"><a href="07-Functional_profiling.html#cb36-1" aria-hidden="true" tabindex="-1"></a><span class="fu">cp</span> <span class="va">$DB</span>/demo.fq.gz .</span></code></pre></div>
+<p>This is a demonstration FASTQ file that we will use. It will be small enough to run HUMANn2 in a reasonable time.</p>
+<div class="sourceCode" id="cb37"><pre class="sourceCode bash"><code class="sourceCode bash"><span id="cb37-1"><a href="07-Functional_profiling.html#cb37-1" aria-hidden="true" tabindex="-1"></a><span class="ex">humann2</span> <span class="kw">\</span></span>
+<span id="cb37-2"><a href="07-Functional_profiling.html#cb37-2" aria-hidden="true" tabindex="-1"></a>  <span class="ex">--input</span> demo.fq.gz <span class="kw">\</span></span>
+<span id="cb37-3"><a href="07-Functional_profiling.html#cb37-3" aria-hidden="true" tabindex="-1"></a>  <span class="ex">--output</span> demo.humann2 <span class="dt">\ </span></span>
+<span id="cb37-4"><a href="07-Functional_profiling.html#cb37-4" aria-hidden="true" tabindex="-1"></a>  <span class="ex">--threads</span> 10</span></code></pre></div>
+<p>Here, we are telling the software to use demo.fq.gz as input and to create a new output directory where results will be generated.</p>
+<p>As the software runs, you might notice that as part of the process, HUMANn2 runs MetaPhlAn2. The purpose of this is to identify what species are present in the sample, so that it can then tailor generate an appropriate database of genes (from those species) to map against. It will carry out this alignment against the gene database, then a protein database, and finally compute which gene families are present to determine which functional pathways are present and how abundant they are.</p>
+<p>Once the run has completed, change into the newly created output directory and list the files that are there.</p>
+<div class="sourceCode" id="cb38"><pre class="sourceCode bash"><code class="sourceCode bash"><span id="cb38-1"><a href="07-Functional_profiling.html#cb38-1" aria-hidden="true" tabindex="-1"></a><span class="bu">cd</span> demo.humann2</span>
+<span id="cb38-2"><a href="07-Functional_profiling.html#cb38-2" aria-hidden="true" tabindex="-1"></a><span class="fu">ls</span></span></code></pre></div>
+<p>You will see that there are three files and one directory. The directory (demo_humann2_temp) contains intermediate temporary files and can be disregarded here. Sometimes, these files can be useful for debugging, however. The three files are:</p>
+<ul>
+<li><code>demo_genefamilies.tsv</code>: A table file showing the number of reads mapping to each UniRef90 gene family, Values are normalised by the length of each gene family (i.e. RPK, or Reads per Kilobase). Additionally, the values are stratified so that they show the overall community abundance but also a breakdown of abundance per species detected. This allows researchers to delve into species specific functions, rather than only looking at the metagenomic functions as a whole,</li>
+<li><code>demo_pathabundance.tsv</code>: As above, a table file showing the normalised abundance of MetaCyc pathways. These abundances are calculated based on the UniRef90 gene family mapping data and are also stratified by species.</li>
+<li><code>demo_pathcoverage.tsv</code>: Similar to above, except instead of abundances of pathways, this table shows the coverage, or completeness, of pathways. For example, a pathway may contain 5 components (or genes/proteins)
+<ul>
+<li>Pathway1 : A → B → C → D → E 100% complete</li>
+<li>A species identified in the sample may only have four of the components, though, meaning that the pathway is only 80% complete (represented as 0.8)</li>
+<li>Pathway1 : A → B → C → <del>D</del> → E 80% complete</li>
+</ul></li>
+</ul>
+<p>The basic format of these three output files is the same, so let’s take a look at the pathway abundance table.</p>
+<div class="sourceCode" id="cb39"><pre class="sourceCode bash"><code class="sourceCode bash"><span id="cb39-1"><a href="07-Functional_profiling.html#cb39-1" aria-hidden="true" tabindex="-1"></a><span class="fu">less</span> demo_pathabundance.tsv</span></code></pre></div>
+<p>You will see that there are two columns. The first shows the pathway (or UNMAPPED where reads could not be aligned, and UNINTEGRATED where reads could be aligned, but to targets not implicated in any pathways). The second column shows the abundance. Press <code>q</code> to exit and let’s look at one specific pathway, COA-PWY-1 (a coenzyme A biosynthesis II pathway).</p>
+<div class="sourceCode" id="cb40"><pre class="sourceCode bash"><code class="sourceCode bash"><span id="cb40-1"><a href="07-Functional_profiling.html#cb40-1" aria-hidden="true" tabindex="-1"></a><span class="fu">grep</span> COA-PWY-1 demo_pathabundance.tsv</span></code></pre></div>
+<p>This shows two entries with two different values, I.e.</p>
+<ul>
+<li>COA-PWY-1: coenzyme A biosynthesis II (mammalian) 6.3694267516</li>
+<li>COA-PWY-1: coenzyme A biosynthesis II (mammalian)|g__Bacteroides.s__Bacteroides_vulgatus 4.7961630695</li>
+</ul>
+<p>This is an example of the species stratification mentioned above. The first line shows the abundance of this pathway across the whole sample, but the second line shows the abundance contributed from Bacteroides_vulgatis.</p>
+<p>Have a look at the other two output files; note the similar layout.</p>
+<p>Finally, return to the parent directory i.e. <code>4-FunctionalProfiling</code></p>
+<div class="sourceCode" id="cb41"><pre class="sourceCode bash"><code class="sourceCode bash"><span id="cb41-1"><a href="07-Functional_profiling.html#cb41-1" aria-hidden="true" tabindex="-1"></a><span class="bu">cd</span> ..</span></code></pre></div>
+</div>
+<div id="statistical-comparison-between-samples" class="section level2" number="7.2">
+<h2><span class="header-section-number">7.2</span> Statistical comparison between samples</h2>
+<p>Looking at the functional profile of one sample in isolation is usually not very informative. First, there is nothing to compare it to and second, there are no biological replicates. We will therefore use all the Korean and Western diet samples.</p>
+<p>It would take many hours to analyse all of the data using HUMANn2 and is outside of the scope of this practical. For this reason, samples were analysed prior to the workshop to generate the output files we covered above. For the purposes of this comparison, we will look at the pathway abundances only. First copy over the results data directory and have a look in it (when copying directories, we need to use –r with the cp command, to recursively copy all files across)</p>
+<div class="sourceCode" id="cb42"><pre class="sourceCode bash"><code class="sourceCode bash"><span id="cb42-1"><a href="07-Functional_profiling.html#cb42-1" aria-hidden="true" tabindex="-1"></a><span class="fu">cp</span> –r <span class="va">$DB</span>/DietPathAbundance .</span>
+<span id="cb42-2"><a href="07-Functional_profiling.html#cb42-2" aria-hidden="true" tabindex="-1"></a><span class="fu">ls</span> DietPathAbundance</span></code></pre></div>
+<p>You will see there are 12 files prefixed with K and 12 prefixed with W, for the Korean diet and Western diet samples, respectively. Take a look in one of the files; you might notice that there is no species stratification: The reason for this is for this test, all pathway abundances have been collapsed to a community level, ignoring differences in species. When you analyse your own data-sets, you can leave this stratification in to identify significant differences between functional profiles at a species level.</p>
+<div id="combining-data" class="section level3" number="7.2.1">
+<h3><span class="header-section-number">7.2.1</span> Combining data</h3>
+<p>First, we need to combine these 24 tables into one large results table. HUMANn2 provides a tool to do this:</p>
+<div class="sourceCode" id="cb43"><pre class="sourceCode bash"><code class="sourceCode bash"><span id="cb43-1"><a href="07-Functional_profiling.html#cb43-1" aria-hidden="true" tabindex="-1"></a><span class="ex">humann2_join_tables</span> --input DietPathAbundance/ --output diet.tsv</span></code></pre></div>
+<p>This command will look for all tables in the DietPathAbundance directory and generate a large, 24 column table called diet.tsv. You can take a look to see that this has worked correctly.</p>
+<div class="sourceCode" id="cb44"><pre class="sourceCode bash"><code class="sourceCode bash"><span id="cb44-1"><a href="07-Functional_profiling.html#cb44-1" aria-hidden="true" tabindex="-1"></a><span class="fu">less</span> -S diet.tsv</span></code></pre></div>
+</div>
+<div id="renormalising-data" class="section level3" number="7.2.2">
+<h3><span class="header-section-number">7.2.2</span> Renormalising data</h3>
+<p>The next step is to renormalise the data. Currently, all of the abundance values are only normalised within each sample, i.e. accounting for the size of the pathways/length of genes. However, they are not normalised between samples, and this is very important. For example, if we had sequenced two samples, A and B, and we obtained 5 million reads for sample A and 20 million reads for sample B, without normalisation, it might look that there was up to 4x as much functional activity in sample B! To correct for this, we normalise the abundance values based on the number of reads in each samples, i.e. counts per million, or cpm. (We could also normalise to relative abundance where all abundances for each sample add up to 1).</p>
+<div class="sourceCode" id="cb45"><pre class="sourceCode bash"><code class="sourceCode bash"><span id="cb45-1"><a href="07-Functional_profiling.html#cb45-1" aria-hidden="true" tabindex="-1"></a><span class="ex">humann2_renorm_table</span> <span class="kw">\</span></span>
+<span id="cb45-2"><a href="07-Functional_profiling.html#cb45-2" aria-hidden="true" tabindex="-1"></a>  <span class="ex">--units</span> cpm <span class="kw">\</span></span>
+<span id="cb45-3"><a href="07-Functional_profiling.html#cb45-3" aria-hidden="true" tabindex="-1"></a>  <span class="ex">--input</span> diet.tsv <span class="kw">\</span></span>
+<span id="cb45-4"><a href="07-Functional_profiling.html#cb45-4" aria-hidden="true" tabindex="-1"></a>  <span class="ex">--special</span> n <span class="kw">\</span></span>
+<span id="cb45-5"><a href="07-Functional_profiling.html#cb45-5" aria-hidden="true" tabindex="-1"></a>  <span class="ex">--output</span> diet.cpm.tsv</span></code></pre></div>
+<p>This command generates the normalised data in the new table <code>diet.cpm.tsv</code>. The <code>--special n</code> option tells the script to remove all unmapped and unassigned values from the table.</p>
+</div>
+<div id="visualisation" class="section level3" number="7.2.3">
+<h3><span class="header-section-number">7.2.3</span> Visualisation</h3>
+<p>Now that we have our data normalised, we can visualise the dataset to see how the two groups look, i.e. do samples in the same diet group appear to correlate well with each other and are they distinguishable from those from the other diet group? To do this, we will draw a PCA plot. So that the plot will show which samples are from which group, we will need to provide the script with some metadata. This has been prepared and can be copied over as follows</p>
+<div class="sourceCode" id="cb46"><pre class="sourceCode bash"><code class="sourceCode bash"><span id="cb46-1"><a href="07-Functional_profiling.html#cb46-1" aria-hidden="true" tabindex="-1"></a><span class="fu">cp</span> <span class="va">$DB</span>/diet.metadata.tsv .</span></code></pre></div>
+<p>This is a table file where the first column is the sample name with subsequent columns representing categories of metadata. Here, the column of interest is the second one, ‘Diet,’ and samples are labelled as either ‘Western’ or ‘Korean.’ We can now run the PCA plot generation script and look at the result.</p>
+<div class="sourceCode" id="cb47"><pre class="sourceCode bash"><code class="sourceCode bash"><span id="cb47-1"><a href="07-Functional_profiling.html#cb47-1" aria-hidden="true" tabindex="-1"></a><span class="ex">PCA_plot.r</span> diet.cpm.tsv diet.metadata.tsv Diet diet.pca.pdf</span></code></pre></div>
+<p>This command takes our data table as the first argument, our metadata table as the second argument, the metadata category of interest as the third argument and the output file as the final argument.</p>
+<p>Now we can view the plot.</p>
+<div class="sourceCode" id="cb48"><pre class="sourceCode bash"><code class="sourceCode bash"><span id="cb48-1"><a href="07-Functional_profiling.html#cb48-1" aria-hidden="true" tabindex="-1"></a><span class="ex">okular</span> diet.pca.pdf <span class="kw">&amp;</span></span></code></pre></div>
+<p>You should see 3 plots, each one plotting 2 of the first 3 principal components against each other. (see following image). The axis of each plot also shows how much of the overall variance that that particular component accounts for. Blue and red dots show the Western and Korean diet samples, respectively, and samples that cluster closely together are more similar to each other.
+From this, we can see that there is some separation between the two dietary groups, but that they are not completely separated, i.e. there is some overlap. This can happen frequently with datasets such as this, that are likely to be much less controlled than laboratory samples and therefore show more between-group variance.</p>
+<p>Is there anything unexpected about any of the samples, from these plots? If so, what might be a sensible course of action before proceeding with statistical analysis?</p>
+</div>
+<div id="finding-statistically-significant-differences" class="section level3" number="7.2.4">
+<h3><span class="header-section-number">7.2.4</span> Finding statistically significant differences</h3>
+<p>For the final part of this section, we will see if there are any statistically significant differences between the two sample groups. There are several ways in which this can be achieved but we will carry out a Kruskal-Wallis Test, using a script supplied with HUMAnN2. This script is suitable for test datasets but more robust methods should be used for other datasets (these will be discussed in day 3). Before we can do this, we need to add the metadata for the samples to the data table itself, as a new row just below the header.</p>
+<div class="sourceCode" id="cb49"><pre class="sourceCode bash"><code class="sourceCode bash"><span id="cb49-1"><a href="07-Functional_profiling.html#cb49-1" aria-hidden="true" tabindex="-1"></a><span class="ex">addMetadataToHumann2Table</span> <span class="kw">\</span></span>
+<span id="cb49-2"><a href="07-Functional_profiling.html#cb49-2" aria-hidden="true" tabindex="-1"></a>  <span class="ex">--table</span> diet.cpm.tsv <span class="kw">\</span></span>
+<span id="cb49-3"><a href="07-Functional_profiling.html#cb49-3" aria-hidden="true" tabindex="-1"></a>  <span class="ex">--metadata</span> diet.metadata.tsv <span class="kw">\</span></span>
+<span id="cb49-4"><a href="07-Functional_profiling.html#cb49-4" aria-hidden="true" tabindex="-1"></a>  <span class="ex">--output</span> diet.cpm.anno.tsv</span></code></pre></div>
+<p>You can take a look at the new metadata-annotated table as follows.</p>
+<div class="sourceCode" id="cb50"><pre class="sourceCode bash"><code class="sourceCode bash"><span id="cb50-1"><a href="07-Functional_profiling.html#cb50-1" aria-hidden="true" tabindex="-1"></a><span class="fu">less</span> -S diet.cpm.anno.tsv</span></code></pre></div>
+<p>Now we can run the statistical test.</p>
+<div class="sourceCode" id="cb51"><pre class="sourceCode bash"><code class="sourceCode bash"><span id="cb51-1"><a href="07-Functional_profiling.html#cb51-1" aria-hidden="true" tabindex="-1"></a><span class="ex">humann2_associate</span> <span class="kw">\</span></span>
+<span id="cb51-2"><a href="07-Functional_profiling.html#cb51-2" aria-hidden="true" tabindex="-1"></a>  <span class="ex">--input</span> diet.cpm.anno.tsv <span class="kw">\</span></span>
+<span id="cb51-3"><a href="07-Functional_profiling.html#cb51-3" aria-hidden="true" tabindex="-1"></a>  <span class="ex">--last-metadatum</span> Group <span class="kw">\</span></span>
+<span id="cb51-4"><a href="07-Functional_profiling.html#cb51-4" aria-hidden="true" tabindex="-1"></a>  <span class="ex">--focal-metadatum</span> Diet <span class="kw">\</span></span>
+<span id="cb51-5"><a href="07-Functional_profiling.html#cb51-5" aria-hidden="true" tabindex="-1"></a>  <span class="ex">--focal-type</span> categorical <span class="kw">\</span></span>
+<span id="cb51-6"><a href="07-Functional_profiling.html#cb51-6" aria-hidden="true" tabindex="-1"></a>  <span class="ex">--output</span> diet.sigdif.tab</span></code></pre></div>
+<p>Besides the input and output arguments, we also tell the script which category to use (<code>--focal-metadatum</code>), and what sort of category it is, i.e. whether it is continuous or categorical data (<code>--focal-type</code>). We also need to tell it what the last category of metadata is in the header so that it knows where the actual table data begins (<code>--last-metadatum</code>). Let’s look at the results and see if there are any pathways which are significantly different in abundance between the Western and Korean diet groups.</p>
+<div class="sourceCode" id="cb52"><pre class="sourceCode bash"><code class="sourceCode bash"><span id="cb52-1"><a href="07-Functional_profiling.html#cb52-1" aria-hidden="true" tabindex="-1"></a><span class="fu">less</span> -S diet.sigdif.tab</span></code></pre></div>
+<p>Here, there are 4 columns. Feature (i.e. pathway), Level means (mean abundance per group for that pathway), P-value, and Q-value (false-discovery rate adjusted P-value). By this test, there are 6 significantly (5% cut-off) differentially abundant pathways between the two groups. These would make an ideal starting point for further scientific investigation, but for this workshop, we will now leave this set and return to our original dataset!</p>
+
+</div>
+</div>
+</div>
+            </section>
+
+          </div>
+        </div>
+      </div>
+<a href="06-Taxonomic_profiling.html" class="navigation navigation-prev " aria-label="Previous page"><i class="fa fa-angle-left"></i></a>
+<a href="08-Metagenome_assembly.html" class="navigation navigation-next " aria-label="Next page"><i class="fa fa-angle-right"></i></a>
+    </div>
+  </div>
+<script src="libs/gitbook-2.6.7/js/app.min.js"></script>
+<script src="libs/gitbook-2.6.7/js/lunr.js"></script>
+<script src="libs/gitbook-2.6.7/js/clipboard.min.js"></script>
+<script src="libs/gitbook-2.6.7/js/plugin-search.js"></script>
+<script src="libs/gitbook-2.6.7/js/plugin-sharing.js"></script>
+<script src="libs/gitbook-2.6.7/js/plugin-fontsettings.js"></script>
+<script src="libs/gitbook-2.6.7/js/plugin-bookdown.js"></script>
+<script src="libs/gitbook-2.6.7/js/jquery.highlight.js"></script>
+<script src="libs/gitbook-2.6.7/js/plugin-clipboard.js"></script>
+<script>
+gitbook.require(["gitbook"], function(gitbook) {
+gitbook.start({
+"sharing": null,
+"fontsettings": {
+"theme": "white",
+"family": "sans",
+"size": 2
+},
+"edit": null,
+"history": {
+"link": null,
+"text": null
+},
+"view": {
+"link": null,
+"text": null
+},
+"download": null,
+"toc": {
+"collapse": "subsection"
+}
+});
+});
+</script>
+
+</body>
+
+</html>

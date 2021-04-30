@@ -575,3 +575,317 @@ Which species causes the biggest effect in the W class and in the K class? Which
 
 <!--chapter:end:06-Taxonomic_profiling.Rmd-->
 
+# Functional profiling
+```{r, fig.align = 'center',out.width= '30%', echo=FALSE }
+knitr::include_graphics(path = "figures/quality_trimming_and_filtering.png", auto_pdf = TRUE)
+``` 
+
+It is also possible to investigate functional differences between metagenome (and metatranscriptome) samples by directly interrogating the read data. We will now look at how this can be done with a package called HUMANn2 (The HMP Unified Metabolic Analysis Network 2), a pipeline designed to accurately profile the presence/absence and abundance of microbial pathways in metagenomic sequencing data.
+
+## A demo run of HUMANn2 
+
+First, we will carry out an example run of the software and briefly explore the output files. Make a new directory and move into it, after moving back to your home directory.
+
+```{bash eal=FALSE}
+cd ..
+mkdir 4-FunctionalProfiling
+cd 4-FunctionalProfiling
+```
+
+Now we will  perform the run with HUMANn2 so we can inspect the output files. First, copy over some test data. $DB is simply an alias used for a directory containing database files used in this tutorial.
+
+```{bash eval=FALSE}
+cp $DB/demo.fq.gz .
+```
+
+This is a demonstration FASTQ file that we will use. It will be small enough to run HUMANn2 in a reasonable time.
+
+```{bash eval=FALSE}
+humann2 \
+  --input demo.fq.gz \
+  --output demo.humann2 \ 
+  --threads 10
+```
+
+Here, we are telling the software to use demo.fq.gz as input and to create a new output directory where results will be generated. 
+
+As the software runs, you might notice that as part of the process, HUMANn2 runs MetaPhlAn2. The purpose of this is to identify what species are present in the sample, so that it can then tailor generate an appropriate database of genes (from those species) to map against. It will carry out this alignment against the gene database, then a protein database, and finally compute which gene families are present to determine which functional pathways are present and how abundant they are.
+
+Once the run has completed, change into the newly created output directory and list the files that are there.
+
+```{bash eval=FALSE}
+cd demo.humann2
+ls
+```
+
+You will see that there are three files and one directory. The directory (demo_humann2_temp) contains intermediate temporary files and can be disregarded here. Sometimes, these files can be useful for debugging, however. The three files are:
+
+- `demo_genefamilies.tsv`: A table file showing the number of reads mapping to each UniRef90 gene family, Values are normalised by the length of each gene family (i.e. RPK, or Reads per Kilobase). Additionally, the values are stratified so that they show the overall community abundance but also a breakdown of abundance per species detected. This allows researchers to delve into species specific functions, rather than only looking at the metagenomic functions as a whole,
+- `demo_pathabundance.tsv`: As above, a table file showing the normalised abundance of MetaCyc pathways. These abundances are calculated based on the UniRef90 gene family mapping data and are also stratified by species.
+- `demo_pathcoverage.tsv`: Similar to above, except instead of abundances of pathways, this table shows the coverage, or completeness, of pathways. For example, a pathway may contain 5 components (or genes/proteins)
+   - Pathway1 :         A → B → C → D → E		100% complete
+   - A species identified in the sample may only have four of the components, though, 	meaning that the pathway is only 80% complete (represented as 0.8)
+    - Pathway1 :         A → B → C → ~~D~~ → E		80% complete
+
+The basic format of these three output files is the same, so let's take a look at the pathway abundance table.
+
+```{bash eval=FALSE}
+less demo_pathabundance.tsv
+```
+
+You will see that there are two columns. The first shows the pathway (or UNMAPPED where reads could not be aligned, and UNINTEGRATED where reads could be aligned, but to targets not implicated in any pathways). The second column shows the abundance. Press `q` to exit and let's look at one specific pathway, COA-PWY-1 (a coenzyme A biosynthesis II pathway).
+
+```{bash eval=FALSE}
+grep COA-PWY-1 demo_pathabundance.tsv
+```
+
+This shows two entries with two different values, I.e.
+
+- COA-PWY-1: coenzyme A biosynthesis II (mammalian)	6.3694267516 
+- COA-PWY-1: coenzyme A biosynthesis II (mammalian)|g__Bacteroides.s__Bacteroides_vulgatus	4.7961630695
+
+This is an example of the species stratification mentioned above. The first line shows the abundance of this pathway across the whole sample, but the second line shows the abundance contributed from Bacteroides_vulgatis.
+
+Have a look at the other two output files; note the similar layout.
+
+Finally, return to the parent directory i.e. `4-FunctionalProfiling`
+
+```{bash eval=FALSE}
+cd ..
+```
+
+## Statistical comparison between samples
+
+Looking at the functional profile of one sample in isolation is usually not very informative. First, there is nothing to compare it to and second, there are no biological replicates. We will therefore use all the Korean and Western diet samples.
+
+It would take many hours to analyse all of the data using HUMANn2 and is outside of the scope of this practical. For this reason, samples were analysed prior to the workshop to generate the output files we covered above. For the purposes of this comparison, we will look at the pathway abundances only. First copy over the results data directory and have a look in it (when copying directories, we need to use –r with the cp command, to recursively copy all files across)
+
+```{bash eval=FALSE}
+cp –r $DB/DietPathAbundance .
+ls DietPathAbundance
+```
+
+You will see there are 12 files prefixed with K and 12 prefixed with W, for the Korean diet and Western diet samples, respectively. Take a look in one of the files; you might notice that there is no species stratification: The reason for this is for this test, all pathway abundances have been collapsed to a community level, ignoring differences in species. When you analyse your own data-sets, you can leave this stratification in to identify significant differences between functional profiles at a species level.
+
+### Combining data
+
+First, we need to combine these 24 tables into one large results table. HUMANn2 provides a tool to do this:
+
+```{bash eval=FALSE}
+humann2_join_tables --input DietPathAbundance/ --output diet.tsv
+```
+
+This command will look for all tables in the DietPathAbundance directory and generate a large, 24 column table called diet.tsv. You can take a look to see that this has worked correctly.
+
+```{bash eval=FALSE}
+less -S diet.tsv
+```
+
+### Renormalising data
+
+The next step is to renormalise the data. Currently, all of the abundance values are only normalised within each sample, i.e. accounting for the size of the pathways/length of genes. However, they are not normalised between samples, and this is very important. For example, if we had sequenced two samples, A and B, and we obtained 5 million reads for sample A and 20 million reads for sample B, without normalisation, it might look that there was up to 4x as much functional activity in sample B! To correct for this, we normalise the abundance values based on the number of reads in each samples, i.e. counts per million, or cpm. (We could also normalise to relative abundance where all abundances for each sample add up to 1).
+
+```{bash eval=FALSE}
+humann2_renorm_table \
+  --units cpm \
+  --input diet.tsv \
+  --special n \
+  --output diet.cpm.tsv
+```
+
+This command generates the normalised data in the new table `diet.cpm.tsv`. The `--special n` option tells the script to remove all unmapped and unassigned values from the table.
+
+### Visualisation
+Now that we have our data normalised, we can visualise the dataset to see how the two groups look, i.e. do samples in the same diet group appear to correlate well with each other and are they distinguishable from those from the other diet group? To do this, we will draw a PCA plot. So that the plot will show which samples are from which group, we will need to provide the script with some metadata. This has been prepared and can be copied over as follows
+
+```{bash eval=FALSE}
+cp $DB/diet.metadata.tsv .
+```
+
+This is a table file where the first column is the sample name with subsequent columns representing categories of metadata. Here, the column of interest is the second one, 'Diet', and samples are labelled as either 'Western' or 'Korean'. We can now run the PCA plot generation script and look at the result.
+```{bash eval=FALSE}
+PCA_plot.r diet.cpm.tsv diet.metadata.tsv Diet diet.pca.pdf
+```
+
+This command takes our data table as the first argument, our metadata table as the second argument, the metadata category of interest as the third argument and the output file as the final argument. 
+
+Now we can view the plot.
+
+```{bash eval=FALSE}
+okular diet.pca.pdf &
+```
+
+You should see 3 plots, each one plotting 2 of the first 3 principal components against each other. (see following image). The axis of each plot also shows how much of the overall variance that that particular component accounts for. Blue and red dots show the Western and Korean diet samples, respectively, and samples that cluster closely together are more similar to each other. 
+From this, we can see that there is some separation between the two dietary groups, but that they are not completely separated, i.e. there is some overlap. This can happen frequently with datasets such as this, that are likely to be much less controlled than laboratory samples and therefore show more between-group variance. 
+
+Is there anything unexpected about any of the samples, from these plots? If so, what might be a sensible course of action before proceeding with statistical analysis?
+
+### Finding statistically significant differences
+
+For the final part of this section, we will see if there are any statistically significant differences between the two sample groups. There are several ways in which this can be achieved but we will carry out a Kruskal-Wallis Test, using a script supplied with HUMAnN2. This script is suitable for test datasets but more robust methods should be used for other datasets (these will be discussed in day 3).  Before we can do this, we need to add the metadata for the samples to the data table itself, as a new row just below the header. 
+
+```{bash eval=FALSE}
+addMetadataToHumann2Table \
+  --table diet.cpm.tsv \
+  --metadata diet.metadata.tsv \
+  --output diet.cpm.anno.tsv
+```
+
+You can take a look at the new metadata-annotated table as follows.
+
+```{bash eval=FALSE}
+less -S diet.cpm.anno.tsv
+```
+
+Now we can run the statistical test.
+
+```{bash eval=FALSE}
+humann2_associate \
+  --input diet.cpm.anno.tsv \
+  --last-metadatum Group \
+  --focal-metadatum Diet \
+  --focal-type categorical \
+  --output diet.sigdif.tab
+```
+
+Besides the input and output arguments, we also tell the script which category to use (`--focal-metadatum`),  and what sort of category it is, i.e. whether it is continuous or categorical data (`--focal-type`). We also need to tell it what the last category of metadata is in the header so that it knows where the actual table data begins (`--last-metadatum`). Let's look at the results and see if there are any pathways which are significantly different in abundance between the Western and Korean diet groups.
+
+```{bash eval=FALSE}
+less -S diet.sigdif.tab
+```
+
+Here, there are 4 columns. Feature (i.e. pathway), Level means (mean abundance per group for that pathway), P-value, and Q-value (false-discovery rate adjusted P-value). By this test, there are 6 significantly (5% cut-off) differentially abundant pathways between the two groups. These would make an ideal starting point for further scientific investigation, but for this workshop, we will now leave this set and return to our original dataset!
+
+<!--chapter:end:07-Functional_profiling.Rmd-->
+
+# Metagenome assembly
+```{r, fig.align = 'center',out.width= '30%', echo=FALSE }
+knitr::include_graphics(path = "figures/quality_trimming_and_filtering.png", auto_pdf = TRUE)
+``` 
+
+So far we have directly analysed the read data itself which is perfectly fine for taxonomic profiling and for certain methods of functional profiling. However, Illumina reads are generally short and therefore can not provide us with much data on larger constructs that are in the metagenomic samples, e.g. genes. While it is possible to predict from which gene a sequence read might originate, the short nature of the query can sometimes lead to ambiguous results. 
+
+Additionally, depending on the application it can become computationally intensive to analyse large numbers of reads. Here, we are only using samples with 1 million reads. Some metagenome samples consist of 50-100 million+ read pairs. If such a sample belonged to a set of 100 samples, that would be up to 10 billion read pairs, or 2 trillion bases of sequence data, with many of these being redundant.
+
+For this reason, it is sometimes advantageous to assemble the reads into contigs, using a meta-genome assembler. This has the dual effect of:
+
+- Reducing the overall size of the data for analysis. If a metagenome was sequenced at 50x depth, then by assembling it you could theoretically reduce the amount of sequence to analyse by 50-fold.
+- Increase the size of the fragments you will analyse. This is the main advantage of an assembly, as the ~100 bp reads can be pieced together to form 100,000 kb+ contigs. These contigs will contain complete genes, operons and regulatory elements: Reconstructed genome sections.
+
+Here, we will carry out a couple of assemblies on our dataset.
+
+## A primer on short read assembly
+
+Illumina reads are too short and numerous to use traditional overlap-layout-consensus assemblers as such an approach would be far too computationally intensive. Instead, we use De Bruijn graph based assemblers. Briefly, these operate as follows:
+
+1. All reads are broken down in to k-length overlapping fragments (k-mers). e.g. if we choose a k-mer size of 5 bp, the following two sequences (blue) would be broken down into the k-mers below them (red):
+
+__(A plot need to go here, see old manual)__
+
+2. All k-mers are linked to other k-mers which match with a k-1 length overlap (i.e. that overlap by all but one base:
+   - GGCAT→GCATGC→CATGC→ATGCA→TGCAG→GCAGG→CAGGA
+
+3. Paths are routed through the graph and longer contigs are generated:
+   - __G__GCAT→__G__CATGC→__C__ATGC→__A__TGCA→__T__GCAG→__G__CAGG→__CAGGA__
+   - → GGCATGCAGGA
+
+The example here is a vast oversimplification of the complexity of a De Bruijn graph (i.e. there are no branches!). Routing through the graph is never as simple as this as some k-mers will lead to multiple k-mers, which can result in the break point of a contig. This is especially true for complex metagenomic data.
+
+Generally speaking, the shorter the k-mer, the more branches there will be, the trickier the graph is to resolve, so the resulting contigs are smaller. Assemblers usually perform better with longer k-mer lengths but even then there might not be enough depth of sequencing to generate all k-mers that form overlaps, therefore leading to break points. Finding the right k-mer size usually involves testing several. 
+
+Fortunately, the assembler we will use, MEGAHIT, allows us to build an assembly using multiple k-mer lengths iteratively. The other great advantage about MEGAHIT is that it is quick and efficient.  We will use MEGAHIT on our data soon, but first there is an additional processing step for our sequences...
+
+## Stitching read pairs
+
+As mentioned, longer k-mers generally perform better, but as our maximum read length is 100 bp, we are limited to a maximum k-mer length of 99 bp. However, we can get even longer k-mers if we stitch our read pairs together. 
+
+Remember that a read pair consists of two sequences read from each end of a fragment of DNA (or RNA). If the two sequences meet in the middle of the fragment and then overlap, there will be a region of homology which we can use to merge the two reads in the pair together (See next image).
+
+First, we obtain our forward and reverse reads, derived from different ends of the same fragment. Second, we look for sufficient overlap between the 3' ends of our sequences. Third, if there is sufficient overlap, we combine, or stitch, the two reads together to form one long sequence.
+
+```{r, fig.align = 'center',out.width= '50%', echo=FALSE }
+knitr::include_graphics(path = "figures/merging_paired_reads.png", auto_pdf = TRUE)
+``` 
+
+Once we have longer stitched reads, we can increase the k-mer length for our assembly. 
+
+There are a number of pieces of software that can be used to stitch reads (e.g. Pear,  Pandaseq) but today we will use one called FLASH:
+
+Make a new output directory for the stitched reads and run FLASH:
+
+```{bash eval=FALSE}
+cd ..
+
+mkdir 5-Stitched
+
+cd 5-Stitched
+
+flash  -o K1 -z -t 12 -d . \
+../2-Trimmed/K1_R1.fq.gz ../2-Trimmed/K1_R2.fq.gz
+```
+
+Here, we are telling flash to use an output file name prefix of K1, that the input is zipped, that the output directory is here (.) and to use the two read files for Sample K1. Once FLASH has finished running, it will display on screen how well the stitching process went, in this case a low amount of reads were combined. Have a look what files have been generated
+```{bash eval=FALSE}
+ls
+```
+
+We have three new fastq.gz files. One containing the stitched reads (`K1.extendedFrags.fastq.gz`) and two containing the reads from pairs that could not be combined (`K1.notCombined_1.fastq.gz` and `K1.notCombined_2.fastq.gz)`.
+
+We can also see what the new read lengths are:
+
+```{bash eval=FALSE}
+less K1.histogram
+```
+
+Scroll down with the down key and you will see that we are looking at a histogram showing the proportion of reads at different lengths. We can now start assembling our stitched reads for this sample.
+
+## Assembly
+
+Create a new directory to store our assembly in and run the metagenome assembler MEGAHIT using our newly stitched read data.
+
+```{bash eval=FALSE}
+cd ..
+mkdir 6-Assembly
+cd 6-Assembly
+megahit \
+-r ../5-Stitched/K1.extendedFrags.fastq.gz \
+-1 ../5-Stitched/K1.notCombined_1.fastq.gz \
+-2 ../5-Stitched/K1.notCombined_2.fastq.gz \
+-o K1 \
+-t 12 \
+--k-list 29,49,69,89,109,129,149,169,189
+```
+
+Here, you have instructed MEGAHIT to use both the stitched and unstitched reads, to output the assembly in a subdirectory called K1 and to use 12 CPUs. 
+
+The last option `--k-list` instructs MEGAHIT to first generate an assembly using a k-mer size of 29 bp and when that is complete, integrate the results into an assembly using a k-mer size of 49 bp, and so on up to a final iteration using a k-mer size of 189 bp. This large range of k-mer lengths should give us a good assembly, given the data. However, it may take a while to run so this might be a good time to either read on, or go back and look at some of the questions/suggestions in green that you have missed. If you need a command prompt (your current one is gone because MEGAHIT is running), Right-click on the grey background → Applications → Terminal Emulators → Xterm, to open a new terminal.
+
+Once the assembly is completed, we can look at the output FASTA file containing the contigs:
+
+```{bash eval=FALSE}
+less K1/final.contigs.fa
+```
+
+We can also generate some metrics based on the assembly
+
+```{bash eval=FALSE}
+assembly.py \
+  -i K1/final.contigs.fa \
+  -o K1/final.contigs.stats \
+  -c stats
+
+less K1/final.contigs.stats
+```
+
+This stats file tells us quite a bit about the assembly quality. Two definitions that you may not be aware of are N50 and N50 length (or, somewhat confusingly, L50 and N50, respectively!).  If we were to order our contigs from largest to smallest, and total up the sizes from biggest downwards, the contig we reach where our total is 50% of the size of the whole assembly is the N50 contig (the smaller the number the better). The N50 length is the length of this contig; a weighted median contig length.
+
+__(add vis to explain N50)__
+
+How do the contig metrics compare to the original reads? 
+Now we have an assembly, albeit not a brilliant one due to us only having used 1 million reads, we can start to explore it.
+
+
+
+
+<!--chapter:end:08-Metagenome_assembly.Rmd-->
+
