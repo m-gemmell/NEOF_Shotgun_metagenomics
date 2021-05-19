@@ -123,6 +123,3 @@ __(add vis to explain N50)__
 
 How do the contig metrics compare to the original reads? 
 Now we have an assembly, albeit not a brilliant one due to us only having used 1 million reads, we can start to explore it.
-
-
-

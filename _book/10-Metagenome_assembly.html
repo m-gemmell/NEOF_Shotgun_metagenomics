@@ -4,11 +4,11 @@
 
   <meta charset="utf-8" />
   <meta http-equiv="X-UA-Compatible" content="IE=edge" />
-  <title>Chapter 8 Metagenome assembly | Shotgun Metagenomics</title>
-  <meta name="description" content="Chapter 8 Metagenome assembly | Shotgun Metagenomics" />
+  <title>Chapter 10 Metagenome assembly | Shotgun Metagenomics</title>
+  <meta name="description" content="Chapter 10 Metagenome assembly | Shotgun Metagenomics" />
   <meta name="generator" content="bookdown 0.21 and GitBook 2.6.7" />
 
-  <meta property="og:title" content="Chapter 8 Metagenome assembly | Shotgun Metagenomics" />
+  <meta property="og:title" content="Chapter 10 Metagenome assembly | Shotgun Metagenomics" />
   <meta property="og:type" content="book" />
   
   
@@ -16,7 +16,7 @@
   
 
   <meta name="twitter:card" content="summary" />
-  <meta name="twitter:title" content="Chapter 8 Metagenome assembly | Shotgun Metagenomics" />
+  <meta name="twitter:title" content="Chapter 10 Metagenome assembly | Shotgun Metagenomics" />
   
   
   
@@ -24,15 +24,15 @@
 <meta name="author" content="Sam Haldenby and Matthew Gemmell" />
 
 
-<meta name="date" content="2021-04-30" />
+<meta name="date" content="2021-05-19" />
 
   <meta name="viewport" content="width=device-width, initial-scale=1" />
   <meta name="apple-mobile-web-app-capable" content="yes" />
   <meta name="apple-mobile-web-app-status-bar-style" content="black" />
   
   
-<link rel="prev" href="07-Functional_profiling.html"/>
-
+<link rel="prev" href="09-Functional_profiling.html"/>
+<link rel="next" href="11-Gene_prediction.html"/>
 <script src="libs/header-attrs-2.6/header-attrs.js"></script>
 <script src="libs/jquery-2.2.3/jquery.min.js"></script>
 <link href="libs/gitbook-2.6.7/css/style.css" rel="stylesheet" />
@@ -147,43 +147,82 @@ code span.wa { color: #60a0b0; font-weight: bold; font-style: italic; } /* Warni
 </ul></li>
 </ul></li>
 <li class="chapter" data-level="3" data-path="03-Start.html"><a href="03-Start.html"><i class="fa fa-check"></i><b>3</b> Before we start</a></li>
-<li class="chapter" data-level="4" data-path="04-Raw_data.html"><a href="04-Raw_data.html"><i class="fa fa-check"></i><b>4</b> Raw data</a>
+<li class="chapter" data-level="4" data-path="04-Cluster_Introduction.html"><a href="04-Cluster_Introduction.html"><i class="fa fa-check"></i><b>4</b> Cluster Introduction</a>
 <ul>
-<li class="chapter" data-level="4.1" data-path="04-Raw_data.html"><a href="04-Raw_data.html#obtaining-the-data"><i class="fa fa-check"></i><b>4.1</b> Obtaining the data</a></li>
-<li class="chapter" data-level="4.2" data-path="04-Raw_data.html"><a href="04-Raw_data.html#checking-quality-control"><i class="fa fa-check"></i><b>4.2</b> Checking quality control</a></li>
+<li class="chapter" data-level="4.1" data-path="04-Cluster_Introduction.html"><a href="04-Cluster_Introduction.html#logon-instructions"><i class="fa fa-check"></i><b>4.1</b> Logon instructions</a></li>
+<li class="chapter" data-level="4.2" data-path="04-Cluster_Introduction.html"><a href="04-Cluster_Introduction.html#the-terminal-window"><i class="fa fa-check"></i><b>4.2</b> The Terminal Window</a></li>
 </ul></li>
-<li class="chapter" data-level="5" data-path="05-Trimming_data.html"><a href="05-Trimming_data.html"><i class="fa fa-check"></i><b>5</b> Quality control</a>
+<li class="chapter" data-level="5" data-path="05-Raw_data.html"><a href="05-Raw_data.html"><i class="fa fa-check"></i><b>5</b> Raw data</a>
 <ul>
-<li class="chapter" data-level="5.1" data-path="05-Trimming_data.html"><a href="05-Trimming_data.html#removing-adapters-and-low-quality-bases"><i class="fa fa-check"></i><b>5.1</b> Removing adapters and low quality bases</a></li>
-<li class="chapter" data-level="5.2" data-path="05-Trimming_data.html"><a href="05-Trimming_data.html#rename-the-files"><i class="fa fa-check"></i><b>5.2</b> Rename the files</a></li>
-<li class="chapter" data-level="5.3" data-path="05-Trimming_data.html"><a href="05-Trimming_data.html#inspect-the-trimmed-data"><i class="fa fa-check"></i><b>5.3</b> Inspect the trimmed data</a></li>
+<li class="chapter" data-level="5.1" data-path="05-Raw_data.html"><a href="05-Raw_data.html#obtaining-the-data"><i class="fa fa-check"></i><b>5.1</b> Obtaining the data</a></li>
+<li class="chapter" data-level="5.2" data-path="05-Raw_data.html"><a href="05-Raw_data.html#checking-quality-control"><i class="fa fa-check"></i><b>5.2</b> Checking quality control</a></li>
 </ul></li>
-<li class="chapter" data-level="6" data-path="06-Taxonomic_profiling.html"><a href="06-Taxonomic_profiling.html"><i class="fa fa-check"></i><b>6</b> Taxonomic profiling</a>
+<li class="chapter" data-level="6" data-path="06-Trimming_data.html"><a href="06-Trimming_data.html"><i class="fa fa-check"></i><b>6</b> Quality control</a>
 <ul>
-<li class="chapter" data-level="6.1" data-path="06-Taxonomic_profiling.html"><a href="06-Taxonomic_profiling.html#running-kraken"><i class="fa fa-check"></i><b>6.1</b> Running Kraken</a></li>
-<li class="chapter" data-level="6.2" data-path="06-Taxonomic_profiling.html"><a href="06-Taxonomic_profiling.html#visualising-kraken-output"><i class="fa fa-check"></i><b>6.2</b> Visualising Kraken output</a>
-<ul>
-<li class="chapter" data-level="6.2.1" data-path="06-Taxonomic_profiling.html"><a href="06-Taxonomic_profiling.html#krona-plot"><i class="fa fa-check"></i><b>6.2.1</b> Krona plot</a></li>
+<li class="chapter" data-level="6.1" data-path="06-Trimming_data.html"><a href="06-Trimming_data.html#removing-adapters-and-low-quality-bases"><i class="fa fa-check"></i><b>6.1</b> Removing adapters and low quality bases</a></li>
+<li class="chapter" data-level="6.2" data-path="06-Trimming_data.html"><a href="06-Trimming_data.html#rename-the-files"><i class="fa fa-check"></i><b>6.2</b> Rename the files</a></li>
+<li class="chapter" data-level="6.3" data-path="06-Trimming_data.html"><a href="06-Trimming_data.html#inspect-the-trimmed-data"><i class="fa fa-check"></i><b>6.3</b> Inspect the trimmed data</a></li>
 </ul></li>
-<li class="chapter" data-level="6.3" data-path="06-Taxonomic_profiling.html"><a href="06-Taxonomic_profiling.html#running-bracken"><i class="fa fa-check"></i><b>6.3</b> Running Bracken</a></li>
-<li class="chapter" data-level="6.4" data-path="06-Taxonomic_profiling.html"><a href="06-Taxonomic_profiling.html#lefse-biomarker-detection"><i class="fa fa-check"></i><b>6.4</b> LEfSe biomarker detection</a></li>
-</ul></li>
-<li class="chapter" data-level="7" data-path="07-Functional_profiling.html"><a href="07-Functional_profiling.html"><i class="fa fa-check"></i><b>7</b> Functional profiling</a>
+<li class="chapter" data-level="7" data-path="07-Host_removal.html"><a href="07-Host_removal.html"><i class="fa fa-check"></i><b>7</b> Host removal</a>
 <ul>
-<li class="chapter" data-level="7.1" data-path="07-Functional_profiling.html"><a href="07-Functional_profiling.html#a-demo-run-of-humann2"><i class="fa fa-check"></i><b>7.1</b> A demo run of HUMANn2</a></li>
-<li class="chapter" data-level="7.2" data-path="07-Functional_profiling.html"><a href="07-Functional_profiling.html#statistical-comparison-between-samples"><i class="fa fa-check"></i><b>7.2</b> Statistical comparison between samples</a>
+<li class="chapter" data-level="7.1" data-path="07-Host_removal.html"><a href="07-Host_removal.html#index-reference"><i class="fa fa-check"></i><b>7.1</b> Index reference</a></li>
+<li class="chapter" data-level="7.2" data-path="07-Host_removal.html"><a href="07-Host_removal.html#alignment"><i class="fa fa-check"></i><b>7.2</b> Alignment</a></li>
+<li class="chapter" data-level="7.3" data-path="07-Host_removal.html"><a href="07-Host_removal.html#unmapped-read-extraction"><i class="fa fa-check"></i><b>7.3</b> Unmapped read extraction</a></li>
+<li class="chapter" data-level="7.4" data-path="07-Host_removal.html"><a href="07-Host_removal.html#re-pair"><i class="fa fa-check"></i><b>7.4</b> Re-pair</a></li>
+</ul></li>
+<li class="chapter" data-level="8" data-path="08-Taxonomic_profiling.html"><a href="08-Taxonomic_profiling.html"><i class="fa fa-check"></i><b>8</b> Taxonomic profiling</a>
 <ul>
-<li class="chapter" data-level="7.2.1" data-path="07-Functional_profiling.html"><a href="07-Functional_profiling.html#combining-data"><i class="fa fa-check"></i><b>7.2.1</b> Combining data</a></li>
-<li class="chapter" data-level="7.2.2" data-path="07-Functional_profiling.html"><a href="07-Functional_profiling.html#renormalising-data"><i class="fa fa-check"></i><b>7.2.2</b> Renormalising data</a></li>
-<li class="chapter" data-level="7.2.3" data-path="07-Functional_profiling.html"><a href="07-Functional_profiling.html#visualisation"><i class="fa fa-check"></i><b>7.2.3</b> Visualisation</a></li>
-<li class="chapter" data-level="7.2.4" data-path="07-Functional_profiling.html"><a href="07-Functional_profiling.html#finding-statistically-significant-differences"><i class="fa fa-check"></i><b>7.2.4</b> Finding statistically significant differences</a></li>
+<li class="chapter" data-level="8.1" data-path="08-Taxonomic_profiling.html"><a href="08-Taxonomic_profiling.html#kraken2"><i class="fa fa-check"></i><b>8.1</b> Kraken2</a>
+<ul>
+<li class="chapter" data-level="8.1.1" data-path="08-Taxonomic_profiling.html"><a href="08-Taxonomic_profiling.html#krona-plot"><i class="fa fa-check"></i><b>8.1.1</b> Krona plot</a></li>
+</ul></li>
+<li class="chapter" data-level="8.2" data-path="08-Taxonomic_profiling.html"><a href="08-Taxonomic_profiling.html#bracken"><i class="fa fa-check"></i><b>8.2</b> Bracken</a></li>
+<li class="chapter" data-level="8.3" data-path="08-Taxonomic_profiling.html"><a href="08-Taxonomic_profiling.html#lefse-biomarker-detection"><i class="fa fa-check"></i><b>8.3</b> LEfSe biomarker detection</a></li>
+</ul></li>
+<li class="chapter" data-level="9" data-path="09-Functional_profiling.html"><a href="09-Functional_profiling.html"><i class="fa fa-check"></i><b>9</b> Functional profiling</a>
+<ul>
+<li class="chapter" data-level="9.1" data-path="09-Functional_profiling.html"><a href="09-Functional_profiling.html#humann2"><i class="fa fa-check"></i><b>9.1</b> HUMAnN2</a></li>
+<li class="chapter" data-level="9.2" data-path="09-Functional_profiling.html"><a href="09-Functional_profiling.html#statistical-comparison-between-samples"><i class="fa fa-check"></i><b>9.2</b> Statistical comparison between samples</a>
+<ul>
+<li class="chapter" data-level="9.2.1" data-path="09-Functional_profiling.html"><a href="09-Functional_profiling.html#combining-data"><i class="fa fa-check"></i><b>9.2.1</b> Combining data</a></li>
+<li class="chapter" data-level="9.2.2" data-path="09-Functional_profiling.html"><a href="09-Functional_profiling.html#renormalising-data"><i class="fa fa-check"></i><b>9.2.2</b> Renormalising data</a></li>
+<li class="chapter" data-level="9.2.3" data-path="09-Functional_profiling.html"><a href="09-Functional_profiling.html#visualisation"><i class="fa fa-check"></i><b>9.2.3</b> Visualisation</a></li>
+<li class="chapter" data-level="9.2.4" data-path="09-Functional_profiling.html"><a href="09-Functional_profiling.html#finding-statistically-significant-differences"><i class="fa fa-check"></i><b>9.2.4</b> Finding statistically significant differences</a></li>
 </ul></li>
 </ul></li>
-<li class="chapter" data-level="8" data-path="08-Metagenome_assembly.html"><a href="08-Metagenome_assembly.html"><i class="fa fa-check"></i><b>8</b> Metagenome assembly</a>
+<li class="chapter" data-level="10" data-path="10-Metagenome_assembly.html"><a href="10-Metagenome_assembly.html"><i class="fa fa-check"></i><b>10</b> Metagenome assembly</a>
 <ul>
-<li class="chapter" data-level="8.1" data-path="08-Metagenome_assembly.html"><a href="08-Metagenome_assembly.html#a-primer-on-short-read-assembly"><i class="fa fa-check"></i><b>8.1</b> A primer on short read assembly</a></li>
-<li class="chapter" data-level="8.2" data-path="08-Metagenome_assembly.html"><a href="08-Metagenome_assembly.html#stitching-read-pairs"><i class="fa fa-check"></i><b>8.2</b> Stitching read pairs</a></li>
-<li class="chapter" data-level="8.3" data-path="08-Metagenome_assembly.html"><a href="08-Metagenome_assembly.html#assembly"><i class="fa fa-check"></i><b>8.3</b> Assembly</a></li>
+<li class="chapter" data-level="10.1" data-path="10-Metagenome_assembly.html"><a href="10-Metagenome_assembly.html#a-primer-on-short-read-assembly"><i class="fa fa-check"></i><b>10.1</b> A primer on short read assembly</a></li>
+<li class="chapter" data-level="10.2" data-path="10-Metagenome_assembly.html"><a href="10-Metagenome_assembly.html#stitching-read-pairs"><i class="fa fa-check"></i><b>10.2</b> Stitching read pairs</a></li>
+<li class="chapter" data-level="10.3" data-path="10-Metagenome_assembly.html"><a href="10-Metagenome_assembly.html#assembly"><i class="fa fa-check"></i><b>10.3</b> Assembly</a></li>
+</ul></li>
+<li class="chapter" data-level="11" data-path="11-Gene_prediction.html"><a href="11-Gene_prediction.html"><i class="fa fa-check"></i><b>11</b> Gene Prediciton</a>
+<ul>
+<li class="chapter" data-level="11.1" data-path="11-Gene_prediction.html"><a href="11-Gene_prediction.html#running-the-software"><i class="fa fa-check"></i><b>11.1</b> Running the software</a></li>
+</ul></li>
+<li class="chapter" data-level="12" data-path="12-Functional_annotation.html"><a href="12-Functional_annotation.html"><i class="fa fa-check"></i><b>12</b> Functional annotation</a>
+<ul>
+<li class="chapter" data-level="12.1" data-path="12-Functional_annotation.html"><a href="12-Functional_annotation.html#annotation-types"><i class="fa fa-check"></i><b>12.1</b> Annotation types</a></li>
+<li class="chapter" data-level="12.2" data-path="12-Functional_annotation.html"><a href="12-Functional_annotation.html#running-cognizer"><i class="fa fa-check"></i><b>12.2</b> Running Cognizer</a></li>
+<li class="chapter" data-level="12.3" data-path="12-Functional_annotation.html"><a href="12-Functional_annotation.html#visualisation-1"><i class="fa fa-check"></i><b>12.3</b> Visualisation</a>
+<ul>
+<li class="chapter" data-level="12.3.1" data-path="12-Functional_annotation.html"><a href="12-Functional_annotation.html#cog-categories"><i class="fa fa-check"></i><b>12.3.1</b> COG categories</a></li>
+</ul></li>
+</ul></li>
+<li class="chapter" data-level="13" data-path="13-Co_assembly.html"><a href="13-Co_assembly.html"><i class="fa fa-check"></i><b>13</b> Co-assembly and coverage</a>
+<ul>
+<li class="chapter" data-level="13.1" data-path="13-Co_assembly.html"><a href="13-Co_assembly.html#running-the-co-assembly-gene-predictions-and-annotations"><i class="fa fa-check"></i><b>13.1</b> Running the co-assembly, gene predictions and annotations</a></li>
+<li class="chapter" data-level="13.2" data-path="13-Co_assembly.html"><a href="13-Co_assembly.html#generation-of-coverage-metrics"><i class="fa fa-check"></i><b>13.2</b> Generation of coverage metrics</a></li>
+</ul></li>
+<li class="chapter" data-level="14" data-path="14-Comparative_analysis.html"><a href="14-Comparative_analysis.html"><i class="fa fa-check"></i><b>14</b> Comparative analysis</a>
+<ul>
+<li class="chapter" data-level="14.1" data-path="14-Comparative_analysis.html"><a href="14-Comparative_analysis.html#cog-categories-1"><i class="fa fa-check"></i><b>14.1</b> COG categories</a></li>
+<li class="chapter" data-level="14.2" data-path="14-Comparative_analysis.html"><a href="14-Comparative_analysis.html#kegg-pathways-1"><i class="fa fa-check"></i><b>14.2</b> KEGG pathways</a></li>
+</ul></li>
+<li class="chapter" data-level="15" data-path="15-Appendix.html"><a href="15-Appendix.html"><i class="fa fa-check"></i><b>15</b> Appendix</a>
+<ul>
+<li class="chapter" data-level="15.1" data-path="15-Appendix.html"><a href="15-Appendix.html#cog-cateories"><i class="fa fa-check"></i><b>15.1</b> COG Cateories</a></li>
+<li class="chapter" data-level="15.2" data-path="15-Appendix.html"><a href="15-Appendix.html#obtaining-read-data"><i class="fa fa-check"></i><b>15.2</b> Obtaining Read Data</a></li>
 </ul></li>
 <li class="divider"></li>
 <li><a href="https://github.com/rstudio/bookdown" target="blank">Published with bookdown</a></li>
@@ -205,8 +244,8 @@ code span.wa { color: #60a0b0; font-weight: bold; font-style: italic; } /* Warni
           <div class="page-inner">
 
             <section class="normal" id="section-">
-<div id="metagenome-assembly" class="section level1" number="8">
-<h1><span class="header-section-number">Chapter 8</span> Metagenome assembly</h1>
+<div id="metagenome-assembly" class="section level1" number="10">
+<h1><span class="header-section-number">Chapter 10</span> Metagenome assembly</h1>
 <p><img src="figures/quality_trimming_and_filtering.png" width="30%" style="display: block; margin: auto;" /></p>
 <p>So far we have directly analysed the read data itself which is perfectly fine for taxonomic profiling and for certain methods of functional profiling. However, Illumina reads are generally short and therefore can not provide us with much data on larger constructs that are in the metagenomic samples, e.g. genes. While it is possible to predict from which gene a sequence read might originate, the short nature of the query can sometimes lead to ambiguous results.</p>
 <p>Additionally, depending on the application it can become computationally intensive to analyse large numbers of reads. Here, we are only using samples with 1 million reads. Some metagenome samples consist of 50-100 million+ read pairs. If such a sample belonged to a set of 100 samples, that would be up to 10 billion read pairs, or 2 trillion bases of sequence data, with many of these being redundant.</p>
@@ -216,8 +255,8 @@ code span.wa { color: #60a0b0; font-weight: bold; font-style: italic; } /* Warni
 <li>Increase the size of the fragments you will analyse. This is the main advantage of an assembly, as the ~100 bp reads can be pieced together to form 100,000 kb+ contigs. These contigs will contain complete genes, operons and regulatory elements: Reconstructed genome sections.</li>
 </ul>
 <p>Here, we will carry out a couple of assemblies on our dataset.</p>
-<div id="a-primer-on-short-read-assembly" class="section level2" number="8.1">
-<h2><span class="header-section-number">8.1</span> A primer on short read assembly</h2>
+<div id="a-primer-on-short-read-assembly" class="section level2" number="10.1">
+<h2><span class="header-section-number">10.1</span> A primer on short read assembly</h2>
 <p>Illumina reads are too short and numerous to use traditional overlap-layout-consensus assemblers as such an approach would be far too computationally intensive. Instead, we use De Bruijn graph based assemblers. Briefly, these operate as follows:</p>
 <ol style="list-style-type: decimal">
 <li>All reads are broken down in to k-length overlapping fragments (k-mers). e.g. if we choose a k-mer size of 5 bp, the following two sequences (blue) would be broken down into the k-mers below them (red):</li>
@@ -238,8 +277,8 @@ code span.wa { color: #60a0b0; font-weight: bold; font-style: italic; } /* Warni
 <p>Generally speaking, the shorter the k-mer, the more branches there will be, the trickier the graph is to resolve, so the resulting contigs are smaller. Assemblers usually perform better with longer k-mer lengths but even then there might not be enough depth of sequencing to generate all k-mers that form overlaps, therefore leading to break points. Finding the right k-mer size usually involves testing several.</p>
 <p>Fortunately, the assembler we will use, MEGAHIT, allows us to build an assembly using multiple k-mer lengths iteratively. The other great advantage about MEGAHIT is that it is quick and efficient. We will use MEGAHIT on our data soon, but first there is an additional processing step for our sequences…</p>
 </div>
-<div id="stitching-read-pairs" class="section level2" number="8.2">
-<h2><span class="header-section-number">8.2</span> Stitching read pairs</h2>
+<div id="stitching-read-pairs" class="section level2" number="10.2">
+<h2><span class="header-section-number">10.2</span> Stitching read pairs</h2>
 <p>As mentioned, longer k-mers generally perform better, but as our maximum read length is 100 bp, we are limited to a maximum k-mer length of 99 bp. However, we can get even longer k-mers if we stitch our read pairs together.</p>
 <p>Remember that a read pair consists of two sequences read from each end of a fragment of DNA (or RNA). If the two sequences meet in the middle of the fragment and then overlap, there will be a region of homology which we can use to merge the two reads in the pair together (See next image).</p>
 <p>First, we obtain our forward and reverse reads, derived from different ends of the same fragment. Second, we look for sufficient overlap between the 3’ ends of our sequences. Third, if there is sufficient overlap, we combine, or stitch, the two reads together to form one long sequence.</p>
@@ -247,45 +286,45 @@ code span.wa { color: #60a0b0; font-weight: bold; font-style: italic; } /* Warni
 <p>Once we have longer stitched reads, we can increase the k-mer length for our assembly.</p>
 <p>There are a number of pieces of software that can be used to stitch reads (e.g. Pear, Pandaseq) but today we will use one called FLASH:</p>
 <p>Make a new output directory for the stitched reads and run FLASH:</p>
-<div class="sourceCode" id="cb53"><pre class="sourceCode bash"><code class="sourceCode bash"><span id="cb53-1"><a href="08-Metagenome_assembly.html#cb53-1" aria-hidden="true" tabindex="-1"></a><span class="bu">cd</span> ..</span>
-<span id="cb53-2"><a href="08-Metagenome_assembly.html#cb53-2" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb53-3"><a href="08-Metagenome_assembly.html#cb53-3" aria-hidden="true" tabindex="-1"></a><span class="fu">mkdir</span> 5-Stitched</span>
-<span id="cb53-4"><a href="08-Metagenome_assembly.html#cb53-4" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb53-5"><a href="08-Metagenome_assembly.html#cb53-5" aria-hidden="true" tabindex="-1"></a><span class="bu">cd</span> 5-Stitched</span>
-<span id="cb53-6"><a href="08-Metagenome_assembly.html#cb53-6" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb53-7"><a href="08-Metagenome_assembly.html#cb53-7" aria-hidden="true" tabindex="-1"></a><span class="ex">flash</span>  -o K1 -z -t 12 -d . <span class="kw">\</span></span>
-<span id="cb53-8"><a href="08-Metagenome_assembly.html#cb53-8" aria-hidden="true" tabindex="-1"></a><span class="ex">../2-Trimmed/K1_R1.fq.gz</span> ../2-Trimmed/K1_R2.fq.gz</span></code></pre></div>
+<div class="sourceCode" id="cb54"><pre class="sourceCode bash"><code class="sourceCode bash"><span id="cb54-1"><a href="10-Metagenome_assembly.html#cb54-1" aria-hidden="true" tabindex="-1"></a><span class="bu">cd</span> ..</span>
+<span id="cb54-2"><a href="10-Metagenome_assembly.html#cb54-2" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb54-3"><a href="10-Metagenome_assembly.html#cb54-3" aria-hidden="true" tabindex="-1"></a><span class="fu">mkdir</span> 5-Stitched</span>
+<span id="cb54-4"><a href="10-Metagenome_assembly.html#cb54-4" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb54-5"><a href="10-Metagenome_assembly.html#cb54-5" aria-hidden="true" tabindex="-1"></a><span class="bu">cd</span> 5-Stitched</span>
+<span id="cb54-6"><a href="10-Metagenome_assembly.html#cb54-6" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb54-7"><a href="10-Metagenome_assembly.html#cb54-7" aria-hidden="true" tabindex="-1"></a><span class="ex">flash</span>  -o K1 -z -t 12 -d . <span class="kw">\</span></span>
+<span id="cb54-8"><a href="10-Metagenome_assembly.html#cb54-8" aria-hidden="true" tabindex="-1"></a><span class="ex">../2-Trimmed/K1_R1.fq.gz</span> ../2-Trimmed/K1_R2.fq.gz</span></code></pre></div>
 <p>Here, we are telling flash to use an output file name prefix of K1, that the input is zipped, that the output directory is here (.) and to use the two read files for Sample K1. Once FLASH has finished running, it will display on screen how well the stitching process went, in this case a low amount of reads were combined. Have a look what files have been generated</p>
-<div class="sourceCode" id="cb54"><pre class="sourceCode bash"><code class="sourceCode bash"><span id="cb54-1"><a href="08-Metagenome_assembly.html#cb54-1" aria-hidden="true" tabindex="-1"></a><span class="fu">ls</span></span></code></pre></div>
+<div class="sourceCode" id="cb55"><pre class="sourceCode bash"><code class="sourceCode bash"><span id="cb55-1"><a href="10-Metagenome_assembly.html#cb55-1" aria-hidden="true" tabindex="-1"></a><span class="fu">ls</span></span></code></pre></div>
 <p>We have three new fastq.gz files. One containing the stitched reads (<code>K1.extendedFrags.fastq.gz</code>) and two containing the reads from pairs that could not be combined (<code>K1.notCombined_1.fastq.gz</code> and <code>K1.notCombined_2.fastq.gz)</code>.</p>
 <p>We can also see what the new read lengths are:</p>
-<div class="sourceCode" id="cb55"><pre class="sourceCode bash"><code class="sourceCode bash"><span id="cb55-1"><a href="08-Metagenome_assembly.html#cb55-1" aria-hidden="true" tabindex="-1"></a><span class="fu">less</span> K1.histogram</span></code></pre></div>
+<div class="sourceCode" id="cb56"><pre class="sourceCode bash"><code class="sourceCode bash"><span id="cb56-1"><a href="10-Metagenome_assembly.html#cb56-1" aria-hidden="true" tabindex="-1"></a><span class="fu">less</span> K1.histogram</span></code></pre></div>
 <p>Scroll down with the down key and you will see that we are looking at a histogram showing the proportion of reads at different lengths. We can now start assembling our stitched reads for this sample.</p>
 </div>
-<div id="assembly" class="section level2" number="8.3">
-<h2><span class="header-section-number">8.3</span> Assembly</h2>
+<div id="assembly" class="section level2" number="10.3">
+<h2><span class="header-section-number">10.3</span> Assembly</h2>
 <p>Create a new directory to store our assembly in and run the metagenome assembler MEGAHIT using our newly stitched read data.</p>
-<div class="sourceCode" id="cb56"><pre class="sourceCode bash"><code class="sourceCode bash"><span id="cb56-1"><a href="08-Metagenome_assembly.html#cb56-1" aria-hidden="true" tabindex="-1"></a><span class="bu">cd</span> ..</span>
-<span id="cb56-2"><a href="08-Metagenome_assembly.html#cb56-2" aria-hidden="true" tabindex="-1"></a><span class="fu">mkdir</span> 6-Assembly</span>
-<span id="cb56-3"><a href="08-Metagenome_assembly.html#cb56-3" aria-hidden="true" tabindex="-1"></a><span class="bu">cd</span> 6-Assembly</span>
-<span id="cb56-4"><a href="08-Metagenome_assembly.html#cb56-4" aria-hidden="true" tabindex="-1"></a><span class="ex">megahit</span> <span class="kw">\</span></span>
-<span id="cb56-5"><a href="08-Metagenome_assembly.html#cb56-5" aria-hidden="true" tabindex="-1"></a><span class="ex">-r</span> ../5-Stitched/K1.extendedFrags.fastq.gz <span class="kw">\</span></span>
-<span id="cb56-6"><a href="08-Metagenome_assembly.html#cb56-6" aria-hidden="true" tabindex="-1"></a><span class="ex">-1</span> ../5-Stitched/K1.notCombined_1.fastq.gz <span class="kw">\</span></span>
-<span id="cb56-7"><a href="08-Metagenome_assembly.html#cb56-7" aria-hidden="true" tabindex="-1"></a><span class="ex">-2</span> ../5-Stitched/K1.notCombined_2.fastq.gz <span class="kw">\</span></span>
-<span id="cb56-8"><a href="08-Metagenome_assembly.html#cb56-8" aria-hidden="true" tabindex="-1"></a><span class="ex">-o</span> K1 <span class="kw">\</span></span>
-<span id="cb56-9"><a href="08-Metagenome_assembly.html#cb56-9" aria-hidden="true" tabindex="-1"></a><span class="ex">-t</span> 12 <span class="kw">\</span></span>
-<span id="cb56-10"><a href="08-Metagenome_assembly.html#cb56-10" aria-hidden="true" tabindex="-1"></a><span class="ex">--k-list</span> 29,49,69,89,109,129,149,169,189</span></code></pre></div>
+<div class="sourceCode" id="cb57"><pre class="sourceCode bash"><code class="sourceCode bash"><span id="cb57-1"><a href="10-Metagenome_assembly.html#cb57-1" aria-hidden="true" tabindex="-1"></a><span class="bu">cd</span> ..</span>
+<span id="cb57-2"><a href="10-Metagenome_assembly.html#cb57-2" aria-hidden="true" tabindex="-1"></a><span class="fu">mkdir</span> 6-Assembly</span>
+<span id="cb57-3"><a href="10-Metagenome_assembly.html#cb57-3" aria-hidden="true" tabindex="-1"></a><span class="bu">cd</span> 6-Assembly</span>
+<span id="cb57-4"><a href="10-Metagenome_assembly.html#cb57-4" aria-hidden="true" tabindex="-1"></a><span class="ex">megahit</span> <span class="kw">\</span></span>
+<span id="cb57-5"><a href="10-Metagenome_assembly.html#cb57-5" aria-hidden="true" tabindex="-1"></a><span class="ex">-r</span> ../5-Stitched/K1.extendedFrags.fastq.gz <span class="kw">\</span></span>
+<span id="cb57-6"><a href="10-Metagenome_assembly.html#cb57-6" aria-hidden="true" tabindex="-1"></a><span class="ex">-1</span> ../5-Stitched/K1.notCombined_1.fastq.gz <span class="kw">\</span></span>
+<span id="cb57-7"><a href="10-Metagenome_assembly.html#cb57-7" aria-hidden="true" tabindex="-1"></a><span class="ex">-2</span> ../5-Stitched/K1.notCombined_2.fastq.gz <span class="kw">\</span></span>
+<span id="cb57-8"><a href="10-Metagenome_assembly.html#cb57-8" aria-hidden="true" tabindex="-1"></a><span class="ex">-o</span> K1 <span class="kw">\</span></span>
+<span id="cb57-9"><a href="10-Metagenome_assembly.html#cb57-9" aria-hidden="true" tabindex="-1"></a><span class="ex">-t</span> 12 <span class="kw">\</span></span>
+<span id="cb57-10"><a href="10-Metagenome_assembly.html#cb57-10" aria-hidden="true" tabindex="-1"></a><span class="ex">--k-list</span> 29,49,69,89,109,129,149,169,189</span></code></pre></div>
 <p>Here, you have instructed MEGAHIT to use both the stitched and unstitched reads, to output the assembly in a subdirectory called K1 and to use 12 CPUs.</p>
 <p>The last option <code>--k-list</code> instructs MEGAHIT to first generate an assembly using a k-mer size of 29 bp and when that is complete, integrate the results into an assembly using a k-mer size of 49 bp, and so on up to a final iteration using a k-mer size of 189 bp. This large range of k-mer lengths should give us a good assembly, given the data. However, it may take a while to run so this might be a good time to either read on, or go back and look at some of the questions/suggestions in green that you have missed. If you need a command prompt (your current one is gone because MEGAHIT is running), Right-click on the grey background → Applications → Terminal Emulators → Xterm, to open a new terminal.</p>
 <p>Once the assembly is completed, we can look at the output FASTA file containing the contigs:</p>
-<div class="sourceCode" id="cb57"><pre class="sourceCode bash"><code class="sourceCode bash"><span id="cb57-1"><a href="08-Metagenome_assembly.html#cb57-1" aria-hidden="true" tabindex="-1"></a><span class="fu">less</span> K1/final.contigs.fa</span></code></pre></div>
+<div class="sourceCode" id="cb58"><pre class="sourceCode bash"><code class="sourceCode bash"><span id="cb58-1"><a href="10-Metagenome_assembly.html#cb58-1" aria-hidden="true" tabindex="-1"></a><span class="fu">less</span> K1/final.contigs.fa</span></code></pre></div>
 <p>We can also generate some metrics based on the assembly</p>
-<div class="sourceCode" id="cb58"><pre class="sourceCode bash"><code class="sourceCode bash"><span id="cb58-1"><a href="08-Metagenome_assembly.html#cb58-1" aria-hidden="true" tabindex="-1"></a><span class="ex">assembly.py</span> <span class="kw">\</span></span>
-<span id="cb58-2"><a href="08-Metagenome_assembly.html#cb58-2" aria-hidden="true" tabindex="-1"></a>  <span class="ex">-i</span> K1/final.contigs.fa <span class="kw">\</span></span>
-<span id="cb58-3"><a href="08-Metagenome_assembly.html#cb58-3" aria-hidden="true" tabindex="-1"></a>  <span class="ex">-o</span> K1/final.contigs.stats <span class="kw">\</span></span>
-<span id="cb58-4"><a href="08-Metagenome_assembly.html#cb58-4" aria-hidden="true" tabindex="-1"></a>  <span class="ex">-c</span> stats</span>
-<span id="cb58-5"><a href="08-Metagenome_assembly.html#cb58-5" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb58-6"><a href="08-Metagenome_assembly.html#cb58-6" aria-hidden="true" tabindex="-1"></a><span class="fu">less</span> K1/final.contigs.stats</span></code></pre></div>
+<div class="sourceCode" id="cb59"><pre class="sourceCode bash"><code class="sourceCode bash"><span id="cb59-1"><a href="10-Metagenome_assembly.html#cb59-1" aria-hidden="true" tabindex="-1"></a><span class="ex">assembly.py</span> <span class="kw">\</span></span>
+<span id="cb59-2"><a href="10-Metagenome_assembly.html#cb59-2" aria-hidden="true" tabindex="-1"></a>  <span class="ex">-i</span> K1/final.contigs.fa <span class="kw">\</span></span>
+<span id="cb59-3"><a href="10-Metagenome_assembly.html#cb59-3" aria-hidden="true" tabindex="-1"></a>  <span class="ex">-o</span> K1/final.contigs.stats <span class="kw">\</span></span>
+<span id="cb59-4"><a href="10-Metagenome_assembly.html#cb59-4" aria-hidden="true" tabindex="-1"></a>  <span class="ex">-c</span> stats</span>
+<span id="cb59-5"><a href="10-Metagenome_assembly.html#cb59-5" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb59-6"><a href="10-Metagenome_assembly.html#cb59-6" aria-hidden="true" tabindex="-1"></a><span class="fu">less</span> K1/final.contigs.stats</span></code></pre></div>
 <p>This stats file tells us quite a bit about the assembly quality. Two definitions that you may not be aware of are N50 and N50 length (or, somewhat confusingly, L50 and N50, respectively!). If we were to order our contigs from largest to smallest, and total up the sizes from biggest downwards, the contig we reach where our total is 50% of the size of the whole assembly is the N50 contig (the smaller the number the better). The N50 length is the length of this contig; a weighted median contig length.</p>
 <p><strong>(add vis to explain N50)</strong></p>
 <p>How do the contig metrics compare to the original reads?
@@ -298,8 +337,8 @@ Now we have an assembly, albeit not a brilliant one due to us only having used 1
           </div>
         </div>
       </div>
-<a href="07-Functional_profiling.html" class="navigation navigation-prev navigation-unique" aria-label="Previous page"><i class="fa fa-angle-left"></i></a>
-
+<a href="09-Functional_profiling.html" class="navigation navigation-prev " aria-label="Previous page"><i class="fa fa-angle-left"></i></a>
+<a href="11-Gene_prediction.html" class="navigation navigation-next " aria-label="Next page"><i class="fa fa-angle-right"></i></a>
     </div>
   </div>
 <script src="libs/gitbook-2.6.7/js/app.min.js"></script>

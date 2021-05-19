@@ -4,11 +4,11 @@
 
   <meta charset="utf-8" />
   <meta http-equiv="X-UA-Compatible" content="IE=edge" />
-  <title>Chapter 2 Overview | Shotgun Metagenomics</title>
-  <meta name="description" content="Chapter 2 Overview | Shotgun Metagenomics" />
+  <title>Chapter 14 Comparative analysis | Shotgun Metagenomics</title>
+  <meta name="description" content="Chapter 14 Comparative analysis | Shotgun Metagenomics" />
   <meta name="generator" content="bookdown 0.21 and GitBook 2.6.7" />
 
-  <meta property="og:title" content="Chapter 2 Overview | Shotgun Metagenomics" />
+  <meta property="og:title" content="Chapter 14 Comparative analysis | Shotgun Metagenomics" />
   <meta property="og:type" content="book" />
   
   
@@ -16,7 +16,7 @@
   
 
   <meta name="twitter:card" content="summary" />
-  <meta name="twitter:title" content="Chapter 2 Overview | Shotgun Metagenomics" />
+  <meta name="twitter:title" content="Chapter 14 Comparative analysis | Shotgun Metagenomics" />
   
   
   
@@ -31,8 +31,8 @@
   <meta name="apple-mobile-web-app-status-bar-style" content="black" />
   
   
-<link rel="prev" href="01-Shotgun_metagenomics.html"/>
-<link rel="next" href="03-Start.html"/>
+<link rel="prev" href="13-Co_assembly.html"/>
+<link rel="next" href="15-Appendix.html"/>
 <script src="libs/header-attrs-2.6/header-attrs.js"></script>
 <script src="libs/jquery-2.2.3/jquery.min.js"></script>
 <link href="libs/gitbook-2.6.7/css/style.css" rel="stylesheet" />
@@ -244,64 +244,80 @@ code span.wa { color: #60a0b0; font-weight: bold; font-style: italic; } /* Warni
           <div class="page-inner">
 
             <section class="normal" id="section-">
-<div id="overview" class="section level1" number="2">
-<h1><span class="header-section-number">Chapter 2</span> Overview</h1>
-<p><img src="figures/overview.png" width="20%" style="display: block; margin: auto;" /></p>
-<div id="what-is-metagenomics" class="section level2" number="2.1">
-<h2><span class="header-section-number">2.1</span> What is metagenomics?</h2>
-<p><img src="figures/what.png" width="10%" style="display: block; margin: auto;" /></p>
-<p><strong>Meta /ˈmɛtə/ : prefix meaning “higher” or “beyond”</strong></p>
-<p>Metagenomics is the study of genes and genetic material recovered from environmental samples (whether from the sea, soil, human gut, or anywhere else you can imagine). Unlike genomics, metagenomics deals with a multitude of usually diverse species rather than focussing on a single species/genome.</p>
+<div id="comparative-analysis" class="section level1" number="14">
+<h1><span class="header-section-number">Chapter 14</span> Comparative analysis</h1>
+<p><img src="figures/quality_trimming_and_filtering.png" width="30%" style="display: block; margin: auto;" /></p>
+<p>While we now have a co-assembly, annotations and coverage data, they are only based on 1 million read pairs from each sample. If we want accurate functional data, we should be using the much larger, full data-set.</p>
+<p>Fortunately, this has also been pre-prepared prior to this workshop, so you can now make a new directory which we will copy everything we need into, i.e. the functional annotation files, and the coverage files (rpkm.tsv)</p>
+<div class="sourceCode" id="cb88"><pre class="sourceCode bash"><code class="sourceCode bash"><span id="cb88-1"><a href="14-Comparative_analysis.html#cb88-1" aria-hidden="true" tabindex="-1"></a><span class="bu">cd</span> ..</span>
+<span id="cb88-2"><a href="14-Comparative_analysis.html#cb88-2" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb88-3"><a href="14-Comparative_analysis.html#cb88-3" aria-hidden="true" tabindex="-1"></a><span class="fu">mkdir</span> 10-FullSet</span>
+<span id="cb88-4"><a href="14-Comparative_analysis.html#cb88-4" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb88-5"><a href="14-Comparative_analysis.html#cb88-5" aria-hidden="true" tabindex="-1"></a><span class="bu">cd</span> 10-FullSet</span>
+<span id="cb88-6"><a href="14-Comparative_analysis.html#cb88-6" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb88-7"><a href="14-Comparative_analysis.html#cb88-7" aria-hidden="true" tabindex="-1"></a><span class="fu">cp</span> <span class="va">$DB</span>/FullAnalysis2019/8-GeneAnnotations/K1K2W1.f/* ./</span>
+<span id="cb88-8"><a href="14-Comparative_analysis.html#cb88-8" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb88-9"><a href="14-Comparative_analysis.html#cb88-9" aria-hidden="true" tabindex="-1"></a><span class="fu">cp</span> <span class="va">$DB</span>/FullAnalysis2019/9-Coverage/all.rpkm.tsv ./</span></code></pre></div>
+<div id="cog-categories-1" class="section level2" number="14.1">
+<h2><span class="header-section-number">14.1</span> COG categories</h2>
+<p>First, we will look again at COG categories, except this time we will see a quantitative profile of each sample. To do this, we will look up which genes belong to which COG category in our assignments.txt file, and convert gene coverage to functional coverage, by consolidating the coverage values of all genes belonging to a category.</p>
+<div class="sourceCode" id="cb89"><pre class="sourceCode bash"><code class="sourceCode bash"><span id="cb89-1"><a href="14-Comparative_analysis.html#cb89-1" aria-hidden="true" tabindex="-1"></a><span class="ex">GeneCoverageToFunctionalCoverage</span> <span class="kw">\</span></span>
+<span id="cb89-2"><a href="14-Comparative_analysis.html#cb89-2" aria-hidden="true" tabindex="-1"></a>  <span class="ex">--type</span> cogFn <span class="kw">\</span></span>
+<span id="cb89-3"><a href="14-Comparative_analysis.html#cb89-3" aria-hidden="true" tabindex="-1"></a>  <span class="ex">--cognizer</span> assignments.txt <span class="kw">\</span></span>
+<span id="cb89-4"><a href="14-Comparative_analysis.html#cb89-4" aria-hidden="true" tabindex="-1"></a>  <span class="ex">--table</span> all.rpkm.tsv <span class="op">&gt;</span> all.cogFn.rpkm.tsv</span>
+<span id="cb89-5"><a href="14-Comparative_analysis.html#cb89-5" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb89-6"><a href="14-Comparative_analysis.html#cb89-6" aria-hidden="true" tabindex="-1"></a><span class="fu">less</span> all.cogFn.rpkm.tsv</span></code></pre></div>
+<p>As you can see, we now have an abundance value for each COG category for each gene, so we will now plot this data on a heatmap and a correlation heatmap.</p>
+<div class="sourceCode" id="cb90"><pre class="sourceCode bash"><code class="sourceCode bash"><span id="cb90-1"><a href="14-Comparative_analysis.html#cb90-1" aria-hidden="true" tabindex="-1"></a><span class="ex">Heatmap.R</span> -i all.cogFn.rpkm.tsv <span class="kw">\</span></span>
+<span id="cb90-2"><a href="14-Comparative_analysis.html#cb90-2" aria-hidden="true" tabindex="-1"></a>  <span class="ex">-o</span> cogFn.heatmap.pdf <span class="kw">\</span></span>
+<span id="cb90-3"><a href="14-Comparative_analysis.html#cb90-3" aria-hidden="true" tabindex="-1"></a>  <span class="ex">-t</span> <span class="st">&quot;COG Categories&quot;</span></span>
+<span id="cb90-4"><a href="14-Comparative_analysis.html#cb90-4" aria-hidden="true" tabindex="-1"></a>  </span>
+<span id="cb90-5"><a href="14-Comparative_analysis.html#cb90-5" aria-hidden="true" tabindex="-1"></a><span class="ex">okular</span> cogFn.heatmap.pdf</span></code></pre></div>
+<p><strong>PLOT</strong></p>
+<p>The heatmap shows that there might be a difference between the samples in terms of relative abundance of COG categories, especially between the K1,K duo and the W1 sample. We will verify this with the correlation heatmap.</p>
+<div class="sourceCode" id="cb91"><pre class="sourceCode bash"><code class="sourceCode bash"><span id="cb91-1"><a href="14-Comparative_analysis.html#cb91-1" aria-hidden="true" tabindex="-1"></a><span class="ex">CorrelationHeatmap.R</span> -i all.cogFn.rpkm.tsv <span class="kw">\</span></span>
+<span id="cb91-2"><a href="14-Comparative_analysis.html#cb91-2" aria-hidden="true" tabindex="-1"></a>  <span class="ex">-o</span> cogFn.corrHeatmap.pdf <span class="kw">\</span></span>
+<span id="cb91-3"><a href="14-Comparative_analysis.html#cb91-3" aria-hidden="true" tabindex="-1"></a>  <span class="ex">-t</span> <span class="st">&quot;COG Categories&quot;</span> --text</span>
+<span id="cb91-4"><a href="14-Comparative_analysis.html#cb91-4" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb91-5"><a href="14-Comparative_analysis.html#cb91-5" aria-hidden="true" tabindex="-1"></a><span class="ex">okular</span> cogFn.corrHeatmap.pdf <span class="kw">&amp;</span></span></code></pre></div>
+<p><strong>PLOT</strong></p>
+<p>What does the correlation heatmap suggest?</p>
 </div>
-<div id="why-metagenomics" class="section level2" number="2.2">
-<h2><span class="header-section-number">2.2</span> Why metagenomics?</h2>
-<p><img src="figures/why.png" width="10%" style="display: block; margin: auto;" /></p>
-<p>Microbes exist virtually everywhere on Earth, even in some of the most seemingly hostile environments. Every process on our planet is influenced in some way by the actions of microbes, and all higher organisms are intrinsically associated with microbial communities.</p>
-<p>While much can be learned from studying the genome of a single microbial species in isolation, it does not provide us with any information regarding that species neighbours, i.e. what else is in its natural environment? Metagenomics offers a top-down approach which allows researchers to investigate and understand interactions between species in different environments, thus providing a much broader and complete picture.</p>
-</div>
-<div id="metagenomics-vs-metagenetics" class="section level2" number="2.3">
-<h2><span class="header-section-number">2.3</span> Metagenomics vs Metagenetics</h2>
-<p><img src="figures/16s_vs_shotgun.png" width="15%" style="display: block; margin: auto;" /></p>
-<p>Broadly speaking, there are two families of metagenomic analysis:</p>
-<ul>
-<li><strong>Amplicon-based</strong>: This utilises sequencing data generated from amplified marker sequences, for example, regions of the 16S rRNA. Sequences are clustered together and taxonomically assigned to estimate the species abundance in a sample. This is sometimes referred to metagenetics, as it does not consist of any genomic analysis beyond the marker gene regions.</li>
-<li><strong>Shotgun</strong>: This utilises sequencing data generated from random fragments from total genomic DNA from environmental samples, rather than targeting specific genes. This approach allows for not only species abundance determination but direct functional analysis, too, due to having information on a wide range of genetic data sampled from the population. This is sometimes referenced as metagenomics, as it involves genome-wide analyses. Shotgun metagenomics is the focus of this practical session.</li>
-</ul>
-</div>
-<div id="tutorial-overview" class="section level2" number="2.4">
-<h2><span class="header-section-number">2.4</span> Tutorial overview</h2>
-<p><img src="figures/tutorial.png" width="15%" style="display: block; margin: auto;" /></p>
-<div id="basics" class="section level3" number="2.4.1">
-<h3><span class="header-section-number">2.4.1</span> Basics</h3>
-<p>This tutorial and practical session focuses on performing a range of metagenomic analyses using shotgun sequence data from the Illumina platforms.</p>
-<p>The analyses discussed here are by no means exhaustive and are instead intended to provide a sample of what can be done with a metagenomic dataset.</p>
-<p>Virtually the entire tutorial will be carried out on the command line, which you will hopefully now be more comfortable with.</p>
-</div>
-<div id="structure" class="section level3" number="2.4.2">
-<h3><span class="header-section-number">2.4.2</span> Structure</h3>
-<p>We prefer to allow people to work at a pace that they are comfortable with rather than ensuring that everyone is at the same point of the tutorial at the same time. So, there will be no instructor telling you what to type and click: Instead, everything you require to carry out the practical is written in the document. Take your time; it’s important to spend some time understanding why you are running the commands, rather than simply typing them out.</p>
-<p>If at any point you are having trouble or have a question, let one of us know and we’ll provide 1-to-1 assistance.</p>
-</div>
-<div id="content" class="section level3" number="2.4.3">
-<h3><span class="header-section-number">2.4.3</span> Content</h3>
-<p><img src="figures/sections.png" width="10%" style="display: block; margin: auto;" /></p>
-<p>This practical is broken up into the following broad sections.</p>
-<ol style="list-style-type: decimal">
-<li><strong>Raw data</strong>: We will first link to a dataset that we have downloaded for this tutorial. We will take a quick look at what the sequence files look like and briefly discuss the origin of the samples.</li>
-<li><strong>Trimming data</strong>: This entails preprocessing our data to ensure that it is of good quality.</li>
-<li><strong>Taxonomic profiling</strong>: We will analyse the dataset to determine the species abundance in each sample. Following this, we will visualise the data and compare the samples.</li>
-<li><strong>Functional profiling</strong>: We will analyse the dataset to determine the pathway abundance and completeness in each sample. Following this, we will visualise the data and compare the samples.</li>
-<li><strong>Metagenome assembly</strong>: Here, we will move away from just analysing the reads directly and will assemble the metagenome into contigs. Prior to this, we will ‘stitch’ the reads together to ensure we get the best assembly possible.</li>
-<li><strong>Gene prediction</strong>: We will take our metagenome assembly, search for genes…</li>
-<li><strong>Functional annotation</strong>: …and then functionally annotate them with information from various databases. We will then visualise some of the output.</li>
-<li><strong>Co-assembly</strong>: Instead of just looking at the functional composition of one metagenome sample, we will discuss methods of combining all samples to carry out a co-assembly and then obtain normalised gene coverage statistics for use in comparative analyses between samples.</li>
-<li><strong>Comparative analysis</strong>: Using our data from the previous step, we will look at a couple of different ways of comparing the functional profiles of our samples
-All the analyses here are just examples of how you could interrogate a metagenomic dataset: There are, of course, many other ways to tackle such a set.</li>
-</ol>
-<p><strong>Don’t worry if you don’t manage to finish the whole practical!</strong></p>
-<p>The more commonly used analyses have been put at the front of the practical (Section 1-4) with the less standard ones being placed towards the end. We will provide you with all of the intermediate and results files on request.</p>
+<div id="kegg-pathways-1" class="section level2" number="14.2">
+<h2><span class="header-section-number">14.2</span> KEGG pathways</h2>
+<p>We can generate KEGG module coverages in the same way that we just created COG category coverages.</p>
+<div class="sourceCode" id="cb92"><pre class="sourceCode bash"><code class="sourceCode bash"><span id="cb92-1"><a href="14-Comparative_analysis.html#cb92-1" aria-hidden="true" tabindex="-1"></a><span class="ex">GeneCoverageToFunctionalCoverage</span> --type kegg <span class="kw">\</span></span>
+<span id="cb92-2"><a href="14-Comparative_analysis.html#cb92-2" aria-hidden="true" tabindex="-1"></a><span class="ex">--cognizer</span> assignments.txt <span class="kw">\</span></span>
+<span id="cb92-3"><a href="14-Comparative_analysis.html#cb92-3" aria-hidden="true" tabindex="-1"></a><span class="ex">--table</span> all.rpkm.tsv <span class="op">&gt;</span> all.kegg.rpkm.tsv</span></code></pre></div>
+<p>Now that we have pathway module coverage values, we can visualise them using Cytoscape. We could use the KEGG pathway mapper as we did earlier, but Cytoscape allows for much greater customisation and more importantly, simple methods to display relative abundances of modules.</p>
+<p>Before we run Cytoscape, we will need two things: (a) a pathway map and (b) a modified RPKM table. For now, we will use the folate biosynthesis pathway which has the ID ko00790. We can download the pathway file from the KEGG website using the following command</p>
+<div class="sourceCode" id="cb93"><pre class="sourceCode bash"><code class="sourceCode bash"><span id="cb93-1"><a href="14-Comparative_analysis.html#cb93-1" aria-hidden="true" tabindex="-1"></a><span class="fu">wget</span> <span class="st">&quot;http://rest.kegg.jp/get/ko00790/kgml&quot;</span> -O ko00790.xml</span></code></pre></div>
+<p>The <code>wget</code> command allows you to download files from the internet via the command line. The URL is part of the KEGG REST API, and instructs the server to <code>get ko00790</code> pathway in kgml format (a type of XML). We specify the output file name with <code>–O</code>. Let’s check that all worked and that the new file, <code>ko00790.xml</code> exists.</p>
+<div class="sourceCode" id="cb94"><pre class="sourceCode bash"><code class="sourceCode bash"><span id="cb94-1"><a href="14-Comparative_analysis.html#cb94-1" aria-hidden="true" tabindex="-1"></a><span class="fu">ls</span></span></code></pre></div>
+<p>You will now have an XML file containing this pathway, which we can import into Cytoscape.</p>
+<p>Now we just need to add a single column to our table which will tell Cytoscape how to use the data within it. This column contains the text:</p>
+<p><strong>barchart: attributelist=”K1,K2,W1”</strong></p>
+<p>This instructs Cytoscape to generate barcharts from the rpkm data from our samples. There are many more options that can be used here (see enhancedGraphics Cytoscape options online) but we will keep it simple for demonstration purposes.</p>
+<p>To modify our table, use the following script:</p>
+<div class="sourceCode" id="cb95"><pre class="sourceCode bash"><code class="sourceCode bash"><span id="cb95-1"><a href="14-Comparative_analysis.html#cb95-1" aria-hidden="true" tabindex="-1"></a><span class="ex">prepareTableForCytoscape.sh</span> all.kegg.rpkm.tsv <span class="op">&gt;</span> <span class="kw">\</span></span>
+<span id="cb95-2"><a href="14-Comparative_analysis.html#cb95-2" aria-hidden="true" tabindex="-1"></a><span class="ex">all.kegg.rpkm.cyto.tsv</span></span></code></pre></div>
+<p>Now we are ready to run Cytoscape.</p>
+<div class="sourceCode" id="cb96"><pre class="sourceCode bash"><code class="sourceCode bash"><span id="cb96-1"><a href="14-Comparative_analysis.html#cb96-1" aria-hidden="true" tabindex="-1"></a><span class="ex">Cytoscape</span></span></code></pre></div>
+<p>If this is the first time running Cytoscape, you will first need to install two apps. To do this, go to Apps on the menu bar and search for ‘KEGGscape,’ and install. Once this is completed, search for ‘enhancedGraphics’ and install that too. (see images below)</p>
+<p><strong>PLOTS</strong></p>
+<p>Once that’s done, go to File → Import → Network → File. Here you may need to first select your home directory (the small house button), then navigate to 10-FullSet/ko00790.xml and press ‘open.’ Press OK on the next pop-up and the map will load.</p>
+<p>Currently, there are no annotations relating to our data on it, so let’s load the table we prepared into Cytoscape via File → Import → Table → File. Select all.kegg.rpkm.cyto.tsv and click ‘Open.’ You will be presented with a window as shown below.</p>
+<p><strong>PLOT</strong></p>
+<p>Here, be sure to set ‘Key Column for Network’ to KEGG_NODE_LABEL, so that it can match up our annotation data with the pathway map. Once done, click OK.</p>
+<p>Finally, click the ‘Style’ tab on the left panel → Properties → Show All.</p>
+<p><strong>PLOT</strong></p>
+<p>Then, select Custom Graphics 1 from the list, and set the options as ‘Column’=‘chart’ and ‘Mapping Type’=‘Passthrough Mapping’ as shown below.</p>
+<p><strong>PLOT</strong></p>
+<p>Now, you will notice that some of the nodes on the pathway map have been annotated with bar charts. These charts show the relative abundance of that particular node in the pathway for each of the samples.</p>
+<p><strong>PLOT</strong></p>
+<p>You can navigate around by first selecting the ‘Network’ tab on the left panel and then by dragging the box on the image in the lower part of the panel. Additionally, you can zoom using the mouse-wheel.
+Spend some time exploring this map and other maps. e.g. the two-component system map ko02020 which can be downloaded as before. For other ideas of maps to look at, revisit section 6.3.2 and download some of the maps from the Pathway Reconstruction Results (the pathway ids are marked next to the pathway names; just prefix them with ‘ko’)</p>
 
-</div>
 </div>
 </div>
             </section>
@@ -309,8 +325,8 @@ All the analyses here are just examples of how you could interrogate a metagenom
           </div>
         </div>
       </div>
-<a href="01-Shotgun_metagenomics.html" class="navigation navigation-prev " aria-label="Previous page"><i class="fa fa-angle-left"></i></a>
-<a href="03-Start.html" class="navigation navigation-next " aria-label="Next page"><i class="fa fa-angle-right"></i></a>
+<a href="13-Co_assembly.html" class="navigation navigation-prev " aria-label="Previous page"><i class="fa fa-angle-left"></i></a>
+<a href="15-Appendix.html" class="navigation navigation-next " aria-label="Next page"><i class="fa fa-angle-right"></i></a>
     </div>
   </div>
 <script src="libs/gitbook-2.6.7/js/app.min.js"></script>

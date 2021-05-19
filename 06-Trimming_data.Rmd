@@ -38,7 +38,7 @@ This is a longer command so we've split it across multiple commands (a `\` at th
 
 This command will remove any low quality regions from the end of both reads in each read pair (quality score < 20). Additionally, if it detects four or more bases of a sequencing adapter, it will trim that off too. We use the two read files for sample K1 as input, from the previous directory we were in.
 
-Run this command two more times, but for the other two samples (K2 and W1)
+__Task__: Run this command two more times, but for the other two samples (K2 and W1)
 
 ## Rename the files
 ```{r, fig.align = 'center',out.width= '15%', echo=FALSE }
@@ -64,22 +64,21 @@ mv W1_R2_val_2.fq.gz W1_R2.fq.gz
 
 __Tip__: If you want to edit and reuse previous commands, press the up arrow key.
 
-Briefly inspect the log files to see how the trimming went (e.g. K1_R1.fastq.gz_trimming_report.txt)
+__Task__: Briefly inspect the log files to see how the trimming went (e.g. K1_R1.fastq.gz_trimming_report.txt)
 
 ## Inspect the trimmed data
 ```{r, fig.align = 'center',out.width= '15%', echo=FALSE }
 knitr::include_graphics(path = "figures/magnify_glass_good.png", auto_pdf = TRUE)
 ``` 
 
-To see what difference the trimming made, run FastQC again on the trimmed output file K1_R1.fq.gz and view it. 
+To see what difference the trimming made, run FastQC and multiqc again on the trimmed output files and view it. 
 
 ```{bash eval=FALSE}
-fastqc K1_R1.fq.gz
-firefox K1_R1_fastqc.html &
+#R1 fastqc and multiqc
+mkdir R1_fastqc
+fastqc -t 3 -o R1_fastqc *R1.fq.gz
+mkdir R1_fastqc/multiqc
+multiqc -o R1_fastqc/multiqc R1_fastqc
 ```
 
-Inspect the FastQC report for yourself. How does it compare to the untrimmed data?
-
-Now that we have trimmed data, we can start the analyses!
-
-
+__Task__: Run fastqc and multiqc for the R2 files and then iew the R1 and R2 multiQC reports with firefox. How does the quality =  compare to the untrimmed data?

@@ -3,11 +3,13 @@
 knitr::include_graphics(path = "figures/start.png", auto_pdf = TRUE)
 ``` 
 
-During this practical you will use a number of installed programs and scripts. To ensure that the system knows where to look for the scripts, run the following command:
+During this practical you will use a number of installed programs and scripts. To ensure that the system knows where to look for the scripts, run the following command (ensure this starts with a full stop and a space `. `):
 
 ```{bash eval=FALSE}
-source /pub21/sam/metagenomicsWorkshop2019.sh
+. useshotgun
 ```
+
+__Note__: The `use` scripts in this workshop are custom scripts that setup conda environments. You can look at the script above script with `less /usr/local/bin/useshotgun` is you are interested in its contents.
 
 Also, there’s a chance you’re currently not in your home directory, so let’s make sure you are with the following command:
 

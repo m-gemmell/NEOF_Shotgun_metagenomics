@@ -1,0 +1,79 @@
+# Host removal
+```{r, fig.align = 'center',out.width= '30%', echo=FALSE }
+knitr::include_graphics(path = "figures/bowtie2.png", auto_pdf = TRUE)
+``` 
+
+It is good practice to remove any host sequences from your data before analysis.
+
+A good method for this is to align/map your reads to a reference of your host genome and remove the mapped sequences (i.e sequences we believe to belong to the host).
+
+If there is no host genome available before you start your sample collections and sequencing it may be a good idea to attempt to sequence and assemble the host genome.
+
+Below is a small example on how to carry out host removal. The below uses a section of a human (host of our samples) assembly.
+
+First step is to copy over the reference fasta file you will use.
+
+```{bash eval=FALSE}
+cp /pub39/tea/matthew/NEOF/Shotgun_metagenomics/GRCh38_slice.fasta
+```
+
+## Index reference
+```{r, fig.align = 'center',out.width= '15%', echo=FALSE }
+knitr::include_graphics(path = "figures/index.png", auto_pdf = TRUE)
+``` 
+
+This process will use the bowtie2 aligner. Prior to alignment/mapping we need to index our reference.
+
+```{bash eval=FALSE}
+bowtie2-build GRCh38_slice.fasta GRCh38_slice.fasta
+```
+
+If you use `ls` you will now see a bunch of files starting with `GRCh38_slice.fasta` and ending with various suffixes that contain `bt`. These are the index files which allow us to use the reference with bowtie2.
+
+## Alignment
+```{r, fig.align = 'center',out.width= '15%', echo=FALSE }
+knitr::include_graphics(path = "figures/alignment.png", auto_pdf = TRUE)
+``` 
+
+With the indexed reference we will align the K1 reads to the reference. This createa a bam file that contains alignment and read information (`mapped.bam`).
+
+```{bash eval=FALSE}
+bowtie2 -x test.fasta -1 R1.fastq.gz -2 R2.fastq.gz \
+-p12 2> out.log | samtools view -bSh > mapped.bam
+```
+
+## Unmapped read extraction
+```{r, fig.align = 'center',out.width= '15%', echo=FALSE }
+knitr::include_graphics(path = "figures/exctractor.png", auto_pdf = TRUE)
+``` 
+
+Next step is extract the reads that did not map form the `mapped.bam` file (unmapped reads).
+
+```{bash eval=FALSE}
+samtools fastq -f 4 -1 K1_R1.u.fastq -2 K1_R2.u.fastq mapped.bam
+```
+ 
+The above step may make unmatched paired files. This occurs when a read from R2 is removed but the matching read in R1 is not removed, or vice versa. This will cause issues for further analysis. 
+
+## Re-pair
+```{r, fig.align = 'center',out.width= '30%', echo=FALSE }
+knitr::include_graphics(path = "figures/repair.png", auto_pdf = TRUE)
+``` 
+
+The below BBTools (https://jgi.doe.gov/data-and-tools/bbtools/bb-tools-user-guide/) command will re-pair the reads by removing a read were its pair is missing and making sure the order of the reads is identical in the 2 paired files.
+
+```{bash eval=FALSE}
+repair.sh in1=K1_R1.u.fastq in2=K1_R2.u.fastq \
+out1=K1_R1.final.fastq out2=K1_R2.final.fastq \
+outs=singletons.fastq
+```
+
+The file `singletons.fastq` contains the left over singletons (a sequence missing a pair) and can normally be ignored.
+
+As our data has pretty much no human data we will skip this step for the other samples and use the trimmed data for the downstream analysis.
+ 
+In a real analysis project you would use a whole genome reference for your host. However, that would have taken too long for this practical. The most current Human reference (when this was written) is GRCh38. We used a random 10kb section to align our reads to.
+
+For more resources on the Human reference please see: https://www.ncbi.nlm.nih.gov/genome/guide/human/
+
+The assembly we used was: https://ftp.ncbi.nlm.nih.gov/refseq/H_sapiens/annotation/GRCh38_latest/refseq_identifiers/GRCh38_latest_genomic.fna.gz

@@ -1,0 +1,65 @@
+# Gene Prediciton
+```{r, fig.align = 'center',out.width= '30%', echo=FALSE }
+knitr::include_graphics(path = "figures/quality_trimming_and_filtering.png", auto_pdf = TRUE)
+``` 
+
+If we want to do functional analysis of our new metagenome assembly, we will first want to identify putative genes within it.
+
+## Running the software
+
+A popular tool for identifying genes (and therefore proteins) in assemblies based on sequence composition is Prodigal (Prokaryotic Dynamic Programming Genefinding Algorithm). Create a new directory and run Prodigal on your assembly:
+
+```{bash eval=FALSE}
+cd ..
+mkdir 7-GenePredictions
+cd 7-GenePredictions
+prodigal -p meta \
+-i ../6-Assembly/K1/final.contigs.fa \
+-a K1.faa -d K1.fna -f gff -o K1.gff 
+```
+
+Here, we tell prodigal to run in metagenome mode (default is single genome mode). We also ask it to generate an amino acid FASTA file with protein predictions (K1.faa) in addition to our gene FASTA file (K1.fna). Finally, we instruct Prodigal to output a GFF (General Feature File), which contains all the gene prediction information.
+
+After a few minutes, take a look at the output files
+
+```{bash eval=FALSE}
+ls
+```
+
+We have 3 new files, as requested.
+
+```{bash eval=FALSE}
+less -S K1.gff 
+less K1.fna
+```
+
+This file contains our predicted genes...
+
+```{bash eval=FALSE}
+less K1.faa
+```
+
+...and this one contains our predicted proteins. For each gene, a corresponding protein with the same ID is predicted. In both of these files, you will notice that the headers are quite long and complex. This can interfere with downstream applications, so we'll rename these now to avoid trouble later on
+
+```{bash eval=FALSE}
+RenameHeaders.py --fasta K1.fna --name K1 \ 
+  --zeros 6 > K1.newHeaders.fna 
+```
+
+Now take a look at the new, re-headered gene FASTA file
+
+```{bash eval=FALSE}
+less K1.newHeaders.fna
+```
+
+Much tidier.
+
+Rename the headers in the protein FASTA file in a similar way to the command used above
+
+Before we move on, we'll check how many genes have been predicted in our mini-metagenome for Sample K1.
+
+```{bash eval=FALSE}
+grep -c "^>"  K1.newHeaders.fna
+```
+
+This command searches for any line starting with >. The `-c` flag tells `grep` to output the number of lines found with this pattern, i.e. the number of headers and therefore the number of genes.

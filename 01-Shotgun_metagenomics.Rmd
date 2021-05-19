@@ -24,6 +24,7 @@ This practical session aims to introduce you to the analysis of Shotgun metageno
 - Overview
 - Raw data
 - Trimming data
+- Host removal
 - Taxonomic profiling
 - Functional profiling
 - Metagenome assembly
