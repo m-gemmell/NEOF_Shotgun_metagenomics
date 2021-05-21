@@ -4,11 +4,11 @@
 
   <meta charset="utf-8" />
   <meta http-equiv="X-UA-Compatible" content="IE=edge" />
-  <title>Chapter 6 Quality control | Shotgun Metagenomics</title>
-  <meta name="description" content="Chapter 6 Quality control | Shotgun Metagenomics" />
+  <title>Chapter 11 Genome binning | Shotgun Metagenomics</title>
+  <meta name="description" content="Chapter 11 Genome binning | Shotgun Metagenomics" />
   <meta name="generator" content="bookdown 0.21 and GitBook 2.6.7" />
 
-  <meta property="og:title" content="Chapter 6 Quality control | Shotgun Metagenomics" />
+  <meta property="og:title" content="Chapter 11 Genome binning | Shotgun Metagenomics" />
   <meta property="og:type" content="book" />
   
   
@@ -16,7 +16,7 @@
   
 
   <meta name="twitter:card" content="summary" />
-  <meta name="twitter:title" content="Chapter 6 Quality control | Shotgun Metagenomics" />
+  <meta name="twitter:title" content="Chapter 11 Genome binning | Shotgun Metagenomics" />
   
   
   
@@ -31,8 +31,8 @@
   <meta name="apple-mobile-web-app-status-bar-style" content="black" />
   
   
-<link rel="prev" href="05-Raw_data.html"/>
-<link rel="next" href="07-Host_removal.html"/>
+<link rel="prev" href="10-Metagenome_assembly.html"/>
+<link rel="next" href="12-Gene_prediction.html"/>
 <script src="libs/header-attrs-2.6/header-attrs.js"></script>
 <script src="libs/jquery-2.2.3/jquery.min.js"></script>
 <link href="libs/gitbook-2.6.7/css/style.css" rel="stylesheet" />
@@ -254,55 +254,91 @@ code span.wa { color: #60a0b0; font-weight: bold; font-style: italic; } /* Warni
           <div class="page-inner">
 
             <section class="normal" id="section-">
-<div id="quality-control" class="section level1" number="6">
-<h1><span class="header-section-number">Chapter 6</span> Quality control</h1>
-<p><img src="figures/quality_trimming_and_filtering.png" width="30%" style="display: block; margin: auto;" /></p>
-<p>Now that we’ve obtained the raw data and had a look at it, we should now clean it up. With any sequencing data, it is very important to ensure that you use the highest quality data possible: Rubbish goes in, rubbish comes out. There are two main methods employed to clean sequence data, and a third method specific to some metagenomic datasets.</p>
+<div id="genome-binning" class="section level1" number="11">
+<h1><span class="header-section-number">Chapter 11</span> Genome binning</h1>
+<p><img src="figures/binning.png" width="10%" style="display: block; margin: auto;" /></p>
+<div id="genomic-binning-and-mags" class="section level2" number="11.1">
+<h2><span class="header-section-number">11.1</span> Genomic binning and MAGs</h2>
+<p><img src="figures/yarn_binning.png" width="40%" style="display: block; margin: auto;" /></p>
+<p>A metagenome assembly consists of contigs from many different genomes. At this stage we don’t know which contigs are from which species. We could try to taxonomically classify each contig but there are 2 problems with this approach:</p>
+<ol style="list-style-type: decimal">
+<li>Some contigs may be misclassified which can lead to multiple contigs from the same genome/organism being classified as various taxa.</li>
+<li>Databases are incomplete and so some contigs will not be classified at all (microbial dark matter).</li>
+</ol>
+<p>To alleviate these issues genomic binning can be carried out. This will cluster contigs into bins based on:</p>
 <ul>
-<li>Remove low quality bases from the end of the reads. These are more likely to be incorrect, so are best trimmed off.</li>
-<li>Remove adapters. Sometimes sequencing adapters can be sequenced if the sequencing runs off the end of a fragment.</li>
-<li>Remove host sequences. If a metagenomic sample derives from a host species then it may be advisable to remove any reads associated with the host genome. Here, we do not need to do this, as the dataset contains barely any human genome sequences.</li>
+<li><strong>Coverage</strong>: Contigs with similar coverage are more likely to be from the same genome.</li>
+<li><strong>Composition</strong>: Contigs with similar GC content are more likely to belong to the same genome.</li>
 </ul>
-<div id="removing-adapters-and-low-quality-bases" class="section level2" number="6.1">
-<h2><span class="header-section-number">6.1</span> Removing adapters and low quality bases</h2>
-<p><img src="figures/hedge_trimming.png" width="15%" style="display: block; margin: auto;" /></p>
-<p>First go back to your home directory and create a new directory where we will clean the sequences up:</p>
-<div class="sourceCode" id="cb10"><pre class="sourceCode bash"><code class="sourceCode bash"><span id="cb10-1"><a href="06-Trimming_data.html#cb10-1" aria-hidden="true" tabindex="-1"></a><span class="bu">cd</span> ..</span></code></pre></div>
-<p>This will move you one directory up, i.e. back to your home directory. Alternatively, you could use <code>cd ~</code> which will take you to your home directory. This is a good idea if you ever get lost!</p>
-<div class="sourceCode" id="cb11"><pre class="sourceCode bash"><code class="sourceCode bash"><span id="cb11-1"><a href="06-Trimming_data.html#cb11-1" aria-hidden="true" tabindex="-1"></a><span class="fu">mkdir</span> 2-Trimmed</span>
-<span id="cb11-2"><a href="06-Trimming_data.html#cb11-2" aria-hidden="true" tabindex="-1"></a><span class="bu">cd</span> 2-Trimmed</span></code></pre></div>
-<p>You are now in your newly created directory. Here we will run Trim Galore! which carries out both of these steps.</p>
-<div class="sourceCode" id="cb12"><pre class="sourceCode bash"><code class="sourceCode bash"><span id="cb12-1"><a href="06-Trimming_data.html#cb12-1" aria-hidden="true" tabindex="-1"></a><span class="ex">trim_galore</span> --paired --quality 20 --stringency 4 <span class="kw">\</span></span>
-<span id="cb12-2"><a href="06-Trimming_data.html#cb12-2" aria-hidden="true" tabindex="-1"></a>   <span class="ex">../1-Raw/K1_R1.fastq.gz</span> ../1-Raw/K1_R2.fastq.gz</span></code></pre></div>
-<p>This is a longer command so we’ve split it across multiple commands (a <code>\</code> at the end of a line allows you to press return without running the command, meaning you can continue to add to that command. When this happens, the <code>$</code> changes to a <code>&gt;</code>. <strong>Note</strong> that if you do use the <code>\</code> character, the next character immediately after it must be return. If you use <code>\</code> in the middle of a line without pressing return afterwards, it will break the command!</p>
-<p>This command will remove any low quality regions from the end of both reads in each read pair (quality score &lt; 20). Additionally, if it detects four or more bases of a sequencing adapter, it will trim that off too. We use the two read files for sample K1 as input, from the previous directory we were in.</p>
-<p><strong>Task</strong>: Run this command two more times, but for the other two samples (K2 and W1)</p>
+<p>Genomic binning has been used to discover many new genomes. Additionally, it makes downstream analyses quicker as the downstream steps will be carried out on the sets of bins rather than on one large metagenome assembly.</p>
+<p>Binning produces “bins” of contigs of various quality (e.g. draft, complete). These bins are also know as MAGs (Metagenome-assembled genomes). In other words a MAG is a single assembled genome that was assembled with other genomes in a metagenome assembly but later separated from the other assemblies. The term MAG has been adopted by the GSC (Genomics Standards Consortium).</p>
+<p>It is recommended to ensure you do not have a poor quality metagenome assembly. Binning requires contigs of good length and good coverage. Extremely low coverage and very short contigs will be excluded from binning.</p>
 </div>
-<div id="rename-the-files" class="section level2" number="6.2">
-<h2><span class="header-section-number">6.2</span> Rename the files</h2>
-<p><img src="figures/rename.png" width="15%" style="display: block; margin: auto;" /></p>
-<p>Once that is complete if you run:</p>
-<div class="sourceCode" id="cb13"><pre class="sourceCode bash"><code class="sourceCode bash"><span id="cb13-1"><a href="06-Trimming_data.html#cb13-1" aria-hidden="true" tabindex="-1"></a><span class="fu">ls</span></span></code></pre></div>
-<p>you will notice that we have a new bunch of files created: 2 new read files for each sample along with a trimming report for each file trimmed. However, the new names are needlessly long. e.g. K1_R1_val_R1.fq.gz could be shortened to K1_R1.fq.gz. So, we’ll rename all of the files with the mv command:</p>
-<div class="sourceCode" id="cb14"><pre class="sourceCode bash"><code class="sourceCode bash"><span id="cb14-1"><a href="06-Trimming_data.html#cb14-1" aria-hidden="true" tabindex="-1"></a><span class="fu">mv</span> K1_R1_val_1.fq.gz K1_R1.fq.gz</span>
-<span id="cb14-2"><a href="06-Trimming_data.html#cb14-2" aria-hidden="true" tabindex="-1"></a><span class="fu">mv</span> K1_R2_val_2.fq.gz K1_R2.fq.gz</span>
-<span id="cb14-3"><a href="06-Trimming_data.html#cb14-3" aria-hidden="true" tabindex="-1"></a><span class="fu">mv</span> K2_R1_val_1.fq.gz K2_R1.fq.gz</span>
-<span id="cb14-4"><a href="06-Trimming_data.html#cb14-4" aria-hidden="true" tabindex="-1"></a><span class="fu">mv</span> K2_R2_val_2.fq.gz K2_R2.fq.gz</span>
-<span id="cb14-5"><a href="06-Trimming_data.html#cb14-5" aria-hidden="true" tabindex="-1"></a><span class="fu">mv</span> W1_R1_val_1.fq.gz W1_R1.fq.gz</span>
-<span id="cb14-6"><a href="06-Trimming_data.html#cb14-6" aria-hidden="true" tabindex="-1"></a><span class="fu">mv</span> W1_R2_val_2.fq.gz W1_R2.fq.gz</span></code></pre></div>
-<p><strong>Tip</strong>: If you want to edit and reuse previous commands, press the up arrow key.</p>
-<p><strong>Task</strong>: Briefly inspect the log files to see how the trimming went (e.g. K1_R1.fastq.gz_trimming_report.txt)</p>
+<div id="conda-environment-directory" class="section level2" number="11.2">
+<h2><span class="header-section-number">11.2</span> Conda environment &amp; directory</h2>
+<p><img src="figures/conda.png" width="10%" style="display: block; margin: auto;" /></p>
+<p>We will use the <code>shotgun_meta</code> conda environment for this chapter.</p>
+<p>Additionally, make a new directory and move into it.</p>
+<div class="sourceCode" id="cb62"><pre class="sourceCode bash"><code class="sourceCode bash"><span id="cb62-1"><a href="11-Genome_binning.html#cb62-1" aria-hidden="true" tabindex="-1"></a><span class="co">#Make directory</span></span>
+<span id="cb62-2"><a href="11-Genome_binning.html#cb62-2" aria-hidden="true" tabindex="-1"></a><span class="fu">mkdir</span> -p ~/7-Binning/K1</span>
+<span id="cb62-3"><a href="11-Genome_binning.html#cb62-3" aria-hidden="true" tabindex="-1"></a><span class="co">#Move into it</span></span>
+<span id="cb62-4"><a href="11-Genome_binning.html#cb62-4" aria-hidden="true" tabindex="-1"></a><span class="bu">cd</span> ~/7-Binning/K1</span></code></pre></div>
 </div>
-<div id="inspect-the-trimmed-data" class="section level2" number="6.3">
-<h2><span class="header-section-number">6.3</span> Inspect the trimmed data</h2>
-<p><img src="figures/magnify_glass_good.png" width="15%" style="display: block; margin: auto;" /></p>
-<p>To see what difference the trimming made, run FastQC and multiqc again on the trimmed output files and view it.</p>
-<div class="sourceCode" id="cb15"><pre class="sourceCode bash"><code class="sourceCode bash"><span id="cb15-1"><a href="06-Trimming_data.html#cb15-1" aria-hidden="true" tabindex="-1"></a><span class="co">#R1 fastqc and multiqc</span></span>
-<span id="cb15-2"><a href="06-Trimming_data.html#cb15-2" aria-hidden="true" tabindex="-1"></a><span class="fu">mkdir</span> R1_fastqc</span>
-<span id="cb15-3"><a href="06-Trimming_data.html#cb15-3" aria-hidden="true" tabindex="-1"></a><span class="ex">fastqc</span> -t 3 -o R1_fastqc *R1.fq.gz</span>
-<span id="cb15-4"><a href="06-Trimming_data.html#cb15-4" aria-hidden="true" tabindex="-1"></a><span class="fu">mkdir</span> R1_fastqc/multiqc</span>
-<span id="cb15-5"><a href="06-Trimming_data.html#cb15-5" aria-hidden="true" tabindex="-1"></a><span class="ex">multiqc</span> -o R1_fastqc/multiqc R1_fastqc</span></code></pre></div>
-<p><strong>Task</strong>: Run fastqc and multiqc for the R2 files and then iew the R1 and R2 multiQC reports with firefox. How does the quality = compare to the untrimmed data?</p>
+<div id="depth-calculation" class="section level2" number="11.3">
+<h2><span class="header-section-number">11.3</span> Depth calculation</h2>
+<p><img src="figures/submarine.png" width="10%" style="display: block; margin: auto;" /></p>
+<p>To carry out effective genome binning MetaBAT2 uses coverage information of the contigs. To calculate depth we need to align the reads to the metagenome assembly.</p>
+<p>For the alignment we will use <code>bwa</code>. We need to index our assembly file prior to alignment.</p>
+<div class="sourceCode" id="cb63"><pre class="sourceCode bash"><code class="sourceCode bash"><span id="cb63-1"><a href="11-Genome_binning.html#cb63-1" aria-hidden="true" tabindex="-1"></a><span class="ex">bwa</span> index ~/6-Assembly/K1/final.contigs.fa</span></code></pre></div>
+<p>Next we will align our trimmed paired reads we used to create the stitched reads. We will carry this out with the <code>bwa mem</code> command. <code>bwa mem</code> is a good aligner for short reads. If you are using long reads (PacBio or Nanopore) <code>minimap2</code> will be more appropriate.</p>
+<div class="sourceCode" id="cb64"><pre class="sourceCode bash"><code class="sourceCode bash"><span id="cb64-1"><a href="11-Genome_binning.html#cb64-1" aria-hidden="true" tabindex="-1"></a><span class="ex">bwa</span> mem ~/6-Assembly/K1/final.contigs.fa <span class="kw">\</span></span>
+<span id="cb64-2"><a href="11-Genome_binning.html#cb64-2" aria-hidden="true" tabindex="-1"></a><span class="ex">~/2-Trimmed/K1_R1.final.fastq</span> ~/2-Trimmed/K1_R2.final.fastq <span class="op">&gt;</span> <span class="kw">\</span></span>
+<span id="cb64-3"><a href="11-Genome_binning.html#cb64-3" aria-hidden="true" tabindex="-1"></a><span class="ex">K1.sam</span></span></code></pre></div>
+<p>After alignment we need to get the file ready for the contig depth summarisation step. This requires converting the sam file to a bam (binary form of a sam file) file and then sorting the bam file.</p>
+<div class="sourceCode" id="cb65"><pre class="sourceCode bash"><code class="sourceCode bash"><span id="cb65-1"><a href="11-Genome_binning.html#cb65-1" aria-hidden="true" tabindex="-1"></a><span class="co"># Convert sam to bam file</span></span>
+<span id="cb65-2"><a href="11-Genome_binning.html#cb65-2" aria-hidden="true" tabindex="-1"></a><span class="ex">samtools</span> view -bu K1.sam <span class="op">&gt;</span> K1.bam</span>
+<span id="cb65-3"><a href="11-Genome_binning.html#cb65-3" aria-hidden="true" tabindex="-1"></a><span class="co"># Created sorted bam file</span></span>
+<span id="cb65-4"><a href="11-Genome_binning.html#cb65-4" aria-hidden="true" tabindex="-1"></a><span class="ex">samtools</span> sort K1.bam <span class="op">&gt;</span> K1.sort.bam</span></code></pre></div>
+<p>Now we can summarise the contig depths from the sorted bame files with <code>MetaBAT</code>’s <code>jgi_summarize_bam_contig_depths</code> command.</p>
+<div class="sourceCode" id="cb66"><pre class="sourceCode bash"><code class="sourceCode bash"><span id="cb66-1"><a href="11-Genome_binning.html#cb66-1" aria-hidden="true" tabindex="-1"></a><span class="ex">jgi_summarize_bam_contig_depths</span> --outputDepth K1.depth.txt <span class="kw">\</span></span>
+<span id="cb66-2"><a href="11-Genome_binning.html#cb66-2" aria-hidden="true" tabindex="-1"></a><span class="ex">K1.sort.bam</span></span></code></pre></div>
+<p>You can have a look at the depth file and you will notice there are many contigs with low coverage (&lt;10) and of short length (&lt;1500).</p>
+<div class="sourceCode" id="cb67"><pre class="sourceCode bash"><code class="sourceCode bash"><span id="cb67-1"><a href="11-Genome_binning.html#cb67-1" aria-hidden="true" tabindex="-1"></a><span class="fu">less</span> K1.depth.txt</span></code></pre></div>
+<p>To get a better look we will open the file in <code>R</code> and look at a summary of the file’s table.</p>
+<p>Activate <code>R</code>:</p>
+<div class="sourceCode" id="cb68"><pre class="sourceCode bash"><code class="sourceCode bash"><span id="cb68-1"><a href="11-Genome_binning.html#cb68-1" aria-hidden="true" tabindex="-1"></a><span class="ex">R</span></span></code></pre></div>
+<p>Now in <code>R</code> we will read in the file and get a <code>summary()</code> of it.</p>
+<div class="sourceCode" id="cb69"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb69-1"><a href="11-Genome_binning.html#cb69-1" aria-hidden="true" tabindex="-1"></a><span class="co">#Read in the table as an object called df (short for data frame)</span></span>
+<span id="cb69-2"><a href="11-Genome_binning.html#cb69-2" aria-hidden="true" tabindex="-1"></a><span class="co">#We want the first row to be the column names (header=TRUE)</span></span>
+<span id="cb69-3"><a href="11-Genome_binning.html#cb69-3" aria-hidden="true" tabindex="-1"></a><span class="co">#We do not want R to check the column names and &quot;fix&quot; them (check.names=FALSE)</span></span>
+<span id="cb69-4"><a href="11-Genome_binning.html#cb69-4" aria-hidden="true" tabindex="-1"></a>df <span class="ot">&lt;-</span> <span class="fu">read.table</span>(<span class="st">&quot;K1.depth.txt&quot;</span>, <span class="at">header=</span><span class="cn">TRUE</span>, <span class="at">check.names=</span><span class="cn">FALSE</span>)</span>
+<span id="cb69-5"><a href="11-Genome_binning.html#cb69-5" aria-hidden="true" tabindex="-1"></a><span class="co">#Create a summary of the data</span></span>
+<span id="cb69-6"><a href="11-Genome_binning.html#cb69-6" aria-hidden="true" tabindex="-1"></a><span class="fu">summary</span>(df)</span></code></pre></div>
+<p>We can see the numbers of the <code>contigLen</code> and <code>totalAvgDepth</code> are very low. However, this is most likely due to a bunch of short low coverage contigs which will be ignored by MetaBAT2. Therefore we will rows with information on contigs shorter than 1500 and rerun the summary. MetaBAT2’s documentation dictates the minimum contig length should be &gt;=1500 with its default being 2500.</p>
+<div class="sourceCode" id="cb70"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb70-1"><a href="11-Genome_binning.html#cb70-1" aria-hidden="true" tabindex="-1"></a><span class="co">#Set the new object &quot;df_min1500len&quot; as all rows</span></span>
+<span id="cb70-2"><a href="11-Genome_binning.html#cb70-2" aria-hidden="true" tabindex="-1"></a><span class="co">#where the value in the column &quot;contigLen&quot; of &quot;df&quot;</span></span>
+<span id="cb70-3"><a href="11-Genome_binning.html#cb70-3" aria-hidden="true" tabindex="-1"></a><span class="co">#Is greater than or equal to 1500</span></span>
+<span id="cb70-4"><a href="11-Genome_binning.html#cb70-4" aria-hidden="true" tabindex="-1"></a>df_min1500len <span class="ot">&lt;-</span> df[df<span class="sc">$</span>contigLen <span class="sc">&gt;=</span> <span class="dv">1500</span>,]</span>
+<span id="cb70-5"><a href="11-Genome_binning.html#cb70-5" aria-hidden="true" tabindex="-1"></a><span class="co">#Summary of our new data frame</span></span>
+<span id="cb70-6"><a href="11-Genome_binning.html#cb70-6" aria-hidden="true" tabindex="-1"></a><span class="fu">summary</span>(df_min1500len)</span></code></pre></div>
+<p>That is looking better, The minimum average coverage for MetaBAT2 is 1 which our minimum is higehr than. Now you can quit R and continue to running MetaBAT2.</p>
+<div class="sourceCode" id="cb71"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb71-1"><a href="11-Genome_binning.html#cb71-1" aria-hidden="true" tabindex="-1"></a><span class="co">#quit R</span></span>
+<span id="cb71-2"><a href="11-Genome_binning.html#cb71-2" aria-hidden="true" tabindex="-1"></a><span class="fu">q</span>()</span>
+<span id="cb71-3"><a href="11-Genome_binning.html#cb71-3" aria-hidden="true" tabindex="-1"></a><span class="co">#On the prompt to save your workspace press &quot;n&quot; and then enter.</span></span></code></pre></div>
+<p><strong>Note</strong>: One of the reasons for our short contigs is that we only used a subset of our sequencing datset for this tutorial due to time concerns.</p>
+</div>
+<div id="metabat2" class="section level2" number="11.4">
+<h2><span class="header-section-number">11.4</span> MetaBAT2</h2>
+<p><img src="figures/bat.png" width="10%" style="display: block; margin: auto;" /></p>
+<p>With our assembly and its depth information we can run MetaBAT2 for binning.</p>
+<div class="sourceCode" id="cb72"><pre class="sourceCode bash"><code class="sourceCode bash"><span id="cb72-1"><a href="11-Genome_binning.html#cb72-1" aria-hidden="true" tabindex="-1"></a><span class="co">#make a diretcory for the bins</span></span>
+<span id="cb72-2"><a href="11-Genome_binning.html#cb72-2" aria-hidden="true" tabindex="-1"></a><span class="fu">mkdir</span> bins</span>
+<span id="cb72-3"><a href="11-Genome_binning.html#cb72-3" aria-hidden="true" tabindex="-1"></a><span class="co">#Run MetaBAT2</span></span>
+<span id="cb72-4"><a href="11-Genome_binning.html#cb72-4" aria-hidden="true" tabindex="-1"></a><span class="ex">metabat2</span> <span class="kw">\</span></span>
+<span id="cb72-5"><a href="11-Genome_binning.html#cb72-5" aria-hidden="true" tabindex="-1"></a><span class="ex">--inFile</span> ~/6-Assembly/K1/final.contigs.fa <span class="kw">\</span></span>
+<span id="cb72-6"><a href="11-Genome_binning.html#cb72-6" aria-hidden="true" tabindex="-1"></a><span class="ex">--outFile</span> bins/K1 <span class="kw">\</span></span>
+<span id="cb72-7"><a href="11-Genome_binning.html#cb72-7" aria-hidden="true" tabindex="-1"></a><span class="ex">--abdFile</span> K1.depth.txt <span class="kw">\</span></span>
+<span id="cb72-8"><a href="11-Genome_binning.html#cb72-8" aria-hidden="true" tabindex="-1"></a><span class="ex">--minContig</span> 1500</span></code></pre></div>
 
 </div>
 </div>
@@ -311,8 +347,8 @@ code span.wa { color: #60a0b0; font-weight: bold; font-style: italic; } /* Warni
           </div>
         </div>
       </div>
-<a href="05-Raw_data.html" class="navigation navigation-prev " aria-label="Previous page"><i class="fa fa-angle-left"></i></a>
-<a href="07-Host_removal.html" class="navigation navigation-next " aria-label="Next page"><i class="fa fa-angle-right"></i></a>
+<a href="10-Metagenome_assembly.html" class="navigation navigation-prev " aria-label="Previous page"><i class="fa fa-angle-left"></i></a>
+<a href="12-Gene_prediction.html" class="navigation navigation-next " aria-label="Next page"><i class="fa fa-angle-right"></i></a>
     </div>
   </div>
 <script src="libs/gitbook-2.6.7/js/app.min.js"></script>

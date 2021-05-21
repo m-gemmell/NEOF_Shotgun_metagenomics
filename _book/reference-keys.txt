@@ -40,6 +40,11 @@ a-primer-on-short-read-assembly
 stitching-read-pairs
 assembly
 quast
+genome-binning
+genomic-binning-and-mags
+conda-environment-directory
+depth-calculation
+metabat2
 gene-prediciton
 running-the-software
 functional-annotation

@@ -8,11 +8,24 @@ knitr::include_graphics(path = "figures/quality_trimming_and_filtering.png", aut
 
 
 Kraken2: https://github.com/DerrickWood/kraken2/wiki/Manual
+
 Krona: https://github.com/marbl/Krona/wiki/KronaTools
+
 Bracken: https://ccb.jhu.edu/software/bracken/index.shtml?t=manual
+
 LEfSe: https://huttenhower.sph.harvard.edu/lefse/
+
 HUMAnN2: https://github.com/biobakery/biobakery/wiki/humann2
+
 Biobakery: https://github.com/biobakery/biobakery
+
+MegaHit: 
+
+BWA: https://github.com/lh3/bwa
+
+minimap2: https://github.com/lh3/minimap2
+
+MetaBAT2: https://bitbucket.org/berkeleylab/metabat/src/master/
 
 ## COG Cateories
 
