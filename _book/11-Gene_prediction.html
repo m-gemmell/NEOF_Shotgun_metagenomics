@@ -24,7 +24,7 @@
 <meta name="author" content="Sam Haldenby and Matthew Gemmell" />
 
 
-<meta name="date" content="2021-05-19" />
+<meta name="date" content="2021-05-21" />
 
   <meta name="viewport" content="width=device-width, initial-scale=1" />
   <meta name="apple-mobile-web-app-capable" content="yes" />
@@ -194,7 +194,10 @@ code span.wa { color: #60a0b0; font-weight: bold; font-style: italic; } /* Warni
 <ul>
 <li class="chapter" data-level="10.1" data-path="10-Metagenome_assembly.html"><a href="10-Metagenome_assembly.html#a-primer-on-short-read-assembly"><i class="fa fa-check"></i><b>10.1</b> A primer on short read assembly</a></li>
 <li class="chapter" data-level="10.2" data-path="10-Metagenome_assembly.html"><a href="10-Metagenome_assembly.html#stitching-read-pairs"><i class="fa fa-check"></i><b>10.2</b> Stitching read pairs</a></li>
-<li class="chapter" data-level="10.3" data-path="10-Metagenome_assembly.html"><a href="10-Metagenome_assembly.html#assembly"><i class="fa fa-check"></i><b>10.3</b> Assembly</a></li>
+<li class="chapter" data-level="10.3" data-path="10-Metagenome_assembly.html"><a href="10-Metagenome_assembly.html#assembly"><i class="fa fa-check"></i><b>10.3</b> Assembly</a>
+<ul>
+<li class="chapter" data-level="10.3.1" data-path="10-Metagenome_assembly.html"><a href="10-Metagenome_assembly.html#quast"><i class="fa fa-check"></i><b>10.3.1</b> QUAST</a></li>
+</ul></li>
 </ul></li>
 <li class="chapter" data-level="11" data-path="11-Gene_prediction.html"><a href="11-Gene_prediction.html"><i class="fa fa-check"></i><b>11</b> Gene Prediciton</a>
 <ul>
@@ -251,29 +254,29 @@ code span.wa { color: #60a0b0; font-weight: bold; font-style: italic; } /* Warni
 <div id="running-the-software" class="section level2" number="11.1">
 <h2><span class="header-section-number">11.1</span> Running the software</h2>
 <p>A popular tool for identifying genes (and therefore proteins) in assemblies based on sequence composition is Prodigal (Prokaryotic Dynamic Programming Genefinding Algorithm). Create a new directory and run Prodigal on your assembly:</p>
-<div class="sourceCode" id="cb60"><pre class="sourceCode bash"><code class="sourceCode bash"><span id="cb60-1"><a href="11-Gene_prediction.html#cb60-1" aria-hidden="true" tabindex="-1"></a><span class="bu">cd</span> ..</span>
-<span id="cb60-2"><a href="11-Gene_prediction.html#cb60-2" aria-hidden="true" tabindex="-1"></a><span class="fu">mkdir</span> 7-GenePredictions</span>
-<span id="cb60-3"><a href="11-Gene_prediction.html#cb60-3" aria-hidden="true" tabindex="-1"></a><span class="bu">cd</span> 7-GenePredictions</span>
-<span id="cb60-4"><a href="11-Gene_prediction.html#cb60-4" aria-hidden="true" tabindex="-1"></a><span class="ex">prodigal</span> -p meta <span class="kw">\</span></span>
-<span id="cb60-5"><a href="11-Gene_prediction.html#cb60-5" aria-hidden="true" tabindex="-1"></a><span class="ex">-i</span> ../6-Assembly/K1/final.contigs.fa <span class="kw">\</span></span>
-<span id="cb60-6"><a href="11-Gene_prediction.html#cb60-6" aria-hidden="true" tabindex="-1"></a><span class="ex">-a</span> K1.faa -d K1.fna -f gff -o K1.gff </span></code></pre></div>
+<div class="sourceCode" id="cb62"><pre class="sourceCode bash"><code class="sourceCode bash"><span id="cb62-1"><a href="11-Gene_prediction.html#cb62-1" aria-hidden="true" tabindex="-1"></a><span class="bu">cd</span> ..</span>
+<span id="cb62-2"><a href="11-Gene_prediction.html#cb62-2" aria-hidden="true" tabindex="-1"></a><span class="fu">mkdir</span> 7-GenePredictions</span>
+<span id="cb62-3"><a href="11-Gene_prediction.html#cb62-3" aria-hidden="true" tabindex="-1"></a><span class="bu">cd</span> 7-GenePredictions</span>
+<span id="cb62-4"><a href="11-Gene_prediction.html#cb62-4" aria-hidden="true" tabindex="-1"></a><span class="ex">prodigal</span> -p meta <span class="kw">\</span></span>
+<span id="cb62-5"><a href="11-Gene_prediction.html#cb62-5" aria-hidden="true" tabindex="-1"></a><span class="ex">-i</span> ../6-Assembly/K1/final.contigs.fa <span class="kw">\</span></span>
+<span id="cb62-6"><a href="11-Gene_prediction.html#cb62-6" aria-hidden="true" tabindex="-1"></a><span class="ex">-a</span> K1.faa -d K1.fna -f gff -o K1.gff </span></code></pre></div>
 <p>Here, we tell prodigal to run in metagenome mode (default is single genome mode). We also ask it to generate an amino acid FASTA file with protein predictions (K1.faa) in addition to our gene FASTA file (K1.fna). Finally, we instruct Prodigal to output a GFF (General Feature File), which contains all the gene prediction information.</p>
 <p>After a few minutes, take a look at the output files</p>
-<div class="sourceCode" id="cb61"><pre class="sourceCode bash"><code class="sourceCode bash"><span id="cb61-1"><a href="11-Gene_prediction.html#cb61-1" aria-hidden="true" tabindex="-1"></a><span class="fu">ls</span></span></code></pre></div>
+<div class="sourceCode" id="cb63"><pre class="sourceCode bash"><code class="sourceCode bash"><span id="cb63-1"><a href="11-Gene_prediction.html#cb63-1" aria-hidden="true" tabindex="-1"></a><span class="fu">ls</span></span></code></pre></div>
 <p>We have 3 new files, as requested.</p>
-<div class="sourceCode" id="cb62"><pre class="sourceCode bash"><code class="sourceCode bash"><span id="cb62-1"><a href="11-Gene_prediction.html#cb62-1" aria-hidden="true" tabindex="-1"></a><span class="fu">less</span> -S K1.gff </span>
-<span id="cb62-2"><a href="11-Gene_prediction.html#cb62-2" aria-hidden="true" tabindex="-1"></a><span class="fu">less</span> K1.fna</span></code></pre></div>
+<div class="sourceCode" id="cb64"><pre class="sourceCode bash"><code class="sourceCode bash"><span id="cb64-1"><a href="11-Gene_prediction.html#cb64-1" aria-hidden="true" tabindex="-1"></a><span class="fu">less</span> -S K1.gff </span>
+<span id="cb64-2"><a href="11-Gene_prediction.html#cb64-2" aria-hidden="true" tabindex="-1"></a><span class="fu">less</span> K1.fna</span></code></pre></div>
 <p>This file contains our predicted genes…</p>
-<div class="sourceCode" id="cb63"><pre class="sourceCode bash"><code class="sourceCode bash"><span id="cb63-1"><a href="11-Gene_prediction.html#cb63-1" aria-hidden="true" tabindex="-1"></a><span class="fu">less</span> K1.faa</span></code></pre></div>
+<div class="sourceCode" id="cb65"><pre class="sourceCode bash"><code class="sourceCode bash"><span id="cb65-1"><a href="11-Gene_prediction.html#cb65-1" aria-hidden="true" tabindex="-1"></a><span class="fu">less</span> K1.faa</span></code></pre></div>
 <p>…and this one contains our predicted proteins. For each gene, a corresponding protein with the same ID is predicted. In both of these files, you will notice that the headers are quite long and complex. This can interfere with downstream applications, so we’ll rename these now to avoid trouble later on</p>
-<div class="sourceCode" id="cb64"><pre class="sourceCode bash"><code class="sourceCode bash"><span id="cb64-1"><a href="11-Gene_prediction.html#cb64-1" aria-hidden="true" tabindex="-1"></a><span class="ex">RenameHeaders.py</span> --fasta K1.fna --name K1 <span class="dt">\ </span></span>
-<span id="cb64-2"><a href="11-Gene_prediction.html#cb64-2" aria-hidden="true" tabindex="-1"></a>  <span class="ex">--zeros</span> 6 <span class="op">&gt;</span> K1.newHeaders.fna </span></code></pre></div>
+<div class="sourceCode" id="cb66"><pre class="sourceCode bash"><code class="sourceCode bash"><span id="cb66-1"><a href="11-Gene_prediction.html#cb66-1" aria-hidden="true" tabindex="-1"></a><span class="ex">RenameHeaders.py</span> --fasta K1.fna --name K1 <span class="dt">\ </span></span>
+<span id="cb66-2"><a href="11-Gene_prediction.html#cb66-2" aria-hidden="true" tabindex="-1"></a>  <span class="ex">--zeros</span> 6 <span class="op">&gt;</span> K1.newHeaders.fna </span></code></pre></div>
 <p>Now take a look at the new, re-headered gene FASTA file</p>
-<div class="sourceCode" id="cb65"><pre class="sourceCode bash"><code class="sourceCode bash"><span id="cb65-1"><a href="11-Gene_prediction.html#cb65-1" aria-hidden="true" tabindex="-1"></a><span class="fu">less</span> K1.newHeaders.fna</span></code></pre></div>
+<div class="sourceCode" id="cb67"><pre class="sourceCode bash"><code class="sourceCode bash"><span id="cb67-1"><a href="11-Gene_prediction.html#cb67-1" aria-hidden="true" tabindex="-1"></a><span class="fu">less</span> K1.newHeaders.fna</span></code></pre></div>
 <p>Much tidier.</p>
 <p>Rename the headers in the protein FASTA file in a similar way to the command used above</p>
 <p>Before we move on, we’ll check how many genes have been predicted in our mini-metagenome for Sample K1.</p>
-<div class="sourceCode" id="cb66"><pre class="sourceCode bash"><code class="sourceCode bash"><span id="cb66-1"><a href="11-Gene_prediction.html#cb66-1" aria-hidden="true" tabindex="-1"></a><span class="fu">grep</span> -c <span class="st">&quot;^&gt;&quot;</span>  K1.newHeaders.fna</span></code></pre></div>
+<div class="sourceCode" id="cb68"><pre class="sourceCode bash"><code class="sourceCode bash"><span id="cb68-1"><a href="11-Gene_prediction.html#cb68-1" aria-hidden="true" tabindex="-1"></a><span class="fu">grep</span> -c <span class="st">&quot;^&gt;&quot;</span>  K1.newHeaders.fna</span></code></pre></div>
 <p>This command searches for any line starting with &gt;. The <code>-c</code> flag tells <code>grep</code> to output the number of lines found with this pattern, i.e. the number of headers and therefore the number of genes.</p>
 
 </div>

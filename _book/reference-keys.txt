@@ -39,6 +39,7 @@ metagenome-assembly
 a-primer-on-short-read-assembly
 stitching-read-pairs
 assembly
+quast
 gene-prediciton
 running-the-software
 functional-annotation

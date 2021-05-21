@@ -24,7 +24,7 @@
 <meta name="author" content="Sam Haldenby and Matthew Gemmell" />
 
 
-<meta name="date" content="2021-05-19" />
+<meta name="date" content="2021-05-21" />
 
   <meta name="viewport" content="width=device-width, initial-scale=1" />
   <meta name="apple-mobile-web-app-capable" content="yes" />
@@ -194,7 +194,10 @@ code span.wa { color: #60a0b0; font-weight: bold; font-style: italic; } /* Warni
 <ul>
 <li class="chapter" data-level="10.1" data-path="10-Metagenome_assembly.html"><a href="10-Metagenome_assembly.html#a-primer-on-short-read-assembly"><i class="fa fa-check"></i><b>10.1</b> A primer on short read assembly</a></li>
 <li class="chapter" data-level="10.2" data-path="10-Metagenome_assembly.html"><a href="10-Metagenome_assembly.html#stitching-read-pairs"><i class="fa fa-check"></i><b>10.2</b> Stitching read pairs</a></li>
-<li class="chapter" data-level="10.3" data-path="10-Metagenome_assembly.html"><a href="10-Metagenome_assembly.html#assembly"><i class="fa fa-check"></i><b>10.3</b> Assembly</a></li>
+<li class="chapter" data-level="10.3" data-path="10-Metagenome_assembly.html"><a href="10-Metagenome_assembly.html#assembly"><i class="fa fa-check"></i><b>10.3</b> Assembly</a>
+<ul>
+<li class="chapter" data-level="10.3.1" data-path="10-Metagenome_assembly.html"><a href="10-Metagenome_assembly.html#quast"><i class="fa fa-check"></i><b>10.3.1</b> QUAST</a></li>
+</ul></li>
 </ul></li>
 <li class="chapter" data-level="11" data-path="11-Gene_prediction.html"><a href="11-Gene_prediction.html"><i class="fa fa-check"></i><b>11</b> Gene Prediciton</a>
 <ul>
@@ -246,7 +249,7 @@ code span.wa { color: #60a0b0; font-weight: bold; font-style: italic; } /* Warni
             <section class="normal" id="section-">
 <div id="metagenome-assembly" class="section level1" number="10">
 <h1><span class="header-section-number">Chapter 10</span> Metagenome assembly</h1>
-<p><img src="figures/quality_trimming_and_filtering.png" width="30%" style="display: block; margin: auto;" /></p>
+<p><img src="figures/jigsaw.png" width="30%" style="display: block; margin: auto;" /></p>
 <p>So far we have directly analysed the read data itself which is perfectly fine for taxonomic profiling and for certain methods of functional profiling. However, Illumina reads are generally short and therefore can not provide us with much data on larger constructs that are in the metagenomic samples, e.g. genes. While it is possible to predict from which gene a sequence read might originate, the short nature of the query can sometimes lead to ambiguous results.</p>
 <p>Additionally, depending on the application it can become computationally intensive to analyse large numbers of reads. Here, we are only using samples with 1 million reads. Some metagenome samples consist of 50-100 million+ read pairs. If such a sample belonged to a set of 100 samples, that would be up to 10 billion read pairs, or 2 trillion bases of sequence data, with many of these being redundant.</p>
 <p>For this reason, it is sometimes advantageous to assemble the reads into contigs, using a meta-genome assembler. This has the dual effect of:</p>
@@ -255,46 +258,46 @@ code span.wa { color: #60a0b0; font-weight: bold; font-style: italic; } /* Warni
 <li>Increase the size of the fragments you will analyse. This is the main advantage of an assembly, as the ~100 bp reads can be pieced together to form 100,000 kb+ contigs. These contigs will contain complete genes, operons and regulatory elements: Reconstructed genome sections.</li>
 </ul>
 <p>Here, we will carry out a couple of assemblies on our dataset.</p>
+<p>We will use the <code>shotgun_meta</code> conda environment so use a terminal where this is activated or open a new one and run <code>. useshotgun_meta</code>.</p>
 <div id="a-primer-on-short-read-assembly" class="section level2" number="10.1">
 <h2><span class="header-section-number">10.1</span> A primer on short read assembly</h2>
+<p><img src="figures/dna_laptop.png" width="15%" style="display: block; margin: auto;" /></p>
 <p>Illumina reads are too short and numerous to use traditional overlap-layout-consensus assemblers as such an approach would be far too computationally intensive. Instead, we use De Bruijn graph based assemblers. Briefly, these operate as follows:</p>
 <ol style="list-style-type: decimal">
-<li>All reads are broken down in to k-length overlapping fragments (k-mers). e.g. if we choose a k-mer size of 5 bp, the following two sequences (blue) would be broken down into the k-mers below them (red):</li>
+<li>All reads are broken down into k-length overlapping fragments (k-mers). e.g. if we choose a k-mer size of 5 bp, the following two sequences (blue) would be broken down into the k-mers below them (red):</li>
 </ol>
-<p><strong>(A plot need to go here, see old manual)</strong></p>
+<p><img src="figures/reads_aligned.png" width="40%" style="display: block; margin: auto;" /></p>
 <ol start="2" style="list-style-type: decimal">
-<li>All k-mers are linked to other k-mers which match with a k-1 length overlap (i.e. that overlap by all but one base:
-<ul>
-<li>GGCAT→GCATGC→CATGC→ATGCA→TGCAG→GCAGG→CAGGA</li>
-</ul></li>
-<li>Paths are routed through the graph and longer contigs are generated:
-<ul>
-<li>__G__GCAT→__G__CATGC→__C__ATGC→__A__TGCA→__T__GCAG→__G__CAGG→<strong>CAGGA</strong></li>
-<li>→ GGCATGCAGGA</li>
-</ul></li>
+<li>All k-mers are linked to other k-mers which match with a k-1 length overlap (i.e. that overlap by all but one base:</li>
 </ol>
+<p><img src="figures/graph_simple.png" width="80%" style="display: block; margin: auto;" /></p>
+<ol start="3" style="list-style-type: decimal">
+<li>Paths are routed through the graph and longer contigs are generated:</li>
+</ol>
+<p><img src="figures/graph_complex.png" width="80%" style="display: block; margin: auto;" /></p>
 <p>The example here is a vast oversimplification of the complexity of a De Bruijn graph (i.e. there are no branches!). Routing through the graph is never as simple as this as some k-mers will lead to multiple k-mers, which can result in the break point of a contig. This is especially true for complex metagenomic data.</p>
 <p>Generally speaking, the shorter the k-mer, the more branches there will be, the trickier the graph is to resolve, so the resulting contigs are smaller. Assemblers usually perform better with longer k-mer lengths but even then there might not be enough depth of sequencing to generate all k-mers that form overlaps, therefore leading to break points. Finding the right k-mer size usually involves testing several.</p>
 <p>Fortunately, the assembler we will use, MEGAHIT, allows us to build an assembly using multiple k-mer lengths iteratively. The other great advantage about MEGAHIT is that it is quick and efficient. We will use MEGAHIT on our data soon, but first there is an additional processing step for our sequences…</p>
 </div>
 <div id="stitching-read-pairs" class="section level2" number="10.2">
 <h2><span class="header-section-number">10.2</span> Stitching read pairs</h2>
+<p><img src="figures/stitch.png" width="15%" style="display: block; margin: auto;" /></p>
 <p>As mentioned, longer k-mers generally perform better, but as our maximum read length is 100 bp, we are limited to a maximum k-mer length of 99 bp. However, we can get even longer k-mers if we stitch our read pairs together.</p>
 <p>Remember that a read pair consists of two sequences read from each end of a fragment of DNA (or RNA). If the two sequences meet in the middle of the fragment and then overlap, there will be a region of homology which we can use to merge the two reads in the pair together (See next image).</p>
 <p>First, we obtain our forward and reverse reads, derived from different ends of the same fragment. Second, we look for sufficient overlap between the 3’ ends of our sequences. Third, if there is sufficient overlap, we combine, or stitch, the two reads together to form one long sequence.</p>
-<p><img src="figures/merging_paired_reads.png" width="50%" style="display: block; margin: auto;" /></p>
+<p><img src="figures/merging_paired_reads.png" width="40%" style="display: block; margin: auto;" /></p>
 <p>Once we have longer stitched reads, we can increase the k-mer length for our assembly.</p>
 <p>There are a number of pieces of software that can be used to stitch reads (e.g. Pear, Pandaseq) but today we will use one called FLASH:</p>
 <p>Make a new output directory for the stitched reads and run FLASH:</p>
-<div class="sourceCode" id="cb54"><pre class="sourceCode bash"><code class="sourceCode bash"><span id="cb54-1"><a href="10-Metagenome_assembly.html#cb54-1" aria-hidden="true" tabindex="-1"></a><span class="bu">cd</span> ..</span>
-<span id="cb54-2"><a href="10-Metagenome_assembly.html#cb54-2" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb54-3"><a href="10-Metagenome_assembly.html#cb54-3" aria-hidden="true" tabindex="-1"></a><span class="fu">mkdir</span> 5-Stitched</span>
-<span id="cb54-4"><a href="10-Metagenome_assembly.html#cb54-4" aria-hidden="true" tabindex="-1"></a></span>
+<div class="sourceCode" id="cb54"><pre class="sourceCode bash"><code class="sourceCode bash"><span id="cb54-1"><a href="10-Metagenome_assembly.html#cb54-1" aria-hidden="true" tabindex="-1"></a><span class="co">#Change directory to home</span></span>
+<span id="cb54-2"><a href="10-Metagenome_assembly.html#cb54-2" aria-hidden="true" tabindex="-1"></a><span class="bu">cd</span> ~</span>
+<span id="cb54-3"><a href="10-Metagenome_assembly.html#cb54-3" aria-hidden="true" tabindex="-1"></a><span class="co">#Make and move into new directory</span></span>
+<span id="cb54-4"><a href="10-Metagenome_assembly.html#cb54-4" aria-hidden="true" tabindex="-1"></a><span class="fu">mkdir</span> 5-Stitched</span>
 <span id="cb54-5"><a href="10-Metagenome_assembly.html#cb54-5" aria-hidden="true" tabindex="-1"></a><span class="bu">cd</span> 5-Stitched</span>
-<span id="cb54-6"><a href="10-Metagenome_assembly.html#cb54-6" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb54-6"><a href="10-Metagenome_assembly.html#cb54-6" aria-hidden="true" tabindex="-1"></a><span class="co">#Run flash</span></span>
 <span id="cb54-7"><a href="10-Metagenome_assembly.html#cb54-7" aria-hidden="true" tabindex="-1"></a><span class="ex">flash</span>  -o K1 -z -t 12 -d . <span class="kw">\</span></span>
 <span id="cb54-8"><a href="10-Metagenome_assembly.html#cb54-8" aria-hidden="true" tabindex="-1"></a><span class="ex">../2-Trimmed/K1_R1.fq.gz</span> ../2-Trimmed/K1_R2.fq.gz</span></code></pre></div>
-<p>Here, we are telling flash to use an output file name prefix of K1, that the input is zipped, that the output directory is here (.) and to use the two read files for Sample K1. Once FLASH has finished running, it will display on screen how well the stitching process went, in this case a low amount of reads were combined. Have a look what files have been generated</p>
+<p>Here, we are telling flash to use an output file name prefix of K1, that the input is zipped, that the output directory is here (.) and to use the two read files for Sample K1. Once FLASH has finished running, it will display on screen how well the stitching process went, in this case a low amount of reads were combined. Have a look what files have been generated.</p>
 <div class="sourceCode" id="cb55"><pre class="sourceCode bash"><code class="sourceCode bash"><span id="cb55-1"><a href="10-Metagenome_assembly.html#cb55-1" aria-hidden="true" tabindex="-1"></a><span class="fu">ls</span></span></code></pre></div>
 <p>We have three new fastq.gz files. One containing the stitched reads (<code>K1.extendedFrags.fastq.gz</code>) and two containing the reads from pairs that could not be combined (<code>K1.notCombined_1.fastq.gz</code> and <code>K1.notCombined_2.fastq.gz)</code>.</p>
 <p>We can also see what the new read lengths are:</p>
@@ -303,6 +306,7 @@ code span.wa { color: #60a0b0; font-weight: bold; font-style: italic; } /* Warni
 </div>
 <div id="assembly" class="section level2" number="10.3">
 <h2><span class="header-section-number">10.3</span> Assembly</h2>
+<p><img src="figures/assembly_line.png" width="20%" style="display: block; margin: auto;" /></p>
 <p>Create a new directory to store our assembly in and run the metagenome assembler MEGAHIT using our newly stitched read data.</p>
 <div class="sourceCode" id="cb57"><pre class="sourceCode bash"><code class="sourceCode bash"><span id="cb57-1"><a href="10-Metagenome_assembly.html#cb57-1" aria-hidden="true" tabindex="-1"></a><span class="bu">cd</span> ..</span>
 <span id="cb57-2"><a href="10-Metagenome_assembly.html#cb57-2" aria-hidden="true" tabindex="-1"></a><span class="fu">mkdir</span> 6-Assembly</span>
@@ -315,21 +319,39 @@ code span.wa { color: #60a0b0; font-weight: bold; font-style: italic; } /* Warni
 <span id="cb57-9"><a href="10-Metagenome_assembly.html#cb57-9" aria-hidden="true" tabindex="-1"></a><span class="ex">-t</span> 12 <span class="kw">\</span></span>
 <span id="cb57-10"><a href="10-Metagenome_assembly.html#cb57-10" aria-hidden="true" tabindex="-1"></a><span class="ex">--k-list</span> 29,49,69,89,109,129,149,169,189</span></code></pre></div>
 <p>Here, you have instructed MEGAHIT to use both the stitched and unstitched reads, to output the assembly in a subdirectory called K1 and to use 12 CPUs.</p>
-<p>The last option <code>--k-list</code> instructs MEGAHIT to first generate an assembly using a k-mer size of 29 bp and when that is complete, integrate the results into an assembly using a k-mer size of 49 bp, and so on up to a final iteration using a k-mer size of 189 bp. This large range of k-mer lengths should give us a good assembly, given the data. However, it may take a while to run so this might be a good time to either read on, or go back and look at some of the questions/suggestions in green that you have missed. If you need a command prompt (your current one is gone because MEGAHIT is running), Right-click on the grey background → Applications → Terminal Emulators → Xterm, to open a new terminal.</p>
+<p>The last option <code>--k-list</code> instructs MEGAHIT to first generate an assembly using a k-mer size of 29 bp and when that is complete, integrate the results into an assembly using a k-mer size of 49 bp, and so on up to a final iteration using a k-mer size of 189 bp. This large range of k-mer lengths should give us a good assembly, given the data. However, it may take a while to run so this might be a good time to either read on.</p>
+<p>If you need a command prompt (your current one is gone because MEGAHIT is running), right click on the main screen, choose <code>Applications</code> -&gt; <code>Shell</code> -&gt; <code>bash</code>.</p>
 <p>Once the assembly is completed, we can look at the output FASTA file containing the contigs:</p>
 <div class="sourceCode" id="cb58"><pre class="sourceCode bash"><code class="sourceCode bash"><span id="cb58-1"><a href="10-Metagenome_assembly.html#cb58-1" aria-hidden="true" tabindex="-1"></a><span class="fu">less</span> K1/final.contigs.fa</span></code></pre></div>
-<p>We can also generate some metrics based on the assembly</p>
-<div class="sourceCode" id="cb59"><pre class="sourceCode bash"><code class="sourceCode bash"><span id="cb59-1"><a href="10-Metagenome_assembly.html#cb59-1" aria-hidden="true" tabindex="-1"></a><span class="ex">assembly.py</span> <span class="kw">\</span></span>
-<span id="cb59-2"><a href="10-Metagenome_assembly.html#cb59-2" aria-hidden="true" tabindex="-1"></a>  <span class="ex">-i</span> K1/final.contigs.fa <span class="kw">\</span></span>
-<span id="cb59-3"><a href="10-Metagenome_assembly.html#cb59-3" aria-hidden="true" tabindex="-1"></a>  <span class="ex">-o</span> K1/final.contigs.stats <span class="kw">\</span></span>
-<span id="cb59-4"><a href="10-Metagenome_assembly.html#cb59-4" aria-hidden="true" tabindex="-1"></a>  <span class="ex">-c</span> stats</span>
-<span id="cb59-5"><a href="10-Metagenome_assembly.html#cb59-5" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb59-6"><a href="10-Metagenome_assembly.html#cb59-6" aria-hidden="true" tabindex="-1"></a><span class="fu">less</span> K1/final.contigs.stats</span></code></pre></div>
-<p>This stats file tells us quite a bit about the assembly quality. Two definitions that you may not be aware of are N50 and N50 length (or, somewhat confusingly, L50 and N50, respectively!). If we were to order our contigs from largest to smallest, and total up the sizes from biggest downwards, the contig we reach where our total is 50% of the size of the whole assembly is the N50 contig (the smaller the number the better). The N50 length is the length of this contig; a weighted median contig length.</p>
-<p><strong>(add vis to explain N50)</strong></p>
-<p>How do the contig metrics compare to the original reads?
-Now we have an assembly, albeit not a brilliant one due to us only having used 1 million reads, we can start to explore it.</p>
+<div id="quast" class="section level3" number="10.3.1">
+<h3><span class="header-section-number">10.3.1</span> QUAST</h3>
+<p>We can also generate some metrics based on the assembly.</p>
+<p>Due to python version conflict we need to use another conda environment.</p>
+<p>Open a new terminal (right click on the main screen, choose <code>Applications</code> -&gt; <code>Shell</code> -&gt; <code>bash</code>) and run the below.</p>
+<div class="sourceCode" id="cb59"><pre class="sourceCode bash"><code class="sourceCode bash"><span id="cb59-1"><a href="10-Metagenome_assembly.html#cb59-1" aria-hidden="true" tabindex="-1"></a><span class="co">#use script to activate conda env</span></span>
+<span id="cb59-2"><a href="10-Metagenome_assembly.html#cb59-2" aria-hidden="true" tabindex="-1"></a><span class="bu">.</span> <span class="ex">usegenoassess</span></span></code></pre></div>
+<p>We will use QUAST for genome contiguity assessment but first we will change directory to <code>6-Assembly</code> and create a directory for the QUAST output.</p>
+<div class="sourceCode" id="cb60"><pre class="sourceCode bash"><code class="sourceCode bash"><span id="cb60-1"><a href="10-Metagenome_assembly.html#cb60-1" aria-hidden="true" tabindex="-1"></a><span class="co">#Change directory</span></span>
+<span id="cb60-2"><a href="10-Metagenome_assembly.html#cb60-2" aria-hidden="true" tabindex="-1"></a><span class="bu">cd</span> ~/6-Assembly</span>
+<span id="cb60-3"><a href="10-Metagenome_assembly.html#cb60-3" aria-hidden="true" tabindex="-1"></a><span class="co">#Create QUAST output directory</span></span>
+<span id="cb60-4"><a href="10-Metagenome_assembly.html#cb60-4" aria-hidden="true" tabindex="-1"></a><span class="co">#The option -p will create and parent directories tha</span></span>
+<span id="cb60-5"><a href="10-Metagenome_assembly.html#cb60-5" aria-hidden="true" tabindex="-1"></a><span class="fu">mkdir</span> -p quast/K1</span></code></pre></div>
+<p>The <code>-p</code> option of <code>mkdir</code> will cause the command to create any parent directories that are required to create the noted directory. I.e. <code>quast</code> will be created so <code>K1</code> can be created.</p>
+<p>Now to run QUAST.</p>
+<div class="sourceCode" id="cb61"><pre class="sourceCode bash"><code class="sourceCode bash"><span id="cb61-1"><a href="10-Metagenome_assembly.html#cb61-1" aria-hidden="true" tabindex="-1"></a><span class="co">#Generate contiguity statistics</span></span>
+<span id="cb61-2"><a href="10-Metagenome_assembly.html#cb61-2" aria-hidden="true" tabindex="-1"></a><span class="ex">quast</span> -o quast/K1 K1/final.contigs.fa</span>
+<span id="cb61-3"><a href="10-Metagenome_assembly.html#cb61-3" aria-hidden="true" tabindex="-1"></a><span class="co">#View QUAST html report</span></span>
+<span id="cb61-4"><a href="10-Metagenome_assembly.html#cb61-4" aria-hidden="true" tabindex="-1"></a><span class="ex">firefox</span> quast/K1/report.html</span></code></pre></div>
+<p>The report tells us quite a bit about the assembly quality. Two definitions that you may not be aware of are N50 and N50 length (or, somewhat confusingly, L50 and N50, respectively!). If we were to order our contigs from largest to smallest, and total up the sizes from biggest downwards, the contig we reach where our total is 50% of the size of the whole assembly is the N50 contig (the smaller the number the better). The N50 length is the length of this contig; a weighted median contig length.</p>
+<p><img src="figures/n50_n90.png" width="20%" style="display: block; margin: auto;" /></p>
+<p><strong>Quastions</strong>
+- How do the contig metrics compare to the original reads?</p>
+<ul>
+<li>Now we have an assembly, albeit not a brilliant one due to us only having used 1 million reads, we can start to explore it.</li>
+</ul>
+<p>There is also a metaQUAST specifically for metagenome assemblies but it requires reference assemblies be provided.</p>
 
+</div>
 </div>
 </div>
             </section>

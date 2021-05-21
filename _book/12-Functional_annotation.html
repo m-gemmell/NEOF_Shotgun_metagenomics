@@ -24,7 +24,7 @@
 <meta name="author" content="Sam Haldenby and Matthew Gemmell" />
 
 
-<meta name="date" content="2021-05-19" />
+<meta name="date" content="2021-05-21" />
 
   <meta name="viewport" content="width=device-width, initial-scale=1" />
   <meta name="apple-mobile-web-app-capable" content="yes" />
@@ -194,7 +194,10 @@ code span.wa { color: #60a0b0; font-weight: bold; font-style: italic; } /* Warni
 <ul>
 <li class="chapter" data-level="10.1" data-path="10-Metagenome_assembly.html"><a href="10-Metagenome_assembly.html#a-primer-on-short-read-assembly"><i class="fa fa-check"></i><b>10.1</b> A primer on short read assembly</a></li>
 <li class="chapter" data-level="10.2" data-path="10-Metagenome_assembly.html"><a href="10-Metagenome_assembly.html#stitching-read-pairs"><i class="fa fa-check"></i><b>10.2</b> Stitching read pairs</a></li>
-<li class="chapter" data-level="10.3" data-path="10-Metagenome_assembly.html"><a href="10-Metagenome_assembly.html#assembly"><i class="fa fa-check"></i><b>10.3</b> Assembly</a></li>
+<li class="chapter" data-level="10.3" data-path="10-Metagenome_assembly.html"><a href="10-Metagenome_assembly.html#assembly"><i class="fa fa-check"></i><b>10.3</b> Assembly</a>
+<ul>
+<li class="chapter" data-level="10.3.1" data-path="10-Metagenome_assembly.html"><a href="10-Metagenome_assembly.html#quast"><i class="fa fa-check"></i><b>10.3.1</b> QUAST</a></li>
+</ul></li>
 </ul></li>
 <li class="chapter" data-level="11" data-path="11-Gene_prediction.html"><a href="11-Gene_prediction.html"><i class="fa fa-check"></i><b>11</b> Gene Prediciton</a>
 <ul>
@@ -251,7 +254,7 @@ code span.wa { color: #60a0b0; font-weight: bold; font-style: italic; } /* Warni
 <p>Today we will use an all-in-one solution called Cognizer which assigns functions inferred from mapping to COG categorisations (KEGG, COG, SEED, GO, Pfam). This framework tool was actually intended for use with reads as input rather than gene/protein sequences: It will take reads and runs a translated BLAST (BLASTP) search against a custom protein database, before determining a variety of functional annotations for each read.</p>
 <p>Unfortunately, this is a very processor intensive and slow process so we are cutting the workload down dramatically by instead providing the software with our predicted protein sequences. Even then, this process takes too long to complete in a tutorial session, so we will instead run the program on a subset of our data, i.e. 2000 proteins.</p>
 <p>To do this, we will use Seqtk (Sequence tool kit)</p>
-<div class="sourceCode" id="cb67"><pre class="sourceCode bash"><code class="sourceCode bash"><span id="cb67-1"><a href="12-Functional_annotation.html#cb67-1" aria-hidden="true" tabindex="-1"></a><span class="ex">seqtk</span> sample K1.newHeaders.faa 2000 <span class="op">&gt;</span> K1.sample.faa</span></code></pre></div>
+<div class="sourceCode" id="cb69"><pre class="sourceCode bash"><code class="sourceCode bash"><span id="cb69-1"><a href="12-Functional_annotation.html#cb69-1" aria-hidden="true" tabindex="-1"></a><span class="ex">seqtk</span> sample K1.newHeaders.faa 2000 <span class="op">&gt;</span> K1.sample.faa</span></code></pre></div>
 <p>This command simply tells Seqtk to select 2000 entries from <code>K1.newHeaders.faa</code> and output them in <code>K1.sample.faa</code>. This resulting set of proteins will be much more manageable.</p>
 <div id="annotation-types" class="section level2" number="12.1">
 <h2><span class="header-section-number">12.1</span> Annotation types</h2>
@@ -269,17 +272,17 @@ code span.wa { color: #60a0b0; font-weight: bold; font-style: italic; } /* Warni
 <div id="running-cognizer" class="section level2" number="12.2">
 <h2><span class="header-section-number">12.2</span> Running Cognizer</h2>
 <p>Make a new directory to store the annotations in.</p>
-<div class="sourceCode" id="cb68"><pre class="sourceCode bash"><code class="sourceCode bash"><span id="cb68-1"><a href="12-Functional_annotation.html#cb68-1" aria-hidden="true" tabindex="-1"></a><span class="bu">cd</span> ..</span>
-<span id="cb68-2"><a href="12-Functional_annotation.html#cb68-2" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb68-3"><a href="12-Functional_annotation.html#cb68-3" aria-hidden="true" tabindex="-1"></a><span class="fu">mkdir</span> 8-GeneAnnotations</span>
-<span id="cb68-4"><a href="12-Functional_annotation.html#cb68-4" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb68-5"><a href="12-Functional_annotation.html#cb68-5" aria-hidden="true" tabindex="-1"></a><span class="bu">cd</span> 8-GeneAnnotations</span>
-<span id="cb68-6"><a href="12-Functional_annotation.html#cb68-6" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb68-7"><a href="12-Functional_annotation.html#cb68-7" aria-hidden="true" tabindex="-1"></a><span class="ex">cognizer_aa</span> -d <span class="va">$DB</span>/Cognizer/ -e -10 <span class="kw">\</span></span>
-<span id="cb68-8"><a href="12-Functional_annotation.html#cb68-8" aria-hidden="true" tabindex="-1"></a><span class="ex">-i</span> ../7-GenePredictions/K1.sample.faa -t 12 -o K1.sample</span></code></pre></div>
+<div class="sourceCode" id="cb70"><pre class="sourceCode bash"><code class="sourceCode bash"><span id="cb70-1"><a href="12-Functional_annotation.html#cb70-1" aria-hidden="true" tabindex="-1"></a><span class="bu">cd</span> ..</span>
+<span id="cb70-2"><a href="12-Functional_annotation.html#cb70-2" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb70-3"><a href="12-Functional_annotation.html#cb70-3" aria-hidden="true" tabindex="-1"></a><span class="fu">mkdir</span> 8-GeneAnnotations</span>
+<span id="cb70-4"><a href="12-Functional_annotation.html#cb70-4" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb70-5"><a href="12-Functional_annotation.html#cb70-5" aria-hidden="true" tabindex="-1"></a><span class="bu">cd</span> 8-GeneAnnotations</span>
+<span id="cb70-6"><a href="12-Functional_annotation.html#cb70-6" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb70-7"><a href="12-Functional_annotation.html#cb70-7" aria-hidden="true" tabindex="-1"></a><span class="ex">cognizer_aa</span> -d <span class="va">$DB</span>/Cognizer/ -e -10 <span class="kw">\</span></span>
+<span id="cb70-8"><a href="12-Functional_annotation.html#cb70-8" aria-hidden="true" tabindex="-1"></a><span class="ex">-i</span> ../7-GenePredictions/K1.sample.faa -t 12 -o K1.sample</span></code></pre></div>
 <p>Here, we have asked cognizer to annotate out proteins with 12 CPUs and output any BLAST matches with an e-value of 1x10-10 or lower to an output directory named K1.sample.</p>
 <p>Once Cognizer has finished, see what files it has generated:</p>
-<div class="sourceCode" id="cb69"><pre class="sourceCode bash"><code class="sourceCode bash"><span id="cb69-1"><a href="12-Functional_annotation.html#cb69-1" aria-hidden="true" tabindex="-1"></a><span class="fu">ls</span> K1.sample</span></code></pre></div>
+<div class="sourceCode" id="cb71"><pre class="sourceCode bash"><code class="sourceCode bash"><span id="cb71-1"><a href="12-Functional_annotation.html#cb71-1" aria-hidden="true" tabindex="-1"></a><span class="fu">ls</span> K1.sample</span></code></pre></div>
 <p>You will see there are six stat files which contain the number of incidences of proteins matching an annotation from each of the above databases. The one other file, assignments.txt, contains a table showing all of the query protein sequences and the annotations found for that protein.</p>
 <p>Have a look in some of the .stat files (e.g. cog.stat) to see what the annotations look like. Take a look at assignments.txt too to see if you can match up the columns with the annotation types</p>
 </div>
@@ -289,24 +292,24 @@ code span.wa { color: #60a0b0; font-weight: bold; font-style: italic; } /* Warni
 <div id="cog-categories" class="section level3" number="12.3.1">
 <h3><span class="header-section-number">12.3.1</span> COG categories</h3>
 <p>We can quickly create a graph to show the frequency of genes assigned to each of the COG categories. First, we need to tabulate and calculate the frequencies of the results which reside at the top of the K1.sample/cog.stat file.</p>
-<div class="sourceCode" id="cb70"><pre class="sourceCode bash"><code class="sourceCode bash"><span id="cb70-1"><a href="12-Functional_annotation.html#cb70-1" aria-hidden="true" tabindex="-1"></a><span class="ex">getCogProportions.sh</span> K1.sample/cog.stat K1 <span class="op">&gt;</span> K1.sample.cog.tsv</span></code></pre></div>
+<div class="sourceCode" id="cb72"><pre class="sourceCode bash"><code class="sourceCode bash"><span id="cb72-1"><a href="12-Functional_annotation.html#cb72-1" aria-hidden="true" tabindex="-1"></a><span class="ex">getCogProportions.sh</span> K1.sample/cog.stat K1 <span class="op">&gt;</span> K1.sample.cog.tsv</span></code></pre></div>
 <p>The second argument, K1, is to tell the script the ID of the sample for graphing purpose.</p>
 <p>We can now draw our graph:</p>
-<div class="sourceCode" id="cb71"><pre class="sourceCode bash"><code class="sourceCode bash"><span id="cb71-1"><a href="12-Functional_annotation.html#cb71-1" aria-hidden="true" tabindex="-1"></a><span class="ex">CogBarChart.R</span> -i K1.sample.cog.tsv -o K1.sample.cog.pdf</span>
-<span id="cb71-2"><a href="12-Functional_annotation.html#cb71-2" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb71-3"><a href="12-Functional_annotation.html#cb71-3" aria-hidden="true" tabindex="-1"></a><span class="ex">okular</span> K1.sample.cog.pdf <span class="kw">&amp;</span></span></code></pre></div>
+<div class="sourceCode" id="cb73"><pre class="sourceCode bash"><code class="sourceCode bash"><span id="cb73-1"><a href="12-Functional_annotation.html#cb73-1" aria-hidden="true" tabindex="-1"></a><span class="ex">CogBarChart.R</span> -i K1.sample.cog.tsv -o K1.sample.cog.pdf</span>
+<span id="cb73-2"><a href="12-Functional_annotation.html#cb73-2" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb73-3"><a href="12-Functional_annotation.html#cb73-3" aria-hidden="true" tabindex="-1"></a><span class="ex">okular</span> K1.sample.cog.pdf <span class="kw">&amp;</span></span></code></pre></div>
 <p>_<strong>PLOT HERE</strong></p>
 <p>The bar-plot tells us the proportion of genes belonging to each COG functional category, which you can look up in the appendix of this document., but that’s not particularly informative unless we can compare it with something: We will come to this soon.</p>
 <div id="kegg-pathways" class="section level4" number="12.3.1.1">
 <h4><span class="header-section-number">12.3.1.1</span> KEGG pathways</h4>
 <p>The above section told us the proportion of genes assigned to different COG functional categories, but nothing about the relationship between genes. To do this we will use the KEGG annotations that we obtained, but instead of just using a subset of the data, we will use annotations generated from the whole of sample K1, calculated prior to the workshop. Copy the full file over:</p>
-<div class="sourceCode" id="cb72"><pre class="sourceCode bash"><code class="sourceCode bash"><span id="cb72-1"><a href="12-Functional_annotation.html#cb72-1" aria-hidden="true" tabindex="-1"></a><span class="fu">cp</span> <span class="va">$DB</span>/FullAnalysis2019/8-GeneAnnotations/K1.f/assignments.txt <span class="kw">\</span></span>
-<span id="cb72-2"><a href="12-Functional_annotation.html#cb72-2" aria-hidden="true" tabindex="-1"></a><span class="ex">K1.full.assignments.txt</span></span></code></pre></div>
+<div class="sourceCode" id="cb74"><pre class="sourceCode bash"><code class="sourceCode bash"><span id="cb74-1"><a href="12-Functional_annotation.html#cb74-1" aria-hidden="true" tabindex="-1"></a><span class="fu">cp</span> <span class="va">$DB</span>/FullAnalysis2019/8-GeneAnnotations/K1.f/assignments.txt <span class="kw">\</span></span>
+<span id="cb74-2"><a href="12-Functional_annotation.html#cb74-2" aria-hidden="true" tabindex="-1"></a><span class="ex">K1.full.assignments.txt</span></span></code></pre></div>
 <p>If you take a look at the file, you will see that the first column consists of the gene/protein id, and the fourth column consists of one or more KO (KEGG orthologue) identifiers. For now, these are the only column we need so we will trim the rest away.</p>
-<div class="sourceCode" id="cb73"><pre class="sourceCode bash"><code class="sourceCode bash"><span id="cb73-1"><a href="12-Functional_annotation.html#cb73-1" aria-hidden="true" tabindex="-1"></a><span class="ex">getKeggFromAssignments.sh</span> <span class="kw">\</span></span>
-<span id="cb73-2"><a href="12-Functional_annotation.html#cb73-2" aria-hidden="true" tabindex="-1"></a><span class="ex">K1.full.assignments.txt</span> <span class="op">&gt;</span> K1.full.kegg.tsv</span></code></pre></div>
+<div class="sourceCode" id="cb75"><pre class="sourceCode bash"><code class="sourceCode bash"><span id="cb75-1"><a href="12-Functional_annotation.html#cb75-1" aria-hidden="true" tabindex="-1"></a><span class="ex">getKeggFromAssignments.sh</span> <span class="kw">\</span></span>
+<span id="cb75-2"><a href="12-Functional_annotation.html#cb75-2" aria-hidden="true" tabindex="-1"></a><span class="ex">K1.full.assignments.txt</span> <span class="op">&gt;</span> K1.full.kegg.tsv</span></code></pre></div>
 <p>This has created a two column file: gene id and KO id, which we can submit on the KEGG website. There, it will reconstruct functional pathways highlighting the presence or absence of the identified KEGG orthologues. Open Firefox</p>
-<div class="sourceCode" id="cb74"><pre class="sourceCode bash"><code class="sourceCode bash"><span id="cb74-1"><a href="12-Functional_annotation.html#cb74-1" aria-hidden="true" tabindex="-1"></a><span class="ex">firefox</span> <span class="kw">&amp;</span></span></code></pre></div>
+<div class="sourceCode" id="cb76"><pre class="sourceCode bash"><code class="sourceCode bash"><span id="cb76-1"><a href="12-Functional_annotation.html#cb76-1" aria-hidden="true" tabindex="-1"></a><span class="ex">firefox</span> <span class="kw">&amp;</span></span></code></pre></div>
 <p>and navigate to www.genome.jp/kegg/tool/map_pathway.html. Here, press the ‘Browse’ button and select your home directory from the right side panel (‘Places’). NB: Your home directory will start with nsc. Then, select 8-GeneAnnotations → K1.full.kegg.tsv, then press ‘Exec.’</p>
 <p><strong>PLOT HERE</strong></p>
 <p>After a few moments, a long list of pathways will appear which you can click on to view. The number in brackets after the pathway shows the number of KEGG orthologue matches identified in this pathway.</p>

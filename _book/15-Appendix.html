@@ -24,7 +24,7 @@
 <meta name="author" content="Sam Haldenby and Matthew Gemmell" />
 
 
-<meta name="date" content="2021-05-19" />
+<meta name="date" content="2021-05-21" />
 
   <meta name="viewport" content="width=device-width, initial-scale=1" />
   <meta name="apple-mobile-web-app-capable" content="yes" />
@@ -194,7 +194,10 @@ code span.wa { color: #60a0b0; font-weight: bold; font-style: italic; } /* Warni
 <ul>
 <li class="chapter" data-level="10.1" data-path="10-Metagenome_assembly.html"><a href="10-Metagenome_assembly.html#a-primer-on-short-read-assembly"><i class="fa fa-check"></i><b>10.1</b> A primer on short read assembly</a></li>
 <li class="chapter" data-level="10.2" data-path="10-Metagenome_assembly.html"><a href="10-Metagenome_assembly.html#stitching-read-pairs"><i class="fa fa-check"></i><b>10.2</b> Stitching read pairs</a></li>
-<li class="chapter" data-level="10.3" data-path="10-Metagenome_assembly.html"><a href="10-Metagenome_assembly.html#assembly"><i class="fa fa-check"></i><b>10.3</b> Assembly</a></li>
+<li class="chapter" data-level="10.3" data-path="10-Metagenome_assembly.html"><a href="10-Metagenome_assembly.html#assembly"><i class="fa fa-check"></i><b>10.3</b> Assembly</a>
+<ul>
+<li class="chapter" data-level="10.3.1" data-path="10-Metagenome_assembly.html"><a href="10-Metagenome_assembly.html#quast"><i class="fa fa-check"></i><b>10.3.1</b> QUAST</a></li>
+</ul></li>
 </ul></li>
 <li class="chapter" data-level="11" data-path="11-Gene_prediction.html"><a href="11-Gene_prediction.html"><i class="fa fa-check"></i><b>11</b> Gene Prediciton</a>
 <ul>
@@ -299,12 +302,12 @@ Biobakery: <a href="https://github.com/biobakery/biobakery" class="uri">https://
 <div id="obtaining-read-data" class="section level2" number="15.2">
 <h2><span class="header-section-number">15.2</span> Obtaining Read Data</h2>
 <p>The following commands can be used to obtain the sequence data used in this practical, directly from the EBI metagenomics site. It is worth noting that these are the full set of data, not like the miniaturised version you have used in the tutorial.</p>
-<div class="sourceCode" id="cb97"><pre class="sourceCode bash"><code class="sourceCode bash"><span id="cb97-1"><a href="15-Appendix.html#cb97-1" aria-hidden="true" tabindex="-1"></a><span class="fu">wget</span> -O K1_R1.fastq.gz ftp://ftp.sra.ebi.ac.uk/vol1/fastq/ERR505/ERR505102/ERR505102_1.fastq.gz</span>
-<span id="cb97-2"><a href="15-Appendix.html#cb97-2" aria-hidden="true" tabindex="-1"></a><span class="fu">wget</span> -O K1_R2.fastq.gz ftp://ftp.sra.ebi.ac.uk/vol1/fastq/ERR505/ERR505102/ERR505102_2.fastq.gz</span>
-<span id="cb97-3"><a href="15-Appendix.html#cb97-3" aria-hidden="true" tabindex="-1"></a><span class="fu">wget</span> -O K2_R1.fastq.gz ftp://ftp.sra.ebi.ac.uk/vol1/fastq/ERR505/ERR505104/ERR505104_1.fastq.gz</span>
-<span id="cb97-4"><a href="15-Appendix.html#cb97-4" aria-hidden="true" tabindex="-1"></a><span class="fu">wget</span> -O K2_R2.fastq.gz ftp://ftp.sra.ebi.ac.uk/vol1/fastq/ERR505/ERR505104/ERR505104_2.fastq.gz</span>
-<span id="cb97-5"><a href="15-Appendix.html#cb97-5" aria-hidden="true" tabindex="-1"></a><span class="fu">wget</span> -O W1_R1.fastq.gz ftp://ftp.sra.ebi.ac.uk/vol1/fastq/ERR505/ERR505090/ERR505090_1.fastq.gz</span>
-<span id="cb97-6"><a href="15-Appendix.html#cb97-6" aria-hidden="true" tabindex="-1"></a><span class="fu">wget</span> -O W1_R2.fastq.gz ftp://ftp.sra.ebi.ac.uk/vol1/fastq/ERR505/ERR505090/ERR505090_2.fastq.gz</span></code></pre></div>
+<div class="sourceCode" id="cb99"><pre class="sourceCode bash"><code class="sourceCode bash"><span id="cb99-1"><a href="15-Appendix.html#cb99-1" aria-hidden="true" tabindex="-1"></a><span class="fu">wget</span> -O K1_R1.fastq.gz ftp://ftp.sra.ebi.ac.uk/vol1/fastq/ERR505/ERR505102/ERR505102_1.fastq.gz</span>
+<span id="cb99-2"><a href="15-Appendix.html#cb99-2" aria-hidden="true" tabindex="-1"></a><span class="fu">wget</span> -O K1_R2.fastq.gz ftp://ftp.sra.ebi.ac.uk/vol1/fastq/ERR505/ERR505102/ERR505102_2.fastq.gz</span>
+<span id="cb99-3"><a href="15-Appendix.html#cb99-3" aria-hidden="true" tabindex="-1"></a><span class="fu">wget</span> -O K2_R1.fastq.gz ftp://ftp.sra.ebi.ac.uk/vol1/fastq/ERR505/ERR505104/ERR505104_1.fastq.gz</span>
+<span id="cb99-4"><a href="15-Appendix.html#cb99-4" aria-hidden="true" tabindex="-1"></a><span class="fu">wget</span> -O K2_R2.fastq.gz ftp://ftp.sra.ebi.ac.uk/vol1/fastq/ERR505/ERR505104/ERR505104_2.fastq.gz</span>
+<span id="cb99-5"><a href="15-Appendix.html#cb99-5" aria-hidden="true" tabindex="-1"></a><span class="fu">wget</span> -O W1_R1.fastq.gz ftp://ftp.sra.ebi.ac.uk/vol1/fastq/ERR505/ERR505090/ERR505090_1.fastq.gz</span>
+<span id="cb99-6"><a href="15-Appendix.html#cb99-6" aria-hidden="true" tabindex="-1"></a><span class="fu">wget</span> -O W1_R2.fastq.gz ftp://ftp.sra.ebi.ac.uk/vol1/fastq/ERR505/ERR505090/ERR505090_2.fastq.gz</span></code></pre></div>
 
 </div>
 </div>

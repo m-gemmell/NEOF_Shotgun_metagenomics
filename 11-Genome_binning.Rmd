@@ -1,0 +1,19 @@
+# Genome binning
+```{r, fig.align = 'center',out.width= '30%', echo=FALSE }
+knitr::include_graphics(path = "figures/quality_trimming_and_filtering.png", auto_pdf = TRUE)
+``` 
+
+__Spiel to introduce genome binning and the term MAGs__
+
+## MetaBat2
+
+We need to use the `shotgun_meta` conda environment.
+
+Make a new directory and move into it.
+
+```{bash eval=FALSE}
+#Make directory
+mkdir -p ~/7-Binning/K1
+#Move into it
+cd ~/7-Binning/K1
+```
