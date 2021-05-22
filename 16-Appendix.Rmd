@@ -27,6 +27,8 @@ minimap2: https://github.com/lh3/minimap2
 
 MetaBAT2: https://bitbucket.org/berkeleylab/metabat/src/master/
 
+CheckM: https://github.com/Ecogenomics/CheckM/wiki
+
 ## COG Cateories
 
 - CELLULAR PROCESSES AND SIGNALING

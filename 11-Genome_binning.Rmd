@@ -29,7 +29,7 @@ It is recommended to ensure you do not have a poor quality metagenome assembly. 
 knitr::include_graphics(path = "figures/conda.png", auto_pdf = TRUE)
 ``` 
 
-We will use the `shotgun_meta` conda environment for this chapter.
+We will use the `shotgun_meta` conda environment to start for this chapter.
 
 Additionally, make a new directory and move into it.
 
@@ -141,3 +141,61 @@ metabat2 \
 --abdFile K1.depth.txt \
 --minContig 1500
 ```
+
+List the contents of the output directory and you'll see there are 2 files with the prefix of `K1`. These are the 2 bins that will hopefully contain 1 MAG (Metagenome-Assembled Genome).
+
+```{bash eval=FALSE}
+ls bins
+```
+
+## CheckM
+```{r, fig.align = 'center',out.width= '40%', echo=FALSE }
+knitr::include_graphics(path = "figures/CheckM.png", auto_pdf = TRUE)
+``` 
+
+`CheckM` is a useful tool to assess the quality of assembled genomes. This can be used on assemblies produced from single cell, single isolate, or metagenome data. Additionally it can be used to identify bins that are likely candidates for merging. This occurs when one genome has been separated into different bins.
+
+An important part of CheckM is the ubiquitous and single-copy genes it utilises. It has sets of these genes for different phylogenetic lineages. With these it can determine:
+
+- What lineage a bin/MAG belongs to. 
+   - Does it contain genes only found in _Escherichia_?
+- How complete the bin/MAG is. A set of lineage specific genes should all be found in a genome belonging to the lineage (ubiquitous).
+   - What percentage of these lineage specific genes are present in the MAG? 
+   - >95% is very good
+   - >80% is good
+   - >70% is ok
+   - <70% is poor to poorer.
+- How contaminated is the bin/MAG?
+   - Only one copy of each gene should be present (single-copy).
+   - Are there any markers for other lineages present?
+
+### Conda
+
+Due to program version conflicts we will use the `checkm` conda environment for this section.
+
+Open a new terminal and activate the correct environment.
+
+```{bash}
+. usecheckm
+```
+
+Ensure you are in the correct directory.
+
+```{bash eval=FALSE}
+cd ~/7-Binning/K1/
+```
+
+### Running CheckM
+
+CheckM has many different commands. We will use on of the common workflows it provides called `lineage_wf`. This carries out four if its other commands in a workflow. This is useful as the commands provide the data needed for the following command.
+
+1. `tree` - Places bins in the reference genome tree. This reference tree comes with CheckM.
+2. `lineage_set` - Infers lineage-specific marker sets for each bin. 
+3. `analyze` - Identifies marker genes in bins.
+4. `qa` - Assessess the bins for contamination and completeness.
+
+
+
+
+
+
