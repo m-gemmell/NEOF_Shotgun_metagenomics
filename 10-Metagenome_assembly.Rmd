@@ -52,7 +52,9 @@ Fortunately, the assembler we will use, MEGAHIT, allows us to build an assembly 
 knitr::include_graphics(path = "figures/stitch.png", auto_pdf = TRUE)
 ``` 
 
-As mentioned, longer k-mers generally perform better, but as our maximum read length is 100 bp, we are limited to a maximum k-mer length of 99 bp. However, we can get even longer k-mers if we stitch our read pairs together. 
+As mentioned, longer k-mers generally perform better, but as our maximum read length is 100 bp, we are limited to a maximum k-mer length of 99 bp. However, we can get even longer k-mers if we stitch our read pairs together.
+
+__Note__: This method will not work if your reads have no overlap. If you are not sure if your reads have overlap ask the team who sequenced them.
 
 Remember that a read pair consists of two sequences read from each end of a fragment of DNA (or RNA). If the two sequences meet in the middle of the fragment and then overlap, there will be a region of homology which we can use to merge the two reads in the pair together (See next image).
 
@@ -163,7 +165,7 @@ firefox quast/K1/report.html
 
 The report tells us quite a bit about the assembly quality. Two definitions that you may not be aware of are N50 and N50 length (or, somewhat confusingly, L50 and N50, respectively!). If we were to order our contigs from largest to smallest, and total up the sizes from biggest downwards, the contig we reach where our total is 50% of the size of the whole assembly is the N50 contig (the smaller the number the better). The N50 length is the length of this contig; a weighted median contig length.
 
-```{r, fig.align = 'center',out.width= '20%', echo=FALSE }
+```{r, fig.align = 'center',out.width= '40%', echo=FALSE }
 knitr::include_graphics(path = "figures/n50_n90.png", auto_pdf = TRUE)
 ``` 
 

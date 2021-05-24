@@ -3,9 +3,21 @@
 knitr::include_graphics(path = "figures/quality_trimming_and_filtering.png", auto_pdf = TRUE)
 ``` 
 
-##Manuals
+## Manuals
 
+Conda: https://conda.io/projects/conda/en/latest/user-guide/getting-started.html
 
+FastQC: https://www.bioinformatics.babraham.ac.uk/projects/fastqc/
+
+MultiQC: https://multiqc.info/
+
+Trim Galore: https://www.bioinformatics.babraham.ac.uk/projects/trim_galore/
+
+Bowtie2: http://bowtie-bio.sourceforge.net/bowtie2/manual.shtml
+
+samtools: http://www.htslib.org/
+
+BBTools: https://jgi.doe.gov/data-and-tools/bbtools/
 
 Kraken2: https://github.com/DerrickWood/kraken2/wiki/Manual
 
@@ -17,9 +29,11 @@ LEfSe: https://huttenhower.sph.harvard.edu/lefse/
 
 HUMAnN2: https://github.com/biobakery/biobakery/wiki/humann2
 
+MetaPhlAn2: https://huttenhower.sph.harvard.edu/metaphlan2/
+
 Biobakery: https://github.com/biobakery/biobakery
 
-MegaHit: 
+MegaHit: https://github.com/voutcn/megahit
 
 BWA: https://github.com/lh3/bwa
 

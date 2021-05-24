@@ -1,6 +1,6 @@
 --- 
 title: "Shotgun Metagenomics"
-author: "Sam Haldenby and Matthew Gemmell"
+author: "Sam Haldenby and Matthew R. Gemmell"
 date: "`r Sys.Date()`"
 site: bookdown::bookdown_site
 output: bookdown::gitbook
@@ -28,7 +28,6 @@ This practical session aims to introduce you to the analysis of Shotgun metageno
 - Taxonomic profiling
 - Functional profiling
 - Metagenome assembly
+- Binning
 - Gene prediction
 - Functional annotation
-- Co-assembly
-- Comparative analysis

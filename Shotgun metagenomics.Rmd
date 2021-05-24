@@ -1,6 +1,6 @@
 --- 
 title: "Shotgun Metagenomics"
-author: "Sam Haldenby and Matthew Gemmell"
+author: "Sam Haldenby and Matthew R. Gemmell"
 date: "`r Sys.Date()`"
 site: bookdown::bookdown_site
 output: bookdown::gitbook
@@ -28,10 +28,9 @@ This practical session aims to introduce you to the analysis of Shotgun metageno
 - Taxonomic profiling
 - Functional profiling
 - Metagenome assembly
+- Binning
 - Gene prediction
 - Functional annotation
-- Co-assembly
-- Comparative analysis
 
 <!--chapter:end:01-Shotgun_metagenomics.Rmd-->
 
@@ -56,7 +55,7 @@ knitr::include_graphics(path = "figures/why.png", auto_pdf = TRUE)
 
 Microbes exist virtually everywhere on Earth, even in some of the most seemingly hostile environments. Every process on our planet is influenced in some way by the actions of microbes, and all higher organisms are intrinsically associated with microbial communities. 
 
-While much can be learned from studying the genome of a single microbial species in isolation, it does not provide us with any information regarding that species neighbours, i.e. what else is in its natural environment?  Metagenomics offers a top-down approach which allows researchers to investigate and understand interactions between species in different environments, thus providing a much broader and complete picture.
+While much can be learned from studying the genome of a single microbial species in isolation, it does not provide us with any information regarding that species' neighbours, i.e. what else is in its natural environment?  Metagenomics offers a top-down approach which allows researchers to investigate and understand interactions between species in different environments, thus providing a much broader and complete picture.
 
 ## Metagenomics vs Metagenetics
 ```{r, fig.align = 'center',out.width= '15%', echo=FALSE }
@@ -79,11 +78,9 @@ This tutorial and practical session focuses on performing a range of metagenomic
 
 The analyses discussed here are by no means exhaustive and are instead intended to provide a sample of what can be done with a metagenomic dataset. 
 
-Virtually the entire tutorial will be carried out on the command line, which you will hopefully now be more comfortable with.
-
 ### Structure
 
-We prefer to allow people to work at a pace that they are comfortable with rather than ensuring that everyone is at the same point of the tutorial at the same time. So, there will be no instructor telling you what to type and click: Instead, everything you require to carry out the practical is written in the document. Take your time; it's important to spend some time understanding why you are running the commands, rather than simply typing them out. 
+We prefer to allow people to work at a pace that they are comfortable with rather than ensuring that everyone is at the same point of the tutorial at the same time. There will be no instructor telling you what to type and click. Instead, everything you require to carry out the practical is written in the document. Take your time; it's important to spend some time understanding why you are running the commands, rather than simply typing them out. 
 
 If at any point you are having trouble or have a question, let one of us know and we'll provide 1-to-1 assistance.
 
@@ -96,14 +93,13 @@ This practical is broken up into the following broad sections.
 
 1. __Raw data__: We will first link to a dataset that we have downloaded for this tutorial. We will take a quick look at what the sequence files look like and briefly discuss the origin of the samples.
 2. __Trimming data__: This entails preprocessing our data to ensure that it is of good quality.
+3. __Host removal__: When sequencing the genomic content of host's microbiota (bacteriome, archaeome, mycobiome, and more) it is likely you will also sequence the host's genome. This step shows a method of removing possible host contamination.
 3. __Taxonomic profiling__: We will analyse the dataset to determine the species abundance in each sample. Following this, we will visualise the data and compare the samples.
 4. __Functional profiling__: We will analyse the dataset to determine the pathway abundance and completeness in each sample. Following this, we will visualise the data and compare the samples.
 5. __Metagenome assembly__: Here, we will move away from just analysing the reads directly and will assemble the metagenome into contigs. Prior to this, we will 'stitch' the reads together to ensure we get the best assembly possible.
-6. __Gene prediction__:  We will take our metagenome assembly, search for genes...
+7. __Binning__: This step attempts to seperate each assembled genomes into bins. These genome assemblies are called Metagenome-assembled Genomes (MAGs).
+6. __Gene prediction__:  We will take our MAGs, search for genes...
 7. __Functional annotation__: ...and then functionally annotate them with information from various databases. We will then visualise some of the output.
-8. __Co-assembly__: Instead of just looking at the functional composition of one metagenome sample, we will discuss methods of combining all samples to carry out a co-assembly and then obtain normalised gene coverage statistics for use in comparative analyses between samples.
-9. __Comparative analysis__: Using our data from the previous step, we will look at a couple of different ways of comparing the functional profiles of our samples
-All the analyses here are just examples of how you could interrogate a metagenomic dataset: There are, of course, many other ways to tackle such a set. 
 
 __Don't worry if you don't manage to finish the whole practical!__  
 
@@ -122,7 +118,7 @@ During this practical you will use a number of installed programs and scripts. T
 . useshotgun
 ```
 
-__Note__: The `use` scripts in this workshop are custom scripts that setup conda environments. You can look at the script above script with `less /usr/local/bin/useshotgun` is you are interested in its contents.
+The `use` scripts in this workshop are custom scripts that set up conda environments. You can look at the above script with `less /usr/local/bin/useshotgun` if you are interested in its contents.
 
 Also, there’s a chance you’re currently not in your home directory, so let’s make sure you are with the following command:
 
@@ -140,7 +136,8 @@ knitr::include_graphics(path = "figures/cluster.png", auto_pdf = TRUE)
 ## Logon instructions
 For this workshop we will be using Virtual Network Computing (VNC). Connect to the VNC with a browser by using the webVNC link you were sent.
 
-You will now be in a logged-in Linux VNC desktop with two terminals. You will see something as below (there may be only one terminal which is fine). If you do not see something similar please ask for assistance.
+You will now be in a logged-in Linux VNC desktop. You will see something as below (there may be only one terminal which is fine). If you do not see something similar please ask for assistance.
+
 ```{r, fig.align = 'center',out.width= '80%', echo=FALSE }
 knitr::include_graphics(path = "figures/logon_pic.png", auto_pdf = TRUE)
 ``` 
@@ -162,7 +159,7 @@ knitr::include_graphics(path = "figures/terminal_window.png", auto_pdf = TRUE)
 
 Already there is useful information for us on the terminal window.
 
-- __nsc006__: This is the login name, also known as the username. In this case nsc006 is a demonstrator's account. Your screen should show a different account name which will be your username for the Linux machine/cluster you are logged into.
+- __nsc065__: This is the login name, also known as the username. In this case nsc065 is a demonstrator's account. Your screen should show a different account name which will be your username for the Linux machine/cluster you are logged into.
 - __gauss03__: This is the machine name the user is logged into.
 - __\~__: This represents the current directory of the user, or the directory a command was run in. In the Linux OS and others __'~'__ is a shortcut to the user's home directory.
 - Everything after the __'$'__ is where commands are typed into the terminal. This is also referred to as the command line.
@@ -200,9 +197,9 @@ Now we can generate a symbolic links (i.e. shortcut) to the raw sequence data fi
 ln -s /pub39/tea/matthew/NEOF/Shotgun_metagenomics/raw_fastq/* .
 ```
 
-All that this command did is symbolic link (like a shortcut in Windows) to the read files that we will be using (The appendix of this document contains the commands used to download these files directly from the EBI metagenomics site). If you would like to know more about symbolic links please check out: https://linuxize.com/post/how-to-create-symbolic-links-in-linux-using-the-ln-command/.
+If you would like to know more about the `ln` command please check out: https://linuxize.com/post/how-to-create-symbolic-links-in-linux-using-the-ln-command/.
 
-Now, check they are there with:
+Now, check the symbolic links are in your current directory:
 
 ```{bash eval=FALSE}
 ls
@@ -240,23 +237,25 @@ The pipe symbol ( `|` ) is used to pass the output of one command as input to th
 
 The lines displayed represent one FASTQ sequence entry, or one read of a read pair: The corresponding second read can be viewed by running the same command on K1_R2.fastq.gz. The first line is the read identifier, the second line is the sequence itself, the third line is a secondary header (which is usually left blank except for '+') and the fourth line is the sequence quality score: For each base in the sequence, there is a corresponding quality encoded in this string of characters.  __To return to the command prompt, press__ `q`. 
 
-Due to computational constraints, the files you have linked to are a subset of the original data (i.e. 1 million read pairs from each sample). At a later point in the tutorial, you will be asked to link to results derived from the full dataset for further processing.
+Due to computational constraints, the files you have linked to are a subset of the original data (i.e. 1 million read pairs from each sample).
 
 ## Checking quality control
 ```{r, fig.align = 'center',out.width= '15%', echo=FALSE }
 knitr::include_graphics(path = "figures/mangify_glass.png", auto_pdf = TRUE)
 ``` 
 
-We can generate and visualise various sequence data metrics for quality control purposes using FastQC. We will run FastQC on the R1 and R2 reads separately as it is good to visualise them in two different reports. R1 and R2 reads have different quality patterns, generally due to the poorer quality of R2. Run FastQC on the files:
+We can generate and visualise various sequence data metrics for quality control purposes using `FastQC`. We will run `FastQC` on the R1 and R2 reads separately as it is good to visualise them in two different reports. This is beacause R1 and R2 reads have different quality patterns, generally due to the poorer quality of R2. 
+
+Run `FastQC` on the files:
 
 ```{bash eval=FALSE}
 #R1 fastqc
 #Make an output directory
 mkdir R1_fastq
 #Run fastqc on all the R1.fastq.gz files 
-#* matches any pattern, 
+#* matches any pattern
 #*R1.fastq.gz matches any file that ends R1.fastq.gz in the current directory
-#-t 3 indicates to the program to use 3 threads, chosen as there are three R1 files
+#-t 3 indicates to use 3 threads, chosen as there are three R1 files
 fastqc -t 3 -o R1_fastqc *R1.fastq.gz
 
 #R2 fastqc
@@ -266,7 +265,7 @@ mkdir R2_fastq
 fastqc -t 3 -o R2_fastqc *R2.fastq.gz
 ```
 
-Once the FastQC commands are run we can run MultiQC to creative interactive html reports for the outputs.
+Once the `FastQC` commands are run we can run `MultiQC` to create interactive html reports for the outputs.
 
 ```{bash eval=FALSE}
 #R1 multiqc fastqc report
@@ -282,20 +281,16 @@ mkdir R2_fastqc/multiqc
 multiqc -o R2_fastqc/multiqc R2_fastqc
 ```
 
-Once completed, view the R1 output (NB: The `&` runs the command in the background, therefore allowing you to continue to run commands while Firefox is still open):
+Once completed, view the `MultiQC` reports (NB: The `&` runs the command in the background, therefore allowing you to continue to run commands while Firefox is still open):
 
 ```{bash eval=FALSE}
 firefox R1_fastqc/multiqc/multiqc_report.html \
 R2_fastqc/multiqc/multiqc_report.html &
 ```
 
-The FastQC report (via MultiQC) contains a number of metrics. The "Sequence Quality Histograms" shows the sequence quality across the length of the reads, you can hover over each line to show which sample it belongs to. Note how quality decreases as the length of the read increases. While this is normal with Illumina sequencing, we will improve the situation a bit in the next chapter.
+The `FastQC` report (via `MultiQC`) contains a number of metrics. The "Sequence Quality Histograms" shows the sequence quality across the length of the reads, you can hover over each line to show which sample it belongs to. Note how quality decreases as the length of the read increases. While this is normal with Illumina sequencing, we will improve the situation a bit in the next chapter.
 
-Briefly inspect the FastQC reports (R1 and R2) for yourself – There are examples of typical (and atypical!) FastQC data in the appendix of this document.
-
-Once you have finished looking, minimise the Firefox window.
-
-MultiQC can create html reports for the output of many tools. See more here: https://multiqc.info/.
+Once you have finished inspecting, minimise the Firefox window.
 
 <!--chapter:end:05-Raw_data.Rmd-->
 
@@ -304,11 +299,13 @@ MultiQC can create html reports for the output of many tools. See more here: htt
 knitr::include_graphics(path = "figures/quality_trimming_and_filtering.png", auto_pdf = TRUE)
 ``` 
 
-Now that we've obtained the raw data and had a look at it, we should now clean it up. With any sequencing data, it is very important to ensure that you use the highest quality data possible: Rubbish goes in, rubbish comes out. There are two main methods employed to clean sequence data, and a third method specific to some metagenomic datasets.
+Now that we've obtained the raw data and had a look at it, we should now clean it up. With any sequencing data, it is very important to ensure that you use the highest quality data possible: Rubbish goes in, rubbish comes out. 
 
-- Remove low quality bases from the end of the reads. These are more likely to be incorrect, so are best trimmed off.
-- Remove adapters. Sometimes sequencing adapters can be sequenced if the sequencing runs off the end of a fragment. 
-- Remove host sequences. If a metagenomic sample derives from a host species then it may be advisable to remove any reads associated with the host genome. Here, we do not need to do this, as the dataset contains barely any human genome sequences.
+There are two main methods employed to clean sequence data, and a third method specific to some metagenomic datasets.
+
+- Remove low quality bases from the end of the reads: These are more likely to be incorrect, so are best trimmed off.
+- Remove adapters: Sometimes sequencing adapters can be sequenced if the sequencing runs off the end of a fragment. 
+- Host removal: If a metagenomic sample derives from a host species then it may be advisable to remove any reads associated with the host genome. Here, we do not need to do this, as the dataset  has next to zero human genome sequences.
 
 ## Removing adapters and low quality bases
 ```{r, fig.align = 'center',out.width= '15%', echo=FALSE }
@@ -319,27 +316,24 @@ First go back to your home directory and create a new directory where we will cl
 
 ```{bash eval=FALSE}
 cd ..
-```
-
-This will move you one directory up, i.e. back to your home directory. Alternatively, you could use `cd ~` which will take you to your home directory. This is a good idea if you ever get lost!
-
-```{bash eval=FALSE}
 mkdir 2-Trimmed
 cd 2-Trimmed
 ```
 
-You are now in your newly created directory. Here we will run Trim Galore! which carries out both of these steps.
+You are now in your newly created directory. Here we will run `Trim Galore!` which removes low quality bases and adapters.
 
 ```{bash eval=FALSE}
 trim_galore --paired --quality 20 --stringency 4 \
    ../1-Raw/K1_R1.fastq.gz ../1-Raw/K1_R2.fastq.gz
 ```
 
-This is a longer command so we've split it across multiple commands (a `\` at the end of a line allows you to press return without running the command, meaning you can continue to add to that command. When this happens, the `$` changes to a `>`. __Note__ that if you do use the `\` character, the next character immediately after it must be return. If you use `\` in the middle of a line without pressing return afterwards, it will break the command!
+This is a longer command so we've split it across multiple lines (a `\` at the end of a line allows you to press return without running the command, meaning you can continue to add to that command. When this happens, the `$` changes to a `>`. 
 
-This command will remove any low quality regions from the end of both reads in each read pair (quality score < 20). Additionally, if it detects four or more bases of a sequencing adapter, it will trim that off too. We use the two read files for sample K1 as input, from the previous directory we were in.
+__Note__ if you do use the `\` character, the next key you press must be return. If you use `\` in the middle of a line without pressing return afterwards, it will break the command!
 
-__Task__: Run this command two more times, but for the other two samples (K2 and W1)
+This command will remove any low quality regions from the end of both reads in each read pair (quality score < 20). Additionally, if it detects four or more bases of a sequencing adapter, it will trim that off too.
+
+__Task__: Rerun this command for the other two samples (K2 and W1).
 
 ## Rename the files
 ```{r, fig.align = 'center',out.width= '15%', echo=FALSE }
@@ -352,7 +346,7 @@ Once that is complete if you run:
 ls
 ```
 
-you will notice that we have a new bunch of files created: 2 new read files for each sample along with a trimming report for each file trimmed. However, the new names are needlessly long. e.g. K1_R1_val_R1.fq.gz could be shortened to K1_R1.fq.gz. So, we'll rename all of the files with the mv command:
+you will notice that we have a new bunch of files created: 2 new read files for each sample along with a trimming report for each file trimmed. However, the new names are needlessly long. For example K1_R1_val_R1.fq.gz could be shortened to K1_R1.fq.gz. So, we'll rename all of the files with the mv command:
 
 ```{bash eval=FALSE}
 mv K1_R1_val_1.fq.gz K1_R1.fq.gz
@@ -365,14 +359,14 @@ mv W1_R2_val_2.fq.gz W1_R2.fq.gz
 
 __Tip__: If you want to edit and reuse previous commands, press the up arrow key.
 
-__Task__: Briefly inspect the log files to see how the trimming went (e.g. K1_R1.fastq.gz_trimming_report.txt)
+__Task__: Briefly inspect the log files to see how the trimming went (e.g. K1_R1.fastq.gz_trimming_report.txt).
 
 ## Inspect the trimmed data
 ```{r, fig.align = 'center',out.width= '15%', echo=FALSE }
 knitr::include_graphics(path = "figures/magnify_glass_good.png", auto_pdf = TRUE)
 ``` 
 
-To see what difference the trimming made, run FastQC and multiqc again on the trimmed output files and view it. 
+To see what difference the trimming made, run `FastQC` and `MultiQC` again on the trimmed output files and view it. 
 
 ```{bash eval=FALSE}
 #R1 fastqc and multiqc
@@ -382,7 +376,7 @@ mkdir R1_fastqc/multiqc
 multiqc -o R1_fastqc/multiqc R1_fastqc
 ```
 
-__Task__: Run fastqc and multiqc for the R2 files and then iew the R1 and R2 multiQC reports with firefox. How does the quality =  compare to the untrimmed data?
+__Task__: Run `FastQC` and `MultiQC` for the R2 files and then view the R1 and R2 `MultiQC` reports with firefox. How does the quality compare to the untrimmed data?
 
 <!--chapter:end:06-Trimming_data.Rmd-->
 
@@ -391,18 +385,16 @@ __Task__: Run fastqc and multiqc for the R2 files and then iew the R1 and R2 mul
 knitr::include_graphics(path = "figures/bowtie2.png", auto_pdf = TRUE)
 ``` 
 
-It is good practice to remove any host sequences from your data before analysis.
+It is good practice to remove any host sequences from your data before further analysis. A good method for this is to align/map your reads to a reference of your host genome and remove the mapped sequences (i.e sequences we believe to belong to the host).
 
-A good method for this is to align/map your reads to a reference of your host genome and remove the mapped sequences (i.e sequences we believe to belong to the host).
+If there is no host genome available before you start your sample collections and sequencing it may be a good idea to attempt to sequence and assemble the host genome. We would recommend long read technologies for single genome assembly projects.
 
-If there is no host genome available before you start your sample collections and sequencing it may be a good idea to attempt to sequence and assemble the host genome.
+This chapter contains a small example on how to carry out host removal. It uses only a section of a human (host of our samples) reference genome assembly. IN real life you should use the entire reference.
 
-Below is a small example on how to carry out host removal. The below uses a section of a human (host of our samples) assembly.
-
-First step is to copy over the reference fasta file you will use.
+First step is to copy over the reference fasta file we will use.
 
 ```{bash eval=FALSE}
-cp /pub39/tea/matthew/NEOF/Shotgun_metagenomics/GRCh38_slice.fasta
+cp /pub39/tea/matthew/NEOF/Shotgun_metagenomics/GRCh38_slice.fasta .
 ```
 
 ## Index reference
@@ -410,20 +402,20 @@ cp /pub39/tea/matthew/NEOF/Shotgun_metagenomics/GRCh38_slice.fasta
 knitr::include_graphics(path = "figures/index.png", auto_pdf = TRUE)
 ``` 
 
-This process will use the bowtie2 aligner. Prior to alignment/mapping we need to index our reference.
+We will will use the `Bowtie2` aligner for mapping/aligning. Prior to alignment/mapping we need to index our reference.
 
 ```{bash eval=FALSE}
 bowtie2-build GRCh38_slice.fasta GRCh38_slice.fasta
 ```
 
-If you use `ls` you will now see a bunch of files starting with `GRCh38_slice.fasta` and ending with various suffixes that contain `bt`. These are the index files which allow us to use the reference with bowtie2.
+If you use `ls` you will now see a bunch of files starting with `GRCh38_slice.fasta` and ending with various suffixes that contain `bt`. These are the index files which allow us to use the reference with `Bowtie2`.
 
 ## Alignment
 ```{r, fig.align = 'center',out.width= '15%', echo=FALSE }
 knitr::include_graphics(path = "figures/alignment.png", auto_pdf = TRUE)
 ``` 
 
-With the indexed reference we will align the K1 reads to the reference. This createa a bam file that contains alignment and read information (`mapped.bam`).
+With the indexed reference we will align the K1 reads to the reference. This creates a bam file that contains alignment and read information (`mapped.bam`).
 
 ```{bash eval=FALSE}
 bowtie2 -x test.fasta -1 R1.fastq.gz -2 R2.fastq.gz \
@@ -435,7 +427,7 @@ bowtie2 -x test.fasta -1 R1.fastq.gz -2 R2.fastq.gz \
 knitr::include_graphics(path = "figures/exctractor.png", auto_pdf = TRUE)
 ``` 
 
-Next step is extract the reads that did not map form the `mapped.bam` file (unmapped reads).
+Next step is to extract the reads that did not map to the host reference from the `mapped.bam` file with a `samtools` command (unmapped reads).
 
 ```{bash eval=FALSE}
 samtools fastq -f 4 -1 K1_R1.u.fastq -2 K1_R2.u.fastq mapped.bam
@@ -448,7 +440,7 @@ The above step may make unmatched paired files. This occurs when a read from R2 
 knitr::include_graphics(path = "figures/repair.png", auto_pdf = TRUE)
 ``` 
 
-The below BBTools (https://jgi.doe.gov/data-and-tools/bbtools/bb-tools-user-guide/) command will re-pair the reads by removing a read were its pair is missing and making sure the order of the reads is identical in the 2 paired files.
+The below `BBTools` command will re-pair the reads by removing reads with a missing pair. The command ensures the order of the reads are identical in the 2 paired files.
 
 ```{bash eval=FALSE}
 repair.sh in1=K1_R1.u.fastq in2=K1_R2.u.fastq \
@@ -459,7 +451,9 @@ outs=singletons.fastq
 The file `singletons.fastq` contains the left over singletons (a sequence missing a pair) and can normally be ignored.
 
 As our data has pretty much no human data we will skip this step for the other samples and use the trimmed data for the downstream analysis.
- 
+
+## Host removal considerations
+
 In a real analysis project you would use a whole genome reference for your host. However, that would have taken too long for this practical. The most current Human reference (when this was written) is GRCh38. We used a random 10kb section to align our reads to.
 
 For more resources on the Human reference please see: https://www.ncbi.nlm.nih.gov/genome/guide/human/
@@ -473,7 +467,7 @@ The assembly we used was: https://ftp.ncbi.nlm.nih.gov/refseq/H_sapiens/annotati
 knitr::include_graphics(path = "figures/classification.png", auto_pdf = TRUE)
 ``` 
 
-There are a number of methods for determining the species composition of a metagenomic data-set, but for the purposes of this practical we will use Kraken & Bracken (Bayesian Reestimation of Abundance with KrakEN).  Kraken classifies short DNA with taxonomic labels and is frequently used for metagenomic studies. We will be using Kraken 1 as Kraken 2 is still in beta. Bracken uses the taxonomic labels assigned by Kraken to compute the abundance of species in a set of DNA sequences.
+There are a number of methods for determining the species composition of a metagenomic data-set, but for the purposes of this practical we will use `Kraken2` & `Bracken` (Bayesian Reestimation of Abundance with KrakEN).  `Kraken2` classifies short DNA with taxonomic labels and is frequently used for metagenomic studies. `Bracken` uses the taxonomic labels assigned by `Kraken2` to compute the abundance of species in a set of DNA sequences.
 
 First, we'll make a new directory for it and move into it, after returning home:
 
@@ -488,15 +482,17 @@ cd 3-Taxonomy
 knitr::include_graphics(path = "figures/kraken.png", auto_pdf = TRUE)
 ``` 
 
-Prior to running kraken we need to set a variable so kraken2 knows where to look for the databases it will use.
+Prior to running `Kraken2` we need to set a variable so `Kraken2` knows where to look for the databases it will use.
 
 ```{bash eval=FALSE}
 export KRAKEN2_DB_PATH=/pub39/tea/matthew/NEOF/Shotgun_metagenomics/kraken2_db
 ```
 
-__Note__: You can look at the contents of the above directory to see it currently contains the MiniKraken database. This database contains only a subset of the bacteria, archaea, and viral kraken2 libraries. This is used in this practical due to restrictions on time and computational resources. For your own analyses we would recommend the full Kraken2 database which uses all the bacteria, achaeal and viral complete genomes that are in Refseq at the time of building. See the appendix for a link to the Kraken2 manual.
+__Note__: You can look at the contents of the above directory to see it currently contains the MiniKraken database. This database contains only a subset of the bacteria, archaea, and viral `Kraken2` libraries. This is used in this practical due to restrictions on time and computational resources. For your own analyses we would recommend the full `Kraken2` database which uses all the bacteria, achaeal and viral complete genomes that are in Refseq at the time of building. See the appendix for a link to the `Kraken2` manual.
 
-Now, run Kraken2 on sample K1 by running the following command.
+### Kraken2: run
+
+Now, run `Kraken2` on sample K1 by running the following command.
 
 __Note__: As there is little human sequence in our data we will not use host removed data.
 
@@ -508,18 +504,20 @@ kraken2 --paired --db minikraken2_v1_8GB \
 
 While this is running, let's look at what those command line options do:
 
-- `~/2-Trimmed/K1_R1.fq.gz ~/2-Trimmed/K1_R2.fq.gz` : the trimmed read pairs for K1, which we use as input.
-- `--paired` : Indicate that we are providing paired reads to Kraken. Internally, Kraken will concatenate the R1 and R2 reads into one sequence with an N between them.
-- `--db` : Specify the kraken database to be used for taxonomic classification. Previous to the command we set the KRAKEN_DB_PATH so in this case the command will look for the directory called ‘minikraken_4GB’ within the KRAKEN_DB_PATH. Alternatively the full path of the required database could be provided.
+- `~/2-Trimmed/K1_R1.fq.gz ~/2-Trimmed/K1_R2.fq.gz` : the trimmed read pairs for K1, which we will use as input.
+- `--paired` : Indicates that we are providing paired reads to `Kraken2`. Internally, `Kraken2` will concatenate the R1 and R2 reads into one sequence with an N between them.
+- `--db` : Specify the `Kraken2` database to be used for taxonomic classification. Previous to the command we set the `KRAKEN_DB_PATH` so in this case the command will look for the directory called `minikraken2_v1_8GB` within `KRAKEN_DB_PATH`. Alternatively the full path of the required database could be provided.
 - `--threads` : How many CPUs the process will use.
 - `--output` : This is the output file. 
 
+### Kraken2: output
+
 There are two major output formats from Kraken2:
 
-- `--output`, `.kraken`: Each sequence (or sequence pair, in the case of paired reads) classified by Kraken 2 results in a single line of output. Kraken 2's output lines contain five tab-delimited fields; from left to right, they are:
+- `--output`, `.kraken`: Each sequence (or sequence pair, in the case of paired reads) classified by `Kraken2` results in a single line of output. `Kraken2`'s output lines contain five tab-delimited fields; from left to right, they are:
    1. "C"/"U": a one letter code indicating that the sequence was either classified or unclassified.
    2. The sequence ID, obtained from the FASTA/FASTQ header.
-   3. The taxonomy ID Kraken 2 used to label the sequence; this is 0 if the sequence is unclassified.
+   3. The taxonomy ID `Kraken2` used to label the sequence; this is 0 if the sequence is unclassified.
    4. The length of the sequence in bp. In the case of paired read data, this will be a string containing the lengths of the two sequences in bp, separated by a pipe character, e.g. "98|94".
    5. A space-delimited list indicating the LCA mapping of each k-mer in the sequence(s). For example, "562:13 561:4 A:31 0:1 562:3" would indicate that:
       - the first 13 k-mers mapped to taxonomy ID #562
@@ -527,41 +525,40 @@ There are two major output formats from Kraken2:
       - the next 31 k-mers contained an ambiguous nucleotide
       - the next k-mer was not in the database
       - the last 3 k-mers mapped to taxonomy ID #562
-
-__Note__: that paired read data will contain a "|:|" token in this list to indicate the end of one read and the beginning of another.
+      - __Note__: that paired read data will contain a "|:|" token in this list to indicate the end of one read and the beginning of another.
 
 - `--report`, `.kreport2`: The report output format. This is required for bracken. It is tab-delimited with one line per taxon. The fields of the output, from left-to-right, are as follows:
-   1. Percentage of fragments covered by the clade rooted at this taxon
-   2. Number of fragments covered by the clade rooted at this taxon
-   3. Number of fragments assigned directly to this taxon
+   1. Percentage of fragments covered by the clade rooted at this taxon.
+   2. Number of fragments covered by the clade rooted at this taxon.
+   3. Number of fragments assigned directly to this taxon.
    4. A rank code, indicating (U)nclassified, (R)oot, (D)omain, (K)ingdom, (P)hylum, (C)lass, (O)rder, (F)amily, (G)enus, or (S)pecies. Taxa that are not at any of these 10 ranks have a rank code that is formed by using the rank code of the closest ancestor rank with a number indicating the distance from that rank. E.g., "G2" is a rank code indicating a taxon is between genus and species and the grandparent taxon is at the genus rank.
    5. NCBI taxonomic ID number
    6. Indented scientific name
 
-The output to screen will show how many sequences are classified. This will be lower than normal as we are using the mini Kraken database.
+The output to screen will show how many sequences are classified. This will be lower than normal as we are using a mini `Kraken2` database.
 
-In a real analysis you may use the option `--confidence` which represents  the "Confidence score threshold". The default is 0.0, which is the lowest, with the maximum value being 1. A good place to start may be 0.1. Too many classifications are removed if you attempt it with this dataset, due to the minikraken database used, so we will not use this. More info on the confidence scoring can be found at: https://github.com/DerrickWood/kraken2/wiki/Manual#confidence-scoring
+In a real analysis you may use the option `--confidence` which represents  the __"Confidence score threshold"__. The default is `0.0`, which is the lowest, with the maximum value being `1`. A good place to start may be `0.1`. Too many classifications are removed if you attempt it with this dataset, due to the mini `Kraken2` database used. More info on the confidence scoring can be found at: https://github.com/DerrickWood/kraken2/wiki/Manual#confidence-scoring
 
 __Task__: Once the Kraken2 command has finished running, run it on the other two samples. 
 
 __Hint__: You will need to change all instances of K1 to K2 or W1 in the above command
 
-### Krona plot
+## Krona plot
 ```{r, fig.align = 'center',out.width= '15%', echo=FALSE }
 knitr::include_graphics(path = "figures/krona.png", auto_pdf = TRUE)
 ``` 
 
-Krona is an interactive metagenome species abundance visualisation tool. 
+`Krona` is an interactive metagenome species abundance visualisation tool. 
 
-We can use the Kraken2 report files to create our Krona plots. With the below command we can inport our Kraken2 taoxnomy (within the report file) into a krona html.
+We can use the `Kraken2` report files to create our Krona plots. With the below command we can import our `Kraken2` taxonomy (within the report file) into a `Krona` html.
 
 ```{bash eval=FALSE}
 ktImportTaxonomy.sh -o kraken2.krona.html *.kreport2
 ```
 
-`-o` is our output html file, and the final argument `*.kreport2` represents all of our .kreport2 files in the current directory: The `*` is a wild-card, meaning any characters any number of times, so this identifies the files `K1.kreport2` `K2.kreport2` and `W1.kreport2`.
+`-o` is our output html file, and the final argument `*.kreport2` represents all of our `.kreport2` files in the current directory. The `*` is a wild-card, meaning any characters any number of times. Therefore `*.kreport2` identifies the files `K1.kreport2` `K2.kreport2` and `W1.kreport2`.
 
-You will get a warning that not all taxonomy IDs were found. We will ignore this but in your own future installations this shoudl be addressed with the `updateTaxonomy.sh` command.
+You will get a warning that not all taxonomy IDs were found. We will ignore this but in your own future installations this should be addressed with `Krona`'s `updateTaxonomy.sh` command.
 
 Now we can view our interactive chart in a web browser.
 
@@ -569,16 +566,18 @@ Now we can view our interactive chart in a web browser.
 firefox kraken2.krona.html &
 ```
 
-Can you tell which sample looks the most different in terms of bacterial species that are present and absent?
+__Question__: Can you tell which sample looks the most different in terms of bacterial species that are present and absent?
 
 ## Bracken
 ```{r, fig.align = 'center',out.width= '15%', echo=FALSE }
 knitr::include_graphics(path = "figures/bracken.png", auto_pdf = TRUE)
 ```
 
-Bracken (Bayesian Reestimation of Abundance with KrakEN) uses taxonomy labels assigned by Kraken to compute estimated abundances of species in a metagenomic sample. 
+`Bracken` (Bayesian Reestimation of Abundance with KrakEN) uses taxonomy labels assigned by `Kraken2` to compute estimated abundances of species in a metagenomic sample. 
 
-Just like with Krona we can use the kraken2 report files to run bracken.
+### Bracken: run
+
+Just like with `Krona` we can use the `Kraken2` report files to run bracken.
 
 ```{bash eval=FALSE}
 bracken -d $KRAKEN_DB_PATH/minikraken2_v1_8GB \
@@ -587,61 +586,67 @@ bracken -d $KRAKEN_DB_PATH/minikraken2_v1_8GB \
 
 Let's look at what those command line options do:
 
-- `-d` : Specify the Kraken database that was used for taxonomic classification. In this case bracken requires the variable `$KRAKEN_DB_PATH` so the option is provided the full path to the kraken database. For clarity try the command `ls ${KRAKEN_DB_PATH}/minikraken_4GG`
-- `-i` : The Kraken report file, this will be used as the input.
-- `-o` : The output bracken file. Information about its contents is below.
-- `-r 100`: This is the ideal length of the reads that were used in the kraken classification. It is recommended that the initial read length of the sequencing data is used. We are using 100 here as it is a paired library of 100 bp reads.
-- `-l S`: This specifies the taxonomic level/rank of the Bracken output. In this case S is equal to species with the other options being 'D','P','C','O','F' and 'G'.
+- `-d` : Specifies the `Kraken2` database that was used for taxonomic classification. In this case bracken requires the variable `$KRAKEN_DB_PATH` so the option is provided the full path to the kraken database. For clarity try the command `ls $KRAKEN_DB_PATH/minikraken2_v1_8GB`. 
+- `-i` : The `Kraken2` report file, this will be used as the input.
+- `-o` : The output `Bracken` file. Information about its contents is below.
+- `-r 100`: This is the ideal length of the reads that were used in the `Kraken2` classification. It is recommended that the initial read length of the sequencing data is used. We are using 100 here as we used a paired library of 100 bp reads.
+- `-l S`: This specifies the taxonomic level/rank of the `Bracken` output. In this case `S` is equal to species with the other options being `D`, `P`, `C`, `O`,`F` and `G`.
 - `-t 5`: This specifies the minimum number of reads required for a classification at the specified rank. Any classifications with fewer reads than the specified threshold will not receive additional reads from higher taxonomy levels when distributing reads for abundance estimation. Five has been chosen here for this example data but in real datasets you may want to increase this number (default is 10).
 
-The output file of Bracken contains the following columns:
+### Bracken: output
 
-1. Name: Name of taxonomy at the specified tax level.
-2. Taxonomy ID: NCBI taxonomy id
-3. Level ID: Letter signifying the taxonomic level of the classification
-4. Kraken assigned read: Number of reads assigned the taxonomy by Kraken2.
-5. Added reads with abundance reestimation: Number of reads added to the taxonomy by Bracken abundance reestimation. 
-6. Total reads after abundance reestimation: Number from field 4 and 5 summed. This is the field that will be used for downstream analysis.
-7. Fraction of total reads: Relative abundance of the taxonomy.
+The output file of `Bracken` contains the following columns:
+
+1. __Name__: Name of taxonomy at the specified tax level.
+2. __Taxonomy ID__: NCBI taxonomy id
+3. __Level ID__: Letter signifying the taxonomic level of the classification
+4. __Kraken assigned read__: Number of reads assigned the taxonomy by `Kraken2`.
+5. __Added reads with abundance reestimation__: Number of reads added to the taxonomy by Bracken abundance reestimation. 
+6. __Total reads after abundance reestimation__: Number from field 4 and 5 summed. This is the field that will be used for downstream analysis.
+7. __Fraction of total reads__: Relative abundance of the taxonomy.
 
 Use `less` or `vim` to look at the bracken output.
 
 __Task__: Repeat the above commands for K2 and W1
 
-To make full use of Bracken output, it is best to merge the output into one table. However before we do this we’ll copy the Bracken output of other samples that have been generated prior to the workshop. These are all either Korean or Western Diet samples.
+### Bracken: merging and extracting output
+
+To make full use of `Bracken` output, it is best to merge the output into one table. However before we do this we’ll copy the `Bracken` output of other samples that have been generated prior to the workshop. These are all either Korean or Western Diet samples.
 
 ```{bash eval=FALSE}
 cp /pub39/tea/matthew/NEOF/Shotgun_metagenomics/bracken/* .
 ```
 
-Now to merge all the Bracken files.
+Now to merge all the `Bracken` files.
 
 ```{bash eval=FALSE}
 combine_bracken_outputs.py --files *.bracken -o all.bracken
 ```
 
 This output file contains the first three columns:
-- __name__ = Organism group name. This will be based on the TAX_LVL chosen in the bracken command and will only show the one level
-- __taxonomy_id__ = Taxonomy id number
+
+- __name__ = Organism group name. This will be based on the TAX_LVL chosen in the `Bracken` command and will only show the one level.
+- __taxonomy_id__ = Taxonomy id number.
 - __taxonomy_lvl__ = A single string indicating the taxonomy level of the group. ('D','P','C','O','F','G','S').
 
-Following these columns are two columns for each sample.
+Following these columns are the following two columns for each sample.
 
 - `${SampleName}.bracken_num`: The number of reads after abundance reestimation 
 - `${SampleName}.bracken_frac`: Relative abundance of the group in the sample
 
-We want a file with only the first column (organism name) and the bracken_num column for each sample. We will therefore use the following commands.
+We want a file with only the first column (organism name) and the `bracken_num` columns for each sample. To carry this out we  first create a sequence of numbers that will match the `bracken_num` column numbers. These start at column 4 and are every even numbered column after this. In this case `seq` will create every `2` numbers from the numbers `4` to `50` with commas (`,`) as separators (`-s`). 
 
-First we create a sequence of numbers that will match the bracken_num column numbers. These start at column 4 and are every even numbered column after this. In this case `seq` will create every `2` numbers from the numbers `4` to `50` with commas (`,`) as separators (`-s`). 
-
-__Note__: The number 50 is chosen as 3 (1st three info columns) + 24*2 (24 samples with 2 columns each) = 50.
+__Note__: The number 50 is chosen as 3 (first three info columns) + 24*2 (24 samples with 2 columns each) = 50.
 
 ```{bash eval=FALSE}
+#Try out the seq command to see its output
+seq -s , 4 2 50
+#Create variable
 bracken_num_columns=$(seq -s , 4 2 50)
 echo $bracken_num_columns
 ```
 
-Now to use the variable to extract the bracken_num columns plus the first column (species names).
+Now to use the variable to extract the `bracken_num` columns plus the first column (species names).
 
 ```{bash eval=FALSE}
 cat all.bracken | cut -f 1,$bracken_num_columns > all_num.bracken
@@ -652,29 +657,31 @@ cat all.bracken | cut -f 1,$bracken_num_columns > all_num.bracken
 knitr::include_graphics(path = "figures/lefse.png", auto_pdf = TRUE)
 ```
 
-We will use LEfSe (Linear discriminant analysis Effect Size) to determine which taxa can most likely explain the differences between the Western and Korean diet. LEfSe couples standard tests for statistical significance with additional tests encoding biological consistency and effect relevance. It can be used with other features such as organisms, clades, operational taxonomic units, genes, or functions.
+We will use `LEfSe` (Linear discriminant analysis Effect Size) to determine which taxa can most likely explain the differences between the Western and Korean diet. `LEfSe` couples standard tests for statistical significance with additional tests encoding biological consistency and effect relevance. It can be used with other features such as organisms, clades, operational taxonomic units, genes, or functions.
 
-In essence it allows for the detection of biomarkers when comparing sample groups. In the LEfSe terminology the sample groups are called the class.
+In essence it allows for the detection of biomarkers when comparing sample groups. In the `LEfSe` terminology the sample groups are called the class.
 
-We need to format our bracken file to be ready for LEfSe. First we will copy the file so we have a backup in case we do anything wrong.
+### LEfSe: add metadata
+
+We need to add metadata to our `Bracken` file to be ready for `LEfSe.` First we will copy the file so we have a backup in case we do anything wrong.
 
 ```{bash eval=FALSE}
 cp all_num.bracken all_num.lefse.bracken
 ```
 
-This next part must be done for further commands to work
-
 Using your favourite text editor (e.g. `nano`, `vim`, etc.) add the following line to the top of your `all_num.lefse.bracken file`. The words are separated by tabs. If you are not sure how to carry out this task please ask a demonstrator.
 
 __diet	K	K	K	K	K	K	K	K	K	K	K	K	W	W	W	W	W	W	W	W	W	W	W	W__
 
-__Note__: The above is __diet__ followed by 12 __K__ and 12 __W__
+__Note__: The above is __diet__ followed by 12 __K__ and 12 __W__.
 
-The singular line should match the order of your samples within the file. This is the metadata line that LEfSe will use to determine which samples belong to each sample group, and therefore which to compare. In this case it is Korean diet samples versus Western diet samples.
+The singular line should match the order of your samples within the file. This is the metadata line that `LEfSe` will use to determine which samples belong to each sample group, and therefore which to compare. In this case it is Korean diet samples versus Western diet samples.
 
-LEfSe requires python2 whilst we have been using packages that required python3. We therefore need to use a different conda environment. We are currently using the conda env called "shotgun_meta" as represented by `(shotgun_meta)`. This was activated with the command `. useshotgun`.
+### LEfSe: conda
 
-Open a new terminal (right click on the main screen background, choose `Applications` -> `Shell` -> `bash`) and run the following in the new terminal to activate the `lefse` conda environment.
+`LEfSe` requires python2 whilst we have been using packages that required python3. We therefore need to use a different `conda` environment. We are currently using the `conda` env called `shotgun_meta` as represented by `(shotgun_meta)`. This was activated with the command `. useshotgun`.
+
+Open a new terminal (right click on the main screen background, choose `Applications` -> `Shell` -> `bash`) and run the following in the new terminal to activate the `lefse` `conda` environment.
 
 ```{bash eval=FALSE}
 #Setup environment
@@ -683,33 +690,39 @@ Open a new terminal (right click on the main screen background, choose `Applicat
 cd ~/3-Taxonomy
 ```
 
-We need to further format and preprocess our file with a LEfSe script.
+### LEfSe: format
+
+We need to further format and preprocess our file with a `LEfSe` script.
 
 ```{bash eval=FALSE}
 lefse-format_input.py all_num.lefse.bracken all_num.lefse -c 1 -u 2 -o 1000000
 ```
 
-- `all_num.lefse.bracken` : Input Bracken file.
+- `all_num.lefse.bracken` : Input `Bracken` file.
 - `all_num.lefse` : Output file formatted for the run_lefse command, which we will soon run.
 - `-c 1` : Specifies the row with the class info. This is used to determine which samples will be compared against which samples. In this case it is the first row with the Ks and Ws.
 - `-u 2` : Specifies the row with the sample names. This is the second row in this case.
-- `-o 1000000` : An integer can be indicated to determine to what size (count sum value) each sample should be normalised to. LEfSe developers recommend 1000000 (1 million) when very low values a present. We generally always use 1 million for consistency.
+- `-o 1000000` : An integer can be indicated to determine to what size (count sum value) each sample should be normalised to. `LEfSe` developers recommend 1000000 (1 million) when very low values a present. We generally always use 1 million for consistency.
 
-Now to run LEfSe. All we need to do is run the command with the formatted input and provide an output file name.
+### LEfSe: run
+
+Now to run `LEfSe.` All we need to do is run the command with the formatted input and provide an output file name.
 
 ```{bash eval=FALSE}
 run_lefse.py all_num.lefse all_num.lefse.out
 ```
 
-The output file is a tab-delimited file which contains a row for each species. Biomarkers will have the five columns below whilst non-biomarkers will have the first two followed by a "-".
+The output file is a tab-delimited file which contains a row for each species. Biomarkers will have the five columns below whilst non-biomarkers will have the first two followed by a "-" .
 
-- Biomarker name
-- Log of highest class average, i.e. Get the class with the greater amounts of the biomarker, average the counts and then get the log of this value.
-- Class with the greater amounts of biomarker
-- LDA effect size: A statistical figure for LEfSe. Only features with an LDA >2 are detected as biomarkers by default. The higher the LDA effect size is the more of an effect the biomarker causes.
-- p-value: biomarkers must have a p-value of <0.05 to be considered significant.
+- __Biomarker name__
+- __Log of highest class average__: I.e. get the class with the greater amounts of the biomarker, average the counts and then get the log of this value.
+- __Class with the greater amounts of biomarker__
+- __LDA effect size__: A statistical figure for `LEfSe`..
+- p-value: Biomarkers must have a p-value of <0.05 to be considered significant.
 
-The LDA effect size indicates how much of an effect each biomarker has. The default is to only count a species with an LDA effect size of greater than 2 or less than -2 as a biomarker. The further the LDA effect size is from 0 the greater the effect the species causes.
+The __LDA effect__ size indicates how much of an effect each biomarker has. The default is to only count a species with an LDA effect size of greater than 2 or less than -2 as a biomarker. The further the LDA effect size is from 0 the greater the effect the species causes.
+
+### LEfSe: visualisation
 
 Next we can visualise the output.
 
@@ -719,18 +732,33 @@ lefse-plot_res.py --dpi 200 --format png all_num.lefse.out biomarkers.png
 
 - `--dpi 200` : Dots per inch. This refers to the resolution of the output image. Normally publications want 300 dpi. We’ve chosen 200 as it is good quality and we will not be publishing these results.
 - `--format png` : Format of output file. png is a commonly used file format for images.
-- `all_num.lefse.out` : LEfSe output to visualise.
+- `all_num.lefse.out` : `LEfSe` output to visualise.
 - `biomarkers.png` : Plot showing the LDA scores of the species detected as biomarkers. Colouring shows which class (K or W) the species is found in higher abundance.
 
-Look at the figure with the program okular:
+Look at the figure with the program `okular`:
 
 ```{bash eval=FALSE}
 okular biomarkers.png
 ```
 
-Which species causes the biggest effect in the W class and in the K class? Which class has more biomarkers associated with it?
+__Questions__:
 
-__Note__: In this instance green Bars represent biomarkers in higher abundance in the W samples whilst the red bars represent biomarkers in higher abundance in the K samples.
+- Which species causes the biggest effect in the W class and in the K class? 
+-Which class has more biomarkers associated with it?
+
+__Note__: In this instance green bars represent biomarkers in higher abundance in the W samples whilst the red bars represent biomarkers in higher abundance in the K samples.
+
+## Kraken2 and Bracken databases
+
+In your own future analysis you will need to create your own `Kraken2` and `Bracken` databases. Please sse the following links on information for this:
+
+- `Kraken2`
+   - Standard `Kraken2` databases: https://github.com/DerrickWood/kraken2/wiki/Manual#standard-kraken-2-database
+   - Custom `Kraken2` databases: https://github.com/DerrickWood/kraken2/wiki/Manual#custom-databases
+- `Bracken`
+   - https://ccb.jhu.edu/software/bracken/index.shtml?t=manual#step1
+   - This requires a `Kraken2` database to be built first.
+
 
 <!--chapter:end:08-Taxonomic_profiling.Rmd-->
 
@@ -739,13 +767,7 @@ __Note__: In this instance green Bars represent biomarkers in higher abundance i
 knitr::include_graphics(path = "figures/profile.png", auto_pdf = TRUE)
 ``` 
 
-It is also possible to investigate functional differences between metagenome (and metatranscriptome) samples by directly interrogating the read data. We will now look at how this can be done with a package called HUMAnN2 (The HMP Unified Metabolic Analysis Network 2), a pipeline designed to accurately profile the presence/absence and abundance of microbial pathways in metagenomic sequencing data.
-
-We need a new conda environment again. Open a new terminal (right click on the main screen background, choose `Applications` -> `Shell` -> `bash`) and run the below:
-
-```{bash eval=FALSE}
-. usehumann2
-```
+It is also possible to investigate functional differences between metagenome (and metatranscriptome) samples by directly interrogating the read data. We will now look at how this can be done with a package called `HUMAnN2` (The HMP Unified Metabolic Analysis Network 2), a pipeline designed to accurately profile the presence/absence and abundance of microbial pathways in metagenomic sequencing data.
 
 ## HUMAnN2 
 ```{r, fig.align = 'center',out.width= '15%', echo=FALSE }
@@ -754,21 +776,30 @@ knitr::include_graphics(path = "figures/humann2.png", auto_pdf = TRUE)
 
 First, we will carry out an example run of the software and briefly explore the output files. HUMAnN2 can take a long time to run so we will use a small amount of example data.
 
-Make a new directory and move into it, after moving back to your home directory.
+### HUMAnN2: conda, directories, and files
+
+We need a new conda environment again. Open a new terminal (right click on the main screen background, choose `Applications` -> `Shell` -> `bash`) and run the below:
 
 ```{bash eval=FALSE}
-cd ~
-mkdir 4-FunctionalProfiling
-cd 4-FunctionalProfiling
+. usehumann2
 ```
 
-Now we will  perform the run with HUMAnN2 so we can inspect the output files. First, copy over some test data. $DB is simply an alias used for a directory containing database files used in this tutorial.
+Make a new directory and move into it.
+
+```{bash eval=FALSE}
+mkdir ~/4-FunctionalProfiling
+cd ~/4-FunctionalProfiling
+```
+
+Copy over some test data we will the analysis on. This is a demonstration FASTQ file that we will use. It will be small enough to run HUMAnN2 in a reasonable time.
 
 ```{bash eval=FALSE}
 cp /pub39/tea/matthew/NEOF/Shotgun_metagenomics/humann2/demo.fq.gz .
 ```
 
-This is a demonstration FASTQ file that we will use. It will be small enough to run HUMAnN2 in a reasonable time.
+### HUMAnN2: run
+
+Now we will perform the run with HUMAnN2 so we can inspect the output files. 
 
 ```{bash eval=FALSE}
 humann2 \
@@ -777,9 +808,11 @@ humann2 \
 --threads 10
 ```
 
-Here, we are telling the software to use demo.fq.gz as input and to create a new output directory where results will be generated. 
+Here, we are telling the software to use `demo.fq.gz` as input and to create a new output directory called `demo.humann2` where the results will be generated. 
 
-As the software runs, you might notice that as part of the process, HUMAnN2 runs MetaPhlAn2. The purpose of this is to identify what species are present in the sample, so that it can then tailor generate an appropriate database of genes (from those species) to map against. It will carry out this alignment against the gene database, then a protein database, and finally compute which gene families are present to determine which functional pathways are present and how abundant they are.
+As the software runs, you might notice that as part of the process, `HUMAnN2` runs `MetaPhlAn2.` The purpose of this is to identify what species are present in the sample, so `HUMAnN2` can tailor generate an appropriate database of genes (from those species) to map against. It will carry out this alignment against the gene database, then a protein database, and finally compute which gene families are present to determine which functional pathways are present and how abundant they are.
+
+### HUMAnN2: output
 
 Once the run has completed, change into the newly created output directory and list the files that are there.
 
@@ -788,7 +821,9 @@ cd demo.humann2
 ls
 ```
 
-You will see that there are three files and one directory. The directory (demo_humann2_temp) contains intermediate temporary files and can be disregarded here. Sometimes, these files can be useful for debugging, however. The three files are:
+You will see that there are three files and one directory. The directory (`demo_humann2_temp`) contains intermediate temporary files and can be disregarded here.
+
+The three output files are:
 
 - `demo_genefamilies.tsv`: A table file showing the number of reads mapping to each UniRef90 gene family, Values are normalised by the length of each gene family (i.e. RPK, or Reads per Kilobase). Additionally, the values are stratified so that they show the overall community abundance but also a breakdown of abundance per species detected. This allows researchers to delve into species specific functions, rather than only looking at the metagenomic functions as a whole,
 - `demo_pathabundance.tsv`: As above, a table file showing the normalised abundance of MetaCyc pathways. These abundances are calculated based on the UniRef90 gene family mapping data and are also stratified by species.
@@ -803,7 +838,14 @@ The basic format of these three output files is the same, so let's take a look a
 less demo_pathabundance.tsv
 ```
 
-You will see that there are two columns. The first shows the pathway (or UNMAPPED where reads could not be aligned, and UNINTEGRATED where reads could be aligned, but to targets not implicated in any pathways). The second column shows the abundance. Press `q` to exit and let's look at one specific pathway, COA-PWY-1 (a coenzyme A biosynthesis II pathway).
+You will see that there are two columns:
+
+1. The first column shows the pathways.
+   - __UNMAPPED__ indicates reads that could not be aligned.
+   - __UNINTEGRATED__ indicates reads that aligned to targets not implicated in any pathways.
+2. The second column shows the abundance.
+
+Press `q` to exit and let's look at one specific pathway, COA-PWY-1 (a coenzyme A biosynthesis II pathway).
 
 ```{bash eval=FALSE}
 grep COA-PWY-1 demo_pathabundance.tsv
@@ -814,7 +856,7 @@ This shows two entries with two different values, I.e.
 - COA-PWY-1: coenzyme A biosynthesis II (mammalian)	6.3694267516 
 - COA-PWY-1: coenzyme A biosynthesis II (mammalian)|g__Bacteroides.s__Bacteroides_vulgatus	4.7961630695
 
-This is an example of the species stratification mentioned above. The first line shows the abundance of this pathway across the whole sample, but the second line shows the abundance contributed from Bacteroides_vulgatis.
+This is an example of the species stratification mentioned above. The first line shows the abundance of this pathway across the entire sample, but the second line shows the abundance contributed by __Bacteroides_vulgatis__.
 
 Have a look at the other two output files; note the similar layout.
 
@@ -824,6 +866,8 @@ Finally, return to the parent directory i.e. `4-FunctionalProfiling`
 cd ..
 ```
 
+__Note__: The directory `demo_humann2_temp` can be very large and so should be deleted in real projects once you are certain they are not needed. However, these files can be useful for debugging. 
+
 ## Statistical comparison between samples
 ```{r, fig.align = 'center',out.width= '15%', echo=FALSE }
 knitr::include_graphics(path = "figures/k_w_venn.png", auto_pdf = TRUE)
@@ -831,7 +875,9 @@ knitr::include_graphics(path = "figures/k_w_venn.png", auto_pdf = TRUE)
 
 Looking at the functional profile of one sample in isolation is usually not very informative. First, there is nothing to compare it to and second, there are no biological replicates. We will therefore use all the Korean and Western diet samples.
 
-It would take many hours to analyse all of the data using HUMAnN2 and is outside of the scope of this practical. For this reason, samples were analysed prior to the workshop to generate the output files we covered above. For the purposes of this comparison, we will look at the pathway abundances only. First copy over the results data directory and have a look in it (when copying directories, we need to use –r with the cp command, to recursively copy all files across)
+It would take many hours to analyse all of the data using `HUMAnN2` and is outside of the scope of this course. For this reason, samples were analysed prior to the workshop to generate the output files we covered above. 
+
+For the purposes of this comparison, we will look at the pathway abundances only. First copy over the results data directory and have a look in it.
 
 ```{bash eval=FALSE}
 cp –r /pub39/tea/matthew/NEOF/Shotgun_metagenomics/DietPathAbundance .
@@ -840,18 +886,20 @@ ls DietPathAbundance
 
 You will see there are 12 files prefixed with K and 12 prefixed with W, for the Korean diet and Western diet samples, respectively. Take a look in one of the files; you might notice that there is no species stratification. The reason for this is that for this test, all pathway abundances have been collapsed to a community level, ignoring differences in species. When you analyse your own data-sets, you can leave this stratification in to identify significant differences between functional profiles at a species level.
 
+__Note__: You can create an unstratified pathabundance file with a command like: `cat pathabundance.tsv | grep -v "|" > pathabundance.unstratified.tsv`. The `grep -v "|"` removes lines that contain `|` which the stratified lines should only contain.
+
 ### Combining data
 ```{r, fig.align = 'center',out.width= '15%', echo=FALSE }
 knitr::include_graphics(path = "figures/merge.png", auto_pdf = TRUE)
 ``` 
 
-First, we need to combine these 24 tables into one large results table. HUMANn2 provides a tool to do this:
+First, we need to combine these 24 tables into one large results table. `HUMAnN2` provides a tool to do this:
 
 ```{bash eval=FALSE}
 humann2_join_tables --input DietPathAbundance/ --output diet.tsv
 ```
 
-This command will look for all tables in the DietPathAbundance directory and generate a large, 24 column table called diet.tsv. You can take a look to see that this has worked correctly.
+This command will look for all tables in the `DietPathAbundance` directory and generate a large, 24 column table called `diet.tsv`. You can take a look to see that this has worked correctly.
 
 ```{bash eval=FALSE}
 less -S diet.tsv
@@ -864,7 +912,21 @@ knitr::include_graphics(path = "figures/normalisation.png", auto_pdf = TRUE)
 
 The next step is to renormalise the data. Currently, all of the abundance values are only normalised within each sample, i.e. accounting for the size of the pathways/length of genes. However, they are not normalised between samples, and this is very important. For example, if we had sequenced two samples, A and B, and we obtained 5 million reads for sample A and 20 million reads for sample B, without normalisation, it might look that there was up to 4x as much functional activity in sample B! 
 
-To correct for this, we normalise the abundance values based on the number of reads in each samples, i.e. counts per million, or cpm. (We could also normalise to relative abundance where all abundances for each sample add up to 1).
+To correct for this, we normalise the abundance values based on the number of reads in each sample. We will normalise by counts per million, or cpm. (We could also normalise to relative abundance where all abundances for each sample add up to 1).
+
+
+__Equation:__
+$$
+cpm = p * (\frac{1000000}{t})
+$$
+
+Where:
+
+- __cpm__ = counts per million.
+- __p__ = count of pathway in sample.
+- __t__ = total count of sample.
+
+Renormalisation command:
 
 ```{bash eval=FALSE}
 humann2_renorm_table \
@@ -874,7 +936,7 @@ humann2_renorm_table \
 --output diet.cpm.tsv
 ```
 
-This command generates the normalised data in the new table `diet.cpm.tsv`. The `--special n` option tells the script to remove all unmapped and unassigned values from the table.
+This command generates the normalised data in the new table `diet.cpm.tsv`. The `--special n` option tells the script to remove all unmapped and unassigned values (__UNMAPPED__ & __UNINTEGRATED__) from the table.
 
 ### Visualisation
 ```{r, fig.align = 'center',out.width= '15%', echo=FALSE }
@@ -1006,7 +1068,9 @@ Fortunately, the assembler we will use, MEGAHIT, allows us to build an assembly 
 knitr::include_graphics(path = "figures/stitch.png", auto_pdf = TRUE)
 ``` 
 
-As mentioned, longer k-mers generally perform better, but as our maximum read length is 100 bp, we are limited to a maximum k-mer length of 99 bp. However, we can get even longer k-mers if we stitch our read pairs together. 
+As mentioned, longer k-mers generally perform better, but as our maximum read length is 100 bp, we are limited to a maximum k-mer length of 99 bp. However, we can get even longer k-mers if we stitch our read pairs together.
+
+__Note__: This method will not work if your reads have no overlap. If you are not sure if your reads have overlap ask the team who sequenced them.
 
 Remember that a read pair consists of two sequences read from each end of a fragment of DNA (or RNA). If the two sequences meet in the middle of the fragment and then overlap, there will be a region of homology which we can use to merge the two reads in the pair together (See next image).
 
@@ -1117,7 +1181,7 @@ firefox quast/K1/report.html
 
 The report tells us quite a bit about the assembly quality. Two definitions that you may not be aware of are N50 and N50 length (or, somewhat confusingly, L50 and N50, respectively!). If we were to order our contigs from largest to smallest, and total up the sizes from biggest downwards, the contig we reach where our total is 50% of the size of the whole assembly is the N50 contig (the smaller the number the better). The N50 length is the length of this contig; a weighted median contig length.
 
-```{r, fig.align = 'center',out.width= '20%', echo=FALSE }
+```{r, fig.align = 'center',out.width= '40%', echo=FALSE }
 knitr::include_graphics(path = "figures/n50_n90.png", auto_pdf = TRUE)
 ``` 
 
@@ -1161,7 +1225,7 @@ It is recommended to ensure you do not have a poor quality metagenome assembly. 
 knitr::include_graphics(path = "figures/conda.png", auto_pdf = TRUE)
 ``` 
 
-We will use the `shotgun_meta` conda environment for this chapter.
+We will use the `shotgun_meta` conda environment to start for this chapter.
 
 Additionally, make a new directory and move into it.
 
@@ -1273,6 +1337,95 @@ metabat2 \
 --abdFile K1.depth.txt \
 --minContig 1500
 ```
+
+List the contents of the output directory and you'll see there are 2 files with the prefix of `K1`. These are the 2 bins that will hopefully contain 1 MAG (Metagenome-Assembled Genome).
+
+```{bash eval=FALSE}
+ls bins
+```
+
+## CheckM
+```{r, fig.align = 'center',out.width= '40%', echo=FALSE }
+knitr::include_graphics(path = "figures/CheckM.png", auto_pdf = TRUE)
+``` 
+
+`CheckM` is a useful tool to assess the quality of assembled genomes. This can be used on assemblies produced from single cell, single isolate, or metagenome data. Additionally it can be used to identify bins that are likely candidates for merging. This occurs when one genome has been separated into different bins.
+
+An important part of CheckM is the ubiquitous and single-copy genes it utilises. It has sets of these genes for different phylogenetic lineages. With these it can determine:
+
+- What lineage a bin/MAG belongs to. 
+   - Does it contain genes only found in _Escherichia_?
+- How complete the bin/MAG is. A set of lineage specific genes should all be found in a genome belonging to the lineage (ubiquitous).
+   - What percentage of these lineage specific genes are present in the MAG? 
+   - >95% is very good
+   - >80% is good
+   - >70% is ok
+   - <70% is poor to poorer.
+- How contaminated is the bin/MAG?
+   - Only one copy of each gene should be present (single-copy).
+   - Are there any markers for other lineages present?
+
+### Conda
+
+Due to program version conflicts we will use the `checkm` conda environment for this section.
+
+Open a new terminal and activate the correct environment.
+
+```{bash eval=FALSE}
+. usecheckm
+```
+
+Ensure you are in the correct directory.
+
+```{bash eval=FALSE}
+cd ~/7-Binning/K1/
+```
+
+### Running CheckM
+
+`CheckM` has many different commands. We will use on of the common workflows it provides called `lineage_wf`. This carries out four if its other commands in a workflow. This is useful as the commands provide the data needed for the following command.
+
+1. `tree` - Places bins in the reference genome tree. This reference tree comes with CheckM.
+2. `lineage_set` - Infers lineage-specific marker sets for each bin. 
+3. `analyze` - Identifies marker genes in bins.
+4. `qa` - Assesses the bins for contamination and completeness.
+
+Run the `CheckM` command (this will take a while):
+
+```{bash eval=FALSE}
+checkm lineage_wf \
+--tab_table -f MAGS_checkm.tsv \
+-x fa  \
+bins/ checkm_output
+```
+
+The options we used are:
+
+- `--tab_table` : Prints results to a tab separated table.
+- `-f` : File name to print result to (if not specified results will go to stdout).
+- `-x` : Suffix/extension of bin files. Other file are ignored in the specified bin directory.
+   - `fa` is used as `MetaBAT2` produced fasta files ending in `.fa`.
+- `bins` : The second last argument is the `bin_dir`, the directory containg all the bins in fasta format.
+- `checkm_output` : The last argument is the directory to store the output to. This directory should not exist prior to running.
+
+When the command has finished look at the results table that is in your current directory.
+
+```{bash eval=FALSE}
+less MAGS_checkm.tsv
+```
+
+__Tip__: The definition of the statistics can be found at: https://github.com/Ecogenomics/CheckM/wiki/Reported-Statistics
+
+__Questions__:
+
+- What lineages were assigned to the bins?
+- How many genomes are present in the bins?
+- What is the completeness and contamination of the samples?
+- With this information how successful was the binning? Was the binning able to create MAGs (i.e. one genome per bin)?
+
+
+
+
 
 <!--chapter:end:11-Genome_binning.Rmd-->
 
@@ -1755,9 +1908,21 @@ Spend some time exploring this map and other maps. e.g. the two-component system
 knitr::include_graphics(path = "figures/quality_trimming_and_filtering.png", auto_pdf = TRUE)
 ``` 
 
-##Manuals
+## Manuals
 
+Conda: https://conda.io/projects/conda/en/latest/user-guide/getting-started.html
 
+FastQC: https://www.bioinformatics.babraham.ac.uk/projects/fastqc/
+
+MultiQC: https://multiqc.info/
+
+Trim Galore: https://www.bioinformatics.babraham.ac.uk/projects/trim_galore/
+
+Bowtie2: http://bowtie-bio.sourceforge.net/bowtie2/manual.shtml
+
+samtools: http://www.htslib.org/
+
+BBTools: https://jgi.doe.gov/data-and-tools/bbtools/
 
 Kraken2: https://github.com/DerrickWood/kraken2/wiki/Manual
 
@@ -1769,15 +1934,19 @@ LEfSe: https://huttenhower.sph.harvard.edu/lefse/
 
 HUMAnN2: https://github.com/biobakery/biobakery/wiki/humann2
 
+MetaPhlAn 2: https://huttenhower.sph.harvard.edu/metaphlan2/
+
 Biobakery: https://github.com/biobakery/biobakery
 
-MegaHit: 
+MegaHit: https://github.com/voutcn/megahit
 
 BWA: https://github.com/lh3/bwa
 
 minimap2: https://github.com/lh3/minimap2
 
 MetaBAT2: https://bitbucket.org/berkeleylab/metabat/src/master/
+
+CheckM: https://github.com/Ecogenomics/CheckM/wiki
 
 ## COG Cateories
 

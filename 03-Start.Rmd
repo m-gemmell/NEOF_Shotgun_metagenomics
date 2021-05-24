@@ -9,7 +9,7 @@ During this practical you will use a number of installed programs and scripts. T
 . useshotgun
 ```
 
-__Note__: The `use` scripts in this workshop are custom scripts that setup conda environments. You can look at the script above script with `less /usr/local/bin/useshotgun` is you are interested in its contents.
+The `use` scripts in this workshop are custom scripts that set up conda environments. You can look at the above script with `less /usr/local/bin/useshotgun` if you are interested in its contents.
 
 Also, there’s a chance you’re currently not in your home directory, so let’s make sure you are with the following command:
 

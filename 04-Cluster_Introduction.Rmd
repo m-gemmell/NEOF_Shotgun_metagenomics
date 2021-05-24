@@ -6,7 +6,8 @@ knitr::include_graphics(path = "figures/cluster.png", auto_pdf = TRUE)
 ## Logon instructions
 For this workshop we will be using Virtual Network Computing (VNC). Connect to the VNC with a browser by using the webVNC link you were sent.
 
-You will now be in a logged-in Linux VNC desktop with two terminals. You will see something as below (there may be only one terminal which is fine). If you do not see something similar please ask for assistance.
+You will now be in a logged-in Linux VNC desktop. You will see something as below (there may be only one terminal which is fine). If you do not see something similar please ask for assistance.
+
 ```{r, fig.align = 'center',out.width= '80%', echo=FALSE }
 knitr::include_graphics(path = "figures/logon_pic.png", auto_pdf = TRUE)
 ``` 
@@ -28,7 +29,7 @@ knitr::include_graphics(path = "figures/terminal_window.png", auto_pdf = TRUE)
 
 Already there is useful information for us on the terminal window.
 
-- __nsc006__: This is the login name, also known as the username. In this case nsc006 is a demonstrator's account. Your screen should show a different account name which will be your username for the Linux machine/cluster you are logged into.
+- __nsc065__: This is the login name, also known as the username. In this case nsc065 is a demonstrator's account. Your screen should show a different account name which will be your username for the Linux machine/cluster you are logged into.
 - __gauss03__: This is the machine name the user is logged into.
 - __\~__: This represents the current directory of the user, or the directory a command was run in. In the Linux OS and others __'~'__ is a shortcut to the user's home directory.
 - Everything after the __'$'__ is where commands are typed into the terminal. This is also referred to as the command line.

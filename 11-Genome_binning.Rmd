@@ -175,7 +175,7 @@ Due to program version conflicts we will use the `checkm` conda environment for 
 
 Open a new terminal and activate the correct environment.
 
-```{bash}
+```{bash eval=FALSE}
 . usecheckm
 ```
 
@@ -187,14 +187,45 @@ cd ~/7-Binning/K1/
 
 ### Running CheckM
 
-CheckM has many different commands. We will use on of the common workflows it provides called `lineage_wf`. This carries out four if its other commands in a workflow. This is useful as the commands provide the data needed for the following command.
+`CheckM` has many different commands. We will use on of the common workflows it provides called `lineage_wf`. This carries out four if its other commands in a workflow. This is useful as the commands provide the data needed for the following command.
 
 1. `tree` - Places bins in the reference genome tree. This reference tree comes with CheckM.
 2. `lineage_set` - Infers lineage-specific marker sets for each bin. 
 3. `analyze` - Identifies marker genes in bins.
-4. `qa` - Assessess the bins for contamination and completeness.
+4. `qa` - Assesses the bins for contamination and completeness.
 
+Run the `CheckM` command (this will take a while):
 
+```{bash eval=FALSE}
+checkm lineage_wf \
+--tab_table -f MAGS_checkm.tsv \
+-x fa  \
+bins/ checkm_output
+```
+
+The options we used are:
+
+- `--tab_table` : Prints results to a tab separated table.
+- `-f` : File name to print result to (if not specified results will go to stdout).
+- `-x` : Suffix/extension of bin files. Other file are ignored in the specified bin directory.
+   - `fa` is used as `MetaBAT2` produced fasta files ending in `.fa`.
+- `bins` : The second last argument is the `bin_dir`, the directory containg all the bins in fasta format.
+- `checkm_output` : The last argument is the directory to store the output to. This directory should not exist prior to running.
+
+When the command has finished look at the results table that is in your current directory.
+
+```{bash eval=FALSE}
+less MAGS_checkm.tsv
+```
+
+__Tip__: The definition of the statistics can be found at: https://github.com/Ecogenomics/CheckM/wiki/Reported-Statistics
+
+__Questions__:
+
+- What lineages were assigned to the bins?
+- How many genomes are present in the bins?
+- What is the completeness and contamination of the samples?
+- With this information how successful was the binning? Was the binning able to create MAGs (i.e. one genome per bin)?
 
 
 

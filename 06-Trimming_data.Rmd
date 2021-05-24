@@ -3,11 +3,13 @@
 knitr::include_graphics(path = "figures/quality_trimming_and_filtering.png", auto_pdf = TRUE)
 ``` 
 
-Now that we've obtained the raw data and had a look at it, we should now clean it up. With any sequencing data, it is very important to ensure that you use the highest quality data possible: Rubbish goes in, rubbish comes out. There are two main methods employed to clean sequence data, and a third method specific to some metagenomic datasets.
+Now that we've obtained the raw data and had a look at it, we should now clean it up. With any sequencing data, it is very important to ensure that you use the highest quality data possible: Rubbish goes in, rubbish comes out. 
 
-- Remove low quality bases from the end of the reads. These are more likely to be incorrect, so are best trimmed off.
-- Remove adapters. Sometimes sequencing adapters can be sequenced if the sequencing runs off the end of a fragment. 
-- Remove host sequences. If a metagenomic sample derives from a host species then it may be advisable to remove any reads associated with the host genome. Here, we do not need to do this, as the dataset contains barely any human genome sequences.
+There are two main methods employed to clean sequence data, and a third method specific to some metagenomic datasets.
+
+- Remove low quality bases from the end of the reads: These are more likely to be incorrect, so are best trimmed off.
+- Remove adapters: Sometimes sequencing adapters can be sequenced if the sequencing runs off the end of a fragment. 
+- Host removal: If a metagenomic sample derives from a host species then it may be advisable to remove any reads associated with the host genome. Here, we do not need to do this, as the dataset  has next to zero human genome sequences.
 
 ## Removing adapters and low quality bases
 ```{r, fig.align = 'center',out.width= '15%', echo=FALSE }
@@ -18,27 +20,24 @@ First go back to your home directory and create a new directory where we will cl
 
 ```{bash eval=FALSE}
 cd ..
-```
-
-This will move you one directory up, i.e. back to your home directory. Alternatively, you could use `cd ~` which will take you to your home directory. This is a good idea if you ever get lost!
-
-```{bash eval=FALSE}
 mkdir 2-Trimmed
 cd 2-Trimmed
 ```
 
-You are now in your newly created directory. Here we will run Trim Galore! which carries out both of these steps.
+You are now in your newly created directory. Here we will run `Trim Galore!` which removes low quality bases and adapters.
 
 ```{bash eval=FALSE}
 trim_galore --paired --quality 20 --stringency 4 \
    ../1-Raw/K1_R1.fastq.gz ../1-Raw/K1_R2.fastq.gz
 ```
 
-This is a longer command so we've split it across multiple commands (a `\` at the end of a line allows you to press return without running the command, meaning you can continue to add to that command. When this happens, the `$` changes to a `>`. __Note__ that if you do use the `\` character, the next character immediately after it must be return. If you use `\` in the middle of a line without pressing return afterwards, it will break the command!
+This is a longer command so we've split it across multiple lines (a `\` at the end of a line allows you to press return without running the command, meaning you can continue to add to that command. When this happens, the `$` changes to a `>`. 
 
-This command will remove any low quality regions from the end of both reads in each read pair (quality score < 20). Additionally, if it detects four or more bases of a sequencing adapter, it will trim that off too. We use the two read files for sample K1 as input, from the previous directory we were in.
+__Note__ if you do use the `\` character, the next key you press must be return. If you use `\` in the middle of a line without pressing return afterwards, it will break the command!
 
-__Task__: Run this command two more times, but for the other two samples (K2 and W1)
+This command will remove any low quality regions from the end of both reads in each read pair (quality score < 20). Additionally, if it detects four or more bases of a sequencing adapter, it will trim that off too.
+
+__Task__: Rerun this command for the other two samples (K2 and W1).
 
 ## Rename the files
 ```{r, fig.align = 'center',out.width= '15%', echo=FALSE }
@@ -51,7 +50,7 @@ Once that is complete if you run:
 ls
 ```
 
-you will notice that we have a new bunch of files created: 2 new read files for each sample along with a trimming report for each file trimmed. However, the new names are needlessly long. e.g. K1_R1_val_R1.fq.gz could be shortened to K1_R1.fq.gz. So, we'll rename all of the files with the mv command:
+you will notice that we have a new bunch of files created: 2 new read files for each sample along with a trimming report for each file trimmed. However, the new names are needlessly long. For example K1_R1_val_R1.fq.gz could be shortened to K1_R1.fq.gz. So, we'll rename all of the files with the mv command:
 
 ```{bash eval=FALSE}
 mv K1_R1_val_1.fq.gz K1_R1.fq.gz
@@ -64,14 +63,14 @@ mv W1_R2_val_2.fq.gz W1_R2.fq.gz
 
 __Tip__: If you want to edit and reuse previous commands, press the up arrow key.
 
-__Task__: Briefly inspect the log files to see how the trimming went (e.g. K1_R1.fastq.gz_trimming_report.txt)
+__Task__: Briefly inspect the log files to see how the trimming went (e.g. K1_R1.fastq.gz_trimming_report.txt).
 
 ## Inspect the trimmed data
 ```{r, fig.align = 'center',out.width= '15%', echo=FALSE }
 knitr::include_graphics(path = "figures/magnify_glass_good.png", auto_pdf = TRUE)
 ``` 
 
-To see what difference the trimming made, run FastQC and multiqc again on the trimmed output files and view it. 
+To see what difference the trimming made, run `FastQC` and `MultiQC` again on the trimmed output files and view it. 
 
 ```{bash eval=FALSE}
 #R1 fastqc and multiqc
@@ -81,4 +80,4 @@ mkdir R1_fastqc/multiqc
 multiqc -o R1_fastqc/multiqc R1_fastqc
 ```
 
-__Task__: Run fastqc and multiqc for the R2 files and then iew the R1 and R2 multiQC reports with firefox. How does the quality =  compare to the untrimmed data?
+__Task__: Run `FastQC` and `MultiQC` for the R2 files and then view the R1 and R2 `MultiQC` reports with firefox. How does the quality compare to the untrimmed data?

@@ -27,9 +27,9 @@ Now we can generate a symbolic links (i.e. shortcut) to the raw sequence data fi
 ln -s /pub39/tea/matthew/NEOF/Shotgun_metagenomics/raw_fastq/* .
 ```
 
-All that this command did is symbolic link (like a shortcut in Windows) to the read files that we will be using (The appendix of this document contains the commands used to download these files directly from the EBI metagenomics site). If you would like to know more about symbolic links please check out: https://linuxize.com/post/how-to-create-symbolic-links-in-linux-using-the-ln-command/.
+If you would like to know more about the `ln` command please check out: https://linuxize.com/post/how-to-create-symbolic-links-in-linux-using-the-ln-command/.
 
-Now, check they are there with:
+Now, check the symbolic links are in your current directory:
 
 ```{bash eval=FALSE}
 ls
@@ -67,23 +67,25 @@ The pipe symbol ( `|` ) is used to pass the output of one command as input to th
 
 The lines displayed represent one FASTQ sequence entry, or one read of a read pair: The corresponding second read can be viewed by running the same command on K1_R2.fastq.gz. The first line is the read identifier, the second line is the sequence itself, the third line is a secondary header (which is usually left blank except for '+') and the fourth line is the sequence quality score: For each base in the sequence, there is a corresponding quality encoded in this string of characters.  __To return to the command prompt, press__ `q`. 
 
-Due to computational constraints, the files you have linked to are a subset of the original data (i.e. 1 million read pairs from each sample). At a later point in the tutorial, you will be asked to link to results derived from the full dataset for further processing.
+Due to computational constraints, the files you have linked to are a subset of the original data (i.e. 1 million read pairs from each sample).
 
 ## Checking quality control
 ```{r, fig.align = 'center',out.width= '15%', echo=FALSE }
 knitr::include_graphics(path = "figures/mangify_glass.png", auto_pdf = TRUE)
 ``` 
 
-We can generate and visualise various sequence data metrics for quality control purposes using FastQC. We will run FastQC on the R1 and R2 reads separately as it is good to visualise them in two different reports. R1 and R2 reads have different quality patterns, generally due to the poorer quality of R2. Run FastQC on the files:
+We can generate and visualise various sequence data metrics for quality control purposes using `FastQC`. We will run `FastQC` on the R1 and R2 reads separately as it is good to visualise them in two different reports. This is beacause R1 and R2 reads have different quality patterns, generally due to the poorer quality of R2. 
+
+Run `FastQC` on the files:
 
 ```{bash eval=FALSE}
 #R1 fastqc
 #Make an output directory
 mkdir R1_fastq
 #Run fastqc on all the R1.fastq.gz files 
-#* matches any pattern, 
+#* matches any pattern
 #*R1.fastq.gz matches any file that ends R1.fastq.gz in the current directory
-#-t 3 indicates to the program to use 3 threads, chosen as there are three R1 files
+#-t 3 indicates to use 3 threads, chosen as there are three R1 files
 fastqc -t 3 -o R1_fastqc *R1.fastq.gz
 
 #R2 fastqc
@@ -93,7 +95,7 @@ mkdir R2_fastq
 fastqc -t 3 -o R2_fastqc *R2.fastq.gz
 ```
 
-Once the FastQC commands are run we can run MultiQC to creative interactive html reports for the outputs.
+Once the `FastQC` commands are run we can run `MultiQC` to create interactive html reports for the outputs.
 
 ```{bash eval=FALSE}
 #R1 multiqc fastqc report
@@ -109,17 +111,13 @@ mkdir R2_fastqc/multiqc
 multiqc -o R2_fastqc/multiqc R2_fastqc
 ```
 
-Once completed, view the R1 output (NB: The `&` runs the command in the background, therefore allowing you to continue to run commands while Firefox is still open):
+Once completed, view the `MultiQC` reports (NB: The `&` runs the command in the background, therefore allowing you to continue to run commands while Firefox is still open):
 
 ```{bash eval=FALSE}
 firefox R1_fastqc/multiqc/multiqc_report.html \
 R2_fastqc/multiqc/multiqc_report.html &
 ```
 
-The FastQC report (via MultiQC) contains a number of metrics. The "Sequence Quality Histograms" shows the sequence quality across the length of the reads, you can hover over each line to show which sample it belongs to. Note how quality decreases as the length of the read increases. While this is normal with Illumina sequencing, we will improve the situation a bit in the next chapter.
+The `FastQC` report (via `MultiQC`) contains a number of metrics. The "Sequence Quality Histograms" shows the sequence quality across the length of the reads, you can hover over each line to show which sample it belongs to. Note how quality decreases as the length of the read increases. While this is normal with Illumina sequencing, we will improve the situation a bit in the next chapter.
 
-Briefly inspect the FastQC reports (R1 and R2) for yourself – There are examples of typical (and atypical!) FastQC data in the appendix of this document.
-
-Once you have finished looking, minimise the Firefox window.
-
-MultiQC can create html reports for the output of many tools. See more here: https://multiqc.info/.
+Once you have finished inspecting, minimise the Firefox window.
