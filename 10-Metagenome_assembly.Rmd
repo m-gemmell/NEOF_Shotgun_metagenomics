@@ -129,7 +129,7 @@ Once the assembly is completed, we can look at the output FASTA file containing 
 less K1/final.contigs.fa
 ```
 
-### QUAST
+## QUAST
 
 We can also generate some metrics based on the assembly.
 

@@ -491,6 +491,9 @@ export KRAKEN2_DB_PATH=/pub39/tea/matthew/NEOF/Shotgun_metagenomics/kraken2_db
 __Note__: You can look at the contents of the above directory to see it currently contains the MiniKraken database. This database contains only a subset of the bacteria, archaea, and viral `Kraken2` libraries. This is used in this practical due to restrictions on time and computational resources. For your own analyses we would recommend the full `Kraken2` database which uses all the bacteria, achaeal and viral complete genomes that are in Refseq at the time of building. See the appendix for a link to the `Kraken2` manual.
 
 ### Kraken2: run
+```{r, fig.align = 'center',out.width= '10%', echo=FALSE }
+knitr::include_graphics(path = "figures/enter_key.png", auto_pdf = TRUE)
+``` 
 
 Now, run `Kraken2` on sample K1 by running the following command.
 
@@ -511,6 +514,9 @@ While this is running, let's look at what those command line options do:
 - `--output` : This is the output file. 
 
 ### Kraken2: output
+```{r, fig.align = 'center',out.width= '10%', echo=FALSE }
+knitr::include_graphics(path = "figures/output.png", auto_pdf = TRUE)
+``` 
 
 There are two major output formats from Kraken2:
 
@@ -576,6 +582,9 @@ knitr::include_graphics(path = "figures/bracken.png", auto_pdf = TRUE)
 `Bracken` (Bayesian Reestimation of Abundance with KrakEN) uses taxonomy labels assigned by `Kraken2` to compute estimated abundances of species in a metagenomic sample. 
 
 ### Bracken: run
+```{r, fig.align = 'center',out.width= '10%', echo=FALSE }
+knitr::include_graphics(path = "figures/enter_key.png", auto_pdf = TRUE)
+``` 
 
 Just like with `Krona` we can use the `Kraken2` report files to run bracken.
 
@@ -594,6 +603,9 @@ Let's look at what those command line options do:
 - `-t 5`: This specifies the minimum number of reads required for a classification at the specified rank. Any classifications with fewer reads than the specified threshold will not receive additional reads from higher taxonomy levels when distributing reads for abundance estimation. Five has been chosen here for this example data but in real datasets you may want to increase this number (default is 10).
 
 ### Bracken: output
+```{r, fig.align = 'center',out.width= '10%', echo=FALSE }
+knitr::include_graphics(path = "figures/output.png", auto_pdf = TRUE)
+``` 
 
 The output file of `Bracken` contains the following columns:
 
@@ -609,7 +621,10 @@ Use `less` or `vim` to look at the bracken output.
 
 __Task__: Repeat the above commands for K2 and W1
 
-### Bracken: merging and extracting output
+### Bracken: merging output
+```{r, fig.align = 'center',out.width= '10%', echo=FALSE }
+knitr::include_graphics(path = "figures/merge.png", auto_pdf = TRUE)
+``` 
 
 To make full use of `Bracken` output, it is best to merge the output into one table. However before we do this we’ll copy the `Bracken` output of other samples that have been generated prior to the workshop. These are all either Korean or Western Diet samples.
 
@@ -633,6 +648,11 @@ Following these columns are the following two columns for each sample.
 
 - `${SampleName}.bracken_num`: The number of reads after abundance reestimation 
 - `${SampleName}.bracken_frac`: Relative abundance of the group in the sample
+
+### Bracken: extracting output
+```{r, fig.align = 'center',out.width= '10%', echo=FALSE }
+knitr::include_graphics(path = "figures/exctractor.png", auto_pdf = TRUE)
+``` 
 
 We want a file with only the first column (organism name) and the `bracken_num` columns for each sample. To carry this out we  first create a sequence of numbers that will match the `bracken_num` column numbers. These start at column 4 and are every even numbered column after this. In this case `seq` will create every `2` numbers from the numbers `4` to `50` with commas (`,`) as separators (`-s`). 
 
@@ -662,6 +682,9 @@ We will use `LEfSe` (Linear discriminant analysis Effect Size) to determine whic
 In essence it allows for the detection of biomarkers when comparing sample groups. In the `LEfSe` terminology the sample groups are called the class.
 
 ### LEfSe: add metadata
+```{r, fig.align = 'center',out.width= '10%', echo=FALSE }
+knitr::include_graphics(path = "figures/header.png", auto_pdf = TRUE)
+```
 
 We need to add metadata to our `Bracken` file to be ready for `LEfSe.` First we will copy the file so we have a backup in case we do anything wrong.
 
@@ -678,6 +701,9 @@ __Note__: The above is __diet__ followed by 12 __K__ and 12 __W__.
 The singular line should match the order of your samples within the file. This is the metadata line that `LEfSe` will use to determine which samples belong to each sample group, and therefore which to compare. In this case it is Korean diet samples versus Western diet samples.
 
 ### LEfSe: conda
+```{r, fig.align = 'center',out.width= '10%', echo=FALSE }
+knitr::include_graphics(path = "figures/conda.png", auto_pdf = TRUE)
+```
 
 `LEfSe` requires python2 whilst we have been using packages that required python3. We therefore need to use a different `conda` environment. We are currently using the `conda` env called `shotgun_meta` as represented by `(shotgun_meta)`. This was activated with the command `. useshotgun`.
 
@@ -691,6 +717,9 @@ cd ~/3-Taxonomy
 ```
 
 ### LEfSe: format
+```{r, fig.align = 'center',out.width= '10%', echo=FALSE }
+knitr::include_graphics(path = "figures/lefse_format.png", auto_pdf = TRUE)
+```
 
 We need to further format and preprocess our file with a `LEfSe` script.
 
@@ -705,6 +734,9 @@ lefse-format_input.py all_num.lefse.bracken all_num.lefse -c 1 -u 2 -o 1000000
 - `-o 1000000` : An integer can be indicated to determine to what size (count sum value) each sample should be normalised to. `LEfSe` developers recommend 1000000 (1 million) when very low values a present. We generally always use 1 million for consistency.
 
 ### LEfSe: run
+```{r, fig.align = 'center',out.width= '10%', echo=FALSE }
+knitr::include_graphics(path = "figures/enter_key.png", auto_pdf = TRUE)
+``` 
 
 Now to run `LEfSe.` All we need to do is run the command with the formatted input and provide an output file name.
 
@@ -723,6 +755,9 @@ The output file is a tab-delimited file which contains a row for each species. B
 The __LDA effect__ size indicates how much of an effect each biomarker has. The default is to only count a species with an LDA effect size of greater than 2 or less than -2 as a biomarker. The further the LDA effect size is from 0 the greater the effect the species causes.
 
 ### LEfSe: visualisation
+```{r, fig.align = 'center',out.width= '10%', echo=FALSE }
+knitr::include_graphics(path = "figures/bar_chart_horizontal.png", auto_pdf = TRUE)
+``` 
 
 Next we can visualise the output.
 
@@ -749,6 +784,9 @@ __Questions__:
 __Note__: In this instance green bars represent biomarkers in higher abundance in the W samples whilst the red bars represent biomarkers in higher abundance in the K samples.
 
 ## Kraken2 and Bracken databases
+```{r, fig.align = 'center',out.width= '15%', echo=FALSE }
+knitr::include_graphics(path = "figures/database.png", auto_pdf = TRUE)
+``` 
 
 In your own future analysis you will need to create your own `Kraken2` and `Bracken` databases. Please sse the following links on information for this:
 
@@ -777,6 +815,9 @@ knitr::include_graphics(path = "figures/humann2.png", auto_pdf = TRUE)
 First, we will carry out an example run of the software and briefly explore the output files. HUMAnN2 can take a long time to run so we will use a small amount of example data.
 
 ### HUMAnN2: conda, directories, and files
+```{r, fig.align = 'center',out.width= '10%', echo=FALSE }
+knitr::include_graphics(path = "figures/conda.png", auto_pdf = TRUE)
+```
 
 We need a new conda environment again. Open a new terminal (right click on the main screen background, choose `Applications` -> `Shell` -> `bash`) and run the below:
 
@@ -798,6 +839,9 @@ cp /pub39/tea/matthew/NEOF/Shotgun_metagenomics/humann2/demo.fq.gz .
 ```
 
 ### HUMAnN2: run
+```{r, fig.align = 'center',out.width= '10%', echo=FALSE }
+knitr::include_graphics(path = "figures/enter_key.png", auto_pdf = TRUE)
+``` 
 
 Now we will perform the run with HUMAnN2 so we can inspect the output files. 
 
@@ -813,6 +857,9 @@ Here, we are telling the software to use `demo.fq.gz` as input and to create a n
 As the software runs, you might notice that as part of the process, `HUMAnN2` runs `MetaPhlAn2.` The purpose of this is to identify what species are present in the sample, so `HUMAnN2` can tailor generate an appropriate database of genes (from those species) to map against. It will carry out this alignment against the gene database, then a protein database, and finally compute which gene families are present to determine which functional pathways are present and how abundant they are.
 
 ### HUMAnN2: output
+```{r, fig.align = 'center',out.width= '10%', echo=FALSE }
+knitr::include_graphics(path = "figures/output.png", auto_pdf = TRUE)
+``` 
 
 Once the run has completed, change into the newly created output directory and list the files that are there.
 
@@ -888,8 +935,8 @@ You will see there are 12 files prefixed with K and 12 prefixed with W, for the 
 
 __Note__: You can create an unstratified pathabundance file with a command like: `cat pathabundance.tsv | grep -v "|" > pathabundance.unstratified.tsv`. The `grep -v "|"` removes lines that contain `|` which the stratified lines should only contain.
 
-### Combining data
-```{r, fig.align = 'center',out.width= '15%', echo=FALSE }
+### HUMAnN2 comparison: combining data
+```{r, fig.align = 'center',out.width= '10%', echo=FALSE }
 knitr::include_graphics(path = "figures/merge.png", auto_pdf = TRUE)
 ``` 
 
@@ -905,8 +952,8 @@ This command will look for all tables in the `DietPathAbundance` directory and g
 less -S diet.tsv
 ```
 
-### Renormalising data
-```{r, fig.align = 'center',out.width= '15%', echo=FALSE }
+### HUMAnN2 comparison: renormalising data
+```{r, fig.align = 'center',out.width= '10%', echo=FALSE }
 knitr::include_graphics(path = "figures/normalisation.png", auto_pdf = TRUE)
 ``` 
 
@@ -938,12 +985,12 @@ humann2_renorm_table \
 
 This command generates the normalised data in the new table `diet.cpm.tsv`. The `--special n` option tells the script to remove all unmapped and unassigned values (__UNMAPPED__ & __UNINTEGRATED__) from the table.
 
-### Visualisation
+### HUMAnN2 comparison: PCA plot
 ```{r, fig.align = 'center',out.width= '15%', echo=FALSE }
 knitr::include_graphics(path = "figures/Scatterplot.png", auto_pdf = TRUE)
 ``` 
 
-Now that we have our data normalised, we can visualise the dataset to see how the two groups look, i.e. do samples in the same diet group appear to correlate well with each other and are they distinguishable from those from the other diet group? To do this, we will draw a PCA plot. So that the plot will show which samples are from which group, we will need to provide the script with some metadata. This has been prepared and can be copied over as follows
+Now that we have our data normalised, we can visualise the dataset to see how the two groups look, i.e. do samples in the same diet group appear to correlate well with each other and are they distinguishable from those from the other diet group? To do this, we will draw a PCA plot. We will need to provide the script with some metadata. This has been prepared and can be copied over as follows
 
 ```{bash eval=FALSE}
 cp /pub39/tea/matthew/NEOF/Shotgun_metagenomics/diet.metadata.tsv .
@@ -965,7 +1012,7 @@ Now we can view the plot.
 okular diet.pca.pdf &
 ```
 
-You should see 3 plots, each one plotting 2 of the first 3 principal components against each other (see following image). The axis of each plot also shows how much of the overall variance that that particular component accounts for. Blue and red dots show the Western and Korean diet samples, respectively, and samples that cluster closely together are more similar to each other.
+You should see 3 plots, each one plotting 2 of the first 3 principal components against each other. The axis of each plot also shows how much of the overall variance that that particular component accounts for. Blue and red dots show the Western and Korean diet samples, respectively, and samples that cluster closely together are more similar to each other.
 
 From this, we can see that there is some separation between the two dietary groups, but that they are not completely separated, i.e. there is some overlap. This can happen frequently with datasets such as this, that are likely to be much less controlled than laboratory samples and therefore show more between-group variance.
 
@@ -973,16 +1020,19 @@ From this, we can see that there is some separation between the two dietary grou
 knitr::include_graphics(path = "figures/PCA1.png", auto_pdf = TRUE)
 ```
 
-__Questions__: Is there anything unexpected about any of the samples, from these plots? If so, what might be a sensible course of action before proceeding with statistical analysis?
+__Questions__: 
 
-### Finding statistically significant differences
+- Is there anything unexpected about any of the samples, from these plots? 
+- If so, what might be a sensible course of action before proceeding with statistical analysis?
+
+### HUMAnN2 comparison: LEfSe
 ```{r, fig.align = 'center',out.width= '15%', echo=FALSE }
-knitr::include_graphics(path = "figures/lefse.png", auto_pdf = TRUE)
+knitr::include_graphics(path = "figures/lefse_flip.png", auto_pdf = TRUE)
 ``` 
 
-For the final part of this section, we will see if there are any statistically significant differences between the two sample groups. There are several ways in which this can be achieved but we will carry out LEfSe again.
+For the final part of this section, we will see if there are any statistically significant differences between the two sample groups. There are several ways in which this can be achieved but we will carry out `LEfSe` again.
 
-Go back to your LEfSe terminal (or create a new one and use `. uselefse`). Then change directory to `4-FunctionalProfiling`)
+__Task__: Go back to your `LEfSe` terminal (or create a new one and use `. uselefse`). Then change directory to `4-FunctionalProfiling`)
 
 First make a new copy of the file we will work on:
 
@@ -990,12 +1040,12 @@ First make a new copy of the file we will work on:
 cp diet.cpm.tsv diet.cpm.lefse.tsv
 ```
 
-Change the file `diet.cpm.lefse.tsv` with you favourite text editor to make it LEfSe compatible. 2 edits are required:
+Change the file `diet.cpm.lefse.tsv` with you favourite text editor to make it `LEfSe` compatible. 2 edits are required:
 
 1. Change the `# Pathway` in the first line to `name`.
-2. Add a new line at the top for the diet metadata (same as we did for the Bracken data)
+2. Add a new line at the top for the diet metadata (same as we did for the `Bracken` data).
 
-As you have carried out LEfSe already we will have one code box showing all the commands.
+As you have carried out `LEfSe` already we will have one code box showing all the commands.
 
 ```{bash eval=FALSE}
 #LEfSe format
@@ -1145,7 +1195,7 @@ Once the assembly is completed, we can look at the output FASTA file containing 
 less K1/final.contigs.fa
 ```
 
-### QUAST
+## QUAST
 
 We can also generate some metrics based on the assembly.
 
@@ -1195,11 +1245,6 @@ There is also a metaQUAST specifically for metagenome assemblies but it requires
 <!--chapter:end:10-Metagenome_assembly.Rmd-->
 
 # Genome binning
-```{r, fig.align = 'center',out.width= '10%', echo=FALSE }
-knitr::include_graphics(path = "figures/binning.png", auto_pdf = TRUE)
-``` 
-
-## Genomic binning and MAGs
 ```{r, fig.align = 'center',out.width= '40%', echo=FALSE }
 knitr::include_graphics(path = "figures/yarn_binning.png", auto_pdf = TRUE)
 ``` 
@@ -1220,7 +1265,18 @@ Binning produces "bins" of contigs of various quality (e.g. draft, complete). Th
 
 It is recommended to ensure you do not have a poor quality metagenome assembly. Binning requires contigs of good length and good coverage. Extremely low coverage and very short contigs will be excluded from binning.
 
-## Conda environment & directory
+## MetaBAT2
+```{r, fig.align = 'center',out.width= '10%', echo=FALSE }
+knitr::include_graphics(path = "figures/bat.png", auto_pdf = TRUE)
+``` 
+
+We will use `MetaBAT2` for our genome binning. It is a relatively new binning tool with three major upsides that makes it very popular:
+
+1. It has very reliable default parameters meaning virtually no parameter optimisation is required.
+2. It performs very well amongst genome binners.
+3. It is computationally efficient compared to other binners (requires less RAM, cores etc.)
+
+### MetaBAT2: Conda environment & directory
 ```{r, fig.align = 'center',out.width= '10%', echo=FALSE }
 knitr::include_graphics(path = "figures/conda.png", auto_pdf = TRUE)
 ``` 
@@ -1236,12 +1292,12 @@ mkdir -p ~/7-Binning/K1
 cd ~/7-Binning/K1
 ```
 
-## Depth calculation
+### MetaBAT2: depth calculation
 ```{r, fig.align = 'center',out.width= '10%', echo=FALSE }
 knitr::include_graphics(path = "figures/submarine.png", auto_pdf = TRUE)
 ``` 
 
-To carry out effective genome binning MetaBAT2 uses coverage information of the contigs. To calculate depth we need to align the reads to the metagenome assembly.
+To carry out effective genome binning `MetaBAT2` uses coverage information of the contigs. To calculate depth we need to align the reads to the metagenome assembly.
 
 For the alignment we will use `bwa`. We need to index our assembly file prior to alignment.
 
@@ -1257,7 +1313,7 @@ bwa mem ~/6-Assembly/K1/final.contigs.fa \
 K1.sam
 ```
 
-After alignment we need to get the file ready for the contig depth summarisation step. This requires converting the sam file to a bam (binary form of a sam file) file and then sorting the bam file.
+After alignment we need to get the file ready for the contig depth summarisation step. This requires converting the `sam` file to a `bam` (binary form of a `sam` file) file and then sorting the `bam` file.
 
 ```{bash eval=FALSE}
 # Convert sam to bam file
@@ -1266,11 +1322,10 @@ samtools view -bu K1.sam > K1.bam
 samtools sort K1.bam > K1.sort.bam
 ```
 
-Now we can summarise the contig depths from the sorted bame files with `MetaBAT`'s `jgi_summarize_bam_contig_depths` command.
+Now we can summarise the contig depths from the sorted `bam` files with `MetaBAT2`'s `jgi_summarize_bam_contig_depths` command.
 
 ```{bash eval=FALSE}
-jgi_summarize_bam_contig_depths --outputDepth K1.depth.txt \
-K1.sort.bam
+jgi_summarize_bam_contig_depths --outputDepth K1.depth.txt K1.sort.bam
 ```
 
 You can have a look at the depth file and you will notice there are many contigs with low coverage (<10) and of short length (<1500).
@@ -1298,7 +1353,7 @@ df <- read.table("K1.depth.txt", header=TRUE, check.names=FALSE)
 summary(df)
 ```
 
-We can see the numbers of the `contigLen` and `totalAvgDepth` are very low. However, this is most likely due to a bunch of short low coverage contigs which will be ignored by MetaBAT2. Therefore we will rows with information on contigs shorter than 1500 and rerun the summary. MetaBAT2's documentation dictates the minimum contig length should be >=1500 with its default being 2500.
+We can see the numbers of the `contigLen` and `totalAvgDepth` are very low. However, this is most likely due to a bunch of short low coverage contigs which will be ignored by `MetaBAT2`. Therefore we will remove rows with information on contigs shorter than 1500 and rerun the summary. `MetaBAT2`'s documentation dictates the minimum contig length should be >=1500 with its default being 2500.
 
 ```{r eval=FALSE}
 #Set the new object "df_min1500len" as all rows
@@ -1309,7 +1364,7 @@ df_min1500len <- df[df$contigLen >= 1500,]
 summary(df_min1500len)
 ```
 
-That is looking better, The minimum average coverage for MetaBAT2 is 1 which our minimum is higehr than. Now you can quit R and continue to running MetaBAT2.
+That is looking better. The minimum average coverage for `MetaBAT2` is 1 and our minimum is higher than that. Now you can quit R and continue.
 
 ```{r eval=FALSE}
 #quit R
@@ -1317,15 +1372,14 @@ q()
 #On the prompt to save your workspace press "n" and then enter.
 ```
 
-__Note__: One of the reasons for our short contigs is that we only used a subset of our sequencing datset for this tutorial due to time concerns.
+__Note__: One of the reasons for our short contigs is that we only used a subset of our sequencing dataset for this tutorial due to time concerns.
 
-
-## MetaBAT2
+### MetaBAT2: run
 ```{r, fig.align = 'center',out.width= '10%', echo=FALSE }
-knitr::include_graphics(path = "figures/bat.png", auto_pdf = TRUE)
+knitr::include_graphics(path = "figures/enter_key.png", auto_pdf = TRUE)
 ``` 
 
-With our assembly and its depth information we can run MetaBAT2 for binning.
+With our assembly and its depth information we can run `MetaBAT2` for binning.
 
 ```{bash eval=FALSE}
 #make a diretcory for the bins
@@ -1349,7 +1403,7 @@ ls bins
 knitr::include_graphics(path = "figures/CheckM.png", auto_pdf = TRUE)
 ``` 
 
-`CheckM` is a useful tool to assess the quality of assembled genomes. This can be used on assemblies produced from single cell, single isolate, or metagenome data. Additionally it can be used to identify bins that are likely candidates for merging. This occurs when one genome has been separated into different bins.
+`CheckM` is a useful tool to assess the quality of assembled genomes. This can be used on assemblies produced from single cell, single isolate, or metagenome data. Additionally, it can be used to identify bins that are likely candidates for merging. This occurs when one genome has been separated into different bins.
 
 An important part of CheckM is the ubiquitous and single-copy genes it utilises. It has sets of these genes for different phylogenetic lineages. With these it can determine:
 
@@ -1357,19 +1411,22 @@ An important part of CheckM is the ubiquitous and single-copy genes it utilises.
    - Does it contain genes only found in _Escherichia_?
 - How complete the bin/MAG is. A set of lineage specific genes should all be found in a genome belonging to the lineage (ubiquitous).
    - What percentage of these lineage specific genes are present in the MAG? 
-   - >95% is very good
-   - >80% is good
-   - >70% is ok
+   - \>95% is very good
+   - \>80% is good
+   - \>70% is ok
    - <70% is poor to poorer.
 - How contaminated is the bin/MAG?
    - Only one copy of each gene should be present (single-copy).
    - Are there any markers for other lineages present?
 
-### Conda
+### CheckM: Conda
+```{r, fig.align = 'center',out.width= '10%', echo=FALSE }
+knitr::include_graphics(path = "figures/conda.png", auto_pdf = TRUE)
+``` 
 
 Due to program version conflicts we will use the `checkm` conda environment for this section.
 
-Open a new terminal and activate the correct environment.
+Open a new terminal and activate the `checkm` environment.
 
 ```{bash eval=FALSE}
 . usecheckm
@@ -1381,11 +1438,14 @@ Ensure you are in the correct directory.
 cd ~/7-Binning/K1/
 ```
 
-### Running CheckM
+### CheckM: run
+```{r, fig.align = 'center',out.width= '10%', echo=FALSE }
+knitr::include_graphics(path = "figures/enter_key.png", auto_pdf = TRUE)
+``` 
 
-`CheckM` has many different commands. We will use on of the common workflows it provides called `lineage_wf`. This carries out four if its other commands in a workflow. This is useful as the commands provide the data needed for the following command.
+`CheckM` has many different commands. We will use one of the common workflows it provides called `lineage_wf`. This carries out four of its commands in a workflow (i.e. the next step uses output from the previous step).
 
-1. `tree` - Places bins in the reference genome tree. This reference tree comes with CheckM.
+1. `tree` - Places bins in the reference genome tree. This reference tree comes with `CheckM`.
 2. `lineage_set` - Infers lineage-specific marker sets for each bin. 
 3. `analyze` - Identifies marker genes in bins.
 4. `qa` - Assesses the bins for contamination and completeness.
@@ -1395,7 +1455,7 @@ Run the `CheckM` command (this will take a while):
 ```{bash eval=FALSE}
 checkm lineage_wf \
 --tab_table -f MAGS_checkm.tsv \
--x fa  \
+-x fa \
 bins/ checkm_output
 ```
 
@@ -1403,10 +1463,15 @@ The options we used are:
 
 - `--tab_table` : Prints results to a tab separated table.
 - `-f` : File name to print result to (if not specified results will go to stdout).
-- `-x` : Suffix/extension of bin files. Other file are ignored in the specified bin directory.
-   - `fa` is used as `MetaBAT2` produced fasta files ending in `.fa`.
+- `-x` : Suffix/extension of bin files. Other files are ignored in the specified bin directory.
+   - `fa` is used as our `MetaBAT2` produce fasta files end in `.fa`.
 - `bins` : The second last argument is the `bin_dir`, the directory containg all the bins in fasta format.
 - `checkm_output` : The last argument is the directory to store the output to. This directory should not exist prior to running.
+
+### CheckM: output
+```{r, fig.align = 'center',out.width= '10%', echo=FALSE }
+knitr::include_graphics(path = "figures/output.png", auto_pdf = TRUE)
+``` 
 
 When the command has finished look at the results table that is in your current directory.
 
@@ -1934,7 +1999,7 @@ LEfSe: https://huttenhower.sph.harvard.edu/lefse/
 
 HUMAnN2: https://github.com/biobakery/biobakery/wiki/humann2
 
-MetaPhlAn 2: https://huttenhower.sph.harvard.edu/metaphlan2/
+MetaPhlAn2: https://huttenhower.sph.harvard.edu/metaphlan2/
 
 Biobakery: https://github.com/biobakery/biobakery
 

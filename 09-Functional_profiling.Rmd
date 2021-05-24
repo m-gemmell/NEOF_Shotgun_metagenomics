@@ -13,6 +13,9 @@ knitr::include_graphics(path = "figures/humann2.png", auto_pdf = TRUE)
 First, we will carry out an example run of the software and briefly explore the output files. HUMAnN2 can take a long time to run so we will use a small amount of example data.
 
 ### HUMAnN2: conda, directories, and files
+```{r, fig.align = 'center',out.width= '10%', echo=FALSE }
+knitr::include_graphics(path = "figures/conda.png", auto_pdf = TRUE)
+```
 
 We need a new conda environment again. Open a new terminal (right click on the main screen background, choose `Applications` -> `Shell` -> `bash`) and run the below:
 
@@ -34,6 +37,9 @@ cp /pub39/tea/matthew/NEOF/Shotgun_metagenomics/humann2/demo.fq.gz .
 ```
 
 ### HUMAnN2: run
+```{r, fig.align = 'center',out.width= '10%', echo=FALSE }
+knitr::include_graphics(path = "figures/enter_key.png", auto_pdf = TRUE)
+``` 
 
 Now we will perform the run with HUMAnN2 so we can inspect the output files. 
 
@@ -49,6 +55,9 @@ Here, we are telling the software to use `demo.fq.gz` as input and to create a n
 As the software runs, you might notice that as part of the process, `HUMAnN2` runs `MetaPhlAn2.` The purpose of this is to identify what species are present in the sample, so `HUMAnN2` can tailor generate an appropriate database of genes (from those species) to map against. It will carry out this alignment against the gene database, then a protein database, and finally compute which gene families are present to determine which functional pathways are present and how abundant they are.
 
 ### HUMAnN2: output
+```{r, fig.align = 'center',out.width= '10%', echo=FALSE }
+knitr::include_graphics(path = "figures/output.png", auto_pdf = TRUE)
+``` 
 
 Once the run has completed, change into the newly created output directory and list the files that are there.
 
@@ -124,8 +133,8 @@ You will see there are 12 files prefixed with K and 12 prefixed with W, for the 
 
 __Note__: You can create an unstratified pathabundance file with a command like: `cat pathabundance.tsv | grep -v "|" > pathabundance.unstratified.tsv`. The `grep -v "|"` removes lines that contain `|` which the stratified lines should only contain.
 
-### Combining data
-```{r, fig.align = 'center',out.width= '15%', echo=FALSE }
+### HUMAnN2 comparison: combining data
+```{r, fig.align = 'center',out.width= '10%', echo=FALSE }
 knitr::include_graphics(path = "figures/merge.png", auto_pdf = TRUE)
 ``` 
 
@@ -141,8 +150,8 @@ This command will look for all tables in the `DietPathAbundance` directory and g
 less -S diet.tsv
 ```
 
-### Renormalising data
-```{r, fig.align = 'center',out.width= '15%', echo=FALSE }
+### HUMAnN2 comparison: renormalising data
+```{r, fig.align = 'center',out.width= '10%', echo=FALSE }
 knitr::include_graphics(path = "figures/normalisation.png", auto_pdf = TRUE)
 ``` 
 
@@ -174,7 +183,7 @@ humann2_renorm_table \
 
 This command generates the normalised data in the new table `diet.cpm.tsv`. The `--special n` option tells the script to remove all unmapped and unassigned values (__UNMAPPED__ & __UNINTEGRATED__) from the table.
 
-### Visualisation: HUMAnN2 PCA plot
+### HUMAnN2 comparison: PCA plot
 ```{r, fig.align = 'center',out.width= '15%', echo=FALSE }
 knitr::include_graphics(path = "figures/Scatterplot.png", auto_pdf = TRUE)
 ``` 
@@ -214,9 +223,9 @@ __Questions__:
 - Is there anything unexpected about any of the samples, from these plots? 
 - If so, what might be a sensible course of action before proceeding with statistical analysis?
 
-### Finding statistically significant differences for HUMAnN2 pathways
+### HUMAnN2 comparison: LEfSe
 ```{r, fig.align = 'center',out.width= '15%', echo=FALSE }
-knitr::include_graphics(path = "figures/lefse.png", auto_pdf = TRUE)
+knitr::include_graphics(path = "figures/lefse_flip.png", auto_pdf = TRUE)
 ``` 
 
 For the final part of this section, we will see if there are any statistically significant differences between the two sample groups. There are several ways in which this can be achieved but we will carry out `LEfSe` again.

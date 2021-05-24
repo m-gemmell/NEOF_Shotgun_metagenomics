@@ -1,9 +1,4 @@
 # Genome binning
-```{r, fig.align = 'center',out.width= '10%', echo=FALSE }
-knitr::include_graphics(path = "figures/binning.png", auto_pdf = TRUE)
-``` 
-
-## Genomic binning and MAGs
 ```{r, fig.align = 'center',out.width= '40%', echo=FALSE }
 knitr::include_graphics(path = "figures/yarn_binning.png", auto_pdf = TRUE)
 ``` 
@@ -24,7 +19,18 @@ Binning produces "bins" of contigs of various quality (e.g. draft, complete). Th
 
 It is recommended to ensure you do not have a poor quality metagenome assembly. Binning requires contigs of good length and good coverage. Extremely low coverage and very short contigs will be excluded from binning.
 
-## Conda environment & directory
+## MetaBAT2
+```{r, fig.align = 'center',out.width= '10%', echo=FALSE }
+knitr::include_graphics(path = "figures/bat.png", auto_pdf = TRUE)
+``` 
+
+We will use `MetaBAT2` for our genome binning. It is a relatively new binning tool with three major upsides that makes it very popular:
+
+1. It has very reliable default parameters meaning virtually no parameter optimisation is required.
+2. It performs very well amongst genome binners.
+3. It is computationally efficient compared to other binners (requires less RAM, cores etc.)
+
+### MetaBAT2: Conda environment & directory
 ```{r, fig.align = 'center',out.width= '10%', echo=FALSE }
 knitr::include_graphics(path = "figures/conda.png", auto_pdf = TRUE)
 ``` 
@@ -40,12 +46,12 @@ mkdir -p ~/7-Binning/K1
 cd ~/7-Binning/K1
 ```
 
-## Depth calculation
+### MetaBAT2: depth calculation
 ```{r, fig.align = 'center',out.width= '10%', echo=FALSE }
 knitr::include_graphics(path = "figures/submarine.png", auto_pdf = TRUE)
 ``` 
 
-To carry out effective genome binning MetaBAT2 uses coverage information of the contigs. To calculate depth we need to align the reads to the metagenome assembly.
+To carry out effective genome binning `MetaBAT2` uses coverage information of the contigs. To calculate depth we need to align the reads to the metagenome assembly.
 
 For the alignment we will use `bwa`. We need to index our assembly file prior to alignment.
 
@@ -61,7 +67,7 @@ bwa mem ~/6-Assembly/K1/final.contigs.fa \
 K1.sam
 ```
 
-After alignment we need to get the file ready for the contig depth summarisation step. This requires converting the sam file to a bam (binary form of a sam file) file and then sorting the bam file.
+After alignment we need to get the file ready for the contig depth summarisation step. This requires converting the `sam` file to a `bam` (binary form of a `sam` file) file and then sorting the `bam` file.
 
 ```{bash eval=FALSE}
 # Convert sam to bam file
@@ -70,11 +76,10 @@ samtools view -bu K1.sam > K1.bam
 samtools sort K1.bam > K1.sort.bam
 ```
 
-Now we can summarise the contig depths from the sorted bame files with `MetaBAT`'s `jgi_summarize_bam_contig_depths` command.
+Now we can summarise the contig depths from the sorted `bam` files with `MetaBAT2`'s `jgi_summarize_bam_contig_depths` command.
 
 ```{bash eval=FALSE}
-jgi_summarize_bam_contig_depths --outputDepth K1.depth.txt \
-K1.sort.bam
+jgi_summarize_bam_contig_depths --outputDepth K1.depth.txt K1.sort.bam
 ```
 
 You can have a look at the depth file and you will notice there are many contigs with low coverage (<10) and of short length (<1500).
@@ -102,7 +107,7 @@ df <- read.table("K1.depth.txt", header=TRUE, check.names=FALSE)
 summary(df)
 ```
 
-We can see the numbers of the `contigLen` and `totalAvgDepth` are very low. However, this is most likely due to a bunch of short low coverage contigs which will be ignored by MetaBAT2. Therefore we will rows with information on contigs shorter than 1500 and rerun the summary. MetaBAT2's documentation dictates the minimum contig length should be >=1500 with its default being 2500.
+We can see the numbers of the `contigLen` and `totalAvgDepth` are very low. However, this is most likely due to a bunch of short low coverage contigs which will be ignored by `MetaBAT2`. Therefore we will remove rows with information on contigs shorter than 1500 and rerun the summary. `MetaBAT2`'s documentation dictates the minimum contig length should be >=1500 with its default being 2500.
 
 ```{r eval=FALSE}
 #Set the new object "df_min1500len" as all rows
@@ -113,7 +118,7 @@ df_min1500len <- df[df$contigLen >= 1500,]
 summary(df_min1500len)
 ```
 
-That is looking better, The minimum average coverage for MetaBAT2 is 1 which our minimum is higehr than. Now you can quit R and continue to running MetaBAT2.
+That is looking better. The minimum average coverage for `MetaBAT2` is 1 and our minimum is higher than that. Now you can quit R and continue.
 
 ```{r eval=FALSE}
 #quit R
@@ -121,15 +126,14 @@ q()
 #On the prompt to save your workspace press "n" and then enter.
 ```
 
-__Note__: One of the reasons for our short contigs is that we only used a subset of our sequencing datset for this tutorial due to time concerns.
+__Note__: One of the reasons for our short contigs is that we only used a subset of our sequencing dataset for this tutorial due to time concerns.
 
-
-## MetaBAT2
+### MetaBAT2: run
 ```{r, fig.align = 'center',out.width= '10%', echo=FALSE }
-knitr::include_graphics(path = "figures/bat.png", auto_pdf = TRUE)
+knitr::include_graphics(path = "figures/enter_key.png", auto_pdf = TRUE)
 ``` 
 
-With our assembly and its depth information we can run MetaBAT2 for binning.
+With our assembly and its depth information we can run `MetaBAT2` for binning.
 
 ```{bash eval=FALSE}
 #make a diretcory for the bins
@@ -153,7 +157,7 @@ ls bins
 knitr::include_graphics(path = "figures/CheckM.png", auto_pdf = TRUE)
 ``` 
 
-`CheckM` is a useful tool to assess the quality of assembled genomes. This can be used on assemblies produced from single cell, single isolate, or metagenome data. Additionally it can be used to identify bins that are likely candidates for merging. This occurs when one genome has been separated into different bins.
+`CheckM` is a useful tool to assess the quality of assembled genomes. This can be used on assemblies produced from single cell, single isolate, or metagenome data. Additionally, it can be used to identify bins that are likely candidates for merging. This occurs when one genome has been separated into different bins.
 
 An important part of CheckM is the ubiquitous and single-copy genes it utilises. It has sets of these genes for different phylogenetic lineages. With these it can determine:
 
@@ -161,19 +165,22 @@ An important part of CheckM is the ubiquitous and single-copy genes it utilises.
    - Does it contain genes only found in _Escherichia_?
 - How complete the bin/MAG is. A set of lineage specific genes should all be found in a genome belonging to the lineage (ubiquitous).
    - What percentage of these lineage specific genes are present in the MAG? 
-   - >95% is very good
-   - >80% is good
-   - >70% is ok
+   - \>95% is very good
+   - \>80% is good
+   - \>70% is ok
    - <70% is poor to poorer.
 - How contaminated is the bin/MAG?
    - Only one copy of each gene should be present (single-copy).
    - Are there any markers for other lineages present?
 
-### Conda
+### CheckM: Conda
+```{r, fig.align = 'center',out.width= '10%', echo=FALSE }
+knitr::include_graphics(path = "figures/conda.png", auto_pdf = TRUE)
+``` 
 
 Due to program version conflicts we will use the `checkm` conda environment for this section.
 
-Open a new terminal and activate the correct environment.
+Open a new terminal and activate the `checkm` environment.
 
 ```{bash eval=FALSE}
 . usecheckm
@@ -185,11 +192,14 @@ Ensure you are in the correct directory.
 cd ~/7-Binning/K1/
 ```
 
-### Running CheckM
+### CheckM: run
+```{r, fig.align = 'center',out.width= '10%', echo=FALSE }
+knitr::include_graphics(path = "figures/enter_key.png", auto_pdf = TRUE)
+``` 
 
-`CheckM` has many different commands. We will use on of the common workflows it provides called `lineage_wf`. This carries out four if its other commands in a workflow. This is useful as the commands provide the data needed for the following command.
+`CheckM` has many different commands. We will use one of the common workflows it provides called `lineage_wf`. This carries out four of its commands in a workflow (i.e. the next step uses output from the previous step).
 
-1. `tree` - Places bins in the reference genome tree. This reference tree comes with CheckM.
+1. `tree` - Places bins in the reference genome tree. This reference tree comes with `CheckM`.
 2. `lineage_set` - Infers lineage-specific marker sets for each bin. 
 3. `analyze` - Identifies marker genes in bins.
 4. `qa` - Assesses the bins for contamination and completeness.
@@ -199,7 +209,7 @@ Run the `CheckM` command (this will take a while):
 ```{bash eval=FALSE}
 checkm lineage_wf \
 --tab_table -f MAGS_checkm.tsv \
--x fa  \
+-x fa \
 bins/ checkm_output
 ```
 
@@ -207,10 +217,15 @@ The options we used are:
 
 - `--tab_table` : Prints results to a tab separated table.
 - `-f` : File name to print result to (if not specified results will go to stdout).
-- `-x` : Suffix/extension of bin files. Other file are ignored in the specified bin directory.
-   - `fa` is used as `MetaBAT2` produced fasta files ending in `.fa`.
+- `-x` : Suffix/extension of bin files. Other files are ignored in the specified bin directory.
+   - `fa` is used as our `MetaBAT2` produce fasta files end in `.fa`.
 - `bins` : The second last argument is the `bin_dir`, the directory containg all the bins in fasta format.
 - `checkm_output` : The last argument is the directory to store the output to. This directory should not exist prior to running.
+
+### CheckM: output
+```{r, fig.align = 'center',out.width= '10%', echo=FALSE }
+knitr::include_graphics(path = "figures/output.png", auto_pdf = TRUE)
+``` 
 
 When the command has finished look at the results table that is in your current directory.
 
