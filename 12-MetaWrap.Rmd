@@ -1,0 +1,45 @@
+# MetaWRAP
+```{r, fig.align = 'center',out.width= '40%', echo=FALSE }
+knitr::include_graphics(path = "figures/yarn_binning.png", auto_pdf = TRUE)
+``` 
+
+`MetaWRAP` is a very useful program with many tools for metagenome analysis. We will only use it to improve our bins and carry out some downstream analysis. However, it can be used from the start of shotgun metagenomic analysis. I recommend looking at the manual for your future projects (link in appendix).
+
+## Bin refinement
+
+`MetaWRAP` has a function called `bin_refinement`. This function can utilise bins from different programs and parameters to produce a consolidated, improved bin set. Additionally, `MetaWRAP` has a `binning` function which will produce three sets of bins from reads. This is carried out with the `MaxBin2`, `MetaBAT2`, and `CONCOCT` binners.
+
+We are not carrying this method as running multiple binners would take too many resources and too much time for this workshop. However, if you have a powerful HPC and the time, this would be a good method.
+
+## Bin reassembly
+
+The first `MetaWRAP` command we will run is `reassemble_bins`. This aims to improve the previous assembled bins. It carried this out by mapping paired reads to the metagenome assembly. Then the program separates the reads based on the bin the mapped contig belongs to. Reassembly is carried out with SPAdes using the `--carefull` option and contigs shorter than 1kbp are removed. 
+
+The program will have 3 assemblies to choose between for each bin:
+
+- The original assembled bin.
+- A strict reassembled bin: This is assembled with reads that perfectly aligned to the bin's contigs.
+- A permissive reassembled bin: This is assembled with reads that mapped with <3 mismatches.
+
+The best assembly is chosen based on the highest score of Completion-(5*Contamination). This assembly is then added to the final bin set.
+
+For speed (even this will take a while) we will run the bin reassembly on our small dataset of K1.
+
+```{bash eval=FALSE}
+metawrap reassemble_bins \
+-o ~/8-metawrap/K1 \
+-b ~/7-Binning/K1/bins/ \
+-1 ~/2-Trimmed/K1_R1.final.fastq \
+-2 ~/2-Trimmed/K1_R2.final.fastq \
+-t 8
+```
+
+The options provides are:
+
+- `-o`: The output directory. `MetaWRAP` seems to prefer being given the absolute path. Additionally if the command fails you can rerun it and it will pick up from where you last left off based on the files in the output directory.
+- `-b`: The directory with bins to be reassembled.
+- `-1` & `-2`: The forward and reverse paired reads for the sample.
+
+
+
+Initially only 2 bins were created with `MetaBAT2` (this can be checked with `less ~/7-Binning/K1/MAGS_checkm.tsv`).

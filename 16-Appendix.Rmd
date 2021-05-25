@@ -43,6 +43,8 @@ MetaBAT2: https://bitbucket.org/berkeleylab/metabat/src/master/
 
 CheckM: https://github.com/Ecogenomics/CheckM/wiki
 
+MetaWRAP: https://github.com/bxlab/metaWRAP
+
 ## COG Cateories
 
 - CELLULAR PROCESSES AND SIGNALING
