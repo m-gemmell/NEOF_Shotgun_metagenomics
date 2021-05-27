@@ -11,9 +11,33 @@ knitr::include_graphics(path = "figures/yarn_binning.png", auto_pdf = TRUE)
 
 We are not carrying this method as running multiple binners would take too many resources and too much time for this workshop. However, if you have a powerful HPC and the time, this would be a good method.
 
+## Quantify bins
+
+As recommended by the `MetaWRAP` developers the next step after bin refinement (which we skipped) is bin quanitification.
+
+
+```{bash eval=FALSE}
+#Ensure in correct directory
+cd ~/8-MetaWRAP
+#make new directory for output
+mkdir quant_bins
+#Command requires names of fastq files to end in _1.fastq and _2.fastq
+#Therefore use symbolic links to make file paths with correct names
+mkdir quant_bins/fastq
+ln -s ~/2-Trimmed/
+
+#Run command
+metawrap quant_bins \
+-o ~/8-MetaWRAP/quant_bins/K1 \
+-b ~/7-Binning/K1/bins \
+-a ~/6-Assembly/K1/final.contigs.fa \
+-t 8 \
+~/8-MetaWRAP/quant_bins/fastq/K1*.fastq
+```
+
 ## Bin reassembly
 
-The first `MetaWRAP` command we will run is `reassemble_bins`. This aims to improve the previous assembled bins. It carried this out by mapping paired reads to the metagenome assembly. Then the program separates the reads based on the bin the mapped contig belongs to. Reassembly is carried out with SPAdes using the `--carefull` option and contigs shorter than 1kbp are removed. 
+The next `MetaWRAP` command we will run is `reassemble_bins`. This aims to improve the previous assembled bins which will improve downstream annotations. It carries this out by mapping paired reads to the metagenome assembly. Then the program separates the reads based on the bin the mapped contig belongs to. Reassembly is carried out with SPAdes using the `--carefull` option and contigs shorter than 1kbp are removed. 
 
 The program will have 3 assemblies to choose between for each bin:
 
@@ -26,20 +50,31 @@ The best assembly is chosen based on the highest score of Completion-(5*Contamin
 For speed (even this will take a while) we will run the bin reassembly on our small dataset of K1.
 
 ```{bash eval=FALSE}
+#Make directory
+mkdir -p ~/8-MetaWRAP/reassemble_bins
+cd ~/8-MetaWRAP
+#Run command
 metawrap reassemble_bins \
--o ~/8-metawrap/K1 \
+-o ~/8-metawrap/reassemble_bins/K1 \
 -b ~/7-Binning/K1/bins/ \
 -1 ~/2-Trimmed/K1_R1.final.fastq \
 -2 ~/2-Trimmed/K1_R2.final.fastq \
 -t 8
 ```
 
-The options provides are:
+The options are:
 
 - `-o`: The output directory. `MetaWRAP` seems to prefer being given the absolute path. Additionally if the command fails you can rerun it and it will pick up from where you last left off based on the files in the output directory.
 - `-b`: The directory with bins to be reassembled.
 - `-1` & `-2`: The forward and reverse paired reads for the sample.
 
+Just as before we will look at the results of the full dataset that has been made before the workshop.
+
+```{bash eval=FALSE}
+ln -s 
+```
 
 
-Initially only 2 bins were created with `MetaBAT2` (this can be checked with `less ~/7-Binning/K1/MAGS_checkm.tsv`).
+
+
+

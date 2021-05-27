@@ -1,0 +1,46 @@
+# MetaWRAP
+```{r, fig.align = 'center',out.width= '20%', echo=FALSE }
+knitr::include_graphics(path = "figures/mummy.png", auto_pdf = TRUE)
+``` 
+
+`MetaWRAP` is a very useful program with many tools for metagenome analysis. It contains wrapper scripts, scripts that utilise other programs (e.g. megahit, CONCOCT, PROKKA, etc.). 
+
+`MetaWRAP` can be used to carry out an entire metagenome assembly/co-assembly approach workflow. Its processes include:
+
+- Read QC
+- Metagenome assembly
+- Taxonomic annotation
+- Binning
+- Bin refinement
+- Bin reassembly
+- Bin quantification
+- Blobology
+- Bin taxonomy classification
+- Bin functional annotation
+
+## Tutorial
+
+As an extra for this workshop we have provided the files and an environment on the webVNC to carry out the `MetaWRAP` online tutorial:
+
+https://github.com/bxlab/metaWRAP/blob/master/Usage_tutorial.md
+
+Follow the below instructions to make a new directory and make a symbolic link to the files that you would otherwise have to download in step 0 of the tutorial.
+
+```{bash eval=FALSE}
+mkdir ~/MetaWRAP_tut
+cd ~/MetaWRAP_tut
+ln -s /pub39/tea/matthew/NEOF/Shotgun_metagenomics/
+```
+
+Now to activate a `MetaWRAP` environment. The first step is to use `chos 8` which is a custom command for our cluster. It will CHange the Unix OS to version 8 as version 7 (default in our cluster) is too old for some of the programs.
+
+```{bash eval=FALSE}
+#CHange OS
+chos 8
+#Activate metawrap environment
+. usemetawrap
+```
+
+Now you can carry on with the online tutorial if you wish.
+
+__Note__: This has not been fully tested and the environment may not fully work. This is the joys of bioinformatics.

@@ -66,9 +66,9 @@ knitr::include_graphics(path = "figures/merging_paired_reads.png", auto_pdf = TR
 
 Once we have longer stitched reads, we can increase the k-mer length for our assembly. 
 
-There are a number of pieces of software that can be used to stitch reads (e.g. Pear,  Pandaseq) but today we will use one called FLASH:
+There are a number of pieces of software that can be used to stitch reads (e.g. `Pear`,  `Pandaseq`) but today we will use one called `FLASH`:
 
-Make a new output directory for the stitched reads and run FLASH:
+Make a new output directory for the stitched reads and run `FLASH`:
 
 ```{bash eval=FALSE}
 #Change directory to home
@@ -81,7 +81,7 @@ flash  -o K1 -z -t 12 -d . \
 ../2-Trimmed/K1_R1.fq.gz ../2-Trimmed/K1_R2.fq.gz
 ```
 
-Here, we are telling flash to use an output file name prefix of K1, that the input is zipped, that the output directory is here (.) and to use the two read files for Sample K1. Once FLASH has finished running, it will display on screen how well the stitching process went, in this case a low amount of reads were combined. Have a look what files have been generated.
+Here, we are telling `FLASH` to use an output file name prefix of K1, that the input is zipped, that the output directory is here (.) and to use the two read files for Sample K1. Once `FLASH` has finished running, it will display on screen how well the stitching process went, in this case a low amount of reads were combined. Have a look what files have been generated.
 
 ```{bash eval=FALSE}
 ls
@@ -102,7 +102,7 @@ Scroll down with the down key and you will see that we are looking at a histogra
 knitr::include_graphics(path = "figures/assembly_line.png", auto_pdf = TRUE)
 ``` 
 
-Create a new directory to store our assembly in and run the metagenome assembler MEGAHIT using our newly stitched read data.
+Create a new directory to store our assembly in and run the metagenome assembler `MEGAHIT` using our newly stitched read data.
 
 ```{bash eval=FALSE}
 cd ..
@@ -117,9 +117,9 @@ megahit \
 --k-list 29,49,69,89,109,129,149,169,189
 ```
 
-Here, you have instructed MEGAHIT to use both the stitched and unstitched reads, to output the assembly in a subdirectory called K1 and to use 12 CPUs. 
+Here, you have instructed `MEGAHIT` to use both the stitched and unstitched reads, to output the assembly in a subdirectory called K1 and to use 12 CPUs. 
 
-The last option `--k-list` instructs MEGAHIT to first generate an assembly using a k-mer size of 29 bp and when that is complete, integrate the results into an assembly using a k-mer size of 49 bp, and so on up to a final iteration using a k-mer size of 189 bp. This large range of k-mer lengths should give us a good assembly, given the data. However, it may take a while to run so this might be a good time to either read on. 
+The last option `--k-list` instructs `MEGAHIT` to first generate an assembly using a k-mer size of 29 bp and when that is complete, integrate the results into an assembly using a k-mer size of 49 bp, and so on up to a final iteration using a k-mer size of 189 bp. This large range of k-mer lengths should give us a good assembly, given the data. However, it may take a while to run so this might be a good time to either read on. 
 
 If you need a command prompt (your current one is gone because MEGAHIT is running), right click on the main screen, choose `Applications` -> `Shell` -> `bash`.
 
@@ -142,7 +142,7 @@ Open a new terminal (right click on the main screen, choose `Applications` -> `S
 . usegenoassess
 ```
 
-We will use QUAST for genome contiguity assessment but first we will change directory to `6-Assembly` and create a directory for the QUAST output.
+We will use `QUAST` for genome contiguity assessment but first we will change directory to `6-Assembly` and create a directory for the `QUAST` output.
 
 ```{bash eval=FALSE}
 #Change directory

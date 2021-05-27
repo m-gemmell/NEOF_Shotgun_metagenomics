@@ -228,11 +228,11 @@ The options we used are:
 knitr::include_graphics(path = "figures/output.png", auto_pdf = TRUE)
 ``` 
 
-As we have only used a subset of data the results are not very good so let us use premade results. These premade results were produced using the entire K1 dataset. First you will need to copy it over.
+As we have only used a subset of data the results are not very good so let us look at premade results. These premade results were produced using the entire K1 dataset. First you will need to copy it over.
 
 ```{bash eval=FALSE}
 cd ~/7-Binning
-cp -r /pub39/tea/matther/NEOF/Shotgun_metagenomics/binning/K1_fullset/ .
+ln -s /pub39/tea/matther/NEOF/Shotgun_metagenomics/binning/K1_fullset/ .
 cd K1_fullset
 ```
 
@@ -292,3 +292,5 @@ Once you are happy you can quit `R`.
 ```{r eval=FALSE}
 q()
 ```
+
+It is always useful to know the quality of your bins so you know which are more reliable than others. With that information you can be more or less certain when concluding your findings.

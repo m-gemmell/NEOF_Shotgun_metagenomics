@@ -391,7 +391,7 @@ If there is no host genome available before you start your sample collections an
 
 This chapter contains a small example on how to carry out host removal. It uses only a section of a human (host of our samples) reference genome assembly. IN real life you should use the entire reference.
 
-First step is to copy over the reference fasta file we will use.
+The first step is to copy over the reference fasta file we will use.
 
 ```{bash eval=FALSE}
 cp /pub39/tea/matthew/NEOF/Shotgun_metagenomics/GRCh38_slice.fasta .
@@ -1474,11 +1474,11 @@ The options we used are:
 knitr::include_graphics(path = "figures/output.png", auto_pdf = TRUE)
 ``` 
 
-As we have only used a subset of data the results are not very good so let us use premade results. These premade results were produced using the entire K1 dataset. First you will need to copy it over.
+As we have only used a subset of data the results are not very good so let us look at premade results. These premade results were produced using the entire K1 dataset. First you will need to copy it over.
 
 ```{bash eval=FALSE}
 cd ~/7-Binning
-cp -r /pub39/tea/matther/NEOF/Shotgun_metagenomics/binning/K1_fullset/ .
+ln -s /pub39/tea/matther/NEOF/Shotgun_metagenomics/binning/K1_fullset/ .
 cd K1_fullset
 ```
 
@@ -1539,51 +1539,168 @@ Once you are happy you can quit `R`.
 q()
 ```
 
+It is always useful to know the quality of your bins so you know which are more reliable than others. With that information you can be more or less certain when concluding your findings.
+
 <!--chapter:end:11-Genome_binning.Rmd-->
 
-# MetaWRAP
+# MAG annotation
 ```{r, fig.align = 'center',out.width= '40%', echo=FALSE }
 knitr::include_graphics(path = "figures/yarn_binning.png", auto_pdf = TRUE)
 ``` 
 
-`MetaWRAP` is a very useful program with many tools for metagenome analysis. We will only use it to improve our bins and carry out some downstream analysis. However, it can be used form the start of shotgun metagenomic analysis. I recommend look at the manual for the future (link in appendix).
+## PhyloPhlAn3
 
-## Bin refinement
+There are ways to improve a metagenome assembly which we will touch on later. For now we will will carry out taxonomic annotation of our bins with `PhyloPhlAn3`, another biobakery package.
 
-`MetaWRAP` has a function called `bin_refinement`. This function can utilise bins from different programs and parameters to produce a consolidated, improved bin set. Additionally, `MetaWRAP` has a `binning` function which will produce three sets of bins from a reads. This is carried out with `MaxBin2`, `metaBAT2`, and `CONCOCT`.
-
-We are not carrying this method as running multiple binners would take too many resources and too much time for this workshop. However, if you have a powerful HPC and the time this would be a good method.
-
-## Bin reassembly
-
-The first `MetaWRAP` command we will run is `reassemble_bins`. This aims to improve the previous assembled bins. It carried this out by mapping paired reads to the metagenome assembly. Then the program separates the mapped reads based on the bin the contig it aligned to belongs to. Reassembly is carried out with SPAdes using the `--carefull` option and contigs shorter than 1kp are removed. The program then has 3 assemblies for each bin:
-
-- The original assembled bin.
-- A strict reassembled bin: This is assembled with reads that perfectly aligned to the bin contigs.
-- A permissive reassembled bin: This is assembled with reads that mapped with <3 mismatches.
-
-The best assembly is chosen based on the highest score of Completion-(5*Contamination). This assembly is then added ot the final bin set.
-
-For speed (even this will take a while) we will run the bin reassembly on our small dataset of K1.
-
-```{bash eval=FALSE}
-metawrap reassemble_bins \
--o K1 -b ~/7-Binning/K1/bins/ \
--1 ~/2-Trimmed/K1_R1.final.fastq \
--2 ~/2-Trimmed/K1_R2.final.fastq \
--t 8
+### PhyloPhlAn3: conda and directories
+```{r, fig.align = 'center',out.width= '10%', echo=FALSE }
+knitr::include_graphics(path = "figures/conda.png", auto_pdf = TRUE)
 ```
 
-Initially only 2 bins were created with `MetaBAT2` (this can be checked with `less ~/7-Binning/K1/MAGS_checkm.tsv`).
+We need a new conda environment again. Open a new terminal (right click on the main screen background, choose `Applications` -> `Shell` -> `bash`) and run the below:
 
-<!--chapter:end:12-MetaWrap.Rmd-->
+```{bash eval=FALSE}
+. usehumann2
+```
 
-# Appendix
-```{r, fig.align = 'center',out.width= '30%', echo=FALSE }
-knitr::include_graphics(path = "figures/quality_trimming_and_filtering.png", auto_pdf = TRUE)
+Make a new directory and move into it.
+
+```{bash eval=FALSE}
+mkdir ~/8-phylophlan
+cd ~/8-phlyophlan
+```
+
+### PhyloPhlAn3: configuration files
+
+`PhyloPhlAn3` utilises configuration files which contain parameter options that the program can use. Some programs use these and it can be quite tedious to create them. Thankfully `PhyloPhlAn3` has a command that creates four different default config files. 
+
+Use the below command to create the 4 configuration files (`.cfg`) in a new directory.
+
+```{bash eval=FALSE}
+#Make config directory
+mkdir config
+#Run command
+phylophlan_write_default_configs.sh ./config
+```
+
+A lot of output will be printed to screen but this can be ignored if no errors popped up. If you list the contents of the directory (`ls ./config`) you will notice the following four files:
+
+- `supermatrix_aa.cfg`: Super matrix (or concatenation) pipeline (default) pipeline that will use a protein database.
+- `supermatrix_nt.cfg`: Super matrix (or concatenation) pipeline (default) pipeline that will use a nucleotide database.
+- `supertree_aa.cfg`: Supertree (or gene trees) pipeline (recommended when building a large phylogeny) that will use a protein database.
+- `supertree_nt.cfg`: Supertree (or gene trees) pipeline (recommended when building a large phylogeny) that will use a nucleotide database.
+
+### PhyloPhlAn3: run
+
+Now with our configuration files we can run the `PhyloPhlAn` command.
+
+```{bash eval=FALSE}
+phylophlan \
+-i ~/7-Binning/K1/bins \
+--genome_extension .fa \
+--output_folder ./K1 \
+-d phylophlan \
+-f config/supermatrix_aa.cfg \
+--diversity medium \
+--fast --nproc 8
+```
+
+The parameters and options are:
+
+- `-i`: Input directory with the genomes/metagenomes in fasta files we want the program to taxonomically annotate.
+- `--genome_extension`: This is the suffix of our genome/metagenome fasta file. The default is `.fna`.
+- `--output_folder`: Directory the output will be stored to.
+- `-d`: This is the name of the database of markers to be used.
+   - `PhyloPhlAn3` has 2 databases that can be automatically downloaded:
+      - PhyloPhlAn (`-d phylophlan`): 400 universal marker genes.
+      - AMPHORA2 (`-d amphora2`): 136 universal marker genes.
+   - Custom databases can becreated and used: https://github.com/biobakery/phylophlan/wiki#database-setup
+- `-f`: Specified the config file to be used.
+   - We used the `supermatrix_aa.cfg` file as our database (PhyloPhlan) is a protein database and we want to use the default supermatrix pipeline.
+- `--diversity`: This chooses a set of pre-defined options based on the expected diveristy of the phylogeny to be built.
+   -`low`: Species and strain level phylogenies.
+   -`medium`: Genus and family level phylogenies.
+   -`high`: Tree-of-life and higher-ranked taxonomic levels phylogenies.
+
+
+
+<!--chapter:end:12-MAG_annotation.Rmd-->
+
+# MetaWRAP
+```{r, fig.align = 'center',out.width= '20%', echo=FALSE }
+knitr::include_graphics(path = "figures/mummy.png", auto_pdf = TRUE)
 ``` 
 
+`MetaWRAP` is a very useful program with many tools for metagenome analysis. It contains wrapper scripts, scripts that utilise other programs (e.g. megahit, CONCOCT, PROKKA, etc.). 
+
+`MetaWRAP` can be used to carry out an entire metagenome assembly/co-assembly approach workflow. Its processes include:
+
+- Read QC
+- Metagenome assembly
+- Taxonomic annotation
+- Binning
+- Bin refinement
+- Bin reassembly
+- Bin quantification
+- Blobology
+- Bin taxonomy classification
+- Bin functional annotation
+
+## Tutorial
+
+As an extra for this workshop we have provided the files and an environment on the webVNC to carry out the `MetaWRAP` online tutorial:
+
+https://github.com/bxlab/metaWRAP/blob/master/Usage_tutorial.md
+
+Follow the below instructions to make a new directory and make a symbolic link to the files that you would otherwise have to download in step 0 of the tutorial.
+
+```{bash eval=FALSE}
+mkdir ~/MetaWRAP_tut
+cd ~/MetaWRAP_tut
+ln -s /pub39/tea/matthew/NEOF/Shotgun_metagenomics/
+```
+
+Now to activate a `MetaWRAP` environment. The first step is to use `chos 8` which is a custom command for our cluster. It will CHange the Unix OS to version 8 as version 7 (default in our cluster) is too old for some of the programs.
+
+```{bash eval=FALSE}
+#CHange OS
+chos 8
+#Activate metawrap environment
+. usemetawrap
+```
+
+Now you can carry on with the online tutorial if you wish.
+
+__Note__: This has not been fully tested and the environment may not fully work. This is the joys of bioinformatics.
+
+<!--chapter:end:13-MetaWrap.Rmd-->
+
+# Appendix
+```{r, fig.align = 'center',out.width= '25%', echo=FALSE }
+knitr::include_graphics(path = "figures/appendix.png", auto_pdf = TRUE)
+``` 
+
+## Next steps
+```{r, fig.align = 'center',out.width= '15%', echo=FALSE }
+knitr::include_graphics(path = "figures/step.png", auto_pdf = TRUE)
+``` 
+
+Below are some good links to start with before carrying out your own projects.
+
+- A good review paper on metagenome assembly approaches
+   - Genome-resolved metagenomics using environmental and clinical samples: https://academic.oup.com/bib/advance-article/doi/10.1093/bib/bbab030/6184411
+- bioBakery tools for meta'omic profiling
+   - https://github.com/biobakery/biobakery
+
+## Visualising data
+
+
+
+
 ## Manuals
+```{r, fig.align = 'center',out.width= '15%', echo=FALSE }
+knitr::include_graphics(path = "figures/manual.png", auto_pdf = TRUE)
+``` 
 
 Conda: https://conda.io/projects/conda/en/latest/user-guide/getting-started.html
 
@@ -1622,6 +1739,8 @@ minimap2: https://github.com/lh3/minimap2
 MetaBAT2: https://bitbucket.org/berkeleylab/metabat/src/master/
 
 CheckM: https://github.com/Ecogenomics/CheckM/wiki
+
+PhyloPhlAn: https://github.com/biobakery/phylophlan/wiki
 
 MetaWRAP: https://github.com/bxlab/metaWRAP
 
@@ -1670,5 +1789,5 @@ wget -O W1_R1.fastq.gz ftp://ftp.sra.ebi.ac.uk/vol1/fastq/ERR505/ERR505090/ERR50
 wget -O W1_R2.fastq.gz ftp://ftp.sra.ebi.ac.uk/vol1/fastq/ERR505/ERR505090/ERR505090_2.fastq.gz
 ```
 
-<!--chapter:end:16-Appendix.Rmd-->
+<!--chapter:end:14-Appendix.Rmd-->
 

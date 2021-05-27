@@ -1,0 +1,80 @@
+# Assembly taxonomy annotation
+```{r, fig.align = 'center',out.width= '40%', echo=FALSE }
+knitr::include_graphics(path = "figures/yarn_binning.png", auto_pdf = TRUE)
+``` 
+
+## PhyloPhlAn3
+
+There are ways to improve a metagenome assembly which we will touch on later. For now we will will carry out taxonomic annotation of our bins with `PhyloPhlAn3`, another biobakery package.
+
+### PhyloPhlAn3: conda and directories
+```{r, fig.align = 'center',out.width= '10%', echo=FALSE }
+knitr::include_graphics(path = "figures/conda.png", auto_pdf = TRUE)
+```
+
+We need a new conda environment again. Open a new terminal (right click on the main screen background, choose `Applications` -> `Shell` -> `bash`) and run the below:
+
+```{bash eval=FALSE}
+. usehumann2
+```
+
+Make a new directory and move into it.
+
+```{bash eval=FALSE}
+mkdir ~/8-phylophlan
+cd ~/8-phlyophlan
+```
+
+### PhyloPhlAn3: configuration files
+
+`PhyloPhlAn3` utilises configuration files which contain parameter options that the program can use. Some programs use these and it can be quite tedious to create them. Thankfully `PhyloPhlAn3` has a command that creates four different default config files. 
+
+Use the below command to create the 4 configuration files (`.cfg`) in a new directory.
+
+```{bash eval=FALSE}
+#Make config directory
+mkdir config
+#Run command
+phylophlan_write_default_configs.sh ./config
+```
+
+A lot of output will be printed to screen but this can be ignored if no errors popped up. If you list the contents of the directory (`ls ./config`) you will notice the following four files:
+
+- `supermatrix_aa.cfg`: Super matrix (or concatenation) pipeline (default) pipeline that will use a protein database.
+- `supermatrix_nt.cfg`: Super matrix (or concatenation) pipeline (default) pipeline that will use a nucleotide database.
+- `supertree_aa.cfg`: Supertree (or gene trees) pipeline (recommended when building a large phylogeny) that will use a protein database.
+- `supertree_nt.cfg`: Supertree (or gene trees) pipeline (recommended when building a large phylogeny) that will use a nucleotide database.
+
+### PhyloPhlAn3: run
+
+Now with our configuration files we can run the `PhyloPhlAn` command.
+
+```{bash eval=FALSE}
+phylophlan \
+-i ~/7-Binning/K1/bins \
+--genome_extension .fa \
+--output_folder ./K1 \
+-d phylophlan \
+-f config/supermatrix_aa.cfg \
+--diversity medium \
+--fast --nproc 8
+```
+
+The parameters and options are:
+
+- `-i`: Input directory with the genomes/metagenomes in fasta files we want the program to taxonomically annotate.
+- `--genome_extension`: This is the suffix of our genome/metagenome fasta file. The default is `.fna`.
+- `--output_folder`: Directory the output will be stored to.
+- `-d`: This is the name of the database of markers to be used.
+   - `PhyloPhlAn3` has 2 databases that can be automatically downloaded:
+      - PhyloPhlAn (`-d phylophlan`): 400 universal marker genes.
+      - AMPHORA2 (`-d amphora2`): 136 universal marker genes.
+   - Custom databases can becreated and used: https://github.com/biobakery/phylophlan/wiki#database-setup
+- `-f`: Specified the config file to be used.
+   - We used the `supermatrix_aa.cfg` file as our database (PhyloPhlan) is a protein database and we want to use the default supermatrix pipeline.
+- `--diversity`: This chooses a set of pre-defined options based on the expected diveristy of the phylogeny to be built.
+   -`low`: Species and strain level phylogenies.
+   -`medium`: Genus and family level phylogenies.
+   -`high`: Tree-of-life and higher-ranked taxonomic levels phylogenies.
+
+

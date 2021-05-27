@@ -1,0 +1,63 @@
+# Assembly functional annotation
+```{r, fig.align = 'center',out.width= '40%', echo=FALSE }
+knitr::include_graphics(path = "figures/yarn_binning.png", auto_pdf = TRUE)
+``` 
+
+## PROKKA
+
+We will carry out `PROKKA` functoinal annotation using `MetaWRAP`. `MetaWRAP` is a very useful program with many tools for metagenome analysis but we will only use it to carry out functional annotations for now.
+
+### PROKKA: conda and directories
+```{r, fig.align = 'center',out.width= '10%', echo=FALSE }
+knitr::include_graphics(path = "figures/conda.png", auto_pdf = TRUE)
+```
+
+Now to activate a `MetaWRAP` environment in a new terminal (right click on the main screen background, choose `Applications` -> `Shell` -> `bash`). The first step is to use `chos 8` which is a custom command for our cluster. It will CHange the Unix OS to version 8 as version 7 (default in our cluster) is too old for some of the programs.
+
+```{bash eval=FALSE}
+chos 8
+. usemetawrap
+```
+
+Make a new directory and move into it.
+
+```{bash eval=FALSE}
+mkdir ~/9-metawrap_anno
+cd ~/9-metawrap_anno
+```
+
+### PROKKA: annotate bins
+
+Now we can annotate the bins.
+
+```{bash eval=FALSE}
+metawrap annotate_bins \
+-b ~/7-Binning/K1/bins \
+-o ./K1 \
+-t 8
+```
+
+The options used are:
+
+- `-b`: The directory containing the assembled bins in fasta format.
+- `-o`: The output directory.
+- `-t`: Number of threads to use for the command.
+
+### PROKKA: output
+
+Like in previous steps we will copy over premade results for the full dataset.
+
+__Note__: This need to be done in one of you non `metawrap` terminals
+
+```{bash eval=FALSE}
+cp -r /pub39/tea/matthew/NEOF
+```
+
+
+## MinPath
+
+
+
+
+
+

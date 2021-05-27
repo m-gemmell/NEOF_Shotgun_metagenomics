@@ -9,7 +9,7 @@ If there is no host genome available before you start your sample collections an
 
 This chapter contains a small example on how to carry out host removal. It uses only a section of a human (host of our samples) reference genome assembly. IN real life you should use the entire reference.
 
-First step is to copy over the reference fasta file we will use.
+The first step is to copy over the reference fasta file we will use.
 
 ```{bash eval=FALSE}
 cp /pub39/tea/matthew/NEOF/Shotgun_metagenomics/GRCh38_slice.fasta .
