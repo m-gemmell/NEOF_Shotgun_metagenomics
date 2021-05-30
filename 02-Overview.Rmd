@@ -62,9 +62,4 @@ This practical is broken up into the following broad sections.
 4. __Functional profiling__: We will analyse the dataset to determine the pathway abundance and completeness in each sample. Following this, we will visualise the data and compare the samples.
 5. __Metagenome assembly__: Here, we will move away from just analysing the reads directly and will assemble the metagenome into contigs. Prior to this, we will 'stitch' the reads together to ensure we get the best assembly possible.
 7. __Binning__: This step attempts to seperate each assembled genomes into bins. These genome assemblies are called Metagenome-assembled Genomes (MAGs).
-6. __Gene prediction__:  We will take our MAGs, search for genes...
-7. __Functional annotation__: ...and then functionally annotate them with information from various databases. We will then visualise some of the output.
-
-__Don't worry if you don't manage to finish the whole practical!__  
-
-The more commonly used analyses have been put at the front of the practical (Section 1-4) with the less standard ones being placed towards the end. We will provide you with all of the intermediate and results files on request.
+8. __Functional annotation__: We will take our MAGs, predict genes and then functionally annotate them with MetaCyc.

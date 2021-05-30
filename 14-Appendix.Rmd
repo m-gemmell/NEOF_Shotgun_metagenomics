@@ -10,19 +10,18 @@ knitr::include_graphics(path = "figures/step.png", auto_pdf = TRUE)
 
 Below are some good links to start with before carrying out your own projects.
 
-- A good review paper on metagenome assembly approaches
+- A review paper on metagenome assembly approaches
    - Genome-resolved metagenomics using environmental and clinical samples: https://academic.oup.com/bib/advance-article/doi/10.1093/bib/bbab030/6184411
 - bioBakery tools for meta'omic profiling
    - https://github.com/biobakery/biobakery
 - Assessing the performance of different approaches for functional and taxonomic annotation of metagenomes
    - https://bmcgenomics.biomedcentral.com/articles/10.1186/s12864-019-6289-6
+- MicrobeAnnotator: Easy-to-use pipeline for the comprehensive metabolic annotation of microbial genomes.
+   - https://github.com/cruizperez/MicrobeAnnotator
 - MetaEuk: Functional annotation of eukaryotic metagenome
    - https://github.com/soedinglab/metaeuk
 _ Methods for Metagenomic data visualisation and analysis
    - https://www.researchgate.net/publication/318252633_Methods_for_The_Metagenomic_Data_Visualization_and_Analysis
-
-
-
 
 ## Manuals
 ```{r, fig.align = 'center',out.width= '15%', echo=FALSE }
@@ -71,38 +70,12 @@ PhyloPhlAn: https://github.com/biobakery/phylophlan/wiki
 
 MetaWRAP: https://github.com/bxlab/metaWRAP
 
-## COG Cateories
+Pokka: https://github.com/tseemann/prokka
 
-- CELLULAR PROCESSES AND SIGNALING
-   - [D] Cell cycle control, cell division, chromosome partitioning
-   - [M] Cell wall/membrane/envelope biogenesis
-   - [N] Cell motility
-   - [O] Post-translational modification, protein turnover, and chaperones
-   - [T] Signal transduction mechanisms
-   - [U] Intracellular trafficking, secretion, and vesicular transport
-   - [V] Defense mechanisms
-   - [W] Extracellular structures
-   - [Y] Nuclear structure
-   - [Z] Cytoskeleton
-- INFORMATION STORAGE AND PROCESSING
-   - [A] RNA processing and modification
-   - [B] Chromatin structure and dynamics
-   - [J] Translation, ribosomal structure and biogenesis
-   - [K] Transcription
-   - [L] Replication, recombination and repair
-- METABOLISM
-   - [C] Energy production and conversion
-   - [E] Amino acid transport and metabolism
-   - [F] Nucleotide transport and metabolism
-   - [G] Carbohydrate transport and metabolism
-   - [H] Coenzyme transport and metabolism
-   - [I] Lipid transport and metabolism
-   - [P] Inorganic ion transport and metabolism
-   - [Q] Secondary metabolites biosynthesis, transport, and catabolism
-- POORLY CHARACTERIZED
-   - [R] General function prediction only
-   - [S] Function unknown
-   
+MinPath: https://github.com/mgtools/MinPath/blob/master/readme
+
+MetaCyc: https://metacyc.org/
+
 ## Obtaining Read Data
 
 The following commands can be used to obtain the sequence data used in this practical, directly from the EBI metagenomics site. It is worth noting that these are the full set of data, not like the miniaturised version you have used in the tutorial.

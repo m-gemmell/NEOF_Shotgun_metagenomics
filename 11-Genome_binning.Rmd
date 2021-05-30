@@ -63,7 +63,7 @@ Next we will align our trimmed paired reads we used to create the stitched reads
 
 ```{bash eval=FALSE}
 bwa mem ~/6-Assembly/K1/final.contigs.fa \
-~/2-Trimmed/K1_R1.final.fastq ~/2-Trimmed/K1_R2.final.fastq > \
+~/2-Trimmed/K1_R1.fq.gz ~/2-Trimmed/K1_R2.fq.gz > \
 K1.sam
 ```
 
@@ -232,8 +232,9 @@ As we have only used a subset of data the results are not very good so let us lo
 
 ```{bash eval=FALSE}
 cd ~/7-Binning
-ln -s /pub39/tea/matther/NEOF/Shotgun_metagenomics/binning/K1_fullset/ .
+mkdir K1_fullset
 cd K1_fullset
+ln -s /pub39/tea/matther/NEOF/Shotgun_metagenomics/binning/K1_fullset/* .
 ```
 
 Now we can look at the results table that is in your current directory.
@@ -250,9 +251,10 @@ $$
 q = comp - (5 * cont)
 $$
 Where:
-__q__ = Overall quality
-__comp__ = Completeness
-__cont__ = Contamination
+
+- __q__ = Overall quality
+- __comp__ = Completeness
+- __cont__ = Contamination
 
 A score of 70-80% would be the aim. Therefore let us calculate this for the bins with R.
 
@@ -276,13 +278,13 @@ df <- read.csv("MAGS_checkm.csv", header=TRUE, check.names=FALSE)
 #Add a column for overall quality
 df$quality <- df$Completeness - (5 * df$Contamination)
 #View the bin name, lineage, completeness, contamination and the quality columns
-df[,c(1,2,12,13,15)]
+df[,c(1,2,3,12,13,15)]
 ```
 
 __Questions__:
 
 - What lineages were assigned to the bins?
-- How many genomes are present in the bins?
+- How many genomes are present in the different bins?
 - What is the completeness and contamination of the bins and how is the overall quality?
 - With this information how successful was the binning? Was the binning able to create MAGs (i.e. one genome per bin)?
 - Which bins look particularly good?

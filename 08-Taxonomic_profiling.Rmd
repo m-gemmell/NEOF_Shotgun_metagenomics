@@ -95,7 +95,7 @@ knitr::include_graphics(path = "figures/krona.png", auto_pdf = TRUE)
 We can use the `Kraken2` report files to create our Krona plots. With the below command we can import our `Kraken2` taxonomy (within the report file) into a `Krona` html.
 
 ```{bash eval=FALSE}
-ktImportTaxonomy.sh -o kraken2.krona.html *.kreport2
+ktImportTaxonomy -o kraken2.krona.html *.kreport2
 ```
 
 `-o` is our output html file, and the final argument `*.kreport2` represents all of our `.kreport2` files in the current directory. The `*` is a wild-card, meaning any characters any number of times. Therefore `*.kreport2` identifies the files `K1.kreport2` `K2.kreport2` and `W1.kreport2`.
@@ -125,8 +125,8 @@ knitr::include_graphics(path = "figures/enter_key.png", auto_pdf = TRUE)
 Just like with `Krona` we can use the `Kraken2` report files to run bracken.
 
 ```{bash eval=FALSE}
-bracken -d $KRAKEN_DB_PATH/minikraken2_v1_8GB \
--i K1.kreport -o K1.bracken -r 100 -l S -t 5
+bracken -d $KRAKEN2_DB_PATH/minikraken2_v1_8GB \
+-i K1.kreport2 -o K1.bracken -r 100 -l S -t 5
 ```
 
 Let's look at what those command line options do:
@@ -168,10 +168,10 @@ To make full use of `Bracken` output, it is best to merge the output into one ta
 cp /pub39/tea/matthew/NEOF/Shotgun_metagenomics/bracken/* .
 ```
 
-Now to merge all the `Bracken` files.
+Now to merge all the K and W `Bracken` files.
 
 ```{bash eval=FALSE}
-combine_bracken_outputs.py --files *.bracken -o all.bracken
+combine_bracken_outputs.py --files [KW]*.bracken -o all.bracken
 ```
 
 This output file contains the first three columns:
@@ -190,7 +190,7 @@ Following these columns are the following two columns for each sample.
 knitr::include_graphics(path = "figures/exctractor.png", auto_pdf = TRUE)
 ``` 
 
-We want a file with only the first column (organism name) and the `bracken_num` columns for each sample. To carry this out we  first create a sequence of numbers that will match the `bracken_num` column numbers. These start at column 4 and are every even numbered column after this. In this case `seq` will create every `2` numbers from the numbers `4` to `50` with commas (`,`) as separators (`-s`). 
+We want a file with only the first column (organism name) and the `bracken_num` columns for each sample. To carry this out we  first create a sequence of numbers that will match the `bracken_num` column numbers. These start at column 4 and are every even numbered column after this. We will use `seq` to create every `2` numbers from the numbers `4` to `50` with commas (`,`) as separators (`-s`). 
 
 __Note__: The number 50 is chosen as 3 (first three info columns) + 24*2 (24 samples with 2 columns each) = 50.
 
@@ -228,7 +228,7 @@ We need to add metadata to our `Bracken` file to be ready for `LEfSe.` First we 
 cp all_num.bracken all_num.lefse.bracken
 ```
 
-Using your favourite text editor (e.g. `nano`, `vim`, etc.) add the following line to the top of your `all_num.lefse.bracken file`. The words are separated by tabs. If you are not sure how to carry out this task please ask a demonstrator.
+Using your favourite text editor (e.g. `nano`, `vim`, etc.) add the following line to the top of your `all_num.lefse.bracken` file. The words are separated by tabs. If you are not sure how to carry out this task please ask a demonstrator.
 
 __diet	K	K	K	K	K	K	K	K	K	K	K	K	W	W	W	W	W	W	W	W	W	W	W	W__
 
@@ -314,8 +314,8 @@ okular biomarkers.png
 
 __Questions__:
 
-- Which species causes the biggest effect in the W class and in the K class? 
--Which class has more biomarkers associated with it?
+- Which species causes the biggest effect in the W class and in the K class?
+- Which class has more biomarkers associated with it?
 
 __Note__: In this instance green bars represent biomarkers in higher abundance in the W samples whilst the red bars represent biomarkers in higher abundance in the K samples.
 

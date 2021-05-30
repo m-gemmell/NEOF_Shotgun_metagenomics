@@ -3,7 +3,7 @@
 knitr::include_graphics(path = "figures/mummy.png", auto_pdf = TRUE)
 ``` 
 
-`MetaWRAP` is a very useful program with many tools for metagenome analysis. It contains wrapper scripts, scripts that utilise other programs (e.g. megahit, CONCOCT, PROKKA, etc.). 
+`MetaWRAP` is a very useful program with many tools for metagenome analysis. It contains wrapper scripts, scripts that utilise other programs (e.g. `MEGAHIT`, `CONCOCT`, `Prokka`, etc.). 
 
 `MetaWRAP` can be used to carry out an entire metagenome assembly/co-assembly approach workflow. Its processes include:
 
@@ -26,21 +26,14 @@ https://github.com/bxlab/metaWRAP/blob/master/Usage_tutorial.md
 
 Follow the below instructions to make a new directory and make a symbolic link to the files that you would otherwise have to download in step 0 of the tutorial.
 
+__Note__: The below code section must be carried out outside on another terminal than your `metawrap` terminal.
+
 ```{bash eval=FALSE}
-mkdir ~/MetaWRAP_tut
+mkdir -p ~/MetaWRAP_tut/RAW_READS
 cd ~/MetaWRAP_tut
-ln -s /pub39/tea/matthew/NEOF/Shotgun_metagenomics/
+cp /pub39/tea/matthew/NEOF/Shotgun_metagenomics/metawrap/* RAW_READS
 ```
 
-Now to activate a `MetaWRAP` environment. The first step is to use `chos 8` which is a custom command for our cluster. It will CHange the Unix OS to version 8 as version 7 (default in our cluster) is too old for some of the programs.
-
-```{bash eval=FALSE}
-#CHange OS
-chos 8
-#Activate metawrap environment
-. usemetawrap
-```
-
-Now you can carry on with the online tutorial if you wish.
+Now you can carry on with the online tutorial if you wish using your `MetaWRAP` terminal.
 
 __Note__: This has not been fully tested and the environment may not fully work. This is the joys of bioinformatics.

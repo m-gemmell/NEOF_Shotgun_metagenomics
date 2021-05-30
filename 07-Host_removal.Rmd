@@ -36,7 +36,7 @@ knitr::include_graphics(path = "figures/alignment.png", auto_pdf = TRUE)
 With the indexed reference we will align the K1 reads to the reference. This creates a bam file that contains alignment and read information (`mapped.bam`).
 
 ```{bash eval=FALSE}
-bowtie2 -x test.fasta -1 R1.fastq.gz -2 R2.fastq.gz \
+bowtie2 -x GRCh38_slice.fasta -1 K1_R1.fq.gz -2 K1_R2.fq.gz \
 -p12 2> out.log | samtools view -bSh > mapped.bam
 ```
 

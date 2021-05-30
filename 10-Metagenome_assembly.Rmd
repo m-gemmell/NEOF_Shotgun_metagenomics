@@ -14,6 +14,11 @@ For this reason, it is sometimes advantageous to assemble the reads into contigs
 
 Here, we will carry out a couple of assemblies on our dataset.
 
+## Metagenome assembly: Conda
+```{r, fig.align = 'center',out.width= '10%', echo=FALSE }
+knitr::include_graphics(path = "figures/conda.png", auto_pdf = TRUE)
+```
+
 We will use the `shotgun_meta` conda environment so use a terminal where this is activated or open a new one and run `. useshotgun_meta`.
 
 ## A primer on short read assembly
@@ -102,12 +107,17 @@ Scroll down with the down key and you will see that we are looking at a histogra
 knitr::include_graphics(path = "figures/assembly_line.png", auto_pdf = TRUE)
 ``` 
 
-Create a new directory to store our assembly in and run the metagenome assembler `MEGAHIT` using our newly stitched read data.
+Create a new directory to store our assembly in. 
 
 ```{bash eval=FALSE}
 cd ..
 mkdir 6-Assembly
 cd 6-Assembly
+```
+
+Now run the metagenome assembler `MEGAHIT` using our newly stitched read data.
+
+```{bash eval=FALSE}
 megahit \
 -r ../5-Stitched/K1.extendedFrags.fastq.gz \
 -1 ../5-Stitched/K1.notCombined_1.fastq.gz \
@@ -130,6 +140,9 @@ less K1/final.contigs.fa
 ```
 
 ## QUAST
+```{r, fig.align = 'center',out.width= '15%', echo=FALSE }
+knitr::include_graphics(path = "figures/inspect.png", auto_pdf = TRUE)
+``` 
 
 We can also generate some metrics based on the assembly.
 

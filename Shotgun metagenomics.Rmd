@@ -29,8 +29,8 @@ This practical session aims to introduce you to the analysis of Shotgun metageno
 - Functional profiling
 - Metagenome assembly
 - Binning
-- Gene prediction
 - Functional annotation
+- MetaWrap workflow
 
 <!--chapter:end:01-Shotgun_metagenomics.Rmd-->
 
@@ -98,12 +98,7 @@ This practical is broken up into the following broad sections.
 4. __Functional profiling__: We will analyse the dataset to determine the pathway abundance and completeness in each sample. Following this, we will visualise the data and compare the samples.
 5. __Metagenome assembly__: Here, we will move away from just analysing the reads directly and will assemble the metagenome into contigs. Prior to this, we will 'stitch' the reads together to ensure we get the best assembly possible.
 7. __Binning__: This step attempts to seperate each assembled genomes into bins. These genome assemblies are called Metagenome-assembled Genomes (MAGs).
-6. __Gene prediction__:  We will take our MAGs, search for genes...
-7. __Functional annotation__: ...and then functionally annotate them with information from various databases. We will then visualise some of the output.
-
-__Don't worry if you don't manage to finish the whole practical!__  
-
-The more commonly used analyses have been put at the front of the practical (Section 1-4) with the less standard ones being placed towards the end. We will provide you with all of the intermediate and results files on request.
+8. __Functional annotation__: We will take our MAGs, predict genes and then functionally annotate them with MetaCyc.
 
 <!--chapter:end:02-Overview.Rmd-->
 
@@ -251,7 +246,7 @@ Run `FastQC` on the files:
 ```{bash eval=FALSE}
 #R1 fastqc
 #Make an output directory
-mkdir R1_fastq
+mkdir R1_fastqc
 #Run fastqc on all the R1.fastq.gz files 
 #* matches any pattern
 #*R1.fastq.gz matches any file that ends R1.fastq.gz in the current directory
@@ -260,7 +255,7 @@ fastqc -t 3 -o R1_fastqc *R1.fastq.gz
 
 #R2 fastqc
 #Make output directory
-mkdir R2_fastq
+mkdir R2_fastqc
 #Run fastqc
 fastqc -t 3 -o R2_fastqc *R2.fastq.gz
 ```
@@ -324,10 +319,10 @@ You are now in your newly created directory. Here we will run `Trim Galore!` whi
 
 ```{bash eval=FALSE}
 trim_galore --paired --quality 20 --stringency 4 \
-   ../1-Raw/K1_R1.fastq.gz ../1-Raw/K1_R2.fastq.gz
+../1-Raw/K1_R1.fastq.gz ../1-Raw/K1_R2.fastq.gz
 ```
 
-This is a longer command so we've split it across multiple lines (a `\` at the end of a line allows you to press return without running the command, meaning you can continue to add to that command. When this happens, the `$` changes to a `>`. 
+This is a longer command so we've split it across multiple lines. A `\` at the end of a line allows you to press return without running the command, meaning you can continue to add to that command. When this happens, the `$` changes to a `>`. 
 
 __Note__ if you do use the `\` character, the next key you press must be return. If you use `\` in the middle of a line without pressing return afterwards, it will break the command!
 
@@ -418,7 +413,7 @@ knitr::include_graphics(path = "figures/alignment.png", auto_pdf = TRUE)
 With the indexed reference we will align the K1 reads to the reference. This creates a bam file that contains alignment and read information (`mapped.bam`).
 
 ```{bash eval=FALSE}
-bowtie2 -x test.fasta -1 R1.fastq.gz -2 R2.fastq.gz \
+bowtie2 -x GRCh38_slice.fasta -1 K1_R1.fq.gz -2 K1_R2.fq.gz \
 -p12 2> out.log | samtools view -bSh > mapped.bam
 ```
 
@@ -559,7 +554,7 @@ knitr::include_graphics(path = "figures/krona.png", auto_pdf = TRUE)
 We can use the `Kraken2` report files to create our Krona plots. With the below command we can import our `Kraken2` taxonomy (within the report file) into a `Krona` html.
 
 ```{bash eval=FALSE}
-ktImportTaxonomy.sh -o kraken2.krona.html *.kreport2
+ktImportTaxonomy -o kraken2.krona.html *.kreport2
 ```
 
 `-o` is our output html file, and the final argument `*.kreport2` represents all of our `.kreport2` files in the current directory. The `*` is a wild-card, meaning any characters any number of times. Therefore `*.kreport2` identifies the files `K1.kreport2` `K2.kreport2` and `W1.kreport2`.
@@ -589,8 +584,8 @@ knitr::include_graphics(path = "figures/enter_key.png", auto_pdf = TRUE)
 Just like with `Krona` we can use the `Kraken2` report files to run bracken.
 
 ```{bash eval=FALSE}
-bracken -d $KRAKEN_DB_PATH/minikraken2_v1_8GB \
--i K1.kreport -o K1.bracken -r 100 -l S -t 5
+bracken -d $KRAKEN2_DB_PATH/minikraken2_v1_8GB \
+-i K1.kreport2 -o K1.bracken -r 100 -l S -t 5
 ```
 
 Let's look at what those command line options do:
@@ -632,10 +627,10 @@ To make full use of `Bracken` output, it is best to merge the output into one ta
 cp /pub39/tea/matthew/NEOF/Shotgun_metagenomics/bracken/* .
 ```
 
-Now to merge all the `Bracken` files.
+Now to merge all the K and W `Bracken` files.
 
 ```{bash eval=FALSE}
-combine_bracken_outputs.py --files *.bracken -o all.bracken
+combine_bracken_outputs.py --files [KW]*.bracken -o all.bracken
 ```
 
 This output file contains the first three columns:
@@ -654,7 +649,7 @@ Following these columns are the following two columns for each sample.
 knitr::include_graphics(path = "figures/exctractor.png", auto_pdf = TRUE)
 ``` 
 
-We want a file with only the first column (organism name) and the `bracken_num` columns for each sample. To carry this out we  first create a sequence of numbers that will match the `bracken_num` column numbers. These start at column 4 and are every even numbered column after this. In this case `seq` will create every `2` numbers from the numbers `4` to `50` with commas (`,`) as separators (`-s`). 
+We want a file with only the first column (organism name) and the `bracken_num` columns for each sample. To carry this out we  first create a sequence of numbers that will match the `bracken_num` column numbers. These start at column 4 and are every even numbered column after this. We will use `seq` to create every `2` numbers from the numbers `4` to `50` with commas (`,`) as separators (`-s`). 
 
 __Note__: The number 50 is chosen as 3 (first three info columns) + 24*2 (24 samples with 2 columns each) = 50.
 
@@ -692,7 +687,7 @@ We need to add metadata to our `Bracken` file to be ready for `LEfSe.` First we 
 cp all_num.bracken all_num.lefse.bracken
 ```
 
-Using your favourite text editor (e.g. `nano`, `vim`, etc.) add the following line to the top of your `all_num.lefse.bracken file`. The words are separated by tabs. If you are not sure how to carry out this task please ask a demonstrator.
+Using your favourite text editor (e.g. `nano`, `vim`, etc.) add the following line to the top of your `all_num.lefse.bracken` file. The words are separated by tabs. If you are not sure how to carry out this task please ask a demonstrator.
 
 __diet	K	K	K	K	K	K	K	K	K	K	K	K	W	W	W	W	W	W	W	W	W	W	W	W__
 
@@ -778,8 +773,8 @@ okular biomarkers.png
 
 __Questions__:
 
-- Which species causes the biggest effect in the W class and in the K class? 
--Which class has more biomarkers associated with it?
+- Which species causes the biggest effect in the W class and in the K class?
+- Which class has more biomarkers associated with it?
 
 __Note__: In this instance green bars represent biomarkers in higher abundance in the W samples whilst the red bars represent biomarkers in higher abundance in the K samples.
 
@@ -1080,6 +1075,11 @@ For this reason, it is sometimes advantageous to assemble the reads into contigs
 
 Here, we will carry out a couple of assemblies on our dataset.
 
+## Metagenome assembly: Conda
+```{r, fig.align = 'center',out.width= '10%', echo=FALSE }
+knitr::include_graphics(path = "figures/conda.png", auto_pdf = TRUE)
+```
+
 We will use the `shotgun_meta` conda environment so use a terminal where this is activated or open a new one and run `. useshotgun_meta`.
 
 ## A primer on short read assembly
@@ -1132,9 +1132,9 @@ knitr::include_graphics(path = "figures/merging_paired_reads.png", auto_pdf = TR
 
 Once we have longer stitched reads, we can increase the k-mer length for our assembly. 
 
-There are a number of pieces of software that can be used to stitch reads (e.g. Pear,  Pandaseq) but today we will use one called FLASH:
+There are a number of pieces of software that can be used to stitch reads (e.g. `Pear`,  `Pandaseq`) but today we will use one called `FLASH`:
 
-Make a new output directory for the stitched reads and run FLASH:
+Make a new output directory for the stitched reads and run `FLASH`:
 
 ```{bash eval=FALSE}
 #Change directory to home
@@ -1147,7 +1147,7 @@ flash  -o K1 -z -t 12 -d . \
 ../2-Trimmed/K1_R1.fq.gz ../2-Trimmed/K1_R2.fq.gz
 ```
 
-Here, we are telling flash to use an output file name prefix of K1, that the input is zipped, that the output directory is here (.) and to use the two read files for Sample K1. Once FLASH has finished running, it will display on screen how well the stitching process went, in this case a low amount of reads were combined. Have a look what files have been generated.
+Here, we are telling `FLASH` to use an output file name prefix of K1, that the input is zipped, that the output directory is here (.) and to use the two read files for Sample K1. Once `FLASH` has finished running, it will display on screen how well the stitching process went, in this case a low amount of reads were combined. Have a look what files have been generated.
 
 ```{bash eval=FALSE}
 ls
@@ -1168,12 +1168,17 @@ Scroll down with the down key and you will see that we are looking at a histogra
 knitr::include_graphics(path = "figures/assembly_line.png", auto_pdf = TRUE)
 ``` 
 
-Create a new directory to store our assembly in and run the metagenome assembler MEGAHIT using our newly stitched read data.
+Create a new directory to store our assembly in. 
 
 ```{bash eval=FALSE}
 cd ..
 mkdir 6-Assembly
 cd 6-Assembly
+```
+
+Now run the metagenome assembler `MEGAHIT` using our newly stitched read data.
+
+```{bash eval=FALSE}
 megahit \
 -r ../5-Stitched/K1.extendedFrags.fastq.gz \
 -1 ../5-Stitched/K1.notCombined_1.fastq.gz \
@@ -1183,9 +1188,9 @@ megahit \
 --k-list 29,49,69,89,109,129,149,169,189
 ```
 
-Here, you have instructed MEGAHIT to use both the stitched and unstitched reads, to output the assembly in a subdirectory called K1 and to use 12 CPUs. 
+Here, you have instructed `MEGAHIT` to use both the stitched and unstitched reads, to output the assembly in a subdirectory called K1 and to use 12 CPUs. 
 
-The last option `--k-list` instructs MEGAHIT to first generate an assembly using a k-mer size of 29 bp and when that is complete, integrate the results into an assembly using a k-mer size of 49 bp, and so on up to a final iteration using a k-mer size of 189 bp. This large range of k-mer lengths should give us a good assembly, given the data. However, it may take a while to run so this might be a good time to either read on. 
+The last option `--k-list` instructs `MEGAHIT` to first generate an assembly using a k-mer size of 29 bp and when that is complete, integrate the results into an assembly using a k-mer size of 49 bp, and so on up to a final iteration using a k-mer size of 189 bp. This large range of k-mer lengths should give us a good assembly, given the data. However, it may take a while to run so this might be a good time to either read on. 
 
 If you need a command prompt (your current one is gone because MEGAHIT is running), right click on the main screen, choose `Applications` -> `Shell` -> `bash`.
 
@@ -1196,6 +1201,9 @@ less K1/final.contigs.fa
 ```
 
 ## QUAST
+```{r, fig.align = 'center',out.width= '15%', echo=FALSE }
+knitr::include_graphics(path = "figures/inspect.png", auto_pdf = TRUE)
+``` 
 
 We can also generate some metrics based on the assembly.
 
@@ -1208,7 +1216,7 @@ Open a new terminal (right click on the main screen, choose `Applications` -> `S
 . usegenoassess
 ```
 
-We will use QUAST for genome contiguity assessment but first we will change directory to `6-Assembly` and create a directory for the QUAST output.
+We will use `QUAST` for genome contiguity assessment but first we will change directory to `6-Assembly` and create a directory for the `QUAST` output.
 
 ```{bash eval=FALSE}
 #Change directory
@@ -1309,7 +1317,7 @@ Next we will align our trimmed paired reads we used to create the stitched reads
 
 ```{bash eval=FALSE}
 bwa mem ~/6-Assembly/K1/final.contigs.fa \
-~/2-Trimmed/K1_R1.final.fastq ~/2-Trimmed/K1_R2.final.fastq > \
+~/2-Trimmed/K1_R1.fq.gz ~/2-Trimmed/K1_R2.fq.gz > \
 K1.sam
 ```
 
@@ -1478,8 +1486,9 @@ As we have only used a subset of data the results are not very good so let us lo
 
 ```{bash eval=FALSE}
 cd ~/7-Binning
-ln -s /pub39/tea/matther/NEOF/Shotgun_metagenomics/binning/K1_fullset/ .
+mkdir K1_fullset
 cd K1_fullset
+ln -s /pub39/tea/matther/NEOF/Shotgun_metagenomics/binning/K1_fullset/* .
 ```
 
 Now we can look at the results table that is in your current directory.
@@ -1496,9 +1505,10 @@ $$
 q = comp - (5 * cont)
 $$
 Where:
-__q__ = Overall quality
-__comp__ = Completeness
-__cont__ = Contamination
+
+- __q__ = Overall quality
+- __comp__ = Completeness
+- __cont__ = Contamination
 
 A score of 70-80% would be the aim. Therefore let us calculate this for the bins with R.
 
@@ -1522,13 +1532,13 @@ df <- read.csv("MAGS_checkm.csv", header=TRUE, check.names=FALSE)
 #Add a column for overall quality
 df$quality <- df$Completeness - (5 * df$Contamination)
 #View the bin name, lineage, completeness, contamination and the quality columns
-df[,c(1,2,12,13,15)]
+df[,c(1,2,3,12,13,15)]
 ```
 
 __Questions__:
 
 - What lineages were assigned to the bins?
-- How many genomes are present in the bins?
+- How many genomes are present in the different bins?
 - What is the completeness and contamination of the bins and how is the overall quality?
 - With this information how successful was the binning? Was the binning able to create MAGs (i.e. one genome per bin)?
 - Which bins look particularly good?
@@ -1543,95 +1553,298 @@ It is always useful to know the quality of your bins so you know which are more 
 
 <!--chapter:end:11-Genome_binning.Rmd-->
 
-# MAG annotation
-```{r, fig.align = 'center',out.width= '40%', echo=FALSE }
-knitr::include_graphics(path = "figures/yarn_binning.png", auto_pdf = TRUE)
+# Assembly functional annotation
+```{r, fig.align = 'center',out.width= '20%', echo=FALSE }
+knitr::include_graphics(path = "figures/pathways.png", auto_pdf = TRUE)
 ``` 
 
-## PhyloPhlAn3
+## Taxonomic annotation
+```{r, fig.align = 'center',out.width= '10%', echo=FALSE }
+knitr::include_graphics(path = "figures/classification.png", auto_pdf = TRUE)
+``` 
 
-There are ways to improve a metagenome assembly which we will touch on later. For now we will will carry out taxonomic annotation of our bins with `PhyloPhlAn3`, another biobakery package.
+Taxonomic annotation of bins can be carried out with `Kraken2`. As we have already done this for the reads and taxonomic results from read and assembly approaches have similar performances we will not cover it here. and instead move straight onto functional annotation with `Prokka`.
 
-### PhyloPhlAn3: conda and directories
+## Prokka
+```{r, fig.align = 'center',out.width= '10%', echo=FALSE }
+knitr::include_graphics(path = "figures/quokka.png", auto_pdf = TRUE)
+``` 
+
+We will carry out `Prokka` functional annotation using `MetaWRAP`. `MetaWRAP` is a very useful program with many tools for metagenome analysis but we will only use it to carry out functional annotations for now.
+
+### Prokka: conda and directories
 ```{r, fig.align = 'center',out.width= '10%', echo=FALSE }
 knitr::include_graphics(path = "figures/conda.png", auto_pdf = TRUE)
 ```
 
-We need a new conda environment again. Open a new terminal (right click on the main screen background, choose `Applications` -> `Shell` -> `bash`) and run the below:
+Now to activate a `MetaWRAP` environment in a new terminal (right click on the main screen background, choose `Applications` -> `Shell` -> `bash`). The first step is to use `chos 8` which is a custom command for our cluster. It will CHange the Unix OS to version 8 as version 7 (default in our cluster) is too old for some of the programs.
 
 ```{bash eval=FALSE}
-. usehumann2
+chos 8
+. usemetawrap
 ```
 
 Make a new directory and move into it.
 
 ```{bash eval=FALSE}
-mkdir ~/8-phylophlan
-cd ~/8-phlyophlan
+mkdir ~/8-metawrap_anno
+cd ~/8-metawrap_anno
 ```
 
-### PhyloPhlAn3: configuration files
+### Prokka: run
+```{r, fig.align = 'center',out.width= '10%', echo=FALSE }
+knitr::include_graphics(path = "figures/enter_key.png", auto_pdf = TRUE)
+``` 
 
-`PhyloPhlAn3` utilises configuration files which contain parameter options that the program can use. Some programs use these and it can be quite tedious to create them. Thankfully `PhyloPhlAn3` has a command that creates four different default config files. 
-
-Use the below command to create the 4 configuration files (`.cfg`) in a new directory.
+Now we can annotate the bins.
 
 ```{bash eval=FALSE}
-#Make config directory
-mkdir config
-#Run command
-phylophlan_write_default_configs.sh ./config
+metawrap annotate_bins \
+-b ~/7-Binning/K1/bins \
+-o ./K1 \
+-t 8
 ```
 
-A lot of output will be printed to screen but this can be ignored if no errors popped up. If you list the contents of the directory (`ls ./config`) you will notice the following four files:
+The options used are:
 
-- `supermatrix_aa.cfg`: Super matrix (or concatenation) pipeline (default) pipeline that will use a protein database.
-- `supermatrix_nt.cfg`: Super matrix (or concatenation) pipeline (default) pipeline that will use a nucleotide database.
-- `supertree_aa.cfg`: Supertree (or gene trees) pipeline (recommended when building a large phylogeny) that will use a protein database.
-- `supertree_nt.cfg`: Supertree (or gene trees) pipeline (recommended when building a large phylogeny) that will use a nucleotide database.
+- `-b`: The directory containing the assembled bins in fasta format.
+- `-o`: The output directory.
+- `-t`: Number of threads to use for the command.
 
-### PhyloPhlAn3: run
+### Prokka: output
+```{r, fig.align = 'center',out.width= '10%', echo=FALSE }
+knitr::include_graphics(path = "figures/output.png", auto_pdf = TRUE)
+``` 
 
-Now with our configuration files we can run the `PhyloPhlAn` command.
+Like in previous steps we will copy over premade results for the full dataset.
+
+__Note__: This need to be done in one of you non `metawrap` terminals
 
 ```{bash eval=FALSE}
-phylophlan \
--i ~/7-Binning/K1/bins \
---genome_extension .fa \
---output_folder ./K1 \
--d phylophlan \
--f config/supermatrix_aa.cfg \
---diversity medium \
---fast --nproc 8
+#Copy over directory
+cp -r /pub39/tea/matthew/NEOF/Shotgun_metagenomics/prokka/K1_fullset ~/8-metawrap_anno
+#Change into copied directory
+cd K1_fullset
 ```
 
-The parameters and options are:
+There are many directories but the one we are interested is `bin_funct_annotations` . This contains a GFF file for each bin.
 
-- `-i`: Input directory with the genomes/metagenomes in fasta files we want the program to taxonomically annotate.
-- `--genome_extension`: This is the suffix of our genome/metagenome fasta file. The default is `.fna`.
-- `--output_folder`: Directory the output will be stored to.
-- `-d`: This is the name of the database of markers to be used.
-   - `PhyloPhlAn3` has 2 databases that can be automatically downloaded:
-      - PhyloPhlAn (`-d phylophlan`): 400 universal marker genes.
-      - AMPHORA2 (`-d amphora2`): 136 universal marker genes.
-   - Custom databases can becreated and used: https://github.com/biobakery/phylophlan/wiki#database-setup
-- `-f`: Specified the config file to be used.
-   - We used the `supermatrix_aa.cfg` file as our database (PhyloPhlan) is a protein database and we want to use the default supermatrix pipeline.
-- `--diversity`: This chooses a set of pre-defined options based on the expected diveristy of the phylogeny to be built.
-   -`low`: Species and strain level phylogenies.
-   -`medium`: Genus and family level phylogenies.
-   -`high`: Tree-of-life and higher-ranked taxonomic levels phylogenies.
+Look at the gff file for bin 1.
 
+```{bash eval=FALSE}
+less bin_funct_annotations/K1.1.gff
+```
 
+The GFF file is a tab delimited file contain annotation information for the features in the assembly/bin. In this case it is a GFF3 file (most curent version of GFF).
 
-<!--chapter:end:12-MAG_annotation.Rmd-->
+There is quite a lot of information contained in each row so instead of listing all the columns here please have a look at the official documentation:
+
+https://github.com/The-Sequence-Ontology/Specifications/blob/master/gff3.md
+
+A quick thing we can do with these files is to see if any of the bins contain a specific annotation. For example, if we wanted to know if there were any ATP-binding proteins in any of the bins we could carry out the below command.
+
+```{bash eval=FALSE}
+grep "ATP-binding protein" bin_funct_annotations/K1*gff | less
+```
+
+We can now view the lines containing "ATP-binding protein" with the start of the line containing the file name the line belongs to.
+
+What if you want to know about pathways?
+
+## MinPath
+```{r, fig.align = 'center',out.width= '15%', echo=FALSE }
+knitr::include_graphics(path = "figures/pathways_2.png", auto_pdf = TRUE)
+```
+
+We can use `MinPath` to predict `MetaCyc` metabolic pathways. These pathway are made up of sets of enzymes that catalyse various reactions.
+
+### MinPath: conda and directory
+```{r, fig.align = 'center',out.width= '10%', echo=FALSE }
+knitr::include_graphics(path = "figures/conda.png", auto_pdf = TRUE)
+```
+
+Use the `MetaWRAP` environment in `chos 8` for this section.
+
+Ensure you start in the `~/8-metawrap_anno/K1_fullset` directory.
+
+### MinPath: EC extraction
+```{r, fig.align = 'center',out.width= '10%', echo=FALSE }
+knitr::include_graphics(path = "figures/exctractor.png", auto_pdf = TRUE)
+```
+
+Before we can estimate the pathways we need to extract the EC numbers predictions from the GFF file. EC (Enzyme Commission) numbers are a numerical classification for enzymes based on the reaction they catalyse.
+
+Unless you know the EC scheme well they are generally not helpful by themselves. An example EC number is EC 3.1.1.The numbers represents the group the enzyme belongs to with the first number being the biggest group. From highest to the lowest grouping 3.1.1. represents:
+
+- __3__: Hydrolase enzymes.
+- __3.1__: Hydrolase enzymes that act on ester bonds.
+- __3.1.1__: Carboxylic Ester Hydrolases.
+
+With all that information we will extract the EC annotations from the GFF files. First we'll create a directory for the output and move into the GFF directory.
+
+```{bash eval=FALSE}
+#Create EC directory
+mkdir EC
+#Change into GFF directory
+cd bin_funct_annotations/
+```
+
+We will now use a loop with various parts to create an EC annotation file (`.ec`).
+
+__Note__: The lack of `\` at the end of most of the ines is intentional. The below is all one command over multiple lines but loops work slightly different and don't need `\` in certain parts. Ensure you do press enter at the end of each line.
+
+```{bash eval=FALSE}
+ls -1 *gff | sed "s/.gff//" | while read bin
+do
+cat ${bin}.gff | grep "eC_number=" | cut -f 9 | cut -f 1,2 -d ';' | \
+sed "s/ID=//g" | sed "s/;eC_number=/\t/g" > ../EC/${bin}.ec
+done
+```
+
+That is quite a bit of code so we'll break it down with examples for you to run. Of course feel free to skip over the explanations of code sections you are already comfortable with.
+
+The first part lists all our `.gff` files on one line each (`ls -1 *gff`). Then the suffix `.gff` is substituted with nothing `sed "s/.gff//"`. This gives us the name of each bin (e.g. `K1.1`, `K1.2`). Run this section of code to see that.
+
+```{bash eval=FALSE}
+#List all gff files on one (-1) each
+ls -1 *gff
+#List all the file prefixes (on one line each)
+ls -1 *gff | sed "s/.gff//"
+```
+
+Next we loop through each file prefix and use the variable `bin` (arbitrarily chosen) which contains the file prefix. This is carried out with `while read bin`. All the lines between the `do` (start of the loop) and `done` (end of loop) are line run in the loop.
+
+Run the loop with an echo command to show we are using the ${bin} variable to specify the input and output files.
+
+```{bash eval=FALSE}
+ls -1 *gff | sed "s/.gff//" | while read bin
+do
+echo "${bin}.gff ../EC/${bin}.ec"
+done
+```
+
+Now to look at the command within the loop:
+
+`cat ${bin}.gff | grep "eC_number=" | cut -f 9 | cut -f 1,2 -d ';' | \`
+`sed "s/ID=//g" | sed "s/;eC_number=/\t/g" > ../EC/${bin}.ec`
+
+A good way to figure out what a pipe workflow is doing is to to run the first part of workflow and then add section by section to see how it is affecting the output. Additionally, it is always good to run it on one file and `head` the output so we have a manageable amount of data to look at.
+
+We'll do that with the `K1.1.gff` file.
+
+__Note__: Remember we are adding `head` to the end for ease of viewing.
+
+__Tips__: 
+
+- Use the up arrow to go back to previously run commands that you can then edit.
+- Remember the `clear` command.
+
+```{bash eval=FALSE}
+#Grab every line containing "ec_number="
+cat K1.1.gff | grep "eC_number=" | head
+#Cut out the 9th column/field (-f) (i.e. only keep the 9th column)
+#cut uses tabs as the default column/field delimiter
+cat K1.1.gff | grep "eC_number=" | cut -f 9 | head
+#Cut out the 1st and 2nd field based on the delimeter ";" (-d ";")
+cat ${bin}.gff | grep "eC_number=" | cut -f 9 | cut -f 1,2 -d ';' | \
+head
+#Substitute (s/) ID= for nothing (/ID//)
+#/g indicates to carry out it out for every instance in every line
+#Default is to only the first instance in each line
+cat ${bin}.gff | grep "eC_number=" | cut -f 9 | cut -f 1,2 -d ';' | \
+sed "s/ID=//g" | head
+#Substitute ;eC_number= for a tab (\t)
+cat ${bin}.gff | grep "eC_number=" | cut -f 9 | cut -f 1,2 -d ';' | \
+sed "s/ID=//g" | sed "s/;eC_number=/\t/g" | head
+```
+
+Finally the pipes output is written into a file: `> ../EC/${bin}.ec`.
+
+The output `.ec` files are required for `MinPath` and are tab delimited with two columns:
+
+1. protein/sequence id
+2. annotation (in this case the EC number)
+
+### MinPath: run
+```{r, fig.align = 'center',out.width= '10%', echo=FALSE }
+knitr::include_graphics(path = "figures/enter_key.png", auto_pdf = TRUE)
+``` 
+
+With our `.ec` files we can create our MetaCyc predictions.
+
+First we'll change directory into the EC directory. Then create an output directory for the MetaCyc predictions.
+
+```{bash eval=FALSE}
+cd ../EC
+mkdir ../MetaCyc
+```
+
+Now we can loop through the file suffixes to run MinPath.
+
+```{bash eval=FALSE}
+ls -1 *ec | sed "s/.ec//" | while read bin
+do
+python /pub39/tea/nsc006/programs/MinPath/MinPath.py \
+-ec ${bin}.ec \
+-report ../MetaCyc/${bin}.minpath
+done
+```
+
+A lot of output will be printed to screen but this can be ignored unless you see warnings.
+
+### MinPath: output
+```{r, fig.align = 'center',out.width= '10%', echo=FALSE }
+knitr::include_graphics(path = "figures/output.png", auto_pdf = TRUE)
+``` 
+
+First step is to change directory into the `MetaCyc` directory.
+
+```{bash eval=FALSE}
+#Change directory
+cd ../MetaCyc
+#List contents
+ls
+```
+
+From the `CheckM` results we found that bin K1.22 was very good with a quality score >96%. We will therefore have a look at its output.
+
+Have a look at the `.minpath` `-report` file for K1.22.
+
+```{bash eval=FALSE}
+less K1.22.minpath
+```
+
+The file contains the following columns
+
+1. __Pathway ID__
+2. __Pathway reconstruction__: Only available for genomes annotated in MetaCyc database)
+3. __Naive__: Indicates if pathway was reconstructed by the naive mapping approach (1) or not (0).
+4. __Minpath__: Indicates if the pathway was kept (1) or removed (0) by `MinPath`.
+5. __Fam0__: The number of families involved in the pathway.
+6. __Fam-found__: Number of families in pathway that were annotated/found.
+7. __Name__: Description of pathway.
+
+Quit (`q`) `less` when you are happy.
+
+There are some quick things we can do in bash with these files.
+
+```{bash eval=FALSE}
+#Count number of pathways found in each bin with word count
+wc -l *minpath
+#Grab every line with "PWY-6972" from every file
+grep "PWY-6972" *minpath | less
+```
+
+With this file you can then investigate what bins have which pathways. Additionally, with more samples analysed you can determine which samples have which pathways present.
+
+<!--chapter:end:12-Assembly_functional_annotation.Rmd-->
 
 # MetaWRAP
 ```{r, fig.align = 'center',out.width= '20%', echo=FALSE }
 knitr::include_graphics(path = "figures/mummy.png", auto_pdf = TRUE)
 ``` 
 
-`MetaWRAP` is a very useful program with many tools for metagenome analysis. It contains wrapper scripts, scripts that utilise other programs (e.g. megahit, CONCOCT, PROKKA, etc.). 
+`MetaWRAP` is a very useful program with many tools for metagenome analysis. It contains wrapper scripts, scripts that utilise other programs (e.g. `MEGAHIT`, `CONCOCT`, `Prokka`, etc.). 
 
 `MetaWRAP` can be used to carry out an entire metagenome assembly/co-assembly approach workflow. Its processes include:
 
@@ -1654,22 +1867,15 @@ https://github.com/bxlab/metaWRAP/blob/master/Usage_tutorial.md
 
 Follow the below instructions to make a new directory and make a symbolic link to the files that you would otherwise have to download in step 0 of the tutorial.
 
+__Note__: The below code section must be carried out outside on another terminal than your `metawrap` terminal.
+
 ```{bash eval=FALSE}
-mkdir ~/MetaWRAP_tut
+mkdir -p ~/MetaWRAP_tut/RAW_READS
 cd ~/MetaWRAP_tut
-ln -s /pub39/tea/matthew/NEOF/Shotgun_metagenomics/
+cp /pub39/tea/matthew/NEOF/Shotgun_metagenomics/metawrap/* RAW_READS
 ```
 
-Now to activate a `MetaWRAP` environment. The first step is to use `chos 8` which is a custom command for our cluster. It will CHange the Unix OS to version 8 as version 7 (default in our cluster) is too old for some of the programs.
-
-```{bash eval=FALSE}
-#CHange OS
-chos 8
-#Activate metawrap environment
-. usemetawrap
-```
-
-Now you can carry on with the online tutorial if you wish.
+Now you can carry on with the online tutorial if you wish using your `MetaWRAP` terminal.
 
 __Note__: This has not been fully tested and the environment may not fully work. This is the joys of bioinformatics.
 
@@ -1687,15 +1893,18 @@ knitr::include_graphics(path = "figures/step.png", auto_pdf = TRUE)
 
 Below are some good links to start with before carrying out your own projects.
 
-- A good review paper on metagenome assembly approaches
+- A review paper on metagenome assembly approaches
    - Genome-resolved metagenomics using environmental and clinical samples: https://academic.oup.com/bib/advance-article/doi/10.1093/bib/bbab030/6184411
 - bioBakery tools for meta'omic profiling
    - https://github.com/biobakery/biobakery
-
-## Visualising data
-
-
-
+- Assessing the performance of different approaches for functional and taxonomic annotation of metagenomes
+   - https://bmcgenomics.biomedcentral.com/articles/10.1186/s12864-019-6289-6
+- MicrobeAnnotator: Easy-to-use pipeline for the comprehensive metabolic annotation of microbial genomes.
+   - https://github.com/cruizperez/MicrobeAnnotator
+- MetaEuk: Functional annotation of eukaryotic metagenome
+   - https://github.com/soedinglab/metaeuk
+_ Methods for Metagenomic data visualisation and analysis
+   - https://www.researchgate.net/publication/318252633_Methods_for_The_Metagenomic_Data_Visualization_and_Analysis
 
 ## Manuals
 ```{r, fig.align = 'center',out.width= '15%', echo=FALSE }
@@ -1744,38 +1953,12 @@ PhyloPhlAn: https://github.com/biobakery/phylophlan/wiki
 
 MetaWRAP: https://github.com/bxlab/metaWRAP
 
-## COG Cateories
+Pokka: https://github.com/tseemann/prokka
 
-- CELLULAR PROCESSES AND SIGNALING
-   - [D] Cell cycle control, cell division, chromosome partitioning
-   - [M] Cell wall/membrane/envelope biogenesis
-   - [N] Cell motility
-   - [O] Post-translational modification, protein turnover, and chaperones
-   - [T] Signal transduction mechanisms
-   - [U] Intracellular trafficking, secretion, and vesicular transport
-   - [V] Defense mechanisms
-   - [W] Extracellular structures
-   - [Y] Nuclear structure
-   - [Z] Cytoskeleton
-- INFORMATION STORAGE AND PROCESSING
-   - [A] RNA processing and modification
-   - [B] Chromatin structure and dynamics
-   - [J] Translation, ribosomal structure and biogenesis
-   - [K] Transcription
-   - [L] Replication, recombination and repair
-- METABOLISM
-   - [C] Energy production and conversion
-   - [E] Amino acid transport and metabolism
-   - [F] Nucleotide transport and metabolism
-   - [G] Carbohydrate transport and metabolism
-   - [H] Coenzyme transport and metabolism
-   - [I] Lipid transport and metabolism
-   - [P] Inorganic ion transport and metabolism
-   - [Q] Secondary metabolites biosynthesis, transport, and catabolism
-- POORLY CHARACTERIZED
-   - [R] General function prediction only
-   - [S] Function unknown
-   
+MinPath: https://github.com/mgtools/MinPath/blob/master/readme
+
+MetaCyc: https://metacyc.org/
+
 ## Obtaining Read Data
 
 The following commands can be used to obtain the sequence data used in this practical, directly from the EBI metagenomics site. It is worth noting that these are the full set of data, not like the miniaturised version you have used in the tutorial.

@@ -81,7 +81,7 @@ Run `FastQC` on the files:
 ```{bash eval=FALSE}
 #R1 fastqc
 #Make an output directory
-mkdir R1_fastq
+mkdir R1_fastqc
 #Run fastqc on all the R1.fastq.gz files 
 #* matches any pattern
 #*R1.fastq.gz matches any file that ends R1.fastq.gz in the current directory
@@ -90,7 +90,7 @@ fastqc -t 3 -o R1_fastqc *R1.fastq.gz
 
 #R2 fastqc
 #Make output directory
-mkdir R2_fastq
+mkdir R2_fastqc
 #Run fastqc
 fastqc -t 3 -o R2_fastqc *R2.fastq.gz
 ```

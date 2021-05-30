@@ -29,5 +29,5 @@ This practical session aims to introduce you to the analysis of Shotgun metageno
 - Functional profiling
 - Metagenome assembly
 - Binning
-- Gene prediction
 - Functional annotation
+- MetaWrap workflow
