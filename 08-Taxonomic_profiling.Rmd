@@ -131,7 +131,7 @@ bracken -d $KRAKEN2_DB_PATH/minikraken2_v1_8GB \
 
 Let's look at what those command line options do:
 
-- `-d` : Specifies the `Kraken2` database that was used for taxonomic classification. In this case bracken requires the variable `$KRAKEN_DB_PATH` so the option is provided the full path to the kraken database. For clarity try the command `ls $KRAKEN_DB_PATH/minikraken2_v1_8GB`. 
+- `-d` : Specifies the `Kraken2` database that was used for taxonomic classification. In this case bracken requires the variable `$KRAKEN_DB_PATH` so the option is provided the full path to the kraken database. For clarity try the command `ls $KRAKEN2_DB_PATH/minikraken2_v1_8GB`. 
 - `-i` : The `Kraken2` report file, this will be used as the input.
 - `-o` : The output `Bracken` file. Information about its contents is below.
 - `-r 100`: This is the ideal length of the reads that were used in the `Kraken2` classification. It is recommended that the initial read length of the sequencing data is used. We are using 100 here as we used a paired library of 100 bp reads.
@@ -145,10 +145,10 @@ knitr::include_graphics(path = "figures/output.png", auto_pdf = TRUE)
 
 The output file of `Bracken` contains the following columns:
 
-1. __Name__: Name of taxonomy at the specified tax level.
+1. __Name__: Name of taxonomy at the specified taxonomic level.
 2. __Taxonomy ID__: NCBI taxonomy id
 3. __Level ID__: Letter signifying the taxonomic level of the classification
-4. __Kraken assigned read__: Number of reads assigned the taxonomy by `Kraken2`.
+4. __Kraken assigned read__: Number of reads assigned to the taxonomy by `Kraken2`.
 5. __Added reads with abundance reestimation__: Number of reads added to the taxonomy by Bracken abundance reestimation. 
 6. __Total reads after abundance reestimation__: Number from field 4 and 5 summed. This is the field that will be used for downstream analysis.
 7. __Fraction of total reads__: Relative abundance of the taxonomy.

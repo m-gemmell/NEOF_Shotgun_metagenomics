@@ -129,7 +129,7 @@ megahit \
 
 Here, you have instructed `MEGAHIT` to use both the stitched and unstitched reads, to output the assembly in a subdirectory called K1 and to use 12 CPUs. 
 
-The last option `--k-list` instructs `MEGAHIT` to first generate an assembly using a k-mer size of 29 bp and when that is complete, integrate the results into an assembly using a k-mer size of 49 bp, and so on up to a final iteration using a k-mer size of 189 bp. This large range of k-mer lengths should give us a good assembly, given the data. However, it may take a while to run so this might be a good time to either read on. 
+The last option `--k-list` instructs `MEGAHIT` to first generate an assembly using a k-mer size of 29 bp and when that is complete, integrate the results into an assembly using a k-mer size of 49 bp, and so on up to a final iteration using a k-mer size of 189 bp. This large range of k-mer lengths should give us a good assembly, given the data. However, it may take a while to run so this might be a good time to read on. 
 
 If you need a command prompt (your current one is gone because MEGAHIT is running), right click on the main screen, choose `Applications` -> `Shell` -> `bash`.
 
@@ -161,7 +161,8 @@ We will use `QUAST` for genome contiguity assessment but first we will change di
 #Change directory
 cd ~/6-Assembly
 #Create QUAST output directory
-#The option -p will create and parent directories tha
+#The option -p will create a directory and any required
+#parent directories
 mkdir -p quast/K1
 ```
 
@@ -182,7 +183,7 @@ The report tells us quite a bit about the assembly quality. Two definitions that
 knitr::include_graphics(path = "figures/n50_n90.png", auto_pdf = TRUE)
 ``` 
 
-__Quastions__
+__Questions__
 - How do the contig metrics compare to the original reads? 
 
 - Now we have an assembly, albeit not a brilliant one due to us only having used 1 million reads, we can start to explore it.

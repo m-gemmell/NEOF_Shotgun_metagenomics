@@ -24,7 +24,7 @@
 <meta name="author" content="Sam Haldenby and Matthew R. Gemmell" />
 
 
-<meta name="date" content="2021-05-30" />
+<meta name="date" content="2021-06-01" />
 
   <meta name="viewport" content="width=device-width, initial-scale=1" />
   <meta name="apple-mobile-web-app-capable" content="yes" />
@@ -374,7 +374,7 @@ code span.wa { color: #60a0b0; font-weight: bold; font-style: italic; } /* Warni
 <span id="cb25-2"><a href="08-Taxonomic_profiling.html#cb25-2" aria-hidden="true" tabindex="-1"></a><span class="ex">-i</span> K1.kreport2 -o K1.bracken -r 100 -l S -t 5</span></code></pre></div>
 <p>Let’s look at what those command line options do:</p>
 <ul>
-<li><code>-d</code> : Specifies the <code>Kraken2</code> database that was used for taxonomic classification. In this case bracken requires the variable <code>$KRAKEN_DB_PATH</code> so the option is provided the full path to the kraken database. For clarity try the command <code>ls $KRAKEN_DB_PATH/minikraken2_v1_8GB</code>.</li>
+<li><code>-d</code> : Specifies the <code>Kraken2</code> database that was used for taxonomic classification. In this case bracken requires the variable <code>$KRAKEN_DB_PATH</code> so the option is provided the full path to the kraken database. For clarity try the command <code>ls $KRAKEN2_DB_PATH/minikraken2_v1_8GB</code>.</li>
 <li><code>-i</code> : The <code>Kraken2</code> report file, this will be used as the input.</li>
 <li><code>-o</code> : The output <code>Bracken</code> file. Information about its contents is below.</li>
 <li><code>-r 100</code>: This is the ideal length of the reads that were used in the <code>Kraken2</code> classification. It is recommended that the initial read length of the sequencing data is used. We are using 100 here as we used a paired library of 100 bp reads.</li>
@@ -387,10 +387,10 @@ code span.wa { color: #60a0b0; font-weight: bold; font-style: italic; } /* Warni
 <p><img src="figures/output.png" width="10%" style="display: block; margin: auto;" /></p>
 <p>The output file of <code>Bracken</code> contains the following columns:</p>
 <ol style="list-style-type: decimal">
-<li><strong>Name</strong>: Name of taxonomy at the specified tax level.</li>
+<li><strong>Name</strong>: Name of taxonomy at the specified taxonomic level.</li>
 <li><strong>Taxonomy ID</strong>: NCBI taxonomy id</li>
 <li><strong>Level ID</strong>: Letter signifying the taxonomic level of the classification</li>
-<li><strong>Kraken assigned read</strong>: Number of reads assigned the taxonomy by <code>Kraken2</code>.</li>
+<li><strong>Kraken assigned read</strong>: Number of reads assigned to the taxonomy by <code>Kraken2</code>.</li>
 <li><strong>Added reads with abundance reestimation</strong>: Number of reads added to the taxonomy by Bracken abundance reestimation.</li>
 <li><strong>Total reads after abundance reestimation</strong>: Number from field 4 and 5 summed. This is the field that will be used for downstream analysis.</li>
 <li><strong>Fraction of total reads</strong>: Relative abundance of the taxonomy.</li>

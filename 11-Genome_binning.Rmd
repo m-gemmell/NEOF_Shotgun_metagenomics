@@ -234,7 +234,7 @@ As we have only used a subset of data the results are not very good so let us lo
 cd ~/7-Binning
 mkdir K1_fullset
 cd K1_fullset
-ln -s /pub39/tea/matther/NEOF/Shotgun_metagenomics/binning/K1_fullset/* .
+ln -s /pub39/tea/matthew/NEOF/Shotgun_metagenomics/binning/K1_fullset/* .
 ```
 
 Now we can look at the results table that is in your current directory.

@@ -7,7 +7,7 @@ It is good practice to remove any host sequences from your data before further a
 
 If there is no host genome available before you start your sample collections and sequencing it may be a good idea to attempt to sequence and assemble the host genome. We would recommend long read technologies for single genome assembly projects.
 
-This chapter contains a small example on how to carry out host removal. It uses only a section of a human (host of our samples) reference genome assembly. IN real life you should use the entire reference.
+This chapter contains a small example on how to carry out host removal. It uses only a section of a human (host of our samples) reference genome assembly. In real life you should use the entire reference.
 
 The first step is to copy over the reference fasta file we will use.
 

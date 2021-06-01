@@ -24,7 +24,7 @@
 <meta name="author" content="Sam Haldenby and Matthew R. Gemmell" />
 
 
-<meta name="date" content="2021-05-30" />
+<meta name="date" content="2021-06-01" />
 
   <meta name="viewport" content="width=device-width, initial-scale=1" />
   <meta name="apple-mobile-web-app-capable" content="yes" />
@@ -288,7 +288,7 @@ code span.wa { color: #60a0b0; font-weight: bold; font-style: italic; } /* Warni
 <div id="taxonomic-annotation" class="section level2" number="12.1">
 <h2><span class="header-section-number">12.1</span> Taxonomic annotation</h2>
 <p><img src="figures/classification.png" width="10%" style="display: block; margin: auto;" /></p>
-<p>Taxonomic annotation of bins can be carried out with <code>Kraken2</code>. As we have already done this for the reads and taxonomic results from read and assembly approaches have similar performances we will not cover it here. and instead move straight onto functional annotation with <code>Prokka</code>.</p>
+<p>Taxonomic annotation of bins can be carried out with <code>Kraken2</code>. As we have already done this for the reads and taxonomic results from read and assembly approaches have similar performances we will not cover it here, and instead move straight onto functional annotation with <code>Prokka</code>.</p>
 </div>
 <div id="prokka" class="section level2" number="12.2">
 <h2><span class="header-section-number">12.2</span> Prokka</h2>
@@ -297,7 +297,7 @@ code span.wa { color: #60a0b0; font-weight: bold; font-style: italic; } /* Warni
 <div id="prokka-conda-and-directories" class="section level3" number="12.2.1">
 <h3><span class="header-section-number">12.2.1</span> Prokka: conda and directories</h3>
 <p><img src="figures/conda.png" width="10%" style="display: block; margin: auto;" /></p>
-<p>Now to activate a <code>MetaWRAP</code> environment in a new terminal (right click on the main screen background, choose <code>Applications</code> -&gt; <code>Shell</code> -&gt; <code>bash</code>). The first step is to use <code>chos 8</code> which is a custom command for our cluster. It will CHange the Unix OS to version 8 as version 7 (default in our cluster) is too old for some of the programs.</p>
+<p>Now to activate a <code>MetaWRAP</code> environment in a new terminal (right click on the main screen background, choose <code>Applications</code> -&gt; <code>Shell</code> -&gt; <code>bash</code>). The first step is to use <code>chos 8</code> which is a custom command for our cluster. It will Change the Unix OS to version 8 as version 7 (default in our cluster) is too old for some of the programs.</p>
 <div class="sourceCode" id="cb83"><pre class="sourceCode bash"><code class="sourceCode bash"><span id="cb83-1"><a href="12-Assembly_functional_annotation.html#cb83-1" aria-hidden="true" tabindex="-1"></a><span class="ex">chos</span> 8</span>
 <span id="cb83-2"><a href="12-Assembly_functional_annotation.html#cb83-2" aria-hidden="true" tabindex="-1"></a><span class="bu">.</span> <span class="ex">usemetawrap</span></span></code></pre></div>
 <p>Make a new directory and move into it.</p>
@@ -327,7 +327,7 @@ code span.wa { color: #60a0b0; font-weight: bold; font-style: italic; } /* Warni
 <div class="sourceCode" id="cb86"><pre class="sourceCode bash"><code class="sourceCode bash"><span id="cb86-1"><a href="12-Assembly_functional_annotation.html#cb86-1" aria-hidden="true" tabindex="-1"></a><span class="co">#Copy over directory</span></span>
 <span id="cb86-2"><a href="12-Assembly_functional_annotation.html#cb86-2" aria-hidden="true" tabindex="-1"></a><span class="fu">cp</span> -r /pub39/tea/matthew/NEOF/Shotgun_metagenomics/prokka/K1_fullset ~/8-metawrap_anno</span>
 <span id="cb86-3"><a href="12-Assembly_functional_annotation.html#cb86-3" aria-hidden="true" tabindex="-1"></a><span class="co">#Change into copied directory</span></span>
-<span id="cb86-4"><a href="12-Assembly_functional_annotation.html#cb86-4" aria-hidden="true" tabindex="-1"></a><span class="bu">cd</span> K1_fullset</span></code></pre></div>
+<span id="cb86-4"><a href="12-Assembly_functional_annotation.html#cb86-4" aria-hidden="true" tabindex="-1"></a><span class="bu">cd</span> ~/8-metawrap_anno/K1_fullset</span></code></pre></div>
 <p>There are many directories but the one we are interested is <code>bin_funct_annotations</code> . This contains a GFF file for each bin.</p>
 <p>Look at the gff file for bin 1.</p>
 <div class="sourceCode" id="cb87"><pre class="sourceCode bash"><code class="sourceCode bash"><span id="cb87-1"><a href="12-Assembly_functional_annotation.html#cb87-1" aria-hidden="true" tabindex="-1"></a><span class="fu">less</span> bin_funct_annotations/K1.1.gff</span></code></pre></div>
@@ -401,15 +401,15 @@ code span.wa { color: #60a0b0; font-weight: bold; font-style: italic; } /* Warni
 <span id="cb93-4"><a href="12-Assembly_functional_annotation.html#cb93-4" aria-hidden="true" tabindex="-1"></a><span class="co">#cut uses tabs as the default column/field delimiter</span></span>
 <span id="cb93-5"><a href="12-Assembly_functional_annotation.html#cb93-5" aria-hidden="true" tabindex="-1"></a><span class="fu">cat</span> K1.1.gff <span class="kw">|</span> <span class="fu">grep</span> <span class="st">&quot;eC_number=&quot;</span> <span class="kw">|</span> <span class="fu">cut</span> -f 9 <span class="kw">|</span> <span class="fu">head</span></span>
 <span id="cb93-6"><a href="12-Assembly_functional_annotation.html#cb93-6" aria-hidden="true" tabindex="-1"></a><span class="co">#Cut out the 1st and 2nd field based on the delimeter &quot;;&quot; (-d &quot;;&quot;)</span></span>
-<span id="cb93-7"><a href="12-Assembly_functional_annotation.html#cb93-7" aria-hidden="true" tabindex="-1"></a><span class="fu">cat</span> <span class="va">${bin}</span>.gff <span class="kw">|</span> <span class="fu">grep</span> <span class="st">&quot;eC_number=&quot;</span> <span class="kw">|</span> <span class="fu">cut</span> -f 9 <span class="kw">|</span> <span class="fu">cut</span> -f 1,2 -d <span class="st">&#39;;&#39;</span> <span class="kw">|</span> <span class="kw">\</span></span>
+<span id="cb93-7"><a href="12-Assembly_functional_annotation.html#cb93-7" aria-hidden="true" tabindex="-1"></a><span class="fu">cat</span> K1.1.gff <span class="kw">|</span> <span class="fu">grep</span> <span class="st">&quot;eC_number=&quot;</span> <span class="kw">|</span> <span class="fu">cut</span> -f 9 <span class="kw">|</span> <span class="fu">cut</span> -f 1,2 -d <span class="st">&#39;;&#39;</span> <span class="kw">|</span> <span class="kw">\</span></span>
 <span id="cb93-8"><a href="12-Assembly_functional_annotation.html#cb93-8" aria-hidden="true" tabindex="-1"></a><span class="fu">head</span></span>
 <span id="cb93-9"><a href="12-Assembly_functional_annotation.html#cb93-9" aria-hidden="true" tabindex="-1"></a><span class="co">#Substitute (s/) ID= for nothing (/ID//)</span></span>
 <span id="cb93-10"><a href="12-Assembly_functional_annotation.html#cb93-10" aria-hidden="true" tabindex="-1"></a><span class="co">#/g indicates to carry out it out for every instance in every line</span></span>
 <span id="cb93-11"><a href="12-Assembly_functional_annotation.html#cb93-11" aria-hidden="true" tabindex="-1"></a><span class="co">#Default is to only the first instance in each line</span></span>
-<span id="cb93-12"><a href="12-Assembly_functional_annotation.html#cb93-12" aria-hidden="true" tabindex="-1"></a><span class="fu">cat</span> <span class="va">${bin}</span>.gff <span class="kw">|</span> <span class="fu">grep</span> <span class="st">&quot;eC_number=&quot;</span> <span class="kw">|</span> <span class="fu">cut</span> -f 9 <span class="kw">|</span> <span class="fu">cut</span> -f 1,2 -d <span class="st">&#39;;&#39;</span> <span class="kw">|</span> <span class="kw">\</span></span>
+<span id="cb93-12"><a href="12-Assembly_functional_annotation.html#cb93-12" aria-hidden="true" tabindex="-1"></a><span class="fu">cat</span> K1.1.gff <span class="kw">|</span> <span class="fu">grep</span> <span class="st">&quot;eC_number=&quot;</span> <span class="kw">|</span> <span class="fu">cut</span> -f 9 <span class="kw">|</span> <span class="fu">cut</span> -f 1,2 -d <span class="st">&#39;;&#39;</span> <span class="kw">|</span> <span class="kw">\</span></span>
 <span id="cb93-13"><a href="12-Assembly_functional_annotation.html#cb93-13" aria-hidden="true" tabindex="-1"></a><span class="fu">sed</span> <span class="st">&quot;s/ID=//g&quot;</span> <span class="kw">|</span> <span class="fu">head</span></span>
 <span id="cb93-14"><a href="12-Assembly_functional_annotation.html#cb93-14" aria-hidden="true" tabindex="-1"></a><span class="co">#Substitute ;eC_number= for a tab (\t)</span></span>
-<span id="cb93-15"><a href="12-Assembly_functional_annotation.html#cb93-15" aria-hidden="true" tabindex="-1"></a><span class="fu">cat</span> <span class="va">${bin}</span>.gff <span class="kw">|</span> <span class="fu">grep</span> <span class="st">&quot;eC_number=&quot;</span> <span class="kw">|</span> <span class="fu">cut</span> -f 9 <span class="kw">|</span> <span class="fu">cut</span> -f 1,2 -d <span class="st">&#39;;&#39;</span> <span class="kw">|</span> <span class="kw">\</span></span>
+<span id="cb93-15"><a href="12-Assembly_functional_annotation.html#cb93-15" aria-hidden="true" tabindex="-1"></a><span class="fu">cat</span> K1.1.gff <span class="kw">|</span> <span class="fu">grep</span> <span class="st">&quot;eC_number=&quot;</span> <span class="kw">|</span> <span class="fu">cut</span> -f 9 <span class="kw">|</span> <span class="fu">cut</span> -f 1,2 -d <span class="st">&#39;;&#39;</span> <span class="kw">|</span> <span class="kw">\</span></span>
 <span id="cb93-16"><a href="12-Assembly_functional_annotation.html#cb93-16" aria-hidden="true" tabindex="-1"></a><span class="fu">sed</span> <span class="st">&quot;s/ID=//g&quot;</span> <span class="kw">|</span> <span class="fu">sed</span> <span class="st">&quot;s/;eC_number=/\t/g&quot;</span> <span class="kw">|</span> <span class="fu">head</span></span></code></pre></div>
 <p>Finally the pipes output is written into a file: <code>&gt; ../EC/${bin}.ec</code>.</p>
 <p>The output <code>.ec</code> files are required for <code>MinPath</code> and are tab delimited with two columns:</p>
@@ -448,7 +448,7 @@ code span.wa { color: #60a0b0; font-weight: bold; font-style: italic; } /* Warni
 <p>The file contains the following columns</p>
 <ol style="list-style-type: decimal">
 <li><strong>Pathway ID</strong></li>
-<li><strong>Pathway reconstruction</strong>: Only available for genomes annotated in MetaCyc database)</li>
+<li><strong>Pathway reconstruction</strong>: Only available for genomes annotated in MetaCyc database.</li>
 <li><strong>Naive</strong>: Indicates if pathway was reconstructed by the naive mapping approach (1) or not (0).</li>
 <li><strong>Minpath</strong>: Indicates if the pathway was kept (1) or removed (0) by <code>MinPath</code>.</li>
 <li><strong>Fam0</strong>: The number of families involved in the pathway.</li>
