@@ -428,7 +428,9 @@ Next step is to extract the reads that did not map to the host reference from th
 samtools fastq -f 4 -1 K1_R1.u.fastq -2 K1_R2.u.fastq mapped.bam
 ```
  
-The above step may make unmatched paired files. This occurs when a read from R2 is removed but the matching read in R1 is not removed, or vice versa. This will cause issues for further analysis. 
+We use the `-f` parameter option to output reads that only include the SAM flag. In this case `4` stands for unmapped reads. Therefore, our resulting fastq files will only contain unmapped reads. The following link is very useful to create a SAM flag you may need: https://broadinstitute.github.io/picard/explain-flags.html.
+
+This step may make unmatched paired files. This occurs when a read from R2 is removed but the matching read in R1 is not removed, or vice versa. This will cause issues for further analysis. 
 
 ## Re-pair
 ```{r, fig.align = 'center',out.width= '30%', echo=FALSE }
