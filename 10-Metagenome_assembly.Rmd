@@ -19,7 +19,7 @@ Here, we will carry out a couple of assemblies on our dataset.
 knitr::include_graphics(path = "figures/conda.png", auto_pdf = TRUE)
 ```
 
-We will use the `shotgun_meta` conda environment so use a terminal where this is activated or open a new one and run `. useshotgun_meta`.
+We will use the `shotgun_meta` conda environment so use a terminal where this is activated or open a new one and run `. useshotgun`.
 
 ## A primer on short read assembly
 ```{r, fig.align = 'center',out.width= '15%', echo=FALSE }
