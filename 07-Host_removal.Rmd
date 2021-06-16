@@ -1,4 +1,4 @@
-# Host removal
+# Host removal {#hostremoval}
 ```{r, fig.align = 'center',out.width= '30%', echo=FALSE }
 knitr::include_graphics(path = "figures/bowtie2.png", auto_pdf = TRUE)
 ``` 

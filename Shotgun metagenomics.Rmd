@@ -8,6 +8,7 @@ documentclass: book
 bibliography: [book.bib, packages.bib]
 biblio-style: apalike
 link-citations: yes
+favicon: figures/NEOF_logo_32x32.png
 ---
 
 ```{r, fig.align = 'center',out.width= '30%', echo=FALSE }
@@ -21,20 +22,20 @@ knitr::include_graphics(path = "figures/squid.png", auto_pdf = TRUE)
 
 This practical session aims to introduce you to the analysis of Shotgun metagenomic data. The topics covered are:
 
-- Overview
-- Raw data
-- Trimming data
-- Host removal
-- Taxonomic profiling
-- Functional profiling
-- Metagenome assembly
-- Binning
-- Functional annotation
-- MetaWrap workflow
+- [Overview](#overview)
+- [Raw data](#rawdata)
+- [Trimming data](#qualcont)
+- [Host removal](#hostremoval)
+- [Taxonomic profiling](#taxprofile)
+- [Functional profiling](#functprofile)
+- [Metagenome assembly](#metagenomeassembly)
+- [Binning](#binning)
+- [Functional annotation](#funcanno)
+- [MetaWrap workflow](#metawrap)
 
 <!--chapter:end:01-Shotgun_metagenomics.Rmd-->
 
-# Overview
+# Overview {#overview}
 ```{r, fig.align = 'center',out.width= '20%', echo=FALSE }
 knitr::include_graphics(path = "figures/overview.png", auto_pdf = TRUE)
 ``` 
@@ -163,7 +164,9 @@ __To open a new terminal window__, right click on the main screen, choose `Appli
 
 <!--chapter:end:04-Cluster_Introduction.Rmd-->
 
-# Raw data
+# (PART\*) Data & QC {-}
+
+# Raw data {#rawdata}
 ```{r, fig.align = 'center',out.width= '20%', echo=FALSE }
 knitr::include_graphics(path = "figures/usb_stick.png", auto_pdf = TRUE)
 ``` 
@@ -289,7 +292,7 @@ Once you have finished inspecting, minimise the Firefox window.
 
 <!--chapter:end:05-Raw_data.Rmd-->
 
-# Quality control
+# Quality control {#qualcont}
 ```{r, fig.align = 'center',out.width= '30%', echo=FALSE }
 knitr::include_graphics(path = "figures/quality_trimming_and_filtering.png", auto_pdf = TRUE)
 ``` 
@@ -375,7 +378,7 @@ __Task__: Run `FastQC` and `MultiQC` for the R2 files and then view the R1 and R
 
 <!--chapter:end:06-Trimming_data.Rmd-->
 
-# Host removal
+# Host removal {#hostremoval}
 ```{r, fig.align = 'center',out.width= '30%', echo=FALSE }
 knitr::include_graphics(path = "figures/bowtie2.png", auto_pdf = TRUE)
 ``` 
@@ -459,7 +462,9 @@ The assembly we used was: https://ftp.ncbi.nlm.nih.gov/refseq/H_sapiens/annotati
 
 <!--chapter:end:07-Host_removal.Rmd-->
 
-# Taxonomic profiling
+# (PART\*) Read approach {-}
+
+# Taxonomic profiling {#taxprofile}
 ```{r, fig.align = 'center',out.width= '30%', echo=FALSE }
 knitr::include_graphics(path = "figures/classification.png", auto_pdf = TRUE)
 ``` 
@@ -797,7 +802,7 @@ In your own future analysis you will need to create your own `Kraken2` and `Brac
 
 <!--chapter:end:08-Taxonomic_profiling.Rmd-->
 
-# Functional profiling
+# Functional profiling {#functprofile}
 ```{r, fig.align = 'center',out.width= '15%', echo=FALSE }
 knitr::include_graphics(path = "figures/profile.png", auto_pdf = TRUE)
 ``` 
@@ -1061,7 +1066,9 @@ That completes the non assembly approach to shotgun metagenomic analysis. The ne
 
 <!--chapter:end:09-Functional_profiling.Rmd-->
 
-# Metagenome assembly
+# (PART\*) Assembly Approach {-}
+
+# Metagenome assembly {#metagenomeassembly}
 ```{r, fig.align = 'center',out.width= '30%', echo=FALSE }
 knitr::include_graphics(path = "figures/jigsaw.png", auto_pdf = TRUE)
 ``` 
@@ -1255,7 +1262,7 @@ There is also a metaQUAST specifically for metagenome assemblies but it requires
 
 <!--chapter:end:10-Metagenome_assembly.Rmd-->
 
-# Genome binning
+# Genome binning {#binning}
 ```{r, fig.align = 'center',out.width= '40%', echo=FALSE }
 knitr::include_graphics(path = "figures/yarn_binning.png", auto_pdf = TRUE)
 ``` 
@@ -1556,7 +1563,7 @@ It is always useful to know the quality of your bins so you know which are more 
 
 <!--chapter:end:11-Genome_binning.Rmd-->
 
-# Assembly functional annotation
+# Assembly functional annotation {#funcanno}
 ```{r, fig.align = 'center',out.width= '20%', echo=FALSE }
 knitr::include_graphics(path = "figures/pathways.png", auto_pdf = TRUE)
 ``` 
@@ -1842,7 +1849,7 @@ With this file you can then investigate what bins have which pathways. Additiona
 
 <!--chapter:end:12-Assembly_functional_annotation.Rmd-->
 
-# MetaWRAP
+# MetaWRAP {#metawrap}
 ```{r, fig.align = 'center',out.width= '20%', echo=FALSE }
 knitr::include_graphics(path = "figures/mummy.png", auto_pdf = TRUE)
 ``` 
@@ -1884,12 +1891,9 @@ __Note__: This has not been fully tested and the environment may not fully work.
 
 <!--chapter:end:13-MetaWrap.Rmd-->
 
-# Appendix
-```{r, fig.align = 'center',out.width= '25%', echo=FALSE }
-knitr::include_graphics(path = "figures/appendix.png", auto_pdf = TRUE)
-``` 
+# (APPENDIX) Appendix {-}
 
-## Next steps
+# Next steps
 ```{r, fig.align = 'center',out.width= '15%', echo=FALSE }
 knitr::include_graphics(path = "figures/step.png", auto_pdf = TRUE)
 ``` 
@@ -1909,7 +1913,7 @@ Below are some good links to start with before carrying out your own projects.
 _ Methods for Metagenomic data visualisation and analysis
    - https://www.researchgate.net/publication/318252633_Methods_for_The_Metagenomic_Data_Visualization_and_Analysis
 
-## Manuals
+# Manuals
 ```{r, fig.align = 'center',out.width= '15%', echo=FALSE }
 knitr::include_graphics(path = "figures/manual.png", auto_pdf = TRUE)
 ``` 
@@ -1962,7 +1966,7 @@ MinPath: https://github.com/mgtools/MinPath/blob/master/readme
 
 MetaCyc: https://metacyc.org/
 
-## Obtaining Read Data
+# Obtaining Read Data
 
 The following commands can be used to obtain the sequence data used in this practical, directly from the EBI metagenomics site. It is worth noting that these are the full set of data, not like the miniaturised version you have used in the tutorial.
 

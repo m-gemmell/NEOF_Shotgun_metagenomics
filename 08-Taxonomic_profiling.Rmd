@@ -1,4 +1,6 @@
-# Taxonomic profiling
+# (PART\*) Read approach {-}
+
+# Taxonomic profiling {#taxprofile}
 ```{r, fig.align = 'center',out.width= '30%', echo=FALSE }
 knitr::include_graphics(path = "figures/classification.png", auto_pdf = TRUE)
 ``` 

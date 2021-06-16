@@ -1,4 +1,6 @@
-# Metagenome assembly
+# (PART\*) Assembly Approach {-}
+
+# Metagenome assembly {#metagenomeassembly}
 ```{r, fig.align = 'center',out.width= '30%', echo=FALSE }
 knitr::include_graphics(path = "figures/jigsaw.png", auto_pdf = TRUE)
 ``` 

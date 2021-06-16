@@ -1,4 +1,4 @@
-# Genome binning
+# Genome binning {#binning}
 ```{r, fig.align = 'center',out.width= '40%', echo=FALSE }
 knitr::include_graphics(path = "figures/yarn_binning.png", auto_pdf = TRUE)
 ``` 

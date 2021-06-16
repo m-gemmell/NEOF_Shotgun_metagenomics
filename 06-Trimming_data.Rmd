@@ -1,4 +1,4 @@
-# Quality control
+# Quality control {#qualcont}
 ```{r, fig.align = 'center',out.width= '30%', echo=FALSE }
 knitr::include_graphics(path = "figures/quality_trimming_and_filtering.png", auto_pdf = TRUE)
 ``` 

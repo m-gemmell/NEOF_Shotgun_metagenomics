@@ -8,6 +8,7 @@ documentclass: book
 bibliography: [book.bib, packages.bib]
 biblio-style: apalike
 link-citations: yes
+favicon: figures/NEOF_logo_32x32.png
 ---
 
 ```{r, fig.align = 'center',out.width= '30%', echo=FALSE }
@@ -21,13 +22,13 @@ knitr::include_graphics(path = "figures/squid.png", auto_pdf = TRUE)
 
 This practical session aims to introduce you to the analysis of Shotgun metagenomic data. The topics covered are:
 
-- Overview
-- Raw data
-- Trimming data
-- Host removal
-- Taxonomic profiling
-- Functional profiling
-- Metagenome assembly
-- Binning
-- Functional annotation
-- MetaWrap workflow
+- [Overview](#overview)
+- [Raw data](#rawdata)
+- [Trimming data](#qualcont)
+- [Host removal](#hostremoval)
+- [Taxonomic profiling](#taxprofile)
+- [Functional profiling](#functprofile)
+- [Metagenome assembly](#metagenomeassembly)
+- [Binning](#binning)
+- [Functional annotation](#funcanno)
+- [MetaWrap workflow](#metawrap)

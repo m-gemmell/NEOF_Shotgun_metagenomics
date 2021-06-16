@@ -1,9 +1,6 @@
-# Appendix
-```{r, fig.align = 'center',out.width= '25%', echo=FALSE }
-knitr::include_graphics(path = "figures/appendix.png", auto_pdf = TRUE)
-``` 
+# (APPENDIX) Appendix {-}
 
-## Next steps
+# Next steps
 ```{r, fig.align = 'center',out.width= '15%', echo=FALSE }
 knitr::include_graphics(path = "figures/step.png", auto_pdf = TRUE)
 ``` 
@@ -23,7 +20,7 @@ Below are some good links to start with before carrying out your own projects.
 _ Methods for Metagenomic data visualisation and analysis
    - https://www.researchgate.net/publication/318252633_Methods_for_The_Metagenomic_Data_Visualization_and_Analysis
 
-## Manuals
+# Manuals
 ```{r, fig.align = 'center',out.width= '15%', echo=FALSE }
 knitr::include_graphics(path = "figures/manual.png", auto_pdf = TRUE)
 ``` 
@@ -76,7 +73,7 @@ MinPath: https://github.com/mgtools/MinPath/blob/master/readme
 
 MetaCyc: https://metacyc.org/
 
-## Obtaining Read Data
+# Obtaining Read Data
 
 The following commands can be used to obtain the sequence data used in this practical, directly from the EBI metagenomics site. It is worth noting that these are the full set of data, not like the miniaturised version you have used in the tutorial.
 
