@@ -67,7 +67,7 @@ PhyloPhlAn: https://github.com/biobakery/phylophlan/wiki
 
 MetaWRAP: https://github.com/bxlab/metaWRAP
 
-Pokka: https://github.com/tseemann/prokka
+Prokka: https://github.com/tseemann/prokka
 
 MinPath: https://github.com/mgtools/MinPath/blob/master/readme
 
