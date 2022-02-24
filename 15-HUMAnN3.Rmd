@@ -3,24 +3,34 @@
 knitr::include_graphics(path = "figures/profile.png", auto_pdf = TRUE)
 ``` 
 
-It is also possible to investigate functional differences between metagenome (and metatranscriptome) samples by directly interrogating the read data. We will now look at how this can be done with a package called `HUMAnN2` (The HMP Unified Metabolic Analysis Network 2), a pipeline designed to accurately profile the presence/absence and abundance of microbial pathways in metagenomic sequencing data.
+It is also possible to investigate functional differences between metagenome (and metatranscriptome) samples by directly interrogating the read data. We will now look at how this can be done with a package called `HUMAnN` (The HMP Unified Metabolic Analysis Network), a pipeline designed to accurately profile the presence/absence and abundance of microbial pathways in metagenomic sequencing data.
 
-## HUMAnN2 
+`HUMAnN` is on its third version and was developed in tandem with the third version of `MetaPhlAn`, a computational tool for profiling the composition of microbial communities from metagenomic data.
+
+It is highly recommended you use the new version of `HUMAnN` as it contains 2 times more species pangenomes and 3 times more gene families than `HUMAnN2`.
+
+__NOTE__ add info about pipeline here.
+
+
+## HUMAnN 
 ```{r, fig.align = 'center',out.width= '15%', echo=FALSE }
 knitr::include_graphics(path = "figures/humann2.png", auto_pdf = TRUE)
 ``` 
 
-First, we will carry out an example run of the software and briefly explore the output files. `HUMAnN2` can take a long time to run so we will use a small amount of example data.
+First, we will carry out an example run of the software and briefly explore the output files. `HUMAnN3` can take a long time to run so we will use a small amount of example data. Additionally, we will use a subset of the `HUMAnN3` databases for the analysis but when running analysis on your data you should use the full databases. information on installing `HUMAnN3` and its databases can be found in its online [Home Page](https://huttenhower.sph.harvard.edu/humann/).
 
-### HUMAnN2: conda, directories, and files
+### HUMAnN3: conda, directories, and files
 ```{r, fig.align = 'center',out.width= '10%', echo=FALSE }
 knitr::include_graphics(path = "figures/conda.png", auto_pdf = TRUE)
 ```
 
 We need a new conda environment again. Open a new terminal (right click on the main screen background, choose `Applications` -> `Shell` -> `bash`) and run the below:
 
+
+- CONDA env installed in chos 8
+
 ```{bash eval=FALSE}
-. usehumann2
+. usehumann3
 ```
 
 Make a new directory and move into it.
@@ -33,10 +43,10 @@ cd ~/4-FunctionalProfiling
 Copy over some test data we will the analysis on. This is a demonstration FASTQ file that we will use. It will be small enough to run HUMAnN2 in a reasonable time.
 
 ```{bash eval=FALSE}
-cp /pub39/tea/nsc006/NEOF/Shotgun_metagenomics/humann2/demo.fq.gz .
+cp /pub39/tea/nsc006/NEOF/Shotgun_metagenomics/humann/demo.fastq.gz .
 ```
 
-### HUMAnN2: run
+### HUMAnN3: run
 ```{r, fig.align = 'center',out.width= '10%', echo=FALSE }
 knitr::include_graphics(path = "figures/enter_key.png", auto_pdf = TRUE)
 ``` 
@@ -44,15 +54,15 @@ knitr::include_graphics(path = "figures/enter_key.png", auto_pdf = TRUE)
 Now we will perform the run with HUMAnN2 so we can inspect the output files. 
 
 ```{bash eval=FALSE}
-humann2 \
---input demo.fq.gz \
---output demo.humann2 \ 
+humann \
+--input demo.fastq.gz \
+--output demo_fastq \ 
 --threads 10
 ```
 
-Here, we are telling the software to use `demo.fq.gz` as input and to create a new output directory called `demo.humann2` where the results will be generated. 
+Here, we are telling the software to use `demo.fastq.gz` as input and to create a new output directory called `demo.humann2` where the results will be generated. 
 
-As the software runs, you might notice that as part of the process, `HUMAnN2` runs `MetaPhlAn2.` The purpose of this is to identify what species are present in the sample, so `HUMAnN2` can tailor generate an appropriate database of genes (from those species) to map against. It will carry out this alignment against the gene database, then a protein database, and finally compute which gene families are present to determine which functional pathways are present and how abundant they are.
+As the software runs, you might notice that as part of the process, `HUMAnN` runs `MetaPhlAn.` The purpose of this is to identify what species are present in the sample, so `HUMAnN` can tailor generate an appropriate database of genes (from those species) to map against. It will carry out this alignment against the gene database, then a protein database, and finally compute which gene families are present to determine which functional pathways are present and how abundant they are.
 
 ### HUMAnN2: output
 ```{r, fig.align = 'center',out.width= '10%', echo=FALSE }
@@ -259,26 +269,3 @@ okular biomarkers.png
 Look at the output and see what pathways count as biomarkers for the 2 groups.
 
 That completes the non assembly approach to shotgun metagenomic analysis. The next chapters will cover an assembly approach.
-
-## HUMAnN3 
-```{r, fig.align = 'center',out.width= '15%', echo=FALSE }
-knitr::include_graphics(path = "figures/humann2.png", auto_pdf = TRUE)
-```
-
-- CONDA env installed in chos 8
-
-- 3rd version of HUMAnN
-- Upgraded along with MetaPhlAn to version 3.0. A computational tool for profiling the composition of microbial communities from metagenomic.
-- Contains 2x more species pangenomes and 3x more gene families (vs. v2.0).
-
-- Manual: https://github.com/biobakery/biobakery/wiki/humann3
-
-- Using small dataset and small database
-
-
-- DBs in /pub39/tea/nsc006/humann_dbs/
-
-##Start
-
-
-

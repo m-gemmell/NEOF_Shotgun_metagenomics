@@ -196,7 +196,7 @@ cd 1-Raw
 Now we can generate a symbolic links (i.e. shortcut) to the raw sequence data files, which will appear in the current directory:
 
 ```{bash eval=FALSE}
-ln -s /pub39/tea/matthew/NEOF/Shotgun_metagenomics/raw_fastq/* .
+ln -s /pub39/tea/nsc006/NEOF/Shotgun_metagenomics/raw_fastq/* .
 ```
 
 If you would like to know more about the `ln` command please check out: https://linuxize.com/post/how-to-create-symbolic-links-in-linux-using-the-ln-command/.
@@ -818,7 +818,7 @@ It is also possible to investigate functional differences between metagenome (an
 knitr::include_graphics(path = "figures/humann2.png", auto_pdf = TRUE)
 ``` 
 
-First, we will carry out an example run of the software and briefly explore the output files. HUMAnN2 can take a long time to run so we will use a small amount of example data.
+First, we will carry out an example run of the software and briefly explore the output files. `HUMAnN2` can take a long time to run so we will use a small amount of example data.
 
 ### HUMAnN2: conda, directories, and files
 ```{r, fig.align = 'center',out.width= '10%', echo=FALSE }
@@ -841,7 +841,7 @@ cd ~/4-FunctionalProfiling
 Copy over some test data we will the analysis on. This is a demonstration FASTQ file that we will use. It will be small enough to run HUMAnN2 in a reasonable time.
 
 ```{bash eval=FALSE}
-cp /pub39/tea/matthew/NEOF/Shotgun_metagenomics/humann2/demo.fq.gz .
+cp /pub39/tea/nsc006/NEOF/Shotgun_metagenomics/humann2/demo.fq.gz .
 ```
 
 ### HUMAnN2: run
@@ -933,7 +933,7 @@ It would take many hours to analyse all of the data using `HUMAnN2` and is outsi
 For the purposes of this comparison, we will look at the pathway abundances only. First copy over the results data directory and have a look in it.
 
 ```{bash eval=FALSE}
-cp –r /pub39/tea/matthew/NEOF/Shotgun_metagenomics/DietPathAbundance .
+cp –r /pub39/tea/nsc006/NEOF/Shotgun_metagenomics/DietPathAbundance .
 ls DietPathAbundance
 ```
 
@@ -999,7 +999,7 @@ knitr::include_graphics(path = "figures/Scatterplot.png", auto_pdf = TRUE)
 Now that we have our data normalised, we can visualise the dataset to see how the two groups look, i.e. do samples in the same diet group appear to correlate well with each other and are they distinguishable from those from the other diet group? To do this, we will draw a PCA plot. We will need to provide the script with some metadata. This has been prepared and can be copied over as follows
 
 ```{bash eval=FALSE}
-cp /pub39/tea/matthew/NEOF/Shotgun_metagenomics/diet.metadata.tsv .
+cp /pub39/tea/nsc006/NEOF/Shotgun_metagenomics/diet.metadata.tsv .
 ```
 
 This is a table file where the first column is the sample name with subsequent columns representing categories of metadata. Here, the column of interest is the second one, 'Diet', and samples are labelled as either 'Western' or 'Korean'. We can now run the PCA plot generation script and look at the result.
@@ -1067,6 +1067,17 @@ okular biomarkers.png
 Look at the output and see what pathways count as biomarkers for the 2 groups.
 
 That completes the non assembly approach to shotgun metagenomic analysis. The next chapters will cover an assembly approach.
+
+## HUMAnN3 
+```{r, fig.align = 'center',out.width= '15%', echo=FALSE }
+knitr::include_graphics(path = "figures/humann2.png", auto_pdf = TRUE)
+```
+
+- 3rd version of HUMAnN
+- Upgraded along with MetaPhlAn to version 3.0. A computational tool for profiling the composition of microbial communities from metagenomic.
+- Contains 2x more species pangenomes and 3x more gene families (vs. v2.0).
+
+- Manual: https://github.com/biobakery/biobakery/wiki/humann3
 
 <!--chapter:end:09-Functional_profiling.Rmd-->
 

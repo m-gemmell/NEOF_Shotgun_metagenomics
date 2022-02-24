@@ -26,7 +26,7 @@ cd 1-Raw
 Now we can generate a symbolic links (i.e. shortcut) to the raw sequence data files, which will appear in the current directory:
 
 ```{bash eval=FALSE}
-ln -s /pub39/tea/matthew/NEOF/Shotgun_metagenomics/raw_fastq/* .
+ln -s /pub39/tea/nsc006/NEOF/Shotgun_metagenomics/raw_fastq/* .
 ```
 
 If you would like to know more about the `ln` command please check out: https://linuxize.com/post/how-to-create-symbolic-links-in-linux-using-the-ln-command/.

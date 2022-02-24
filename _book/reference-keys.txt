@@ -51,6 +51,7 @@ humann2-comparison-combining-data
 humann2-comparison-renormalising-data
 humann2-comparison-pca-plot
 humann2-comparison-lefse
+humann3
 metagenomeassembly
 metagenome-assembly-conda
 a-primer-on-short-read-assembly
