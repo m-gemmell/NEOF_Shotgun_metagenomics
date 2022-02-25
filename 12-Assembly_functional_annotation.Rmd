@@ -17,7 +17,7 @@ knitr::include_graphics(path = "figures/quokka.png", auto_pdf = TRUE)
 
 We will carry out `Prokka` functional annotation using `MetaWRAP`. `MetaWRAP` is a very useful program with many tools for metagenome analysis but we will only use it to carry out functional annotations for now.
 
-### Prokka: conda and directories
+### Prokka: conda and directories {#prokka_conda}
 ```{r, fig.align = 'center',out.width= '10%', echo=FALSE }
 knitr::include_graphics(path = "figures/conda.png", auto_pdf = TRUE)
 ```

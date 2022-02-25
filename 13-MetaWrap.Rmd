@@ -34,6 +34,6 @@ cd ~/MetaWRAP_tut
 cp /pub39/tea/matthew/NEOF/Shotgun_metagenomics/metawrap/* RAW_READS
 ```
 
-Now you can carry on with the online tutorial if you wish using your `MetaWRAP` terminal.
+Now you can carry on with the online tutorial, starting from step 1, if you wish using your `MetaWRAP` terminal. Instructions on activating the environment can be found [here](#prokka_conda).
 
 __Note__: This has not been fully tested and the environment may not fully work. This is the joys of bioinformatics.

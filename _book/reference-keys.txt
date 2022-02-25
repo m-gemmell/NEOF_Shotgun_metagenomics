@@ -70,7 +70,7 @@ checkm-output
 funcanno
 taxonomic-annotation
 prokka
-prokka-conda-and-directories
+prokka_conda
 prokka-run
 prokka-output
 minpath
@@ -83,3 +83,12 @@ tutorial
 next-steps
 manuals
 obtaining-read-data
+humann
+humann-conda-directories-and-files
+humann-run
+humann-output
+statistical-comparison-between-samples-1
+humann-comparison-combining-data
+humann-comparison-renormalising-data
+humann-comparison-pca-plot
+humann-comparison-lefse

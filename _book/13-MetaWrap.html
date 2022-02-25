@@ -24,7 +24,7 @@
 <meta name="author" content="Sam Haldenby and Matthew R. Gemmell" />
 
 
-<meta name="date" content="2022-02-23" />
+<meta name="date" content="2022-02-24" />
 
   <meta name="viewport" content="width=device-width, initial-scale=1" />
   <meta name="apple-mobile-web-app-capable" content="yes" />
@@ -249,7 +249,7 @@ code span.wa { color: #60a0b0; font-weight: bold; font-style: italic; } /* Warni
 <li class="chapter" data-level="12.1" data-path="12-Assembly_functional_annotation.html"><a href="12-Assembly_functional_annotation.html#taxonomic-annotation"><i class="fa fa-check"></i><b>12.1</b> Taxonomic annotation</a></li>
 <li class="chapter" data-level="12.2" data-path="12-Assembly_functional_annotation.html"><a href="12-Assembly_functional_annotation.html#prokka"><i class="fa fa-check"></i><b>12.2</b> Prokka</a>
 <ul>
-<li class="chapter" data-level="12.2.1" data-path="12-Assembly_functional_annotation.html"><a href="12-Assembly_functional_annotation.html#prokka-conda-and-directories"><i class="fa fa-check"></i><b>12.2.1</b> Prokka: conda and directories</a></li>
+<li class="chapter" data-level="12.2.1" data-path="12-Assembly_functional_annotation.html"><a href="12-Assembly_functional_annotation.html#prokka_conda"><i class="fa fa-check"></i><b>12.2.1</b> Prokka: conda and directories</a></li>
 <li class="chapter" data-level="12.2.2" data-path="12-Assembly_functional_annotation.html"><a href="12-Assembly_functional_annotation.html#prokka-run"><i class="fa fa-check"></i><b>12.2.2</b> Prokka: run</a></li>
 <li class="chapter" data-level="12.2.3" data-path="12-Assembly_functional_annotation.html"><a href="12-Assembly_functional_annotation.html#prokka-output"><i class="fa fa-check"></i><b>12.2.3</b> Prokka: output</a></li>
 </ul></li>
@@ -269,6 +269,22 @@ code span.wa { color: #60a0b0; font-weight: bold; font-style: italic; } /* Warni
 <li class="chapter" data-level="A" data-path="14-Appendix.html"><a href="14-Appendix.html"><i class="fa fa-check"></i><b>A</b> Next steps</a></li>
 <li class="chapter" data-level="B" data-path="14-Appendix.html"><a href="14-Appendix.html#manuals"><i class="fa fa-check"></i><b>B</b> Manuals</a></li>
 <li class="chapter" data-level="C" data-path="14-Appendix.html"><a href="14-Appendix.html#obtaining-read-data"><i class="fa fa-check"></i><b>C</b> Obtaining Read Data</a></li>
+<li class="chapter" data-level="D" data-path="09-Functional_profiling.html"><a href="09-Functional_profiling.html#functprofile"><i class="fa fa-check"></i><b>D</b> HUMAnN Functional profiling</a>
+<ul>
+<li class="chapter" data-level="D.1" data-path="15-HUMAnN3.html"><a href="15-HUMAnN3.html"><i class="fa fa-check"></i><b>D.1</b> HUMAnN</a>
+<ul>
+<li class="chapter" data-level="D.1.1" data-path="15-HUMAnN3.html"><a href="15-HUMAnN3.html#humann-conda-directories-and-files"><i class="fa fa-check"></i><b>D.1.1</b> HUMAnN: conda, directories, and files</a></li>
+<li class="chapter" data-level="D.1.2" data-path="15-HUMAnN3.html"><a href="15-HUMAnN3.html#humann-run"><i class="fa fa-check"></i><b>D.1.2</b> HUMAnN: run</a></li>
+<li class="chapter" data-level="D.1.3" data-path="15-HUMAnN3.html"><a href="15-HUMAnN3.html#humann-output"><i class="fa fa-check"></i><b>D.1.3</b> HUMAnN: output</a></li>
+</ul></li>
+<li class="chapter" data-level="D.2" data-path="15-HUMAnN3.html"><a href="15-HUMAnN3.html#statistical-comparison-between-samples-1"><i class="fa fa-check"></i><b>D.2</b> Statistical comparison between samples</a>
+<ul>
+<li class="chapter" data-level="D.2.1" data-path="15-HUMAnN3.html"><a href="15-HUMAnN3.html#humann-comparison-combining-data"><i class="fa fa-check"></i><b>D.2.1</b> HUMAnN comparison: combining data</a></li>
+<li class="chapter" data-level="D.2.2" data-path="15-HUMAnN3.html"><a href="15-HUMAnN3.html#humann-comparison-renormalising-data"><i class="fa fa-check"></i><b>D.2.2</b> HUMAnN comparison: renormalising data</a></li>
+<li class="chapter" data-level="D.2.3" data-path="15-HUMAnN3.html"><a href="15-HUMAnN3.html#humann-comparison-pca-plot"><i class="fa fa-check"></i><b>D.2.3</b> HUMAnN comparison: PCA plot</a></li>
+<li class="chapter" data-level="D.2.4" data-path="15-HUMAnN3.html"><a href="15-HUMAnN3.html#humann-comparison-lefse"><i class="fa fa-check"></i><b>D.2.4</b> HUMAnN comparison: LEfSe</a></li>
+</ul></li>
+</ul></li>
 <li class="divider"></li>
 <li><a href="https://github.com/rstudio/bookdown" target="blank">Published with bookdown</a></li>
 
@@ -315,7 +331,7 @@ code span.wa { color: #60a0b0; font-weight: bold; font-style: italic; } /* Warni
 <div class="sourceCode" id="cb99"><pre class="sourceCode bash"><code class="sourceCode bash"><span id="cb99-1"><a href="13-MetaWrap.html#cb99-1" aria-hidden="true" tabindex="-1"></a><span class="fu">mkdir</span> <span class="at">-p</span> ~/MetaWRAP_tut/RAW_READS</span>
 <span id="cb99-2"><a href="13-MetaWrap.html#cb99-2" aria-hidden="true" tabindex="-1"></a><span class="bu">cd</span> ~/MetaWRAP_tut</span>
 <span id="cb99-3"><a href="13-MetaWrap.html#cb99-3" aria-hidden="true" tabindex="-1"></a><span class="fu">cp</span> /pub39/tea/matthew/NEOF/Shotgun_metagenomics/metawrap/<span class="pp">*</span> RAW_READS</span></code></pre></div>
-<p>Now you can carry on with the online tutorial if you wish using your <code>MetaWRAP</code> terminal.</p>
+<p>Now you can carry on with the online tutorial if you wish using your <code>MetaWRAP</code> terminal. Instructions on activating the environment can be found <a href="12-Assembly_functional_annotation.html#prokka_conda">here</a>.</p>
 <p><strong>Note</strong>: This has not been fully tested and the environment may not fully work. This is the joys of bioinformatics.</p>
 
 </div>
