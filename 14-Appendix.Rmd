@@ -47,13 +47,13 @@ Bracken: https://ccb.jhu.edu/software/bracken/index.shtml?t=manual
 
 LEfSe: https://huttenhower.sph.harvard.edu/lefse/
 
-HUMAnN2: https://github.com/biobakery/biobakery/wiki/humann2
+HUMAnN 3.0: https://huttenhower.sph.harvard.edu/humann/
 
-HUMAnN: https://huttenhower.sph.harvard.edu/humann/
-
-MetaPhlAn2: https://huttenhower.sph.harvard.edu/metaphlan2/
+MetaPhlAn 3.0: https://huttenhower.sph.harvard.edu/metaphlan/
 
 Biobakery: https://github.com/biobakery/biobakery
+
+hclust2: https://github.com/SegataLab/hclust2
 
 MegaHit: https://github.com/voutcn/megahit
 

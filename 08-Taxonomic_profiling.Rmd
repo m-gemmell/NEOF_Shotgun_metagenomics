@@ -219,7 +219,7 @@ We will use `LEfSe` (Linear discriminant analysis Effect Size) to determine whic
 
 In essence it allows for the detection of biomarkers when comparing sample groups. In the `LEfSe` terminology the sample groups are called the class.
 
-### LEfSe: add metadata
+### LEfSe: add metadata {#kraken2_lefse_metadata}
 ```{r, fig.align = 'center',out.width= '10%', echo=FALSE }
 knitr::include_graphics(path = "figures/header.png", auto_pdf = TRUE)
 ```
