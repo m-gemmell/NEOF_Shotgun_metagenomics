@@ -106,7 +106,7 @@ __Note__: The directory `demo_humann2_temp` can be very large and so should be d
 
 __Note__: Link to more deatil on [Output files](https://github.com/biobakery/humann#output-files)
 
-## Multi sample processing
+## Multi sample processing {#humannmultisampleprocessing}
 ```{r, fig.align = 'center',out.width= '15%', echo=FALSE }
 knitr::include_graphics(path = "figures/k_w_venn.png", auto_pdf = TRUE)
 ``` 
@@ -198,7 +198,7 @@ Before you move on feel free to inspect the output files with the `less` command
 
 __Note__: you can use any of the three tables (unsplit table, unstratified table, or stratified table) in your own analysis. This depends on your question and data
 
-### HUMAnN: renormalising data
+### HUMAnN: renormalising data {#humannrenormalise}
 ```{r, fig.align = 'center',out.width= '10%', echo=FALSE }
 knitr::include_graphics(path = "figures/normalisation.png", auto_pdf = TRUE)
 ``` 
@@ -317,5 +317,13 @@ firefox diet_unstratified.relab.comp.lefse.png
 ```
 
 Look at the output and see what pathways count as biomarkers for the 2 groups.
+
+## HUMAnN: Optional task
+
+Carry out all the steps starting from [Multi sample processing](#humannmultisampleprocessing) with the gene.
+
+- Copy the data from `/pub39/tea/nsc006/NEOF/Shotgun_metagenomics/DietGeneFamilies`
+- Ensure in the [renormalising data](#humannrenormalise) step you set the `--units` option to `cpm`.
+- On top of analysing the unstratified data you can also analyse the stratified date.
 
 That completes the non assembly approach to shotgun metagenomic analysis. The next chapters will cover an assembly approach.
