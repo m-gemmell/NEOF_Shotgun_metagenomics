@@ -811,13 +811,17 @@ In your own future analysis you will need to create your own `Kraken2` and `Brac
 knitr::include_graphics(path = "figures/profile.png", auto_pdf = TRUE)
 ``` 
 
-It is also possible to investigate functional differences between metagenome (and metatranscriptome) samples by directly interrogating the read data. We will now look at how this can be done with a package called `HUMAnN` (The HMP Unified Metabolic Analysis Network), a pipeline designed to accurately profile the presence/absence and abundance of microbial pathways in metagenomic sequencing data.
+It is possible to investigate functional differences between metagenome (and metatranscriptome) samples by directly interrogating the read data. We will look at how this can be done with a package called `HUMAnN` (The HMP Unified Metabolic Analysis Network), a [bioBakery](https://github.com/biobakery/biobakery) pipeline designed to accurately profile the presence/absence and abundance of microbial pathways in metagenomic sequencing data.
 
 `HUMAnN` is on its third version and was developed in tandem with the third version of `MetaPhlAn`, a computational tool for profiling the composition of microbial communities from metagenomic data.
 
 It is highly recommended you use the new version of `HUMAnN` as it contains 2 times more species pangenomes and 3 times more gene families than `HUMAnN2`.
 
-__NOTE__ add info about pipeline here.
+Please see below for a diagram showing the pipline of `HUMAnN`:
+
+```{r, fig.align = 'center',out.width= '75%', echo=FALSE }
+knitr::include_graphics(path = "figures/humann3_workflow.png", auto_pdf = TRUE)
+``` 
 
 
 ## HUMAnN 
@@ -825,7 +829,7 @@ __NOTE__ add info about pipeline here.
 knitr::include_graphics(path = "figures/humann2.png", auto_pdf = TRUE)
 ``` 
 
-First, we will carry out an example run of the software and briefly explore the output files. `HUMAnN` can take a long time to run so we will use a small amount of example data. Additionally, we will use a subset of the `HUMAnN` databases for the analysis but when running analysis on your data you should use the full databases. information on installing `HUMAnN` and its databases can be found in its online [Home Page](https://huttenhower.sph.harvard.edu/humann/).
+First, we will carry out an example run of the software and briefly explore the output files. `HUMAnN` can take a long time to run so we will use a small amount of example data. Additionally, we will use a subset of the `HUMAnN` databases for the analysis but when running analysis on your own data you should use the full databases. information on installing `HUMAnN` and its databases can be found in its online [Home Page](https://huttenhower.sph.harvard.edu/humann/).
 
 ### HUMAnN: conda, directories, and files
 ```{r, fig.align = 'center',out.width= '10%', echo=FALSE }
@@ -833,8 +837,6 @@ knitr::include_graphics(path = "figures/conda.png", auto_pdf = TRUE)
 ```
 
 We need a new conda environment again. Open a new terminal (right click on the main screen background, choose `Applications` -> `Shell` -> `bash`) and run the below:
-
-- CONDA env installed in chos 8
 
 ```{bash eval=FALSE}
 chos 8
@@ -848,7 +850,7 @@ mkdir ~/4-FunctionalProfiling
 cd ~/4-FunctionalProfiling
 ```
 
-Copy over some test data we will the analysis on. This is a demonstration FASTQ file that we will use. It will be small enough to run `HUMAnN` in a reasonable time.
+Copy over some test data we will carry out the analysis on. This is a demonstration FASTQ file that we will use. It will be small enough to run `HUMAnN` in a reasonable amount of time.
 
 ```{bash eval=FALSE}
 cp /pub39/tea/nsc006/NEOF/Shotgun_metagenomics/humann/demo.fastq.gz .
@@ -859,7 +861,7 @@ cp /pub39/tea/nsc006/NEOF/Shotgun_metagenomics/humann/demo.fastq.gz .
 knitr::include_graphics(path = "figures/enter_key.png", auto_pdf = TRUE)
 ``` 
 
-Now we will perform the run with `HUMAnN` so we can inspect the output files. 
+Run the `HUMAnN` pipline with our demo data:
 
 ```{bash eval=FALSE}
 humann \
@@ -870,14 +872,14 @@ humann \
 
 Here, we are telling the software to use `demo.fastq.gz` as input and to create a new output directory called `demo.humann` where the results will be generated. 
 
-As the software runs you might notice that `HUMAnN` runs `MetaPhlAn.` The purpose of this is to identify what species are present in the sample, so `HUMAnN` can tailor generate an appropriate database of genes (from those species) to map against. It will carry out this alignment against the gene database, then a protein database, and finally compute which gene families are present to determine which functional pathways are present and how abundant they are.
+As the software runs you might notice that `HUMAnN` runs `MetaPhlAn`. The purpose of this is to identify what species are present in the sample, so `HUMAnN` can tailor generate an appropriate database of genes (from those species) to map against. It will carry out this alignment against the gene database, then a protein database, and finally compute which gene families are present. `HUMAnN` will determine which functional pathways are present and how abundant they are.
 
 ### HUMAnN: output
 ```{r, fig.align = 'center',out.width= '10%', echo=FALSE }
 knitr::include_graphics(path = "figures/output.png", auto_pdf = TRUE)
 ``` 
 
-Once the run has completed, change into the newly created output directory and list the files that are there.
+Once the run has completed, change into the newly created output directory and list the files that are present.
 
 ```{bash eval=FALSE}
 cd demo.humann
@@ -888,11 +890,11 @@ You will see that there are three files and one directory. The directory (`demo_
 
 The three output files are:
 
-- `demo_genefamilies.tsv`: A table file showing the number of reads mapping to each UniRef90 gene family, Values are normalised by the length of each gene family (i.e. RPK, or Reads per Kilobase). Additionally, the values are stratified so that they show the overall community abundance but also a breakdown of abundance per species detected. This allows researchers to delve into species specific functions, rather than only looking at the metagenomic functions as a whole,
-- `demo_pathabundance.tsv`: As above, a table file showing the normalised abundance of MetaCyc pathways. These abundances are calculated based on the UniRef90 gene family mapping data and are also stratified by species.
-- `demo_pathcoverage.tsv`: Similar to above, except instead of abundances of pathways, this table shows the coverage, or completeness, of pathways. For example, a pathway may contain 5 components (or genes/proteins)
+- __`demo_genefamilies.tsv`__: A table file showing the number of reads mapping to each UniRef90 gene family. Values are normalised by the length of each gene family (i.e. RPK, or Reads per Kilobase). Additionally, the values are stratified so that they show the overall community abundance but also a breakdown of abundance per species detected. This allows researchers to delve into species specific functions, rather than only looking at the metagenomic functions as a whole,
+- __`demo_pathabundance.tsv`__: A table file showing the normalised abundance of MetaCyc pathways (RPKs). These abundances are calculated based on the UniRef90 gene family mapping data and are also stratified by species.
+- __`demo_pathcoverage.tsv`__: A table file that shows the coverage, or completeness, of pathways. For example, a pathway may contain 5 components (or genes/proteins)
    - Pathway1 :         A → B → C → D → E		100% complete
-   - A species identified in the sample may only have four of the components, though, 	meaning that the pathway is only 80% complete (represented as 0.8)
+   - A species identified in the sample may only have four of the components, meaning that the pathway is only 80% complete (represented as 0.8)
     - Pathway1 :         A → B → C → ~~D~~ → E		80% complete
 
 The basic format of these three output files is the same, so let's take a look at the pathway abundance table.
@@ -908,22 +910,22 @@ You will see that there are two columns:
    - __UNINTEGRATED__ indicates reads that aligned to targets not implicated in any pathways.
 2. The second column shows the abundance.
 
-This file is not too interesting to look at as it is only demo data. Therefore, press `q` to exit and let's look at some real data.
+This file is not too interesting to look at as it is only demo data. Therefore, press `q` to exit `less` and let's look at some real data.
 
 __Note__: The directory `demo_humann2_temp` can be very large and so should be deleted in real projects once you are certain they are not needed. However, these files can be useful for debugging.
 
-__Note__: Link to more deatil on [Output files](https://github.com/biobakery/humann#output-files)
+__Note__: Link to more detail on [Output files](https://github.com/biobakery/humann#output-files)
 
-## Multi sample processing
+## Multi sample processing {#humannmultisampleprocessing}
 ```{r, fig.align = 'center',out.width= '15%', echo=FALSE }
 knitr::include_graphics(path = "figures/k_w_venn.png", auto_pdf = TRUE)
 ``` 
 
 Looking at the functional profile of one sample in isolation is usually not very informative. First, there is nothing to compare it to and second, there are no biological replicates. We will therefore use all the Korean and Western diet samples.
 
-It would take many hours to analyse all of the data using `HUMAnN` and is outside of the scope of this course. For this reason, samples were analysed prior to the workshop to generate the output files we covered above. 
+It would take many hours to analyse all of the data using `HUMAnN` and is outside the scope of this course. For this reason, samples were analysed prior to the workshop to generate the output files we covered above. 
 
-For the purposes of this comparison, we will look at the pathway abundances only. First copy over the results data directory and have a look in it.
+For the purposes of this comparison, we will look at the pathway abundances only. First copy over the data directory containg the gene families tables and have a look in it.
 
 ```{bash eval=FALSE}
 #Ensure you are in the correct directory
@@ -942,7 +944,7 @@ You will see there are 12 files prefixed with K and 12 prefixed with W, for the 
 less K1_pathabundance.tsv
 ```
 
-There are a lot of pathways in the file. Quit out of the `less` viewer (`q`) and look at at entries for one specific pathway, COA-PWY-1 (a coenzyme A biosynthesis II pathway).
+There are a lot of pathways in the file. Quit out of the `less` viewer (`q`) and look at the entries for one specific pathway, COA-PWY-1 (a coenzyme A biosynthesis II pathway).
 
 ```{bash eval=FALSE}
 grep COA-PWY-1 K1_pathabundance.tsv
@@ -950,15 +952,17 @@ grep COA-PWY-1 K1_pathabundance.tsv
 
 This shows 30 entries/lines with the top entry/line:
 
-`COA-PWY-1: superpathway of coenzyme A biosynthesis III (mammals)        6790.1517478104`
+**`COA-PWY-1: superpathway of coenzyme A biosynthesis III (mammals)        6790.1517478104`**
 
 This shows the abundance of the pathway across the entire sample (6790.1517478104).
 
 The other entries show the species stratification information (mentioned above) of the pathway. I.e. the second line:
 
-`COA-PWY-1: superpathway of coenzyme A biosynthesis III (mammals)|g__Bacteroides.s__Bacteroides_dorei    1292.7711872228`
+**`COA-PWY-1: superpathway of coenzyme A biosynthesis III (mammals)|g__Bacteroides.s__Bacteroides_dorei    1292.7711872228`**
 
-shows the abundance of the pathway that is contributed by the species _Bacteroides dorei_ (1292.7711872228). Therefore, _Bacteroides dorei_ contributes 19% of the pathway's abundance in the sample (1292/6790=0.19).
+shows the abundance of the pathway that is contributed by the species _Bacteroides dorei_ (1292.7711872228).
+
+__Note__: The species stratified pathway abundances may not equal the total community pathway abundance. Please see the this [forum post](https://forum.biobakery.org/t/humann3-pathway-abundance-table-pathway-sum-and-species-sum-different/1471) for details.
 
 With this information we will carry out some comparisons including biomarker detection to determine which pathways are differentially abundant between the Western diet and Korean diet samples.
 
@@ -978,7 +982,7 @@ cd ~/4-FunctionalProfiling
 humann_join_tables --input DietPathAbundance/ --output diet.tsv
 ```
 
-This command will look for all tables in the `DietPathAbundance` directory and generate a large, 25 column table called `diet.tsv`. You can take a look to see that this has worked correctly.
+This command will look for all tables in the `DietPathAbundance` directory and generate a large, 25 column table called `diet.tsv`. You can inspect the file to ensure that this has worked correctly.
 
 ```{bash eval=FALSE}
 less -S diet.tsv
@@ -994,7 +998,7 @@ For this tutorial we do not want the species stratification information. We will
 - `diet_unstratified.tsv`: This table only contains the total abundance values for the pathways. It does not contain any species stratification information.
 - `diet_stratified.tsv`: This table only contains the species stratification abundance values for the pathways. It does not contain the total abundance information.
 
-To create the split files and output them to your current directory, run the following command.
+To create the split files and output them to your current directory, run the following command:
 
 ```{bash eval=FALSE}
 humann_split_stratified_tables --input diet.tsv --output .
@@ -1004,14 +1008,14 @@ We will use the file `diet_unstratified.tsv` for our downstream analysis.
 
 Before you move on feel free to inspect the output files with the `less` command.
 
-__Note__: you can use any of the three tables (unsplit table, unstratified table, or stratified table) in your own analysis. This depends on your question and data
+__Note__: You can use any of the three tables (unsplit table, unstratified table, or stratified table) in your own analysis. This depends on your question and data
 
-### HUMAnN: renormalising data
+### HUMAnN: renormalising data {#humannrenormalise}
 ```{r, fig.align = 'center',out.width= '10%', echo=FALSE }
 knitr::include_graphics(path = "figures/normalisation.png", auto_pdf = TRUE)
 ``` 
 
-The next step is to renormalise the data. Currently, all of the abundance values are only normalised within each sample, i.e. accounting for the size of the pathways/length of genes. However, they are not normalised between samples, and this is very important. For example, if we had sequenced two samples, A and B, and we obtained 5 million reads for sample A and 20 million reads for sample B, without normalisation, it might look that there was up to 4x as much functional activity in sample B! 
+The next step is to renormalise the data. Currently, all of the abundance values are only normalised within each sample (RPKs). However, they are not normalised between samples, and this is very important to do. For example, if we had sequenced two samples, A and B, and we obtained 5 million reads for sample A and 20 million reads for sample B, without normalisation, it might look that there was up to 4x as much functional activity in sample B! 
 
 To correct for this, we normalise the abundance values based on the number of reads in each sample. We will normalise to relative abundance where all abundances for each sample add up to 1.
 
@@ -1025,31 +1029,39 @@ humann_renorm_table \
 --output diet_unstratified.relab.tsv
 ```
 
-This command generates the normalised data in the new table `diet.cpm.tsv`. The `--special n` option tells the script to remove all unmapped and unassigned values (__UNMAPPED__ & __UNINTEGRATED__) from the table.
+This command generates the normalised data in the new table `diet.relab.tsv`. The `--special n` option tells the script to remove all unmapped and unassigned values (__UNMAPPED__ & __UNINTEGRATED__) from the table.
 
 __Note:__ With the gene families information ensure you normalise by CPM (counts per million) with the option `--units cpm`. More info can be found on the [Normalizing RPKs to relative abundance](https://github.com/biobakery/biobakery/wiki/humann3#31-normalizing-rpks-to-relative-abundance) section of the HUMAnN 3.0 tutorial.
 
-## HUMAnN Heatmap
+## Heatmap
 ```{r, fig.align = 'center',out.width= '15%', echo=FALSE }
 knitr::include_graphics(path = "figures/heatmap.png", auto_pdf = TRUE)
 ``` 
 
-Now that we have our data normalised, we can visualise the dataset to see how the two groups look, i.e. do samples in the same diet group appear to correlate well with each other and are they distinguishable from those from the other diet group? To do this, we will create a heatmap with `hclust2`.
+Now that we have our combined, unstratified, and normalised table, we can visualise the dataset to see how the two groups compare. 
 
-Before carrying out the command we will need to create a copy of the file and carry out the following alterations:
+- Do samples in the same diet group appear to correlate well with each other? 
+- Are samples from one diet group distinguishable from those from the other diet group? 
 
-Remove the `_Abundance` part of the sample names whilst creating a copy.
+To visualise this we will create a heatmap with `hclust2`.
+
+Before carrying out the command we will need edit the file. Carry out the following alterations:
+
+Remove the `_Abundance` part of the sample names whilst creating a copy that we will use (It is always a good idea to keep the original file in case a mistake happens).
 
 ```{bash eval=FALSE}
 cat diet_unstratified.relab.tsv | sed "s/_Abundance//g" > diet_unstratified.relab.comp.tsv
 ```
 
-__Intro to unix links__ on [`sed`](http://www.cgr.liv.ac.uk/illum/NEOFworkshops_5bfa93ca0482d69d/Intro_to_Unix/12-Advanced_linux_practice.html#sed) and [`>`](http://www.cgr.liv.ac.uk/illum/NEOFworkshops_5bfa93ca0482d69d/Intro_to_Unix/12-Advanced_linux_practice.html#redirection).
+__Intro to unix links__: 
+
+- [Text editing with __`sed`__](http://www.cgr.liv.ac.uk/illum/NEOFworkshops_5bfa93ca0482d69d/Intro_to_Unix/12-Advanced_linux_practice.html#sed)
+- [Redirection with __`>`__](http://www.cgr.liv.ac.uk/illum/NEOFworkshops_5bfa93ca0482d69d/Intro_to_Unix/12-Advanced_linux_practice.html#redirection)
 
 Next using your text editor of choice carry out the following changes on the file `diet_unstratified.relab.comp.tsv`.
 
-- Remove the `# ` from the start of the header so it starts as `Pathway`.
-- Add in the same metadata as we did for [8.4.1](#kraken2_lefse_metadata) below the header the line.
+- Remove the `# ` (including the one space after the `#`) from the start of the header so it starts as `Pathway`.
+- Add in the same metadata line as we did for [8.4.1](#kraken2_lefse_metadata) below the header line (ensure you are using tabs instead of spaces).
 
 Now we can use the `hclust2` tool to create a heatmap of our pathway abundances.
 
@@ -1062,19 +1074,20 @@ hclust2.py \
 --dpi 300
 ```
 
-__Note:__ You will get 2 `MatplotlibDeprecationWarnings`, these are normal and can be ignored.
+__Note:__ You will get 2 `MatplotlibDeprecationWarnings`, these are normal and can be ignored. However, ensure these ar ethe only warnings/errors before continuing.
 
 The arguments for this command are:
 
 - `-i`: The input table file.
-- `-o`: The output image file. The tool does not specify what types of image files you can use but `/png` is always a good image file format.
+- `-o`: The output image file. The tool does not specify what types of image files you can use but `.png` is always a good image file format.
 - `--ftop`: Specifies how many of the top features (pathways in this case) to be included in the heatmap. 
 - `--metadata_rows`: Specifies which row/s contain the metadata information to be used for the group colouring at the top of the heatmap.
-   - Row numbers start at 0 for this tool. Therefore our smaple names are in row 0 and the diet info is in row 1.
-   - Multiple rows can be specified if you have multiple rows of metadata/ e.g. `--metadata_rows 1,2,3`.
+   - Row numbers start at 0 for this tool. Therefore our sample names are in row 0 and the diet info is in row 1.
+   - Multiple rows can be specified if you have multiple rows of metadata.
+      - e.g. `--metadata_rows 1,2,3`.
 - `--dpi`: The image resolution in dpi (dots per inch). 300 dpi is used for publication quality images.
 
-There are many more potions that can bee seen on the [hclust github](https://github.com/SegataLab/hclust2).
+There are many more options that can be seen on the [hclust2 github](https://github.com/SegataLab/hclust2).
 
 Now we can view the plot.
 
@@ -1082,18 +1095,18 @@ Now we can view the plot.
 firefox diet_unstratified.relab.heatmap.png
 ```
 
-From this, we can see that there is some clustering caused by the difference between the Korean and Western diet. Other factors that we do not know about the samples must come into play. This is normal as we cannot acocunt for anything but it is good to try to acount for as much as possible.
+From this, we can see that there is a small amount of clustering caused by the differences between the Korean and Western diet. Other factors that we do not know about the samples must also come into play. This is normal as we cannot account for everything but it is good to try to account for as much as possible.
 
-```{r, fig.align = 'center',out.width= '60%', echo=FALSE }
+```{r, fig.align = 'center',out.width= '75%', echo=FALSE }
 knitr::include_graphics(path = "figures/humann_heatmap.png", auto_pdf = TRUE)
 ```
 
 __Questions__: 
 
 - Do any of the pathways stand out?
-   - If there are, look up the pathway in the table file to see what it does.
+   - If any do, look up the pathway in the table file to see what it does.
 
-## HUMAnN: LEfSe
+## LEfSe {#humann_lefse}
 ```{r, fig.align = 'center',out.width= '15%', echo=FALSE }
 knitr::include_graphics(path = "figures/lefse_flip.png", auto_pdf = TRUE)
 ``` 
@@ -1102,7 +1115,7 @@ For the final part of this section, we will see if there are any statistically s
 
 __Task__: Go back to your `LEfSe` terminal (or create a new one and use `. uselefse`). Then change directory to `4-FunctionalProfiling`)
 
-Thankfully we have already formatted the file to work with `LEfSe` when we formated it for `hclust2`
+Thankfully we already formatted the file to work with `LEfSe` when we formatted it for `hclust2`
 
 ```{bash eval=FALSE}
 #LEfSe format
@@ -1125,6 +1138,14 @@ firefox diet_unstratified.relab.comp.lefse.png
 ```
 
 Look at the output and see what pathways count as biomarkers for the 2 groups.
+
+## Optional task
+
+Carry out all the steps starting from [Multi sample processing](#humannmultisampleprocessing) with the gene families information.
+
+- Copy the gene families data from `/pub39/tea/nsc006/NEOF/Shotgun_metagenomics/DietGeneFamilies`
+- Ensure you set the `--units` option to `cpm` in the [renormalising data](#humannrenormalise) step.
+- On top of analysing the unstratified data you can also analyse the stratified data.
 
 That completes the non assembly approach to shotgun metagenomic analysis. The next chapters will cover an assembly approach.
 
