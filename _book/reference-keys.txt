@@ -79,8 +79,6 @@ minpath-conda-and-directory
 minpath-ec-extraction
 minpath-run
 minpath-output
-metawrap
-tutorial
 next-steps
 manuals
 obtaining-read-data

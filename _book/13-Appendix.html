@@ -4,11 +4,11 @@
 
   <meta charset="utf-8" />
   <meta http-equiv="X-UA-Compatible" content="IE=edge" />
-  <title>Chapter 13 MetaWRAP | Shotgun Metagenomics</title>
+  <title>A Next steps | Shotgun Metagenomics</title>
   <meta name="description" content="NEOF book for the Microbial shotgun metagenomics workshop" />
   <meta name="generator" content="bookdown 0.24 and GitBook 2.6.7" />
 
-  <meta property="og:title" content="Chapter 13 MetaWRAP | Shotgun Metagenomics" />
+  <meta property="og:title" content="A Next steps | Shotgun Metagenomics" />
   <meta property="og:type" content="book" />
   
   <meta property="og:image" content="/figures/NEOF.png" />
@@ -16,7 +16,7 @@
   
 
   <meta name="twitter:card" content="summary" />
-  <meta name="twitter:title" content="Chapter 13 MetaWRAP | Shotgun Metagenomics" />
+  <meta name="twitter:title" content="A Next steps | Shotgun Metagenomics" />
   
   <meta name="twitter:description" content="NEOF book for the Microbial shotgun metagenomics workshop" />
   <meta name="twitter:image" content="/figures/NEOF.png" />
@@ -32,7 +32,7 @@
   
   <link rel="shortcut icon" href="figures/NEOF_favicon.png" type="image/x-icon" />
 <link rel="prev" href="12-Assembly_functional_annotation.html"/>
-<link rel="next" href="14-Appendix.html"/>
+
 <script src="libs/header-attrs-2.11/header-attrs.js"></script>
 <script src="libs/jquery-3.6.0/jquery-3.6.0.min.js"></script>
 <script src="https://cdn.jsdelivr.net/npm/fuse.js@6.4.6/dist/fuse.min.js"></script>
@@ -262,14 +262,10 @@ code span.wa { color: #60a0b0; font-weight: bold; font-style: italic; } /* Warni
 <li class="chapter" data-level="12.3.4" data-path="12-Assembly_functional_annotation.html"><a href="12-Assembly_functional_annotation.html#minpath-output"><i class="fa fa-check"></i><b>12.3.4</b> MinPath: output</a></li>
 </ul></li>
 </ul></li>
-<li class="chapter" data-level="13" data-path="13-MetaWrap.html"><a href="13-MetaWrap.html"><i class="fa fa-check"></i><b>13</b> MetaWRAP</a>
-<ul>
-<li class="chapter" data-level="13.1" data-path="13-MetaWrap.html"><a href="13-MetaWrap.html#tutorial"><i class="fa fa-check"></i><b>13.1</b> Tutorial</a></li>
-</ul></li>
 <li class="appendix"><span><b>Appendix</b></span></li>
-<li class="chapter" data-level="A" data-path="14-Appendix.html"><a href="14-Appendix.html"><i class="fa fa-check"></i><b>A</b> Next steps</a></li>
-<li class="chapter" data-level="B" data-path="14-Appendix.html"><a href="14-Appendix.html#manuals"><i class="fa fa-check"></i><b>B</b> Manuals</a></li>
-<li class="chapter" data-level="C" data-path="14-Appendix.html"><a href="14-Appendix.html#obtaining-read-data"><i class="fa fa-check"></i><b>C</b> Obtaining Read Data</a></li>
+<li class="chapter" data-level="A" data-path="13-Appendix.html"><a href="13-Appendix.html"><i class="fa fa-check"></i><b>A</b> Next steps</a></li>
+<li class="chapter" data-level="B" data-path="13-Appendix.html"><a href="13-Appendix.html#manuals"><i class="fa fa-check"></i><b>B</b> Manuals</a></li>
+<li class="chapter" data-level="C" data-path="13-Appendix.html"><a href="13-Appendix.html#obtaining-read-data"><i class="fa fa-check"></i><b>C</b> Obtaining Read Data</a></li>
 <li class="divider"></li>
 <li><a href="https://github.com/rstudio/bookdown" target="blank">Published with bookdown</a></li>
 
@@ -290,53 +286,81 @@ code span.wa { color: #60a0b0; font-weight: bold; font-style: italic; } /* Warni
           <div class="page-inner">
 
             <section class="normal" id="section-">
-<div id="metawrap" class="section level1" number="13">
-<h1><span class="header-section-number">Chapter 13</span> MetaWRAP</h1>
-<p><img src="figures/mummy.png" width="20%" style="display: block; margin: auto;" /></p>
-<p><code>MetaWRAP</code> is a very useful program with many tools for metagenome analysis. It contains wrapper scripts, scripts that utilise other programs (e.g. <code>MEGAHIT</code>, <code>CONCOCT</code>, <code>Prokka</code>, etc.).</p>
-<p><code>MetaWRAP</code> can be used to carry out an entire metagenome assembly/co-assembly approach workflow. Its processes include:</p>
+<div id="next-steps" class="section level1" number="13">
+<h1><span class="header-section-number">A</span> Next steps</h1>
+<p><img src="figures/step.png" width="15%" style="display: block; margin: auto;" /></p>
+<p>Below are some good links to start with before carrying out your own projects.</p>
 <ul>
-<li>Read QC</li>
-<li>Metagenome assembly</li>
-<li>Taxonomic annotation</li>
-<li>Binning</li>
-<li>Bin refinement</li>
-<li>Bin reassembly</li>
-<li>Bin quantification</li>
-<li>Blobology</li>
-<li>Bin taxonomy classification</li>
-<li>Bin functional annotation</li>
-</ul>
-<div id="tutorial" class="section level2" number="13.1">
-<h2><span class="header-section-number">13.1</span> Tutorial</h2>
-<p>As an extra for this workshop we have provided the files and an environment on the webVNC to carry out the <code>MetaWRAP</code> online tutorial:</p>
-<p><a href="https://github.com/bxlab/metaWRAP/blob/master/Usage_tutorial.md" class="uri">https://github.com/bxlab/metaWRAP/blob/master/Usage_tutorial.md</a></p>
-<p>Follow the below instructions to make a new directory and make a symbolic link to the files that you would otherwise have to download in step 0 of the tutorial.</p>
-<p><strong>Note</strong>: The below code section must be carried out outside on another terminal than your <code>metawrap</code> terminal.</p>
-<div class="sourceCode" id="cb99"><pre class="sourceCode bash"><code class="sourceCode bash"><span id="cb99-1"><a href="13-MetaWrap.html#cb99-1" aria-hidden="true" tabindex="-1"></a><span class="fu">mkdir</span> <span class="at">-p</span> ~/MetaWRAP_tut/RAW_READS</span>
-<span id="cb99-2"><a href="13-MetaWrap.html#cb99-2" aria-hidden="true" tabindex="-1"></a><span class="bu">cd</span> ~/MetaWRAP_tut</span>
-<span id="cb99-3"><a href="13-MetaWrap.html#cb99-3" aria-hidden="true" tabindex="-1"></a><span class="fu">cp</span> /pub39/tea/matthew/NEOF/Shotgun_metagenomics/metawrap/<span class="pp">*</span> RAW_READS</span></code></pre></div>
-<p>Now you can carry on with the online tutorial, starting from step 1, if you wish using your <code>MetaWRAP</code> terminal. Instructions on activating the environment can be found <a href="12-Assembly_functional_annotation.html#prokka_conda">here</a>.</p>
-<p><strong>Notes</strong>:</p>
+<li>A review paper on metagenome assembly approaches
 <ul>
-<li>This has not been fully tested and the environment may not fully work. This is the joys of bioinformatics.</li>
-<li>Our machine does not have 96 cores/threads, therefore use <code>-t 12</code> instead of <code>-t 96</code> when present.</li>
-<li>For <strong>STEP 3</strong> instead of using <code>kraken1</code> use <code>kraken2</code> with the following command:</li>
+<li>Genome-resolved metagenomics using environmental and clinical samples: <a href="https://academic.oup.com/bib/advance-article/doi/10.1093/bib/bbab030/6184411" class="uri">https://academic.oup.com/bib/advance-article/doi/10.1093/bib/bbab030/6184411</a></li>
+</ul></li>
+<li>bioBakery tools for meta’omic profiling
+<ul>
+<li><a href="https://github.com/biobakery/biobakery" class="uri">https://github.com/biobakery/biobakery</a></li>
+</ul></li>
+<li>Assessing the performance of different approaches for functional and taxonomic annotation of metagenomes
+<ul>
+<li><a href="https://bmcgenomics.biomedcentral.com/articles/10.1186/s12864-019-6289-6" class="uri">https://bmcgenomics.biomedcentral.com/articles/10.1186/s12864-019-6289-6</a></li>
+</ul></li>
+<li>MicrobeAnnotator: Easy-to-use pipeline for the comprehensive metabolic annotation of microbial genomes.
+<ul>
+<li><a href="https://github.com/cruizperez/MicrobeAnnotator" class="uri">https://github.com/cruizperez/MicrobeAnnotator</a></li>
+</ul></li>
+<li>MetaEuk: Functional annotation of eukaryotic metagenome
+<ul>
+<li><a href="https://github.com/soedinglab/metaeuk" class="uri">https://github.com/soedinglab/metaeuk</a>
+_ Methods for Metagenomic data visualisation and analysis</li>
+<li><a href="https://www.researchgate.net/publication/318252633_Methods_for_The_Metagenomic_Data_Visualization_and_Analysis" class="uri">https://www.researchgate.net/publication/318252633_Methods_for_The_Metagenomic_Data_Visualization_and_Analysis</a></li>
+</ul></li>
 </ul>
-<div class="sourceCode" id="cb100"><pre class="sourceCode bash"><code class="sourceCode bash"><span id="cb100-1"><a href="13-MetaWrap.html#cb100-1" aria-hidden="true" tabindex="-1"></a><span class="ex">metawrap</span> kraken2 <span class="at">-o</span> KRAKEN <span class="at">-t</span> 96 <span class="at">-s</span> 1000000 CLEAN_READS/ERR<span class="pp">*</span>fastq ASSEMBLY/final_assembly.fasta</span></code></pre></div>
+</div>
+<div id="manuals" class="section level1" number="14">
+<h1><span class="header-section-number">B</span> Manuals</h1>
+<p><img src="figures/manual.png" width="15%" style="display: block; margin: auto;" /></p>
+<p>Conda: <a href="https://conda.io/projects/conda/en/latest/user-guide/getting-started.html" class="uri">https://conda.io/projects/conda/en/latest/user-guide/getting-started.html</a></p>
+<p>FastQC: <a href="https://www.bioinformatics.babraham.ac.uk/projects/fastqc/" class="uri">https://www.bioinformatics.babraham.ac.uk/projects/fastqc/</a></p>
+<p>MultiQC: <a href="https://multiqc.info/" class="uri">https://multiqc.info/</a></p>
+<p>Trim Galore: <a href="https://www.bioinformatics.babraham.ac.uk/projects/trim_galore/" class="uri">https://www.bioinformatics.babraham.ac.uk/projects/trim_galore/</a></p>
+<p>Bowtie2: <a href="http://bowtie-bio.sourceforge.net/bowtie2/manual.shtml" class="uri">http://bowtie-bio.sourceforge.net/bowtie2/manual.shtml</a></p>
+<p>samtools: <a href="http://www.htslib.org/" class="uri">http://www.htslib.org/</a></p>
+<p>BBTools: <a href="https://jgi.doe.gov/data-and-tools/bbtools/" class="uri">https://jgi.doe.gov/data-and-tools/bbtools/</a></p>
+<p>Kraken2: <a href="https://github.com/DerrickWood/kraken2/wiki/Manual" class="uri">https://github.com/DerrickWood/kraken2/wiki/Manual</a></p>
+<p>Krona: <a href="https://github.com/marbl/Krona/wiki/KronaTools" class="uri">https://github.com/marbl/Krona/wiki/KronaTools</a></p>
+<p>Bracken: <a href="https://ccb.jhu.edu/software/bracken/index.shtml?t=manual" class="uri">https://ccb.jhu.edu/software/bracken/index.shtml?t=manual</a></p>
+<p>LEfSe: <a href="https://huttenhower.sph.harvard.edu/lefse/" class="uri">https://huttenhower.sph.harvard.edu/lefse/</a></p>
+<p>HUMAnN 3.0: <a href="https://huttenhower.sph.harvard.edu/humann/" class="uri">https://huttenhower.sph.harvard.edu/humann/</a></p>
+<p>MetaPhlAn 3.0: <a href="https://huttenhower.sph.harvard.edu/metaphlan/" class="uri">https://huttenhower.sph.harvard.edu/metaphlan/</a></p>
+<p>Biobakery: <a href="https://github.com/biobakery/biobakery" class="uri">https://github.com/biobakery/biobakery</a></p>
+<p>hclust2: <a href="https://github.com/SegataLab/hclust2" class="uri">https://github.com/SegataLab/hclust2</a></p>
+<p>MegaHit: <a href="https://github.com/voutcn/megahit" class="uri">https://github.com/voutcn/megahit</a></p>
+<p>BWA: <a href="https://github.com/lh3/bwa" class="uri">https://github.com/lh3/bwa</a></p>
+<p>minimap2: <a href="https://github.com/lh3/minimap2" class="uri">https://github.com/lh3/minimap2</a></p>
+<p>MetaBAT2: <a href="https://bitbucket.org/berkeleylab/metabat/src/master/" class="uri">https://bitbucket.org/berkeleylab/metabat/src/master/</a></p>
+<p>CheckM: <a href="https://github.com/Ecogenomics/CheckM/wiki" class="uri">https://github.com/Ecogenomics/CheckM/wiki</a></p>
+<p>PhyloPhlAn: <a href="https://github.com/biobakery/phylophlan/wiki" class="uri">https://github.com/biobakery/phylophlan/wiki</a></p>
+<p>Prokka: <a href="https://github.com/tseemann/prokka" class="uri">https://github.com/tseemann/prokka</a></p>
+<p>MinPath: <a href="https://github.com/mgtools/MinPath/blob/master/readme" class="uri">https://github.com/mgtools/MinPath/blob/master/readme</a></p>
+<p>MetaCyc: <a href="https://metacyc.org/" class="uri">https://metacyc.org/</a></p>
+</div>
+<div id="obtaining-read-data" class="section level1" number="15">
+<h1><span class="header-section-number">C</span> Obtaining Read Data</h1>
+<p>The following commands can be used to obtain the sequence data used in this practical, directly from the EBI metagenomics site. It is worth noting that these are the full set of data, not like the miniaturised version you have used in the tutorial.</p>
+<div class="sourceCode" id="cb99"><pre class="sourceCode bash"><code class="sourceCode bash"><span id="cb99-1"><a href="13-Appendix.html#cb99-1" aria-hidden="true" tabindex="-1"></a><span class="fu">wget</span> <span class="at">-O</span> K1_R1.fastq.gz ftp://ftp.sra.ebi.ac.uk/vol1/fastq/ERR505/ERR505102/ERR505102_1.fastq.gz</span>
+<span id="cb99-2"><a href="13-Appendix.html#cb99-2" aria-hidden="true" tabindex="-1"></a><span class="fu">wget</span> <span class="at">-O</span> K1_R2.fastq.gz ftp://ftp.sra.ebi.ac.uk/vol1/fastq/ERR505/ERR505102/ERR505102_2.fastq.gz</span>
+<span id="cb99-3"><a href="13-Appendix.html#cb99-3" aria-hidden="true" tabindex="-1"></a><span class="fu">wget</span> <span class="at">-O</span> K2_R1.fastq.gz ftp://ftp.sra.ebi.ac.uk/vol1/fastq/ERR505/ERR505104/ERR505104_1.fastq.gz</span>
+<span id="cb99-4"><a href="13-Appendix.html#cb99-4" aria-hidden="true" tabindex="-1"></a><span class="fu">wget</span> <span class="at">-O</span> K2_R2.fastq.gz ftp://ftp.sra.ebi.ac.uk/vol1/fastq/ERR505/ERR505104/ERR505104_2.fastq.gz</span>
+<span id="cb99-5"><a href="13-Appendix.html#cb99-5" aria-hidden="true" tabindex="-1"></a><span class="fu">wget</span> <span class="at">-O</span> W1_R1.fastq.gz ftp://ftp.sra.ebi.ac.uk/vol1/fastq/ERR505/ERR505090/ERR505090_1.fastq.gz</span>
+<span id="cb99-6"><a href="13-Appendix.html#cb99-6" aria-hidden="true" tabindex="-1"></a><span class="fu">wget</span> <span class="at">-O</span> W1_R2.fastq.gz ftp://ftp.sra.ebi.ac.uk/vol1/fastq/ERR505/ERR505090/ERR505090_2.fastq.gz</span></code></pre></div>
 
 </div>
-</div>
-
-
-
             </section>
 
           </div>
         </div>
       </div>
-<a href="12-Assembly_functional_annotation.html" class="navigation navigation-prev " aria-label="Previous page"><i class="fa fa-angle-left"></i></a>
-<a href="14-Appendix.html" class="navigation navigation-next " aria-label="Next page"><i class="fa fa-angle-right"></i></a>
+<a href="12-Assembly_functional_annotation.html" class="navigation navigation-prev navigation-unique" aria-label="Previous page"><i class="fa fa-angle-left"></i></a>
+
     </div>
   </div>
 <script src="libs/gitbook-2.6.7/js/app.min.js"></script>
