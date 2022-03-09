@@ -24,7 +24,7 @@
 <meta name="author" content="Sam Haldenby and Matthew R. Gemmell" />
 
 
-<meta name="date" content="2022-03-01" />
+<meta name="date" content="2022-03-09" />
 
   <meta name="viewport" content="width=device-width, initial-scale=1" />
   <meta name="apple-mobile-web-app-capable" content="yes" />
@@ -211,14 +211,15 @@ code span.wa { color: #60a0b0; font-weight: bold; font-style: italic; } /* Warni
 <li class="chapter" data-level="9.1.2" data-path="09-Functional_profiling.html"><a href="09-Functional_profiling.html#humann-run"><i class="fa fa-check"></i><b>9.1.2</b> HUMAnN: run</a></li>
 <li class="chapter" data-level="9.1.3" data-path="09-Functional_profiling.html"><a href="09-Functional_profiling.html#humann-output"><i class="fa fa-check"></i><b>9.1.3</b> HUMAnN: output</a></li>
 </ul></li>
-<li class="chapter" data-level="9.2" data-path="09-Functional_profiling.html"><a href="09-Functional_profiling.html#multi-sample-processing"><i class="fa fa-check"></i><b>9.2</b> Multi sample processing</a>
+<li class="chapter" data-level="9.2" data-path="09-Functional_profiling.html"><a href="09-Functional_profiling.html#humannmultisampleprocessing"><i class="fa fa-check"></i><b>9.2</b> Multi sample processing</a>
 <ul>
 <li class="chapter" data-level="9.2.1" data-path="09-Functional_profiling.html"><a href="09-Functional_profiling.html#humann-combining-data"><i class="fa fa-check"></i><b>9.2.1</b> HUMAnN: combining data</a></li>
 <li class="chapter" data-level="9.2.2" data-path="09-Functional_profiling.html"><a href="09-Functional_profiling.html#humann-split-stratified-table"><i class="fa fa-check"></i><b>9.2.2</b> HUMAnN: split stratified table</a></li>
-<li class="chapter" data-level="9.2.3" data-path="09-Functional_profiling.html"><a href="09-Functional_profiling.html#humann-renormalising-data"><i class="fa fa-check"></i><b>9.2.3</b> HUMAnN: renormalising data</a></li>
+<li class="chapter" data-level="9.2.3" data-path="09-Functional_profiling.html"><a href="09-Functional_profiling.html#humannrenormalise"><i class="fa fa-check"></i><b>9.2.3</b> HUMAnN: renormalising data</a></li>
 </ul></li>
 <li class="chapter" data-level="9.3" data-path="09-Functional_profiling.html"><a href="09-Functional_profiling.html#humann-heatmap"><i class="fa fa-check"></i><b>9.3</b> HUMAnN Heatmap</a></li>
 <li class="chapter" data-level="9.4" data-path="09-Functional_profiling.html"><a href="09-Functional_profiling.html#humann-lefse"><i class="fa fa-check"></i><b>9.4</b> HUMAnN: LEfSe</a></li>
+<li class="chapter" data-level="9.5" data-path="09-Functional_profiling.html"><a href="09-Functional_profiling.html#humann-optional-task"><i class="fa fa-check"></i><b>9.5</b> HUMAnN: Optional task</a></li>
 </ul></li>
 <li class="part"><span><b>Assembly Approach</b></span></li>
 <li class="chapter" data-level="10" data-path="10-Metagenome_assembly.html"><a href="10-Metagenome_assembly.html"><i class="fa fa-check"></i><b>10</b> Metagenome assembly</a>
@@ -295,7 +296,8 @@ code span.wa { color: #60a0b0; font-weight: bold; font-style: italic; } /* Warni
 <p>It is also possible to investigate functional differences between metagenome (and metatranscriptome) samples by directly interrogating the read data. We will now look at how this can be done with a package called <code>HUMAnN</code> (The HMP Unified Metabolic Analysis Network), a pipeline designed to accurately profile the presence/absence and abundance of microbial pathways in metagenomic sequencing data.</p>
 <p><code>HUMAnN</code> is on its third version and was developed in tandem with the third version of <code>MetaPhlAn</code>, a computational tool for profiling the composition of microbial communities from metagenomic data.</p>
 <p>It is highly recommended you use the new version of <code>HUMAnN</code> as it contains 2 times more species pangenomes and 3 times more gene families than <code>HUMAnN2</code>.</p>
-<p><strong>NOTE</strong> add info about pipeline here.</p>
+<p>The description of the <code>HUMAnN</code> pipeline is shown in the below diagram:</p>
+<p><img src="figures/humann_workflow.png" width="90%" style="display: block; margin: auto;" /></p>
 <div id="humann" class="section level2" number="9.1">
 <h2><span class="header-section-number">9.1</span> HUMAnN</h2>
 <p><img src="figures/humann2.png" width="15%" style="display: block; margin: auto;" /></p>
@@ -360,7 +362,7 @@ code span.wa { color: #60a0b0; font-weight: bold; font-style: italic; } /* Warni
 <p><strong>Note</strong>: Link to more deatil on <a href="https://github.com/biobakery/humann#output-files">Output files</a></p>
 </div>
 </div>
-<div id="multi-sample-processing" class="section level2" number="9.2">
+<div id="humannmultisampleprocessing" class="section level2" number="9.2">
 <h2><span class="header-section-number">9.2</span> Multi sample processing</h2>
 <p><img src="figures/k_w_venn.png" width="15%" style="display: block; margin: auto;" /></p>
 <p>Looking at the functional profile of one sample in isolation is usually not very informative. First, there is nothing to compare it to and second, there are no biological replicates. We will therefore use all the Korean and Western diet samples.</p>
@@ -411,7 +413,7 @@ code span.wa { color: #60a0b0; font-weight: bold; font-style: italic; } /* Warni
 <p>Before you move on feel free to inspect the output files with the <code>less</code> command.</p>
 <p><strong>Note</strong>: you can use any of the three tables (unsplit table, unstratified table, or stratified table) in your own analysis. This depends on your question and data</p>
 </div>
-<div id="humann-renormalising-data" class="section level3" number="9.2.3">
+<div id="humannrenormalise" class="section level3" number="9.2.3">
 <h3><span class="header-section-number">9.2.3</span> HUMAnN: renormalising data</h3>
 <p><img src="figures/normalisation.png" width="10%" style="display: block; margin: auto;" /></p>
 <p>The next step is to renormalise the data. Currently, all of the abundance values are only normalised within each sample, i.e. accounting for the size of the pathways/length of genes. However, they are not normalised between samples, and this is very important. For example, if we had sequenced two samples, A and B, and we obtained 5 million reads for sample A and 20 million reads for sample B, without normalisation, it might look that there was up to 4x as much functional activity in sample B!</p>
@@ -496,6 +498,15 @@ code span.wa { color: #60a0b0; font-weight: bold; font-style: italic; } /* Warni
 <span id="cb52-16"><a href="09-Functional_profiling.html#cb52-16" aria-hidden="true" tabindex="-1"></a><span class="co">#View plot</span></span>
 <span id="cb52-17"><a href="09-Functional_profiling.html#cb52-17" aria-hidden="true" tabindex="-1"></a><span class="ex">firefox</span> diet_unstratified.relab.comp.lefse.png</span></code></pre></div>
 <p>Look at the output and see what pathways count as biomarkers for the 2 groups.</p>
+</div>
+<div id="humann-optional-task" class="section level2" number="9.5">
+<h2><span class="header-section-number">9.5</span> HUMAnN: Optional task</h2>
+<p>Carry out all the steps starting from <a href="09-Functional_profiling.html#humannmultisampleprocessing">Multi sample processing</a> with the gene.</p>
+<ul>
+<li>Copy the data from <code>/pub39/tea/nsc006/NEOF/Shotgun_metagenomics/DietGeneFamilies</code></li>
+<li>Ensure in the <a href="09-Functional_profiling.html#humannrenormalise">renormalising data</a> step you set the <code>--units</code> option to <code>cpm</code>.</li>
+<li>On top of analysing the unstratified data you can also analyse the stratified date.</li>
+</ul>
 <p>That completes the non assembly approach to shotgun metagenomic analysis. The next chapters will cover an assembly approach.</p>
 
 </div>

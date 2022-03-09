@@ -24,7 +24,7 @@
 <meta name="author" content="Sam Haldenby and Matthew R. Gemmell" />
 
 
-<meta name="date" content="2022-03-01" />
+<meta name="date" content="2022-03-09" />
 
   <meta name="viewport" content="width=device-width, initial-scale=1" />
   <meta name="apple-mobile-web-app-capable" content="yes" />
@@ -211,14 +211,15 @@ code span.wa { color: #60a0b0; font-weight: bold; font-style: italic; } /* Warni
 <li class="chapter" data-level="9.1.2" data-path="09-Functional_profiling.html"><a href="09-Functional_profiling.html#humann-run"><i class="fa fa-check"></i><b>9.1.2</b> HUMAnN: run</a></li>
 <li class="chapter" data-level="9.1.3" data-path="09-Functional_profiling.html"><a href="09-Functional_profiling.html#humann-output"><i class="fa fa-check"></i><b>9.1.3</b> HUMAnN: output</a></li>
 </ul></li>
-<li class="chapter" data-level="9.2" data-path="09-Functional_profiling.html"><a href="09-Functional_profiling.html#multi-sample-processing"><i class="fa fa-check"></i><b>9.2</b> Multi sample processing</a>
+<li class="chapter" data-level="9.2" data-path="09-Functional_profiling.html"><a href="09-Functional_profiling.html#humannmultisampleprocessing"><i class="fa fa-check"></i><b>9.2</b> Multi sample processing</a>
 <ul>
 <li class="chapter" data-level="9.2.1" data-path="09-Functional_profiling.html"><a href="09-Functional_profiling.html#humann-combining-data"><i class="fa fa-check"></i><b>9.2.1</b> HUMAnN: combining data</a></li>
 <li class="chapter" data-level="9.2.2" data-path="09-Functional_profiling.html"><a href="09-Functional_profiling.html#humann-split-stratified-table"><i class="fa fa-check"></i><b>9.2.2</b> HUMAnN: split stratified table</a></li>
-<li class="chapter" data-level="9.2.3" data-path="09-Functional_profiling.html"><a href="09-Functional_profiling.html#humann-renormalising-data"><i class="fa fa-check"></i><b>9.2.3</b> HUMAnN: renormalising data</a></li>
+<li class="chapter" data-level="9.2.3" data-path="09-Functional_profiling.html"><a href="09-Functional_profiling.html#humannrenormalise"><i class="fa fa-check"></i><b>9.2.3</b> HUMAnN: renormalising data</a></li>
 </ul></li>
 <li class="chapter" data-level="9.3" data-path="09-Functional_profiling.html"><a href="09-Functional_profiling.html#humann-heatmap"><i class="fa fa-check"></i><b>9.3</b> HUMAnN Heatmap</a></li>
 <li class="chapter" data-level="9.4" data-path="09-Functional_profiling.html"><a href="09-Functional_profiling.html#humann-lefse"><i class="fa fa-check"></i><b>9.4</b> HUMAnN: LEfSe</a></li>
+<li class="chapter" data-level="9.5" data-path="09-Functional_profiling.html"><a href="09-Functional_profiling.html#humann-optional-task"><i class="fa fa-check"></i><b>9.5</b> HUMAnN: Optional task</a></li>
 </ul></li>
 <li class="part"><span><b>Assembly Approach</b></span></li>
 <li class="chapter" data-level="10" data-path="10-Metagenome_assembly.html"><a href="10-Metagenome_assembly.html"><i class="fa fa-check"></i><b>10</b> Metagenome assembly</a>
@@ -377,7 +378,7 @@ code span.wa { color: #60a0b0; font-weight: bold; font-style: italic; } /* Warni
 <div class="sourceCode" id="cb90"><pre class="sourceCode bash"><code class="sourceCode bash"><span id="cb90-1"><a href="12-Assembly_functional_annotation.html#cb90-1" aria-hidden="true" tabindex="-1"></a><span class="fu">ls</span> <span class="at">-1</span> <span class="pp">*</span>gff <span class="kw">|</span> <span class="fu">sed</span> <span class="st">&quot;s/.gff//&quot;</span> <span class="kw">|</span> <span class="cf">while</span> <span class="bu">read</span> <span class="va">bin</span></span>
 <span id="cb90-2"><a href="12-Assembly_functional_annotation.html#cb90-2" aria-hidden="true" tabindex="-1"></a><span class="cf">do</span></span>
 <span id="cb90-3"><a href="12-Assembly_functional_annotation.html#cb90-3" aria-hidden="true" tabindex="-1"></a><span class="fu">cat</span> <span class="va">${bin}</span>.gff <span class="kw">|</span> <span class="fu">grep</span> <span class="st">&quot;eC_number=&quot;</span> <span class="kw">|</span> <span class="fu">cut</span> <span class="at">-f</span> 9 <span class="kw">|</span> <span class="fu">cut</span> <span class="at">-f</span> 1,2 <span class="at">-d</span> <span class="st">&#39;;&#39;</span> <span class="kw">|</span> <span class="dt">\</span></span>
-<span id="cb90-4"><a href="12-Assembly_functional_annotation.html#cb90-4" aria-hidden="true" tabindex="-1"></a><span class="ex">sed</span> <span class="st">&quot;s/ID=//g&quot;</span> <span class="kw">|</span> <span class="fu">sed</span> <span class="st">&quot;s/;eC_number=/\t/g&quot;</span> <span class="op">&gt;</span> ../EC/<span class="va">${bin}</span>.ec</span>
+<span id="cb90-4"><a href="12-Assembly_functional_annotation.html#cb90-4" aria-hidden="true" tabindex="-1"></a><span class="fu">sed</span> <span class="st">&quot;s/ID=//g&quot;</span> <span class="kw">|</span> <span class="fu">sed</span> <span class="st">&quot;s/;eC_number=/\t/g&quot;</span> <span class="op">&gt;</span> ../EC/<span class="va">${bin}</span>.ec</span>
 <span id="cb90-5"><a href="12-Assembly_functional_annotation.html#cb90-5" aria-hidden="true" tabindex="-1"></a><span class="cf">done</span></span></code></pre></div>
 <p>That is quite a bit of code so we’ll break it down with examples for you to run. Of course feel free to skip over the explanations of code sections you are already comfortable with.</p>
 <p>The first part lists all our <code>.gff</code> files on one line each (<code>ls -1 *gff</code>). Then the suffix <code>.gff</code> is substituted with nothing <code>sed "s/.gff//"</code>. This gives us the name of each bin (e.g. <code>K1.1</code>, <code>K1.2</code>). Run this section of code to see that.</p>
@@ -409,15 +410,15 @@ code span.wa { color: #60a0b0; font-weight: bold; font-style: italic; } /* Warni
 <span id="cb93-5"><a href="12-Assembly_functional_annotation.html#cb93-5" aria-hidden="true" tabindex="-1"></a><span class="fu">cat</span> K1.1.gff <span class="kw">|</span> <span class="fu">grep</span> <span class="st">&quot;eC_number=&quot;</span> <span class="kw">|</span> <span class="fu">cut</span> <span class="at">-f</span> 9 <span class="kw">|</span> <span class="fu">head</span></span>
 <span id="cb93-6"><a href="12-Assembly_functional_annotation.html#cb93-6" aria-hidden="true" tabindex="-1"></a><span class="co">#Cut out the 1st and 2nd field based on the delimeter &quot;;&quot; (-d &quot;;&quot;)</span></span>
 <span id="cb93-7"><a href="12-Assembly_functional_annotation.html#cb93-7" aria-hidden="true" tabindex="-1"></a><span class="fu">cat</span> K1.1.gff <span class="kw">|</span> <span class="fu">grep</span> <span class="st">&quot;eC_number=&quot;</span> <span class="kw">|</span> <span class="fu">cut</span> <span class="at">-f</span> 9 <span class="kw">|</span> <span class="fu">cut</span> <span class="at">-f</span> 1,2 <span class="at">-d</span> <span class="st">&#39;;&#39;</span> <span class="kw">|</span> <span class="dt">\</span></span>
-<span id="cb93-8"><a href="12-Assembly_functional_annotation.html#cb93-8" aria-hidden="true" tabindex="-1"></a><span class="ex">head</span></span>
+<span id="cb93-8"><a href="12-Assembly_functional_annotation.html#cb93-8" aria-hidden="true" tabindex="-1"></a><span class="fu">head</span></span>
 <span id="cb93-9"><a href="12-Assembly_functional_annotation.html#cb93-9" aria-hidden="true" tabindex="-1"></a><span class="co">#Substitute (s/) ID= for nothing (/ID//)</span></span>
 <span id="cb93-10"><a href="12-Assembly_functional_annotation.html#cb93-10" aria-hidden="true" tabindex="-1"></a><span class="co">#/g indicates to carry out it out for every instance in every line</span></span>
 <span id="cb93-11"><a href="12-Assembly_functional_annotation.html#cb93-11" aria-hidden="true" tabindex="-1"></a><span class="co">#Default is to only the first instance in each line</span></span>
 <span id="cb93-12"><a href="12-Assembly_functional_annotation.html#cb93-12" aria-hidden="true" tabindex="-1"></a><span class="fu">cat</span> K1.1.gff <span class="kw">|</span> <span class="fu">grep</span> <span class="st">&quot;eC_number=&quot;</span> <span class="kw">|</span> <span class="fu">cut</span> <span class="at">-f</span> 9 <span class="kw">|</span> <span class="fu">cut</span> <span class="at">-f</span> 1,2 <span class="at">-d</span> <span class="st">&#39;;&#39;</span> <span class="kw">|</span> <span class="dt">\</span></span>
-<span id="cb93-13"><a href="12-Assembly_functional_annotation.html#cb93-13" aria-hidden="true" tabindex="-1"></a><span class="ex">sed</span> <span class="st">&quot;s/ID=//g&quot;</span> <span class="kw">|</span> <span class="fu">head</span></span>
+<span id="cb93-13"><a href="12-Assembly_functional_annotation.html#cb93-13" aria-hidden="true" tabindex="-1"></a><span class="fu">sed</span> <span class="st">&quot;s/ID=//g&quot;</span> <span class="kw">|</span> <span class="fu">head</span></span>
 <span id="cb93-14"><a href="12-Assembly_functional_annotation.html#cb93-14" aria-hidden="true" tabindex="-1"></a><span class="co">#Substitute ;eC_number= for a tab (\t)</span></span>
 <span id="cb93-15"><a href="12-Assembly_functional_annotation.html#cb93-15" aria-hidden="true" tabindex="-1"></a><span class="fu">cat</span> K1.1.gff <span class="kw">|</span> <span class="fu">grep</span> <span class="st">&quot;eC_number=&quot;</span> <span class="kw">|</span> <span class="fu">cut</span> <span class="at">-f</span> 9 <span class="kw">|</span> <span class="fu">cut</span> <span class="at">-f</span> 1,2 <span class="at">-d</span> <span class="st">&#39;;&#39;</span> <span class="kw">|</span> <span class="dt">\</span></span>
-<span id="cb93-16"><a href="12-Assembly_functional_annotation.html#cb93-16" aria-hidden="true" tabindex="-1"></a><span class="ex">sed</span> <span class="st">&quot;s/ID=//g&quot;</span> <span class="kw">|</span> <span class="fu">sed</span> <span class="st">&quot;s/;eC_number=/\t/g&quot;</span> <span class="kw">|</span> <span class="fu">head</span></span></code></pre></div>
+<span id="cb93-16"><a href="12-Assembly_functional_annotation.html#cb93-16" aria-hidden="true" tabindex="-1"></a><span class="fu">sed</span> <span class="st">&quot;s/ID=//g&quot;</span> <span class="kw">|</span> <span class="fu">sed</span> <span class="st">&quot;s/;eC_number=/\t/g&quot;</span> <span class="kw">|</span> <span class="fu">head</span></span></code></pre></div>
 <p>Finally the pipes output is written into a file: <code>&gt; ../EC/${bin}.ec</code>.</p>
 <p>The output <code>.ec</code> files are required for <code>MinPath</code> and are tab delimited with two columns:</p>
 <ol style="list-style-type: decimal">

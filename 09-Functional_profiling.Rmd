@@ -9,8 +9,11 @@ It is also possible to investigate functional differences between metagenome (an
 
 It is highly recommended you use the new version of `HUMAnN` as it contains 2 times more species pangenomes and 3 times more gene families than `HUMAnN2`.
 
-__NOTE__ add info about pipeline here.
+The below diagram describes the `HUMAnN` pipeline.
 
+```{r, fig.align = 'center',out.width= '90%', echo=FALSE }
+knitr::include_graphics(path = "figures/humann_workflow.png", auto_pdf = TRUE)
+``` 
 
 ## HUMAnN 
 ```{r, fig.align = 'center',out.width= '15%', echo=FALSE }
