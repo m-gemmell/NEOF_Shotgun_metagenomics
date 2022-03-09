@@ -817,7 +817,7 @@ It is also possible to investigate functional differences between metagenome (an
 
 It is highly recommended you use the new version of `HUMAnN` as it contains 2 times more species pangenomes and 3 times more gene families than `HUMAnN2`.
 
-The description of the `HUMAnN` pipeline is shown in the below diagram:
+The below diagram describes the `HUMAnN` pipeline.
 
 ```{r, fig.align = 'center',out.width= '90%', echo=FALSE }
 knitr::include_graphics(path = "figures/humann_workflow.png", auto_pdf = TRUE)
@@ -1962,7 +1962,15 @@ cp /pub39/tea/matthew/NEOF/Shotgun_metagenomics/metawrap/* RAW_READS
 
 Now you can carry on with the online tutorial, starting from step 1, if you wish using your `MetaWRAP` terminal. Instructions on activating the environment can be found [here](#prokka_conda).
 
-__Note__: This has not been fully tested and the environment may not fully work. This is the joys of bioinformatics.
+__Notes__: 
+
+- This has not been fully tested and the environment may not fully work. This is the joys of bioinformatics.
+- Our machine does not have 96 cores/threads, therefore use `-t 12` instead of `-t 96` when present.
+- For __STEP 3__ instead of using `kraken1` use `kraken2` with the following command:
+
+```{bash eval=FALSE}
+metawrap kraken2 -o KRAKEN -t 96 -s 1000000 CLEAN_READS/ERR*fastq ASSEMBLY/final_assembly.fasta
+```
 
 <!--chapter:end:13-MetaWrap.Rmd-->
 
