@@ -245,7 +245,7 @@ knitr::include_graphics(path = "figures/conda.png", auto_pdf = TRUE)
 
 `LEfSe` requires python2 whilst we have been using packages that required python3. We therefore need to use a different `conda` environment. We are currently using the `conda` env called `shotgun_meta` as represented by `(shotgun_meta)`. This was activated with the command `. useshotgun`.
 
-Open a new terminal (right click on the main screen background, choose `Applications` -> `Shell` -> `bash`) and run the following in the new terminal to activate the `lefse` `conda` environment.
+__Open a new terminal__ (right click on the main screen background, choose `Applications` -> `Shell` -> `bash`) and run the following in the new terminal to activate the `lefse` `conda` environment.
 
 ```{bash eval=FALSE}
 #Setup environment
