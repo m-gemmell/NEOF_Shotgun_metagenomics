@@ -45,7 +45,7 @@ embed_url("https://www.youtube.com/watch?v=w_-4xldv2fI")
 
 ```{r, echo=FALSE, warning=FALSE, }
 library("vembedr")
-embed_url("https://www.youtube.com/watch?v=w_-4xldv2fI")
+embed_url("https://www.youtube.com/watch?v=Kf4nkvbaXDM")
 ```
 
 [__Slides__]()
@@ -59,6 +59,12 @@ Note:
 - The file locations will not match
 - The `. use` scripts will not work. You will have to install your own programs. I recommend looking into [conda](https://docs.conda.io/en/latest/) to more easily install programs.
 
-[__Download files__]()
+[__Download files__](http://www.cgr.liv.ac.uk/illum/NEOFworkshops_5bfa93ca0482d69d/Shotgun_Metagenomics/resources/Shotgun_metagenomics.zip)
+
+## Bookdown html
+
+You can download the html files of the bookdown below. Ensure you unzip the directory before use.
+
+[__Download zipped bookdown__](http://www.cgr.liv.ac.uk/illum/NEOFworkshops_5bfa93ca0482d69d/Shotgun_Metagenomics/resources/NEOF_shotgun_metageomics_bookdown.zip)
 
 
