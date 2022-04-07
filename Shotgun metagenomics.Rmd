@@ -395,7 +395,7 @@ This chapter contains a small example on how to carry out host removal. It uses 
 The first step is to copy over the reference fasta file we will use.
 
 ```{bash eval=FALSE}
-cp /pub39/tea/matthew/NEOF/Shotgun_metagenomics/GRCh38_slice.fasta .
+cp /pub39/tea/nsc006/NEOF/Shotgun_metagenomics/GRCh38_slice.fasta .
 ```
 
 ## Index reference
@@ -490,7 +490,7 @@ knitr::include_graphics(path = "figures/kraken.png", auto_pdf = TRUE)
 Prior to running `Kraken2` we need to set a variable so `Kraken2` knows where to look for the databases it will use.
 
 ```{bash eval=FALSE}
-export KRAKEN2_DB_PATH=/pub39/tea/matthew/NEOF/Shotgun_metagenomics/kraken2_db
+export KRAKEN2_DB_PATH=/pub39/tea/nsc006/NEOF/Shotgun_metagenomics/kraken2_db
 ```
 
 __Note__: You can look at the contents of the above directory to see it currently contains the MiniKraken database. This database contains only a subset of the bacteria, archaea, and viral `Kraken2` libraries. This is used in this practical due to restrictions on time and computational resources. For your own analyses we would recommend the full `Kraken2` database which uses all the bacteria, achaeal and viral complete genomes that are in Refseq at the time of building. See the appendix for a link to the `Kraken2` manual.
@@ -1582,7 +1582,7 @@ As we have only used a subset of data the results are not very good so let us lo
 cd ~/7-Binning
 mkdir K1_fullset
 cd K1_fullset
-ln -s /pub39/tea/matthew/NEOF/Shotgun_metagenomics/binning/K1_fullset/* .
+ln -s /pub39/tea/nsc006/NEOF/Shotgun_metagenomics/binning/K1_fullset/* .
 ```
 
 Now we can look at the results table that is in your current directory.
@@ -1625,7 +1625,8 @@ Now to do the calculation in R for each bin:
 df <- read.csv("MAGS_checkm.csv", header=TRUE, check.names=FALSE)
 #Add a column for overall quality
 df$quality <- df$Completeness - (5 * df$Contamination)
-#View the bin name, lineage, completeness, contamination and the quality columns
+#View the bin name, lineage, number genomes, 
+#completeness, contamination, and the quality columns
 df[,c(1,2,3,12,13,15)]
 ```
 
@@ -1692,6 +1693,8 @@ knitr::include_graphics(path = "figures/enter_key.png", auto_pdf = TRUE)
 
 Now we can annotate the bins.
 
+The below will take a long time to run (>1 hour). Instead of running it skip onto the next step to copy pre-made output to continue with. This command is here so you know what to run in your own future analyses.
+
 ```{bash eval=FALSE}
 metawrap annotate_bins \
 -b ~/7-Binning/K1/bins \
@@ -1716,7 +1719,7 @@ __Note__: This need to be done in one of you non `metawrap` terminals
 
 ```{bash eval=FALSE}
 #Copy over directory
-cp -r /pub39/tea/matthew/NEOF/Shotgun_metagenomics/prokka/K1_fullset ~/8-metawrap_anno
+cp -r /pub39/tea/nsc006/NEOF/Shotgun_metagenomics/prokka/K1_fullset ~/8-metawrap_anno
 #Change into copied directory
 cd ~/8-metawrap_anno/K1_fullset
 ```

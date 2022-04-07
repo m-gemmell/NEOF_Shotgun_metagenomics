@@ -24,7 +24,7 @@
 <meta name="author" content="Sam Haldenby and Matthew R. Gemmell" />
 
 
-<meta name="date" content="2022-04-05" />
+<meta name="date" content="2022-04-07" />
 
   <meta name="viewport" content="width=device-width, initial-scale=1" />
   <meta name="apple-mobile-web-app-capable" content="yes" />
@@ -298,7 +298,7 @@ code span.wa { color: #60a0b0; font-weight: bold; font-style: italic; } /* Warni
 <h2><span class="header-section-number">8.1</span> Kraken2</h2>
 <p><img src="figures/kraken.png" width="15%" style="display: block; margin: auto;" /></p>
 <p>Prior to running <code>Kraken2</code> we need to set a variable so <code>Kraken2</code> knows where to look for the databases it will use.</p>
-<div class="sourceCode" id="cb21"><pre class="sourceCode bash"><code class="sourceCode bash"><span id="cb21-1"><a href="08-Taxonomic_profiling.html#cb21-1" aria-hidden="true" tabindex="-1"></a><span class="bu">export</span> <span class="va">KRAKEN2_DB_PATH=</span>/pub39/tea/matthew/NEOF/Shotgun_metagenomics/kraken2_db</span></code></pre></div>
+<div class="sourceCode" id="cb21"><pre class="sourceCode bash"><code class="sourceCode bash"><span id="cb21-1"><a href="08-Taxonomic_profiling.html#cb21-1" aria-hidden="true" tabindex="-1"></a><span class="bu">export</span> <span class="va">KRAKEN2_DB_PATH=</span>/pub39/tea/nsc006/NEOF/Shotgun_metagenomics/kraken2_db</span></code></pre></div>
 <p><strong>Note</strong>: You can look at the contents of the above directory to see it currently contains the MiniKraken database. This database contains only a subset of the bacteria, archaea, and viral <code>Kraken2</code> libraries. This is used in this practical due to restrictions on time and computational resources. For your own analyses we would recommend the full <code>Kraken2</code> database which uses all the bacteria, achaeal and viral complete genomes that are in Refseq at the time of building. See the appendix for a link to the <code>Kraken2</code> manual.</p>
 <div id="kraken2-run" class="section level3" number="8.1.1">
 <h3><span class="header-section-number">8.1.1</span> Kraken2: run</h3>

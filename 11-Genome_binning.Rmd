@@ -234,7 +234,7 @@ As we have only used a subset of data the results are not very good so let us lo
 cd ~/7-Binning
 mkdir K1_fullset
 cd K1_fullset
-ln -s /pub39/tea/matthew/NEOF/Shotgun_metagenomics/binning/K1_fullset/* .
+ln -s /pub39/tea/nsc006/NEOF/Shotgun_metagenomics/binning/K1_fullset/* .
 ```
 
 Now we can look at the results table that is in your current directory.
@@ -277,7 +277,8 @@ Now to do the calculation in R for each bin:
 df <- read.csv("MAGS_checkm.csv", header=TRUE, check.names=FALSE)
 #Add a column for overall quality
 df$quality <- df$Completeness - (5 * df$Contamination)
-#View the bin name, lineage, completeness, contamination and the quality columns
+#View the bin name, lineage, number genomes, 
+#completeness, contamination, and the quality columns
 df[,c(1,2,3,12,13,15)]
 ```
 

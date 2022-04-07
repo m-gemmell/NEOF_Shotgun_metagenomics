@@ -12,7 +12,7 @@ This chapter contains a small example on how to carry out host removal. It uses 
 The first step is to copy over the reference fasta file we will use.
 
 ```{bash eval=FALSE}
-cp /pub39/tea/matthew/NEOF/Shotgun_metagenomics/GRCh38_slice.fasta .
+cp /pub39/tea/nsc006/NEOF/Shotgun_metagenomics/GRCh38_slice.fasta .
 ```
 
 ## Index reference

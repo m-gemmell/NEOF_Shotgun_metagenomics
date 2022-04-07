@@ -23,7 +23,7 @@ knitr::include_graphics(path = "figures/kraken.png", auto_pdf = TRUE)
 Prior to running `Kraken2` we need to set a variable so `Kraken2` knows where to look for the databases it will use.
 
 ```{bash eval=FALSE}
-export KRAKEN2_DB_PATH=/pub39/tea/matthew/NEOF/Shotgun_metagenomics/kraken2_db
+export KRAKEN2_DB_PATH=/pub39/tea/nsc006/NEOF/Shotgun_metagenomics/kraken2_db
 ```
 
 __Note__: You can look at the contents of the above directory to see it currently contains the MiniKraken database. This database contains only a subset of the bacteria, archaea, and viral `Kraken2` libraries. This is used in this practical due to restrictions on time and computational resources. For your own analyses we would recommend the full `Kraken2` database which uses all the bacteria, achaeal and viral complete genomes that are in Refseq at the time of building. See the appendix for a link to the `Kraken2` manual.

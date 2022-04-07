@@ -24,7 +24,7 @@
 <meta name="author" content="Sam Haldenby and Matthew R. Gemmell" />
 
 
-<meta name="date" content="2022-04-05" />
+<meta name="date" content="2022-04-07" />
 
   <meta name="viewport" content="width=device-width, initial-scale=1" />
   <meta name="apple-mobile-web-app-capable" content="yes" />
@@ -312,6 +312,7 @@ code span.wa { color: #60a0b0; font-weight: bold; font-style: italic; } /* Warni
 <h3><span class="header-section-number">12.2.2</span> Prokka: run</h3>
 <p><img src="figures/enter_key.png" width="10%" style="display: block; margin: auto;" /></p>
 <p>Now we can annotate the bins.</p>
+<p>The below will take a long time to run (&gt;1 hour). Instead of running it skip onto the next step to copy pre-made output to continue with. This command is here so you know what to run in your own future analyses.</p>
 <div class="sourceCode" id="cb85"><pre class="sourceCode bash"><code class="sourceCode bash"><span id="cb85-1"><a href="12-Assembly_functional_annotation.html#cb85-1" aria-hidden="true" tabindex="-1"></a><span class="ex">metawrap</span> annotate_bins <span class="dt">\</span></span>
 <span id="cb85-2"><a href="12-Assembly_functional_annotation.html#cb85-2" aria-hidden="true" tabindex="-1"></a>-b ~/7-Binning/K1/bins <span class="dt">\</span></span>
 <span id="cb85-3"><a href="12-Assembly_functional_annotation.html#cb85-3" aria-hidden="true" tabindex="-1"></a>-o ./K1 <span class="dt">\</span></span>
@@ -329,7 +330,7 @@ code span.wa { color: #60a0b0; font-weight: bold; font-style: italic; } /* Warni
 <p>Like in previous steps we will copy over premade results for the full dataset.</p>
 <p><strong>Note</strong>: This need to be done in one of you non <code>metawrap</code> terminals</p>
 <div class="sourceCode" id="cb86"><pre class="sourceCode bash"><code class="sourceCode bash"><span id="cb86-1"><a href="12-Assembly_functional_annotation.html#cb86-1" aria-hidden="true" tabindex="-1"></a><span class="co">#Copy over directory</span></span>
-<span id="cb86-2"><a href="12-Assembly_functional_annotation.html#cb86-2" aria-hidden="true" tabindex="-1"></a><span class="fu">cp</span> <span class="at">-r</span> /pub39/tea/matthew/NEOF/Shotgun_metagenomics/prokka/K1_fullset ~/8-metawrap_anno</span>
+<span id="cb86-2"><a href="12-Assembly_functional_annotation.html#cb86-2" aria-hidden="true" tabindex="-1"></a><span class="fu">cp</span> <span class="at">-r</span> /pub39/tea/nsc006/NEOF/Shotgun_metagenomics/prokka/K1_fullset ~/8-metawrap_anno</span>
 <span id="cb86-3"><a href="12-Assembly_functional_annotation.html#cb86-3" aria-hidden="true" tabindex="-1"></a><span class="co">#Change into copied directory</span></span>
 <span id="cb86-4"><a href="12-Assembly_functional_annotation.html#cb86-4" aria-hidden="true" tabindex="-1"></a><span class="bu">cd</span> ~/8-metawrap_anno/K1_fullset</span></code></pre></div>
 <p>There are many directories but the one we are interested is <code>bin_funct_annotations</code> . This contains a GFF file for each bin.</p>
