@@ -7,10 +7,10 @@ tutorial-overview
 basics
 structure
 content
-before-we-start
 cluster-introduction
 logon-instructions
 the-terminal-window
+before-we-start
 rawdata
 obtaining-the-data
 checking-quality-control
@@ -23,11 +23,12 @@ index-reference
 alignment
 unmapped-read-extraction
 re-pair
-host-removal-considerations
+host-removal-summary
 taxprofile
 kraken2
 kraken2-run
 kraken2-output
+kraken-2-mcqs
 krona-plot
 bracken
 bracken-run

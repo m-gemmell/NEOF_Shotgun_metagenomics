@@ -12,6 +12,31 @@ favicon: figures/NEOF_favicon.png
 description: NEOF book for the Microbial shotgun metagenomics workshop
 cover-image: "figures/NEOF.png"
 ---
+```{r include=FALSE, cache=FALSE}
+suppressPackageStartupMessages({
+  library(webexercises)
+})
+
+knitr::knit_hooks$set(webex.hide = function(before, options, envir) {
+  if (before) {
+    if (is.character(options$webex.hide)) {
+      hide(options$webex.hide)
+    } else {
+      hide()
+    }
+  } else {
+    unhide()
+  }
+})
+```
+
+```{r cite-packages, include = FALSE}
+# automatically create a bib database for R packages
+# add any packages you want to cite here
+knitr::write_bib(c(
+  .packages(), 'bookdown', 'webexercises'
+), 'packages.bib')
+```
 
 ```{r, fig.align = 'center',out.width= '30%', echo=FALSE }
 knitr::include_graphics(path = "figures/NEOF.png", auto_pdf = TRUE)
@@ -38,6 +63,23 @@ This practical session aims to introduce you to the analysis of Shotgun metageno
 
 <!--chapter:end:01-Shotgun_metagenomics.Rmd-->
 
+```{r include=FALSE, cache=FALSE}
+suppressPackageStartupMessages({
+  library(webexercises)
+})
+
+knitr::knit_hooks$set(webex.hide = function(before, options, envir) {
+  if (before) {
+    if (is.character(options$webex.hide)) {
+      hide(options$webex.hide)
+    } else {
+      hide()
+    }
+  } else {
+    unhide()
+  }
+})
+```
 # Overview {#overview}
 ```{r, fig.align = 'center',out.width= '20%', echo=FALSE }
 knitr::include_graphics(path = "figures/overview.png", auto_pdf = TRUE)
@@ -106,6 +148,78 @@ This practical is broken up into the following broad sections.
 
 <!--chapter:end:02-Overview.Rmd-->
 
+```{r include=FALSE, cache=FALSE}
+suppressPackageStartupMessages({
+  library(webexercises)
+})
+
+knitr::knit_hooks$set(webex.hide = function(before, options, envir) {
+  if (before) {
+    if (is.character(options$webex.hide)) {
+      hide(options$webex.hide)
+    } else {
+      hide()
+    }
+  } else {
+    unhide()
+  }
+})
+```
+# Cluster Introduction
+```{r, fig.align = 'center',out.width= '20%', echo=FALSE }
+knitr::include_graphics(path = "figures/cluster.png", auto_pdf = TRUE)
+``` 
+
+## Logon instructions
+For this workshop we will be using Virtual Network Computing (VNC). Connect to the VNC with a browser by using the webVNC link you were sent.
+
+You will now be in a logged-in Linux VNC desktop. You will see something as below (there may be only one terminal which is fine). If you do not see something similar please ask for assistance.
+
+```{r, fig.align = 'center',out.width= '80%', echo=FALSE }
+knitr::include_graphics(path = "figures/logon_pic.png", auto_pdf = TRUE)
+``` 
+
+If the VNC is taking up too much/little space of your browser you can use the zoom of your browser to adjust the size. Ensure you can see one whole terminal.
+
+These instructions will not work outside of this workshop. If you would like to install your own Linux OS on your desktop or laptop we would recommend Mint Linux 
+
+The following link is a guide to install Mint Linux:  
+https://linuxmint-installation-guide.readthedocs.io/en/latest/
+
+## The Terminal Window
+In our case the terminal window looks like the picture below. We are using the terminal window as our shell to interpret our commands to the kernel. Depending on your system and preferences it may look different.
+```{r, fig.align = 'center',out.width= '80%', echo=FALSE }
+knitr::include_graphics(path = "figures/terminal_window.png", auto_pdf = TRUE)
+``` 
+
+Already there is useful information for us on the terminal window.
+
+- __nsc065__: This is the login name, also known as the username. In this case nsc065 is a demonstrator's account. Your screen should show a different account name which will be your username for the Linux machine/cluster you are logged into.
+- __gauss03__: This is the machine name the user is logged into.
+- __\~__: This represents the current directory of the user, or the directory a command was run in. In the Linux OS and others __'~'__ is a shortcut to the user's home directory.
+- Everything after the __'$'__ is where commands are typed into the terminal. This is also referred to as the command line.
+
+__To open a new terminal window__, right click on the main screen, choose `Applications` -> `Shell` -> `bash`
+
+<!--chapter:end:03-Cluster_Introduction.Rmd-->
+
+```{r include=FALSE, cache=FALSE}
+suppressPackageStartupMessages({
+  library(webexercises)
+})
+
+knitr::knit_hooks$set(webex.hide = function(before, options, envir) {
+  if (before) {
+    if (is.character(options$webex.hide)) {
+      hide(options$webex.hide)
+    } else {
+      hide()
+    }
+  } else {
+    unhide()
+  }
+})
+```
 # Before we start
 ```{r, fig.align = 'center',out.width= '20%', echo=FALSE }
 knitr::include_graphics(path = "figures/start.png", auto_pdf = TRUE)
@@ -125,48 +239,25 @@ Also, there’s a chance you’re currently not in your home directory, so let�
 cd ~
 ```
 
-<!--chapter:end:03-Start.Rmd-->
+<!--chapter:end:04-Start.Rmd-->
 
-# Cluster Introduction
-```{r, fig.align = 'center',out.width= '20%', echo=FALSE }
-knitr::include_graphics(path = "figures/cluster.png", auto_pdf = TRUE)
-``` 
+```{r include=FALSE, cache=FALSE}
+suppressPackageStartupMessages({
+  library(webexercises)
+})
 
-## Logon instructions
-For this workshop we will be using Virtual Network Computing (VNC). Connect to the VNC with a browser by using the webVNC link you were sent.
-
-You will now be in a logged-in Linux VNC desktop. You will see something as below (there may be only one terminal which is fine). If you do not see something similar please ask for assistance.
-
-```{r, fig.align = 'center',out.width= '80%', echo=FALSE }
-knitr::include_graphics(path = "figures/logon_pic.png", auto_pdf = TRUE)
-``` 
-
-If the VNC is taking up too much/little space of your browser you can use the zoom of your browser to adjust the size. Ensure you can see one whole terminal.
-
-These instructions will not work outside of this workshop. If you would like to install your own Linux OS on your desktop or laptop we would recommend Ubuntu. 
-
-The following link is a guide to install Ubuntu:  
-https://www.ubuntu.com/download/desktop/install-ubuntu-desktop.  
-If you use a USB you need to create a bootable USB stick. The following link will assist:  
-https://www.ubuntu.com/download/desktop/create-a-usb-stick-on-windows 
-
-## The Terminal Window
-In our case the terminal window looks like the picture below. We are using the terminal window as our shell to interpret our commands to the kernel. Depending on your system and preferences it may look different.
-```{r, fig.align = 'center',out.width= '80%', echo=FALSE }
-knitr::include_graphics(path = "figures/terminal_window.png", auto_pdf = TRUE)
-``` 
-
-Already there is useful information for us on the terminal window.
-
-- __nsc065__: This is the login name, also known as the username. In this case nsc065 is a demonstrator's account. Your screen should show a different account name which will be your username for the Linux machine/cluster you are logged into.
-- __gauss03__: This is the machine name the user is logged into.
-- __\~__: This represents the current directory of the user, or the directory a command was run in. In the Linux OS and others __'~'__ is a shortcut to the user's home directory.
-- Everything after the __'$'__ is where commands are typed into the terminal. This is also referred to as the command line.
-
-__To open a new terminal window__, right click on the main screen, choose `Applications` -> `Shell` -> `bash`
-
-<!--chapter:end:04-Cluster_Introduction.Rmd-->
-
+knitr::knit_hooks$set(webex.hide = function(before, options, envir) {
+  if (before) {
+    if (is.character(options$webex.hide)) {
+      hide(options$webex.hide)
+    } else {
+      hide()
+    }
+  } else {
+    unhide()
+  }
+})
+```
 # (PART\*) Data & QC {-}
 
 # Raw data {#rawdata}
@@ -214,7 +305,7 @@ The file ID has three components:
 - R1 is for the forward reads in the Illumina reads pair (R2 is for the set corresponding to the other end of the reads). 
 - fastq.gz tells us that this is a zipped FASTQ file.
 
-The sample labelling indicates the type treatment samples. The three samples are:
+The three samples are:
 
 - __K1__: Fecal sample of individual of Korean diets
 - __K2__: Fecal sample of individual of Korean diets
@@ -236,7 +327,9 @@ zcat K1_R1.fastq.gz | head -n 4 | less -S
 
 The pipe symbol ( `|` ) is used to pass the output of one command as input to the next command. So, this command (1) shows the unzipped contents of the FASTQ file, (2) displays only the first 4 lines, and (3) displays them without wrapping lines (with `–S`, for easy viewing).
 
-The lines displayed represent one FASTQ sequence entry, or one read of a read pair: The corresponding second read can be viewed by running the same command on K1_R2.fastq.gz. The first line is the read identifier, the second line is the sequence itself, the third line is a secondary header (which is usually left blank except for '+') and the fourth line is the sequence quality score: For each base in the sequence, there is a corresponding quality encoded in this string of characters.  __To return to the command prompt, press__ `q`. 
+The lines displayed represent one FASTQ sequence entry, or one read of a read pair: The corresponding second read can be viewed by running the same command on K1_R2.fastq.gz. The first line is the read identifier, the second line is the sequence itself, the third line is a secondary header (which is usually left blank except for '+') and the fourth line is the sequence quality score: For each base in the sequence, there is a corresponding quality encoded in this string of characters.  
+
+__To return to the command prompt, press__ `q`. 
 
 Due to computational constraints, the files you have linked to are a subset of the original data (i.e. 1 million read pairs from each sample).
 
@@ -289,31 +382,52 @@ firefox R1_fastqc/multiqc/multiqc_report.html \
 R2_fastqc/multiqc/multiqc_report.html &
 ```
 
+This is a longer command so we've split it across multiple lines. A `\` at the end of a line allows you to press return without running the command, meaning you can continue to add to that command. When this happens, the `$` changes to a `>`. 
+
+__Note__ if you do use the `\` character, the next key you press must be return. If you use `\` in the middle of a line without pressing return afterwards, it will break the command!
+
 The `FastQC` report (via `MultiQC`) contains a number of metrics. The "Sequence Quality Histograms" shows the sequence quality across the length of the reads, you can hover over each line to show which sample it belongs to. Note how quality decreases as the length of the read increases. While this is normal with Illumina sequencing, we will improve the situation a bit in the next chapter.
 
 Once you have finished inspecting, minimise the Firefox window.
 
 <!--chapter:end:05-Raw_data.Rmd-->
 
+```{r include=FALSE, cache=FALSE}
+suppressPackageStartupMessages({
+  library(webexercises)
+})
+
+knitr::knit_hooks$set(webex.hide = function(before, options, envir) {
+  if (before) {
+    if (is.character(options$webex.hide)) {
+      hide(options$webex.hide)
+    } else {
+      hide()
+    }
+  } else {
+    unhide()
+  }
+})
+```
 # Quality control {#qualcont}
 ```{r, fig.align = 'center',out.width= '30%', echo=FALSE }
 knitr::include_graphics(path = "figures/quality_trimming_and_filtering.png", auto_pdf = TRUE)
 ``` 
 
-Now that we've obtained the raw data and had a look at it, we should now clean it up. With any sequencing data, it is very important to ensure that you use the highest quality data possible: Rubbish goes in, rubbish comes out. 
+Now that we've obtained the raw data and had a look at it, we should clean it up. With any sequencing data, it is very important to ensure that you use the highest quality data possible: Rubbish goes in, rubbish comes out. 
 
 There are two main methods employed to clean sequence data, and a third method specific to some metagenomic datasets.
 
 - Remove low quality bases from the end of the reads: These are more likely to be incorrect, so are best trimmed off.
 - Remove adapters: Sometimes sequencing adapters can be sequenced if the sequencing runs off the end of a fragment. 
-- Host removal: If a metagenomic sample derives from a host species then it may be advisable to remove any reads associated with the host genome. Here, we do not need to do this, as the dataset  has next to zero human genome sequences.
+- Host removal: If a metagenomic sample derives from a host species then it may be advisable to remove any reads associated with the host genome.
 
 ## Removing adapters and low quality bases
 ```{r, fig.align = 'center',out.width= '15%', echo=FALSE }
 knitr::include_graphics(path = "figures/hedge_trimming.png", auto_pdf = TRUE)
 ``` 
 
-First go back to your home directory and create a new directory where we will clean the sequences up:
+Go back to your home directory and create a new directory where we will clean the sequences up:
 
 ```{bash eval=FALSE}
 cd ..
@@ -328,13 +442,20 @@ trim_galore --paired --quality 20 --stringency 4 \
 ../1-Raw/K1_R1.fastq.gz ../1-Raw/K1_R2.fastq.gz
 ```
 
-This is a longer command so we've split it across multiple lines. A `\` at the end of a line allows you to press return without running the command, meaning you can continue to add to that command. When this happens, the `$` changes to a `>`. 
-
-__Note__ if you do use the `\` character, the next key you press must be return. If you use `\` in the middle of a line without pressing return afterwards, it will break the command!
-
 This command will remove any low quality regions from the end of both reads in each read pair (quality score < 20). Additionally, if it detects four or more bases of a sequencing adapter, it will trim that off too.
 
-__Task__: Rerun this command for the other two samples (K2 and W1).
+__Task__: Rerun this command for the other two samples (K2 and W1). Try to run these without looking at the help box below.
+
+`r hide("trim_galore commands")`
+```{bash eval=FALSE}
+#K2
+trim_galore --paired --quality 20 --stringency 4 \
+../1-Raw/K2_R1.fastq.gz ../1-Raw/K2_R2.fastq.gz
+#W1
+trim_galore --paired --quality 20 --stringency 4 \
+../1-Raw/W1_R1.fastq.gz ../1-Raw/W1_R2.fastq.gz
+```
+`r unhide()`
 
 ## Rename the files
 ```{r, fig.align = 'center',out.width= '15%', echo=FALSE }
@@ -347,7 +468,7 @@ Once that is complete if you run:
 ls
 ```
 
-you will notice that we have a new bunch of files created: 2 new read files for each sample along with a trimming report for each file trimmed. However, the new names are needlessly long. For example K1_R1_val_R1.fq.gz could be shortened to K1_R1.fq.gz. So, we'll rename all of the files with the mv command:
+you will notice that we have a new bunch of files created: 2 new read files for each sample along with a trimming report for each file trimmed. However, the new names are needlessly long. For example K1_R1_val_1.fq.gz could be shortened to K1_R1.fq.gz. So, we'll rename all of the files with the mv command:
 
 ```{bash eval=FALSE}
 mv K1_R1_val_1.fq.gz K1_R1.fq.gz
@@ -377,10 +498,39 @@ mkdir R1_fastqc/multiqc
 multiqc -o R1_fastqc/multiqc R1_fastqc
 ```
 
-__Task__: Run `FastQC` and `MultiQC` for the R2 files and then view the R1 and R2 `MultiQC` reports with firefox. How does the quality compare to the untrimmed data?
+__Task__: Run `FastQC` and `MultiQC` for the R2 files and then view the R1 and R2 `MultiQC` reports with firefox. Try to run the commands without looking at the help box below.
+
+How does the quality compare to the untrimmed data?
+
+`r hide("R2 commands")`
+```{bash eval=FALSE}
+#R2 fastqc and multiqc
+mkdir R2_fastqc
+fastqc -t 3 -o R2_fastqc *R2.fq.gz
+mkdir R2_fastqc/multiqc
+multiqc -o R2_fastqc/multiqc R2_fastqc
+```
+`r unhide()`
 
 <!--chapter:end:06-Trimming_data.Rmd-->
 
+```{r include=FALSE, cache=FALSE}
+suppressPackageStartupMessages({
+  library(webexercises)
+})
+
+knitr::knit_hooks$set(webex.hide = function(before, options, envir) {
+  if (before) {
+    if (is.character(options$webex.hide)) {
+      hide(options$webex.hide)
+    } else {
+      hide()
+    }
+  } else {
+    unhide()
+  }
+})
+```
 # Host removal {#hostremoval}
 ```{r, fig.align = 'center',out.width= '30%', echo=FALSE }
 knitr::include_graphics(path = "figures/bowtie2.png", auto_pdf = TRUE)
@@ -409,34 +559,69 @@ We will will use the `Bowtie2` aligner for mapping/aligning. Prior to alignment/
 bowtie2-build GRCh38_slice.fasta GRCh38_slice.fasta
 ```
 
-If you use `ls` you will now see a bunch of files starting with `GRCh38_slice.fasta` and ending with various suffixes that contain `bt`. These are the index files which allow us to use the reference with `Bowtie2`.
+If you use `ls` you will now see a bunch of files starting with `GRCh38_slice.fasta` and ending with various suffixes that contain `bt2`. These are the index files which allow us to use the reference with `Bowtie2`.
 
 ## Alignment
 ```{r, fig.align = 'center',out.width= '15%', echo=FALSE }
 knitr::include_graphics(path = "figures/alignment.png", auto_pdf = TRUE)
 ``` 
 
-With the indexed reference we will align the K1 reads to the reference. This creates a bam file that contains alignment and read information (`mapped.bam`).
+With the indexed reference we will align the K1 reads to the reference. This creates a BAM file that contains alignment and read information (`K1_mapped.bam`).
 
 ```{bash eval=FALSE}
 bowtie2 -x GRCh38_slice.fasta -1 K1_R1.fq.gz -2 K1_R2.fq.gz \
--p12 2> out.log | samtools view -bSh > mapped.bam
+-p12 2> K1_bowtie2_out.log | samtools view -b -S -h > K1_mapped.bam
 ```
+
+#### Parameters {-}
+```{r, fig.align = 'center',out.width= '10%', echo=FALSE }
+knitr::include_graphics(path = "figures/parameter_black.png", auto_pdf = TRUE)
+```
+
+This command is split into two commands. The first is `bowtie2` that creates the alignment. The parameters for the command are:
+
+- __`-x`__: Indexed reference the reads will be aligned to.
+- __`-1`__: The forward reads.
+- __`-2`__: The reverse reads.
+- __`-p`__: Number of threads to be used. 12 in this case.
+- __`2>`__: This will cause the standard error to be redirected to the chosen file. In this case `out.log`.
+  - This useful for commands that may produce a lot of output to screen. If an error occurs you can view this file to see the error messages.
+  
+The alignment is then piped (`|`) to the command `samtools view`. For more information on pipes please see our [Intro to Unix course book](http://www.cgr.liv.ac.uk/illum/NEOFworkshops_5bfa93ca0482d69d/Intro_to_Unix/12-Advanced_linux_practice.html#pipes).
+
+The parameters for `samtools view` are:
+
+- __`-b`__: Output the alignment as a BAM file.
+  - BAM files are a binary form of SAM files so they are smaller in memory size.
+  - If you are interested in the SAM format please see its [specification file](https://samtools.github.io/hts-specs/SAMv1.pdf).
+- __`-S`__: Auto detect input format.
+- __`-h`__: Include header.
+
+The binary alignment is redirected to a new file called `K1_mapped.bam`. For more information on redirection please see our [Intro to Unix course book](http://www.cgr.liv.ac.uk/illum/NEOFworkshops_5bfa93ca0482d69d/Intro_to_Unix/12-Advanced_linux_practice.html#redirection).
 
 ## Unmapped read extraction
 ```{r, fig.align = 'center',out.width= '15%', echo=FALSE }
 knitr::include_graphics(path = "figures/exctractor.png", auto_pdf = TRUE)
 ``` 
 
-Next step is to extract the reads that did not map to the host reference from the `mapped.bam` file with a `samtools` command (unmapped reads).
+Next step is to extract the reads that did not map to the host reference from the `K1_mapped.bam` file with the `samtools fastq` command (unmapped reads).
 
 ```{bash eval=FALSE}
-samtools fastq -f 4 -1 K1_R1.u.fastq -2 K1_R2.u.fastq mapped.bam
+samtools fastq -f 4 -1 K1_R1.u.fastq -2 K1_R2.u.fastq K1_mapped.bam
 ```
  
-We use the `-f` parameter option to output reads that only include the SAM flag. In this case `4` stands for unmapped reads. Therefore, our resulting fastq files will only contain unmapped reads. The following link is very useful to create a SAM flag you may need: https://broadinstitute.github.io/picard/explain-flags.html.
+#### Parameters {-}
+```{r, fig.align = 'center',out.width= '10%', echo=FALSE }
+knitr::include_graphics(path = "figures/parameter_green.png", auto_pdf = TRUE)
+```
 
-This step may make unmatched paired files. This occurs when a read from R2 is removed but the matching read in R1 is not removed, or vice versa. This will cause issues for further analysis. 
+- __`-f`__: Output reads that only include the SAM flag.
+  - In this case `4` stands for unmapped reads. Therefore, our resulting fastq files will only contain unmapped reads. 
+  - The following link is very useful to create a SAM flag you may need: https://broadinstitute.github.io/picard/explain-flags.html.
+- __`-1`__: The output R1 fastq file of unmapped reads.
+- __`-2`__: The output R2 fastq file of unmapped reads.
+
+This step may make unmatched paired files (why we have `.u.` in the output file names). This occurs when a read from R2 is removed but the matching read in R1 is not removed, or vice versa. This will cause issues for further analysis. 
 
 ## Re-pair
 ```{r, fig.align = 'center',out.width= '30%', echo=FALSE }
@@ -451,11 +636,24 @@ out1=K1_R1.final.fastq out2=K1_R2.final.fastq \
 outs=singletons.fastq
 ```
 
-The file `singletons.fastq` contains the left over singletons (a sequence missing a pair) and can normally be ignored.
+#### Parameters {-}
+```{r, fig.align = 'center',out.width= '10%', echo=FALSE }
+knitr::include_graphics(path = "figures/parameter_blue.png", auto_pdf = TRUE)
+```
 
-As our data has pretty much no human data we will skip this step for the other samples and use the trimmed data for the downstream analysis.
+- __`in1=`__: The input R1 fastq file of unmapped unpaired reads.
+- __`in2=`__: The input R2 fastq file of unmapped unpaired reads.
+- __`out1=`__: The output R1 fastq file of unmapped paired reads.
+- __`out2=`__: The output R2 fastq file of unmapped unpaired reads.
+- __`outs=`__: The output fastq file containing the left over singletons (a sequence missing a pair).
+  - This file can normally be ignored.
 
-## Host removal considerations
+## Host removal summary
+```{r, fig.align = 'center',out.width= '10%', echo=FALSE }
+knitr::include_graphics(path = "figures/sum_blue.png", auto_pdf = TRUE)
+```
+
+We have run through quality control including host removal for our K1 sample. As our data has pretty much no human data we will skip this step for the other samples and use the trimmed data for the downstream analysis.
 
 In a real analysis project you would use a whole genome reference for your host. However, that would have taken too long for this practical. The most current Human reference (when this was written) is GRCh38. We used a random 10kb section to align our reads to.
 
@@ -465,14 +663,31 @@ The assembly we used was: https://ftp.ncbi.nlm.nih.gov/refseq/H_sapiens/annotati
 
 <!--chapter:end:07-Host_removal.Rmd-->
 
-# (PART\*) Read approach {-}
+```{r include=FALSE, cache=FALSE}
+suppressPackageStartupMessages({
+  library(webexercises)
+})
+
+knitr::knit_hooks$set(webex.hide = function(before, options, envir) {
+  if (before) {
+    if (is.character(options$webex.hide)) {
+      hide(options$webex.hide)
+    } else {
+      hide()
+    }
+  } else {
+    unhide()
+  }
+})
+```
+# (PART\*) Taxonomy of reads {-}
 
 # Taxonomic profiling {#taxprofile}
 ```{r, fig.align = 'center',out.width= '30%', echo=FALSE }
 knitr::include_graphics(path = "figures/classification.png", auto_pdf = TRUE)
 ``` 
 
-There are a number of methods for determining the species composition of a metagenomic data-set, but for the purposes of this practical we will use `Kraken2` & `Bracken` (Bayesian Reestimation of Abundance with KrakEN).  `Kraken2` classifies short DNA with taxonomic labels and is frequently used for metagenomic studies. `Bracken` uses the taxonomic labels assigned by `Kraken2` to compute the abundance of species in a set of DNA sequences.
+There are a number of methods for determining the species composition of a metagenomic dataset, but for the purposes of this practical we will use `Kraken2` & `Bracken` (Bayesian Reestimation of Abundance with KrakEN).  `Kraken2` classifies short DNA with taxonomic labels and is frequently used for metagenomic studies. `Bracken` uses the taxonomic labels assigned by `Kraken2` to compute the abundance of species in a set of DNA sequences.
 
 First, we'll make a new directory for it and move into it, after returning home:
 
@@ -482,7 +697,26 @@ mkdir 3-Taxonomy
 cd 3-Taxonomy
 ```
 
-## Kraken2
+<!--chapter:end:08-Taxonomic_profiling.Rmd-->
+
+```{r include=FALSE, cache=FALSE}
+suppressPackageStartupMessages({
+  library(webexercises)
+})
+
+knitr::knit_hooks$set(webex.hide = function(before, options, envir) {
+  if (before) {
+    if (is.character(options$webex.hide)) {
+      hide(options$webex.hide)
+    } else {
+      hide()
+    }
+  } else {
+    unhide()
+  }
+})
+```
+# Kraken2
 ```{r, fig.align = 'center',out.width= '15%', echo=FALSE }
 knitr::include_graphics(path = "figures/kraken.png", auto_pdf = TRUE)
 ``` 
@@ -493,16 +727,19 @@ Prior to running `Kraken2` we need to set a variable so `Kraken2` knows where to
 export KRAKEN2_DB_PATH=/pub39/tea/nsc006/NEOF/Shotgun_metagenomics/kraken2_db
 ```
 
-__Note__: You can look at the contents of the above directory to see it currently contains the MiniKraken database. This database contains only a subset of the bacteria, archaea, and viral `Kraken2` libraries. This is used in this practical due to restrictions on time and computational resources. For your own analyses we would recommend the full `Kraken2` database which uses all the bacteria, achaeal and viral complete genomes that are in Refseq at the time of building. See the appendix for a link to the `Kraken2` manual.
+__Note__: You can look at the contents of the above directory to see it currently contains the MiniKraken database. This database contains only a subset of the bacteria, archaea, and viral `Kraken2` libraries. This is used in this practical due to restrictions on time and computational resources. For your own analyses we would recommend the full `Kraken2` database which uses all the bacteria, achaeal and viral complete genomes that are in Refseq at the time of building. See the following links for info on installing the databases.
 
-### Kraken2: run
+- Standard `Kraken2` databases: https://github.com/DerrickWood/kraken2/wiki/Manual#standard-kraken-2-database
+- Custom `Kraken2` databases: https://github.com/DerrickWood/kraken2/wiki/Manual#custom-databases
+
+## Kraken2: run
 ```{r, fig.align = 'center',out.width= '10%', echo=FALSE }
-knitr::include_graphics(path = "figures/enter_key.png", auto_pdf = TRUE)
+knitr::include_graphics(path = "figures/play_blue.png", auto_pdf = TRUE)
 ``` 
 
 Now, run `Kraken2` on sample K1 by running the following command.
 
-__Note__: As there is little human sequence in our data we will not use host removed data.
+__Note__: We are not using the host removed data to save time. IN your own analysis ensure you are using host removed data.
 
 ```{bash eval=FALSE}
 kraken2 --paired --db minikraken2_v1_8GB \
@@ -510,17 +747,23 @@ kraken2 --paired --db minikraken2_v1_8GB \
 ~/2-Trimmed/K1_R1.fq.gz ~/2-Trimmed/K1_R2.fq.gz
 ```  
 
-While this is running, let's look at what those command line options do:
-
-- `~/2-Trimmed/K1_R1.fq.gz ~/2-Trimmed/K1_R2.fq.gz` : the trimmed read pairs for K1, which we will use as input.
-- `--paired` : Indicates that we are providing paired reads to `Kraken2`. Internally, `Kraken2` will concatenate the R1 and R2 reads into one sequence with an N between them.
-- `--db` : Specify the `Kraken2` database to be used for taxonomic classification. Previous to the command we set the `KRAKEN_DB_PATH` so in this case the command will look for the directory called `minikraken2_v1_8GB` within `KRAKEN_DB_PATH`. Alternatively the full path of the required database could be provided.
-- `--threads` : How many CPUs the process will use.
-- `--output` : This is the output file. 
-
-### Kraken2: output
+#### Parameters {-}
 ```{r, fig.align = 'center',out.width= '10%', echo=FALSE }
-knitr::include_graphics(path = "figures/output.png", auto_pdf = TRUE)
+knitr::include_graphics(path = "figures/parameter_blue.png", auto_pdf = TRUE)
+```
+
+- __`--paired`__: Indicates that we are providing paired reads to `Kraken2`. Internally, `Kraken2` will concatenate the R1 and R2 reads into one sequence with an N between them.
+- __`--db`__: Specify the `Kraken2` database to be used for taxonomic classification. 
+  - Previous to the command we set the `KRAKEN_DB_PATH` so in this case the command will look for the directory called `minikraken2_v1_8GB` within `KRAKEN_DB_PATH`. 
+  - Alternatively the full path of the required database could be provided.
+- __`--threads`__: Number of CPUs the process will use.
+- __`--output`__: The output file. More info below.
+- __`--report`__: The output report file. More info below.
+- __`~/2-Trimmed/K1_R1.fq.gz ~/2-Trimmed/K1_R2.fq.gz`__: The trimmed read pairs for K1, which we will use as input.
+
+## Kraken2: output
+```{r, fig.align = 'center',out.width= '10%', echo=FALSE }
+knitr::include_graphics(path = "figures/output_file_blue.png", auto_pdf = TRUE)
 ``` 
 
 There are two major output formats from Kraken2:
@@ -539,9 +782,9 @@ There are two major output formats from Kraken2:
       - __Note__: that paired read data will contain a "|:|" token in this list to indicate the end of one read and the beginning of another.
 
 - `--report`, `.kreport2`: The report output format. This is required for bracken. It is tab-delimited with one line per taxon. The fields of the output, from left-to-right, are as follows:
-   1. Percentage of fragments covered by the clade rooted at this taxon.
-   2. Number of fragments covered by the clade rooted at this taxon.
-   3. Number of fragments assigned directly to this taxon.
+   1. Percentage of paired reads covered by the clade rooted at this taxon.
+   2. Number of paired reads covered by the clade rooted at this taxon.
+   3. Number of paired reads assigned directly to this taxon.
    4. A rank code, indicating (U)nclassified, (R)oot, (D)omain, (K)ingdom, (P)hylum, (C)lass, (O)rder, (F)amily, (G)enus, or (S)pecies. Taxa that are not at any of these 10 ranks have a rank code that is formed by using the rank code of the closest ancestor rank with a number indicating the distance from that rank. E.g., "G2" is a rank code indicating a taxon is between genus and species and the grandparent taxon is at the genus rank.
    5. NCBI taxonomic ID number
    6. Indented scientific name
@@ -550,11 +793,81 @@ The output to screen will show how many sequences are classified. This will be l
 
 In a real analysis you may use the option `--confidence` which represents  the __"Confidence score threshold"__. The default is `0.0`, which is the lowest, with the maximum value being `1`. A good place to start may be `0.1`. Too many classifications are removed if you attempt it with this dataset, due to the mini `Kraken2` database used. More info on the confidence scoring can be found at: https://github.com/DerrickWood/kraken2/wiki/Manual#confidence-scoring
 
-__Task__: Once the Kraken2 command has finished running, run it on the other two samples. 
+__Task__: Once the Kraken2 command has finished running, run it on the other two samples. Attempt the commands without looking at the help box.
 
 __Hint__: You will need to change all instances of K1 to K2 or W1 in the above command
 
-## Krona plot
+`r hide("K2 & W1 Kraken 2 commands")`
+```{bash eval=FALSE}
+#K2
+kraken2 --paired --db minikraken2_v1_8GB \
+--output K2.kraken --report K2.kreport2 \
+~/2-Trimmed/K2_R1.fq.gz ~/2-Trimmed/K2_R2.fq.gz
+#W1
+```{bash eval=FALSE}
+kraken2 --paired --db minikraken2_v1_8GB \
+--output W1.kraken --report W1.kreport2 \
+~/2-Trimmed/W1_R1.fq.gz ~/2-Trimmed/W1_R2.fq.gz
+```
+`r unhide()`
+
+## Kraken 2: MCQs
+```{r, fig.align = 'center',out.width= '10%', echo=FALSE }
+knitr::include_graphics(path = "figures/question_bubble_blue.png", auto_pdf = TRUE)
+```
+
+Viewing the Kraken2 output files with your favourite text viewer (`less`, `nano`, `vim`, etc.), attempt the below MCQs.
+
+```{r, echo = FALSE}
+opts_p <- c("__2__", "__486,723__", answer="__555,162__")
+```
+1. How many paired reads were unclassified for K1? `r longmcq(opts_p)`
+
+```{r, echo = FALSE}
+opts_p <- c("__2__", answer="__486,723__", "__555,162__")
+```
+2. How many paired reads were classified for K2 (i.e. number of reads classified at root level and below)? `r longmcq(opts_p)`
+
+```{r, echo = FALSE}
+opts_p <- c(answer="__2__", "__486,723__", "__555,162__")
+```
+3. How many paired reads were assigned directly to root level for W1? `r longmcq(opts_p)`
+
+```{r, echo = FALSE}
+opts_p <- c("__0.12__", "__0.59__", answer="__14.88__")
+```
+4. What percentage of W1's paired reads were assigned to the clade of Bacteroidetes (Phylum)? `r longmcq(opts_p)`
+
+```{r, echo = FALSE}
+opts_p <- c("__0.12__", answer="__0.59__", "__14.88__")
+```
+5. What percentage of K2's paired reads were assigned to the clade of Rikenellaceae (Family)? `r longmcq(opts_p)`
+
+```{r, echo = FALSE}
+opts_p <- c(answer="__0.12__", "__0.59__", "__14.88__")
+```
+6. What percentage of K1's paired reads were assigned to the clade of Bacteroides helcogenes (Species)? `r longmcq(opts_p)`
+
+<!--chapter:end:09-Kraken2.Rmd-->
+
+```{r include=FALSE, cache=FALSE}
+suppressPackageStartupMessages({
+  library(webexercises)
+})
+
+knitr::knit_hooks$set(webex.hide = function(before, options, envir) {
+  if (before) {
+    if (is.character(options$webex.hide)) {
+      hide(options$webex.hide)
+    } else {
+      hide()
+    }
+  } else {
+    unhide()
+  }
+})
+```
+# Krona plot
 ```{r, fig.align = 'center',out.width= '15%', echo=FALSE }
 knitr::include_graphics(path = "figures/krona.png", auto_pdf = TRUE)
 ``` 
@@ -579,7 +892,26 @@ firefox kraken2.krona.html &
 
 __Question__: Can you tell which sample looks the most different in terms of bacterial species that are present and absent?
 
-## Bracken
+<!--chapter:end:10-Krona.Rmd-->
+
+```{r include=FALSE, cache=FALSE}
+suppressPackageStartupMessages({
+  library(webexercises)
+})
+
+knitr::knit_hooks$set(webex.hide = function(before, options, envir) {
+  if (before) {
+    if (is.character(options$webex.hide)) {
+      hide(options$webex.hide)
+    } else {
+      hide()
+    }
+  } else {
+    unhide()
+  }
+})
+```
+# Bracken
 ```{r, fig.align = 'center',out.width= '15%', echo=FALSE }
 knitr::include_graphics(path = "figures/bracken.png", auto_pdf = TRUE)
 ```
@@ -607,7 +939,7 @@ Let's look at what those command line options do:
 - `-l S`: This specifies the taxonomic level/rank of the `Bracken` output. In this case `S` is equal to species with the other options being `D`, `P`, `C`, `O`,`F` and `G`.
 - `-t 5`: This specifies the minimum number of reads required for a classification at the specified rank. Any classifications with fewer reads than the specified threshold will not receive additional reads from higher taxonomy levels when distributing reads for abundance estimation. Five has been chosen here for this example data but in real datasets you may want to increase this number (default is 10).
 
-### Bracken: output
+## Bracken: output
 ```{r, fig.align = 'center',out.width= '10%', echo=FALSE }
 knitr::include_graphics(path = "figures/output.png", auto_pdf = TRUE)
 ``` 
@@ -626,7 +958,7 @@ Use `less` or `vim` to look at the bracken output.
 
 __Task__: Repeat the above commands for K2 and W1
 
-### Bracken: merging output
+## Bracken: merging output
 ```{r, fig.align = 'center',out.width= '10%', echo=FALSE }
 knitr::include_graphics(path = "figures/merge.png", auto_pdf = TRUE)
 ``` 
@@ -654,7 +986,7 @@ Following these columns are the following two columns for each sample.
 - `${SampleName}.bracken_num`: The number of reads after abundance reestimation 
 - `${SampleName}.bracken_frac`: Relative abundance of the group in the sample
 
-### Bracken: extracting output
+## Bracken: extracting output
 ```{r, fig.align = 'center',out.width= '10%', echo=FALSE }
 knitr::include_graphics(path = "figures/exctractor.png", auto_pdf = TRUE)
 ``` 
@@ -677,7 +1009,26 @@ Now to use the variable to extract the `bracken_num` columns plus the first colu
 cat all.bracken | cut -f 1,$bracken_num_columns > all_num.bracken
 ```
 
-## LEfSe biomarker detection
+<!--chapter:end:11-Bracken.Rmd-->
+
+```{r include=FALSE, cache=FALSE}
+suppressPackageStartupMessages({
+  library(webexercises)
+})
+
+knitr::knit_hooks$set(webex.hide = function(before, options, envir) {
+  if (before) {
+    if (is.character(options$webex.hide)) {
+      hide(options$webex.hide)
+    } else {
+      hide()
+    }
+  } else {
+    unhide()
+  }
+})
+```
+# LEfSe biomarker detection
 ```{r, fig.align = 'center',out.width= '15%', echo=FALSE }
 knitr::include_graphics(path = "figures/lefse.png", auto_pdf = TRUE)
 ```
@@ -686,7 +1037,7 @@ We will use `LEfSe` (Linear discriminant analysis Effect Size) to determine whic
 
 In essence it allows for the detection of biomarkers when comparing sample groups. In the `LEfSe` terminology the sample groups are called the class.
 
-### LEfSe: add metadata {#kraken2_lefse_metadata}
+## LEfSe: add metadata {#kraken2_lefse_metadata}
 ```{r, fig.align = 'center',out.width= '10%', echo=FALSE }
 knitr::include_graphics(path = "figures/header.png", auto_pdf = TRUE)
 ```
@@ -705,7 +1056,7 @@ __Note__: The above is __diet__ followed by 12 __K__ and 12 __W__.
 
 The singular line should match the order of your samples within the file. This is the metadata line that `LEfSe` will use to determine which samples belong to each sample group, and therefore which to compare. In this case it is Korean diet samples versus Western diet samples.
 
-### LEfSe: conda
+## LEfSe: conda
 ```{r, fig.align = 'center',out.width= '10%', echo=FALSE }
 knitr::include_graphics(path = "figures/conda.png", auto_pdf = TRUE)
 ```
@@ -721,7 +1072,7 @@ __Open a new terminal__ (right click on the main screen background, choose `Appl
 cd ~/3-Taxonomy
 ```
 
-### LEfSe: format
+## LEfSe: format
 ```{r, fig.align = 'center',out.width= '10%', echo=FALSE }
 knitr::include_graphics(path = "figures/lefse_format.png", auto_pdf = TRUE)
 ```
@@ -738,7 +1089,7 @@ lefse-format_input.py all_num.lefse.bracken all_num.lefse -c 1 -u 2 -o 1000000
 - `-u 2` : Specifies the row with the sample names. This is the second row in this case.
 - `-o 1000000` : An integer can be indicated to determine to what size (count sum value) each sample should be normalised to. `LEfSe` developers recommend 1000000 (1 million) when very low values a present. We generally always use 1 million for consistency.
 
-### LEfSe: run
+## LEfSe: run
 ```{r, fig.align = 'center',out.width= '10%', echo=FALSE }
 knitr::include_graphics(path = "figures/enter_key.png", auto_pdf = TRUE)
 ``` 
@@ -759,7 +1110,7 @@ The output file is a tab-delimited file which contains a row for each species. B
 
 The __LDA effect__ size indicates how much of an effect each biomarker has. The default is to only count a species with an LDA effect size of greater than 2 or less than -2 as a biomarker. The further the LDA effect size is from 0 the greater the effect the species causes.
 
-### LEfSe: visualisation
+## LEfSe: visualisation
 ```{r, fig.align = 'center',out.width= '10%', echo=FALSE }
 knitr::include_graphics(path = "figures/bar_chart_horizontal.png", auto_pdf = TRUE)
 ``` 
@@ -803,7 +1154,26 @@ In your own future analysis you will need to create your own `Kraken2` and `Brac
    - This requires a `Kraken2` database to be built first.
 
 
-<!--chapter:end:08-Taxonomic_profiling.Rmd-->
+<!--chapter:end:12-Lefse.Rmd-->
+
+```{r include=FALSE, cache=FALSE}
+suppressPackageStartupMessages({
+  library(webexercises)
+})
+
+knitr::knit_hooks$set(webex.hide = function(before, options, envir) {
+  if (before) {
+    if (is.character(options$webex.hide)) {
+      hide(options$webex.hide)
+    } else {
+      hide()
+    }
+  } else {
+    unhide()
+  }
+})
+```
+# (PART\*) Functional profiling of reads {-}
 
 # HUMAnN Functional profiling {#functprofile}
 ```{r, fig.align = 'center',out.width= '15%', echo=FALSE }
@@ -1148,8 +1518,25 @@ Carry out all the steps starting from [Multi sample processing](#humannmultisamp
 
 That completes the non assembly approach to shotgun metagenomic analysis. The next chapters will cover an assembly approach.
 
-<!--chapter:end:09-Functional_profiling.Rmd-->
+<!--chapter:end:13-Functional_profiling.Rmd-->
 
+```{r include=FALSE, cache=FALSE}
+suppressPackageStartupMessages({
+  library(webexercises)
+})
+
+knitr::knit_hooks$set(webex.hide = function(before, options, envir) {
+  if (before) {
+    if (is.character(options$webex.hide)) {
+      hide(options$webex.hide)
+    } else {
+      hide()
+    }
+  } else {
+    unhide()
+  }
+})
+```
 # (PART\*) Assembly Approach {-}
 
 # Metagenome assembly {#metagenomeassembly}
@@ -1344,8 +1731,25 @@ __Questions__
 
 There is also a metaQUAST specifically for metagenome assemblies but it requires reference assemblies be provided.
 
-<!--chapter:end:10-Metagenome_assembly.Rmd-->
+<!--chapter:end:14-Metagenome_assembly.Rmd-->
 
+```{r include=FALSE, cache=FALSE}
+suppressPackageStartupMessages({
+  library(webexercises)
+})
+
+knitr::knit_hooks$set(webex.hide = function(before, options, envir) {
+  if (before) {
+    if (is.character(options$webex.hide)) {
+      hide(options$webex.hide)
+    } else {
+      hide()
+    }
+  } else {
+    unhide()
+  }
+})
+```
 # Genome binning {#binning}
 ```{r, fig.align = 'center',out.width= '40%', echo=FALSE }
 knitr::include_graphics(path = "figures/yarn_binning.png", auto_pdf = TRUE)
@@ -1646,8 +2050,25 @@ q()
 
 It is always useful to know the quality of your bins so you know which are more reliable than others. With that information you can be more or less certain when concluding your findings.
 
-<!--chapter:end:11-Genome_binning.Rmd-->
+<!--chapter:end:15-Genome_binning.Rmd-->
 
+```{r include=FALSE, cache=FALSE}
+suppressPackageStartupMessages({
+  library(webexercises)
+})
+
+knitr::knit_hooks$set(webex.hide = function(before, options, envir) {
+  if (before) {
+    if (is.character(options$webex.hide)) {
+      hide(options$webex.hide)
+    } else {
+      hide()
+    }
+  } else {
+    unhide()
+  }
+})
+```
 # Assembly functional annotation {#funcanno}
 ```{r, fig.align = 'center',out.width= '20%', echo=FALSE }
 knitr::include_graphics(path = "figures/pathways.png", auto_pdf = TRUE)
@@ -1934,8 +2355,25 @@ grep "PWY-6972" *minpath | less
 
 With this file you can then investigate what bins have which pathways. Additionally, with more samples analysed you can determine which samples have which pathways present.
 
-<!--chapter:end:12-Assembly_functional_annotation.Rmd-->
+<!--chapter:end:16-Assembly_functional_annotation.Rmd-->
 
+```{r include=FALSE, cache=FALSE}
+suppressPackageStartupMessages({
+  library(webexercises)
+})
+
+knitr::knit_hooks$set(webex.hide = function(before, options, envir) {
+  if (before) {
+    if (is.character(options$webex.hide)) {
+      hide(options$webex.hide)
+    } else {
+      hide()
+    }
+  } else {
+    unhide()
+  }
+})
+```
 # (APPENDIX) Appendix {-}
 
 # Next steps
@@ -2024,5 +2462,5 @@ wget -O W1_R1.fastq.gz ftp://ftp.sra.ebi.ac.uk/vol1/fastq/ERR505/ERR505090/ERR50
 wget -O W1_R2.fastq.gz ftp://ftp.sra.ebi.ac.uk/vol1/fastq/ERR505/ERR505090/ERR505090_2.fastq.gz
 ```
 
-<!--chapter:end:13-Appendix.Rmd-->
+<!--chapter:end:17-Appendix.Rmd-->
 

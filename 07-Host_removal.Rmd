@@ -26,34 +26,69 @@ We will will use the `Bowtie2` aligner for mapping/aligning. Prior to alignment/
 bowtie2-build GRCh38_slice.fasta GRCh38_slice.fasta
 ```
 
-If you use `ls` you will now see a bunch of files starting with `GRCh38_slice.fasta` and ending with various suffixes that contain `bt`. These are the index files which allow us to use the reference with `Bowtie2`.
+If you use `ls` you will now see a bunch of files starting with `GRCh38_slice.fasta` and ending with various suffixes that contain `bt2`. These are the index files which allow us to use the reference with `Bowtie2`.
 
 ## Alignment
 ```{r, fig.align = 'center',out.width= '15%', echo=FALSE }
 knitr::include_graphics(path = "figures/alignment.png", auto_pdf = TRUE)
 ``` 
 
-With the indexed reference we will align the K1 reads to the reference. This creates a bam file that contains alignment and read information (`mapped.bam`).
+With the indexed reference we will align the K1 reads to the reference. This creates a BAM file that contains alignment and read information (`K1_mapped.bam`).
 
 ```{bash eval=FALSE}
 bowtie2 -x GRCh38_slice.fasta -1 K1_R1.fq.gz -2 K1_R2.fq.gz \
--p12 2> out.log | samtools view -bSh > mapped.bam
+-p12 2> K1_bowtie2_out.log | samtools view -b -S -h > K1_mapped.bam
 ```
+
+#### Parameters {-}
+```{r, fig.align = 'center',out.width= '10%', echo=FALSE }
+knitr::include_graphics(path = "figures/parameter_black.png", auto_pdf = TRUE)
+```
+
+This command is split into two commands. The first is `bowtie2` that creates the alignment. The parameters for the command are:
+
+- __`-x`__: Indexed reference the reads will be aligned to.
+- __`-1`__: The forward reads.
+- __`-2`__: The reverse reads.
+- __`-p`__: Number of threads to be used. 12 in this case.
+- __`2>`__: This will cause the standard error to be redirected to the chosen file. In this case `out.log`.
+  - This useful for commands that may produce a lot of output to screen. If an error occurs you can view this file to see the error messages.
+  
+The alignment is then piped (`|`) to the command `samtools view`. For more information on pipes please see our [Intro to Unix course book](http://www.cgr.liv.ac.uk/illum/NEOFworkshops_5bfa93ca0482d69d/Intro_to_Unix/12-Advanced_linux_practice.html#pipes).
+
+The parameters for `samtools view` are:
+
+- __`-b`__: Output the alignment as a BAM file.
+  - BAM files are a binary form of SAM files so they are smaller in memory size.
+  - If you are interested in the SAM format please see its [specification file](https://samtools.github.io/hts-specs/SAMv1.pdf).
+- __`-S`__: Auto detect input format.
+- __`-h`__: Include header.
+
+The binary alignment is redirected to a new file called `K1_mapped.bam`. For more information on redirection please see our [Intro to Unix course book](http://www.cgr.liv.ac.uk/illum/NEOFworkshops_5bfa93ca0482d69d/Intro_to_Unix/12-Advanced_linux_practice.html#redirection).
 
 ## Unmapped read extraction
 ```{r, fig.align = 'center',out.width= '15%', echo=FALSE }
 knitr::include_graphics(path = "figures/exctractor.png", auto_pdf = TRUE)
 ``` 
 
-Next step is to extract the reads that did not map to the host reference from the `mapped.bam` file with a `samtools` command (unmapped reads).
+Next step is to extract the reads that did not map to the host reference from the `K1_mapped.bam` file with the `samtools fastq` command (unmapped reads).
 
 ```{bash eval=FALSE}
-samtools fastq -f 4 -1 K1_R1.u.fastq -2 K1_R2.u.fastq mapped.bam
+samtools fastq -f 4 -1 K1_R1.u.fastq -2 K1_R2.u.fastq K1_mapped.bam
 ```
  
-We use the `-f` parameter option to output reads that only include the SAM flag. In this case `4` stands for unmapped reads. Therefore, our resulting fastq files will only contain unmapped reads. The following link is very useful to create a SAM flag you may need: https://broadinstitute.github.io/picard/explain-flags.html.
+#### Parameters {-}
+```{r, fig.align = 'center',out.width= '10%', echo=FALSE }
+knitr::include_graphics(path = "figures/parameter_green.png", auto_pdf = TRUE)
+```
 
-This step may make unmatched paired files. This occurs when a read from R2 is removed but the matching read in R1 is not removed, or vice versa. This will cause issues for further analysis. 
+- __`-f`__: Output reads that only include the SAM flag.
+  - In this case `4` stands for unmapped reads. Therefore, our resulting fastq files will only contain unmapped reads. 
+  - The following link is very useful to create a SAM flag you may need: https://broadinstitute.github.io/picard/explain-flags.html.
+- __`-1`__: The output R1 fastq file of unmapped reads.
+- __`-2`__: The output R2 fastq file of unmapped reads.
+
+This step may make unmatched paired files (why we have `.u.` in the output file names). This occurs when a read from R2 is removed but the matching read in R1 is not removed, or vice versa. This will cause issues for further analysis. 
 
 ## Re-pair
 ```{r, fig.align = 'center',out.width= '30%', echo=FALSE }
@@ -68,11 +103,24 @@ out1=K1_R1.final.fastq out2=K1_R2.final.fastq \
 outs=singletons.fastq
 ```
 
-The file `singletons.fastq` contains the left over singletons (a sequence missing a pair) and can normally be ignored.
+#### Parameters {-}
+```{r, fig.align = 'center',out.width= '10%', echo=FALSE }
+knitr::include_graphics(path = "figures/parameter_blue.png", auto_pdf = TRUE)
+```
 
-As our data has pretty much no human data we will skip this step for the other samples and use the trimmed data for the downstream analysis.
+- __`in1=`__: The input R1 fastq file of unmapped unpaired reads.
+- __`in2=`__: The input R2 fastq file of unmapped unpaired reads.
+- __`out1=`__: The output R1 fastq file of unmapped paired reads.
+- __`out2=`__: The output R2 fastq file of unmapped unpaired reads.
+- __`outs=`__: The output fastq file containing the left over singletons (a sequence missing a pair).
+  - This file can normally be ignored.
 
-## Host removal considerations
+## Host removal summary
+```{r, fig.align = 'center',out.width= '10%', echo=FALSE }
+knitr::include_graphics(path = "figures/sum_blue.png", auto_pdf = TRUE)
+```
+
+We have run through quality control including host removal for our K1 sample. As our data has pretty much no human data we will skip this step for the other samples and use the trimmed data for the downstream analysis.
 
 In a real analysis project you would use a whole genome reference for your host. However, that would have taken too long for this practical. The most current Human reference (when this was written) is GRCh38. We used a random 10kb section to align our reads to.
 

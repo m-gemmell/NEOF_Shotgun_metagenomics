@@ -45,7 +45,7 @@ The file ID has three components:
 - R1 is for the forward reads in the Illumina reads pair (R2 is for the set corresponding to the other end of the reads). 
 - fastq.gz tells us that this is a zipped FASTQ file.
 
-The sample labelling indicates the type treatment samples. The three samples are:
+The three samples are:
 
 - __K1__: Fecal sample of individual of Korean diets
 - __K2__: Fecal sample of individual of Korean diets
@@ -67,7 +67,9 @@ zcat K1_R1.fastq.gz | head -n 4 | less -S
 
 The pipe symbol ( `|` ) is used to pass the output of one command as input to the next command. So, this command (1) shows the unzipped contents of the FASTQ file, (2) displays only the first 4 lines, and (3) displays them without wrapping lines (with `–S`, for easy viewing).
 
-The lines displayed represent one FASTQ sequence entry, or one read of a read pair: The corresponding second read can be viewed by running the same command on K1_R2.fastq.gz. The first line is the read identifier, the second line is the sequence itself, the third line is a secondary header (which is usually left blank except for '+') and the fourth line is the sequence quality score: For each base in the sequence, there is a corresponding quality encoded in this string of characters.  __To return to the command prompt, press__ `q`. 
+The lines displayed represent one FASTQ sequence entry, or one read of a read pair: The corresponding second read can be viewed by running the same command on K1_R2.fastq.gz. The first line is the read identifier, the second line is the sequence itself, the third line is a secondary header (which is usually left blank except for '+') and the fourth line is the sequence quality score: For each base in the sequence, there is a corresponding quality encoded in this string of characters.  
+
+__To return to the command prompt, press__ `q`. 
 
 Due to computational constraints, the files you have linked to are a subset of the original data (i.e. 1 million read pairs from each sample).
 
@@ -119,6 +121,10 @@ Once completed, view the `MultiQC` reports (NB: The `&` runs the command in the 
 firefox R1_fastqc/multiqc/multiqc_report.html \
 R2_fastqc/multiqc/multiqc_report.html &
 ```
+
+This is a longer command so we've split it across multiple lines. A `\` at the end of a line allows you to press return without running the command, meaning you can continue to add to that command. When this happens, the `$` changes to a `>`. 
+
+__Note__ if you do use the `\` character, the next key you press must be return. If you use `\` in the middle of a line without pressing return afterwards, it will break the command!
 
 The `FastQC` report (via `MultiQC`) contains a number of metrics. The "Sequence Quality Histograms" shows the sequence quality across the length of the reads, you can hover over each line to show which sample it belongs to. Note how quality decreases as the length of the read increases. While this is normal with Illumina sequencing, we will improve the situation a bit in the next chapter.
 
