@@ -6,7 +6,7 @@
   <meta http-equiv="X-UA-Compatible" content="IE=edge" />
   <title>Chapter 11 Bracken | Shotgun Metagenomics</title>
   <meta name="description" content="NEOF book for the Microbial shotgun metagenomics workshop" />
-  <meta name="generator" content="bookdown 0.28 and GitBook 2.6.7" />
+  <meta name="generator" content="bookdown 0.29 and GitBook 2.6.7" />
 
   <meta property="og:title" content="Chapter 11 Bracken | Shotgun Metagenomics" />
   <meta property="og:type" content="book" />
@@ -23,7 +23,7 @@
 <meta name="author" content="Sam Haldenby and Matthew R. Gemmell" />
 
 
-<meta name="date" content="2022-08-31" />
+<meta name="date" content="2022-11-02" />
 
   <meta name="viewport" content="width=device-width, initial-scale=1" />
   <meta name="apple-mobile-web-app-capable" content="yes" />
@@ -326,7 +326,7 @@ code span.wa { color: #60a0b0; font-weight: bold; font-style: italic; } /* Warni
 <h2><span class="header-section-number">11.2</span> Bracken: merging output<a href="11-Bracken.html#bracken-merging-output" class="anchor-section" aria-label="Anchor link to header"></a></h2>
 <p><img src="figures/merge.png" width="10%" style="display: block; margin: auto;" /></p>
 <p>To make full use of <code>Bracken</code> output, it is best to merge the output into one table. However before we do this we’ll copy the <code>Bracken</code> output of other samples that have been generated prior to the workshop. These are all either Korean or Western Diet samples.</p>
-<div class="sourceCode" id="cb30"><pre class="sourceCode bash"><code class="sourceCode bash"><span id="cb30-1"><a href="11-Bracken.html#cb30-1" aria-hidden="true" tabindex="-1"></a><span class="fu">cp</span> /pub39/tea/matthew/NEOF/Shotgun_metagenomics/bracken/<span class="pp">*</span> .</span></code></pre></div>
+<div class="sourceCode" id="cb30"><pre class="sourceCode bash"><code class="sourceCode bash"><span id="cb30-1"><a href="11-Bracken.html#cb30-1" aria-hidden="true" tabindex="-1"></a><span class="fu">cp</span> /pub39/tea/nsc006/NEOF/Shotgun_metagenomics/bracken/<span class="pp">*</span> .</span></code></pre></div>
 <p>Now to merge all the K and W <code>Bracken</code> files.</p>
 <div class="sourceCode" id="cb31"><pre class="sourceCode bash"><code class="sourceCode bash"><span id="cb31-1"><a href="11-Bracken.html#cb31-1" aria-hidden="true" tabindex="-1"></a><span class="ex">combine_bracken_outputs.py</span> <span class="at">--files</span> [KW]<span class="pp">*</span>.bracken <span class="at">-o</span> all.bracken</span></code></pre></div>
 <p>This output file contains the first three columns:</p>
