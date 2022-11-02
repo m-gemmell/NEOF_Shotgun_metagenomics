@@ -1,3 +1,5 @@
+# (PART\*) Functional profiling of reads {-}
+
 # HUMAnN Functional profiling {#functprofile}
 ```{r, fig.align = 'center',out.width= '15%', echo=FALSE }
 knitr::include_graphics(path = "figures/profile.png", auto_pdf = TRUE)

@@ -3,20 +3,20 @@
 knitr::include_graphics(path = "figures/quality_trimming_and_filtering.png", auto_pdf = TRUE)
 ``` 
 
-Now that we've obtained the raw data and had a look at it, we should now clean it up. With any sequencing data, it is very important to ensure that you use the highest quality data possible: Rubbish goes in, rubbish comes out. 
+Now that we've obtained the raw data and had a look at it, we should clean it up. With any sequencing data, it is very important to ensure that you use the highest quality data possible: Rubbish goes in, rubbish comes out. 
 
 There are two main methods employed to clean sequence data, and a third method specific to some metagenomic datasets.
 
 - Remove low quality bases from the end of the reads: These are more likely to be incorrect, so are best trimmed off.
 - Remove adapters: Sometimes sequencing adapters can be sequenced if the sequencing runs off the end of a fragment. 
-- Host removal: If a metagenomic sample derives from a host species then it may be advisable to remove any reads associated with the host genome. Here, we do not need to do this, as the dataset  has next to zero human genome sequences.
+- Host removal: If a metagenomic sample derives from a host species then it may be advisable to remove any reads associated with the host genome.
 
 ## Removing adapters and low quality bases
 ```{r, fig.align = 'center',out.width= '15%', echo=FALSE }
 knitr::include_graphics(path = "figures/hedge_trimming.png", auto_pdf = TRUE)
 ``` 
 
-First go back to your home directory and create a new directory where we will clean the sequences up:
+Go back to your home directory and create a new directory where we will clean the sequences up:
 
 ```{bash eval=FALSE}
 cd ..
@@ -31,13 +31,20 @@ trim_galore --paired --quality 20 --stringency 4 \
 ../1-Raw/K1_R1.fastq.gz ../1-Raw/K1_R2.fastq.gz
 ```
 
-This is a longer command so we've split it across multiple lines. A `\` at the end of a line allows you to press return without running the command, meaning you can continue to add to that command. When this happens, the `$` changes to a `>`. 
-
-__Note__ if you do use the `\` character, the next key you press must be return. If you use `\` in the middle of a line without pressing return afterwards, it will break the command!
-
 This command will remove any low quality regions from the end of both reads in each read pair (quality score < 20). Additionally, if it detects four or more bases of a sequencing adapter, it will trim that off too.
 
-__Task__: Rerun this command for the other two samples (K2 and W1).
+__Task__: Rerun this command for the other two samples (K2 and W1). Try to run these without looking at the help box below.
+
+`r hide("trim_galore commands")`
+```{bash eval=FALSE}
+#K2
+trim_galore --paired --quality 20 --stringency 4 \
+../1-Raw/K2_R1.fastq.gz ../1-Raw/K2_R2.fastq.gz
+#W1
+trim_galore --paired --quality 20 --stringency 4 \
+../1-Raw/W1_R1.fastq.gz ../1-Raw/W1_R2.fastq.gz
+```
+`r unhide()`
 
 ## Rename the files
 ```{r, fig.align = 'center',out.width= '15%', echo=FALSE }
@@ -50,7 +57,7 @@ Once that is complete if you run:
 ls
 ```
 
-you will notice that we have a new bunch of files created: 2 new read files for each sample along with a trimming report for each file trimmed. However, the new names are needlessly long. For example K1_R1_val_R1.fq.gz could be shortened to K1_R1.fq.gz. So, we'll rename all of the files with the mv command:
+you will notice that we have a new bunch of files created: 2 new read files for each sample along with a trimming report for each file trimmed. However, the new names are needlessly long. For example K1_R1_val_1.fq.gz could be shortened to K1_R1.fq.gz. So, we'll rename all of the files with the mv command:
 
 ```{bash eval=FALSE}
 mv K1_R1_val_1.fq.gz K1_R1.fq.gz
@@ -80,4 +87,16 @@ mkdir R1_fastqc/multiqc
 multiqc -o R1_fastqc/multiqc R1_fastqc
 ```
 
-__Task__: Run `FastQC` and `MultiQC` for the R2 files and then view the R1 and R2 `MultiQC` reports with firefox. How does the quality compare to the untrimmed data?
+__Task__: Run `FastQC` and `MultiQC` for the R2 files and then view the R1 and R2 `MultiQC` reports with firefox. Try to run the commands without looking at the help box below.
+
+How does the quality compare to the untrimmed data?
+
+`r hide("R2 commands")`
+```{bash eval=FALSE}
+#R2 fastqc and multiqc
+mkdir R2_fastqc
+fastqc -t 3 -o R2_fastqc *R2.fq.gz
+mkdir R2_fastqc/multiqc
+multiqc -o R2_fastqc/multiqc R2_fastqc
+```
+`r unhide()`
