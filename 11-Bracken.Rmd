@@ -53,7 +53,7 @@ knitr::include_graphics(path = "figures/merge.png", auto_pdf = TRUE)
 To make full use of `Bracken` output, it is best to merge the output into one table. However before we do this we’ll copy the `Bracken` output of other samples that have been generated prior to the workshop. These are all either Korean or Western Diet samples.
 
 ```{bash eval=FALSE}
-cp /pub39/tea/matthew/NEOF/Shotgun_metagenomics/bracken/* .
+cp /pub39/tea/nsc006/NEOF/Shotgun_metagenomics/bracken/* .
 ```
 
 Now to merge all the K and W `Bracken` files.
