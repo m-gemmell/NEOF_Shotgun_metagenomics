@@ -21,7 +21,7 @@ knitr::include_graphics(path = "figures/play_blue.png", auto_pdf = TRUE)
 
 Now, run `Kraken2` on sample K1 by running the following command.
 
-__Note__: We are not using the host removed data to save time. IN your own analysis ensure you are using host removed data.
+__Note__: We are not using the host removed data. This is to save time. In your own analysis ensure you are using host removed data.
 
 ```{bash eval=FALSE}
 kraken2 --paired --db minikraken2_v1_8GB \
@@ -37,7 +37,7 @@ knitr::include_graphics(path = "figures/parameter_blue.png", auto_pdf = TRUE)
 - __`--paired`__: Indicates that we are providing paired reads to `Kraken2`. Internally, `Kraken2` will concatenate the R1 and R2 reads into one sequence with an N between them.
 - __`--db`__: Specify the `Kraken2` database to be used for taxonomic classification. 
   - Previous to the command we set the `KRAKEN_DB_PATH` so in this case the command will look for the directory called `minikraken2_v1_8GB` within `KRAKEN_DB_PATH`. 
-  - Alternatively the full path of the required database could be provided.
+  - Alternatively the full path of the required database could be provided (`/pub39/tea/nsc006/NEOF/Shotgun_metagenomics/kraken2_db/minikraken2_v1_8GB`).
 - __`--threads`__: Number of CPUs the process will use.
 - __`--output`__: The output file. More info below.
 - __`--report`__: The output report file. More info below.

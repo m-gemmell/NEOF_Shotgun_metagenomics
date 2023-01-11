@@ -6,7 +6,7 @@
   <meta http-equiv="X-UA-Compatible" content="IE=edge" />
   <title>Chapter 9 Kraken2 | Shotgun Metagenomics</title>
   <meta name="description" content="NEOF book for the Microbial shotgun metagenomics workshop" />
-  <meta name="generator" content="bookdown 0.29 and GitBook 2.6.7" />
+  <meta name="generator" content="bookdown 0.30 and GitBook 2.6.7" />
 
   <meta property="og:title" content="Chapter 9 Kraken2 | Shotgun Metagenomics" />
   <meta property="og:type" content="book" />
@@ -23,7 +23,7 @@
 <meta name="author" content="Sam Haldenby and Matthew R. Gemmell" />
 
 
-<meta name="date" content="2022-11-08" />
+<meta name="date" content="2023-01-11" />
 
   <meta name="viewport" content="width=device-width, initial-scale=1" />
   <meta name="apple-mobile-web-app-capable" content="yes" />
@@ -92,7 +92,7 @@ code span.al { color: #ff0000; font-weight: bold; } /* Alert */
 code span.an { color: #60a0b0; font-weight: bold; font-style: italic; } /* Annotation */
 code span.at { color: #7d9029; } /* Attribute */
 code span.bn { color: #40a070; } /* BaseN */
-code span.bu { } /* BuiltIn */
+code span.bu { color: #008000; } /* BuiltIn */
 code span.cf { color: #007020; font-weight: bold; } /* ControlFlow */
 code span.ch { color: #4070a0; } /* Char */
 code span.cn { color: #880000; } /* Constant */
@@ -105,7 +105,7 @@ code span.er { color: #ff0000; font-weight: bold; } /* Error */
 code span.ex { } /* Extension */
 code span.fl { color: #40a070; } /* Float */
 code span.fu { color: #06287e; } /* Function */
-code span.im { } /* Import */
+code span.im { color: #008000; font-weight: bold; } /* Import */
 code span.in { color: #60a0b0; font-weight: bold; font-style: italic; } /* Information */
 code span.kw { color: #007020; font-weight: bold; } /* Keyword */
 code span.op { color: #666666; } /* Operator */
@@ -185,7 +185,12 @@ code span.wa { color: #60a0b0; font-weight: bold; font-style: italic; } /* Warni
 <li class="chapter" data-level="9.2" data-path="09-Kraken2.html"><a href="09-Kraken2.html#kraken2-output"><i class="fa fa-check"></i><b>9.2</b> Kraken2: output</a></li>
 <li class="chapter" data-level="9.3" data-path="09-Kraken2.html"><a href="09-Kraken2.html#kraken-2-mcqs"><i class="fa fa-check"></i><b>9.3</b> Kraken 2: MCQs</a></li>
 </ul></li>
-<li class="chapter" data-level="10" data-path="10-Krona.html"><a href="10-Krona.html"><i class="fa fa-check"></i><b>10</b> Krona plot</a></li>
+<li class="chapter" data-level="10" data-path="10-Krona.html"><a href="10-Krona.html"><i class="fa fa-check"></i><b>10</b> Krona plot</a>
+<ul>
+<li class="chapter" data-level="10.1" data-path="10-Krona.html"><a href="10-Krona.html#krona-run"><i class="fa fa-check"></i><b>10.1</b> Krona: run</a></li>
+<li class="chapter" data-level="10.2" data-path="10-Krona.html"><a href="10-Krona.html#krona-visualise"><i class="fa fa-check"></i><b>10.2</b> Krona: visualise</a></li>
+<li class="chapter" data-level="10.3" data-path="10-Krona.html"><a href="10-Krona.html#krona-mcqs"><i class="fa fa-check"></i><b>10.3</b> Krona: MCQs</a></li>
+</ul></li>
 <li class="chapter" data-level="11" data-path="11-Bracken.html"><a href="11-Bracken.html"><i class="fa fa-check"></i><b>11</b> Bracken</a>
 <ul>
 <li class="chapter" data-level="11.0.1" data-path="11-Bracken.html"><a href="11-Bracken.html#bracken-run"><i class="fa fa-check"></i><b>11.0.1</b> Bracken: run</a></li>
@@ -300,7 +305,7 @@ code span.wa { color: #60a0b0; font-weight: bold; font-style: italic; } /* Warni
 <h2><span class="header-section-number">9.1</span> Kraken2: run<a href="09-Kraken2.html#kraken2-run" class="anchor-section" aria-label="Anchor link to header"></a></h2>
 <p><img src="figures/play_blue.png" width="10%" style="display: block; margin: auto;" /></p>
 <p>Now, run <code>Kraken2</code> on sample K1 by running the following command.</p>
-<p><strong>Note</strong>: We are not using the host removed data to save time. IN your own analysis ensure you are using host removed data.</p>
+<p><strong>Note</strong>: We are not using the host removed data. This is to save time. In your own analysis ensure you are using host removed data.</p>
 <div class="sourceCode" id="cb24"><pre class="sourceCode bash"><code class="sourceCode bash"><span id="cb24-1"><a href="09-Kraken2.html#cb24-1" aria-hidden="true" tabindex="-1"></a><span class="ex">kraken2</span> <span class="at">--paired</span> <span class="at">--db</span> minikraken2_v1_8GB <span class="dt">\</span></span>
 <span id="cb24-2"><a href="09-Kraken2.html#cb24-2" aria-hidden="true" tabindex="-1"></a>--output K1.kraken <span class="at">--report</span> K1.kreport2 <span class="dt">\</span></span>
 <span id="cb24-3"><a href="09-Kraken2.html#cb24-3" aria-hidden="true" tabindex="-1"></a>~/2-Trimmed/K1_R1.fq.gz ~/2-Trimmed/K1_R2.fq.gz</span></code></pre></div>
@@ -312,7 +317,7 @@ code span.wa { color: #60a0b0; font-weight: bold; font-style: italic; } /* Warni
 <li><strong><code>--db</code></strong>: Specify the <code>Kraken2</code> database to be used for taxonomic classification.
 <ul>
 <li>Previous to the command we set the <code>KRAKEN_DB_PATH</code> so in this case the command will look for the directory called <code>minikraken2_v1_8GB</code> within <code>KRAKEN_DB_PATH</code>.</li>
-<li>Alternatively the full path of the required database could be provided.</li>
+<li>Alternatively the full path of the required database could be provided (<code>/pub39/tea/nsc006/NEOF/Shotgun_metagenomics/kraken2_db/minikraken2_v1_8GB</code>).</li>
 </ul></li>
 <li><strong><code>--threads</code></strong>: Number of CPUs the process will use.</li>
 <li><strong><code>--output</code></strong>: The output file. More info below.</li>
@@ -376,28 +381,28 @@ K2 &amp; W1 Kraken 2 commands
 <p>Viewing the Kraken2 output files with your favourite text viewer (<code>less</code>, <code>nano</code>, <code>vim</code>, etc.), attempt the below MCQs.</p>
 <ol style="list-style-type: decimal">
 <li>How many paired reads were unclassified for K1?
-<div id="radio_JJQXYMXAWH" class="webex-radiogroup">
-<label><input type="radio" autocomplete="off" name="radio_JJQXYMXAWH" value=""></input> <span><strong>2</strong></span></label><label><input type="radio" autocomplete="off" name="radio_JJQXYMXAWH" value=""></input> <span><strong>486,723</strong></span></label><label><input type="radio" autocomplete="off" name="radio_JJQXYMXAWH" value="answer"></input> <span><strong>555,162</strong></span></label>
+<div id="radio_SYOHGMYMZZ" class="webex-radiogroup">
+<label><input type="radio" autocomplete="off" name="radio_SYOHGMYMZZ" value=""></input> <span><strong>2</strong></span></label><label><input type="radio" autocomplete="off" name="radio_SYOHGMYMZZ" value=""></input> <span><strong>486,723</strong></span></label><label><input type="radio" autocomplete="off" name="radio_SYOHGMYMZZ" value="answer"></input> <span><strong>555,162</strong></span></label>
 </div></li>
 <li>How many paired reads were classified for K2 (i.e. number of reads classified at root level and below)?
-<div id="radio_KEIUBFDJMO" class="webex-radiogroup">
-<label><input type="radio" autocomplete="off" name="radio_KEIUBFDJMO" value=""></input> <span><strong>2</strong></span></label><label><input type="radio" autocomplete="off" name="radio_KEIUBFDJMO" value="answer"></input> <span><strong>486,723</strong></span></label><label><input type="radio" autocomplete="off" name="radio_KEIUBFDJMO" value=""></input> <span><strong>555,162</strong></span></label>
+<div id="radio_PGINCWVQOC" class="webex-radiogroup">
+<label><input type="radio" autocomplete="off" name="radio_PGINCWVQOC" value=""></input> <span><strong>2</strong></span></label><label><input type="radio" autocomplete="off" name="radio_PGINCWVQOC" value="answer"></input> <span><strong>486,723</strong></span></label><label><input type="radio" autocomplete="off" name="radio_PGINCWVQOC" value=""></input> <span><strong>555,162</strong></span></label>
 </div></li>
 <li>How many paired reads were assigned directly to root level for W1?
-<div id="radio_INOVYNPORH" class="webex-radiogroup">
-<label><input type="radio" autocomplete="off" name="radio_INOVYNPORH" value="answer"></input> <span><strong>2</strong></span></label><label><input type="radio" autocomplete="off" name="radio_INOVYNPORH" value=""></input> <span><strong>486,723</strong></span></label><label><input type="radio" autocomplete="off" name="radio_INOVYNPORH" value=""></input> <span><strong>555,162</strong></span></label>
+<div id="radio_LRSLGBIAYZ" class="webex-radiogroup">
+<label><input type="radio" autocomplete="off" name="radio_LRSLGBIAYZ" value="answer"></input> <span><strong>2</strong></span></label><label><input type="radio" autocomplete="off" name="radio_LRSLGBIAYZ" value=""></input> <span><strong>486,723</strong></span></label><label><input type="radio" autocomplete="off" name="radio_LRSLGBIAYZ" value=""></input> <span><strong>555,162</strong></span></label>
 </div></li>
 <li>What percentage of W1's paired reads were assigned to the clade of Bacteroidetes (Phylum)?
-<div id="radio_DPJTNEZRLD" class="webex-radiogroup">
-<label><input type="radio" autocomplete="off" name="radio_DPJTNEZRLD" value=""></input> <span><strong>0.12</strong></span></label><label><input type="radio" autocomplete="off" name="radio_DPJTNEZRLD" value=""></input> <span><strong>0.59</strong></span></label><label><input type="radio" autocomplete="off" name="radio_DPJTNEZRLD" value="answer"></input> <span><strong>14.88</strong></span></label>
+<div id="radio_WIBUZLUWVH" class="webex-radiogroup">
+<label><input type="radio" autocomplete="off" name="radio_WIBUZLUWVH" value=""></input> <span><strong>0.12</strong></span></label><label><input type="radio" autocomplete="off" name="radio_WIBUZLUWVH" value=""></input> <span><strong>0.59</strong></span></label><label><input type="radio" autocomplete="off" name="radio_WIBUZLUWVH" value="answer"></input> <span><strong>14.88</strong></span></label>
 </div></li>
 <li>What percentage of K2's paired reads were assigned to the clade of Rikenellaceae (Family)?
-<div id="radio_UVDGKLEAKF" class="webex-radiogroup">
-<label><input type="radio" autocomplete="off" name="radio_UVDGKLEAKF" value=""></input> <span><strong>0.12</strong></span></label><label><input type="radio" autocomplete="off" name="radio_UVDGKLEAKF" value="answer"></input> <span><strong>0.59</strong></span></label><label><input type="radio" autocomplete="off" name="radio_UVDGKLEAKF" value=""></input> <span><strong>14.88</strong></span></label>
+<div id="radio_OBBSZUUKLO" class="webex-radiogroup">
+<label><input type="radio" autocomplete="off" name="radio_OBBSZUUKLO" value=""></input> <span><strong>0.12</strong></span></label><label><input type="radio" autocomplete="off" name="radio_OBBSZUUKLO" value="answer"></input> <span><strong>0.59</strong></span></label><label><input type="radio" autocomplete="off" name="radio_OBBSZUUKLO" value=""></input> <span><strong>14.88</strong></span></label>
 </div></li>
 <li>What percentage of K1's paired reads were assigned to the clade of Bacteroides helcogenes (Species)?
-<div id="radio_XXYFUQIIXI" class="webex-radiogroup">
-<label><input type="radio" autocomplete="off" name="radio_XXYFUQIIXI" value="answer"></input> <span><strong>0.12</strong></span></label><label><input type="radio" autocomplete="off" name="radio_XXYFUQIIXI" value=""></input> <span><strong>0.59</strong></span></label><label><input type="radio" autocomplete="off" name="radio_XXYFUQIIXI" value=""></input> <span><strong>14.88</strong></span></label>
+<div id="radio_MAINWEXVCG" class="webex-radiogroup">
+<label><input type="radio" autocomplete="off" name="radio_MAINWEXVCG" value="answer"></input> <span><strong>0.12</strong></span></label><label><input type="radio" autocomplete="off" name="radio_MAINWEXVCG" value=""></input> <span><strong>0.59</strong></span></label><label><input type="radio" autocomplete="off" name="radio_MAINWEXVCG" value=""></input> <span><strong>14.88</strong></span></label>
 </div></li>
 </ol>
 

@@ -30,6 +30,9 @@ kraken2-run
 kraken2-output
 kraken-2-mcqs
 krona-plot
+krona-run
+krona-visualise
+krona-mcqs
 bracken
 bracken-run
 bracken-output

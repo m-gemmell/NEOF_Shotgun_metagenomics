@@ -6,7 +6,7 @@
   <meta http-equiv="X-UA-Compatible" content="IE=edge" />
   <title>Chapter 7 Host removal | Shotgun Metagenomics</title>
   <meta name="description" content="NEOF book for the Microbial shotgun metagenomics workshop" />
-  <meta name="generator" content="bookdown 0.29 and GitBook 2.6.7" />
+  <meta name="generator" content="bookdown 0.30 and GitBook 2.6.7" />
 
   <meta property="og:title" content="Chapter 7 Host removal | Shotgun Metagenomics" />
   <meta property="og:type" content="book" />
@@ -23,7 +23,7 @@
 <meta name="author" content="Sam Haldenby and Matthew R. Gemmell" />
 
 
-<meta name="date" content="2022-11-08" />
+<meta name="date" content="2023-01-11" />
 
   <meta name="viewport" content="width=device-width, initial-scale=1" />
   <meta name="apple-mobile-web-app-capable" content="yes" />
@@ -92,7 +92,7 @@ code span.al { color: #ff0000; font-weight: bold; } /* Alert */
 code span.an { color: #60a0b0; font-weight: bold; font-style: italic; } /* Annotation */
 code span.at { color: #7d9029; } /* Attribute */
 code span.bn { color: #40a070; } /* BaseN */
-code span.bu { } /* BuiltIn */
+code span.bu { color: #008000; } /* BuiltIn */
 code span.cf { color: #007020; font-weight: bold; } /* ControlFlow */
 code span.ch { color: #4070a0; } /* Char */
 code span.cn { color: #880000; } /* Constant */
@@ -105,7 +105,7 @@ code span.er { color: #ff0000; font-weight: bold; } /* Error */
 code span.ex { } /* Extension */
 code span.fl { color: #40a070; } /* Float */
 code span.fu { color: #06287e; } /* Function */
-code span.im { } /* Import */
+code span.im { color: #008000; font-weight: bold; } /* Import */
 code span.in { color: #60a0b0; font-weight: bold; font-style: italic; } /* Information */
 code span.kw { color: #007020; font-weight: bold; } /* Keyword */
 code span.op { color: #666666; } /* Operator */
@@ -185,7 +185,12 @@ code span.wa { color: #60a0b0; font-weight: bold; font-style: italic; } /* Warni
 <li class="chapter" data-level="9.2" data-path="09-Kraken2.html"><a href="09-Kraken2.html#kraken2-output"><i class="fa fa-check"></i><b>9.2</b> Kraken2: output</a></li>
 <li class="chapter" data-level="9.3" data-path="09-Kraken2.html"><a href="09-Kraken2.html#kraken-2-mcqs"><i class="fa fa-check"></i><b>9.3</b> Kraken 2: MCQs</a></li>
 </ul></li>
-<li class="chapter" data-level="10" data-path="10-Krona.html"><a href="10-Krona.html"><i class="fa fa-check"></i><b>10</b> Krona plot</a></li>
+<li class="chapter" data-level="10" data-path="10-Krona.html"><a href="10-Krona.html"><i class="fa fa-check"></i><b>10</b> Krona plot</a>
+<ul>
+<li class="chapter" data-level="10.1" data-path="10-Krona.html"><a href="10-Krona.html#krona-run"><i class="fa fa-check"></i><b>10.1</b> Krona: run</a></li>
+<li class="chapter" data-level="10.2" data-path="10-Krona.html"><a href="10-Krona.html#krona-visualise"><i class="fa fa-check"></i><b>10.2</b> Krona: visualise</a></li>
+<li class="chapter" data-level="10.3" data-path="10-Krona.html"><a href="10-Krona.html#krona-mcqs"><i class="fa fa-check"></i><b>10.3</b> Krona: MCQs</a></li>
+</ul></li>
 <li class="chapter" data-level="11" data-path="11-Bracken.html"><a href="11-Bracken.html"><i class="fa fa-check"></i><b>11</b> Bracken</a>
 <ul>
 <li class="chapter" data-level="11.0.1" data-path="11-Bracken.html"><a href="11-Bracken.html#bracken-run"><i class="fa fa-check"></i><b>11.0.1</b> Bracken: run</a></li>
@@ -358,7 +363,7 @@ code span.wa { color: #60a0b0; font-weight: bold; font-style: italic; } /* Warni
 <div id="re-pair" class="section level2 hasAnchor" number="7.4">
 <h2><span class="header-section-number">7.4</span> Re-pair<a href="07-Host_removal.html#re-pair" class="anchor-section" aria-label="Anchor link to header"></a></h2>
 <p><img src="figures/repair.png" width="30%" style="display: block; margin: auto;" /></p>
-<p>The below <code>BBTools</code> command will re-pair the reads by removing reads with a missing pair. The command ensures the order of the reads are identical in the 2 paired files.</p>
+<p>The below <code>BBTools</code> command will re-pair the reads by removing reads with a missing pair. The command ensures the order of the reads are identical in the 2 output paired files.</p>
 <div class="sourceCode" id="cb21"><pre class="sourceCode bash"><code class="sourceCode bash"><span id="cb21-1"><a href="07-Host_removal.html#cb21-1" aria-hidden="true" tabindex="-1"></a><span class="ex">repair.sh</span> in1=K1_R1.u.fastq in2=K1_R2.u.fastq <span class="dt">\</span></span>
 <span id="cb21-2"><a href="07-Host_removal.html#cb21-2" aria-hidden="true" tabindex="-1"></a>out1=K1_R1.final.fastq out2=K1_R2.final.fastq <span class="dt">\</span></span>
 <span id="cb21-3"><a href="07-Host_removal.html#cb21-3" aria-hidden="true" tabindex="-1"></a>outs=singletons.fastq</span></code></pre></div>

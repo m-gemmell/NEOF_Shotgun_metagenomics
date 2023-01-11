@@ -95,7 +95,7 @@ This step may make unmatched paired files (why we have `.u.` in the output file 
 knitr::include_graphics(path = "figures/repair.png", auto_pdf = TRUE)
 ``` 
 
-The below `BBTools` command will re-pair the reads by removing reads with a missing pair. The command ensures the order of the reads are identical in the 2 paired files.
+The below `BBTools` command will re-pair the reads by removing reads with a missing pair. The command ensures the order of the reads are identical in the 2 output paired files.
 
 ```{bash eval=FALSE}
 repair.sh in1=K1_R1.u.fastq in2=K1_R2.u.fastq \

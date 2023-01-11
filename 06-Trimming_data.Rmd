@@ -51,13 +51,13 @@ trim_galore --paired --quality 20 --stringency 4 \
 knitr::include_graphics(path = "figures/rename.png", auto_pdf = TRUE)
 ``` 
 
-Once that is complete if you run:
+Once that is complete list the contents of your directory:
 
 ```{bash eval=FALSE}
 ls
 ```
 
-you will notice that we have a new bunch of files created: 2 new read files for each sample along with a trimming report for each file trimmed. However, the new names are needlessly long. For example K1_R1_val_1.fq.gz could be shortened to K1_R1.fq.gz. So, we'll rename all of the files with the mv command:
+You will notice that we have a new bunch of files created: 2 new read files for each sample along with a trimming report for each file trimmed. However, the new names are needlessly long. For example K1_R1_val_1.fq.gz could be shortened to K1_R1.fq.gz. So, we'll rename all of the files with the mv command:
 
 ```{bash eval=FALSE}
 mv K1_R1_val_1.fq.gz K1_R1.fq.gz

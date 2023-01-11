@@ -7,7 +7,7 @@ knitr::include_graphics(path = "figures/usb_stick.png", auto_pdf = TRUE)
 
 The very first thing we need to do is to obtain a dataset to work with. The European Bioinformatics Institute (EBI) provides an excellent metagenomics resource (https://www.ebi.ac.uk/metagenomics/) which allows users to download publicly available metagenomic and metagenetic datasets.
 
-Have a browse of some of the projects by selecting one of the biomes on this page.
+Have a browse of some of the projects by selecting one of the biomes on the website.
 
 We have selected a dataset from this site that consists of DNA shotgun data generated from 24 human faecal samples. 12 of these samples are from subjects who were fed a western diet and 12 are from subjects who were fed a Korean diet. This dataset comes from the EBI metagenomics resource (https://www.ebi.ac.uk/metagenomics/projects/ERP005558).
 
@@ -43,7 +43,7 @@ The file ID has three components:
 
 - K1 is the sample ID. 
 - R1 is for the forward reads in the Illumina reads pair (R2 is for the set corresponding to the other end of the reads). 
-- fastq.gz tells us that this is a zipped FASTQ file.
+- fastq.gz tells us that this is a gzipped FASTQ file.
 
 The three samples are:
 
@@ -78,7 +78,7 @@ Due to computational constraints, the files you have linked to are a subset of t
 knitr::include_graphics(path = "figures/mangify_glass.png", auto_pdf = TRUE)
 ``` 
 
-We can generate and visualise various sequence data metrics for quality control purposes using `FastQC`. We will run `FastQC` on the R1 and R2 reads separately as it is good to visualise them in two different reports. This is beacause R1 and R2 reads have different quality patterns, generally due to the poorer quality of R2. 
+We can generate and visualise various sequence data metrics for quality control purposes using `FastQC`. We will run `FastQC` on the R1 and R2 reads separately as it is good to visualise them in two different reports. This is because R1 and R2 reads have different quality patterns, generally due to the poorer quality of R2. 
 
 Run `FastQC` on the files:
 
@@ -115,17 +115,19 @@ mkdir R2_fastqc/multiqc
 multiqc -o R2_fastqc/multiqc R2_fastqc
 ```
 
-Once completed, view the `MultiQC` reports (NB: The `&` runs the command in the background, therefore allowing you to continue to run commands while Firefox is still open):
+Once completed, view the `MultiQC` reports (NB: The `&` runs the command in the background, therefore allowing you to continue to run commands while Firefox is still open).
+
+This is a longer command so we've split it across multiple lines with bash escape. A `\` at the end of a line allows you to press return/enter without running the command, meaning you can continue to add to that command. When this happens, the `$` changes to a `>`. For more information please see our [Intro to Unix materials](http://www.cgr.liv.ac.uk/illum/NEOFworkshops_5bfa93ca0482d69d/Intro_to_Unix/05-Tips_and_tricks.html#bash-escape)
+
+__Note__ if you do use the `\` character, the next key you press must be return/enter. If you use `\` in the middle of a line without pressing return afterwards, it will break the command!
 
 ```{bash eval=FALSE}
 firefox R1_fastqc/multiqc/multiqc_report.html \
 R2_fastqc/multiqc/multiqc_report.html &
 ```
 
-This is a longer command so we've split it across multiple lines. A `\` at the end of a line allows you to press return without running the command, meaning you can continue to add to that command. When this happens, the `$` changes to a `>`. 
-
-__Note__ if you do use the `\` character, the next key you press must be return. If you use `\` in the middle of a line without pressing return afterwards, it will break the command!
-
 The `FastQC` report (via `MultiQC`) contains a number of metrics. The "Sequence Quality Histograms" shows the sequence quality across the length of the reads, you can hover over each line to show which sample it belongs to. Note how quality decreases as the length of the read increases. While this is normal with Illumina sequencing, we will improve the situation a bit in the next chapter.
+
+For more information on the plots of FactQC please see this [online resource](https://rtsf.natsci.msu.edu/genomics/tech-notes/fastqc-tutorial-and-faq/#:~:text=FastQC%2C%20written%20by%20Simon%20Andrews,on%20a%20sequence%20data%20set).
 
 Once you have finished inspecting, minimise the Firefox window.
