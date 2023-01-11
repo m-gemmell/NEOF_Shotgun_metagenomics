@@ -195,8 +195,9 @@ code span.wa { color: #60a0b0; font-weight: bold; font-style: italic; } /* Warni
 <ul>
 <li class="chapter" data-level="11.0.1" data-path="11-Bracken.html"><a href="11-Bracken.html#bracken-run"><i class="fa fa-check"></i><b>11.0.1</b> Bracken: run</a></li>
 <li class="chapter" data-level="11.1" data-path="11-Bracken.html"><a href="11-Bracken.html#bracken-output"><i class="fa fa-check"></i><b>11.1</b> Bracken: output</a></li>
-<li class="chapter" data-level="11.2" data-path="11-Bracken.html"><a href="11-Bracken.html#bracken-merging-output"><i class="fa fa-check"></i><b>11.2</b> Bracken: merging output</a></li>
-<li class="chapter" data-level="11.3" data-path="11-Bracken.html"><a href="11-Bracken.html#bracken-extracting-output"><i class="fa fa-check"></i><b>11.3</b> Bracken: extracting output</a></li>
+<li class="chapter" data-level="11.2" data-path="11-Bracken.html"><a href="11-Bracken.html#bracken-mcqs"><i class="fa fa-check"></i><b>11.2</b> Bracken: MCQs</a></li>
+<li class="chapter" data-level="11.3" data-path="11-Bracken.html"><a href="11-Bracken.html#bracken-merging-output"><i class="fa fa-check"></i><b>11.3</b> Bracken: merging output</a></li>
+<li class="chapter" data-level="11.4" data-path="11-Bracken.html"><a href="11-Bracken.html#bracken-extracting-output"><i class="fa fa-check"></i><b>11.4</b> Bracken: extracting output</a></li>
 </ul></li>
 <li class="chapter" data-level="12" data-path="12-Lefse.html"><a href="12-Lefse.html"><i class="fa fa-check"></i><b>12</b> LEfSe biomarker detection</a>
 <ul>
@@ -300,7 +301,7 @@ code span.wa { color: #60a0b0; font-weight: bold; font-style: italic; } /* Warni
 <h2><span class="header-section-number">12.1</span> LEfSe: add metadata<a href="12-Lefse.html#kraken2_lefse_metadata" class="anchor-section" aria-label="Anchor link to header"></a></h2>
 <p><img src="figures/header.png" width="10%" style="display: block; margin: auto;" /></p>
 <p>We need to add metadata to our <code>Bracken</code> file to be ready for <code>LEfSe.</code> First we will copy the file so we have a backup in case we do anything wrong.</p>
-<div class="sourceCode" id="cb34"><pre class="sourceCode bash"><code class="sourceCode bash"><span id="cb34-1"><a href="12-Lefse.html#cb34-1" aria-hidden="true" tabindex="-1"></a><span class="fu">cp</span> all_num.bracken all_num.lefse.bracken</span></code></pre></div>
+<div class="sourceCode" id="cb35"><pre class="sourceCode bash"><code class="sourceCode bash"><span id="cb35-1"><a href="12-Lefse.html#cb35-1" aria-hidden="true" tabindex="-1"></a><span class="fu">cp</span> all_num.bracken all_num.lefse.bracken</span></code></pre></div>
 <p>Using your favourite text editor (e.g. <code>nano</code>, <code>vim</code>, etc.) add the following line to the top of your <code>all_num.lefse.bracken</code> file. The words are separated by tabs. If you are not sure how to carry out this task please ask a demonstrator.</p>
 <p><strong>diet K K K K K K K K K K K K W W W W W W W W W W W W</strong></p>
 <p><strong>Note</strong>: The above is <strong>diet</strong> followed by 12 <strong>K</strong> and 12 <strong>W</strong>.</p>
@@ -311,16 +312,16 @@ code span.wa { color: #60a0b0; font-weight: bold; font-style: italic; } /* Warni
 <p><img src="figures/conda.png" width="10%" style="display: block; margin: auto;" /></p>
 <p><code>LEfSe</code> requires python2 whilst we have been using packages that required python3. We therefore need to use a different <code>conda</code> environment. We are currently using the <code>conda</code> env called <code>shotgun_meta</code> as represented by <code>(shotgun_meta)</code>. This was activated with the command <code>. useshotgun</code>.</p>
 <p><strong>Open a new terminal</strong> (right click on the main screen background, choose <code>Applications</code> -&gt; <code>Shell</code> -&gt; <code>bash</code>) and run the following in the new terminal to activate the <code>lefse</code> <code>conda</code> environment.</p>
-<div class="sourceCode" id="cb35"><pre class="sourceCode bash"><code class="sourceCode bash"><span id="cb35-1"><a href="12-Lefse.html#cb35-1" aria-hidden="true" tabindex="-1"></a><span class="co">#Setup environment</span></span>
-<span id="cb35-2"><a href="12-Lefse.html#cb35-2" aria-hidden="true" tabindex="-1"></a><span class="bu">.</span> uselefse</span>
-<span id="cb35-3"><a href="12-Lefse.html#cb35-3" aria-hidden="true" tabindex="-1"></a><span class="co">#Change directory</span></span>
-<span id="cb35-4"><a href="12-Lefse.html#cb35-4" aria-hidden="true" tabindex="-1"></a><span class="bu">cd</span> ~/3-Taxonomy</span></code></pre></div>
+<div class="sourceCode" id="cb36"><pre class="sourceCode bash"><code class="sourceCode bash"><span id="cb36-1"><a href="12-Lefse.html#cb36-1" aria-hidden="true" tabindex="-1"></a><span class="co">#Setup environment</span></span>
+<span id="cb36-2"><a href="12-Lefse.html#cb36-2" aria-hidden="true" tabindex="-1"></a><span class="bu">.</span> uselefse</span>
+<span id="cb36-3"><a href="12-Lefse.html#cb36-3" aria-hidden="true" tabindex="-1"></a><span class="co">#Change directory</span></span>
+<span id="cb36-4"><a href="12-Lefse.html#cb36-4" aria-hidden="true" tabindex="-1"></a><span class="bu">cd</span> ~/3-Taxonomy</span></code></pre></div>
 </div>
 <div id="lefse-format" class="section level2 hasAnchor" number="12.3">
 <h2><span class="header-section-number">12.3</span> LEfSe: format<a href="12-Lefse.html#lefse-format" class="anchor-section" aria-label="Anchor link to header"></a></h2>
 <p><img src="figures/lefse_format.png" width="10%" style="display: block; margin: auto;" /></p>
 <p>We need to further format and preprocess our file with a <code>LEfSe</code> script.</p>
-<div class="sourceCode" id="cb36"><pre class="sourceCode bash"><code class="sourceCode bash"><span id="cb36-1"><a href="12-Lefse.html#cb36-1" aria-hidden="true" tabindex="-1"></a><span class="ex">lefse-format_input.py</span> all_num.lefse.bracken all_num.lefse <span class="at">-c</span> 1 <span class="at">-u</span> 2 <span class="at">-o</span> 1000000</span></code></pre></div>
+<div class="sourceCode" id="cb37"><pre class="sourceCode bash"><code class="sourceCode bash"><span id="cb37-1"><a href="12-Lefse.html#cb37-1" aria-hidden="true" tabindex="-1"></a><span class="ex">lefse-format_input.py</span> all_num.lefse.bracken all_num.lefse <span class="at">-c</span> 1 <span class="at">-u</span> 2 <span class="at">-o</span> 1000000</span></code></pre></div>
 <ul>
 <li><code>all_num.lefse.bracken</code> : Input <code>Bracken</code> file.</li>
 <li><code>all_num.lefse</code> : Output file formatted for the run_lefse command, which we will soon run.</li>
@@ -333,7 +334,7 @@ code span.wa { color: #60a0b0; font-weight: bold; font-style: italic; } /* Warni
 <h2><span class="header-section-number">12.4</span> LEfSe: run<a href="12-Lefse.html#lefse-run" class="anchor-section" aria-label="Anchor link to header"></a></h2>
 <p><img src="figures/enter_key.png" width="10%" style="display: block; margin: auto;" /></p>
 <p>Now to run <code>LEfSe.</code> All we need to do is run the command with the formatted input and provide an output file name.</p>
-<div class="sourceCode" id="cb37"><pre class="sourceCode bash"><code class="sourceCode bash"><span id="cb37-1"><a href="12-Lefse.html#cb37-1" aria-hidden="true" tabindex="-1"></a><span class="ex">run_lefse.py</span> all_num.lefse all_num.lefse.out</span></code></pre></div>
+<div class="sourceCode" id="cb38"><pre class="sourceCode bash"><code class="sourceCode bash"><span id="cb38-1"><a href="12-Lefse.html#cb38-1" aria-hidden="true" tabindex="-1"></a><span class="ex">run_lefse.py</span> all_num.lefse all_num.lefse.out</span></code></pre></div>
 <p>The output file is a tab-delimited file which contains a row for each species. Biomarkers will have the five columns below whilst non-biomarkers will have the first two followed by a "-" .</p>
 <ul>
 <li><strong>Biomarker name</strong></li>
@@ -348,7 +349,7 @@ code span.wa { color: #60a0b0; font-weight: bold; font-style: italic; } /* Warni
 <h2><span class="header-section-number">12.5</span> LEfSe: visualisation<a href="12-Lefse.html#lefse-visualisation" class="anchor-section" aria-label="Anchor link to header"></a></h2>
 <p><img src="figures/bar_chart_horizontal.png" width="10%" style="display: block; margin: auto;" /></p>
 <p>Next we can visualise the output.</p>
-<div class="sourceCode" id="cb38"><pre class="sourceCode bash"><code class="sourceCode bash"><span id="cb38-1"><a href="12-Lefse.html#cb38-1" aria-hidden="true" tabindex="-1"></a><span class="ex">lefse-plot_res.py</span> <span class="at">--dpi</span> 200 <span class="at">--format</span> png all_num.lefse.out biomarkers.png</span></code></pre></div>
+<div class="sourceCode" id="cb39"><pre class="sourceCode bash"><code class="sourceCode bash"><span id="cb39-1"><a href="12-Lefse.html#cb39-1" aria-hidden="true" tabindex="-1"></a><span class="ex">lefse-plot_res.py</span> <span class="at">--dpi</span> 200 <span class="at">--format</span> png all_num.lefse.out biomarkers.png</span></code></pre></div>
 <ul>
 <li><code>--dpi 200</code> : Dots per inch. This refers to the resolution of the output image. Normally publications want 300 dpi. We’ve chosen 200 as it is good quality and we will not be publishing these results.</li>
 <li><code>--format png</code> : Format of output file. png is a commonly used file format for images.</li>
@@ -356,7 +357,7 @@ code span.wa { color: #60a0b0; font-weight: bold; font-style: italic; } /* Warni
 <li><code>biomarkers.png</code> : Plot showing the LDA scores of the species detected as biomarkers. Colouring shows which class (K or W) the species is found in higher abundance.</li>
 </ul>
 <p>Look at the figure with the program <code>okular</code>:</p>
-<div class="sourceCode" id="cb39"><pre class="sourceCode bash"><code class="sourceCode bash"><span id="cb39-1"><a href="12-Lefse.html#cb39-1" aria-hidden="true" tabindex="-1"></a><span class="ex">okular</span> biomarkers.png</span></code></pre></div>
+<div class="sourceCode" id="cb40"><pre class="sourceCode bash"><code class="sourceCode bash"><span id="cb40-1"><a href="12-Lefse.html#cb40-1" aria-hidden="true" tabindex="-1"></a><span class="ex">okular</span> biomarkers.png</span></code></pre></div>
 <p><strong>Questions</strong>:</p>
 <ul>
 <li>Which species causes the biggest effect in the W class and in the K class?</li>

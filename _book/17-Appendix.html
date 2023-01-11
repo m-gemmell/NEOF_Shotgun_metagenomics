@@ -195,8 +195,9 @@ code span.wa { color: #60a0b0; font-weight: bold; font-style: italic; } /* Warni
 <ul>
 <li class="chapter" data-level="11.0.1" data-path="11-Bracken.html"><a href="11-Bracken.html#bracken-run"><i class="fa fa-check"></i><b>11.0.1</b> Bracken: run</a></li>
 <li class="chapter" data-level="11.1" data-path="11-Bracken.html"><a href="11-Bracken.html#bracken-output"><i class="fa fa-check"></i><b>11.1</b> Bracken: output</a></li>
-<li class="chapter" data-level="11.2" data-path="11-Bracken.html"><a href="11-Bracken.html#bracken-merging-output"><i class="fa fa-check"></i><b>11.2</b> Bracken: merging output</a></li>
-<li class="chapter" data-level="11.3" data-path="11-Bracken.html"><a href="11-Bracken.html#bracken-extracting-output"><i class="fa fa-check"></i><b>11.3</b> Bracken: extracting output</a></li>
+<li class="chapter" data-level="11.2" data-path="11-Bracken.html"><a href="11-Bracken.html#bracken-mcqs"><i class="fa fa-check"></i><b>11.2</b> Bracken: MCQs</a></li>
+<li class="chapter" data-level="11.3" data-path="11-Bracken.html"><a href="11-Bracken.html#bracken-merging-output"><i class="fa fa-check"></i><b>11.3</b> Bracken: merging output</a></li>
+<li class="chapter" data-level="11.4" data-path="11-Bracken.html"><a href="11-Bracken.html#bracken-extracting-output"><i class="fa fa-check"></i><b>11.4</b> Bracken: extracting output</a></li>
 </ul></li>
 <li class="chapter" data-level="12" data-path="12-Lefse.html"><a href="12-Lefse.html"><i class="fa fa-check"></i><b>12</b> LEfSe biomarker detection</a>
 <ul>
@@ -351,12 +352,12 @@ _ Methods for Metagenomic data visualisation and analysis</li>
 <div id="obtaining-read-data" class="section level1 hasAnchor" number="19">
 <h1><span class="header-section-number">C</span> Obtaining Read Data<a href="17-Appendix.html#obtaining-read-data" class="anchor-section" aria-label="Anchor link to header"></a></h1>
 <p>The following commands can be used to obtain the sequence data used in this practical, directly from the EBI metagenomics site. It is worth noting that these are the full set of data, not like the miniaturised version you have used in the tutorial.</p>
-<div class="sourceCode" id="cb103"><pre class="sourceCode bash"><code class="sourceCode bash"><span id="cb103-1"><a href="17-Appendix.html#cb103-1" aria-hidden="true" tabindex="-1"></a><span class="fu">wget</span> <span class="at">-O</span> K1_R1.fastq.gz ftp://ftp.sra.ebi.ac.uk/vol1/fastq/ERR505/ERR505102/ERR505102_1.fastq.gz</span>
-<span id="cb103-2"><a href="17-Appendix.html#cb103-2" aria-hidden="true" tabindex="-1"></a><span class="fu">wget</span> <span class="at">-O</span> K1_R2.fastq.gz ftp://ftp.sra.ebi.ac.uk/vol1/fastq/ERR505/ERR505102/ERR505102_2.fastq.gz</span>
-<span id="cb103-3"><a href="17-Appendix.html#cb103-3" aria-hidden="true" tabindex="-1"></a><span class="fu">wget</span> <span class="at">-O</span> K2_R1.fastq.gz ftp://ftp.sra.ebi.ac.uk/vol1/fastq/ERR505/ERR505104/ERR505104_1.fastq.gz</span>
-<span id="cb103-4"><a href="17-Appendix.html#cb103-4" aria-hidden="true" tabindex="-1"></a><span class="fu">wget</span> <span class="at">-O</span> K2_R2.fastq.gz ftp://ftp.sra.ebi.ac.uk/vol1/fastq/ERR505/ERR505104/ERR505104_2.fastq.gz</span>
-<span id="cb103-5"><a href="17-Appendix.html#cb103-5" aria-hidden="true" tabindex="-1"></a><span class="fu">wget</span> <span class="at">-O</span> W1_R1.fastq.gz ftp://ftp.sra.ebi.ac.uk/vol1/fastq/ERR505/ERR505090/ERR505090_1.fastq.gz</span>
-<span id="cb103-6"><a href="17-Appendix.html#cb103-6" aria-hidden="true" tabindex="-1"></a><span class="fu">wget</span> <span class="at">-O</span> W1_R2.fastq.gz ftp://ftp.sra.ebi.ac.uk/vol1/fastq/ERR505/ERR505090/ERR505090_2.fastq.gz</span></code></pre></div>
+<div class="sourceCode" id="cb104"><pre class="sourceCode bash"><code class="sourceCode bash"><span id="cb104-1"><a href="17-Appendix.html#cb104-1" aria-hidden="true" tabindex="-1"></a><span class="fu">wget</span> <span class="at">-O</span> K1_R1.fastq.gz ftp://ftp.sra.ebi.ac.uk/vol1/fastq/ERR505/ERR505102/ERR505102_1.fastq.gz</span>
+<span id="cb104-2"><a href="17-Appendix.html#cb104-2" aria-hidden="true" tabindex="-1"></a><span class="fu">wget</span> <span class="at">-O</span> K1_R2.fastq.gz ftp://ftp.sra.ebi.ac.uk/vol1/fastq/ERR505/ERR505102/ERR505102_2.fastq.gz</span>
+<span id="cb104-3"><a href="17-Appendix.html#cb104-3" aria-hidden="true" tabindex="-1"></a><span class="fu">wget</span> <span class="at">-O</span> K2_R1.fastq.gz ftp://ftp.sra.ebi.ac.uk/vol1/fastq/ERR505/ERR505104/ERR505104_1.fastq.gz</span>
+<span id="cb104-4"><a href="17-Appendix.html#cb104-4" aria-hidden="true" tabindex="-1"></a><span class="fu">wget</span> <span class="at">-O</span> K2_R2.fastq.gz ftp://ftp.sra.ebi.ac.uk/vol1/fastq/ERR505/ERR505104/ERR505104_2.fastq.gz</span>
+<span id="cb104-5"><a href="17-Appendix.html#cb104-5" aria-hidden="true" tabindex="-1"></a><span class="fu">wget</span> <span class="at">-O</span> W1_R1.fastq.gz ftp://ftp.sra.ebi.ac.uk/vol1/fastq/ERR505/ERR505090/ERR505090_1.fastq.gz</span>
+<span id="cb104-6"><a href="17-Appendix.html#cb104-6" aria-hidden="true" tabindex="-1"></a><span class="fu">wget</span> <span class="at">-O</span> W1_R2.fastq.gz ftp://ftp.sra.ebi.ac.uk/vol1/fastq/ERR505/ERR505090/ERR505090_2.fastq.gz</span></code></pre></div>
 
 </div>
 <script>

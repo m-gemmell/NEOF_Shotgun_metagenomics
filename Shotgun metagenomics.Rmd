@@ -978,7 +978,7 @@ knitr::include_graphics(path = "figures/bracken.png", auto_pdf = TRUE)
 
 ### Bracken: run
 ```{r, fig.align = 'center',out.width= '10%', echo=FALSE }
-knitr::include_graphics(path = "figures/enter_key.png", auto_pdf = TRUE)
+knitr::include_graphics(path = "figures/play_green.png", auto_pdf = TRUE)
 ``` 
 
 Just like with `Krona` we can use the `Kraken2` report files to run bracken.
@@ -988,18 +988,21 @@ bracken -d $KRAKEN2_DB_PATH/minikraken2_v1_8GB \
 -i K1.kreport2 -o K1.bracken -r 100 -l S -t 5
 ```
 
-Let's look at what those command line options do:
+#### Parameters {-}
+```{r, fig.align = 'center',out.width= '10%', echo=FALSE }
+knitr::include_graphics(path = "figures/parameter_green.png", auto_pdf = TRUE)
+```
 
 - `-d` : Specifies the `Kraken2` database that was used for taxonomic classification. In this case bracken requires the variable `$KRAKEN_DB_PATH` so the option is provided the full path to the kraken database. For clarity try the command `ls $KRAKEN2_DB_PATH/minikraken2_v1_8GB`. 
 - `-i` : The `Kraken2` report file, this will be used as the input.
 - `-o` : The output `Bracken` file. Information about its contents is below.
-- `-r 100`: This is the ideal length of the reads that were used in the `Kraken2` classification. It is recommended that the initial read length of the sequencing data is used. We are using 100 here as we used a paired library of 100 bp reads.
+- `-r 100`: This is the ideal length of the reads that were used in the `Kraken2` classification. It is recommended that the initial read length of the sequencing data is used. We are using 100 here as we used a paired library of 100bp*2 reads.
 - `-l S`: This specifies the taxonomic level/rank of the `Bracken` output. In this case `S` is equal to species with the other options being `D`, `P`, `C`, `O`,`F` and `G`.
 - `-t 5`: This specifies the minimum number of reads required for a classification at the specified rank. Any classifications with fewer reads than the specified threshold will not receive additional reads from higher taxonomy levels when distributing reads for abundance estimation. Five has been chosen here for this example data but in real datasets you may want to increase this number (default is 10).
 
 ## Bracken: output
 ```{r, fig.align = 'center',out.width= '10%', echo=FALSE }
-knitr::include_graphics(path = "figures/output.png", auto_pdf = TRUE)
+knitr::include_graphics(path = "figures/output_file_green.png", auto_pdf = TRUE)
 ``` 
 
 The output file of `Bracken` contains the following columns:
@@ -1012,16 +1015,47 @@ The output file of `Bracken` contains the following columns:
 6. __Total reads after abundance reestimation__: Number from field 4 and 5 summed. This is the field that will be used for downstream analysis.
 7. __Fraction of total reads__: Relative abundance of the taxonomy.
 
-Use `less` or `vim` to look at the bracken output.
-
 __Task__: Repeat the above commands for K2 and W1
+
+`r hide("K2 & W1 Bracken commands")`
+```{bash eval=FALSE}
+#K2
+bracken -d $KRAKEN2_DB_PATH/minikraken2_v1_8GB \
+-i K2.kreport2 -o K2.bracken -r 100 -l S -t 5
+#W1
+bracken -d $KRAKEN2_DB_PATH/minikraken2_v1_8GB \
+-i W1.kreport2 -o W1.bracken -r 100 -l S -t 5
+```
+`r unhide()`
+
+## Bracken: MCQs
+```{r, fig.align = 'center',out.width= '10%', echo=FALSE }
+knitr::include_graphics(path = "figures/question_bubble_green.png", auto_pdf = TRUE)
+```
+
+Viewing the Bracken output files with your favourite text viewer (`less`, `nano`, `vim`, etc.), attempt the below MCQs.
+
+```{r, echo = FALSE}
+opts_p <- c("__0.00011__",answer="__16__", "__702__")
+```
+1. In __K1__, how many total reads after abundance reestimation are there for __Prevotella fusca__? `r longmcq(opts_p)`
+
+```{r, echo = FALSE}
+opts_p <- c("__0.00011__","__16__",answer="__702__")
+```
+2. In __K2__, how many reads after abundance reestimation were added for __Bacteroides caccae__? `r longmcq(opts_p)`
+
+```{r, echo = FALSE}
+opts_p <- c(answer="__0.00011__","__16__", "__702__")
+```
+3. In __W1__, what is the fraction of total reads (after abundance reestimation) for __Tannerella forsythia__? `r longmcq(opts_p)`
 
 ## Bracken: merging output
 ```{r, fig.align = 'center',out.width= '10%', echo=FALSE }
 knitr::include_graphics(path = "figures/merge.png", auto_pdf = TRUE)
 ``` 
 
-To make full use of `Bracken` output, it is best to merge the output into one table. However before we do this we’ll copy the `Bracken` output of other samples that have been generated prior to the workshop. These are all either Korean or Western Diet samples.
+To make full use of `Bracken` output, it is best to merge the output into one table. Before we do this we’ll copy the `Bracken` output of other samples that have been generated prior to the workshop. These are all either Korean or Western Diet samples.
 
 ```{bash eval=FALSE}
 cp /pub39/tea/nsc006/NEOF/Shotgun_metagenomics/bracken/* .
@@ -1039,7 +1073,7 @@ This output file contains the first three columns:
 - __taxonomy_id__ = Taxonomy id number.
 - __taxonomy_lvl__ = A single string indicating the taxonomy level of the group. ('D','P','C','O','F','G','S').
 
-Following these columns are the following two columns for each sample.
+After these columns are the following two columns for each sample.
 
 - `${SampleName}.bracken_num`: The number of reads after abundance reestimation 
 - `${SampleName}.bracken_frac`: Relative abundance of the group in the sample
@@ -1049,7 +1083,7 @@ Following these columns are the following two columns for each sample.
 knitr::include_graphics(path = "figures/exctractor.png", auto_pdf = TRUE)
 ``` 
 
-We want a file with only the first column (organism name) and the `bracken_num` columns for each sample. To carry this out we  first create a sequence of numbers that will match the `bracken_num` column numbers. These start at column 4 and are every even numbered column after this. We will use `seq` to create every `2` numbers from the numbers `4` to `50` with commas (`,`) as separators (`-s`). 
+We want a file with only the first column (organism name) and the `bracken_num` columns for each sample. To carry this out we  first create a sequence of numbers that will match the `bracken_num` column numbers. These start at column 4 and are every even numbered column after this. We will use `seq` to create a sequence of numbers starting at `4` and including every second (`2`) number up to and including `50` with commas (`,`) as separators (`-s`). 
 
 __Note__: The number 50 is chosen as 3 (first three info columns) + 24*2 (24 samples with 2 columns each) = 50.
 

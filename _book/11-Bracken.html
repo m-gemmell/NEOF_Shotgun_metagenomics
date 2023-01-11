@@ -195,8 +195,9 @@ code span.wa { color: #60a0b0; font-weight: bold; font-style: italic; } /* Warni
 <ul>
 <li class="chapter" data-level="11.0.1" data-path="11-Bracken.html"><a href="11-Bracken.html#bracken-run"><i class="fa fa-check"></i><b>11.0.1</b> Bracken: run</a></li>
 <li class="chapter" data-level="11.1" data-path="11-Bracken.html"><a href="11-Bracken.html#bracken-output"><i class="fa fa-check"></i><b>11.1</b> Bracken: output</a></li>
-<li class="chapter" data-level="11.2" data-path="11-Bracken.html"><a href="11-Bracken.html#bracken-merging-output"><i class="fa fa-check"></i><b>11.2</b> Bracken: merging output</a></li>
-<li class="chapter" data-level="11.3" data-path="11-Bracken.html"><a href="11-Bracken.html#bracken-extracting-output"><i class="fa fa-check"></i><b>11.3</b> Bracken: extracting output</a></li>
+<li class="chapter" data-level="11.2" data-path="11-Bracken.html"><a href="11-Bracken.html#bracken-mcqs"><i class="fa fa-check"></i><b>11.2</b> Bracken: MCQs</a></li>
+<li class="chapter" data-level="11.3" data-path="11-Bracken.html"><a href="11-Bracken.html#bracken-merging-output"><i class="fa fa-check"></i><b>11.3</b> Bracken: merging output</a></li>
+<li class="chapter" data-level="11.4" data-path="11-Bracken.html"><a href="11-Bracken.html#bracken-extracting-output"><i class="fa fa-check"></i><b>11.4</b> Bracken: extracting output</a></li>
 </ul></li>
 <li class="chapter" data-level="12" data-path="12-Lefse.html"><a href="12-Lefse.html"><i class="fa fa-check"></i><b>12</b> LEfSe biomarker detection</a>
 <ul>
@@ -297,23 +298,26 @@ code span.wa { color: #60a0b0; font-weight: bold; font-style: italic; } /* Warni
 <p><code>Bracken</code> (Bayesian Reestimation of Abundance with KrakEN) uses taxonomy labels assigned by <code>Kraken2</code> to compute estimated abundances of species in a metagenomic sample.</p>
 <div id="bracken-run" class="section level3 hasAnchor" number="11.0.1">
 <h3><span class="header-section-number">11.0.1</span> Bracken: run<a href="11-Bracken.html#bracken-run" class="anchor-section" aria-label="Anchor link to header"></a></h3>
-<p><img src="figures/enter_key.png" width="10%" style="display: block; margin: auto;" /></p>
+<p><img src="figures/play_green.png" width="10%" style="display: block; margin: auto;" /></p>
 <p>Just like with <code>Krona</code> we can use the <code>Kraken2</code> report files to run bracken.</p>
 <div class="sourceCode" id="cb29"><pre class="sourceCode bash"><code class="sourceCode bash"><span id="cb29-1"><a href="11-Bracken.html#cb29-1" aria-hidden="true" tabindex="-1"></a><span class="ex">bracken</span> <span class="at">-d</span> <span class="va">$KRAKEN2_DB_PATH</span>/minikraken2_v1_8GB <span class="dt">\</span></span>
 <span id="cb29-2"><a href="11-Bracken.html#cb29-2" aria-hidden="true" tabindex="-1"></a>-i K1.kreport2 <span class="at">-o</span> K1.bracken <span class="at">-r</span> 100 <span class="at">-l</span> S <span class="at">-t</span> 5</span></code></pre></div>
-<p>Let's look at what those command line options do:</p>
+<div id="parameters-4" class="section level4 unnumbered hasAnchor">
+<h4>Parameters<a href="11-Bracken.html#parameters-4" class="anchor-section" aria-label="Anchor link to header"></a></h4>
+<p><img src="figures/parameter_green.png" width="10%" style="display: block; margin: auto;" /></p>
 <ul>
 <li><code>-d</code> : Specifies the <code>Kraken2</code> database that was used for taxonomic classification. In this case bracken requires the variable <code>$KRAKEN_DB_PATH</code> so the option is provided the full path to the kraken database. For clarity try the command <code>ls $KRAKEN2_DB_PATH/minikraken2_v1_8GB</code>.</li>
 <li><code>-i</code> : The <code>Kraken2</code> report file, this will be used as the input.</li>
 <li><code>-o</code> : The output <code>Bracken</code> file. Information about its contents is below.</li>
-<li><code>-r 100</code>: This is the ideal length of the reads that were used in the <code>Kraken2</code> classification. It is recommended that the initial read length of the sequencing data is used. We are using 100 here as we used a paired library of 100 bp reads.</li>
+<li><code>-r 100</code>: This is the ideal length of the reads that were used in the <code>Kraken2</code> classification. It is recommended that the initial read length of the sequencing data is used. We are using 100 here as we used a paired library of 100bp*2 reads.</li>
 <li><code>-l S</code>: This specifies the taxonomic level/rank of the <code>Bracken</code> output. In this case <code>S</code> is equal to species with the other options being <code>D</code>, <code>P</code>, <code>C</code>, <code>O</code>,<code>F</code> and <code>G</code>.</li>
 <li><code>-t 5</code>: This specifies the minimum number of reads required for a classification at the specified rank. Any classifications with fewer reads than the specified threshold will not receive additional reads from higher taxonomy levels when distributing reads for abundance estimation. Five has been chosen here for this example data but in real datasets you may want to increase this number (default is 10).</li>
 </ul>
 </div>
+</div>
 <div id="bracken-output" class="section level2 hasAnchor" number="11.1">
 <h2><span class="header-section-number">11.1</span> Bracken: output<a href="11-Bracken.html#bracken-output" class="anchor-section" aria-label="Anchor link to header"></a></h2>
-<p><img src="figures/output.png" width="10%" style="display: block; margin: auto;" /></p>
+<p><img src="figures/output_file_green.png" width="10%" style="display: block; margin: auto;" /></p>
 <p>The output file of <code>Bracken</code> contains the following columns:</p>
 <ol style="list-style-type: decimal">
 <li><strong>Name</strong>: Name of taxonomy at the specified taxonomic level.</li>
@@ -324,40 +328,69 @@ code span.wa { color: #60a0b0; font-weight: bold; font-style: italic; } /* Warni
 <li><strong>Total reads after abundance reestimation</strong>: Number from field 4 and 5 summed. This is the field that will be used for downstream analysis.</li>
 <li><strong>Fraction of total reads</strong>: Relative abundance of the taxonomy.</li>
 </ol>
-<p>Use <code>less</code> or <code>vim</code> to look at the bracken output.</p>
 <p><strong>Task</strong>: Repeat the above commands for K2 and W1</p>
+<div class="webex-solution">
+<button>
+K2 &amp; W1 Bracken commands
+</button>
+<div class="sourceCode" id="cb30"><pre class="sourceCode bash"><code class="sourceCode bash"><span id="cb30-1"><a href="11-Bracken.html#cb30-1" aria-hidden="true" tabindex="-1"></a><span class="co">#K2</span></span>
+<span id="cb30-2"><a href="11-Bracken.html#cb30-2" aria-hidden="true" tabindex="-1"></a><span class="ex">bracken</span> <span class="at">-d</span> <span class="va">$KRAKEN2_DB_PATH</span>/minikraken2_v1_8GB <span class="dt">\</span></span>
+<span id="cb30-3"><a href="11-Bracken.html#cb30-3" aria-hidden="true" tabindex="-1"></a>-i K2.kreport2 <span class="at">-o</span> K2.bracken <span class="at">-r</span> 100 <span class="at">-l</span> S <span class="at">-t</span> 5</span>
+<span id="cb30-4"><a href="11-Bracken.html#cb30-4" aria-hidden="true" tabindex="-1"></a><span class="co">#W1</span></span>
+<span id="cb30-5"><a href="11-Bracken.html#cb30-5" aria-hidden="true" tabindex="-1"></a><span class="ex">bracken</span> <span class="at">-d</span> <span class="va">$KRAKEN2_DB_PATH</span>/minikraken2_v1_8GB <span class="dt">\</span></span>
+<span id="cb30-6"><a href="11-Bracken.html#cb30-6" aria-hidden="true" tabindex="-1"></a>-i W1.kreport2 <span class="at">-o</span> W1.bracken <span class="at">-r</span> 100 <span class="at">-l</span> S <span class="at">-t</span> 5</span></code></pre></div>
 </div>
-<div id="bracken-merging-output" class="section level2 hasAnchor" number="11.2">
-<h2><span class="header-section-number">11.2</span> Bracken: merging output<a href="11-Bracken.html#bracken-merging-output" class="anchor-section" aria-label="Anchor link to header"></a></h2>
+</div>
+<div id="bracken-mcqs" class="section level2 hasAnchor" number="11.2">
+<h2><span class="header-section-number">11.2</span> Bracken: MCQs<a href="11-Bracken.html#bracken-mcqs" class="anchor-section" aria-label="Anchor link to header"></a></h2>
+<p><img src="figures/question_bubble_green.png" width="10%" style="display: block; margin: auto;" /></p>
+<p>Viewing the Bracken output files with your favourite text viewer (<code>less</code>, <code>nano</code>, <code>vim</code>, etc.), attempt the below MCQs.</p>
+<ol style="list-style-type: decimal">
+<li>In <strong>K1</strong>, how many total reads after abundance reestimation are there for <strong>Prevotella fusca</strong>?
+<div id="radio_HUVUMWZLFR" class="webex-radiogroup">
+<label><input type="radio" autocomplete="off" name="radio_HUVUMWZLFR" value=""></input> <span><strong>0.00011</strong></span></label><label><input type="radio" autocomplete="off" name="radio_HUVUMWZLFR" value="answer"></input> <span><strong>16</strong></span></label><label><input type="radio" autocomplete="off" name="radio_HUVUMWZLFR" value=""></input> <span><strong>702</strong></span></label>
+</div></li>
+<li>In <strong>K2</strong>, how many reads after abundance reestimation were added for <strong>Bacteroides caccae</strong>?
+<div id="radio_KUQWGKTVVY" class="webex-radiogroup">
+<label><input type="radio" autocomplete="off" name="radio_KUQWGKTVVY" value=""></input> <span><strong>0.00011</strong></span></label><label><input type="radio" autocomplete="off" name="radio_KUQWGKTVVY" value=""></input> <span><strong>16</strong></span></label><label><input type="radio" autocomplete="off" name="radio_KUQWGKTVVY" value="answer"></input> <span><strong>702</strong></span></label>
+</div></li>
+<li>In <strong>W1</strong>, what is the fraction of total reads (after abundance reestimation) for <strong>Tannerella forsythia</strong>?
+<div id="radio_UBQYKNENMB" class="webex-radiogroup">
+<label><input type="radio" autocomplete="off" name="radio_UBQYKNENMB" value="answer"></input> <span><strong>0.00011</strong></span></label><label><input type="radio" autocomplete="off" name="radio_UBQYKNENMB" value=""></input> <span><strong>16</strong></span></label><label><input type="radio" autocomplete="off" name="radio_UBQYKNENMB" value=""></input> <span><strong>702</strong></span></label>
+</div></li>
+</ol>
+</div>
+<div id="bracken-merging-output" class="section level2 hasAnchor" number="11.3">
+<h2><span class="header-section-number">11.3</span> Bracken: merging output<a href="11-Bracken.html#bracken-merging-output" class="anchor-section" aria-label="Anchor link to header"></a></h2>
 <p><img src="figures/merge.png" width="10%" style="display: block; margin: auto;" /></p>
-<p>To make full use of <code>Bracken</code> output, it is best to merge the output into one table. However before we do this we’ll copy the <code>Bracken</code> output of other samples that have been generated prior to the workshop. These are all either Korean or Western Diet samples.</p>
-<div class="sourceCode" id="cb30"><pre class="sourceCode bash"><code class="sourceCode bash"><span id="cb30-1"><a href="11-Bracken.html#cb30-1" aria-hidden="true" tabindex="-1"></a><span class="fu">cp</span> /pub39/tea/nsc006/NEOF/Shotgun_metagenomics/bracken/<span class="pp">*</span> .</span></code></pre></div>
+<p>To make full use of <code>Bracken</code> output, it is best to merge the output into one table. Before we do this we’ll copy the <code>Bracken</code> output of other samples that have been generated prior to the workshop. These are all either Korean or Western Diet samples.</p>
+<div class="sourceCode" id="cb31"><pre class="sourceCode bash"><code class="sourceCode bash"><span id="cb31-1"><a href="11-Bracken.html#cb31-1" aria-hidden="true" tabindex="-1"></a><span class="fu">cp</span> /pub39/tea/nsc006/NEOF/Shotgun_metagenomics/bracken/<span class="pp">*</span> .</span></code></pre></div>
 <p>Now to merge all the K and W <code>Bracken</code> files.</p>
-<div class="sourceCode" id="cb31"><pre class="sourceCode bash"><code class="sourceCode bash"><span id="cb31-1"><a href="11-Bracken.html#cb31-1" aria-hidden="true" tabindex="-1"></a><span class="ex">combine_bracken_outputs.py</span> <span class="at">--files</span> [KW]<span class="pp">*</span>.bracken <span class="at">-o</span> all.bracken</span></code></pre></div>
+<div class="sourceCode" id="cb32"><pre class="sourceCode bash"><code class="sourceCode bash"><span id="cb32-1"><a href="11-Bracken.html#cb32-1" aria-hidden="true" tabindex="-1"></a><span class="ex">combine_bracken_outputs.py</span> <span class="at">--files</span> [KW]<span class="pp">*</span>.bracken <span class="at">-o</span> all.bracken</span></code></pre></div>
 <p>This output file contains the first three columns:</p>
 <ul>
 <li><strong>name</strong> = Organism group name. This will be based on the TAX_LVL chosen in the <code>Bracken</code> command and will only show the one level.</li>
 <li><strong>taxonomy_id</strong> = Taxonomy id number.</li>
 <li><strong>taxonomy_lvl</strong> = A single string indicating the taxonomy level of the group. ('D','P','C','O','F','G','S').</li>
 </ul>
-<p>Following these columns are the following two columns for each sample.</p>
+<p>After these columns are the following two columns for each sample.</p>
 <ul>
 <li><code>${SampleName}.bracken_num</code>: The number of reads after abundance reestimation</li>
 <li><code>${SampleName}.bracken_frac</code>: Relative abundance of the group in the sample</li>
 </ul>
 </div>
-<div id="bracken-extracting-output" class="section level2 hasAnchor" number="11.3">
-<h2><span class="header-section-number">11.3</span> Bracken: extracting output<a href="11-Bracken.html#bracken-extracting-output" class="anchor-section" aria-label="Anchor link to header"></a></h2>
+<div id="bracken-extracting-output" class="section level2 hasAnchor" number="11.4">
+<h2><span class="header-section-number">11.4</span> Bracken: extracting output<a href="11-Bracken.html#bracken-extracting-output" class="anchor-section" aria-label="Anchor link to header"></a></h2>
 <p><img src="figures/exctractor.png" width="10%" style="display: block; margin: auto;" /></p>
-<p>We want a file with only the first column (organism name) and the <code>bracken_num</code> columns for each sample. To carry this out we first create a sequence of numbers that will match the <code>bracken_num</code> column numbers. These start at column 4 and are every even numbered column after this. We will use <code>seq</code> to create every <code>2</code> numbers from the numbers <code>4</code> to <code>50</code> with commas (<code>,</code>) as separators (<code>-s</code>).</p>
+<p>We want a file with only the first column (organism name) and the <code>bracken_num</code> columns for each sample. To carry this out we first create a sequence of numbers that will match the <code>bracken_num</code> column numbers. These start at column 4 and are every even numbered column after this. We will use <code>seq</code> to create a sequence of numbers starting at <code>4</code> and including every second (<code>2</code>) number up to and including <code>50</code> with commas (<code>,</code>) as separators (<code>-s</code>).</p>
 <p><strong>Note</strong>: The number 50 is chosen as 3 (first three info columns) + 24*2 (24 samples with 2 columns each) = 50.</p>
-<div class="sourceCode" id="cb32"><pre class="sourceCode bash"><code class="sourceCode bash"><span id="cb32-1"><a href="11-Bracken.html#cb32-1" aria-hidden="true" tabindex="-1"></a><span class="co">#Try out the seq command to see its output</span></span>
-<span id="cb32-2"><a href="11-Bracken.html#cb32-2" aria-hidden="true" tabindex="-1"></a><span class="fu">seq</span> <span class="at">-s</span> , 4 2 50</span>
-<span id="cb32-3"><a href="11-Bracken.html#cb32-3" aria-hidden="true" tabindex="-1"></a><span class="co">#Create variable</span></span>
-<span id="cb32-4"><a href="11-Bracken.html#cb32-4" aria-hidden="true" tabindex="-1"></a><span class="va">bracken_num_columns</span><span class="op">=</span><span class="va">$(</span><span class="fu">seq</span> <span class="at">-s</span> , 4 2 50<span class="va">)</span></span>
-<span id="cb32-5"><a href="11-Bracken.html#cb32-5" aria-hidden="true" tabindex="-1"></a><span class="bu">echo</span> <span class="va">$bracken_num_columns</span></span></code></pre></div>
+<div class="sourceCode" id="cb33"><pre class="sourceCode bash"><code class="sourceCode bash"><span id="cb33-1"><a href="11-Bracken.html#cb33-1" aria-hidden="true" tabindex="-1"></a><span class="co">#Try out the seq command to see its output</span></span>
+<span id="cb33-2"><a href="11-Bracken.html#cb33-2" aria-hidden="true" tabindex="-1"></a><span class="fu">seq</span> <span class="at">-s</span> , 4 2 50</span>
+<span id="cb33-3"><a href="11-Bracken.html#cb33-3" aria-hidden="true" tabindex="-1"></a><span class="co">#Create variable</span></span>
+<span id="cb33-4"><a href="11-Bracken.html#cb33-4" aria-hidden="true" tabindex="-1"></a><span class="va">bracken_num_columns</span><span class="op">=</span><span class="va">$(</span><span class="fu">seq</span> <span class="at">-s</span> , 4 2 50<span class="va">)</span></span>
+<span id="cb33-5"><a href="11-Bracken.html#cb33-5" aria-hidden="true" tabindex="-1"></a><span class="bu">echo</span> <span class="va">$bracken_num_columns</span></span></code></pre></div>
 <p>Now to use the variable to extract the <code>bracken_num</code> columns plus the first column (species names).</p>
-<div class="sourceCode" id="cb33"><pre class="sourceCode bash"><code class="sourceCode bash"><span id="cb33-1"><a href="11-Bracken.html#cb33-1" aria-hidden="true" tabindex="-1"></a><span class="fu">cat</span> all.bracken <span class="kw">|</span> <span class="fu">cut</span> <span class="at">-f</span> 1,<span class="va">$bracken_num_columns</span> <span class="op">&gt;</span> all_num.bracken</span></code></pre></div>
+<div class="sourceCode" id="cb34"><pre class="sourceCode bash"><code class="sourceCode bash"><span id="cb34-1"><a href="11-Bracken.html#cb34-1" aria-hidden="true" tabindex="-1"></a><span class="fu">cat</span> all.bracken <span class="kw">|</span> <span class="fu">cut</span> <span class="at">-f</span> 1,<span class="va">$bracken_num_columns</span> <span class="op">&gt;</span> all_num.bracken</span></code></pre></div>
 
 </div>
 </div>

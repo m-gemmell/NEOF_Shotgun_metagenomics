@@ -36,6 +36,7 @@ krona-mcqs
 bracken
 bracken-run
 bracken-output
+bracken-mcqs
 bracken-merging-output
 bracken-extracting-output
 lefse-biomarker-detection
