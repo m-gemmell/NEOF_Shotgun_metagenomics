@@ -1340,7 +1340,7 @@ knitr::include_graphics(path = "figures/humann3_workflow.png", auto_pdf = TRUE)
 knitr::include_graphics(path = "figures/humann2.png", auto_pdf = TRUE)
 ``` 
 
-First, we will carry out an example run of the software and briefly explore the output files. `HUMAnN` can take a long time to run so we will use a small amount of example data. Additionally, we will use a subset of the `HUMAnN` databases for the analysis but when running analysis on your own data you should use the full databases. information on installing `HUMAnN` and its databases can be found in its online [Home Page](https://huttenhower.sph.harvard.edu/humann/).
+First, we will carry out an example run of the software and briefly explore the output files. `HUMAnN` can take a long time to run so we will use a small amount of example data. Additionally, we will use a subset of the `HUMAnN` databases for the analysis but when running analysis on your own data you should use the full databases. information on installing `HUMAnN` and its databases can be found on its online [Home Page](https://huttenhower.sph.harvard.edu/humann/).
 
 ### HUMAnN: conda, directories, and files
 ```{r, fig.align = 'center',out.width= '10%', echo=FALSE }
@@ -1369,10 +1369,10 @@ cp /pub39/tea/nsc006/NEOF/Shotgun_metagenomics/humann/demo.fastq.gz .
 
 ### HUMAnN: run
 ```{r, fig.align = 'center',out.width= '10%', echo=FALSE }
-knitr::include_graphics(path = "figures/enter_key.png", auto_pdf = TRUE)
+knitr::include_graphics(path = "figures/play_orange.png", auto_pdf = TRUE)
 ``` 
 
-Run the `HUMAnN` pipline with our demo data:
+Run the `HUMAnN` pipeline with our demo data:
 
 ```{bash eval=FALSE}
 humann \
@@ -1387,7 +1387,7 @@ As the software runs you might notice that `HUMAnN` runs `MetaPhlAn`. The purpos
 
 ### HUMAnN: output
 ```{r, fig.align = 'center',out.width= '10%', echo=FALSE }
-knitr::include_graphics(path = "figures/output.png", auto_pdf = TRUE)
+knitr::include_graphics(path = "figures/output_file_orange.png", auto_pdf = TRUE)
 ``` 
 
 Once the run has completed, change into the newly created output directory and list the files that are present.
@@ -1458,7 +1458,7 @@ less K1_pathabundance.tsv
 There are a lot of pathways in the file. Quit out of the `less` viewer (`q`) and look at the entries for one specific pathway, COA-PWY-1 (a coenzyme A biosynthesis II pathway).
 
 ```{bash eval=FALSE}
-grep COA-PWY-1 K1_pathabundance.tsv
+grep COA-PWY-1 K1_pathabundance.tsv | less
 ```
 
 This shows 30 entries/lines with the top entry/line:
@@ -1473,7 +1473,7 @@ The other entries show the species stratification information (mentioned above) 
 
 shows the abundance of the pathway that is contributed by the species _Bacteroides dorei_ (1292.7711872228).
 
-__Note__: The species stratified pathway abundances may not equal the total community pathway abundance. Please see the this [forum post](https://forum.biobakery.org/t/humann3-pathway-abundance-table-pathway-sum-and-species-sum-different/1471) for details.
+__Note__: The species stratified pathway abundances may not equal the total community pathway abundance. Please see  this [forum post](https://forum.biobakery.org/t/humann3-pathway-abundance-table-pathway-sum-and-species-sum-different/1471) for details.
 
 With this information we will carry out some comparisons including biomarker detection to determine which pathways are differentially abundant between the Western diet and Korean diet samples.
 
@@ -1519,7 +1519,7 @@ We will use the file `diet_unstratified.tsv` for our downstream analysis.
 
 Before you move on feel free to inspect the output files with the `less` command.
 
-__Note__: You can use any of the three tables (unsplit table, unstratified table, or stratified table) in your own analysis. This depends on your question and data
+__Note__: You can use any of the three tables (unsplit table, unstratified table, or stratified table) in your own analysis. This depends on your question and data.
 
 ### HUMAnN: renormalising data {#humannrenormalise}
 ```{r, fig.align = 'center',out.width= '10%', echo=FALSE }
@@ -1528,7 +1528,7 @@ knitr::include_graphics(path = "figures/normalisation.png", auto_pdf = TRUE)
 
 The next step is to renormalise the data. Currently, all of the abundance values are only normalised within each sample (RPKs). However, they are not normalised between samples, and this is very important to do. For example, if we had sequenced two samples, A and B, and we obtained 5 million reads for sample A and 20 million reads for sample B, without normalisation, it might look that there was up to 4x as much functional activity in sample B! 
 
-To correct for this, we normalise the abundance values based on the number of reads in each sample. We will normalise to relative abundance where all abundances for each sample add up to 1.
+To correct for this, we normalise the abundance values based on the number of reads in each sample. We will normalise to relative abundance (`--units relab`) where all abundances for each sample add up to 1.
 
 Renormalisation command:
 
@@ -1574,6 +1574,13 @@ Next using your text editor of choice carry out the following changes on the fil
 - Remove the `# ` (including the one space after the `#`) from the start of the header so it starts as `Pathway`.
 - Add in the same metadata line as we did for [8.4.1](#kraken2_lefse_metadata) but this time below the header line, i.e. as the 2nd line (ensure you are using tabs instead of spaces).
 
+`r hide("Issues with creating file?")`
+If you are having issues with creating and editing the file `all_num.lefse.bracken` you can copy a pre-made version.
+```{bash, eval=FALSE}
+cp /pub39/tea/nsc006/Shotgun_metagenomics/lefse/diet_unstratified.relab.comp.tsv
+```
+`r unhide()`
+
 Now we can use the `hclust2` tool to create a heatmap of our pathway abundances.
 
 ```{bash eval=FALSE}
@@ -1587,7 +1594,7 @@ hclust2.py \
 
 __Note:__ You will get 2 `MatplotlibDeprecationWarnings`, these are normal and can be ignored. However, ensure these ar ethe only warnings/errors before continuing.
 
-The arguments for this command are:
+#### Parameters {-}
 
 - `-i`: The input table file.
 - `-o`: The output image file. The tool does not specify what types of image files you can use but `.png` is always a good image file format.
@@ -1599,6 +1606,8 @@ The arguments for this command are:
 - `--dpi`: The image resolution in dpi (dots per inch). 300 dpi is used for publication quality images.
 
 There are many more options that can be seen on the [hclust2 github](https://github.com/SegataLab/hclust2).
+
+#### Visualise {-}
 
 Now we can view the plot.
 
@@ -1612,10 +1621,24 @@ From this, we can see that there is a small amount of clustering caused by the d
 knitr::include_graphics(path = "figures/humann_heatmap.png", auto_pdf = TRUE)
 ```
 
-__Questions__: 
+#### MCQs {-}
 
-- Do any of the pathways stand out?
-   - If any do, look up the pathway in the table file to see what it does.
+```{r, echo = FALSE}
+opts_p <- c("__ARO-PWY__",answer="__DTDPRHAMSYN__","__PWY-6385__")
+```
+1. Which pathway stands out the most? `r longmcq(opts_p)`
+
+```{r, echo = FALSE}
+opts_p <- c("__1__",answer="__2__","__3__")
+```
+2. How many clusters are formed based on diet (Colours on tree at top of heatmap)? `r longmcq(opts_p)`
+
+```{r, echo = FALSE}
+opts_p <- c("__1__","__2__",answer="__3__")
+```
+3. How many clusters are formed based on pathways (Colours on tree at the side of heatmap)? `r longmcq(opts_p)`
+
+You can look up the pathway names in the table file to see a fuller description.
 
 ## LEfSe {#humann_lefse}
 ```{r, fig.align = 'center',out.width= '15%', echo=FALSE }
@@ -1717,7 +1740,7 @@ Illumina reads are too short and numerous to use traditional overlap-layout-cons
 knitr::include_graphics(path = "figures/reads_aligned.png", auto_pdf = TRUE)
 ``` 
 
-2. All k-mers are linked to other k-mers which match with a k-1 length overlap (i.e. that overlap by all but one base:
+2. All k-mers are linked to other k-mers which match with a k-1 length overlap (i.e. that overlap by all but one base):
 
 ```{r, fig.align = 'center',out.width= '80%', echo=FALSE }
 knitr::include_graphics(path = "figures/graph_simple.png", auto_pdf = TRUE)
@@ -1769,7 +1792,17 @@ flash  -o K1 -z -t 12 -d . \
 ../2-Trimmed/K1_R1.fq.gz ../2-Trimmed/K1_R2.fq.gz
 ```
 
-Here, we are telling `FLASH` to use an output file name prefix of K1, that the input is zipped, that the output directory is here (.) and to use the two read files for Sample K1. Once `FLASH` has finished running, it will display on screen how well the stitching process went, in this case a low amount of reads were combined. Have a look what files have been generated.
+#### Parameters {-}
+
+- `-o`: Sets the prefix of the output files.
+- `-z`: The input is zipped.
+- `-t`: Number of threads to use.
+- `-d`: The directory the output files will be placed.
+- The last 2 flag-less parameters are the forward and reverse read files for stitching.
+
+#### Output {-}
+
+Once `FLASH` has finished running, it will display on screen how well the stitching process went, in this case a low amount of reads were combined. Have a look what files have been generated.
 
 ```{bash eval=FALSE}
 ls

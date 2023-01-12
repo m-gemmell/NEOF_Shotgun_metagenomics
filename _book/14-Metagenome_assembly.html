@@ -318,7 +318,7 @@ code span.wa { color: #60a0b0; font-weight: bold; font-style: italic; } /* Warni
 </ol>
 <p><img src="figures/reads_aligned.png" width="40%" style="display: block; margin: auto;" /></p>
 <ol start="2" style="list-style-type: decimal">
-<li>All k-mers are linked to other k-mers which match with a k-1 length overlap (i.e. that overlap by all but one base:</li>
+<li>All k-mers are linked to other k-mers which match with a k-1 length overlap (i.e. that overlap by all but one base):</li>
 </ol>
 <p><img src="figures/graph_simple.png" width="80%" style="display: block; margin: auto;" /></p>
 <ol start="3" style="list-style-type: decimal">
@@ -340,41 +340,54 @@ code span.wa { color: #60a0b0; font-weight: bold; font-style: italic; } /* Warni
 <p>Once we have longer stitched reads, we can increase the k-mer length for our assembly.</p>
 <p>There are a number of pieces of software that can be used to stitch reads (e.g. <code>Pear</code>, <code>Pandaseq</code>) but today we will use one called <code>FLASH</code>:</p>
 <p>Make a new output directory for the stitched reads and run <code>FLASH</code>:</p>
-<div class="sourceCode" id="cb59"><pre class="sourceCode bash"><code class="sourceCode bash"><span id="cb59-1"><a href="14-Metagenome_assembly.html#cb59-1" aria-hidden="true" tabindex="-1"></a><span class="co">#Change directory to home</span></span>
-<span id="cb59-2"><a href="14-Metagenome_assembly.html#cb59-2" aria-hidden="true" tabindex="-1"></a><span class="bu">cd</span> ~</span>
-<span id="cb59-3"><a href="14-Metagenome_assembly.html#cb59-3" aria-hidden="true" tabindex="-1"></a><span class="co">#Make and move into new directory</span></span>
-<span id="cb59-4"><a href="14-Metagenome_assembly.html#cb59-4" aria-hidden="true" tabindex="-1"></a><span class="fu">mkdir</span> 5-Stitched</span>
-<span id="cb59-5"><a href="14-Metagenome_assembly.html#cb59-5" aria-hidden="true" tabindex="-1"></a><span class="bu">cd</span> 5-Stitched</span>
-<span id="cb59-6"><a href="14-Metagenome_assembly.html#cb59-6" aria-hidden="true" tabindex="-1"></a><span class="co">#Run flash</span></span>
-<span id="cb59-7"><a href="14-Metagenome_assembly.html#cb59-7" aria-hidden="true" tabindex="-1"></a><span class="ex">flash</span>  <span class="at">-o</span> K1 <span class="at">-z</span> <span class="at">-t</span> 12 <span class="at">-d</span> . <span class="dt">\</span></span>
-<span id="cb59-8"><a href="14-Metagenome_assembly.html#cb59-8" aria-hidden="true" tabindex="-1"></a>../2-Trimmed/K1_R1.fq.gz ../2-Trimmed/K1_R2.fq.gz</span></code></pre></div>
-<p>Here, we are telling <code>FLASH</code> to use an output file name prefix of K1, that the input is zipped, that the output directory is here (.) and to use the two read files for Sample K1. Once <code>FLASH</code> has finished running, it will display on screen how well the stitching process went, in this case a low amount of reads were combined. Have a look what files have been generated.</p>
-<div class="sourceCode" id="cb60"><pre class="sourceCode bash"><code class="sourceCode bash"><span id="cb60-1"><a href="14-Metagenome_assembly.html#cb60-1" aria-hidden="true" tabindex="-1"></a><span class="fu">ls</span></span></code></pre></div>
+<div class="sourceCode" id="cb60"><pre class="sourceCode bash"><code class="sourceCode bash"><span id="cb60-1"><a href="14-Metagenome_assembly.html#cb60-1" aria-hidden="true" tabindex="-1"></a><span class="co">#Change directory to home</span></span>
+<span id="cb60-2"><a href="14-Metagenome_assembly.html#cb60-2" aria-hidden="true" tabindex="-1"></a><span class="bu">cd</span> ~</span>
+<span id="cb60-3"><a href="14-Metagenome_assembly.html#cb60-3" aria-hidden="true" tabindex="-1"></a><span class="co">#Make and move into new directory</span></span>
+<span id="cb60-4"><a href="14-Metagenome_assembly.html#cb60-4" aria-hidden="true" tabindex="-1"></a><span class="fu">mkdir</span> 5-Stitched</span>
+<span id="cb60-5"><a href="14-Metagenome_assembly.html#cb60-5" aria-hidden="true" tabindex="-1"></a><span class="bu">cd</span> 5-Stitched</span>
+<span id="cb60-6"><a href="14-Metagenome_assembly.html#cb60-6" aria-hidden="true" tabindex="-1"></a><span class="co">#Run flash</span></span>
+<span id="cb60-7"><a href="14-Metagenome_assembly.html#cb60-7" aria-hidden="true" tabindex="-1"></a><span class="ex">flash</span>  <span class="at">-o</span> K1 <span class="at">-z</span> <span class="at">-t</span> 12 <span class="at">-d</span> . <span class="dt">\</span></span>
+<span id="cb60-8"><a href="14-Metagenome_assembly.html#cb60-8" aria-hidden="true" tabindex="-1"></a>../2-Trimmed/K1_R1.fq.gz ../2-Trimmed/K1_R2.fq.gz</span></code></pre></div>
+<div id="parameters-7" class="section level4 unnumbered hasAnchor">
+<h4>Parameters<a href="14-Metagenome_assembly.html#parameters-7" class="anchor-section" aria-label="Anchor link to header"></a></h4>
+<ul>
+<li><code>-o</code>: Sets the prefix of the output files.</li>
+<li><code>-z</code>: The input is zipped.</li>
+<li><code>-t</code>: Number of threads to use.</li>
+<li><code>-d</code>: The directory the output files will be placed.</li>
+<li>The last 2 flag-less parameters are the forward and reverse read files for stitching.</li>
+</ul>
+</div>
+<div id="output-1" class="section level4 unnumbered hasAnchor">
+<h4>Output<a href="14-Metagenome_assembly.html#output-1" class="anchor-section" aria-label="Anchor link to header"></a></h4>
+<p>Once <code>FLASH</code> has finished running, it will display on screen how well the stitching process went, in this case a low amount of reads were combined. Have a look what files have been generated.</p>
+<div class="sourceCode" id="cb61"><pre class="sourceCode bash"><code class="sourceCode bash"><span id="cb61-1"><a href="14-Metagenome_assembly.html#cb61-1" aria-hidden="true" tabindex="-1"></a><span class="fu">ls</span></span></code></pre></div>
 <p>We have three new fastq.gz files. One containing the stitched reads (<code>K1.extendedFrags.fastq.gz</code>) and two containing the reads from pairs that could not be combined (<code>K1.notCombined_1.fastq.gz</code> and <code>K1.notCombined_2.fastq.gz)</code>.</p>
 <p>We can also see what the new read lengths are:</p>
-<div class="sourceCode" id="cb61"><pre class="sourceCode bash"><code class="sourceCode bash"><span id="cb61-1"><a href="14-Metagenome_assembly.html#cb61-1" aria-hidden="true" tabindex="-1"></a><span class="fu">less</span> K1.histogram</span></code></pre></div>
+<div class="sourceCode" id="cb62"><pre class="sourceCode bash"><code class="sourceCode bash"><span id="cb62-1"><a href="14-Metagenome_assembly.html#cb62-1" aria-hidden="true" tabindex="-1"></a><span class="fu">less</span> K1.histogram</span></code></pre></div>
 <p>Scroll down with the down key and you will see that we are looking at a histogram showing the proportion of reads at different lengths. We can now start assembling our stitched reads for this sample.</p>
+</div>
 </div>
 <div id="assembly" class="section level2 hasAnchor" number="14.4">
 <h2><span class="header-section-number">14.4</span> Assembly<a href="14-Metagenome_assembly.html#assembly" class="anchor-section" aria-label="Anchor link to header"></a></h2>
 <p><img src="figures/assembly_line.png" width="20%" style="display: block; margin: auto;" /></p>
 <p>Create a new directory to store our assembly in.</p>
-<div class="sourceCode" id="cb62"><pre class="sourceCode bash"><code class="sourceCode bash"><span id="cb62-1"><a href="14-Metagenome_assembly.html#cb62-1" aria-hidden="true" tabindex="-1"></a><span class="bu">cd</span> ..</span>
-<span id="cb62-2"><a href="14-Metagenome_assembly.html#cb62-2" aria-hidden="true" tabindex="-1"></a><span class="fu">mkdir</span> 6-Assembly</span>
-<span id="cb62-3"><a href="14-Metagenome_assembly.html#cb62-3" aria-hidden="true" tabindex="-1"></a><span class="bu">cd</span> 6-Assembly</span></code></pre></div>
+<div class="sourceCode" id="cb63"><pre class="sourceCode bash"><code class="sourceCode bash"><span id="cb63-1"><a href="14-Metagenome_assembly.html#cb63-1" aria-hidden="true" tabindex="-1"></a><span class="bu">cd</span> ..</span>
+<span id="cb63-2"><a href="14-Metagenome_assembly.html#cb63-2" aria-hidden="true" tabindex="-1"></a><span class="fu">mkdir</span> 6-Assembly</span>
+<span id="cb63-3"><a href="14-Metagenome_assembly.html#cb63-3" aria-hidden="true" tabindex="-1"></a><span class="bu">cd</span> 6-Assembly</span></code></pre></div>
 <p>Now run the metagenome assembler <code>MEGAHIT</code> using our newly stitched read data.</p>
-<div class="sourceCode" id="cb63"><pre class="sourceCode bash"><code class="sourceCode bash"><span id="cb63-1"><a href="14-Metagenome_assembly.html#cb63-1" aria-hidden="true" tabindex="-1"></a><span class="ex">megahit</span> <span class="dt">\</span></span>
-<span id="cb63-2"><a href="14-Metagenome_assembly.html#cb63-2" aria-hidden="true" tabindex="-1"></a>-r ../5-Stitched/K1.extendedFrags.fastq.gz <span class="dt">\</span></span>
-<span id="cb63-3"><a href="14-Metagenome_assembly.html#cb63-3" aria-hidden="true" tabindex="-1"></a>-1 ../5-Stitched/K1.notCombined_1.fastq.gz <span class="dt">\</span></span>
-<span id="cb63-4"><a href="14-Metagenome_assembly.html#cb63-4" aria-hidden="true" tabindex="-1"></a>-2 ../5-Stitched/K1.notCombined_2.fastq.gz <span class="dt">\</span></span>
-<span id="cb63-5"><a href="14-Metagenome_assembly.html#cb63-5" aria-hidden="true" tabindex="-1"></a>-o K1 <span class="dt">\</span></span>
-<span id="cb63-6"><a href="14-Metagenome_assembly.html#cb63-6" aria-hidden="true" tabindex="-1"></a>-t 12 <span class="dt">\</span></span>
-<span id="cb63-7"><a href="14-Metagenome_assembly.html#cb63-7" aria-hidden="true" tabindex="-1"></a>--k-list 29,49,69,89,109,129,149,169,189</span></code></pre></div>
+<div class="sourceCode" id="cb64"><pre class="sourceCode bash"><code class="sourceCode bash"><span id="cb64-1"><a href="14-Metagenome_assembly.html#cb64-1" aria-hidden="true" tabindex="-1"></a><span class="ex">megahit</span> <span class="dt">\</span></span>
+<span id="cb64-2"><a href="14-Metagenome_assembly.html#cb64-2" aria-hidden="true" tabindex="-1"></a>-r ../5-Stitched/K1.extendedFrags.fastq.gz <span class="dt">\</span></span>
+<span id="cb64-3"><a href="14-Metagenome_assembly.html#cb64-3" aria-hidden="true" tabindex="-1"></a>-1 ../5-Stitched/K1.notCombined_1.fastq.gz <span class="dt">\</span></span>
+<span id="cb64-4"><a href="14-Metagenome_assembly.html#cb64-4" aria-hidden="true" tabindex="-1"></a>-2 ../5-Stitched/K1.notCombined_2.fastq.gz <span class="dt">\</span></span>
+<span id="cb64-5"><a href="14-Metagenome_assembly.html#cb64-5" aria-hidden="true" tabindex="-1"></a>-o K1 <span class="dt">\</span></span>
+<span id="cb64-6"><a href="14-Metagenome_assembly.html#cb64-6" aria-hidden="true" tabindex="-1"></a>-t 12 <span class="dt">\</span></span>
+<span id="cb64-7"><a href="14-Metagenome_assembly.html#cb64-7" aria-hidden="true" tabindex="-1"></a>--k-list 29,49,69,89,109,129,149,169,189</span></code></pre></div>
 <p>Here, you have instructed <code>MEGAHIT</code> to use both the stitched and unstitched reads, to output the assembly in a subdirectory called K1 and to use 12 CPUs.</p>
 <p>The last option <code>--k-list</code> instructs <code>MEGAHIT</code> to first generate an assembly using a k-mer size of 29 bp and when that is complete, integrate the results into an assembly using a k-mer size of 49 bp, and so on up to a final iteration using a k-mer size of 189 bp. This large range of k-mer lengths should give us a good assembly, given the data. However, it may take a while to run so this might be a good time to read on.</p>
 <p>If you need a command prompt (your current one is gone because MEGAHIT is running), right click on the main screen, choose <code>Applications</code> -&gt; <code>Shell</code> -&gt; <code>bash</code>.</p>
 <p>Once the assembly is completed, we can look at the output FASTA file containing the contigs:</p>
-<div class="sourceCode" id="cb64"><pre class="sourceCode bash"><code class="sourceCode bash"><span id="cb64-1"><a href="14-Metagenome_assembly.html#cb64-1" aria-hidden="true" tabindex="-1"></a><span class="fu">less</span> K1/final.contigs.fa</span></code></pre></div>
+<div class="sourceCode" id="cb65"><pre class="sourceCode bash"><code class="sourceCode bash"><span id="cb65-1"><a href="14-Metagenome_assembly.html#cb65-1" aria-hidden="true" tabindex="-1"></a><span class="fu">less</span> K1/final.contigs.fa</span></code></pre></div>
 </div>
 <div id="quast" class="section level2 hasAnchor" number="14.5">
 <h2><span class="header-section-number">14.5</span> QUAST<a href="14-Metagenome_assembly.html#quast" class="anchor-section" aria-label="Anchor link to header"></a></h2>
@@ -382,21 +395,21 @@ code span.wa { color: #60a0b0; font-weight: bold; font-style: italic; } /* Warni
 <p>We can also generate some metrics based on the assembly.</p>
 <p>Due to python version conflict we need to use another conda environment.</p>
 <p>Open a new terminal (right click on the main screen, choose <code>Applications</code> -&gt; <code>Shell</code> -&gt; <code>bash</code>) and run the below.</p>
-<div class="sourceCode" id="cb65"><pre class="sourceCode bash"><code class="sourceCode bash"><span id="cb65-1"><a href="14-Metagenome_assembly.html#cb65-1" aria-hidden="true" tabindex="-1"></a><span class="co">#use script to activate conda env</span></span>
-<span id="cb65-2"><a href="14-Metagenome_assembly.html#cb65-2" aria-hidden="true" tabindex="-1"></a><span class="bu">.</span> usegenoassess</span></code></pre></div>
+<div class="sourceCode" id="cb66"><pre class="sourceCode bash"><code class="sourceCode bash"><span id="cb66-1"><a href="14-Metagenome_assembly.html#cb66-1" aria-hidden="true" tabindex="-1"></a><span class="co">#use script to activate conda env</span></span>
+<span id="cb66-2"><a href="14-Metagenome_assembly.html#cb66-2" aria-hidden="true" tabindex="-1"></a><span class="bu">.</span> usegenoassess</span></code></pre></div>
 <p>We will use <code>QUAST</code> for genome contiguity assessment but first we will change directory to <code>6-Assembly</code> and create a directory for the <code>QUAST</code> output.</p>
-<div class="sourceCode" id="cb66"><pre class="sourceCode bash"><code class="sourceCode bash"><span id="cb66-1"><a href="14-Metagenome_assembly.html#cb66-1" aria-hidden="true" tabindex="-1"></a><span class="co">#Change directory</span></span>
-<span id="cb66-2"><a href="14-Metagenome_assembly.html#cb66-2" aria-hidden="true" tabindex="-1"></a><span class="bu">cd</span> ~/6-Assembly</span>
-<span id="cb66-3"><a href="14-Metagenome_assembly.html#cb66-3" aria-hidden="true" tabindex="-1"></a><span class="co">#Create QUAST output directory</span></span>
-<span id="cb66-4"><a href="14-Metagenome_assembly.html#cb66-4" aria-hidden="true" tabindex="-1"></a><span class="co">#The option -p will create a directory and any required</span></span>
-<span id="cb66-5"><a href="14-Metagenome_assembly.html#cb66-5" aria-hidden="true" tabindex="-1"></a><span class="co">#parent directories</span></span>
-<span id="cb66-6"><a href="14-Metagenome_assembly.html#cb66-6" aria-hidden="true" tabindex="-1"></a><span class="fu">mkdir</span> <span class="at">-p</span> quast/K1</span></code></pre></div>
+<div class="sourceCode" id="cb67"><pre class="sourceCode bash"><code class="sourceCode bash"><span id="cb67-1"><a href="14-Metagenome_assembly.html#cb67-1" aria-hidden="true" tabindex="-1"></a><span class="co">#Change directory</span></span>
+<span id="cb67-2"><a href="14-Metagenome_assembly.html#cb67-2" aria-hidden="true" tabindex="-1"></a><span class="bu">cd</span> ~/6-Assembly</span>
+<span id="cb67-3"><a href="14-Metagenome_assembly.html#cb67-3" aria-hidden="true" tabindex="-1"></a><span class="co">#Create QUAST output directory</span></span>
+<span id="cb67-4"><a href="14-Metagenome_assembly.html#cb67-4" aria-hidden="true" tabindex="-1"></a><span class="co">#The option -p will create a directory and any required</span></span>
+<span id="cb67-5"><a href="14-Metagenome_assembly.html#cb67-5" aria-hidden="true" tabindex="-1"></a><span class="co">#parent directories</span></span>
+<span id="cb67-6"><a href="14-Metagenome_assembly.html#cb67-6" aria-hidden="true" tabindex="-1"></a><span class="fu">mkdir</span> <span class="at">-p</span> quast/K1</span></code></pre></div>
 <p>The <code>-p</code> option of <code>mkdir</code> will cause the command to create any parent directories that are required to create the noted directory. I.e. <code>quast</code> will be created so <code>K1</code> can be created.</p>
 <p>Now to run QUAST.</p>
-<div class="sourceCode" id="cb67"><pre class="sourceCode bash"><code class="sourceCode bash"><span id="cb67-1"><a href="14-Metagenome_assembly.html#cb67-1" aria-hidden="true" tabindex="-1"></a><span class="co">#Generate contiguity statistics</span></span>
-<span id="cb67-2"><a href="14-Metagenome_assembly.html#cb67-2" aria-hidden="true" tabindex="-1"></a><span class="ex">quast</span> <span class="at">-o</span> quast/K1 K1/final.contigs.fa</span>
-<span id="cb67-3"><a href="14-Metagenome_assembly.html#cb67-3" aria-hidden="true" tabindex="-1"></a><span class="co">#View QUAST html report</span></span>
-<span id="cb67-4"><a href="14-Metagenome_assembly.html#cb67-4" aria-hidden="true" tabindex="-1"></a><span class="ex">firefox</span> quast/K1/report.html</span></code></pre></div>
+<div class="sourceCode" id="cb68"><pre class="sourceCode bash"><code class="sourceCode bash"><span id="cb68-1"><a href="14-Metagenome_assembly.html#cb68-1" aria-hidden="true" tabindex="-1"></a><span class="co">#Generate contiguity statistics</span></span>
+<span id="cb68-2"><a href="14-Metagenome_assembly.html#cb68-2" aria-hidden="true" tabindex="-1"></a><span class="ex">quast</span> <span class="at">-o</span> quast/K1 K1/final.contigs.fa</span>
+<span id="cb68-3"><a href="14-Metagenome_assembly.html#cb68-3" aria-hidden="true" tabindex="-1"></a><span class="co">#View QUAST html report</span></span>
+<span id="cb68-4"><a href="14-Metagenome_assembly.html#cb68-4" aria-hidden="true" tabindex="-1"></a><span class="ex">firefox</span> quast/K1/report.html</span></code></pre></div>
 <p>The report tells us quite a bit about the assembly quality. Two definitions that you may not be aware of are N50 and N50 length (or, somewhat confusingly, L50 and N50, respectively!). If we were to order our contigs from largest to smallest, and total up the sizes from biggest downwards, the contig we reach where our total is 50% of the size of the whole assembly is the N50 contig (the smaller the number the better). The N50 length is the length of this contig; a weighted median contig length.</p>
 <p><img src="figures/n50_n90.png" width="40%" style="display: block; margin: auto;" /></p>
 <p><strong>Questions</strong>

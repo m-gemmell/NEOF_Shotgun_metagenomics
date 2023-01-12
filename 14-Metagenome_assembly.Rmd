@@ -36,7 +36,7 @@ Illumina reads are too short and numerous to use traditional overlap-layout-cons
 knitr::include_graphics(path = "figures/reads_aligned.png", auto_pdf = TRUE)
 ``` 
 
-2. All k-mers are linked to other k-mers which match with a k-1 length overlap (i.e. that overlap by all but one base:
+2. All k-mers are linked to other k-mers which match with a k-1 length overlap (i.e. that overlap by all but one base):
 
 ```{r, fig.align = 'center',out.width= '80%', echo=FALSE }
 knitr::include_graphics(path = "figures/graph_simple.png", auto_pdf = TRUE)
@@ -88,7 +88,17 @@ flash  -o K1 -z -t 12 -d . \
 ../2-Trimmed/K1_R1.fq.gz ../2-Trimmed/K1_R2.fq.gz
 ```
 
-Here, we are telling `FLASH` to use an output file name prefix of K1, that the input is zipped, that the output directory is here (.) and to use the two read files for Sample K1. Once `FLASH` has finished running, it will display on screen how well the stitching process went, in this case a low amount of reads were combined. Have a look what files have been generated.
+#### Parameters {-}
+
+- `-o`: Sets the prefix of the output files.
+- `-z`: The input is zipped.
+- `-t`: Number of threads to use.
+- `-d`: The directory the output files will be placed.
+- The last 2 flag-less parameters are the forward and reverse read files for stitching.
+
+#### Output {-}
+
+Once `FLASH` has finished running, it will display on screen how well the stitching process went, in this case a low amount of reads were combined. Have a look what files have been generated.
 
 ```{bash eval=FALSE}
 ls
