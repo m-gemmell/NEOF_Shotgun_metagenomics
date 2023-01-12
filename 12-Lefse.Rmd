@@ -26,6 +26,13 @@ __Note__: The above is __diet__ followed by 12 __K__ and 12 __W__.
 
 The singular line should match the order of your samples within the file. This is the metadata line that `LEfSe` will use to determine which samples belong to each sample group, and therefore which to compare. In this case it is Korean diet samples versus Western diet samples.
 
+`r hide("Issues with creating file?")`
+If you are having issues with creating and editing the file `all_num.lefse.bracken` you can copy a pre-made version.
+```{bash, eval=FALSE}
+cp /pub39/tea/nsc006/Shotgun_metagenomics/lefse/all_num.lefse.bracken
+```
+`r unhide()`
+
 ## LEfSe: conda
 ```{r, fig.align = 'center',out.width= '10%', echo=FALSE }
 knitr::include_graphics(path = "figures/conda.png", auto_pdf = TRUE)
@@ -53,6 +60,11 @@ We need to further format and preprocess our file with a `LEfSe` script.
 lefse-format_input.py all_num.lefse.bracken all_num.lefse -c 1 -u 2 -o 1000000
 ```
 
+#### Parameters {-}
+```{r, fig.align = 'center',out.width= '10%', echo=FALSE }
+knitr::include_graphics(path = "figures/parameter_purple.png", auto_pdf = TRUE)
+```
+
 - `all_num.lefse.bracken` : Input `Bracken` file.
 - `all_num.lefse` : Output file formatted for the run_lefse command, which we will soon run.
 - `-c 1` : Specifies the row with the class info. This is used to determine which samples will be compared against which samples. In this case it is the first row with the Ks and Ws.
@@ -61,7 +73,7 @@ lefse-format_input.py all_num.lefse.bracken all_num.lefse -c 1 -u 2 -o 1000000
 
 ## LEfSe: run
 ```{r, fig.align = 'center',out.width= '10%', echo=FALSE }
-knitr::include_graphics(path = "figures/enter_key.png", auto_pdf = TRUE)
+knitr::include_graphics(path = "figures/play_purple.png", auto_pdf = TRUE)
 ``` 
 
 Now to run `LEfSe.` All we need to do is run the command with the formatted input and provide an output file name.
@@ -70,13 +82,15 @@ Now to run `LEfSe.` All we need to do is run the command with the formatted inpu
 run_lefse.py all_num.lefse all_num.lefse.out
 ```
 
+#### Output {-}
+
 The output file is a tab-delimited file which contains a row for each species. Biomarkers will have the five columns below whilst non-biomarkers will have the first two followed by a "-" .
 
 - __Biomarker name__
 - __Log of highest class average__: I.e. get the class with the greater amounts of the biomarker, average the counts and then get the log of this value.
 - __Class with the greater amounts of biomarker__
 - __LDA effect size__: A statistical figure for `LEfSe`..
-- p-value: Biomarkers must have a p-value of <0.05 to be considered significant.
+- __p-value__: Biomarkers must have a p-value of <0.05 to be considered significant.
 
 The __LDA effect__ size indicates how much of an effect each biomarker has. The default is to only count a species with an LDA effect size of greater than 2 or less than -2 as a biomarker. The further the LDA effect size is from 0 the greater the effect the species causes.
 
@@ -102,12 +116,49 @@ Look at the figure with the program `okular`:
 okular biomarkers.png
 ```
 
-__Questions__:
+## LEfSe: MCQs
+```{r, fig.align = 'center',out.width= '10%', echo=FALSE }
+knitr::include_graphics(path = "figures/question_bubble_purple.png", auto_pdf = TRUE)
+```
 
-- Which species causes the biggest effect in the W class and in the K class?
-- Which class has more biomarkers associated with it?
+Interrogating the biomarkers.png plot and the all_num.lefse.out file, attempt the below MCQs.
 
 __Note__: In this instance green bars represent biomarkers in higher abundance in the W samples whilst the red bars represent biomarkers in higher abundance in the K samples.
+
+```{r, echo = FALSE}
+opts_p <- c(answer="__Alistipesshahhii__","__Lactobacillusruminis__","__Methanosphaerastadtmanae__")
+```
+1. Which species biomarker causes the biggest effect in the __W__ class? `r longmcq(opts_p)`
+
+```{r, echo = FALSE}
+opts_p <- c("__Alistipesshahhii__","__Lactobacillusruminis__",answer="__Methanosphaerastadtmanae__")
+```
+2. Which species biomarker causes the biggest effect in the __K__ class? `r longmcq(opts_p)`
+
+```{r, echo = FALSE}
+opts_p <- c("__Alistipesshahhii__",answer="__Lactobacillusruminis__","__Methanosphaerastadtmanae__")
+```
+3. Which species biomarker (i.e. present in the plot) causes the lowest effect in the __K__ class? `r longmcq(opts_p)`
+
+```{r, echo = FALSE}
+opts_p <- c("__Korean__",answer="__Western__")
+```
+4. Which class has more biomarkers associated with it? `r longmcq(opts_p)`
+
+```{r, echo = FALSE}
+opts_p <- c(answer="__0.0328692343007__","__1.39274299091__","__2.08988829344__")
+```
+5. What is the LEfSe p-value for __Oxalobacterformigenes__? `r longmcq(opts_p)`
+
+```{r, echo = FALSE}
+opts_p <- c("__0.0328692343007__",answer="__1.39274299091__","__2.08988829344__")
+```
+6. What is the Log of highest class average for __Pantoearwandensis__? `r longmcq(opts_p)`
+
+```{r, echo = FALSE}
+opts_p <- c("__0.0328692343007__","__1.39274299091__",answer="__2.08988829344__")
+```
+7. What is the LDA effect size for __Eggerthellalenta__? `r longmcq(opts_p)`
 
 ## Kraken2 and Bracken databases
 ```{r, fig.align = 'center',out.width= '15%', echo=FALSE }
@@ -122,4 +173,3 @@ In your own future analysis you will need to create your own `Kraken2` and `Brac
 - `Bracken`
    - https://ccb.jhu.edu/software/bracken/index.shtml?t=manual#step1
    - This requires a `Kraken2` database to be built first.
-

@@ -23,7 +23,7 @@
 <meta name="author" content="Sam Haldenby and Matthew R. Gemmell" />
 
 
-<meta name="date" content="2023-01-11" />
+<meta name="date" content="2023-01-12" />
 
   <meta name="viewport" content="width=device-width, initial-scale=1" />
   <meta name="apple-mobile-web-app-capable" content="yes" />
@@ -206,7 +206,8 @@ code span.wa { color: #60a0b0; font-weight: bold; font-style: italic; } /* Warni
 <li class="chapter" data-level="12.3" data-path="12-Lefse.html"><a href="12-Lefse.html#lefse-format"><i class="fa fa-check"></i><b>12.3</b> LEfSe: format</a></li>
 <li class="chapter" data-level="12.4" data-path="12-Lefse.html"><a href="12-Lefse.html#lefse-run"><i class="fa fa-check"></i><b>12.4</b> LEfSe: run</a></li>
 <li class="chapter" data-level="12.5" data-path="12-Lefse.html"><a href="12-Lefse.html#lefse-visualisation"><i class="fa fa-check"></i><b>12.5</b> LEfSe: visualisation</a></li>
-<li class="chapter" data-level="12.6" data-path="12-Lefse.html"><a href="12-Lefse.html#kraken2-and-bracken-databases"><i class="fa fa-check"></i><b>12.6</b> Kraken2 and Bracken databases</a></li>
+<li class="chapter" data-level="12.6" data-path="12-Lefse.html"><a href="12-Lefse.html#lefse-mcqs"><i class="fa fa-check"></i><b>12.6</b> LEfSe: MCQs</a></li>
+<li class="chapter" data-level="12.7" data-path="12-Lefse.html"><a href="12-Lefse.html#kraken2-and-bracken-databases"><i class="fa fa-check"></i><b>12.7</b> Kraken2 and Bracken databases</a></li>
 </ul></li>
 <li class="part"><span><b>Functional profiling of reads</b></span></li>
 <li class="chapter" data-level="13" data-path="13-Functional_profiling.html"><a href="13-Functional_profiling.html"><i class="fa fa-check"></i><b>13</b> HUMAnN Functional profiling</a>
@@ -352,12 +353,12 @@ _ Methods for Metagenomic data visualisation and analysis</li>
 <div id="obtaining-read-data" class="section level1 hasAnchor" number="19">
 <h1><span class="header-section-number">C</span> Obtaining Read Data<a href="17-Appendix.html#obtaining-read-data" class="anchor-section" aria-label="Anchor link to header"></a></h1>
 <p>The following commands can be used to obtain the sequence data used in this practical, directly from the EBI metagenomics site. It is worth noting that these are the full set of data, not like the miniaturised version you have used in the tutorial.</p>
-<div class="sourceCode" id="cb104"><pre class="sourceCode bash"><code class="sourceCode bash"><span id="cb104-1"><a href="17-Appendix.html#cb104-1" aria-hidden="true" tabindex="-1"></a><span class="fu">wget</span> <span class="at">-O</span> K1_R1.fastq.gz ftp://ftp.sra.ebi.ac.uk/vol1/fastq/ERR505/ERR505102/ERR505102_1.fastq.gz</span>
-<span id="cb104-2"><a href="17-Appendix.html#cb104-2" aria-hidden="true" tabindex="-1"></a><span class="fu">wget</span> <span class="at">-O</span> K1_R2.fastq.gz ftp://ftp.sra.ebi.ac.uk/vol1/fastq/ERR505/ERR505102/ERR505102_2.fastq.gz</span>
-<span id="cb104-3"><a href="17-Appendix.html#cb104-3" aria-hidden="true" tabindex="-1"></a><span class="fu">wget</span> <span class="at">-O</span> K2_R1.fastq.gz ftp://ftp.sra.ebi.ac.uk/vol1/fastq/ERR505/ERR505104/ERR505104_1.fastq.gz</span>
-<span id="cb104-4"><a href="17-Appendix.html#cb104-4" aria-hidden="true" tabindex="-1"></a><span class="fu">wget</span> <span class="at">-O</span> K2_R2.fastq.gz ftp://ftp.sra.ebi.ac.uk/vol1/fastq/ERR505/ERR505104/ERR505104_2.fastq.gz</span>
-<span id="cb104-5"><a href="17-Appendix.html#cb104-5" aria-hidden="true" tabindex="-1"></a><span class="fu">wget</span> <span class="at">-O</span> W1_R1.fastq.gz ftp://ftp.sra.ebi.ac.uk/vol1/fastq/ERR505/ERR505090/ERR505090_1.fastq.gz</span>
-<span id="cb104-6"><a href="17-Appendix.html#cb104-6" aria-hidden="true" tabindex="-1"></a><span class="fu">wget</span> <span class="at">-O</span> W1_R2.fastq.gz ftp://ftp.sra.ebi.ac.uk/vol1/fastq/ERR505/ERR505090/ERR505090_2.fastq.gz</span></code></pre></div>
+<div class="sourceCode" id="cb105"><pre class="sourceCode bash"><code class="sourceCode bash"><span id="cb105-1"><a href="17-Appendix.html#cb105-1" aria-hidden="true" tabindex="-1"></a><span class="fu">wget</span> <span class="at">-O</span> K1_R1.fastq.gz ftp://ftp.sra.ebi.ac.uk/vol1/fastq/ERR505/ERR505102/ERR505102_1.fastq.gz</span>
+<span id="cb105-2"><a href="17-Appendix.html#cb105-2" aria-hidden="true" tabindex="-1"></a><span class="fu">wget</span> <span class="at">-O</span> K1_R2.fastq.gz ftp://ftp.sra.ebi.ac.uk/vol1/fastq/ERR505/ERR505102/ERR505102_2.fastq.gz</span>
+<span id="cb105-3"><a href="17-Appendix.html#cb105-3" aria-hidden="true" tabindex="-1"></a><span class="fu">wget</span> <span class="at">-O</span> K2_R1.fastq.gz ftp://ftp.sra.ebi.ac.uk/vol1/fastq/ERR505/ERR505104/ERR505104_1.fastq.gz</span>
+<span id="cb105-4"><a href="17-Appendix.html#cb105-4" aria-hidden="true" tabindex="-1"></a><span class="fu">wget</span> <span class="at">-O</span> K2_R2.fastq.gz ftp://ftp.sra.ebi.ac.uk/vol1/fastq/ERR505/ERR505104/ERR505104_2.fastq.gz</span>
+<span id="cb105-5"><a href="17-Appendix.html#cb105-5" aria-hidden="true" tabindex="-1"></a><span class="fu">wget</span> <span class="at">-O</span> W1_R1.fastq.gz ftp://ftp.sra.ebi.ac.uk/vol1/fastq/ERR505/ERR505090/ERR505090_1.fastq.gz</span>
+<span id="cb105-6"><a href="17-Appendix.html#cb105-6" aria-hidden="true" tabindex="-1"></a><span class="fu">wget</span> <span class="at">-O</span> W1_R2.fastq.gz ftp://ftp.sra.ebi.ac.uk/vol1/fastq/ERR505/ERR505090/ERR505090_2.fastq.gz</span></code></pre></div>
 
 </div>
 <script>

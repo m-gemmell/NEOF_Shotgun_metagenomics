@@ -45,6 +45,7 @@ lefse-conda
 lefse-format
 lefse-run
 lefse-visualisation
+lefse-mcqs
 kraken2-and-bracken-databases
 functprofile
 humann

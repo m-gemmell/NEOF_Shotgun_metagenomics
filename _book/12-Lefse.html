@@ -23,7 +23,7 @@
 <meta name="author" content="Sam Haldenby and Matthew R. Gemmell" />
 
 
-<meta name="date" content="2023-01-11" />
+<meta name="date" content="2023-01-12" />
 
   <meta name="viewport" content="width=device-width, initial-scale=1" />
   <meta name="apple-mobile-web-app-capable" content="yes" />
@@ -206,7 +206,8 @@ code span.wa { color: #60a0b0; font-weight: bold; font-style: italic; } /* Warni
 <li class="chapter" data-level="12.3" data-path="12-Lefse.html"><a href="12-Lefse.html#lefse-format"><i class="fa fa-check"></i><b>12.3</b> LEfSe: format</a></li>
 <li class="chapter" data-level="12.4" data-path="12-Lefse.html"><a href="12-Lefse.html#lefse-run"><i class="fa fa-check"></i><b>12.4</b> LEfSe: run</a></li>
 <li class="chapter" data-level="12.5" data-path="12-Lefse.html"><a href="12-Lefse.html#lefse-visualisation"><i class="fa fa-check"></i><b>12.5</b> LEfSe: visualisation</a></li>
-<li class="chapter" data-level="12.6" data-path="12-Lefse.html"><a href="12-Lefse.html#kraken2-and-bracken-databases"><i class="fa fa-check"></i><b>12.6</b> Kraken2 and Bracken databases</a></li>
+<li class="chapter" data-level="12.6" data-path="12-Lefse.html"><a href="12-Lefse.html#lefse-mcqs"><i class="fa fa-check"></i><b>12.6</b> LEfSe: MCQs</a></li>
+<li class="chapter" data-level="12.7" data-path="12-Lefse.html"><a href="12-Lefse.html#kraken2-and-bracken-databases"><i class="fa fa-check"></i><b>12.7</b> Kraken2 and Bracken databases</a></li>
 </ul></li>
 <li class="part"><span><b>Functional profiling of reads</b></span></li>
 <li class="chapter" data-level="13" data-path="13-Functional_profiling.html"><a href="13-Functional_profiling.html"><i class="fa fa-check"></i><b>13</b> HUMAnN Functional profiling</a>
@@ -306,22 +307,32 @@ code span.wa { color: #60a0b0; font-weight: bold; font-style: italic; } /* Warni
 <p><strong>diet K K K K K K K K K K K K W W W W W W W W W W W W</strong></p>
 <p><strong>Note</strong>: The above is <strong>diet</strong> followed by 12 <strong>K</strong> and 12 <strong>W</strong>.</p>
 <p>The singular line should match the order of your samples within the file. This is the metadata line that <code>LEfSe</code> will use to determine which samples belong to each sample group, and therefore which to compare. In this case it is Korean diet samples versus Western diet samples.</p>
+<div class="webex-solution">
+<button>
+Issues with creating file?
+</button>
+<p>If you are having issues with creating and editing the file <code>all_num.lefse.bracken</code> you can copy a pre-made version.</p>
+<div class="sourceCode" id="cb36"><pre class="sourceCode bash"><code class="sourceCode bash"><span id="cb36-1"><a href="12-Lefse.html#cb36-1" aria-hidden="true" tabindex="-1"></a><span class="fu">cp</span> /pub39/tea/nsc006/Shotgun_metagenomics/lefse/all_num.lefse.bracken</span></code></pre></div>
+</div>
 </div>
 <div id="lefse-conda" class="section level2 hasAnchor" number="12.2">
 <h2><span class="header-section-number">12.2</span> LEfSe: conda<a href="12-Lefse.html#lefse-conda" class="anchor-section" aria-label="Anchor link to header"></a></h2>
 <p><img src="figures/conda.png" width="10%" style="display: block; margin: auto;" /></p>
 <p><code>LEfSe</code> requires python2 whilst we have been using packages that required python3. We therefore need to use a different <code>conda</code> environment. We are currently using the <code>conda</code> env called <code>shotgun_meta</code> as represented by <code>(shotgun_meta)</code>. This was activated with the command <code>. useshotgun</code>.</p>
 <p><strong>Open a new terminal</strong> (right click on the main screen background, choose <code>Applications</code> -&gt; <code>Shell</code> -&gt; <code>bash</code>) and run the following in the new terminal to activate the <code>lefse</code> <code>conda</code> environment.</p>
-<div class="sourceCode" id="cb36"><pre class="sourceCode bash"><code class="sourceCode bash"><span id="cb36-1"><a href="12-Lefse.html#cb36-1" aria-hidden="true" tabindex="-1"></a><span class="co">#Setup environment</span></span>
-<span id="cb36-2"><a href="12-Lefse.html#cb36-2" aria-hidden="true" tabindex="-1"></a><span class="bu">.</span> uselefse</span>
-<span id="cb36-3"><a href="12-Lefse.html#cb36-3" aria-hidden="true" tabindex="-1"></a><span class="co">#Change directory</span></span>
-<span id="cb36-4"><a href="12-Lefse.html#cb36-4" aria-hidden="true" tabindex="-1"></a><span class="bu">cd</span> ~/3-Taxonomy</span></code></pre></div>
+<div class="sourceCode" id="cb37"><pre class="sourceCode bash"><code class="sourceCode bash"><span id="cb37-1"><a href="12-Lefse.html#cb37-1" aria-hidden="true" tabindex="-1"></a><span class="co">#Setup environment</span></span>
+<span id="cb37-2"><a href="12-Lefse.html#cb37-2" aria-hidden="true" tabindex="-1"></a><span class="bu">.</span> uselefse</span>
+<span id="cb37-3"><a href="12-Lefse.html#cb37-3" aria-hidden="true" tabindex="-1"></a><span class="co">#Change directory</span></span>
+<span id="cb37-4"><a href="12-Lefse.html#cb37-4" aria-hidden="true" tabindex="-1"></a><span class="bu">cd</span> ~/3-Taxonomy</span></code></pre></div>
 </div>
 <div id="lefse-format" class="section level2 hasAnchor" number="12.3">
 <h2><span class="header-section-number">12.3</span> LEfSe: format<a href="12-Lefse.html#lefse-format" class="anchor-section" aria-label="Anchor link to header"></a></h2>
 <p><img src="figures/lefse_format.png" width="10%" style="display: block; margin: auto;" /></p>
 <p>We need to further format and preprocess our file with a <code>LEfSe</code> script.</p>
-<div class="sourceCode" id="cb37"><pre class="sourceCode bash"><code class="sourceCode bash"><span id="cb37-1"><a href="12-Lefse.html#cb37-1" aria-hidden="true" tabindex="-1"></a><span class="ex">lefse-format_input.py</span> all_num.lefse.bracken all_num.lefse <span class="at">-c</span> 1 <span class="at">-u</span> 2 <span class="at">-o</span> 1000000</span></code></pre></div>
+<div class="sourceCode" id="cb38"><pre class="sourceCode bash"><code class="sourceCode bash"><span id="cb38-1"><a href="12-Lefse.html#cb38-1" aria-hidden="true" tabindex="-1"></a><span class="ex">lefse-format_input.py</span> all_num.lefse.bracken all_num.lefse <span class="at">-c</span> 1 <span class="at">-u</span> 2 <span class="at">-o</span> 1000000</span></code></pre></div>
+<div id="parameters-5" class="section level4 unnumbered hasAnchor">
+<h4>Parameters<a href="12-Lefse.html#parameters-5" class="anchor-section" aria-label="Anchor link to header"></a></h4>
+<p><img src="figures/parameter_purple.png" width="10%" style="display: block; margin: auto;" /></p>
 <ul>
 <li><code>all_num.lefse.bracken</code> : Input <code>Bracken</code> file.</li>
 <li><code>all_num.lefse</code> : Output file formatted for the run_lefse command, which we will soon run.</li>
@@ -330,26 +341,30 @@ code span.wa { color: #60a0b0; font-weight: bold; font-style: italic; } /* Warni
 <li><code>-o 1000000</code> : An integer can be indicated to determine to what size (count sum value) each sample should be normalised to. <code>LEfSe</code> developers recommend 1000000 (1 million) when very low values a present. We generally always use 1 million for consistency.</li>
 </ul>
 </div>
+</div>
 <div id="lefse-run" class="section level2 hasAnchor" number="12.4">
 <h2><span class="header-section-number">12.4</span> LEfSe: run<a href="12-Lefse.html#lefse-run" class="anchor-section" aria-label="Anchor link to header"></a></h2>
-<p><img src="figures/enter_key.png" width="10%" style="display: block; margin: auto;" /></p>
+<p><img src="figures/play_purple.png" width="10%" style="display: block; margin: auto;" /></p>
 <p>Now to run <code>LEfSe.</code> All we need to do is run the command with the formatted input and provide an output file name.</p>
-<div class="sourceCode" id="cb38"><pre class="sourceCode bash"><code class="sourceCode bash"><span id="cb38-1"><a href="12-Lefse.html#cb38-1" aria-hidden="true" tabindex="-1"></a><span class="ex">run_lefse.py</span> all_num.lefse all_num.lefse.out</span></code></pre></div>
+<div class="sourceCode" id="cb39"><pre class="sourceCode bash"><code class="sourceCode bash"><span id="cb39-1"><a href="12-Lefse.html#cb39-1" aria-hidden="true" tabindex="-1"></a><span class="ex">run_lefse.py</span> all_num.lefse all_num.lefse.out</span></code></pre></div>
+<div id="output" class="section level4 unnumbered hasAnchor">
+<h4>Output<a href="12-Lefse.html#output" class="anchor-section" aria-label="Anchor link to header"></a></h4>
 <p>The output file is a tab-delimited file which contains a row for each species. Biomarkers will have the five columns below whilst non-biomarkers will have the first two followed by a "-" .</p>
 <ul>
 <li><strong>Biomarker name</strong></li>
 <li><strong>Log of highest class average</strong>: I.e. get the class with the greater amounts of the biomarker, average the counts and then get the log of this value.</li>
 <li><strong>Class with the greater amounts of biomarker</strong></li>
 <li><strong>LDA effect size</strong>: A statistical figure for <code>LEfSe</code>..</li>
-<li>p-value: Biomarkers must have a p-value of &lt;0.05 to be considered significant.</li>
+<li><strong>p-value</strong>: Biomarkers must have a p-value of &lt;0.05 to be considered significant.</li>
 </ul>
 <p>The <strong>LDA effect</strong> size indicates how much of an effect each biomarker has. The default is to only count a species with an LDA effect size of greater than 2 or less than -2 as a biomarker. The further the LDA effect size is from 0 the greater the effect the species causes.</p>
+</div>
 </div>
 <div id="lefse-visualisation" class="section level2 hasAnchor" number="12.5">
 <h2><span class="header-section-number">12.5</span> LEfSe: visualisation<a href="12-Lefse.html#lefse-visualisation" class="anchor-section" aria-label="Anchor link to header"></a></h2>
 <p><img src="figures/bar_chart_horizontal.png" width="10%" style="display: block; margin: auto;" /></p>
 <p>Next we can visualise the output.</p>
-<div class="sourceCode" id="cb39"><pre class="sourceCode bash"><code class="sourceCode bash"><span id="cb39-1"><a href="12-Lefse.html#cb39-1" aria-hidden="true" tabindex="-1"></a><span class="ex">lefse-plot_res.py</span> <span class="at">--dpi</span> 200 <span class="at">--format</span> png all_num.lefse.out biomarkers.png</span></code></pre></div>
+<div class="sourceCode" id="cb40"><pre class="sourceCode bash"><code class="sourceCode bash"><span id="cb40-1"><a href="12-Lefse.html#cb40-1" aria-hidden="true" tabindex="-1"></a><span class="ex">lefse-plot_res.py</span> <span class="at">--dpi</span> 200 <span class="at">--format</span> png all_num.lefse.out biomarkers.png</span></code></pre></div>
 <ul>
 <li><code>--dpi 200</code> : Dots per inch. This refers to the resolution of the output image. Normally publications want 300 dpi. We’ve chosen 200 as it is good quality and we will not be publishing these results.</li>
 <li><code>--format png</code> : Format of output file. png is a commonly used file format for images.</li>
@@ -357,16 +372,46 @@ code span.wa { color: #60a0b0; font-weight: bold; font-style: italic; } /* Warni
 <li><code>biomarkers.png</code> : Plot showing the LDA scores of the species detected as biomarkers. Colouring shows which class (K or W) the species is found in higher abundance.</li>
 </ul>
 <p>Look at the figure with the program <code>okular</code>:</p>
-<div class="sourceCode" id="cb40"><pre class="sourceCode bash"><code class="sourceCode bash"><span id="cb40-1"><a href="12-Lefse.html#cb40-1" aria-hidden="true" tabindex="-1"></a><span class="ex">okular</span> biomarkers.png</span></code></pre></div>
-<p><strong>Questions</strong>:</p>
-<ul>
-<li>Which species causes the biggest effect in the W class and in the K class?</li>
-<li>Which class has more biomarkers associated with it?</li>
-</ul>
-<p><strong>Note</strong>: In this instance green bars represent biomarkers in higher abundance in the W samples whilst the red bars represent biomarkers in higher abundance in the K samples.</p>
+<div class="sourceCode" id="cb41"><pre class="sourceCode bash"><code class="sourceCode bash"><span id="cb41-1"><a href="12-Lefse.html#cb41-1" aria-hidden="true" tabindex="-1"></a><span class="ex">okular</span> biomarkers.png</span></code></pre></div>
 </div>
-<div id="kraken2-and-bracken-databases" class="section level2 hasAnchor" number="12.6">
-<h2><span class="header-section-number">12.6</span> Kraken2 and Bracken databases<a href="12-Lefse.html#kraken2-and-bracken-databases" class="anchor-section" aria-label="Anchor link to header"></a></h2>
+<div id="lefse-mcqs" class="section level2 hasAnchor" number="12.6">
+<h2><span class="header-section-number">12.6</span> LEfSe: MCQs<a href="12-Lefse.html#lefse-mcqs" class="anchor-section" aria-label="Anchor link to header"></a></h2>
+<p><img src="figures/question_bubble_purple.png" width="10%" style="display: block; margin: auto;" /></p>
+<p>Interrogating the biomarkers.png plot and the all_num.lefse.out file, attempt the below MCQs.</p>
+<p><strong>Note</strong>: In this instance green bars represent biomarkers in higher abundance in the W samples whilst the red bars represent biomarkers in higher abundance in the K samples.</p>
+<ol style="list-style-type: decimal">
+<li>Which species biomarker causes the biggest effect in the <strong>W</strong> class?
+<div id="radio_QXAYJCIDQT" class="webex-radiogroup">
+<label><input type="radio" autocomplete="off" name="radio_QXAYJCIDQT" value="answer"></input> <span><strong>Alistipesshahhii</strong></span></label><label><input type="radio" autocomplete="off" name="radio_QXAYJCIDQT" value=""></input> <span><strong>Lactobacillusruminis</strong></span></label><label><input type="radio" autocomplete="off" name="radio_QXAYJCIDQT" value=""></input> <span><strong>Methanosphaerastadtmanae</strong></span></label>
+</div></li>
+<li>Which species biomarker causes the biggest effect in the <strong>K</strong> class?
+<div id="radio_OONWVDEUII" class="webex-radiogroup">
+<label><input type="radio" autocomplete="off" name="radio_OONWVDEUII" value=""></input> <span><strong>Alistipesshahhii</strong></span></label><label><input type="radio" autocomplete="off" name="radio_OONWVDEUII" value=""></input> <span><strong>Lactobacillusruminis</strong></span></label><label><input type="radio" autocomplete="off" name="radio_OONWVDEUII" value="answer"></input> <span><strong>Methanosphaerastadtmanae</strong></span></label>
+</div></li>
+<li>Which species biomarker (i.e. present in the plot) causes the lowest effect in the <strong>K</strong> class?
+<div id="radio_WPCULRRNHA" class="webex-radiogroup">
+<label><input type="radio" autocomplete="off" name="radio_WPCULRRNHA" value=""></input> <span><strong>Alistipesshahhii</strong></span></label><label><input type="radio" autocomplete="off" name="radio_WPCULRRNHA" value="answer"></input> <span><strong>Lactobacillusruminis</strong></span></label><label><input type="radio" autocomplete="off" name="radio_WPCULRRNHA" value=""></input> <span><strong>Methanosphaerastadtmanae</strong></span></label>
+</div></li>
+<li>Which class has more biomarkers associated with it?
+<div id="radio_QIIDSUVHKP" class="webex-radiogroup">
+<label><input type="radio" autocomplete="off" name="radio_QIIDSUVHKP" value=""></input> <span><strong>Korean</strong></span></label><label><input type="radio" autocomplete="off" name="radio_QIIDSUVHKP" value="answer"></input> <span><strong>Western</strong></span></label>
+</div></li>
+<li>What is the LEfSe p-value for <strong>Oxalobacterformigenes</strong>?
+<div id="radio_FQDBMQRHPM" class="webex-radiogroup">
+<label><input type="radio" autocomplete="off" name="radio_FQDBMQRHPM" value="answer"></input> <span><strong>0.0328692343007</strong></span></label><label><input type="radio" autocomplete="off" name="radio_FQDBMQRHPM" value=""></input> <span><strong>1.39274299091</strong></span></label><label><input type="radio" autocomplete="off" name="radio_FQDBMQRHPM" value=""></input> <span><strong>2.08988829344</strong></span></label>
+</div></li>
+<li>What is the Log of highest class average for <strong>Pantoearwandensis</strong>?
+<div id="radio_RVZKIWWCUR" class="webex-radiogroup">
+<label><input type="radio" autocomplete="off" name="radio_RVZKIWWCUR" value=""></input> <span><strong>0.0328692343007</strong></span></label><label><input type="radio" autocomplete="off" name="radio_RVZKIWWCUR" value="answer"></input> <span><strong>1.39274299091</strong></span></label><label><input type="radio" autocomplete="off" name="radio_RVZKIWWCUR" value=""></input> <span><strong>2.08988829344</strong></span></label>
+</div></li>
+<li>What is the LDA effect size for <strong>Eggerthellalenta</strong>?
+<div id="radio_JSOVNNEXJJ" class="webex-radiogroup">
+<label><input type="radio" autocomplete="off" name="radio_JSOVNNEXJJ" value=""></input> <span><strong>0.0328692343007</strong></span></label><label><input type="radio" autocomplete="off" name="radio_JSOVNNEXJJ" value=""></input> <span><strong>1.39274299091</strong></span></label><label><input type="radio" autocomplete="off" name="radio_JSOVNNEXJJ" value="answer"></input> <span><strong>2.08988829344</strong></span></label>
+</div></li>
+</ol>
+</div>
+<div id="kraken2-and-bracken-databases" class="section level2 hasAnchor" number="12.7">
+<h2><span class="header-section-number">12.7</span> Kraken2 and Bracken databases<a href="12-Lefse.html#kraken2-and-bracken-databases" class="anchor-section" aria-label="Anchor link to header"></a></h2>
 <p><img src="figures/database.png" width="15%" style="display: block; margin: auto;" /></p>
 <p>In your own future analysis you will need to create your own <code>Kraken2</code> and <code>Bracken</code> databases. Please sse the following links on information for this:</p>
 <ul>
