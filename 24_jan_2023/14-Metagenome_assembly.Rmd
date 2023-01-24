@@ -1,0 +1,224 @@
+# (PART\*) Assembly Approach {-}
+
+# Metagenome assembly {#metagenomeassembly}
+```{r, fig.align = 'center',out.width= '30%', echo=FALSE }
+knitr::include_graphics(path = "figures/jigsaw.png", auto_pdf = TRUE)
+``` 
+
+So far we have directly analysed the read data itself which is perfectly fine for taxonomic profiling and for certain methods of functional profiling. However, Illumina reads are generally short and therefore can not provide us with much data on larger constructs that are in the metagenomic samples, e.g. genes. While it is possible to predict from which gene a sequence read might originate, the short nature of the query can sometimes lead to ambiguous results. 
+
+Additionally, depending on the application it can become computationally intensive to analyse large numbers of reads. Here, we are only using samples with 1 million reads. Some metagenome samples consist of 50-100 million+ read pairs. If such a sample belonged to a set of 100 samples, that would be up to 10 billion read pairs, or 2 trillion bases of sequence data, with many of these being redundant.
+
+For this reason, it is sometimes advantageous to assemble the reads into contigs, using a meta-genome assembler. This has the dual effect of:
+
+- Reducing the overall size of the data for analysis. If a metagenome was sequenced at 50x depth, then by assembling it you could theoretically reduce the amount of sequence to analyse by 50-fold.
+- Increase the size of the fragments you will analyse. This is the main advantage of an assembly, as the ~100 bp reads can be pieced together to form 100,000 kb+ contigs. These contigs will contain complete genes, operons and regulatory elements: Reconstructed genome sections.
+
+Here, we will carry out a couple of assemblies on our dataset.
+
+## Metagenome assembly: Conda
+```{r, fig.align = 'center',out.width= '10%', echo=FALSE }
+knitr::include_graphics(path = "figures/conda.png", auto_pdf = TRUE)
+```
+
+We will use the `shotgun_meta` conda environment so use a terminal where this is activated or open a new one and run `. useshotgun`.
+
+## A primer on short read assembly
+```{r, fig.align = 'center',out.width= '15%', echo=FALSE }
+knitr::include_graphics(path = "figures/dna_laptop.png", auto_pdf = TRUE)
+``` 
+
+Illumina reads are too short and numerous to use traditional overlap-layout-consensus assemblers as such an approach would be far too computationally intensive. Instead, we use De Bruijn graph based assemblers. Briefly, these operate as follows:
+
+1. All reads are broken down into k-length overlapping fragments (k-mers). e.g. if we choose a k-mer size of 5 bp, the following two sequences (blue) would be broken down into the k-mers below them (red):
+
+```{r, fig.align = 'center',out.width= '40%', echo=FALSE }
+knitr::include_graphics(path = "figures/reads_aligned.png", auto_pdf = TRUE)
+``` 
+
+2. All k-mers are linked to other k-mers which match with a k-1 length overlap (i.e. that overlap by all but one base):
+
+```{r, fig.align = 'center',out.width= '80%', echo=FALSE }
+knitr::include_graphics(path = "figures/graph_simple.png", auto_pdf = TRUE)
+``` 
+
+3. Paths are routed through the graph and longer contigs are generated:
+
+```{r, fig.align = 'center',out.width= '80%', echo=FALSE }
+knitr::include_graphics(path = "figures/graph_complex.png", auto_pdf = TRUE)
+``` 
+
+The example here is a vast oversimplification of the complexity of a De Bruijn graph (i.e. there are no branches!). Routing through the graph is never as simple as this as some k-mers will lead to multiple k-mers, which can result in the break point of a contig. This is especially true for complex metagenomic data.
+
+Generally speaking, the shorter the k-mer, the more branches there will be, the trickier the graph is to resolve, so the resulting contigs are smaller. Assemblers usually perform better with longer k-mer lengths but even then there might not be enough depth of sequencing to generate all k-mers that form overlaps, therefore leading to break points. Finding the right k-mer size usually involves testing several. 
+
+Fortunately, the assembler we will use, MEGAHIT, allows us to build an assembly using multiple k-mer lengths iteratively. The other great advantage about MEGAHIT is that it is quick and efficient.  We will use MEGAHIT on our data soon, but first there is an additional processing step for our sequences...
+
+## Stitching read pairs
+```{r, fig.align = 'center',out.width= '15%', echo=FALSE }
+knitr::include_graphics(path = "figures/stitch.png", auto_pdf = TRUE)
+``` 
+
+As mentioned, longer k-mers generally perform better, but as our maximum read length is 100 bp, we are limited to a maximum k-mer length of 99 bp. However, we can get even longer k-mers if we stitch our read pairs together.
+
+__Note__: This method will not work if your reads have no overlap. If you are not sure if your reads have overlap ask the team who sequenced them.
+
+Remember that a read pair consists of two sequences read from each end of a fragment of DNA (or RNA). If the two sequences meet in the middle of the fragment and then overlap, there will be a region of homology which we can use to merge the two reads in the pair together (See next image).
+
+First, we obtain our forward and reverse reads, derived from different ends of the same fragment. Second, we look for sufficient overlap between the 3' ends of our sequences. Third, if there is sufficient overlap, we combine, or stitch, the two reads together to form one long sequence.
+
+```{r, fig.align = 'center',out.width= '40%', echo=FALSE }
+knitr::include_graphics(path = "figures/merging_paired_reads.png", auto_pdf = TRUE)
+``` 
+
+Once we have longer stitched reads, we can increase the k-mer length for our assembly. 
+
+There are a number of pieces of software that can be used to stitch reads (e.g. `Pear`,  `Pandaseq`) but today we will use one called `FLASH`:
+
+Make a new output directory for the stitched reads and run `FLASH`:
+
+```{bash eval=FALSE}
+#Change directory to home
+cd ~
+#Make and move into new directory
+mkdir 5-Stitched
+cd 5-Stitched
+#Run flash
+flash  -o K1 -z -t 12 -d . \
+../2-Trimmed/K1_R1.fq.gz ../2-Trimmed/K1_R2.fq.gz
+```
+
+#### Parameters {-}
+
+- `-o`: Sets the prefix of the output files.
+- `-z`: The input is zipped.
+- `-t`: Number of threads to use.
+- `-d`: The directory the output files will be placed.
+- The last 2 flag-less parameters are the forward and reverse read files for stitching.
+
+#### Output {-}
+
+Once `FLASH` has finished running, it will display on screen how well the stitching process went, in this case a low amount of reads were combined. Have a look what files have been generated.
+
+```{bash eval=FALSE}
+ls
+```
+
+We have three new fastq.gz files. One containing the stitched reads (`K1.extendedFrags.fastq.gz`) and two containing the reads from pairs that could not be combined (`K1.notCombined_1.fastq.gz` and `K1.notCombined_2.fastq.gz)`.
+
+We can also see what the new read lengths are:
+
+```{bash eval=FALSE}
+less K1.histogram
+```
+
+Scroll down with the down key and you will see that we are looking at a histogram showing the proportion of stitched reads at different lengths. 
+
+#### MCQs {-}
+
+```{r, echo = FALSE}
+opts_p <- c("__101__", "__177__", answer="__188__")
+```
+1. What length has the highest proportion of stitched reads? `r longmcq(opts_p)`
+
+```{r, echo = FALSE}
+opts_p <- c(answer="__101__", "__177__", "__188__")
+```
+1. What length has the lowest proportion of stitched reads? `r longmcq(opts_p)`
+
+## Assembly
+```{r, fig.align = 'center',out.width= '20%', echo=FALSE }
+knitr::include_graphics(path = "figures/assembly_line.png", auto_pdf = TRUE)
+``` 
+
+With our stitched and unstitched read can start assembling a metagenome for this sample.
+
+Create a new directory to store our assembly in. 
+
+```{bash eval=FALSE}
+cd ..
+mkdir 6-Assembly
+cd 6-Assembly
+```
+
+Now run the metagenome assembler `MEGAHIT` using our newly stitched read data.
+
+```{bash eval=FALSE}
+megahit \
+-r ../5-Stitched/K1.extendedFrags.fastq.gz \
+-1 ../5-Stitched/K1.notCombined_1.fastq.gz \
+-2 ../5-Stitched/K1.notCombined_2.fastq.gz \
+-o K1 \
+-t 12 \
+--k-list 29,49,69,89,109,129,149,169,189
+```
+
+#### Parameters {-}
+
+- `-r`: Single-end reads to be used for assembly. We are using our successfully stitched reads.
+- `-1`: Forward reads of paired end reads to be used for assembly. We are using the reads that did not stitch as they still have useful information.
+- `-2`: Reverse reads of paired end reads to be used for assembly. We are using the reads that did not stitch as they still have useful information.
+- `-o`: Output directory.
+- `-t`: Number of threads to be used for process.
+- `--k-list`: K-mer list.
+
+The __k-mer list__ instructs `MEGAHIT` to first generate an assembly using a k-mer size of 29 bp and when that is complete, integrate the results into an assembly using a k-mer size of 49 bp, and so on up to a final iteration using a k-mer size of 189 bp. This large range of k-mer lengths should give us a good assembly, given the data. However, it may take a while to run. This might be a good time to read on or take a break whilst the command runs. 
+
+If you need a command prompt (your current one is busy because MEGAHIT is running), right click on the main screen, choose `Applications` -> `Shell` -> `bash`.
+
+Once the assembly is completed, we can look at the output FASTA file containing the contigs:
+
+```{bash eval=FALSE}
+less K1/final.contigs.fa
+```
+
+## QUAST
+```{r, fig.align = 'center',out.width= '15%', echo=FALSE }
+knitr::include_graphics(path = "figures/inspect.png", auto_pdf = TRUE)
+``` 
+
+We can also generate some metrics based on the assembly.
+
+Due to python version conflict we need to use another conda environment.
+
+Open a new terminal (right click on the main screen, choose `Applications` -> `Shell` -> `bash`) and run the below.
+
+```{bash eval=FALSE}
+#use script to activate conda env
+. usegenoassess
+```
+
+We will use `QUAST` for genome contiguity assessment but first we will change directory to `6-Assembly` and create a directory for the `QUAST` output.
+
+```{bash eval=FALSE}
+#Change directory
+cd ~/6-Assembly
+#Create QUAST output directory
+#The option -p will create a directory and any required
+#parent directories
+mkdir -p quast/K1
+```
+
+The `-p` option of `mkdir` will cause the command to create any parent directories that are required to create the noted directory. I.e. `quast` will be created so `K1` can be created.
+
+Now to run QUAST. 
+
+```{bash eval=FALSE}
+#Generate contiguity statistics
+quast -o quast/K1 K1/final.contigs.fa
+#View QUAST html report
+firefox quast/K1/report.html
+```
+
+The report tells us quite a bit about the assembly quality. Two definitions that you may not be aware of are N50 and N50 length (or, somewhat confusingly, L50 and N50, respectively!). If we were to order our contigs from largest to smallest, and total up the sizes from biggest downwards, the contig we reach where our total is 50% of the size of the whole assembly is the N50 contig (the smaller the number the better). The N50 length is the length of this contig; a weighted median contig length.
+
+```{r, fig.align = 'center',out.width= '40%', echo=FALSE }
+knitr::include_graphics(path = "figures/n50_n90.png", auto_pdf = TRUE)
+``` 
+
+__Questions__
+- How do the contig metrics compare to the original reads? 
+
+- Now we have an assembly, albeit not a brilliant one due to us only having used 1 million reads, we can start to explore it.
+
+There is also a metaQUAST specifically for metagenome assemblies but it requires reference assemblies be provided.

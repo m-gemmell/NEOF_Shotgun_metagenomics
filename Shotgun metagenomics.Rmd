@@ -220,10 +220,10 @@ knitr::knit_hooks$set(webex.hide = function(before, options, envir) {
   }
 })
 ```
-# Before we start
+# Startup & conda
 ```{r, fig.align = 'center',out.width= '20%', echo=FALSE }
-knitr::include_graphics(path = "figures/start.png", auto_pdf = TRUE)
-``` 
+knitr::include_graphics(path = "figures/conda.png", auto_pdf = TRUE)
+```
 
 During this practical you will use a number of installed programs and scripts. To ensure that the system knows where to look for the scripts, run the following command (ensure this starts with a full stop and a space `. `):
 
@@ -239,7 +239,7 @@ Also, there’s a chance you’re currently not in your home directory, so let�
 cd ~
 ```
 
-<!--chapter:end:04-Start.Rmd-->
+<!--chapter:end:04-Start_conda.Rmd-->
 
 ```{r include=FALSE, cache=FALSE}
 suppressPackageStartupMessages({
@@ -1756,18 +1756,37 @@ The example here is a vast oversimplification of the complexity of a De Bruijn g
 
 Generally speaking, the shorter the k-mer, the more branches there will be, the trickier the graph is to resolve, so the resulting contigs are smaller. Assemblers usually perform better with longer k-mer lengths but even then there might not be enough depth of sequencing to generate all k-mers that form overlaps, therefore leading to break points. Finding the right k-mer size usually involves testing several. 
 
-Fortunately, the assembler we will use, MEGAHIT, allows us to build an assembly using multiple k-mer lengths iteratively. The other great advantage about MEGAHIT is that it is quick and efficient.  We will use MEGAHIT on our data soon, but first there is an additional processing step for our sequences...
+Fortunately, the assembler we will use, `MEGAHIT`, allows us to build an assembly using multiple k-mer lengths iteratively. The other great advantage about `MEGAHIT` is that it is quick and efficient.  We will use `MEGAHIT` on our data soon, but first there is an additional processing step for our sequences...
 
-## Stitching read pairs
+<!--chapter:end:14-Metagenome_assembly.Rmd-->
+
+```{r include=FALSE, cache=FALSE}
+suppressPackageStartupMessages({
+  library(webexercises)
+})
+
+knitr::knit_hooks$set(webex.hide = function(before, options, envir) {
+  if (before) {
+    if (is.character(options$webex.hide)) {
+      hide(options$webex.hide)
+    } else {
+      hide()
+    }
+  } else {
+    unhide()
+  }
+})
+```
+# Stitching read pairs
 ```{r, fig.align = 'center',out.width= '15%', echo=FALSE }
 knitr::include_graphics(path = "figures/stitch.png", auto_pdf = TRUE)
 ``` 
 
-As mentioned, longer k-mers generally perform better, but as our maximum read length is 100 bp, we are limited to a maximum k-mer length of 99 bp. However, we can get even longer k-mers if we stitch our read pairs together.
+Longer k-mers generally perform better for assemblies. However, our maximum read length is 100 bp so we are limited to a maximum k-mer length of 99 bp. Thankfully we can get even longer k-mers if we stitch our read pairs together.
 
 __Note__: This method will not work if your reads have no overlap. If you are not sure if your reads have overlap ask the team who sequenced them.
 
-Remember that a read pair consists of two sequences read from each end of a fragment of DNA (or RNA). If the two sequences meet in the middle of the fragment and then overlap, there will be a region of homology which we can use to merge the two reads in the pair together (See next image).
+A read pair consists of two sequences read from each end of a fragment of DNA (or RNA). If the two sequences meet and overlap in the middle of the fragment, there will be a region of homology. We can use this to merge the two reads together (See next image).
 
 First, we obtain our forward and reverse reads, derived from different ends of the same fragment. Second, we look for sufficient overlap between the 3' ends of our sequences. Third, if there is sufficient overlap, we combine, or stitch, the two reads together to form one long sequence.
 
@@ -1778,6 +1797,11 @@ knitr::include_graphics(path = "figures/merging_paired_reads.png", auto_pdf = TR
 Once we have longer stitched reads, we can increase the k-mer length for our assembly. 
 
 There are a number of pieces of software that can be used to stitch reads (e.g. `Pear`,  `Pandaseq`) but today we will use one called `FLASH`:
+
+## FLASH: run
+```{r, fig.align = 'center',out.width= '10%', echo=FALSE }
+knitr::include_graphics(path = "figures/play_red.png", auto_pdf = TRUE)
+``` 
 
 Make a new output directory for the stitched reads and run `FLASH`:
 
@@ -1793,6 +1817,9 @@ flash  -o K1 -z -t 12 -d . \
 ```
 
 #### Parameters {-}
+```{r, fig.align = 'center',out.width= '10%', echo=FALSE }
+knitr::include_graphics(path = "figures/parameter_red.png", auto_pdf = TRUE)
+```
 
 - `-o`: Sets the prefix of the output files.
 - `-z`: The input is zipped.
@@ -1800,7 +1827,10 @@ flash  -o K1 -z -t 12 -d . \
 - `-d`: The directory the output files will be placed.
 - The last 2 flag-less parameters are the forward and reverse read files for stitching.
 
-#### Output {-}
+## FLASH: Output
+```{r, fig.align = 'center',out.width= '10%', echo=FALSE }
+knitr::include_graphics(path = "figures/output_file_red.png", auto_pdf = TRUE)
+``` 
 
 Once `FLASH` has finished running, it will display on screen how well the stitching process went, in this case a low amount of reads were combined. Have a look what files have been generated.
 
@@ -1816,12 +1846,53 @@ We can also see what the new read lengths are:
 less K1.histogram
 ```
 
-Scroll down with the down key and you will see that we are looking at a histogram showing the proportion of reads at different lengths. We can now start assembling our stitched reads for this sample.
+Scroll down with the down key and you will see that we are looking at a histogram showing the proportion of stitched reads at different lengths. 
 
-## Assembly
+## FLASH: MCQs
+```{r, fig.align = 'center',out.width= '10%', echo=FALSE }
+knitr::include_graphics(path = "figures/question_bubble_red.png", auto_pdf = TRUE)
+```
+
+```{r, echo = FALSE}
+opts_p <- c("__101__", "__177__", answer="__188__")
+```
+1. What length has the highest proportion of stitched reads? `r longmcq(opts_p)`
+
+```{r, echo = FALSE}
+opts_p <- c(answer="__101__", "__177__", "__188__")
+```
+2. What length has the lowest proportion of stitched reads? `r longmcq(opts_p)`
+
+<!--chapter:end:15-Stitching_reads.Rmd-->
+
+```{r include=FALSE, cache=FALSE}
+suppressPackageStartupMessages({
+  library(webexercises)
+})
+
+knitr::knit_hooks$set(webex.hide = function(before, options, envir) {
+  if (before) {
+    if (is.character(options$webex.hide)) {
+      hide(options$webex.hide)
+    } else {
+      hide()
+    }
+  } else {
+    unhide()
+  }
+})
+```
+# Megahit Assembly
 ```{r, fig.align = 'center',out.width= '20%', echo=FALSE }
-knitr::include_graphics(path = "figures/assembly_line.png", auto_pdf = TRUE)
+knitr::include_graphics(path = "figures/puzzle.png", auto_pdf = TRUE)
 ``` 
+
+We will use our stitched and unstitched reads to produce an assembly with`MEGAHIT`. 
+
+## MEGAHIT
+```{r, fig.align = 'center',out.width= '10%', echo=FALSE }
+knitr::include_graphics(path = "figures/play_blue.png", auto_pdf = TRUE)
+```
 
 Create a new directory to store our assembly in. 
 
@@ -1843,11 +1914,21 @@ megahit \
 --k-list 29,49,69,89,109,129,149,169,189
 ```
 
-Here, you have instructed `MEGAHIT` to use both the stitched and unstitched reads, to output the assembly in a subdirectory called K1 and to use 12 CPUs. 
+#### Parameters {-}
+```{r, fig.align = 'center',out.width= '10%', echo=FALSE }
+knitr::include_graphics(path = "figures/parameter_blue.png", auto_pdf = TRUE)
+```
 
-The last option `--k-list` instructs `MEGAHIT` to first generate an assembly using a k-mer size of 29 bp and when that is complete, integrate the results into an assembly using a k-mer size of 49 bp, and so on up to a final iteration using a k-mer size of 189 bp. This large range of k-mer lengths should give us a good assembly, given the data. However, it may take a while to run so this might be a good time to read on. 
+- `-r`: Single-end reads to be used for assembly. We are using our successfully stitched reads.
+- `-1`: Forward reads of paired end reads to be used for assembly. We are using the reads that did not stitch as they still have useful information.
+- `-2`: Reverse reads of paired end reads to be used for assembly. We are using the reads that did not stitch as they still have useful information.
+- `-o`: Output directory.
+- `-t`: Number of threads to be used for process.
+- `--k-list`: K-mer list.
 
-If you need a command prompt (your current one is gone because MEGAHIT is running), right click on the main screen, choose `Applications` -> `Shell` -> `bash`.
+The __k-mer list__ instructs `MEGAHIT` to first generate an assembly using a k-mer size of 29 bp and when that is complete, integrate the results into an assembly using a k-mer size of 49 bp, and so on up to a final iteration using a k-mer size of 189 bp. This large range of k-mer lengths should give us a good assembly, given the data. However, it may take a while to run. This might be a good time to read on or take a break whilst the command runs. 
+
+If you need a command prompt (your current one is busy because MEGAHIT is running), right click on the main screen, choose `Applications` -> `Shell` -> `bash`.
 
 Once the assembly is completed, we can look at the output FASTA file containing the contigs:
 
@@ -1855,14 +1936,21 @@ Once the assembly is completed, we can look at the output FASTA file containing 
 less K1/final.contigs.fa
 ```
 
+There is not much to see. When happy, quit the `less` (`q`) and carry on to `QUAST`.
+
 ## QUAST
 ```{r, fig.align = 'center',out.width= '15%', echo=FALSE }
 knitr::include_graphics(path = "figures/inspect.png", auto_pdf = TRUE)
 ``` 
 
-We can also generate some metrics based on the assembly.
+We can generate some metrics based on the assembly with `QUAST`.
 
-Due to python version conflict we need to use another conda environment.
+### QUAST: conda
+```{r, fig.align = 'center',out.width= '10%', echo=FALSE }
+knitr::include_graphics(path = "figures/conda.png", auto_pdf = TRUE)
+```
+
+Due to a python version conflict we need to use another conda environment.
 
 Open a new terminal (right click on the main screen, choose `Applications` -> `Shell` -> `bash`) and run the below.
 
@@ -1882,31 +1970,88 @@ cd ~/6-Assembly
 mkdir -p quast/K1
 ```
 
-The `-p` option of `mkdir` will cause the command to create any parent directories that are required to create the noted directory. I.e. `quast` will be created so `K1` can be created.
+### QUAST: run
+```{r, fig.align = 'center',out.width= '10%', echo=FALSE }
+knitr::include_graphics(path = "figures/play_green.png", auto_pdf = TRUE)
+``` 
 
-Now to run QUAST. 
+Now to run `QUAST`. 
 
 ```{bash eval=FALSE}
-#Generate contiguity statistics
 quast -o quast/K1 K1/final.contigs.fa
-#View QUAST html report
+```
+
+### QUAST: visualise
+```{r, fig.align = 'center',out.width= '10%', echo=FALSE }
+knitr::include_graphics(path = "figures/eye_green.png", auto_pdf = TRUE)
+```
+
+`QUAST` will run relatively quickly. Once complete view the output with `firefox`.
+
+```{bash eval=FALSE}
 firefox quast/K1/report.html
 ```
 
-The report tells us quite a bit about the assembly quality. Two definitions that you may not be aware of are N50 and N50 length (or, somewhat confusingly, L50 and N50, respectively!). If we were to order our contigs from largest to smallest, and total up the sizes from biggest downwards, the contig we reach where our total is 50% of the size of the whole assembly is the N50 contig (the smaller the number the better). The N50 length is the length of this contig; a weighted median contig length.
+The report tells us quite a bit about the assembly quality. Two definitions that you may not be aware are __N50__ and __L50__. To calculate these values:
+
+- Order the contigs from largest to smallest.
+- Total up the sizes from biggest downwards.
+- The contig we reach where our total is at least 50% of the size of the whole assembly is the N50 contig.
+- __N50__ equals the length of the N50 contig. 
+- __L50__ is the number of contigs with a length equal to or greater than N50.
 
 ```{r, fig.align = 'center',out.width= '40%', echo=FALSE }
 knitr::include_graphics(path = "figures/n50_n90.png", auto_pdf = TRUE)
 ``` 
 
+### QUAST: MCQs
+```{r, fig.align = 'center',out.width= '10%', echo=FALSE }
+knitr::include_graphics(path = "figures/question_bubble_green.png", auto_pdf = TRUE)
+```
+
+```{r, echo = FALSE}
+opts_p <- c("__39.88__", "__18,650__",answer="__16,187,295__")
+```
+1. What is the total length of the assembly? `r longmcq(opts_p)`
+
+```{r, echo = FALSE}
+opts_p <- c("__39.88__", answer="__18,650__","__16,187,295__")
+```
+2. How many contigs does the assembly consist of? `r longmcq(opts_p)`
+
+```{r, echo = FALSE}
+opts_p <- c(answer="__39.88__", "__18,650__","__16,187,295__")
+```
+3. What is the GC% of the assembly? `r longmcq(opts_p)`
+
+```{r, echo = FALSE}
+opts_p <- c(answer="__1,363__","__2,178__","__87,586__")
+```
+4. What is the N50 of the assembly? `r longmcq(opts_p)`
+
+```{r, echo = FALSE}
+opts_p <- c("__1,363__",answer="__2,178__","__87,586__")
+```
+5. What is the L50 of the assembly? `r longmcq(opts_p)`
+
+```{r, echo = FALSE}
+opts_p <- c("__1,363__","__2,178__",answer="__87,586__")
+```
+6. what is the length of the largest contig? `r longmcq(opts_p)`
+
 __Questions__
 - How do the contig metrics compare to the original reads? 
 
-- Now we have an assembly, albeit not a brilliant one due to us only having used 1 million reads, we can start to explore it.
+## Metagenome assembly summary
+```{r, fig.align = 'center',out.width= '10%', echo=FALSE }
+knitr::include_graphics(path = "figures/sum_black.png", auto_pdf = TRUE)
+```
 
-There is also a metaQUAST specifically for metagenome assemblies but it requires reference assemblies be provided.
+We now have an assembly. It is not a brilliant one due to us only having used 1 million reads. In real analysis we would prefer fewer but longer contigs. We will explore some tools we can use with our metagenome assembly in the next chapters.
 
-<!--chapter:end:14-Metagenome_assembly.Rmd-->
+There is also a `metaQUAST` specifically for metagenome assemblies but it requires reference assemblies be provided.
+
+<!--chapter:end:16_Megahit.Rmd-->
 
 ```{r include=FALSE, cache=FALSE}
 suppressPackageStartupMessages({
@@ -2034,7 +2179,9 @@ df <- read.table("K1.depth.txt", header=TRUE, check.names=FALSE)
 summary(df)
 ```
 
-We can see the numbers of the `contigLen` and `totalAvgDepth` are very low. However, this is most likely due to a bunch of short low coverage contigs which will be ignored by `MetaBAT2`. Therefore we will remove rows with information on contigs shorter than 1500 and rerun the summary. `MetaBAT2`'s documentation dictates the minimum contig length should be >=1500 with its default being 2500.
+The last command gave us summary information of all the columns. This includes the minimum, maximum, mean, median, and Inter-Quartile Range (IQR) values. 
+
+We can see the values of the `contigLen` and `totalAvgDepth` are very low. However, this is most likely due to a bunch of short and low coverage contigs which will be ignored by `MetaBAT2`. Therefore we will remove rows with information on contigs shorter than 1500 and rerun the summary. `MetaBAT2`'s documentation dictates the minimum contig length should be >=1500 with its default being 2500.
 
 ```{r eval=FALSE}
 #Set the new object "df_min1500len" as all rows
@@ -2045,7 +2192,7 @@ df_min1500len <- df[df$contigLen >= 1500,]
 summary(df_min1500len)
 ```
 
-That is looking better. The minimum average coverage for `MetaBAT2` is 1 and our minimum is higher than that. Now you can quit R and continue.
+That is looking better. The minimum average coverage for `MetaBAT2` is 1 and our minimum value is 2.844 with a maximum of 92.967. Now you can quit R and continue.
 
 ```{r eval=FALSE}
 #quit R
@@ -2057,7 +2204,7 @@ __Note__: One of the reasons for our short contigs is that we only used a subset
 
 ### MetaBAT2: run
 ```{r, fig.align = 'center',out.width= '10%', echo=FALSE }
-knitr::include_graphics(path = "figures/enter_key.png", auto_pdf = TRUE)
+knitr::include_graphics(path = "figures/play_orange.png", auto_pdf = TRUE)
 ``` 
 
 With our assembly and its depth information we can run `MetaBAT2` for binning.
@@ -2073,7 +2220,24 @@ metabat2 \
 --minContig 1500
 ```
 
-List the contents of the output directory and you'll see there are 2 files with the prefix of `K1`. These are the 2 bins that will hopefully contain 1 MAG (Metagenome-Assembled Genome).
+#### Parameters {-}
+```{r, fig.align = 'center',out.width= '10%', echo=FALSE }
+knitr::include_graphics(path = "figures/parameter_orange.png", auto_pdf = TRUE)
+```
+
+- `--inFile`: Input metagenome assembly fasta file.
+- `--outFile`: Prefix of output files.
+- `--abdFile`: Base depth file.
+- `--minContig`: Minimum size of contigs to be used for binning.
+  - The default is 2500.
+  - We used the minimum value of 1500 as we are using tutorial data. We recommend using the default in your own analysis.
+
+### MetaBAT2: output
+```{r, fig.align = 'center',out.width= '10%', echo=FALSE }
+knitr::include_graphics(path = "figures/output_file_orange.png", auto_pdf = TRUE)
+``` 
+
+List the contents of the output directory and you'll see there are 2 fasta files with the prefix of `K1`. These are the 2 bins that will hopefully contain 1 MAG (Metagenome-Assembled Genome).
 
 ```{bash eval=FALSE}
 ls bins
@@ -2225,7 +2389,7 @@ q()
 
 It is always useful to know the quality of your bins so you know which are more reliable than others. With that information you can be more or less certain when concluding your findings.
 
-<!--chapter:end:15-Genome_binning.Rmd-->
+<!--chapter:end:17-Genome_binning.Rmd-->
 
 ```{r include=FALSE, cache=FALSE}
 suppressPackageStartupMessages({
@@ -2530,7 +2694,7 @@ grep "PWY-6972" *minpath | less
 
 With this file you can then investigate what bins have which pathways. Additionally, with more samples analysed you can determine which samples have which pathways present.
 
-<!--chapter:end:16-Assembly_functional_annotation.Rmd-->
+<!--chapter:end:18-Assembly_functional_annotation.Rmd-->
 
 ```{r include=FALSE, cache=FALSE}
 suppressPackageStartupMessages({
@@ -2637,5 +2801,5 @@ wget -O W1_R1.fastq.gz ftp://ftp.sra.ebi.ac.uk/vol1/fastq/ERR505/ERR505090/ERR50
 wget -O W1_R2.fastq.gz ftp://ftp.sra.ebi.ac.uk/vol1/fastq/ERR505/ERR505090/ERR505090_2.fastq.gz
 ```
 
-<!--chapter:end:17-Appendix.Rmd-->
+<!--chapter:end:19-Appendix.Rmd-->
 

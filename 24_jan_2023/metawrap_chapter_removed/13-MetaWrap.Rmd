@@ -1,0 +1,47 @@
+# MetaWRAP {#metawrap}
+```{r, fig.align = 'center',out.width= '20%', echo=FALSE }
+knitr::include_graphics(path = "figures/mummy.png", auto_pdf = TRUE)
+``` 
+
+`MetaWRAP` is a very useful program with many tools for metagenome analysis. It contains wrapper scripts, scripts that utilise other programs (e.g. `MEGAHIT`, `CONCOCT`, `Prokka`, etc.). 
+
+`MetaWRAP` can be used to carry out an entire metagenome assembly/co-assembly approach workflow. Its processes include:
+
+- Read QC
+- Metagenome assembly
+- Taxonomic annotation
+- Binning
+- Bin refinement
+- Bin reassembly
+- Bin quantification
+- Blobology
+- Bin taxonomy classification
+- Bin functional annotation
+
+## Tutorial
+
+As an extra for this workshop we have provided the files and an environment on the webVNC to carry out the `MetaWRAP` online tutorial:
+
+https://github.com/bxlab/metaWRAP/blob/master/Usage_tutorial.md
+
+Follow the below instructions to make a new directory and make a symbolic link to the files that you would otherwise have to download in step 0 of the tutorial.
+
+__Note__: The below code section must be carried out outside on another terminal than your `metawrap` terminal.
+
+```{bash eval=FALSE}
+mkdir -p ~/MetaWRAP_tut/RAW_READS
+cd ~/MetaWRAP_tut
+cp /pub39/tea/matthew/NEOF/Shotgun_metagenomics/metawrap/* RAW_READS
+```
+
+Now you can carry on with the online tutorial, starting from step 1, if you wish using your `MetaWRAP` terminal. Instructions on activating the environment can be found [here](#prokka_conda).
+
+__Notes__: 
+
+- This has not been fully tested and the environment may not fully work. This is the joys of bioinformatics.
+- Our machine does not have 96 cores/threads, therefore use `-t 12` instead of `-t 96` when present.
+- For __STEP 3__ instead of using `kraken1` use `kraken2` with the following command:
+
+```{bash eval=FALSE}
+metawrap kraken2 -o KRAKEN -t 96 -s 1000000 CLEAN_READS/ERR*fastq ASSEMBLY/final_assembly.fasta
+```

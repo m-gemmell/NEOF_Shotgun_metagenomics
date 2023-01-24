@@ -1,0 +1,175 @@
+# LEfSe biomarker detection
+```{r, fig.align = 'center',out.width= '15%', echo=FALSE }
+knitr::include_graphics(path = "figures/lefse.png", auto_pdf = TRUE)
+```
+
+We will use `LEfSe` (Linear discriminant analysis Effect Size) to determine which taxa can most likely explain the differences between the Western and Korean diet. `LEfSe` couples standard tests for statistical significance with additional tests encoding biological consistency and effect relevance. It can be used with other features such as organisms, clades, operational taxonomic units, genes, or functions.
+
+In essence it allows for the detection of biomarkers when comparing sample groups. In the `LEfSe` terminology the sample groups are called the class.
+
+## LEfSe: add metadata {#kraken2_lefse_metadata}
+```{r, fig.align = 'center',out.width= '10%', echo=FALSE }
+knitr::include_graphics(path = "figures/header.png", auto_pdf = TRUE)
+```
+
+We need to add metadata to our `Bracken` file to be ready for `LEfSe.` First we will copy the file so we have a backup in case we do anything wrong.
+
+```{bash eval=FALSE}
+cp all_num.bracken all_num.lefse.bracken
+```
+
+Using your favourite text editor (e.g. `nano`, `vim`, etc.) add the following line to the top of your `all_num.lefse.bracken` file. The words are separated by tabs. If you are not sure how to carry out this task please ask a demonstrator.
+
+__diet	K	K	K	K	K	K	K	K	K	K	K	K	W	W	W	W	W	W	W	W	W	W	W	W__
+
+__Note__: The above is __diet__ followed by 12 __K__ and 12 __W__.
+
+The singular line should match the order of your samples within the file. This is the metadata line that `LEfSe` will use to determine which samples belong to each sample group, and therefore which to compare. In this case it is Korean diet samples versus Western diet samples.
+
+`r hide("Issues with creating file?")`
+If you are having issues with creating and editing the file `all_num.lefse.bracken` you can copy a pre-made version.
+```{bash, eval=FALSE}
+cp /pub39/tea/nsc006/Shotgun_metagenomics/lefse/all_num.lefse.bracken
+```
+`r unhide()`
+
+## LEfSe: conda
+```{r, fig.align = 'center',out.width= '10%', echo=FALSE }
+knitr::include_graphics(path = "figures/conda.png", auto_pdf = TRUE)
+```
+
+`LEfSe` requires python2 whilst we have been using packages that required python3. We therefore need to use a different `conda` environment. We are currently using the `conda` env called `shotgun_meta` as represented by `(shotgun_meta)`. This was activated with the command `. useshotgun`.
+
+__Open a new terminal__ (right click on the main screen background, choose `Applications` -> `Shell` -> `bash`) and run the following in the new terminal to activate the `lefse` `conda` environment.
+
+```{bash eval=FALSE}
+#Setup environment
+. uselefse
+#Change directory
+cd ~/3-Taxonomy
+```
+
+## LEfSe: format
+```{r, fig.align = 'center',out.width= '10%', echo=FALSE }
+knitr::include_graphics(path = "figures/lefse_format.png", auto_pdf = TRUE)
+```
+
+We need to further format and preprocess our file with a `LEfSe` script.
+
+```{bash eval=FALSE}
+lefse-format_input.py all_num.lefse.bracken all_num.lefse -c 1 -u 2 -o 1000000
+```
+
+#### Parameters {-}
+```{r, fig.align = 'center',out.width= '10%', echo=FALSE }
+knitr::include_graphics(path = "figures/parameter_purple.png", auto_pdf = TRUE)
+```
+
+- `all_num.lefse.bracken` : Input `Bracken` file.
+- `all_num.lefse` : Output file formatted for the run_lefse command, which we will soon run.
+- `-c 1` : Specifies the row with the class info. This is used to determine which samples will be compared against which samples. In this case it is the first row with the Ks and Ws.
+- `-u 2` : Specifies the row with the sample names. This is the second row in this case.
+- `-o 1000000` : An integer can be indicated to determine to what size (count sum value) each sample should be normalised to. `LEfSe` developers recommend 1000000 (1 million) when very low values a present. We generally always use 1 million for consistency.
+
+## LEfSe: run
+```{r, fig.align = 'center',out.width= '10%', echo=FALSE }
+knitr::include_graphics(path = "figures/play_purple.png", auto_pdf = TRUE)
+``` 
+
+Now to run `LEfSe.` All we need to do is run the command with the formatted input and provide an output file name.
+
+```{bash eval=FALSE}
+run_lefse.py all_num.lefse all_num.lefse.out
+```
+
+#### Output {-}
+
+The output file is a tab-delimited file which contains a row for each species. Biomarkers will have the five columns below whilst non-biomarkers will have the first two followed by a "-" .
+
+- __Biomarker name__
+- __Log of highest class average__: I.e. get the class with the greater amounts of the biomarker, average the counts and then get the log of this value.
+- __Class with the greater amounts of biomarker__
+- __LDA effect size__: A statistical figure for `LEfSe`..
+- __p-value__: Biomarkers must have a p-value of <0.05 to be considered significant.
+
+The __LDA effect__ size indicates how much of an effect each biomarker has. The default is to only count a species with an LDA effect size of greater than 2 or less than -2 as a biomarker. The further the LDA effect size is from 0 the greater the effect the species causes.
+
+## LEfSe: visualisation
+```{r, fig.align = 'center',out.width= '10%', echo=FALSE }
+knitr::include_graphics(path = "figures/bar_chart_horizontal.png", auto_pdf = TRUE)
+``` 
+
+Next we can visualise the output.
+
+```{bash eval=FALSE}
+lefse-plot_res.py --dpi 200 --format png all_num.lefse.out biomarkers.png
+```
+
+- `--dpi 200` : Dots per inch. This refers to the resolution of the output image. Normally publications want 300 dpi. We’ve chosen 200 as it is good quality and we will not be publishing these results.
+- `--format png` : Format of output file. png is a commonly used file format for images.
+- `all_num.lefse.out` : `LEfSe` output to visualise.
+- `biomarkers.png` : Plot showing the LDA scores of the species detected as biomarkers. Colouring shows which class (K or W) the species is found in higher abundance.
+
+Look at the figure with the program `okular`:
+
+```{bash eval=FALSE}
+okular biomarkers.png
+```
+
+## LEfSe: MCQs
+```{r, fig.align = 'center',out.width= '10%', echo=FALSE }
+knitr::include_graphics(path = "figures/question_bubble_purple.png", auto_pdf = TRUE)
+```
+
+Interrogating the biomarkers.png plot and the all_num.lefse.out file, attempt the below MCQs.
+
+__Note__: In this instance green bars represent biomarkers in higher abundance in the W samples whilst the red bars represent biomarkers in higher abundance in the K samples.
+
+```{r, echo = FALSE}
+opts_p <- c(answer="__Alistipesshahhii__","__Lactobacillusruminis__","__Methanosphaerastadtmanae__")
+```
+1. Which species biomarker causes the biggest effect in the __W__ class? `r longmcq(opts_p)`
+
+```{r, echo = FALSE}
+opts_p <- c("__Alistipesshahhii__","__Lactobacillusruminis__",answer="__Methanosphaerastadtmanae__")
+```
+2. Which species biomarker causes the biggest effect in the __K__ class? `r longmcq(opts_p)`
+
+```{r, echo = FALSE}
+opts_p <- c("__Alistipesshahhii__",answer="__Lactobacillusruminis__","__Methanosphaerastadtmanae__")
+```
+3. Which species biomarker (i.e. present in the plot) causes the lowest effect in the __K__ class? `r longmcq(opts_p)`
+
+```{r, echo = FALSE}
+opts_p <- c("__Korean__",answer="__Western__")
+```
+4. Which class has more biomarkers associated with it? `r longmcq(opts_p)`
+
+```{r, echo = FALSE}
+opts_p <- c(answer="__0.0328692343007__","__1.39274299091__","__2.08988829344__")
+```
+5. What is the LEfSe p-value for __Oxalobacterformigenes__? `r longmcq(opts_p)`
+
+```{r, echo = FALSE}
+opts_p <- c("__0.0328692343007__",answer="__1.39274299091__","__2.08988829344__")
+```
+6. What is the Log of highest class average for __Pantoearwandensis__? `r longmcq(opts_p)`
+
+```{r, echo = FALSE}
+opts_p <- c("__0.0328692343007__","__1.39274299091__",answer="__2.08988829344__")
+```
+7. What is the LDA effect size for __Eggerthellalenta__? `r longmcq(opts_p)`
+
+## Kraken2 and Bracken databases
+```{r, fig.align = 'center',out.width= '15%', echo=FALSE }
+knitr::include_graphics(path = "figures/database.png", auto_pdf = TRUE)
+``` 
+
+In your own future analysis you will need to create your own `Kraken2` and `Bracken` databases. Please sse the following links on information for this:
+
+- `Kraken2`
+   - Standard `Kraken2` databases: https://github.com/DerrickWood/kraken2/wiki/Manual#standard-kraken-2-database
+   - Custom `Kraken2` databases: https://github.com/DerrickWood/kraken2/wiki/Manual#custom-databases
+- `Bracken`
+   - https://ccb.jhu.edu/software/bracken/index.shtml?t=manual#step1
+   - This requires a `Kraken2` database to be built first.

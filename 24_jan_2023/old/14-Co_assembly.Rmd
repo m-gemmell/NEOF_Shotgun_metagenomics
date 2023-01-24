@@ -1,0 +1,150 @@
+# Co-assembly and coverage
+```{r, fig.align = 'center',out.width= '30%', echo=FALSE }
+knitr::include_graphics(path = "figures/quality_trimming_and_filtering.png", auto_pdf = TRUE)
+``` 
+
+Instead of looking at one sample alone, we will now interrogate all 3 samples together. One option for this might be to assemble each metagenome separately, and then compare functional annotations. This has the potential to lead to artefactual results, however. For example, Gene A might be seen in K1, but not in K2 or W1, but does that mean that Gene A is not present? It could be the case that Gene A is present in K2 and W1, but that there is insufficient sequencing depth of the gene in these samples and it therefore does not get assembled.
+
+Therefore, a second option is to assemble all of our metagenomes together. This can both help and hinder the assembly process: If there are an abundance of small variants between samples, these may confuse the assembler and result in shorter contigs. Conversely, the extra coverage afforded by using multiple samples together can also lead to some contigs being much longer, allowing more complete reconstruction of genomes in the populations. However, this does tend to rely on the content of the metagenomic samples being coassembled being similar in composition. One major benefit is that once we have our co-assembled metagenome, we can look at the coverage of each gene per sample, allowing for direct comparison between samples.
+
+## Running the co-assembly, gene predictions and annotations
+
+To assemble all three of our samples together, all we do is provide the MEGAHIT assembler with all three datasets simultaneously. Due to time and computational constraints we will not be doing this now, and will instead copy over the assembly which was created prior to the workshop.
+
+```{bash eval=FALSE}
+cd ..
+
+cd 6-Assembly
+
+cp -r $DB/PartialRun2019/6-Assembly/K1K2W1 ./
+```
+
+At this point, we would now predict genes (Section 5.1) and then carry out functional annotation (Section 6.2) in exactly the same manner as before, aside from file names). Again, these steps will be too time consuming to carry out in the time available so we will copy over these pre-prepared files instead.
+
+```{bash eval=FALSE}
+cd ..
+
+cd 7-GenePredictions
+
+cp $DB/PartialRun2019/7-GenePrediction/K1K2W1.* ./
+
+cd ..
+
+cd 8-GeneAnnotations
+
+cp -r $DB/PartialRun2019/8-GeneAnnotations/K1K2W1 ./ 
+```
+
+## Generation of coverage metrics
+
+Now we have a co-assembly of all the samples, a gene prediction set from all the samples, and accompanying gene annotations. However, we currently don't have any data telling us the abundance of genes from each sample. To get this quantitative data, we will align our trimmed reads to our gene prediction FASTA file. This will tell us the depth of coverage for each gene, and therefore an estimate of abundance in each sample.
+
+To carry out these mappings we will use the short read mapper, Bowtie 2. If you recall, this is the same mapper that MetaPhlAn uses internally to map reads against the clade specific marker database.
+
+Once we have mapped the reads, we will lightly filter the data by searching for and removing PCR duplicated reads: These are identical read pairs that arise from amplification of fragments during library preparation, and are not biologically informative. 
+
+Following this step, we will calculate sequencing depth for each gene, for each sample.
+
+Let's make a new directory and get started:
+
+```{bash eval=FALSE}
+cd ..
+
+mkdir 9-Coverage
+
+cd 9-Coverage
+```
+
+Before we can map our reads to our genes, we need to index the genes FASTA so that it can be used by Bowtie 2
+
+```{bash eval=FALSE}
+bowtie2-build ../7-GenePredictions/K1K2W1.newHeaders.fna \
+K1K2W1.genes
+```
+
+This will generate a set of 6 files which will be utilised as a reference by Bowtie2. We can now align our reads to it.
+
+```{bash eval=FALSE}
+bowtie2 -x K1K2W1.genes \
+-p 12 \
+-1 ../2-Trimmed/K1_R1.fq.gz
+-2 ../2-Trimmed/K1_R2.fq.gz |  \
+samtools view -bSh - | samtools sort - K1
+```
+
+While this is running, we can look at what this command is doing. The first part is instructing Bowtie 2 to map the trimmed files for K1 against our new reference genes files using 12 CPUs. The output of this is a SAM file which contains all the results of the read mappings. However, it is in human readable text format which makes it very large. So, we instead pass the results to a program called SAMtools which will convert it from the text SAM format to binary, more compressed and computer friendly BAM format. We then use SAMtools again to sort the output, based on the read mapping locations against the genes.
+
+Once this is complete, we will remove PCR duplicate reads.
+
+```{bash eval=FALSE}
+java -jar $BIN/MarkDuplicates.jar \
+  I=K1.bam \
+  O=K1.rmdup.bam \
+  M=K1.metrics \
+  ASSUME_SORTED=True \
+  REMOVE_DUPLICATES=True \
+  MAX_FILE_HANDLES=50 \
+  VALIDATION_STRINGENCY=LENIENT
+```
+
+Here, we are telling a Java program called MarkDuplicates (part of the Picard suite of tools) to search and remove duplicates from our BAM alignment file, and output the filtered set to a second BAM file, called K1.rmdup.bam.
+
+Finally, we will index this last BAM file and extract the number of reads mapping to each gene.
+
+```{bash eval=FALSE}
+samtools index K1.rmdup.bam
+
+samtools idxstats K1.rmdup.bam > K1.coverage
+```
+
+Rather than repeat the above steps for the other two samples, we will instead copy over the pre-calculated coverages that were prepared prior to this workshop.
+
+```{bash eval=FALSE}
+cp $DB/PartialRun2019/9-Coverage/K2.coverage K2.coverage
+
+cp $DB/PartialRun2019/9-Coverage/W1.coverage W1.coverage
+```
+
+We can see how many reads map to each gene by looking at the resulting indexed BAM file.
+
+```{bash eval=FALSE}
+less K1.coverage
+```
+
+This shows us a table with the first column representing the gene ID and the second column representing the gene length. The third column tells us how many reads mapped to this gene and the final column tells us how many reads mapped, but with low quality and therefore were rejected.
+
+We now have coverage statistics for each sample based on reads per gene. However, we should normalise these values. 
+
+First we need to account for the total number of reads: If Gene A has 5 and 10 reads mapped to it in K1 and K2 respectively, it does not mean that there is more of Gene A in K2; it may be that the K2 sample has twice as many reads in total, so is proportionally the same.
+
+Secondly, we will account for the length of the genes: We would expect much longer genes to have more reads mapping to them than very short genes, so we can balance this out by accounting for gene length. The following script takes our BAM counts and normalises them to RPKM values, i.e. reads per kilobase of gene, per million reads.
+
+```{bash eval=FALSE}
+IdxStatsToRPKM K1.coverage > K1.rpkm
+
+IdxStatsToRPKM K2.coverage > K2.rpkm
+
+IdxStatsToRPKM W1.coverage > W1.rpkm
+```
+
+If you look at one of our .rpkm files, you will see that the values have been converted, i.e. normalised. We are now able to directly compare the functional profiles of our three samples.
+
+Finally, we can join these three files into one table. First, we will create a table header
+
+```{bash eval=FALSE}
+echo -e "Feature\tK1\tK2\tW1" > all.rpkm.tsv
+```
+
+(`\t` refers to a tab character, and we need to tell echo to convert `\t` into a tab character with –e, for expand). Then, we will grab the relevant columns from our files and append them to our table header
+
+```{bash eval=FALSE}
+paste K1.rpkm K2.rpkm W1.rpkm | cut -f1,2,4,6 >> all.rpkm.tsv
+```
+
+This command places our 3 rpkm files side by side, then selects the first column (i.e. the gene Ids) and the rpkm values from the samples and appends them to our table. NB: Note the >> rather than a single >. This appends to a file, rather than overwriting it.
+
+```{bash eval=FALSE}
+less all.rpkm.tsv
+```
+
+Using this file as a base, we are now able to directly compare the functional profiles of our three samples.
