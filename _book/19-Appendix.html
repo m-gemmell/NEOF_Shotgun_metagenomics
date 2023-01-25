@@ -23,7 +23,7 @@
 <meta name="author" content="Sam Haldenby and Matthew R. Gemmell" />
 
 
-<meta name="date" content="2023-01-24" />
+<meta name="date" content="2023-01-25" />
 
   <meta name="viewport" content="width=device-width, initial-scale=1" />
   <meta name="apple-mobile-web-app-capable" content="yes" />
@@ -266,7 +266,9 @@ code span.wa { color: #60a0b0; font-weight: bold; font-style: italic; } /* Warni
 <li class="chapter" data-level="17.2.1" data-path="17-Genome_binning.html"><a href="17-Genome_binning.html#checkm-conda"><i class="fa fa-check"></i><b>17.2.1</b> CheckM: Conda</a></li>
 <li class="chapter" data-level="17.2.2" data-path="17-Genome_binning.html"><a href="17-Genome_binning.html#checkm-run"><i class="fa fa-check"></i><b>17.2.2</b> CheckM: run</a></li>
 <li class="chapter" data-level="17.2.3" data-path="17-Genome_binning.html"><a href="17-Genome_binning.html#checkm-output"><i class="fa fa-check"></i><b>17.2.3</b> CheckM: output</a></li>
+<li class="chapter" data-level="17.2.4" data-path="17-Genome_binning.html"><a href="17-Genome_binning.html#checkm-mcqs"><i class="fa fa-check"></i><b>17.2.4</b> CheckM: MCQs</a></li>
 </ul></li>
+<li class="chapter" data-level="17.3" data-path="17-Genome_binning.html"><a href="17-Genome_binning.html#binning-summary"><i class="fa fa-check"></i><b>17.3</b> Binning summary</a></li>
 </ul></li>
 <li class="chapter" data-level="18" data-path="18-Assembly_functional_annotation.html"><a href="18-Assembly_functional_annotation.html"><i class="fa fa-check"></i><b>18</b> Assembly functional annotation</a>
 <ul>
@@ -369,12 +371,12 @@ _ Methods for Metagenomic data visualisation and analysis</li>
 <div id="obtaining-read-data" class="section level1 hasAnchor" number="21">
 <h1><span class="header-section-number">C</span> Obtaining Read Data<a href="19-Appendix.html#obtaining-read-data" class="anchor-section" aria-label="Anchor link to header"></a></h1>
 <p>The following commands can be used to obtain the sequence data used in this practical, directly from the EBI metagenomics site. It is worth noting that these are the full set of data, not like the miniaturised version you have used in the tutorial.</p>
-<div class="sourceCode" id="cb107"><pre class="sourceCode bash"><code class="sourceCode bash"><span id="cb107-1"><a href="19-Appendix.html#cb107-1" aria-hidden="true" tabindex="-1"></a><span class="fu">wget</span> <span class="at">-O</span> K1_R1.fastq.gz ftp://ftp.sra.ebi.ac.uk/vol1/fastq/ERR505/ERR505102/ERR505102_1.fastq.gz</span>
-<span id="cb107-2"><a href="19-Appendix.html#cb107-2" aria-hidden="true" tabindex="-1"></a><span class="fu">wget</span> <span class="at">-O</span> K1_R2.fastq.gz ftp://ftp.sra.ebi.ac.uk/vol1/fastq/ERR505/ERR505102/ERR505102_2.fastq.gz</span>
-<span id="cb107-3"><a href="19-Appendix.html#cb107-3" aria-hidden="true" tabindex="-1"></a><span class="fu">wget</span> <span class="at">-O</span> K2_R1.fastq.gz ftp://ftp.sra.ebi.ac.uk/vol1/fastq/ERR505/ERR505104/ERR505104_1.fastq.gz</span>
-<span id="cb107-4"><a href="19-Appendix.html#cb107-4" aria-hidden="true" tabindex="-1"></a><span class="fu">wget</span> <span class="at">-O</span> K2_R2.fastq.gz ftp://ftp.sra.ebi.ac.uk/vol1/fastq/ERR505/ERR505104/ERR505104_2.fastq.gz</span>
-<span id="cb107-5"><a href="19-Appendix.html#cb107-5" aria-hidden="true" tabindex="-1"></a><span class="fu">wget</span> <span class="at">-O</span> W1_R1.fastq.gz ftp://ftp.sra.ebi.ac.uk/vol1/fastq/ERR505/ERR505090/ERR505090_1.fastq.gz</span>
-<span id="cb107-6"><a href="19-Appendix.html#cb107-6" aria-hidden="true" tabindex="-1"></a><span class="fu">wget</span> <span class="at">-O</span> W1_R2.fastq.gz ftp://ftp.sra.ebi.ac.uk/vol1/fastq/ERR505/ERR505090/ERR505090_2.fastq.gz</span></code></pre></div>
+<div class="sourceCode" id="cb111"><pre class="sourceCode bash"><code class="sourceCode bash"><span id="cb111-1"><a href="19-Appendix.html#cb111-1" aria-hidden="true" tabindex="-1"></a><span class="fu">wget</span> <span class="at">-O</span> K1_R1.fastq.gz ftp://ftp.sra.ebi.ac.uk/vol1/fastq/ERR505/ERR505102/ERR505102_1.fastq.gz</span>
+<span id="cb111-2"><a href="19-Appendix.html#cb111-2" aria-hidden="true" tabindex="-1"></a><span class="fu">wget</span> <span class="at">-O</span> K1_R2.fastq.gz ftp://ftp.sra.ebi.ac.uk/vol1/fastq/ERR505/ERR505102/ERR505102_2.fastq.gz</span>
+<span id="cb111-3"><a href="19-Appendix.html#cb111-3" aria-hidden="true" tabindex="-1"></a><span class="fu">wget</span> <span class="at">-O</span> K2_R1.fastq.gz ftp://ftp.sra.ebi.ac.uk/vol1/fastq/ERR505/ERR505104/ERR505104_1.fastq.gz</span>
+<span id="cb111-4"><a href="19-Appendix.html#cb111-4" aria-hidden="true" tabindex="-1"></a><span class="fu">wget</span> <span class="at">-O</span> K2_R2.fastq.gz ftp://ftp.sra.ebi.ac.uk/vol1/fastq/ERR505/ERR505104/ERR505104_2.fastq.gz</span>
+<span id="cb111-5"><a href="19-Appendix.html#cb111-5" aria-hidden="true" tabindex="-1"></a><span class="fu">wget</span> <span class="at">-O</span> W1_R1.fastq.gz ftp://ftp.sra.ebi.ac.uk/vol1/fastq/ERR505/ERR505090/ERR505090_1.fastq.gz</span>
+<span id="cb111-6"><a href="19-Appendix.html#cb111-6" aria-hidden="true" tabindex="-1"></a><span class="fu">wget</span> <span class="at">-O</span> W1_R2.fastq.gz ftp://ftp.sra.ebi.ac.uk/vol1/fastq/ERR505/ERR505090/ERR505090_2.fastq.gz</span></code></pre></div>
 
 </div>
 <script>

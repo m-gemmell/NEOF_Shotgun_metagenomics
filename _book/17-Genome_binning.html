@@ -23,7 +23,7 @@
 <meta name="author" content="Sam Haldenby and Matthew R. Gemmell" />
 
 
-<meta name="date" content="2023-01-24" />
+<meta name="date" content="2023-01-25" />
 
   <meta name="viewport" content="width=device-width, initial-scale=1" />
   <meta name="apple-mobile-web-app-capable" content="yes" />
@@ -266,7 +266,9 @@ code span.wa { color: #60a0b0; font-weight: bold; font-style: italic; } /* Warni
 <li class="chapter" data-level="17.2.1" data-path="17-Genome_binning.html"><a href="17-Genome_binning.html#checkm-conda"><i class="fa fa-check"></i><b>17.2.1</b> CheckM: Conda</a></li>
 <li class="chapter" data-level="17.2.2" data-path="17-Genome_binning.html"><a href="17-Genome_binning.html#checkm-run"><i class="fa fa-check"></i><b>17.2.2</b> CheckM: run</a></li>
 <li class="chapter" data-level="17.2.3" data-path="17-Genome_binning.html"><a href="17-Genome_binning.html#checkm-output"><i class="fa fa-check"></i><b>17.2.3</b> CheckM: output</a></li>
+<li class="chapter" data-level="17.2.4" data-path="17-Genome_binning.html"><a href="17-Genome_binning.html#checkm-mcqs"><i class="fa fa-check"></i><b>17.2.4</b> CheckM: MCQs</a></li>
 </ul></li>
+<li class="chapter" data-level="17.3" data-path="17-Genome_binning.html"><a href="17-Genome_binning.html#binning-summary"><i class="fa fa-check"></i><b>17.3</b> Binning summary</a></li>
 </ul></li>
 <li class="chapter" data-level="18" data-path="18-Assembly_functional_annotation.html"><a href="18-Assembly_functional_annotation.html"><i class="fa fa-check"></i><b>18</b> Assembly functional annotation</a>
 <ul>
@@ -437,9 +439,9 @@ code span.wa { color: #60a0b0; font-weight: bold; font-style: italic; } /* Warni
 <li>&gt;95% is very good</li>
 <li>&gt;80% is good</li>
 <li>&gt;70% is ok</li>
-<li>&lt;70% is poor to poorer.</li>
+<li>&lt;70% is poor to poorer</li>
 </ul></li>
-<li>How contaminated is the bin/MAG?
+<li>How contaminated the bin/MAG is.
 <ul>
 <li>Only one copy of each gene should be present (single-copy).</li>
 <li>Are there any markers for other lineages present?</li>
@@ -456,7 +458,7 @@ code span.wa { color: #60a0b0; font-weight: bold; font-style: italic; } /* Warni
 </div>
 <div id="checkm-run" class="section level3 hasAnchor" number="17.2.2">
 <h3><span class="header-section-number">17.2.2</span> CheckM: run<a href="17-Genome_binning.html#checkm-run" class="anchor-section" aria-label="Anchor link to header"></a></h3>
-<p><img src="figures/enter_key.png" width="10%" style="display: block; margin: auto;" /></p>
+<p><img src="figures/play_black.png" width="10%" style="display: block; margin: auto;" /></p>
 <p><code>CheckM</code> has many different commands. We will use one of the common workflows it provides called <code>lineage_wf</code>. This carries out five of its commands in a workflow (i.e. the next step uses output from the previous step).</p>
 <ol style="list-style-type: decimal">
 <li><code>tree</code> - Places bins in the reference genome tree. This reference tree comes with <code>CheckM</code>.</li>
@@ -470,29 +472,62 @@ code span.wa { color: #60a0b0; font-weight: bold; font-style: italic; } /* Warni
 <span id="cb84-2"><a href="17-Genome_binning.html#cb84-2" aria-hidden="true" tabindex="-1"></a>--tab_table <span class="at">-f</span> MAGS_checkm.tsv <span class="dt">\</span></span>
 <span id="cb84-3"><a href="17-Genome_binning.html#cb84-3" aria-hidden="true" tabindex="-1"></a>-x fa <span class="dt">\</span></span>
 <span id="cb84-4"><a href="17-Genome_binning.html#cb84-4" aria-hidden="true" tabindex="-1"></a>bins/ checkm_output</span></code></pre></div>
-<p>The options we used are:</p>
+<div id="parameters-10" class="section level4 unnumbered hasAnchor">
+<h4>Parameters<a href="17-Genome_binning.html#parameters-10" class="anchor-section" aria-label="Anchor link to header"></a></h4>
+<p><img src="figures/parameter_black.png" width="10%" style="display: block; margin: auto;" /></p>
 <ul>
 <li><code>--tab_table</code> : Prints results to a tab separated table.</li>
 <li><code>-f</code> : File name to print result to (if not specified results will go to stdout).</li>
 <li><code>-x</code> : Suffix/extension of bin files. Other files are ignored in the specified bin directory.
 <ul>
-<li><code>fa</code> is used as our <code>MetaBAT2</code> produce fasta files end in <code>.fa</code>.</li>
+<li><code>fa</code> is used as our <code>MetaBAT2</code> produce fasta files that end in <code>.fa</code>.</li>
 </ul></li>
-<li><code>bins</code> : The second last argument is the <code>bin_dir</code>, the directory containg all the bins in fasta format.</li>
+<li><code>bins</code> : The second last argument is the <code>bin_dir</code>, the directory containing all the bins to be analysed in fasta format.</li>
 <li><code>checkm_output</code> : The last argument is the directory to store the output to. This directory should not exist prior to running.</li>
 </ul>
 </div>
+</div>
 <div id="checkm-output" class="section level3 hasAnchor" number="17.2.3">
 <h3><span class="header-section-number">17.2.3</span> CheckM: output<a href="17-Genome_binning.html#checkm-output" class="anchor-section" aria-label="Anchor link to header"></a></h3>
-<p><img src="figures/output.png" width="10%" style="display: block; margin: auto;" /></p>
-<p>As we have only used a subset of data the results are not very good so let us look at premade results. These premade results were produced using the entire K1 dataset. First you will need to copy it over.</p>
+<p><img src="figures/output_file_black.png" width="10%" style="display: block; margin: auto;" /></p>
+<p>As we have only used a subset of data the results are not very good. We'll therefore look at premade results.
+These premade results were produced using the entire K1 dataset.
+First you will need to copy them.</p>
 <div class="sourceCode" id="cb85"><pre class="sourceCode bash"><code class="sourceCode bash"><span id="cb85-1"><a href="17-Genome_binning.html#cb85-1" aria-hidden="true" tabindex="-1"></a><span class="bu">cd</span> ~/7-Binning</span>
 <span id="cb85-2"><a href="17-Genome_binning.html#cb85-2" aria-hidden="true" tabindex="-1"></a><span class="fu">mkdir</span> K1_fullset</span>
 <span id="cb85-3"><a href="17-Genome_binning.html#cb85-3" aria-hidden="true" tabindex="-1"></a><span class="bu">cd</span> K1_fullset</span>
 <span id="cb85-4"><a href="17-Genome_binning.html#cb85-4" aria-hidden="true" tabindex="-1"></a><span class="fu">ln</span> <span class="at">-s</span> /pub39/tea/nsc006/NEOF/Shotgun_metagenomics/binning/K1_fullset/<span class="pp">*</span> .</span></code></pre></div>
 <p>Now we can look at the results table that is in your current directory.</p>
 <div class="sourceCode" id="cb86"><pre class="sourceCode bash"><code class="sourceCode bash"><span id="cb86-1"><a href="17-Genome_binning.html#cb86-1" aria-hidden="true" tabindex="-1"></a><span class="fu">less</span> MAGS_checkm.tsv</span></code></pre></div>
-<p><strong>Tip</strong>: The definition of the statistics can be found at: <a href="https://github.com/Ecogenomics/CheckM/wiki/Reported-Statistics" class="uri">https://github.com/Ecogenomics/CheckM/wiki/Reported-Statistics</a></p>
+<div class="webex-solution">
+<button>
+CheckM statistics definitions
+</button>
+<p>List of statistics definitions from <a href="https://github.com/Ecogenomics/CheckM/wiki/Reported-Statistics">CheckM wiki</a>)</p>
+<ul>
+<li><strong>bin id</strong>: unique identifier of genome bin (derived from input fasta file)</li>
+<li><strong>marker lineage</strong>: indicates the taxonomic rank of the lineage-specific marker set used to estimated genome completeness, contamination, and strain heterogeneity. More detailed information about the placement of a genome within the reference genome tree can be obtained with the tree_qa command. The UID indicates the branch within the reference tree used to infer the marker set applied to estimate the bins quality.</li>
+<li><strong># genomes</strong>: number of reference genomes used to infer the lineage-specific marker set</li>
+<li><strong>markers</strong>: number of marker genes within the inferred lineage-specific marker set
+marker sets: number of co-located marker sets within the inferred lineage-specific marker set</li>
+<li><strong>0-5+</strong>: number of times each marker gene is identified</li>
+<li><strong>completeness</strong>: estimated completeness of genome as determined from the presence/absence of marker genes and the expected collocalization of these genes (see Methods in the PeerJ preprint for details)</li>
+<li><strong>contamination</strong>: estimated contamination of genome as determined by the presence of multi-copy marker genes and the expected collocalization of these genes (see Methods in the PeerJ preprint for details)</li>
+<li><strong>strain heterogeneity</strong>: estimated strain heterogeneity as determined from the number of multi-copy marker pairs which exceed a specified amino acid identity threshold (default = 90%). High strain heterogeneity suggests the majority of reported contamination is from one or more closely related organisms (i.e. potentially the same species), while low strain heterogeneity suggests the majority of contamination is from more phylogenetically diverse sources (see Methods in the CheckM manuscript for more details).</li>
+<li><strong>genome size</strong>: number of nucleotides (including unknowns specified by N's) in the genome</li>
+<li><strong># ambiguous bases</strong>: number of ambiguous (N's) bases in the genome</li>
+<li><strong># scaffolds</strong>: number of scaffolds within the genome</li>
+<li><strong># contigs</strong>: number of contigs within the genome as determined by splitting scaffolds at any position consisting of more than 10 consecutive ambiguous bases</li>
+<li><strong>N50 (scaffolds)</strong>: N50 statistics as calculated over all scaffolds</li>
+<li><strong>N50 (contigs)</strong>: N50 statistics as calculated over all contigs</li>
+<li><strong>longest scaffold</strong>: the longest scaffold within the genome</li>
+<li><strong>longest contig</strong>: the longest contig within the genome</li>
+<li><strong>GC</strong>: number of G/C nucleotides relative to all A,C,G, and T nucleotides in the genome</li>
+<li><strong>coding density</strong>: the number of nucleotides within a coding sequence (CDS) relative to all nucleotides in the genome</li>
+<li><strong>translation table</strong>: indicates which genetic code was used to translate nucleotides into amino acids</li>
+<li><strong># predicted genes</strong>: number of predicted coding sequences (CDS) within the genome as determined using Prodigal</li>
+</ul>
+</div>
 <p>One quick way to calculate the overall quality of a bin is with the following equation:</p>
 <p><span class="math display">\[
 q = comp - (5 * cont)
@@ -503,32 +538,94 @@ Where:</p>
 <li><strong>comp</strong> = Completeness</li>
 <li><strong>cont</strong> = Contamination</li>
 </ul>
-<p>A score of 70-80% would be the aim. Therefore let us calculate this for the bins with R.</p>
-<p>First the tab delimited file has some issues for <code>R</code> so we'll make a comma separated version.</p>
+<p>A score of at least 70-80% would be the aim, with a maximum/perfect value being 100% (100% completeness, 0% contamination). Therefore let us calculate this for the bins with some bash and <code>awk</code> scripting.</p>
+<p>First it is good to make a copy of the file in case we make a mistake and want to start over. Additionally, we will make the copy a comma separated file. I find these easier to edit as typing comma characters (<code>,</code>) in commands is more reliable than tab characters (<code>\t</code>).</p>
+<p>This is carried out with <code>tr</code> which can translate characters. In the below case we translate/convert the tabs (<code>\t</code>) into commas (<code>,</code>). The converted output is then redirected (<code>&gt;</code>) to the file "MAGS_checkm.csv".</p>
 <div class="sourceCode" id="cb87"><pre class="sourceCode bash"><code class="sourceCode bash"><span id="cb87-1"><a href="17-Genome_binning.html#cb87-1" aria-hidden="true" tabindex="-1"></a><span class="fu">cat</span> MAGS_checkm.tsv <span class="kw">|</span> <span class="fu">tr</span> <span class="st">&quot;\t&quot;</span> <span class="st">&quot;,&quot;</span> <span class="op">&gt;</span> MAGS_checkm.csv</span></code></pre></div>
-<p>Activate <code>R</code>:</p>
-<div class="sourceCode" id="cb88"><pre class="sourceCode bash"><code class="sourceCode bash"><span id="cb88-1"><a href="17-Genome_binning.html#cb88-1" aria-hidden="true" tabindex="-1"></a><span class="ex">R</span></span></code></pre></div>
-<p>Now to do the calculation in R for each bin:</p>
-<div class="sourceCode" id="cb89"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb89-1"><a href="17-Genome_binning.html#cb89-1" aria-hidden="true" tabindex="-1"></a><span class="co">#Read in csv file as data frame</span></span>
-<span id="cb89-2"><a href="17-Genome_binning.html#cb89-2" aria-hidden="true" tabindex="-1"></a>df <span class="ot">&lt;-</span> <span class="fu">read.csv</span>(<span class="st">&quot;MAGS_checkm.csv&quot;</span>, <span class="at">header=</span><span class="cn">TRUE</span>, <span class="at">check.names=</span><span class="cn">FALSE</span>)</span>
-<span id="cb89-3"><a href="17-Genome_binning.html#cb89-3" aria-hidden="true" tabindex="-1"></a><span class="co">#Add a column for overall quality</span></span>
-<span id="cb89-4"><a href="17-Genome_binning.html#cb89-4" aria-hidden="true" tabindex="-1"></a>df<span class="sc">$</span>quality <span class="ot">&lt;-</span> df<span class="sc">$</span>Completeness <span class="sc">-</span> (<span class="dv">5</span> <span class="sc">*</span> df<span class="sc">$</span>Contamination)</span>
-<span id="cb89-5"><a href="17-Genome_binning.html#cb89-5" aria-hidden="true" tabindex="-1"></a><span class="co">#View the bin name, lineage, number genomes, </span></span>
-<span id="cb89-6"><a href="17-Genome_binning.html#cb89-6" aria-hidden="true" tabindex="-1"></a><span class="co">#completeness, contamination, and the quality columns</span></span>
-<span id="cb89-7"><a href="17-Genome_binning.html#cb89-7" aria-hidden="true" tabindex="-1"></a>df[,<span class="fu">c</span>(<span class="dv">1</span>,<span class="dv">2</span>,<span class="dv">3</span>,<span class="dv">12</span>,<span class="dv">13</span>,<span class="dv">15</span>)]</span></code></pre></div>
-<p><strong>Questions</strong>:</p>
+<p>We will create a new file with only the quality information. We'll start by making a file with only a header.</p>
+<div class="sourceCode" id="cb88"><pre class="sourceCode bash"><code class="sourceCode bash"><span id="cb88-1"><a href="17-Genome_binning.html#cb88-1" aria-hidden="true" tabindex="-1"></a><span class="bu">echo</span> <span class="st">&quot;Quality&quot;</span> <span class="op">&gt;</span> MAGS_quality.csv</span></code></pre></div>
+<p>Next is the most complicated command. We will be calculating the Overall quality (see calculation above) for each row except the header row.</p>
+<p>We will be using a complicated linux based language called <code>awk</code>. This is very useful as it can carry out calculations on columns or as <code>awk</code> calls them, <strong>fields</strong>.</p>
+<p>As this is new and complicated we will build up our command step by step.</p>
+<p>First step is to extract the completeness and contamination fields/columns.</p>
+<div class="sourceCode" id="cb89"><pre class="sourceCode bash"><code class="sourceCode bash"><span id="cb89-1"><a href="17-Genome_binning.html#cb89-1" aria-hidden="true" tabindex="-1"></a><span class="fu">awk</span> <span class="at">-F,</span> <span class="st">&#39;{print $12,$13}&#39;</span> MAGS_checkm.csv</span></code></pre></div>
 <ul>
-<li>What lineages were assigned to the bins?</li>
-<li>How many genomes are present in the different bins?</li>
-<li>What is the completeness and contamination of the bins and how is the overall quality?</li>
-<li>With this information how successful was the binning? Was the binning able to create MAGs (i.e. one genome per bin)?</li>
-<li>Which bins look particularly good?</li>
+<li><code>-F,</code>: Indicates the input fields are separated by commas (<code>,</code>).</li>
+<li><code>''</code>: All the <code>awk</code> options are contained within the quotes.</li>
+<li><code>{}</code>: We can supply a function to <code>awk</code> within the braces.</li>
+<li><code>print $12,$13</code>: This function instructs <code>awk</code> to print the 12th (completeness) and 13th (contamination) fields. It is common to put commas (<code>,</code>) between fields if printing multiple fields.</li>
+<li><code>MAGS_checkm.csv</code>: Our last parameter is the input file. We are not changing the contents of the file, only printing information to screen/stdout.</li>
 </ul>
-<p>Once you are happy you can quit <code>R</code>.</p>
-<div class="sourceCode" id="cb90"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb90-1"><a href="17-Genome_binning.html#cb90-1" aria-hidden="true" tabindex="-1"></a><span class="fu">q</span>()</span></code></pre></div>
-<p>It is always useful to know the quality of your bins so you know which are more reliable than others. With that information you can be more or less certain when concluding your findings.</p>
-
+<p>We do not want the header in our calculation so we will add an extra <code>awk</code> option.</p>
+<div class="sourceCode" id="cb90"><pre class="sourceCode bash"><code class="sourceCode bash"><span id="cb90-1"><a href="17-Genome_binning.html#cb90-1" aria-hidden="true" tabindex="-1"></a><span class="fu">awk</span> <span class="at">-F,</span> <span class="st">&#39;NR&gt;1 {print $12,$13}&#39;</span> MAGS_checkm.csv</span></code></pre></div>
+<ul>
+<li><code>NR&gt;1</code>: <code>NR</code> stands for number of records. Rows are called records in <code>awk</code>. Therefore <code>NR&gt;1</code> means <code>awk</code> will only carry out the functions on the records numbered greater than 1. I.e. skip row 1, the header row.</li>
+</ul>
+<p>The <strong>final</strong> step is to carry out the overall quality calculation and append the information to the "MAGS_quality.csv" file.</p>
+<div class="sourceCode" id="cb91"><pre class="sourceCode bash"><code class="sourceCode bash"><span id="cb91-1"><a href="17-Genome_binning.html#cb91-1" aria-hidden="true" tabindex="-1"></a><span class="fu">awk</span> <span class="at">-F,</span> <span class="st">&#39;NR&gt;1 {print $12 - (5 * $13)}&#39;</span> MAGS_checkm.csv <span class="op">&gt;&gt;</span> MAGS_quality.csv</span></code></pre></div>
+<ul>
+<li><code>{print $12 - (5 * $13)}</code>: Our new function carries out the overall quality calculation and prints it for each record/row except the first (<code>NR&gt;1</code>).</li>
+<li><code>&gt;&gt; MAGS_quality.csv</code>: The printed information is appended (<code>&gt;&gt;</code>) to the file "MAGS_quality.csv". We append because we want to retain the header we added to the file earlier.</li>
+</ul>
+<p>You can view the file to ensure it worked. The first and second values should be 33.62 and -0.89</p>
+<div class="sourceCode" id="cb92"><pre class="sourceCode bash"><code class="sourceCode bash"><span id="cb92-1"><a href="17-Genome_binning.html#cb92-1" aria-hidden="true" tabindex="-1"></a><span class="fu">less</span> MAGS_quality.csv</span></code></pre></div>
+<p>The last step is to combine the files "MAGS_checkm.csv" and "MAGS_quality.csv" with the <code>paste</code> command. The <code>-d ","</code> options indicates the merged files will be separated by commas (<code>,</code>), matching the column separation in "MAGS_checkm.csv".</p>
+<div class="sourceCode" id="cb93"><pre class="sourceCode bash"><code class="sourceCode bash"><span id="cb93-1"><a href="17-Genome_binning.html#cb93-1" aria-hidden="true" tabindex="-1"></a><span class="fu">paste</span> <span class="at">-d</span> <span class="st">&quot;,&quot;</span> MAGS_checkm.csv MAGS_quality.csv <span class="op">&gt;</span> MAGS_checkm_quality.csv</span></code></pre></div>
 </div>
+<div id="checkm-mcqs" class="section level3 hasAnchor" number="17.2.4">
+<h3><span class="header-section-number">17.2.4</span> CheckM: MCQs<a href="17-Genome_binning.html#checkm-mcqs" class="anchor-section" aria-label="Anchor link to header"></a></h3>
+<p><img src="figures/question_bubble_blue.png" width="10%" style="display: block; margin: auto;" /></p>
+<p>Viewing the file "MAGS_checkm_quality.csv" attempt the below questions.</p>
+<p><strong>Tip</strong>: You can use the <code>cut</code> command to look at specific columns. For example:</p>
+<div class="sourceCode" id="cb94"><pre class="sourceCode bash"><code class="sourceCode bash"><span id="cb94-1"><a href="17-Genome_binning.html#cb94-1" aria-hidden="true" tabindex="-1"></a><span class="co">#look at the &quot;Bin Id&quot; and &quot;Quality&quot;</span></span>
+<span id="cb94-2"><a href="17-Genome_binning.html#cb94-2" aria-hidden="true" tabindex="-1"></a><span class="co">#Convert the printed output&#39;s commas to tabs for readability</span></span>
+<span id="cb94-3"><a href="17-Genome_binning.html#cb94-3" aria-hidden="true" tabindex="-1"></a><span class="fu">cut</span> <span class="at">-d</span> <span class="st">&quot;,&quot;</span> <span class="at">-f</span> 1,15 MAGS_checkm_quality.csv <span class="kw">|</span> <span class="fu">tr</span> <span class="st">&quot;,&quot;</span> <span class="st">&quot;\t&quot;</span></span></code></pre></div>
+<ol style="list-style-type: decimal">
+<li>What lineage was assigned to bin <strong>K1.1</strong>?
+<div id="radio_JGTKLJXFSF" class="webex-radiogroup">
+<label><input type="radio" autocomplete="off" name="radio_JGTKLJXFSF" value=""></input> <span><strong>root (UID1)</strong></span></label><label><input type="radio" autocomplete="off" name="radio_JGTKLJXFSF" value="answer"></input> <span><strong>k_Bacteria (UID203)</strong></span></label><label><input type="radio" autocomplete="off" name="radio_JGTKLJXFSF" value=""></input> <span><strong>o_Lachnospiraceae</strong></span></label>
+</div></li>
+<li>What lineage was assigned to bin <strong>K1.22</strong>?
+<div id="radio_QEHHZYRDYW" class="webex-radiogroup">
+<label><input type="radio" autocomplete="off" name="radio_QEHHZYRDYW" value=""></input> <span><strong>root (UID1)</strong></span></label><label><input type="radio" autocomplete="off" name="radio_QEHHZYRDYW" value=""></input> <span><strong>k_Bacteria (UID203)</strong></span></label><label><input type="radio" autocomplete="off" name="radio_QEHHZYRDYW" value="answer"></input> <span><strong>o_Lachnospiraceae</strong></span></label>
+</div></li>
+<li>What lineage was assigned to bin <strong>K1.8</strong>?
+<div id="radio_UYQETLHANW" class="webex-radiogroup">
+<label><input type="radio" autocomplete="off" name="radio_UYQETLHANW" value="answer"></input> <span><strong>root (UID1)</strong></span></label><label><input type="radio" autocomplete="off" name="radio_UYQETLHANW" value=""></input> <span><strong>k_Bacteria (UID203)</strong></span></label><label><input type="radio" autocomplete="off" name="radio_UYQETLHANW" value=""></input> <span><strong>o_Lachnospiraceae</strong></span></label>
+</div></li>
+<li>What is the quality value of K1.1?
+<div id="radio_HXERDBAQWN" class="webex-radiogroup">
+<label><input type="radio" autocomplete="off" name="radio_HXERDBAQWN" value=""></input> <span><strong>4.17</strong></span></label><label><input type="radio" autocomplete="off" name="radio_HXERDBAQWN" value="answer"></input> <span><strong>33.62</strong></span></label><label><input type="radio" autocomplete="off" name="radio_HXERDBAQWN" value=""></input> <span><strong>172</strong></span></label>
+</div></li>
+<li>What is the completeness value of K1.27?
+<div id="radio_CQDCLGRABR" class="webex-radiogroup">
+<label><input type="radio" autocomplete="off" name="radio_CQDCLGRABR" value="answer"></input> <span><strong>4.17</strong></span></label><label><input type="radio" autocomplete="off" name="radio_CQDCLGRABR" value=""></input> <span><strong>33.62</strong></span></label><label><input type="radio" autocomplete="off" name="radio_CQDCLGRABR" value=""></input> <span><strong>172</strong></span></label>
+</div></li>
+<li>How many genomes are within the K1.12 bin?
+<div id="radio_PSCNYYCUAE" class="webex-radiogroup">
+<label><input type="radio" autocomplete="off" name="radio_PSCNYYCUAE" value=""></input> <span><strong>4.17</strong></span></label><label><input type="radio" autocomplete="off" name="radio_PSCNYYCUAE" value=""></input> <span><strong>33.62</strong></span></label><label><input type="radio" autocomplete="off" name="radio_PSCNYYCUAE" value="answer"></input> <span><strong>172</strong></span></label>
+</div></li>
+<li>Which bin has the highest quality value (96.38%)?
+<div id="radio_SWLZWDKXEM" class="webex-radiogroup">
+<label><input type="radio" autocomplete="off" name="radio_SWLZWDKXEM" value=""></input> <span><strong>K1.20</strong></span></label><label><input type="radio" autocomplete="off" name="radio_SWLZWDKXEM" value=""></input> <span><strong>K1.21</strong></span></label><label><input type="radio" autocomplete="off" name="radio_SWLZWDKXEM" value="answer"></input> <span><strong>K1.22</strong></span></label>
+</div></li>
+<li>Which bin has the lowest quality value (-300.67%)?
+<div id="radio_QPZOQXELUO" class="webex-radiogroup">
+<label><input type="radio" autocomplete="off" name="radio_QPZOQXELUO" value="answer"></input> <span><strong>K1.20</strong></span></label><label><input type="radio" autocomplete="off" name="radio_QPZOQXELUO" value=""></input> <span><strong>K1.21</strong></span></label><label><input type="radio" autocomplete="off" name="radio_QPZOQXELUO" value=""></input> <span><strong>K1.22</strong></span></label>
+</div></li>
+<li>Which bin has the highest completeness value (98.27%)?
+<div id="radio_HHXRHVUDWJ" class="webex-radiogroup">
+<label><input type="radio" autocomplete="off" name="radio_HHXRHVUDWJ" value=""></input> <span><strong>K1.20</strong></span></label><label><input type="radio" autocomplete="off" name="radio_HHXRHVUDWJ" value="answer"></input> <span><strong>K1.21</strong></span></label><label><input type="radio" autocomplete="off" name="radio_HHXRHVUDWJ" value=""></input> <span><strong>K1.22</strong></span></label>
+</div></li>
+</ol>
+</div>
+</div>
+<div id="binning-summary" class="section level2 hasAnchor" number="17.3">
+<h2><span class="header-section-number">17.3</span> Binning summary<a href="17-Genome_binning.html#binning-summary" class="anchor-section" aria-label="Anchor link to header"></a></h2>
+<p><img src="figures/sum_black.png" width="10%" style="display: block; margin: auto;" /></p>
+<p>It is always useful to know the quality of your bins so you know which are more reliable than others. With that information you can be more or less certain when concluding your findings.</p>
+<p>We have some good quality bins. However, the best bins would only have one genome. Ultimately binning is trying to separate all the genomes from each other. A better metagenome assembly would most likely have led to better binning.</p>
+
 </div>
 </div>
 <script>

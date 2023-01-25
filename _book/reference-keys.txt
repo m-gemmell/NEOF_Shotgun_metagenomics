@@ -84,6 +84,8 @@ checkm
 checkm-conda
 checkm-run
 checkm-output
+checkm-mcqs
+binning-summary
 funcanno
 taxonomic-annotation
 prokka

@@ -187,8 +187,8 @@ An important part of CheckM is the ubiquitous and single-copy genes it utilises.
    - \>95% is very good
    - \>80% is good
    - \>70% is ok
-   - <70% is poor to poorer.
-- How contaminated is the bin/MAG?
+   - <70% is poor to poorer
+- How contaminated the bin/MAG is.
    - Only one copy of each gene should be present (single-copy).
    - Are there any markers for other lineages present?
 
@@ -213,7 +213,7 @@ cd ~/7-Binning/K1/
 
 ### CheckM: run
 ```{r, fig.align = 'center',out.width= '10%', echo=FALSE }
-knitr::include_graphics(path = "figures/enter_key.png", auto_pdf = TRUE)
+knitr::include_graphics(path = "figures/play_black.png", auto_pdf = TRUE)
 ``` 
 
 `CheckM` has many different commands. We will use one of the common workflows it provides called `lineage_wf`. This carries out five of its commands in a workflow (i.e. the next step uses output from the previous step).
@@ -233,21 +233,26 @@ checkm lineage_wf \
 bins/ checkm_output
 ```
 
-The options we used are:
+#### Parameters {-}
+```{r, fig.align = 'center',out.width= '10%', echo=FALSE }
+knitr::include_graphics(path = "figures/parameter_black.png", auto_pdf = TRUE)
+```
 
 - `--tab_table` : Prints results to a tab separated table.
 - `-f` : File name to print result to (if not specified results will go to stdout).
 - `-x` : Suffix/extension of bin files. Other files are ignored in the specified bin directory.
-   - `fa` is used as our `MetaBAT2` produce fasta files end in `.fa`.
-- `bins` : The second last argument is the `bin_dir`, the directory containg all the bins in fasta format.
+   - `fa` is used as our `MetaBAT2` produce fasta files that end in `.fa`.
+- `bins` : The second last argument is the `bin_dir`, the directory containing all the bins to be analysed in fasta format.
 - `checkm_output` : The last argument is the directory to store the output to. This directory should not exist prior to running.
 
 ### CheckM: output
 ```{r, fig.align = 'center',out.width= '10%', echo=FALSE }
-knitr::include_graphics(path = "figures/output.png", auto_pdf = TRUE)
+knitr::include_graphics(path = "figures/output_file_black.png", auto_pdf = TRUE)
 ``` 
 
-As we have only used a subset of data the results are not very good so let us look at premade results. These premade results were produced using the entire K1 dataset. First you will need to copy it over.
+As we have only used a subset of data the results are not very good. We'll therefore look at premade results. 
+These premade results were produced using the entire K1 dataset. 
+First you will need to copy them.
 
 ```{bash eval=FALSE}
 cd ~/7-Binning
@@ -262,7 +267,31 @@ Now we can look at the results table that is in your current directory.
 less MAGS_checkm.tsv
 ```
 
-__Tip__: The definition of the statistics can be found at: https://github.com/Ecogenomics/CheckM/wiki/Reported-Statistics
+`r hide("CheckM statistics definitions")`
+List of statistics definitions from [CheckM wiki](https://github.com/Ecogenomics/CheckM/wiki/Reported-Statistics))
+
+- __bin id__: unique identifier of genome bin (derived from input fasta file)
+- __marker lineage__: indicates the taxonomic rank of the lineage-specific marker set used to estimated genome completeness, contamination, and strain heterogeneity. More detailed information about the placement of a genome within the reference genome tree can be obtained with the tree_qa command. The UID indicates the branch within the reference tree used to infer the marker set applied to estimate the bins quality.
+- __# genomes__: number of reference genomes used to infer the lineage-specific marker set
+- __markers__: number of marker genes within the inferred lineage-specific marker set
+marker sets: number of co-located marker sets within the inferred lineage-specific marker set
+- __0-5+__: number of times each marker gene is identified
+- __completeness__: estimated completeness of genome as determined from the presence/absence of marker genes and the expected collocalization of these genes (see Methods in the PeerJ preprint for details)
+- __contamination__: estimated contamination of genome as determined by the presence of multi-copy marker genes and the expected collocalization of these genes (see Methods in the PeerJ preprint for details)
+- __strain heterogeneity__: estimated strain heterogeneity as determined from the number of multi-copy marker pairs which exceed a specified amino acid identity threshold (default = 90%). High strain heterogeneity suggests the majority of reported contamination is from one or more closely related organisms (i.e. potentially the same species), while low strain heterogeneity suggests the majority of contamination is from more phylogenetically diverse sources (see Methods in the CheckM manuscript for more details).
+- __genome size__: number of nucleotides (including unknowns specified by N's) in the genome
+- __# ambiguous bases__: number of ambiguous (N's) bases in the genome
+- __# scaffolds__: number of scaffolds within the genome
+- __# contigs__: number of contigs within the genome as determined by splitting scaffolds at any position consisting of more than 10 consecutive ambiguous bases
+- __N50 (scaffolds)__: N50 statistics as calculated over all scaffolds
+- __N50 (contigs)__: N50 statistics as calculated over all contigs
+- __longest scaffold__: the longest scaffold within the genome
+- __longest contig__: the longest contig within the genome
+- __GC__: number of G/C nucleotides relative to all A,C,G, and T nucleotides in the genome
+- __coding density__: the number of nucleotides within a coding sequence (CDS) relative to all nucleotides in the genome
+- __translation table__: indicates which genetic code was used to translate nucleotides into amino acids
+- __# predicted genes__: number of predicted coding sequences (CDS) within the genome as determined using Prodigal
+`r unhide()`
 
 One quick way to calculate the overall quality of a bin is with the following equation:
 
@@ -275,44 +304,134 @@ Where:
 - __comp__ = Completeness
 - __cont__ = Contamination
 
-A score of 70-80% would be the aim. Therefore let us calculate this for the bins with R.
+A score of at least 70-80% would be the aim, with a maximum/perfect value being 100% (100% completeness, 0% contamination). Therefore let us calculate this for the bins with some bash and `awk` scripting.
 
-First the tab delimited file has some issues for `R` so we'll make a comma separated version.
+First it is good to make a copy of the file in case we make a mistake and want to start over. Additionally, we will make the copy a comma separated file. I find these easier to edit as typing comma characters (`,`) in commands is more reliable than tab characters (`\t`).
+
+This is carried out with `tr` which can translate characters. In the below case we translate/convert the tabs (`\t`) into commas (`,`). The converted output is then redirected (`>`) to the file "MAGS_checkm.csv".
 
 ```{bash eval=FALSE}
 cat MAGS_checkm.tsv | tr "\t" "," > MAGS_checkm.csv
 ```
 
-Activate `R`:
+We will create a new file with only the quality information. We'll start by making a file with only a header.
 
 ```{bash eval=FALSE}
-R
+echo "Quality" > MAGS_quality.csv
 ```
 
-Now to do the calculation in R for each bin:
+Next is the most complicated command. We will be calculating the Overall quality (see calculation above) for each row except the header row.
 
-```{r eval=FALSE}
-#Read in csv file as data frame
-df <- read.csv("MAGS_checkm.csv", header=TRUE, check.names=FALSE)
-#Add a column for overall quality
-df$quality <- df$Completeness - (5 * df$Contamination)
-#View the bin name, lineage, number genomes, 
-#completeness, contamination, and the quality columns
-df[,c(1,2,3,12,13,15)]
+We will be using a complicated linux based language called `awk`. This is very useful as it can carry out calculations on columns or as `awk` calls them, __fields__.
+
+As this is new and complicated we will build up our command step by step.
+
+First step is to extract the completeness and contamination fields/columns.
+
+```{bash eval=FALSE}
+awk -F, '{print $12,$13}' MAGS_checkm.csv
 ```
 
-__Questions__:
+- `-F,`: Indicates the input fields are separated by commas (`,`).
+- `''`: All the `awk` options are contained within the quotes.
+- `{}`: We can supply a function to `awk` within the braces.
+- `print $12,$13`: This function instructs `awk` to print the 12th (completeness) and 13th (contamination) fields. It is common to put commas (`,`) between fields if printing multiple fields.
+- `MAGS_checkm.csv`: Our last parameter is the input file. We are not changing the contents of the file, only printing information to screen/stdout.
 
-- What lineages were assigned to the bins?
-- How many genomes are present in the different bins?
-- What is the completeness and contamination of the bins and how is the overall quality?
-- With this information how successful was the binning? Was the binning able to create MAGs (i.e. one genome per bin)?
-- Which bins look particularly good?
+We do not want the header in our calculation so we will add an extra `awk` option.
 
-Once you are happy you can quit `R`.
+```{bash eval=FALSE}
+awk -F, 'NR>1 {print $12,$13}' MAGS_checkm.csv
+```
 
-```{r eval=FALSE}
-q()
+- `NR>1`: `NR` stands for number of records. Rows are called records in `awk`. Therefore `NR>1` means `awk` will only carry out the functions on the records numbered greater than 1. I.e. skip row 1, the header row.
+
+The __final__ step is to carry out the overall quality calculation and append the information to the "MAGS_quality.csv" file.
+
+```{bash eval=FALSE}
+awk -F, 'NR>1 {print $12 - (5 * $13)}' MAGS_checkm.csv >> MAGS_quality.csv
+```
+
+- `{print $12 - (5 * $13)}`: Our new function carries out the overall quality calculation and prints it for each record/row except the first (`NR>1`).
+- `>> MAGS_quality.csv`: The printed information is appended (`>>`) to the file "MAGS_quality.csv". We append because we want to retain the header we added to the file earlier.
+
+You can view the file to ensure it worked. The first and second values should be 33.62 and -0.89
+
+```{bash eval=FALSE}
+less MAGS_quality.csv
+```
+
+The last step is to combine the files "MAGS_checkm.csv" and "MAGS_quality.csv" with the `paste` command. The `-d ","` options indicates the merged files will be separated by commas (`,`), matching the column separation in "MAGS_checkm.csv".
+
+```{bash eval=FALSE}
+paste -d "," MAGS_checkm.csv MAGS_quality.csv > MAGS_checkm_quality.csv
+```
+
+### CheckM: MCQs
+```{r, fig.align = 'center',out.width= '10%', echo=FALSE }
+knitr::include_graphics(path = "figures/question_bubble_blue.png", auto_pdf = TRUE)
+```
+
+Viewing the file "MAGS_checkm_quality.csv" attempt the below questions.
+
+__Tip__: You can use the `cut` command to look at specific columns. For example:
+
+```{bash eval=FALSE}
+#look at the "Bin Id" and "Quality"
+#Convert the printed output's commas to tabs for readability
+cut -d "," -f 1,15 MAGS_checkm_quality.csv | tr "," "\t"
+```
+
+```{r, echo = FALSE}
+opts_p <- c("__root (UID1)__", answer="__k_Bacteria (UID203)__", "__o_Lachnospiraceae__")
+```
+1. What lineage was assigned to bin __K1.1__? `r longmcq(opts_p)`
+
+```{r, echo = FALSE}
+opts_p <- c("__root (UID1)__", "__k_Bacteria (UID203)__", answer="__o_Lachnospiraceae__")
+```
+2. What lineage was assigned to bin __K1.22__? `r longmcq(opts_p)`
+
+```{r, echo = FALSE}
+opts_p <- c(answer="__root (UID1)__", "__k_Bacteria (UID203)__", "__o_Lachnospiraceae__")
+```
+3. What lineage was assigned to bin __K1.8__? `r longmcq(opts_p)`
+
+```{r, echo = FALSE}
+opts_p <- c("__4.17__", answer="__33.62__", "__172__")
+```
+4. What is the quality value of K1.1? `r longmcq(opts_p)`
+
+```{r, echo = FALSE}
+opts_p <- c(answer="__4.17__", "__33.62__", "__172__")
+```
+5. What is the completeness value of K1.27? `r longmcq(opts_p)`
+
+```{r, echo = FALSE}
+opts_p <- c("__4.17__", "__33.62__", answer="__172__")
+```
+6. How many genomes are within the K1.12 bin? `r longmcq(opts_p)`
+
+```{r, echo = FALSE}
+opts_p <- c("__K1.20__", "__K1.21__", answer="__K1.22__")
+```
+7. Which bin has the highest quality value (96.38%)? `r longmcq(opts_p)`
+
+```{r, echo = FALSE}
+opts_p <- c(answer="__K1.20__", "__K1.21__", "__K1.22__")
+```
+8. Which bin has the lowest quality value (-300.67%)? `r longmcq(opts_p)`
+
+```{r, echo = FALSE}
+opts_p <- c("__K1.20__", answer="__K1.21__", "__K1.22__")
+```
+9. Which bin has the highest completeness value (98.27%)? `r longmcq(opts_p)`
+
+## Binning summary
+```{r, fig.align = 'center',out.width= '10%', echo=FALSE }
+knitr::include_graphics(path = "figures/sum_black.png", auto_pdf = TRUE)
 ```
 
 It is always useful to know the quality of your bins so you know which are more reliable than others. With that information you can be more or less certain when concluding your findings.
+
+We have some good quality bins. However, the best bins would only have one genome. Ultimately binning is trying to separate all the genomes from each other. A better metagenome assembly would most likely have led to better binning.
