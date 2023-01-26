@@ -95,7 +95,8 @@ prokka-output
 minpath
 minpath-conda-and-directory
 minpath-ec-extraction
-minpath-run
+code-explanation
+minpathrun
 minpath-output
 next-steps
 manuals

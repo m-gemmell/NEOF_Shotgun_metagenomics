@@ -23,7 +23,7 @@
 <meta name="author" content="Sam Haldenby and Matthew R. Gemmell" />
 
 
-<meta name="date" content="2023-01-25" />
+<meta name="date" content="2023-01-26" />
 
   <meta name="viewport" content="width=device-width, initial-scale=1" />
   <meta name="apple-mobile-web-app-capable" content="yes" />
@@ -283,7 +283,7 @@ code span.wa { color: #60a0b0; font-weight: bold; font-style: italic; } /* Warni
 <ul>
 <li class="chapter" data-level="18.3.1" data-path="18-Assembly_functional_annotation.html"><a href="18-Assembly_functional_annotation.html#minpath-conda-and-directory"><i class="fa fa-check"></i><b>18.3.1</b> MinPath: conda and directory</a></li>
 <li class="chapter" data-level="18.3.2" data-path="18-Assembly_functional_annotation.html"><a href="18-Assembly_functional_annotation.html#minpath-ec-extraction"><i class="fa fa-check"></i><b>18.3.2</b> MinPath: EC extraction</a></li>
-<li class="chapter" data-level="18.3.3" data-path="18-Assembly_functional_annotation.html"><a href="18-Assembly_functional_annotation.html#minpath-run"><i class="fa fa-check"></i><b>18.3.3</b> MinPath: run</a></li>
+<li class="chapter" data-level="18.3.3" data-path="18-Assembly_functional_annotation.html"><a href="18-Assembly_functional_annotation.html#minpathrun"><i class="fa fa-check"></i><b>18.3.3</b> MinPath: run</a></li>
 <li class="chapter" data-level="18.3.4" data-path="18-Assembly_functional_annotation.html"><a href="18-Assembly_functional_annotation.html#minpath-output"><i class="fa fa-check"></i><b>18.3.4</b> MinPath: output</a></li>
 </ul></li>
 </ul></li>
@@ -335,25 +335,27 @@ code span.wa { color: #60a0b0; font-weight: bold; font-style: italic; } /* Warni
 </div>
 <div id="prokka-run" class="section level3 hasAnchor" number="18.2.2">
 <h3><span class="header-section-number">18.2.2</span> Prokka: run<a href="18-Assembly_functional_annotation.html#prokka-run" class="anchor-section" aria-label="Anchor link to header"></a></h3>
-<p><img src="figures/enter_key.png" width="10%" style="display: block; margin: auto;" /></p>
+<p><img src="figures/play_blue.png" width="10%" style="display: block; margin: auto;" /></p>
 <p>Now we can annotate the bins.</p>
 <p>The below will take a long time to run (&gt;1 hour). Instead of running it skip onto the next step to copy pre-made output to continue with. This command is here so you know what to run in your own future analyses.</p>
 <div class="sourceCode" id="cb97"><pre class="sourceCode bash"><code class="sourceCode bash"><span id="cb97-1"><a href="18-Assembly_functional_annotation.html#cb97-1" aria-hidden="true" tabindex="-1"></a><span class="ex">metawrap</span> annotate_bins <span class="dt">\</span></span>
 <span id="cb97-2"><a href="18-Assembly_functional_annotation.html#cb97-2" aria-hidden="true" tabindex="-1"></a>-b ~/7-Binning/K1/bins <span class="dt">\</span></span>
 <span id="cb97-3"><a href="18-Assembly_functional_annotation.html#cb97-3" aria-hidden="true" tabindex="-1"></a>-o ./K1 <span class="dt">\</span></span>
 <span id="cb97-4"><a href="18-Assembly_functional_annotation.html#cb97-4" aria-hidden="true" tabindex="-1"></a>-t 8</span></code></pre></div>
-<p>The options used are:</p>
+<div id="parameters-11" class="section level4 unnumbered hasAnchor">
+<h4>Parameters<a href="18-Assembly_functional_annotation.html#parameters-11" class="anchor-section" aria-label="Anchor link to header"></a></h4>
+<p><img src="figures/parameter_blue.png" width="10%" style="display: block; margin: auto;" /></p>
 <ul>
 <li><code>-b</code>: The directory containing the assembled bins in fasta format.</li>
 <li><code>-o</code>: The output directory.</li>
 <li><code>-t</code>: Number of threads to use for the command.</li>
 </ul>
 </div>
+</div>
 <div id="prokka-output" class="section level3 hasAnchor" number="18.2.3">
 <h3><span class="header-section-number">18.2.3</span> Prokka: output<a href="18-Assembly_functional_annotation.html#prokka-output" class="anchor-section" aria-label="Anchor link to header"></a></h3>
-<p><img src="figures/output.png" width="10%" style="display: block; margin: auto;" /></p>
+<p><img src="figures/output_file_blue.png" width="10%" style="display: block; margin: auto;" /></p>
 <p>Like in previous steps we will copy over premade results for the full dataset.</p>
-<p><strong>Note</strong>: This need to be done in one of you non <code>metawrap</code> terminals</p>
 <div class="sourceCode" id="cb98"><pre class="sourceCode bash"><code class="sourceCode bash"><span id="cb98-1"><a href="18-Assembly_functional_annotation.html#cb98-1" aria-hidden="true" tabindex="-1"></a><span class="co">#Copy over directory</span></span>
 <span id="cb98-2"><a href="18-Assembly_functional_annotation.html#cb98-2" aria-hidden="true" tabindex="-1"></a><span class="fu">cp</span> <span class="at">-r</span> /pub39/tea/nsc006/NEOF/Shotgun_metagenomics/prokka/K1_fullset ~/8-metawrap_anno</span>
 <span id="cb98-3"><a href="18-Assembly_functional_annotation.html#cb98-3" aria-hidden="true" tabindex="-1"></a><span class="co">#Change into copied directory</span></span>
@@ -367,13 +369,14 @@ code span.wa { color: #60a0b0; font-weight: bold; font-style: italic; } /* Warni
 <p>A quick thing we can do with these files is to see if any of the bins contain a specific annotation. For example, if we wanted to know if there were any ATP-binding proteins in any of the bins we could carry out the below command.</p>
 <div class="sourceCode" id="cb100"><pre class="sourceCode bash"><code class="sourceCode bash"><span id="cb100-1"><a href="18-Assembly_functional_annotation.html#cb100-1" aria-hidden="true" tabindex="-1"></a><span class="fu">grep</span> <span class="st">&quot;ATP-binding protein&quot;</span> bin_funct_annotations/K1<span class="pp">*</span>gff <span class="kw">|</span> <span class="fu">less</span></span></code></pre></div>
 <p>We can now view the lines containing "ATP-binding protein" with the start of the line containing the file name the line belongs to.</p>
+<p>IN your future analyses you can expect these files further with excel, R, or visualisation software like <code>IGV</code> (<a href="https://software.broadinstitute.org/software/igv/GFF" class="uri">https://software.broadinstitute.org/software/igv/GFF</a>).</p>
 <p>What if you want to know about pathways?</p>
 </div>
 </div>
 <div id="minpath" class="section level2 hasAnchor" number="18.3">
 <h2><span class="header-section-number">18.3</span> MinPath<a href="18-Assembly_functional_annotation.html#minpath" class="anchor-section" aria-label="Anchor link to header"></a></h2>
 <p><img src="figures/pathways_2.png" width="15%" style="display: block; margin: auto;" /></p>
-<p>We can use <code>MinPath</code> to predict <code>MetaCyc</code> metabolic pathways. These pathway are made up of sets of enzymes that catalyse various reactions.</p>
+<p><code>MinPath</code> can predict <code>MetaCyc</code> metabolic pathways. These pathway are made up of sets of enzymes that catalyse various reactions.</p>
 <div id="minpath-conda-and-directory" class="section level3 hasAnchor" number="18.3.1">
 <h3><span class="header-section-number">18.3.1</span> MinPath: conda and directory<a href="18-Assembly_functional_annotation.html#minpath-conda-and-directory" class="anchor-section" aria-label="Anchor link to header"></a></h3>
 <p><img src="figures/conda.png" width="10%" style="display: block; margin: auto;" /></p>
@@ -396,20 +399,30 @@ code span.wa { color: #60a0b0; font-weight: bold; font-style: italic; } /* Warni
 <span id="cb101-3"><a href="18-Assembly_functional_annotation.html#cb101-3" aria-hidden="true" tabindex="-1"></a><span class="co">#Change into GFF directory</span></span>
 <span id="cb101-4"><a href="18-Assembly_functional_annotation.html#cb101-4" aria-hidden="true" tabindex="-1"></a><span class="bu">cd</span> bin_funct_annotations/</span></code></pre></div>
 <p>We will now use a loop with various parts to create an EC annotation file (<code>.ec</code>).</p>
-<p><strong>Note</strong>: The lack of <code>\</code> at the end of most of the ines is intentional. The below is all one command over multiple lines but loops work slightly different and don't need <code>\</code> in certain parts. Ensure you do press enter at the end of each line.</p>
+<p><strong>Note</strong>: The lack of <code>\</code> at the end of most of the ines is intentional.
+The below is all one command over multiple lines but loops work slightly different and don't need <code>\</code> in certain parts.
+Ensure you do press enter at the end of each line.</p>
 <div class="sourceCode" id="cb102"><pre class="sourceCode bash"><code class="sourceCode bash"><span id="cb102-1"><a href="18-Assembly_functional_annotation.html#cb102-1" aria-hidden="true" tabindex="-1"></a><span class="fu">ls</span> <span class="at">-1</span> <span class="pp">*</span>gff <span class="kw">|</span> <span class="fu">sed</span> <span class="st">&quot;s/.gff//&quot;</span> <span class="kw">|</span> <span class="cf">while</span> <span class="bu">read</span> <span class="va">bin</span></span>
 <span id="cb102-2"><a href="18-Assembly_functional_annotation.html#cb102-2" aria-hidden="true" tabindex="-1"></a><span class="cf">do</span></span>
 <span id="cb102-3"><a href="18-Assembly_functional_annotation.html#cb102-3" aria-hidden="true" tabindex="-1"></a><span class="fu">cat</span> <span class="va">${bin}</span>.gff <span class="kw">|</span> <span class="fu">grep</span> <span class="st">&quot;eC_number=&quot;</span> <span class="kw">|</span> <span class="fu">cut</span> <span class="at">-f</span> 9 <span class="kw">|</span> <span class="fu">cut</span> <span class="at">-f</span> 1,2 <span class="at">-d</span> <span class="st">&#39;;&#39;</span> <span class="kw">|</span> <span class="dt">\</span></span>
 <span id="cb102-4"><a href="18-Assembly_functional_annotation.html#cb102-4" aria-hidden="true" tabindex="-1"></a><span class="fu">sed</span> <span class="st">&quot;s/ID=//g&quot;</span> <span class="kw">|</span> <span class="fu">sed</span> <span class="st">&quot;s/;eC_number=/\t/g&quot;</span> <span class="op">&gt;</span> ../EC/<span class="va">${bin}</span>.ec</span>
 <span id="cb102-5"><a href="18-Assembly_functional_annotation.html#cb102-5" aria-hidden="true" tabindex="-1"></a><span class="cf">done</span></span></code></pre></div>
-<p>That is quite a bit of code so we'll break it down with examples for you to run. Of course feel free to skip over the explanations of code sections you are already comfortable with.</p>
-<p>The first part lists all our <code>.gff</code> files on one line each (<code>ls -1 *gff</code>). Then the suffix <code>.gff</code> is substituted with nothing <code>sed "s/.gff//"</code>. This gives us the name of each bin (e.g. <code>K1.1</code>, <code>K1.2</code>). Run this section of code to see that.</p>
+<div id="code-explanation" class="section level4 hasAnchor" number="18.3.2.1">
+<h4><span class="header-section-number">18.3.2.1</span> Code explanation<a href="18-Assembly_functional_annotation.html#code-explanation" class="anchor-section" aria-label="Anchor link to header"></a></h4>
+<p>That is quite a bit of code. You don't need to undertsand it as it should always work for <code>PROKKA</code> output.
+If you are not currently interested you can skip to the <a href="18-Assembly_functional_annotation.html#minpathrun"><code>MinPath</code>: run section</a></p>
+<p>If you are interested in how it works we'll break it down with examples for you to run.</p>
+<p>The first part lists all our <code>.gff</code> files on one line each (<code>ls -1 *gff</code>).
+Then the suffix <code>.gff</code> is substituted with nothing <code>sed "s/.gff//"</code>.
+This gives us the name of each bin (e.g. <code>K1.1</code>, <code>K1.2</code>).</p>
 <div class="sourceCode" id="cb103"><pre class="sourceCode bash"><code class="sourceCode bash"><span id="cb103-1"><a href="18-Assembly_functional_annotation.html#cb103-1" aria-hidden="true" tabindex="-1"></a><span class="co">#List all gff files on one (-1) each</span></span>
 <span id="cb103-2"><a href="18-Assembly_functional_annotation.html#cb103-2" aria-hidden="true" tabindex="-1"></a><span class="fu">ls</span> <span class="at">-1</span> <span class="pp">*</span>gff</span>
 <span id="cb103-3"><a href="18-Assembly_functional_annotation.html#cb103-3" aria-hidden="true" tabindex="-1"></a><span class="co">#List all the file prefixes (on one line each)</span></span>
 <span id="cb103-4"><a href="18-Assembly_functional_annotation.html#cb103-4" aria-hidden="true" tabindex="-1"></a><span class="fu">ls</span> <span class="at">-1</span> <span class="pp">*</span>gff <span class="kw">|</span> <span class="fu">sed</span> <span class="st">&quot;s/.gff//&quot;</span></span></code></pre></div>
-<p>Next we loop through each file prefix and use the variable <code>bin</code> (arbitrarily chosen) which contains the file prefix. This is carried out with <code>while read bin</code>. All the lines between the <code>do</code> (start of the loop) and <code>done</code> (end of loop) are line run in the loop.</p>
-<p>Run the loop with an echo command to show we are using the ${bin} variable to specify the input and output files.</p>
+<p>Next we loop through each file prefix and use the variable <code>bin</code> (arbitrarily chosen) which contains the file prefix.
+This is carried out with <code>while read bin</code>.
+All the lines between the <code>do</code> (start of the loop) and <code>done</code> (end of loop) are line run in the loop.</p>
+<p>Run the loop with an echo command to show we are using the <code>${bin}</code> variable to specify the input and output files.</p>
 <div class="sourceCode" id="cb104"><pre class="sourceCode bash"><code class="sourceCode bash"><span id="cb104-1"><a href="18-Assembly_functional_annotation.html#cb104-1" aria-hidden="true" tabindex="-1"></a><span class="fu">ls</span> <span class="at">-1</span> <span class="pp">*</span>gff <span class="kw">|</span> <span class="fu">sed</span> <span class="st">&quot;s/.gff//&quot;</span> <span class="kw">|</span> <span class="cf">while</span> <span class="bu">read</span> <span class="va">bin</span></span>
 <span id="cb104-2"><a href="18-Assembly_functional_annotation.html#cb104-2" aria-hidden="true" tabindex="-1"></a><span class="cf">do</span></span>
 <span id="cb104-3"><a href="18-Assembly_functional_annotation.html#cb104-3" aria-hidden="true" tabindex="-1"></a><span class="bu">echo</span> <span class="st">&quot;</span><span class="va">${bin}</span><span class="st">.gff ../EC/</span><span class="va">${bin}</span><span class="st">.ec&quot;</span></span>
@@ -417,7 +430,10 @@ code span.wa { color: #60a0b0; font-weight: bold; font-style: italic; } /* Warni
 <p>Now to look at the command within the loop:</p>
 <p><code>cat ${bin}.gff | grep "eC_number=" | cut -f 9 | cut -f 1,2 -d ';' | \</code>
 <code>sed "s/ID=//g" | sed "s/;eC_number=/\t/g" &gt; ../EC/${bin}.ec</code></p>
-<p>A good way to figure out what a pipe workflow is doing is to to run the first part of workflow and then add section by section to see how it is affecting the output. Additionally, it is always good to run it on one file and <code>head</code> the output so we have a manageable amount of data to look at.</p>
+<p>A good way to figure out what a pipe workflow is by building it up step by step.
+Run the first part of workflow and then add the next section, run, repeat.
+This shows you how each new section is affecting the output.
+Additionally, it is always good to run it on one file and <code>head</code> the output so we have a manageable amount of data to look at.</p>
 <p>We'll do that with the <code>K1.1.gff</code> file.</p>
 <p><strong>Note</strong>: Remember we are adding <code>head</code> to the end for ease of viewing.</p>
 <p><strong>Tips</strong>:</p>
@@ -434,23 +450,24 @@ code span.wa { color: #60a0b0; font-weight: bold; font-style: italic; } /* Warni
 <span id="cb105-7"><a href="18-Assembly_functional_annotation.html#cb105-7" aria-hidden="true" tabindex="-1"></a><span class="fu">cat</span> K1.1.gff <span class="kw">|</span> <span class="fu">grep</span> <span class="st">&quot;eC_number=&quot;</span> <span class="kw">|</span> <span class="fu">cut</span> <span class="at">-f</span> 9 <span class="kw">|</span> <span class="fu">cut</span> <span class="at">-f</span> 1,2 <span class="at">-d</span> <span class="st">&#39;;&#39;</span> <span class="kw">|</span> <span class="dt">\</span></span>
 <span id="cb105-8"><a href="18-Assembly_functional_annotation.html#cb105-8" aria-hidden="true" tabindex="-1"></a><span class="fu">head</span></span>
 <span id="cb105-9"><a href="18-Assembly_functional_annotation.html#cb105-9" aria-hidden="true" tabindex="-1"></a><span class="co">#Substitute (s/) ID= for nothing (/ID//)</span></span>
-<span id="cb105-10"><a href="18-Assembly_functional_annotation.html#cb105-10" aria-hidden="true" tabindex="-1"></a><span class="co">#/g indicates to carry out it out for every instance in every line</span></span>
-<span id="cb105-11"><a href="18-Assembly_functional_annotation.html#cb105-11" aria-hidden="true" tabindex="-1"></a><span class="co">#Default is to only the first instance in each line</span></span>
+<span id="cb105-10"><a href="18-Assembly_functional_annotation.html#cb105-10" aria-hidden="true" tabindex="-1"></a><span class="co">#/g indicates to carry it out for every instance in every line</span></span>
+<span id="cb105-11"><a href="18-Assembly_functional_annotation.html#cb105-11" aria-hidden="true" tabindex="-1"></a><span class="co">#Default is to only substitute the first instance in each line</span></span>
 <span id="cb105-12"><a href="18-Assembly_functional_annotation.html#cb105-12" aria-hidden="true" tabindex="-1"></a><span class="fu">cat</span> K1.1.gff <span class="kw">|</span> <span class="fu">grep</span> <span class="st">&quot;eC_number=&quot;</span> <span class="kw">|</span> <span class="fu">cut</span> <span class="at">-f</span> 9 <span class="kw">|</span> <span class="fu">cut</span> <span class="at">-f</span> 1,2 <span class="at">-d</span> <span class="st">&#39;;&#39;</span> <span class="kw">|</span> <span class="dt">\</span></span>
 <span id="cb105-13"><a href="18-Assembly_functional_annotation.html#cb105-13" aria-hidden="true" tabindex="-1"></a><span class="fu">sed</span> <span class="st">&quot;s/ID=//g&quot;</span> <span class="kw">|</span> <span class="fu">head</span></span>
 <span id="cb105-14"><a href="18-Assembly_functional_annotation.html#cb105-14" aria-hidden="true" tabindex="-1"></a><span class="co">#Substitute ;eC_number= for a tab (\t)</span></span>
 <span id="cb105-15"><a href="18-Assembly_functional_annotation.html#cb105-15" aria-hidden="true" tabindex="-1"></a><span class="fu">cat</span> K1.1.gff <span class="kw">|</span> <span class="fu">grep</span> <span class="st">&quot;eC_number=&quot;</span> <span class="kw">|</span> <span class="fu">cut</span> <span class="at">-f</span> 9 <span class="kw">|</span> <span class="fu">cut</span> <span class="at">-f</span> 1,2 <span class="at">-d</span> <span class="st">&#39;;&#39;</span> <span class="kw">|</span> <span class="dt">\</span></span>
 <span id="cb105-16"><a href="18-Assembly_functional_annotation.html#cb105-16" aria-hidden="true" tabindex="-1"></a><span class="fu">sed</span> <span class="st">&quot;s/ID=//g&quot;</span> <span class="kw">|</span> <span class="fu">sed</span> <span class="st">&quot;s/;eC_number=/\t/g&quot;</span> <span class="kw">|</span> <span class="fu">head</span></span></code></pre></div>
-<p>Finally the pipes output is written into a file: <code>&gt; ../EC/${bin}.ec</code>.</p>
+<p>In the looped command output is written into files: <code>&gt; ../EC/${bin}.ec</code>.</p>
 <p>The output <code>.ec</code> files are required for <code>MinPath</code> and are tab delimited with two columns:</p>
 <ol style="list-style-type: decimal">
 <li>protein/sequence id</li>
 <li>annotation (in this case the EC number)</li>
 </ol>
 </div>
-<div id="minpath-run" class="section level3 hasAnchor" number="18.3.3">
-<h3><span class="header-section-number">18.3.3</span> MinPath: run<a href="18-Assembly_functional_annotation.html#minpath-run" class="anchor-section" aria-label="Anchor link to header"></a></h3>
-<p><img src="figures/enter_key.png" width="10%" style="display: block; margin: auto;" /></p>
+</div>
+<div id="minpathrun" class="section level3 hasAnchor" number="18.3.3">
+<h3><span class="header-section-number">18.3.3</span> MinPath: run<a href="18-Assembly_functional_annotation.html#minpathrun" class="anchor-section" aria-label="Anchor link to header"></a></h3>
+<p><img src="figures/play_green.png" width="10%" style="display: block; margin: auto;" /></p>
 <p>With our <code>.ec</code> files we can create our MetaCyc predictions.</p>
 <p>First we'll change directory into the EC directory. Then create an output directory for the MetaCyc predictions.</p>
 <div class="sourceCode" id="cb106"><pre class="sourceCode bash"><code class="sourceCode bash"><span id="cb106-1"><a href="18-Assembly_functional_annotation.html#cb106-1" aria-hidden="true" tabindex="-1"></a><span class="bu">cd</span> ../EC</span>
@@ -466,7 +483,7 @@ code span.wa { color: #60a0b0; font-weight: bold; font-style: italic; } /* Warni
 </div>
 <div id="minpath-output" class="section level3 hasAnchor" number="18.3.4">
 <h3><span class="header-section-number">18.3.4</span> MinPath: output<a href="18-Assembly_functional_annotation.html#minpath-output" class="anchor-section" aria-label="Anchor link to header"></a></h3>
-<p><img src="figures/output.png" width="10%" style="display: block; margin: auto;" /></p>
+<p><img src="figures/output_file_green.png" width="10%" style="display: block; margin: auto;" /></p>
 <p>First step is to change directory into the <code>MetaCyc</code> directory.</p>
 <div class="sourceCode" id="cb108"><pre class="sourceCode bash"><code class="sourceCode bash"><span id="cb108-1"><a href="18-Assembly_functional_annotation.html#cb108-1" aria-hidden="true" tabindex="-1"></a><span class="co">#Change directory</span></span>
 <span id="cb108-2"><a href="18-Assembly_functional_annotation.html#cb108-2" aria-hidden="true" tabindex="-1"></a><span class="bu">cd</span> ../MetaCyc</span>

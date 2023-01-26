@@ -38,7 +38,7 @@ cd ~/8-metawrap_anno
 
 ### Prokka: run
 ```{r, fig.align = 'center',out.width= '10%', echo=FALSE }
-knitr::include_graphics(path = "figures/enter_key.png", auto_pdf = TRUE)
+knitr::include_graphics(path = "figures/play_blue.png", auto_pdf = TRUE)
 ``` 
 
 Now we can annotate the bins.
@@ -52,7 +52,10 @@ metawrap annotate_bins \
 -t 8
 ```
 
-The options used are:
+#### Parameters {-}
+```{r, fig.align = 'center',out.width= '10%', echo=FALSE }
+knitr::include_graphics(path = "figures/parameter_blue.png", auto_pdf = TRUE)
+```
 
 - `-b`: The directory containing the assembled bins in fasta format.
 - `-o`: The output directory.
@@ -60,12 +63,10 @@ The options used are:
 
 ### Prokka: output
 ```{r, fig.align = 'center',out.width= '10%', echo=FALSE }
-knitr::include_graphics(path = "figures/output.png", auto_pdf = TRUE)
+knitr::include_graphics(path = "figures/output_file_blue.png", auto_pdf = TRUE)
 ``` 
 
 Like in previous steps we will copy over premade results for the full dataset.
-
-__Note__: This need to be done in one of you non `metawrap` terminals
 
 ```{bash eval=FALSE}
 #Copy over directory
@@ -96,6 +97,8 @@ grep "ATP-binding protein" bin_funct_annotations/K1*gff | less
 
 We can now view the lines containing "ATP-binding protein" with the start of the line containing the file name the line belongs to.
 
+IN your future analyses you can expect these files further with excel, R, or visualisation software like `IGV` (https://software.broadinstitute.org/software/igv/GFF).
+
 What if you want to know about pathways?
 
 ## MinPath
@@ -103,7 +106,7 @@ What if you want to know about pathways?
 knitr::include_graphics(path = "figures/pathways_2.png", auto_pdf = TRUE)
 ```
 
-We can use `MinPath` to predict `MetaCyc` metabolic pathways. These pathway are made up of sets of enzymes that catalyse various reactions.
+`MinPath` can predict `MetaCyc` metabolic pathways. These pathway are made up of sets of enzymes that catalyse various reactions.
 
 ### MinPath: conda and directory
 ```{r, fig.align = 'center',out.width= '10%', echo=FALSE }
@@ -138,7 +141,9 @@ cd bin_funct_annotations/
 
 We will now use a loop with various parts to create an EC annotation file (`.ec`).
 
-__Note__: The lack of `\` at the end of most of the ines is intentional. The below is all one command over multiple lines but loops work slightly different and don't need `\` in certain parts. Ensure you do press enter at the end of each line.
+__Note__: The lack of `\` at the end of most of the ines is intentional. 
+The below is all one command over multiple lines but loops work slightly different and don't need `\` in certain parts. 
+Ensure you do press enter at the end of each line.
 
 ```{bash eval=FALSE}
 ls -1 *gff | sed "s/.gff//" | while read bin
@@ -148,9 +153,16 @@ sed "s/ID=//g" | sed "s/;eC_number=/\t/g" > ../EC/${bin}.ec
 done
 ```
 
-That is quite a bit of code so we'll break it down with examples for you to run. Of course feel free to skip over the explanations of code sections you are already comfortable with.
+#### Code explanation
 
-The first part lists all our `.gff` files on one line each (`ls -1 *gff`). Then the suffix `.gff` is substituted with nothing `sed "s/.gff//"`. This gives us the name of each bin (e.g. `K1.1`, `K1.2`). Run this section of code to see that.
+That is quite a bit of code. You don't need to undertsand it as it should always work for `PROKKA` output. 
+If you are not currently interested you can skip to the [`MinPath`: run section](#minpathrun)
+
+If you are interested in how it works we'll break it down with examples for you to run. 
+
+The first part lists all our `.gff` files on one line each (`ls -1 *gff`). 
+Then the suffix `.gff` is substituted with nothing `sed "s/.gff//"`. 
+This gives us the name of each bin (e.g. `K1.1`, `K1.2`).
 
 ```{bash eval=FALSE}
 #List all gff files on one (-1) each
@@ -159,9 +171,11 @@ ls -1 *gff
 ls -1 *gff | sed "s/.gff//"
 ```
 
-Next we loop through each file prefix and use the variable `bin` (arbitrarily chosen) which contains the file prefix. This is carried out with `while read bin`. All the lines between the `do` (start of the loop) and `done` (end of loop) are line run in the loop.
+Next we loop through each file prefix and use the variable `bin` (arbitrarily chosen) which contains the file prefix. 
+This is carried out with `while read bin`. 
+All the lines between the `do` (start of the loop) and `done` (end of loop) are line run in the loop.
 
-Run the loop with an echo command to show we are using the ${bin} variable to specify the input and output files.
+Run the loop with an echo command to show we are using the `${bin}` variable to specify the input and output files.
 
 ```{bash eval=FALSE}
 ls -1 *gff | sed "s/.gff//" | while read bin
@@ -175,7 +189,10 @@ Now to look at the command within the loop:
 `cat ${bin}.gff | grep "eC_number=" | cut -f 9 | cut -f 1,2 -d ';' | \`
 `sed "s/ID=//g" | sed "s/;eC_number=/\t/g" > ../EC/${bin}.ec`
 
-A good way to figure out what a pipe workflow is doing is to to run the first part of workflow and then add section by section to see how it is affecting the output. Additionally, it is always good to run it on one file and `head` the output so we have a manageable amount of data to look at.
+A good way to figure out what a pipe workflow is by building it up step by step.
+Run the first part of workflow and then add the next section, run, repeat.
+This shows you how each new section is affecting the output. 
+Additionally, it is always good to run it on one file and `head` the output so we have a manageable amount of data to look at.
 
 We'll do that with the `K1.1.gff` file.
 
@@ -196,8 +213,8 @@ cat K1.1.gff | grep "eC_number=" | cut -f 9 | head
 cat K1.1.gff | grep "eC_number=" | cut -f 9 | cut -f 1,2 -d ';' | \
 head
 #Substitute (s/) ID= for nothing (/ID//)
-#/g indicates to carry out it out for every instance in every line
-#Default is to only the first instance in each line
+#/g indicates to carry it out for every instance in every line
+#Default is to only substitute the first instance in each line
 cat K1.1.gff | grep "eC_number=" | cut -f 9 | cut -f 1,2 -d ';' | \
 sed "s/ID=//g" | head
 #Substitute ;eC_number= for a tab (\t)
@@ -205,16 +222,16 @@ cat K1.1.gff | grep "eC_number=" | cut -f 9 | cut -f 1,2 -d ';' | \
 sed "s/ID=//g" | sed "s/;eC_number=/\t/g" | head
 ```
 
-Finally the pipes output is written into a file: `> ../EC/${bin}.ec`.
+In the looped command output is written into files: `> ../EC/${bin}.ec`.
 
 The output `.ec` files are required for `MinPath` and are tab delimited with two columns:
 
 1. protein/sequence id
 2. annotation (in this case the EC number)
 
-### MinPath: run
+### MinPath: run {#minpathrun}
 ```{r, fig.align = 'center',out.width= '10%', echo=FALSE }
-knitr::include_graphics(path = "figures/enter_key.png", auto_pdf = TRUE)
+knitr::include_graphics(path = "figures/play_green.png", auto_pdf = TRUE)
 ``` 
 
 With our `.ec` files we can create our MetaCyc predictions.
@@ -241,7 +258,7 @@ A lot of output will be printed to screen but this can be ignored unless you see
 
 ### MinPath: output
 ```{r, fig.align = 'center',out.width= '10%', echo=FALSE }
-knitr::include_graphics(path = "figures/output.png", auto_pdf = TRUE)
+knitr::include_graphics(path = "figures/output_file_green.png", auto_pdf = TRUE)
 ``` 
 
 First step is to change directory into the `MetaCyc` directory.

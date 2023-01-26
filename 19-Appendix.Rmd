@@ -7,6 +7,8 @@ knitr::include_graphics(path = "figures/step.png", auto_pdf = TRUE)
 
 Below are some good links to start with before carrying out your own projects.
 
+- `KrakenTools`: A suite of scripts to be used alongside the Kraken, KrakenUniq, Kraken 2, or Bracken programs. 
+  - https://github.com/jenniferlu717/KrakenTools
 - A review paper on metagenome assembly approaches
    - Genome-resolved metagenomics using environmental and clinical samples: https://academic.oup.com/bib/advance-article/doi/10.1093/bib/bbab030/6184411
 - bioBakery tools for meta'omic profiling
@@ -82,6 +84,48 @@ wget -O K1_R1.fastq.gz ftp://ftp.sra.ebi.ac.uk/vol1/fastq/ERR505/ERR505102/ERR50
 wget -O K1_R2.fastq.gz ftp://ftp.sra.ebi.ac.uk/vol1/fastq/ERR505/ERR505102/ERR505102_2.fastq.gz
 wget -O K2_R1.fastq.gz ftp://ftp.sra.ebi.ac.uk/vol1/fastq/ERR505/ERR505104/ERR505104_1.fastq.gz
 wget -O K2_R2.fastq.gz ftp://ftp.sra.ebi.ac.uk/vol1/fastq/ERR505/ERR505104/ERR505104_2.fastq.gz
+wget -O K3_R1.fastq.gz ftp://ftp.sra.ebi.ac.uk/vol1/fastq/ERR505/ERR505095/ERR505095_1.fastq.gz
+wget -O K3_R2.fastq.gz ftp://ftp.sra.ebi.ac.uk/vol1/fastq/ERR505/ERR505095/ERR505095_2.fastq.gz
+wget -O K4_R1.fastq.gz ftp://ftp.sra.ebi.ac.uk/vol1/fastq/ERR505/ERR505096/ERR505096_1.fastq.gz
+wget -O K4_R2.fastq.gz ftp://ftp.sra.ebi.ac.uk/vol1/fastq/ERR505/ERR505096/ERR505096_2.fastq.gz
+wget -O K5_R1.fastq.gz ftp://ftp.sra.ebi.ac.uk/vol1/fastq/ERR505/ERR505097/ERR505097_1.fastq.gz
+wget -O K5_R2.fastq.gz ftp://ftp.sra.ebi.ac.uk/vol1/fastq/ERR505/ERR505097/ERR505097_2.fastq.gz
+wget -O K6_R1.fastq.gz ftp://ftp.sra.ebi.ac.uk/vol1/fastq/ERR505/ERR505098/ERR505098_1.fastq.gz
+wget -O K6_R2.fastq.gz ftp://ftp.sra.ebi.ac.uk/vol1/fastq/ERR505/ERR505098/ERR505098_2.fastq.gz
+wget -O K7_R1.fastq.gz ftp://ftp.sra.ebi.ac.uk/vol1/fastq/ERR505/ERR505099/ERR505099_1.fastq.gz
+wget -O K7_R2.fastq.gz ftp://ftp.sra.ebi.ac.uk/vol1/fastq/ERR505/ERR505099/ERR505099_2.fastq.gz
+wget -O K8_R1.fastq.gz ftp://ftp.sra.ebi.ac.uk/vol1/fastq/ERR505/ERR505100/ERR505100_1.fastq.gz
+wget -O K8_R2.fastq.gz ftp://ftp.sra.ebi.ac.uk/vol1/fastq/ERR505/ERR505100/ERR505100_2.fastq.gz
+wget -O K9_R1.fastq.gz ftp://ftp.sra.ebi.ac.uk/vol1/fastq/ERR505/ERR505101/ERR505101_1.fastq.gz
+wget -O K9_R2.fastq.gz ftp://ftp.sra.ebi.ac.uk/vol1/fastq/ERR505/ERR505101/ERR505101_2.fastq.gz
+wget -O K10_R1.fastq.gz ftp://ftp.sra.ebi.ac.uk/vol1/fastq/ERR505/ERR505103/ERR505103_1.fastq.gz
+wget -O K10_R2.fastq.gz ftp://ftp.sra.ebi.ac.uk/vol1/fastq/ERR505/ERR505103/ERR505103_2.fastq.gz
+wget -O K11_R1.fastq.gz ftp://ftp.sra.ebi.ac.uk/vol1/fastq/ERR505/ERR505105/ERR505105_1.fastq.gz
+wget -O K11_R2.fastq.gz ftp://ftp.sra.ebi.ac.uk/vol1/fastq/ERR505/ERR505105/ERR505105_2.fastq.gz
+wget -O K12_R1.fastq.gz ftp://ftp.sra.ebi.ac.uk/vol1/fastq/ERR505/ERR505106/ERR505106_1.fastq.gz
+wget -O K12_R2.fastq.gz ftp://ftp.sra.ebi.ac.uk/vol1/fastq/ERR505/ERR505106/ERR505106_2.fastq.gz
 wget -O W1_R1.fastq.gz ftp://ftp.sra.ebi.ac.uk/vol1/fastq/ERR505/ERR505090/ERR505090_1.fastq.gz
 wget -O W1_R2.fastq.gz ftp://ftp.sra.ebi.ac.uk/vol1/fastq/ERR505/ERR505090/ERR505090_2.fastq.gz
+wget -O W2_R1.fastq.gz ftp://ftp.sra.ebi.ac.uk/vol1/fastq/ERR505/ERR505088/ERR505088_1.fastq.gz
+wget -O W2_R2.fastq.gz ftp://ftp.sra.ebi.ac.uk/vol1/fastq/ERR505/ERR505088/ERR505088_2.fastq.gz
+wget -O W3_R1.fastq.gz ftp://ftp.sra.ebi.ac.uk/vol1/fastq/ERR505/ERR505084/ERR505084_1.fastq.gz
+wget -O W3_R2.fastq.gz ftp://ftp.sra.ebi.ac.uk/vol1/fastq/ERR505/ERR505084/ERR505084_2.fastq.gz
+wget -O W4_R1.fastq.gz ftp://ftp.sra.ebi.ac.uk/vol1/fastq/ERR505/ERR505085/ERR505085_1.fastq.gz
+wget -O W4_R2.fastq.gz ftp://ftp.sra.ebi.ac.uk/vol1/fastq/ERR505/ERR505085/ERR505085_2.fastq.gz
+wget -O W5_R1.fastq.gz ftp://ftp.sra.ebi.ac.uk/vol1/fastq/ERR505/ERR505086/ERR505086_1.fastq.gz
+wget -O W5_R2.fastq.gz ftp://ftp.sra.ebi.ac.uk/vol1/fastq/ERR505/ERR505086/ERR505086_2.fastq.gz
+wget -O W6_R1.fastq.gz ftp://ftp.sra.ebi.ac.uk/vol1/fastq/ERR505/ERR505087/ERR505087_1.fastq.gz
+wget -O W6_R2.fastq.gz ftp://ftp.sra.ebi.ac.uk/vol1/fastq/ERR505/ERR505087/ERR505087_2.fastq.gz
+wget -O W7_R1.fastq.gz ftp://ftp.sra.ebi.ac.uk/vol1/fastq/ERR505/ERR505089/ERR505089_1.fastq.gz
+wget -O W7_R2.fastq.gz ftp://ftp.sra.ebi.ac.uk/vol1/fastq/ERR505/ERR505089/ERR505089_2.fastq.gz
+wget -O W8_R1.fastq.gz ftp://ftp.sra.ebi.ac.uk/vol1/fastq/ERR505/ERR505091/ERR505091_1.fastq.gz
+wget -O W8_R2.fastq.gz ftp://ftp.sra.ebi.ac.uk/vol1/fastq/ERR505/ERR505091/ERR505091_2.fastq.gz
+wget -O W9_R1.fastq.gz ftp://ftp.sra.ebi.ac.uk/vol1/fastq/ERR505/ERR505092/ERR505092_1.fastq.gz
+wget -O W9_R2.fastq.gz ftp://ftp.sra.ebi.ac.uk/vol1/fastq/ERR505/ERR505092/ERR505092_2.fastq.gz
+wget -O W10_R1.fastq.gz ftp://ftp.sra.ebi.ac.uk/vol1/fastq/ERR505/ERR505093/ERR505093_1.fastq.gz
+wget -O W10_R2.fastq.gz ftp://ftp.sra.ebi.ac.uk/vol1/fastq/ERR505/ERR505093/ERR505093_2.fastq.gz
+wget -O W11_R1.fastq.gz ftp://ftp.sra.ebi.ac.uk/vol1/fastq/ERR505/ERR505094/ERR505094_1.fastq.gz
+wget -O W11_R2.fastq.gz ftp://ftp.sra.ebi.ac.uk/vol1/fastq/ERR505/ERR505094/ERR505094_2.fastq.gz
+wget -O W12_R1.fastq.gz ftp://ftp.sra.ebi.ac.uk/vol1/fastq/ERR505/ERR505083/ERR505083_1.fastq.gz
+wget -O W12_R2.fastq.gz ftp://ftp.sra.ebi.ac.uk/vol1/fastq/ERR505/ERR505083/ERR505083_2.fastq.gz
 ```
