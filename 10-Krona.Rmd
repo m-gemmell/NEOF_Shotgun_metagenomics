@@ -62,7 +62,7 @@ opts_p <- c(answer="__43%__", "__35%__", "__14%__")
 ```{r, echo = FALSE}
 opts_p <- c("__43%__", "__35%__", answer="__14%__")
 ```
-3. What percentage of the __root__ was classified to __Proteobacteria__ for __W1__? `r longmcq(opts_p)`
+3. What percentage of the __root__ was classified to __Azorhizobium__ for __W1__? `r longmcq(opts_p)`
 
 ```{r, echo = FALSE}
 opts_p <- c(answer="__39%__", "__27%__", "__6%__")
