@@ -1,0 +1,79 @@
+--- 
+title: "Shotgun Metagenomics resources"
+author: "Sam Haldenby and Matthew R. Gemmell"
+date: "`r Sys.Date()`"
+site: bookdown::bookdown_site
+output: bookdown::gitbook
+documentclass: book
+bibliography: [book.bib, packages.bib]
+biblio-style: apalike
+link-citations: yes
+favicon: figures/NEOF_favicon.png
+description: NEOF book for the Microbial shotgun metagenomics workshop resources
+cover-image: "figures/NEOF.png"
+---
+
+```{r, fig.align = 'center',out.width= '30%', echo=FALSE }
+knitr::include_graphics(path = "figures/NEOF.png", auto_pdf = TRUE)
+``` 
+
+# Videos, slides, & files
+
+```{r, fig.align = 'center',out.width= '20%', echo=FALSE }
+knitr::include_graphics(path = "figures/squid.png", auto_pdf = TRUE)
+``` 
+
+## Introduction
+
+<div class="container">
+<iframe src="https://www.youtube.com/embed/U1tOEjaqO1o" 
+frameborder="0" allowfullscreen class="video"></iframe>
+</div>
+
+[__Slides__](https://NEOF-workshops.github.io/Shotgun_ld5ug2/resources/Slides/Shotgun_intro.pdf)
+
+## Kraken 2
+
+[__Slides__](https://NEOF-workshops.github.io/Shotgun_ld5ug2/resources/Slides/Shotgun_kraken2.pdf)
+
+## HUMAnN & bioBakery
+
+<div class="container">
+<iframe src="https://www.youtube.com/embed/w_-4xldv2fI" 
+frameborder="0" allowfullscreen class="video"></iframe>
+</div>
+
+[__Slides__](https://NEOF-workshops.github.io/Shotgun_ld5ug2/resources/Slides/Shotgun_humann.pdf)
+
+## Assembly approach
+
+<div class="container">
+<iframe src="https://www.youtube.com/embed/Kf4nkvbaXDM" 
+frameborder="0" allowfullscreen class="video"></iframe>
+</div>
+
+[__Slides__](https://NEOF-workshops.github.io/Shotgun_ld5ug2/resources/Slides/Shotgun_metagenome.pdf)
+
+## Workshop files
+
+The below compressed directory is provided so you may attempt the workshop materials on a computer/cluster available to you.
+
+Note:
+
+- The file locations will not match
+- The `. use` scripts will not work. You will have to install your own programs. I recommend looking into [conda](https://docs.conda.io/en/latest/) to more easily install programs.
+
+[__Download files__](http://www.cgr.liv.ac.uk/illum/NEOFworkshops_5bfa93ca0482d69d/Shotgun_Metagenomics/resources/Shotgun_metagenomics.zip)
+
+## Bookdown html
+
+Links to the online version of the Bookdown.
+
+- [__Main__](https://neof-workshops.github.io/Shotgun_ld5ug2/)
+
+You can download the html files of the bookdown below. Ensure you unzip the directory before use.
+
+- [__Download main zipped bookdown__](https://NEOF-workshops.github.io/Shotgun_ld5ug2/resources/Bookdown/NEOF_shotgun_metagenome_course_book.zip)
+
+<!--chapter:end:01-Shotgun_metagenomics.Rmd-->
+
