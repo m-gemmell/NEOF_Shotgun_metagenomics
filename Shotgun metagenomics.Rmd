@@ -646,7 +646,7 @@ knitr::include_graphics(path = "figures/parameter_blue.png", auto_pdf = TRUE)
 - __`in1=`__: The input R1 fastq file of unmapped unpaired reads.
 - __`in2=`__: The input R2 fastq file of unmapped unpaired reads.
 - __`out1=`__: The output R1 fastq file of unmapped paired reads.
-- __`out2=`__: The output R2 fastq file of unmapped unpaired reads.
+- __`out2=`__: The output R2 fastq file of unmapped paired reads.
 - __`outs=`__: The output fastq file containing the left over singletons (a sequence missing a pair).
   - This file can normally be ignored.
 
@@ -933,7 +933,7 @@ opts_p <- c(answer="__43%__", "__35%__", "__14%__")
 ```{r, echo = FALSE}
 opts_p <- c("__43%__", "__35%__", answer="__14%__")
 ```
-3. What percentage of the __root__ was classified to __Proteobacteria__ for __W1__? `r longmcq(opts_p)`
+3. What percentage of the __root__ was classified to __Azorhizobium__ for __W1__? `r longmcq(opts_p)`
 
 ```{r, echo = FALSE}
 opts_p <- c(answer="__39%__", "__27%__", "__6%__")
