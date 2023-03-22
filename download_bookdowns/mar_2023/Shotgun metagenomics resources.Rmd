@@ -26,13 +26,18 @@ knitr::include_graphics(path = "figures/squid.png", auto_pdf = TRUE)
 ## Introduction
 
 <div class="container">
-<iframe src="https://www.youtube.com/embed/U1tOEjaqO1o" 
+<iframe src="https://www.youtube.com/embed/Ymq2_FqCP1Y" 
 frameborder="0" allowfullscreen class="video"></iframe>
 </div>
 
 [__Slides__](https://NEOF-workshops.github.io/Shotgun_ld5ug2/resources/Slides/Shotgun_intro.pdf)
 
 ## Kraken 2
+
+<div class="container">
+<iframe src="https://www.youtube.com/embed/JMau7Q9ULOY" 
+frameborder="0" allowfullscreen class="video"></iframe>
+</div>
 
 [__Slides__](https://NEOF-workshops.github.io/Shotgun_ld5ug2/resources/Slides/Shotgun_kraken2.pdf)
 
