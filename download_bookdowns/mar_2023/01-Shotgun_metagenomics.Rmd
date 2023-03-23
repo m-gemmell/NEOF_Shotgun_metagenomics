@@ -53,7 +53,7 @@ frameborder="0" allowfullscreen class="video"></iframe>
 ## Assembly approach
 
 <div class="container">
-<iframe src="https://www.youtube.com/embed/Kf4nkvbaXDM" 
+<iframe src="https://www.youtube.com/embed/svBLpSOK8ss" 
 frameborder="0" allowfullscreen class="video"></iframe>
 </div>
 
