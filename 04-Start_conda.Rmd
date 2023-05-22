@@ -1,6 +1,6 @@
-# Startup & conda
-```{r, fig.align = 'center',out.width= '20%', echo=FALSE }
-knitr::include_graphics(path = "figures/conda.png", auto_pdf = TRUE)
+# Startup & mamba
+```{r, fig.align = 'center',out.width= '30%', echo=FALSE }
+knitr::include_graphics(path = "figures/mamba_logo.png", auto_pdf = TRUE)
 ```
 
 During this practical you will use a number of installed programs and scripts. To ensure that the system knows where to look for the scripts, run the following command (ensure this starts with a full stop and a space `. `):
@@ -9,7 +9,7 @@ During this practical you will use a number of installed programs and scripts. T
 . useshotgun
 ```
 
-The `use` scripts in this workshop are custom scripts that set up conda environments. You can look at the above script with `less /usr/local/bin/useshotgun` if you are interested in its contents.
+The `use` scripts in this workshop are custom scripts that set up `mamba` environments. You can look at the above script with `less /usr/local/bin/useshotgun` if you are interested in its contents.
 
 Also, there’s a chance you’re currently not in your home directory, so let’s make sure you are with the following command:
 

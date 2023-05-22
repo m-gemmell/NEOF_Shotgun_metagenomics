@@ -1,5 +1,65 @@
 # (APPENDIX) Appendix {-}
 
+# Mamba installs
+```{r, fig.align = 'center',out.width= '20%', echo=FALSE }
+knitr::include_graphics(path = "figures/mamba_logo.png", auto_pdf = TRUE)
+```
+
+## Mamba installation and environment {#mamba_install}
+
+Mamba is a reimplementation of conda.
+It is a great tool for installing bioinformatic packages including R packages.
+
+Mamba github: https://github.com/mamba-org/mamba
+
+Mamba installation: https://github.com/conda-forge/miniforge#mambaforge
+
+Mamba guide: https://mamba.readthedocs.io/en/latest/user_guide/mamba.html
+
+To create the mamba environment `shotgun_meta` run the below commands in your bash. You will need to have installed `mamba` first.
+
+```{bash, eval=FALSE}
+#shotgun_meta
+mamba create -n shotgun_meta
+mamba activate shotgun_meta
+#Install packages
+mamba install -c bioconda fastqc trim-galore multiqc bowtie2 kraken2 krona bracken lefse flash megahit quast metabat2 prokka bbmap
+#Update krona taxonomy database
+ktUpdateTaxonomy.sh
+```
+
+#Install minpath
+
+Install [MinPath](https://github.com/mgtools/MinPath) via `git`.
+I suggest creating a directory called "git_installs" in your home directory and running this code there.
+
+```{bash, eval=FALSE}
+#git_installs directory
+mkdir ~/git_installs
+cd ~/git_installs
+#MinPath
+git clone https://github.com/mgtools/MinPath
+```
+
+To run `MinPath` in your own machines you will need to use the full path of the python file.
+If you installed these in your "~/git_installs" examples are below.
+
+```{bash, eval=FALSE}
+#MinPath help page
+python ~/git_installs/SequelTools/Scripts/SequelTools.sh -h
+```
+
+To create the mamba environment `biobakery` run the below commands in your bash. You will need to have installed `mamba` first.
+
+```{bash, eval=FALSE}
+#
+mamba create -n biobakery
+mamba activate biobakery
+
+
+
+```
+
 # Next steps
 ```{r, fig.align = 'center',out.width= '15%', echo=FALSE }
 knitr::include_graphics(path = "figures/step.png", auto_pdf = TRUE)
@@ -9,6 +69,8 @@ Below are some good links to start with before carrying out your own projects.
 
 - `KrakenTools`: A suite of scripts to be used alongside the Kraken, KrakenUniq, Kraken 2, or Bracken programs. 
   - https://github.com/jenniferlu717/KrakenTools
+- A review of computational tools for generating metagenome-assembled genomes from metagenomic sequencing data
+  - https://www.sciencedirect.com/science/article/pii/S2001037021004931
 - A review paper on metagenome assembly approaches
    - Genome-resolved metagenomics using environmental and clinical samples: https://academic.oup.com/bib/advance-article/doi/10.1093/bib/bbab030/6184411
 - bioBakery tools for meta'omic profiling
