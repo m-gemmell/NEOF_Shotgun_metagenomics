@@ -86,7 +86,6 @@ kraken2 --paired --db minikraken2_v1_8GB \
 --output K2.kraken --report K2.kreport2 \
 ~/2-Trimmed/K2_R1.fq.gz ~/2-Trimmed/K2_R2.fq.gz
 #W1
-```{bash eval=FALSE}
 kraken2 --paired --db minikraken2_v1_8GB \
 --output W1.kraken --report W1.kreport2 \
 ~/2-Trimmed/W1_R1.fq.gz ~/2-Trimmed/W1_R2.fq.gz
@@ -116,16 +115,16 @@ opts_p <- c(answer="__2__", "__486,723__", "__555,162__")
 3. How many paired reads were assigned directly to root level for W1? `r longmcq(opts_p)`
 
 ```{r, echo = FALSE}
-opts_p <- c("__0.12__", "__0.59__", answer="__14.88__")
+opts_p <- c("__0.12__", "__0.59__", answer="__14.89__")
 ```
 4. What percentage of W1's paired reads were assigned to the clade of Bacteroidetes (Phylum)? `r longmcq(opts_p)`
 
 ```{r, echo = FALSE}
-opts_p <- c("__0.12__", answer="__0.59__", "__14.88__")
+opts_p <- c("__0.12__", answer="__0.59__", "__14.89__")
 ```
 5. What percentage of K2's paired reads were assigned to the clade of Rikenellaceae (Family)? `r longmcq(opts_p)`
 
 ```{r, echo = FALSE}
-opts_p <- c(answer="__0.12__", "__0.59__", "__14.88__")
+opts_p <- c(answer="__0.12__", "__0.59__", "__14.89__")
 ```
 6. What percentage of K1's paired reads were assigned to the clade of Bacteroides helcogenes (Species)? `r longmcq(opts_p)`

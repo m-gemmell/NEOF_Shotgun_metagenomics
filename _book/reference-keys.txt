@@ -10,7 +10,7 @@ content
 cluster-introduction
 logon-instructions
 the-terminal-window
-startup-conda
+startup-mamba
 rawdata
 obtaining-the-data
 checking-quality-control
@@ -98,6 +98,8 @@ minpath-ec-extraction
 code-explanation
 minpathrun
 minpath-output
+mamba-installs
+mamba_install
 next-steps
 manuals
 obtaining-read-data

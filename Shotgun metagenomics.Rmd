@@ -220,9 +220,9 @@ knitr::knit_hooks$set(webex.hide = function(before, options, envir) {
   }
 })
 ```
-# Startup & conda
-```{r, fig.align = 'center',out.width= '20%', echo=FALSE }
-knitr::include_graphics(path = "figures/conda.png", auto_pdf = TRUE)
+# Startup & mamba
+```{r, fig.align = 'center',out.width= '30%', echo=FALSE }
+knitr::include_graphics(path = "figures/mamba_logo.png", auto_pdf = TRUE)
 ```
 
 During this practical you will use a number of installed programs and scripts. To ensure that the system knows where to look for the scripts, run the following command (ensure this starts with a full stop and a space `. `):
@@ -231,7 +231,7 @@ During this practical you will use a number of installed programs and scripts. T
 . useshotgun
 ```
 
-The `use` scripts in this workshop are custom scripts that set up conda environments. You can look at the above script with `less /usr/local/bin/useshotgun` if you are interested in its contents.
+The `use` scripts in this workshop are custom scripts that set up `mamba` environments. You can look at the above script with `less /usr/local/bin/useshotgun` if you are interested in its contents.
 
 Also, there’s a chance you’re currently not in your home directory, so let’s make sure you are with the following command:
 
@@ -286,7 +286,7 @@ cd 1-Raw
 Now we can generate a symbolic links (i.e. shortcut) to the raw sequence data files, which will appear in the current directory:
 
 ```{bash eval=FALSE}
-ln -s /pub39/tea/nsc006/NEOF/Shotgun_metagenomics/raw_fastq/* .
+ln -s /pub14/tea/nsc206/NEOF/Shotgun_metagenomics/raw_fastq/* .
 ```
 
 If you would like to know more about the `ln` command please check out: https://linuxize.com/post/how-to-create-symbolic-links-in-linux-using-the-ln-command/.
@@ -547,7 +547,7 @@ This chapter contains a small example on how to carry out host removal. It uses 
 The first step is to copy over the reference fasta file we will use.
 
 ```{bash eval=FALSE}
-cp /pub39/tea/nsc006/NEOF/Shotgun_metagenomics/GRCh38_slice.fasta .
+cp /pub14/tea/nsc206/NEOF/Shotgun_metagenomics/GRCh38_slice.fasta .
 ```
 
 ## Index reference
@@ -806,7 +806,6 @@ kraken2 --paired --db minikraken2_v1_8GB \
 --output K2.kraken --report K2.kreport2 \
 ~/2-Trimmed/K2_R1.fq.gz ~/2-Trimmed/K2_R2.fq.gz
 #W1
-```{bash eval=FALSE}
 kraken2 --paired --db minikraken2_v1_8GB \
 --output W1.kraken --report W1.kreport2 \
 ~/2-Trimmed/W1_R1.fq.gz ~/2-Trimmed/W1_R2.fq.gz
@@ -836,17 +835,17 @@ opts_p <- c(answer="__2__", "__486,723__", "__555,162__")
 3. How many paired reads were assigned directly to root level for W1? `r longmcq(opts_p)`
 
 ```{r, echo = FALSE}
-opts_p <- c("__0.12__", "__0.59__", answer="__14.88__")
+opts_p <- c("__0.12__", "__0.59__", answer="__14.89__")
 ```
 4. What percentage of W1's paired reads were assigned to the clade of Bacteroidetes (Phylum)? `r longmcq(opts_p)`
 
 ```{r, echo = FALSE}
-opts_p <- c("__0.12__", answer="__0.59__", "__14.88__")
+opts_p <- c("__0.12__", answer="__0.59__", "__14.89__")
 ```
 5. What percentage of K2's paired reads were assigned to the clade of Rikenellaceae (Family)? `r longmcq(opts_p)`
 
 ```{r, echo = FALSE}
-opts_p <- c(answer="__0.12__", "__0.59__", "__14.88__")
+opts_p <- c(answer="__0.12__", "__0.59__", "__14.89__")
 ```
 6. What percentage of K1's paired reads were assigned to the clade of Bacteroides helcogenes (Species)? `r longmcq(opts_p)`
 
@@ -921,34 +920,34 @@ knitr::include_graphics(path = "figures/question_bubble_red.png", auto_pdf = TRU
 Viewing the Krona, attempt the below MCQs.
 
 ```{r, echo = FALSE}
-opts_p <- c("__43%__", answer="__35%__", "__14%__")
+opts_p <- c("__2%__", "__34%__", answer="__35%__")
 ```
 1. What percentage of the __root__ was classified to __Bacteria__ for __K1__? `r longmcq(opts_p)`
 
 ```{r, echo = FALSE}
-opts_p <- c(answer="__43%__", "__35%__", "__14%__")
+opts_p <- c("__2%__",answer="__34%__", "__35%__")
 ```
-2. What percentage of __bacteria__ was classified to __Proteobacteria__ for __K2__? `r longmcq(opts_p)`
+2. What percentage of __bacteria__ was classified to __Pseudomonadota__ for __K2__? `r longmcq(opts_p)`
 
 ```{r, echo = FALSE}
-opts_p <- c("__43%__", "__35%__", answer="__14%__")
+opts_p <- c(answer="__2%__","__34%__", "__35%__")
 ```
-3. What percentage of the __root__ was classified to __Azorhizobium__ for __W1__? `r longmcq(opts_p)`
+3. What percentage of the __root__ was classified to __Myxococcota__ for __W1__? `r longmcq(opts_p)`
 
 ```{r, echo = FALSE}
-opts_p <- c(answer="__39%__", "__27%__", "__6%__")
+opts_p <- c(answer="__39%__", "__8%__", "__6%__")
 ```
 4. What percentage of the __Terrabacteria groups__ was classified to __Cellulomonas gilvus__ for __K2__? `r longmcq(opts_p)`
 
 ```{r, echo = FALSE}
-opts_p <- c("__39%__", "__27%__", answer="__6%__")
+opts_p <- c("__39%__", "__8%__", answer="__6%__")
 ```
 5. What percentage of __Alphaproteobacteria__ was classified to __Phenylobacterium immobile__ for __K1__? `r longmcq(opts_p)`
 
 ```{r, echo = FALSE}
-opts_p <- c("__39%__", answer="__27%__", "__6%__")
+opts_p <- c("__39%__", answer="__8%__", "__6%__")
 ```
-6. What percentage of __Viridiplantae__ (in Eukaryota) was classified to __Zygnemataceae__ for __W1__?  `r longmcq(opts_p)`
+6. What percentage of __Viridiplantae__ (in Eukaryota) was classified to __Parasponia__ for __W1__?  `r longmcq(opts_p)`
 
 <!--chapter:end:10-Krona.Rmd-->
 
@@ -2851,6 +2850,66 @@ knitr::knit_hooks$set(webex.hide = function(before, options, envir) {
 ```
 # (APPENDIX) Appendix {-}
 
+# Mamba installs
+```{r, fig.align = 'center',out.width= '20%', echo=FALSE }
+knitr::include_graphics(path = "figures/mamba_logo.png", auto_pdf = TRUE)
+```
+
+## Mamba installation and environment {#mamba_install}
+
+Mamba is a reimplementation of conda.
+It is a great tool for installing bioinformatic packages including R packages.
+
+Mamba github: https://github.com/mamba-org/mamba
+
+Mamba installation: https://github.com/conda-forge/miniforge#mambaforge
+
+Mamba guide: https://mamba.readthedocs.io/en/latest/user_guide/mamba.html
+
+To create the mamba environment `shotgun_meta` run the below commands in your bash. You will need to have installed `mamba` first.
+
+```{bash, eval=FALSE}
+#shotgun_meta
+mamba create -n shotgun_meta
+mamba activate shotgun_meta
+#Install packages
+mamba install -c bioconda fastqc trim-galore multiqc bowtie2 kraken2 krona bracken lefse flash megahit quast metabat2 prokka bbmap
+#Update krona taxonomy database
+ktUpdateTaxonomy.sh
+```
+
+#Install minpath
+
+Install [MinPath](https://github.com/mgtools/MinPath) via `git`.
+I suggest creating a directory called "git_installs" in your home directory and running this code there.
+
+```{bash, eval=FALSE}
+#git_installs directory
+mkdir ~/git_installs
+cd ~/git_installs
+#MinPath
+git clone https://github.com/mgtools/MinPath
+```
+
+To run `MinPath` in your own machines you will need to use the full path of the python file.
+If you installed these in your "~/git_installs" examples are below.
+
+```{bash, eval=FALSE}
+#MinPath help page
+python ~/git_installs/SequelTools/Scripts/SequelTools.sh -h
+```
+
+To create the mamba environment `biobakery` run the below commands in your bash. You will need to have installed `mamba` first.
+
+```{bash, eval=FALSE}
+#
+mamba create -n biobakery
+mamba activate biobakery
+
+
+
+```
+
 # Next steps
 ```{r, fig.align = 'center',out.width= '15%', echo=FALSE }
 knitr::include_graphics(path = "figures/step.png", auto_pdf = TRUE)
@@ -2860,6 +2919,8 @@ Below are some good links to start with before carrying out your own projects.
 
 - `KrakenTools`: A suite of scripts to be used alongside the Kraken, KrakenUniq, Kraken 2, or Bracken programs. 
   - https://github.com/jenniferlu717/KrakenTools
+- A review of computational tools for generating metagenome-assembled genomes from metagenomic sequencing data
+  - https://www.sciencedirect.com/science/article/pii/S2001037021004931
 - A review paper on metagenome assembly approaches
    - Genome-resolved metagenomics using environmental and clinical samples: https://academic.oup.com/bib/advance-article/doi/10.1093/bib/bbab030/6184411
 - bioBakery tools for meta'omic profiling

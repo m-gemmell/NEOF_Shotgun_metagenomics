@@ -50,31 +50,31 @@ knitr::include_graphics(path = "figures/question_bubble_red.png", auto_pdf = TRU
 Viewing the Krona, attempt the below MCQs.
 
 ```{r, echo = FALSE}
-opts_p <- c("__43%__", answer="__35%__", "__14%__")
+opts_p <- c("__2%__", "__34%__", answer="__35%__")
 ```
 1. What percentage of the __root__ was classified to __Bacteria__ for __K1__? `r longmcq(opts_p)`
 
 ```{r, echo = FALSE}
-opts_p <- c(answer="__43%__", "__35%__", "__14%__")
+opts_p <- c("__2%__",answer="__34%__", "__35%__")
 ```
-2. What percentage of __bacteria__ was classified to __Proteobacteria__ for __K2__? `r longmcq(opts_p)`
+2. What percentage of __bacteria__ was classified to __Pseudomonadota__ for __K2__? `r longmcq(opts_p)`
 
 ```{r, echo = FALSE}
-opts_p <- c("__43%__", "__35%__", answer="__14%__")
+opts_p <- c(answer="__2%__","__34%__", "__35%__")
 ```
-3. What percentage of the __root__ was classified to __Azorhizobium__ for __W1__? `r longmcq(opts_p)`
+3. What percentage of the __root__ was classified to __Myxococcota__ for __W1__? `r longmcq(opts_p)`
 
 ```{r, echo = FALSE}
-opts_p <- c(answer="__39%__", "__27%__", "__6%__")
+opts_p <- c(answer="__39%__", "__8%__", "__6%__")
 ```
 4. What percentage of the __Terrabacteria groups__ was classified to __Cellulomonas gilvus__ for __K2__? `r longmcq(opts_p)`
 
 ```{r, echo = FALSE}
-opts_p <- c("__39%__", "__27%__", answer="__6%__")
+opts_p <- c("__39%__", "__8%__", answer="__6%__")
 ```
 5. What percentage of __Alphaproteobacteria__ was classified to __Phenylobacterium immobile__ for __K1__? `r longmcq(opts_p)`
 
 ```{r, echo = FALSE}
-opts_p <- c("__39%__", answer="__27%__", "__6%__")
+opts_p <- c("__39%__", answer="__8%__", "__6%__")
 ```
-6. What percentage of __Viridiplantae__ (in Eukaryota) was classified to __Zygnemataceae__ for __W1__?  `r longmcq(opts_p)`
+6. What percentage of __Viridiplantae__ (in Eukaryota) was classified to __Parasponia__ for __W1__?  `r longmcq(opts_p)`
