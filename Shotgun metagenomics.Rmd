@@ -984,7 +984,7 @@ Just like with `Krona` we can use the `Kraken2` report files to run bracken.
 
 ```{bash eval=FALSE}
 bracken -d $KRAKEN2_DB_PATH/minikraken2_v1_8GB \
--i K1.kreport2 -o K1.bracken -r 100 -l S -t 5
+-i K1.kreport2 -o K1.bracken -w K1.breport2 -r 100 -l S -t 5
 ```
 
 #### Parameters {-}
@@ -995,6 +995,7 @@ knitr::include_graphics(path = "figures/parameter_green.png", auto_pdf = TRUE)
 - `-d` : Specifies the `Kraken2` database that was used for taxonomic classification. In this case bracken requires the variable `$KRAKEN_DB_PATH` so the option is provided the full path to the kraken database. For clarity try the command `ls $KRAKEN2_DB_PATH/minikraken2_v1_8GB`. 
 - `-i` : The `Kraken2` report file, this will be used as the input.
 - `-o` : The output `Bracken` file. Information about its contents is below.
+- `-w`: Output report file. This contains the `Bracken` read counts in a kraken-style report. This is an essential file if you want to use the `Bracken` output in R using the `phyloseq` object. This is covered in our R community analysis workshop. We won't cover it more here.
 - `-r 100`: This is the ideal length of the reads that were used in the `Kraken2` classification. It is recommended that the initial read length of the sequencing data is used. We are using 100 here as we used a paired library of 100bp*2 reads.
 - `-l S`: This specifies the taxonomic level/rank of the `Bracken` output. In this case `S` is equal to species with the other options being `D`, `P`, `C`, `O`,`F` and `G`.
 - `-t 5`: This specifies the minimum number of reads required for a classification at the specified rank. Any classifications with fewer reads than the specified threshold will not receive additional reads from higher taxonomy levels when distributing reads for abundance estimation. Five has been chosen here for this example data but in real datasets you may want to increase this number (default is 10).
@@ -1032,7 +1033,7 @@ bracken -d $KRAKEN2_DB_PATH/minikraken2_v1_8GB \
 knitr::include_graphics(path = "figures/question_bubble_green.png", auto_pdf = TRUE)
 ```
 
-Viewing the Bracken output files with your favourite text viewer (`less`, `nano`, `vim`, etc.), attempt the below MCQs.
+Viewing the Bracken output files (`.bracken`) with your favourite text viewer (`less`, `nano`, `vim`, etc.), attempt the below MCQs.
 
 ```{r, echo = FALSE}
 opts_p <- c("__0.00011__",answer="__16__", "__702__")
@@ -1057,7 +1058,7 @@ knitr::include_graphics(path = "figures/merge.png", auto_pdf = TRUE)
 To make full use of `Bracken` output, it is best to merge the output into one table. Before we do this we’ll copy the `Bracken` output of other samples that have been generated prior to the workshop. These are all either Korean or Western Diet samples.
 
 ```{bash eval=FALSE}
-cp /pub39/tea/nsc006/NEOF/Shotgun_metagenomics/bracken/* .
+cp /pub14/tea/nsc206/NEOF/Shotgun_metagenomics/bracken/* .
 ```
 
 Now to merge all the K and W `Bracken` files.
@@ -1154,22 +1155,6 @@ cp /pub39/tea/nsc006/Shotgun_metagenomics/lefse/all_num.lefse.bracken
 ```
 `r unhide()`
 
-## LEfSe: conda
-```{r, fig.align = 'center',out.width= '10%', echo=FALSE }
-knitr::include_graphics(path = "figures/conda.png", auto_pdf = TRUE)
-```
-
-`LEfSe` requires python2 whilst we have been using packages that required python3. We therefore need to use a different `conda` environment. We are currently using the `conda` env called `shotgun_meta` as represented by `(shotgun_meta)`. This was activated with the command `. useshotgun`.
-
-__Open a new terminal__ (right click on the main screen background, choose `Applications` -> `Shell` -> `bash`) and run the following in the new terminal to activate the `lefse` `conda` environment.
-
-```{bash eval=FALSE}
-#Setup environment
-. uselefse
-#Change directory
-cd ~/3-Taxonomy
-```
-
 ## LEfSe: format
 ```{r, fig.align = 'center',out.width= '10%', echo=FALSE }
 knitr::include_graphics(path = "figures/lefse_format.png", auto_pdf = TRUE)
@@ -1178,7 +1163,7 @@ knitr::include_graphics(path = "figures/lefse_format.png", auto_pdf = TRUE)
 We need to further format and preprocess our file with a `LEfSe` script.
 
 ```{bash eval=FALSE}
-lefse-format_input.py all_num.lefse.bracken all_num.lefse -c 1 -u 2 -o 1000000
+lefse_format_input.py all_num.lefse.bracken all_num.lefse -c 1 -u 2 -o 1000000
 ```
 
 #### Parameters {-}
@@ -1200,7 +1185,7 @@ knitr::include_graphics(path = "figures/play_purple.png", auto_pdf = TRUE)
 Now to run `LEfSe.` All we need to do is run the command with the formatted input and provide an output file name.
 
 ```{bash eval=FALSE}
-run_lefse.py all_num.lefse all_num.lefse.out
+lefse_run.py all_num.lefse all_num.lefse.out
 ```
 
 #### Output {-}
@@ -1223,7 +1208,7 @@ knitr::include_graphics(path = "figures/bar_chart_horizontal.png", auto_pdf = TR
 Next we can visualise the output.
 
 ```{bash eval=FALSE}
-lefse-plot_res.py --dpi 200 --format png all_num.lefse.out biomarkers.png
+lefse_plot_res.py --dpi 200 --format png all_num.lefse.out biomarkers.png
 ```
 
 - `--dpi 200` : Dots per inch. This refers to the resolution of the output image. Normally publications want 300 dpi. We’ve chosen 200 as it is good quality and we will not be publishing these results.
@@ -1234,7 +1219,7 @@ lefse-plot_res.py --dpi 200 --format png all_num.lefse.out biomarkers.png
 Look at the figure with the program `okular`:
 
 ```{bash eval=FALSE}
-okular biomarkers.png
+firefox biomarkers.png
 ```
 
 ## LEfSe: MCQs
@@ -1247,19 +1232,19 @@ Interrogating the biomarkers.png plot and the all_num.lefse.out file, attempt th
 __Note__: In this instance green bars represent biomarkers in higher abundance in the W samples whilst the red bars represent biomarkers in higher abundance in the K samples.
 
 ```{r, echo = FALSE}
-opts_p <- c(answer="__Alistipesshahhii__","__Lactobacillusruminis__","__Methanosphaerastadtmanae__")
+opts_p <- c("__Adlercreutziaequolifaciens__",answer="__Alistipesshahhii__","__Methanosphaerastadtmanae__")
 ```
 1. Which species biomarker causes the biggest effect in the __W__ class? `r longmcq(opts_p)`
 
 ```{r, echo = FALSE}
-opts_p <- c("__Alistipesshahhii__","__Lactobacillusruminis__",answer="__Methanosphaerastadtmanae__")
+opts_p <- c("__Adlercreutziaequolifaciens__","__Alistipesshahhii__",answer="__Methanosphaerastadtmanae__")
 ```
 2. Which species biomarker causes the biggest effect in the __K__ class? `r longmcq(opts_p)`
 
 ```{r, echo = FALSE}
-opts_p <- c("__Alistipesshahhii__",answer="__Lactobacillusruminis__","__Methanosphaerastadtmanae__")
+opts_p <- c(answer="__Adlercreutziaequolifaciens__","__Alistipesshahhii__","__Methanosphaerastadtmanae__")
 ```
-3. Which species biomarker (i.e. present in the plot) causes the lowest effect in the __K__ class? `r longmcq(opts_p)`
+3. Which species biomarker (i.e. present in the plot) causes the lowest effect in the __W__ class? `r longmcq(opts_p)`
 
 ```{r, echo = FALSE}
 opts_p <- c("__Korean__",answer="__Western__")
@@ -1267,19 +1252,19 @@ opts_p <- c("__Korean__",answer="__Western__")
 4. Which class has more biomarkers associated with it? `r longmcq(opts_p)`
 
 ```{r, echo = FALSE}
-opts_p <- c(answer="__0.0328692343007__","__1.39274299091__","__2.08988829344__")
+opts_p <- c(answer="__0.0022136919545913936__","__3.0266165524513937__","__3.314396201978439__")
 ```
-5. What is the LEfSe p-value for __Oxalobacterformigenes__? `r longmcq(opts_p)`
+5. What is the LEfSe p-value for __Campylobactercoli__? `r longmcq(opts_p)`
 
 ```{r, echo = FALSE}
-opts_p <- c("__0.0328692343007__",answer="__1.39274299091__","__2.08988829344__")
+opts_p <- c("__0.0022136919545913936__",answer="__3.0266165524513937__","__3.314396201978439__")
 ```
-6. What is the Log of highest class average for __Pantoearwandensis__? `r longmcq(opts_p)`
+6. What is the Log of highest class average for __Streptococcussuis__? `r longmcq(opts_p)`
 
 ```{r, echo = FALSE}
-opts_p <- c("__0.0328692343007__","__1.39274299091__",answer="__2.08988829344__")
+opts_p <- c("__0.0022136919545913936__","__3.0266165524513937__",answer="__3.314396201978439__")
 ```
-7. What is the LDA effect size for __Eggerthellalenta__? `r longmcq(opts_p)`
+7. What is the LDA effect size for __Bifidobacteriumlongum__? `r longmcq(opts_p)`
 
 ## Kraken2 and Bracken databases
 ```{r, fig.align = 'center',out.width= '15%', echo=FALSE }

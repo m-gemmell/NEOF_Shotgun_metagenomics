@@ -14,7 +14,7 @@ Just like with `Krona` we can use the `Kraken2` report files to run bracken.
 
 ```{bash eval=FALSE}
 bracken -d $KRAKEN2_DB_PATH/minikraken2_v1_8GB \
--i K1.kreport2 -o K1.bracken -r 100 -l S -t 5
+-i K1.kreport2 -o K1.bracken -w K1.breport2 -r 100 -l S -t 5
 ```
 
 #### Parameters {-}
@@ -25,6 +25,7 @@ knitr::include_graphics(path = "figures/parameter_green.png", auto_pdf = TRUE)
 - `-d` : Specifies the `Kraken2` database that was used for taxonomic classification. In this case bracken requires the variable `$KRAKEN_DB_PATH` so the option is provided the full path to the kraken database. For clarity try the command `ls $KRAKEN2_DB_PATH/minikraken2_v1_8GB`. 
 - `-i` : The `Kraken2` report file, this will be used as the input.
 - `-o` : The output `Bracken` file. Information about its contents is below.
+- `-w`: Output report file. This contains the `Bracken` read counts in a kraken-style report. This is an essential file if you want to use the `Bracken` output in R using the `phyloseq` object. This is covered in our R community analysis workshop. We won't cover it more here.
 - `-r 100`: This is the ideal length of the reads that were used in the `Kraken2` classification. It is recommended that the initial read length of the sequencing data is used. We are using 100 here as we used a paired library of 100bp*2 reads.
 - `-l S`: This specifies the taxonomic level/rank of the `Bracken` output. In this case `S` is equal to species with the other options being `D`, `P`, `C`, `O`,`F` and `G`.
 - `-t 5`: This specifies the minimum number of reads required for a classification at the specified rank. Any classifications with fewer reads than the specified threshold will not receive additional reads from higher taxonomy levels when distributing reads for abundance estimation. Five has been chosen here for this example data but in real datasets you may want to increase this number (default is 10).
@@ -62,7 +63,7 @@ bracken -d $KRAKEN2_DB_PATH/minikraken2_v1_8GB \
 knitr::include_graphics(path = "figures/question_bubble_green.png", auto_pdf = TRUE)
 ```
 
-Viewing the Bracken output files with your favourite text viewer (`less`, `nano`, `vim`, etc.), attempt the below MCQs.
+Viewing the Bracken output files (`.bracken`) with your favourite text viewer (`less`, `nano`, `vim`, etc.), attempt the below MCQs.
 
 ```{r, echo = FALSE}
 opts_p <- c("__0.00011__",answer="__16__", "__702__")
@@ -87,7 +88,7 @@ knitr::include_graphics(path = "figures/merge.png", auto_pdf = TRUE)
 To make full use of `Bracken` output, it is best to merge the output into one table. Before we do this we’ll copy the `Bracken` output of other samples that have been generated prior to the workshop. These are all either Korean or Western Diet samples.
 
 ```{bash eval=FALSE}
-cp /pub39/tea/nsc006/NEOF/Shotgun_metagenomics/bracken/* .
+cp /pub14/tea/nsc206/NEOF/Shotgun_metagenomics/bracken/* .
 ```
 
 Now to merge all the K and W `Bracken` files.

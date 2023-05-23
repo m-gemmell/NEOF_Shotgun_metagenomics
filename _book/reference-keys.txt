@@ -41,7 +41,6 @@ bracken-merging-output
 bracken-extracting-output
 lefse-biomarker-detection
 kraken2_lefse_metadata
-lefse-conda
 lefse-format
 lefse-run
 lefse-visualisation

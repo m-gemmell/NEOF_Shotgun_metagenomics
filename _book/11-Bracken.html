@@ -206,12 +206,11 @@ code span.wa { color: #60a0b0; font-weight: bold; font-style: italic; } /* Warni
 <li class="chapter" data-level="12" data-path="12-Lefse.html"><a href="12-Lefse.html"><i class="fa fa-check"></i><b>12</b> LEfSe biomarker detection</a>
 <ul>
 <li class="chapter" data-level="12.1" data-path="12-Lefse.html"><a href="12-Lefse.html#kraken2_lefse_metadata"><i class="fa fa-check"></i><b>12.1</b> LEfSe: add metadata</a></li>
-<li class="chapter" data-level="12.2" data-path="12-Lefse.html"><a href="12-Lefse.html#lefse-conda"><i class="fa fa-check"></i><b>12.2</b> LEfSe: conda</a></li>
-<li class="chapter" data-level="12.3" data-path="12-Lefse.html"><a href="12-Lefse.html#lefse-format"><i class="fa fa-check"></i><b>12.3</b> LEfSe: format</a></li>
-<li class="chapter" data-level="12.4" data-path="12-Lefse.html"><a href="12-Lefse.html#lefse-run"><i class="fa fa-check"></i><b>12.4</b> LEfSe: run</a></li>
-<li class="chapter" data-level="12.5" data-path="12-Lefse.html"><a href="12-Lefse.html#lefse-visualisation"><i class="fa fa-check"></i><b>12.5</b> LEfSe: visualisation</a></li>
-<li class="chapter" data-level="12.6" data-path="12-Lefse.html"><a href="12-Lefse.html#lefse-mcqs"><i class="fa fa-check"></i><b>12.6</b> LEfSe: MCQs</a></li>
-<li class="chapter" data-level="12.7" data-path="12-Lefse.html"><a href="12-Lefse.html#kraken2-and-bracken-databases"><i class="fa fa-check"></i><b>12.7</b> Kraken2 and Bracken databases</a></li>
+<li class="chapter" data-level="12.2" data-path="12-Lefse.html"><a href="12-Lefse.html#lefse-format"><i class="fa fa-check"></i><b>12.2</b> LEfSe: format</a></li>
+<li class="chapter" data-level="12.3" data-path="12-Lefse.html"><a href="12-Lefse.html#lefse-run"><i class="fa fa-check"></i><b>12.3</b> LEfSe: run</a></li>
+<li class="chapter" data-level="12.4" data-path="12-Lefse.html"><a href="12-Lefse.html#lefse-visualisation"><i class="fa fa-check"></i><b>12.4</b> LEfSe: visualisation</a></li>
+<li class="chapter" data-level="12.5" data-path="12-Lefse.html"><a href="12-Lefse.html#lefse-mcqs"><i class="fa fa-check"></i><b>12.5</b> LEfSe: MCQs</a></li>
+<li class="chapter" data-level="12.6" data-path="12-Lefse.html"><a href="12-Lefse.html#kraken2-and-bracken-databases"><i class="fa fa-check"></i><b>12.6</b> Kraken2 and Bracken databases</a></li>
 </ul></li>
 <li class="part"><span><b>Functional profiling of reads</b></span></li>
 <li class="chapter" data-level="13" data-path="13-Functional_profiling.html"><a href="13-Functional_profiling.html"><i class="fa fa-check"></i><b>13</b> HUMAnN Functional profiling</a>
@@ -328,7 +327,7 @@ code span.wa { color: #60a0b0; font-weight: bold; font-style: italic; } /* Warni
 <p><img src="figures/play_green.png" width="10%" style="display: block; margin: auto;" /></p>
 <p>Just like with <code>Krona</code> we can use the <code>Kraken2</code> report files to run bracken.</p>
 <div class="sourceCode" id="cb28"><pre class="sourceCode bash"><code class="sourceCode bash"><span id="cb28-1"><a href="11-Bracken.html#cb28-1" aria-hidden="true" tabindex="-1"></a><span class="ex">bracken</span> <span class="at">-d</span> <span class="va">$KRAKEN2_DB_PATH</span>/minikraken2_v1_8GB <span class="dt">\</span></span>
-<span id="cb28-2"><a href="11-Bracken.html#cb28-2" aria-hidden="true" tabindex="-1"></a>-i K1.kreport2 <span class="at">-o</span> K1.bracken <span class="at">-r</span> 100 <span class="at">-l</span> S <span class="at">-t</span> 5</span></code></pre></div>
+<span id="cb28-2"><a href="11-Bracken.html#cb28-2" aria-hidden="true" tabindex="-1"></a>-i K1.kreport2 <span class="at">-o</span> K1.bracken <span class="at">-w</span> K1.breport2 <span class="at">-r</span> 100 <span class="at">-l</span> S <span class="at">-t</span> 5</span></code></pre></div>
 <div id="parameters-4" class="section level4 unnumbered hasAnchor">
 <h4>Parameters<a href="11-Bracken.html#parameters-4" class="anchor-section" aria-label="Anchor link to header"></a></h4>
 <p><img src="figures/parameter_green.png" width="10%" style="display: block; margin: auto;" /></p>
@@ -336,6 +335,7 @@ code span.wa { color: #60a0b0; font-weight: bold; font-style: italic; } /* Warni
 <li><code>-d</code> : Specifies the <code>Kraken2</code> database that was used for taxonomic classification. In this case bracken requires the variable <code>$KRAKEN_DB_PATH</code> so the option is provided the full path to the kraken database. For clarity try the command <code>ls $KRAKEN2_DB_PATH/minikraken2_v1_8GB</code>.</li>
 <li><code>-i</code> : The <code>Kraken2</code> report file, this will be used as the input.</li>
 <li><code>-o</code> : The output <code>Bracken</code> file. Information about its contents is below.</li>
+<li><code>-w</code>: Output report file. This contains the <code>Bracken</code> read counts in a kraken-style report. This is an essential file if you want to use the <code>Bracken</code> output in R using the <code>phyloseq</code> object. This is covered in our R community analysis workshop. We won't cover it more here.</li>
 <li><code>-r 100</code>: This is the ideal length of the reads that were used in the <code>Kraken2</code> classification. It is recommended that the initial read length of the sequencing data is used. We are using 100 here as we used a paired library of 100bp*2 reads.</li>
 <li><code>-l S</code>: This specifies the taxonomic level/rank of the <code>Bracken</code> output. In this case <code>S</code> is equal to species with the other options being <code>D</code>, <code>P</code>, <code>C</code>, <code>O</code>,<code>F</code> and <code>G</code>.</li>
 <li><code>-t 5</code>: This specifies the minimum number of reads required for a classification at the specified rank. Any classifications with fewer reads than the specified threshold will not receive additional reads from higher taxonomy levels when distributing reads for abundance estimation. Five has been chosen here for this example data but in real datasets you may want to increase this number (default is 10).</li>
@@ -371,19 +371,19 @@ K2 &amp; W1 Bracken commands
 <div id="bracken-mcqs" class="section level2 hasAnchor" number="11.2">
 <h2><span class="header-section-number">11.2</span> Bracken: MCQs<a href="11-Bracken.html#bracken-mcqs" class="anchor-section" aria-label="Anchor link to header"></a></h2>
 <p><img src="figures/question_bubble_green.png" width="10%" style="display: block; margin: auto;" /></p>
-<p>Viewing the Bracken output files with your favourite text viewer (<code>less</code>, <code>nano</code>, <code>vim</code>, etc.), attempt the below MCQs.</p>
+<p>Viewing the Bracken output files (<code>.bracken</code>) with your favourite text viewer (<code>less</code>, <code>nano</code>, <code>vim</code>, etc.), attempt the below MCQs.</p>
 <ol style="list-style-type: decimal">
 <li>In <strong>K1</strong>, how many total reads after abundance reestimation are there for <strong>Prevotella fusca</strong>?
-<div id="radio_PPJIZJAIDQ" class="webex-radiogroup">
-<label><input type="radio" autocomplete="off" name="radio_PPJIZJAIDQ" value=""></input> <span><strong>0.00011</strong></span></label><label><input type="radio" autocomplete="off" name="radio_PPJIZJAIDQ" value="answer"></input> <span><strong>16</strong></span></label><label><input type="radio" autocomplete="off" name="radio_PPJIZJAIDQ" value=""></input> <span><strong>702</strong></span></label>
+<div id="radio_QVVWBYZSQV" class="webex-radiogroup">
+<label><input type="radio" autocomplete="off" name="radio_QVVWBYZSQV" value=""></input> <span><strong>0.00011</strong></span></label><label><input type="radio" autocomplete="off" name="radio_QVVWBYZSQV" value="answer"></input> <span><strong>16</strong></span></label><label><input type="radio" autocomplete="off" name="radio_QVVWBYZSQV" value=""></input> <span><strong>702</strong></span></label>
 </div></li>
 <li>In <strong>K2</strong>, how many reads after abundance reestimation were added for <strong>Bacteroides caccae</strong>?
-<div id="radio_ETLAXVGOHD" class="webex-radiogroup">
-<label><input type="radio" autocomplete="off" name="radio_ETLAXVGOHD" value=""></input> <span><strong>0.00011</strong></span></label><label><input type="radio" autocomplete="off" name="radio_ETLAXVGOHD" value=""></input> <span><strong>16</strong></span></label><label><input type="radio" autocomplete="off" name="radio_ETLAXVGOHD" value="answer"></input> <span><strong>702</strong></span></label>
+<div id="radio_ASQGZBVNFH" class="webex-radiogroup">
+<label><input type="radio" autocomplete="off" name="radio_ASQGZBVNFH" value=""></input> <span><strong>0.00011</strong></span></label><label><input type="radio" autocomplete="off" name="radio_ASQGZBVNFH" value=""></input> <span><strong>16</strong></span></label><label><input type="radio" autocomplete="off" name="radio_ASQGZBVNFH" value="answer"></input> <span><strong>702</strong></span></label>
 </div></li>
 <li>In <strong>W1</strong>, what is the fraction of total reads (after abundance reestimation) for <strong>Tannerella forsythia</strong>?
-<div id="radio_XVTXRTSCGL" class="webex-radiogroup">
-<label><input type="radio" autocomplete="off" name="radio_XVTXRTSCGL" value="answer"></input> <span><strong>0.00011</strong></span></label><label><input type="radio" autocomplete="off" name="radio_XVTXRTSCGL" value=""></input> <span><strong>16</strong></span></label><label><input type="radio" autocomplete="off" name="radio_XVTXRTSCGL" value=""></input> <span><strong>702</strong></span></label>
+<div id="radio_WWYRMIAFDT" class="webex-radiogroup">
+<label><input type="radio" autocomplete="off" name="radio_WWYRMIAFDT" value="answer"></input> <span><strong>0.00011</strong></span></label><label><input type="radio" autocomplete="off" name="radio_WWYRMIAFDT" value=""></input> <span><strong>16</strong></span></label><label><input type="radio" autocomplete="off" name="radio_WWYRMIAFDT" value=""></input> <span><strong>702</strong></span></label>
 </div></li>
 </ol>
 </div>
@@ -391,7 +391,7 @@ K2 &amp; W1 Bracken commands
 <h2><span class="header-section-number">11.3</span> Bracken: merging output<a href="11-Bracken.html#bracken-merging-output" class="anchor-section" aria-label="Anchor link to header"></a></h2>
 <p><img src="figures/merge.png" width="10%" style="display: block; margin: auto;" /></p>
 <p>To make full use of <code>Bracken</code> output, it is best to merge the output into one table. Before we do this we’ll copy the <code>Bracken</code> output of other samples that have been generated prior to the workshop. These are all either Korean or Western Diet samples.</p>
-<div class="sourceCode" id="cb30"><pre class="sourceCode bash"><code class="sourceCode bash"><span id="cb30-1"><a href="11-Bracken.html#cb30-1" aria-hidden="true" tabindex="-1"></a><span class="fu">cp</span> /pub39/tea/nsc006/NEOF/Shotgun_metagenomics/bracken/<span class="pp">*</span> .</span></code></pre></div>
+<div class="sourceCode" id="cb30"><pre class="sourceCode bash"><code class="sourceCode bash"><span id="cb30-1"><a href="11-Bracken.html#cb30-1" aria-hidden="true" tabindex="-1"></a><span class="fu">cp</span> /pub14/tea/nsc206/NEOF/Shotgun_metagenomics/bracken/<span class="pp">*</span> .</span></code></pre></div>
 <p>Now to merge all the K and W <code>Bracken</code> files.</p>
 <div class="sourceCode" id="cb31"><pre class="sourceCode bash"><code class="sourceCode bash"><span id="cb31-1"><a href="11-Bracken.html#cb31-1" aria-hidden="true" tabindex="-1"></a><span class="ex">combine_bracken_outputs.py</span> <span class="at">--files</span> [KW]<span class="pp">*</span>.bracken <span class="at">-o</span> all.bracken</span></code></pre></div>
 <p>This output file contains the first three columns:</p>

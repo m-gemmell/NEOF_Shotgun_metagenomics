@@ -206,12 +206,11 @@ code span.wa { color: #60a0b0; font-weight: bold; font-style: italic; } /* Warni
 <li class="chapter" data-level="12" data-path="12-Lefse.html"><a href="12-Lefse.html"><i class="fa fa-check"></i><b>12</b> LEfSe biomarker detection</a>
 <ul>
 <li class="chapter" data-level="12.1" data-path="12-Lefse.html"><a href="12-Lefse.html#kraken2_lefse_metadata"><i class="fa fa-check"></i><b>12.1</b> LEfSe: add metadata</a></li>
-<li class="chapter" data-level="12.2" data-path="12-Lefse.html"><a href="12-Lefse.html#lefse-conda"><i class="fa fa-check"></i><b>12.2</b> LEfSe: conda</a></li>
-<li class="chapter" data-level="12.3" data-path="12-Lefse.html"><a href="12-Lefse.html#lefse-format"><i class="fa fa-check"></i><b>12.3</b> LEfSe: format</a></li>
-<li class="chapter" data-level="12.4" data-path="12-Lefse.html"><a href="12-Lefse.html#lefse-run"><i class="fa fa-check"></i><b>12.4</b> LEfSe: run</a></li>
-<li class="chapter" data-level="12.5" data-path="12-Lefse.html"><a href="12-Lefse.html#lefse-visualisation"><i class="fa fa-check"></i><b>12.5</b> LEfSe: visualisation</a></li>
-<li class="chapter" data-level="12.6" data-path="12-Lefse.html"><a href="12-Lefse.html#lefse-mcqs"><i class="fa fa-check"></i><b>12.6</b> LEfSe: MCQs</a></li>
-<li class="chapter" data-level="12.7" data-path="12-Lefse.html"><a href="12-Lefse.html#kraken2-and-bracken-databases"><i class="fa fa-check"></i><b>12.7</b> Kraken2 and Bracken databases</a></li>
+<li class="chapter" data-level="12.2" data-path="12-Lefse.html"><a href="12-Lefse.html#lefse-format"><i class="fa fa-check"></i><b>12.2</b> LEfSe: format</a></li>
+<li class="chapter" data-level="12.3" data-path="12-Lefse.html"><a href="12-Lefse.html#lefse-run"><i class="fa fa-check"></i><b>12.3</b> LEfSe: run</a></li>
+<li class="chapter" data-level="12.4" data-path="12-Lefse.html"><a href="12-Lefse.html#lefse-visualisation"><i class="fa fa-check"></i><b>12.4</b> LEfSe: visualisation</a></li>
+<li class="chapter" data-level="12.5" data-path="12-Lefse.html"><a href="12-Lefse.html#lefse-mcqs"><i class="fa fa-check"></i><b>12.5</b> LEfSe: MCQs</a></li>
+<li class="chapter" data-level="12.6" data-path="12-Lefse.html"><a href="12-Lefse.html#kraken2-and-bracken-databases"><i class="fa fa-check"></i><b>12.6</b> Kraken2 and Bracken databases</a></li>
 </ul></li>
 <li class="part"><span><b>Functional profiling of reads</b></span></li>
 <li class="chapter" data-level="13" data-path="13-Functional_profiling.html"><a href="13-Functional_profiling.html"><i class="fa fa-check"></i><b>13</b> HUMAnN Functional profiling</a>
@@ -327,17 +326,17 @@ code span.wa { color: #60a0b0; font-weight: bold; font-style: italic; } /* Warni
 <h2><span class="header-section-number">16.1</span> MEGAHIT<a href="16_Megahit.html#megahit" class="anchor-section" aria-label="Anchor link to header"></a></h2>
 <p><img src="figures/play_blue.png" width="10%" style="display: block; margin: auto;" /></p>
 <p>Create a new directory to store our assembly in.</p>
-<div class="sourceCode" id="cb62"><pre class="sourceCode bash"><code class="sourceCode bash"><span id="cb62-1"><a href="16_Megahit.html#cb62-1" aria-hidden="true" tabindex="-1"></a><span class="bu">cd</span> ..</span>
-<span id="cb62-2"><a href="16_Megahit.html#cb62-2" aria-hidden="true" tabindex="-1"></a><span class="fu">mkdir</span> 6-Assembly</span>
-<span id="cb62-3"><a href="16_Megahit.html#cb62-3" aria-hidden="true" tabindex="-1"></a><span class="bu">cd</span> 6-Assembly</span></code></pre></div>
+<div class="sourceCode" id="cb61"><pre class="sourceCode bash"><code class="sourceCode bash"><span id="cb61-1"><a href="16_Megahit.html#cb61-1" aria-hidden="true" tabindex="-1"></a><span class="bu">cd</span> ..</span>
+<span id="cb61-2"><a href="16_Megahit.html#cb61-2" aria-hidden="true" tabindex="-1"></a><span class="fu">mkdir</span> 6-Assembly</span>
+<span id="cb61-3"><a href="16_Megahit.html#cb61-3" aria-hidden="true" tabindex="-1"></a><span class="bu">cd</span> 6-Assembly</span></code></pre></div>
 <p>Now run the metagenome assembler <code>MEGAHIT</code> using our newly stitched read data.</p>
-<div class="sourceCode" id="cb63"><pre class="sourceCode bash"><code class="sourceCode bash"><span id="cb63-1"><a href="16_Megahit.html#cb63-1" aria-hidden="true" tabindex="-1"></a><span class="ex">megahit</span> <span class="dt">\</span></span>
-<span id="cb63-2"><a href="16_Megahit.html#cb63-2" aria-hidden="true" tabindex="-1"></a>-r ../5-Stitched/K1.extendedFrags.fastq.gz <span class="dt">\</span></span>
-<span id="cb63-3"><a href="16_Megahit.html#cb63-3" aria-hidden="true" tabindex="-1"></a>-1 ../5-Stitched/K1.notCombined_1.fastq.gz <span class="dt">\</span></span>
-<span id="cb63-4"><a href="16_Megahit.html#cb63-4" aria-hidden="true" tabindex="-1"></a>-2 ../5-Stitched/K1.notCombined_2.fastq.gz <span class="dt">\</span></span>
-<span id="cb63-5"><a href="16_Megahit.html#cb63-5" aria-hidden="true" tabindex="-1"></a>-o K1 <span class="dt">\</span></span>
-<span id="cb63-6"><a href="16_Megahit.html#cb63-6" aria-hidden="true" tabindex="-1"></a>-t 12 <span class="dt">\</span></span>
-<span id="cb63-7"><a href="16_Megahit.html#cb63-7" aria-hidden="true" tabindex="-1"></a>--k-list 29,49,69,89,109,129,149,169,189</span></code></pre></div>
+<div class="sourceCode" id="cb62"><pre class="sourceCode bash"><code class="sourceCode bash"><span id="cb62-1"><a href="16_Megahit.html#cb62-1" aria-hidden="true" tabindex="-1"></a><span class="ex">megahit</span> <span class="dt">\</span></span>
+<span id="cb62-2"><a href="16_Megahit.html#cb62-2" aria-hidden="true" tabindex="-1"></a>-r ../5-Stitched/K1.extendedFrags.fastq.gz <span class="dt">\</span></span>
+<span id="cb62-3"><a href="16_Megahit.html#cb62-3" aria-hidden="true" tabindex="-1"></a>-1 ../5-Stitched/K1.notCombined_1.fastq.gz <span class="dt">\</span></span>
+<span id="cb62-4"><a href="16_Megahit.html#cb62-4" aria-hidden="true" tabindex="-1"></a>-2 ../5-Stitched/K1.notCombined_2.fastq.gz <span class="dt">\</span></span>
+<span id="cb62-5"><a href="16_Megahit.html#cb62-5" aria-hidden="true" tabindex="-1"></a>-o K1 <span class="dt">\</span></span>
+<span id="cb62-6"><a href="16_Megahit.html#cb62-6" aria-hidden="true" tabindex="-1"></a>-t 12 <span class="dt">\</span></span>
+<span id="cb62-7"><a href="16_Megahit.html#cb62-7" aria-hidden="true" tabindex="-1"></a>--k-list 29,49,69,89,109,129,149,169,189</span></code></pre></div>
 <div id="parameters-8" class="section level4 unnumbered hasAnchor">
 <h4>Parameters<a href="16_Megahit.html#parameters-8" class="anchor-section" aria-label="Anchor link to header"></a></h4>
 <p><img src="figures/parameter_blue.png" width="10%" style="display: block; margin: auto;" /></p>
@@ -352,7 +351,7 @@ code span.wa { color: #60a0b0; font-weight: bold; font-style: italic; } /* Warni
 <p>The <strong>k-mer list</strong> instructs <code>MEGAHIT</code> to first generate an assembly using a k-mer size of 29 bp and when that is complete, integrate the results into an assembly using a k-mer size of 49 bp, and so on up to a final iteration using a k-mer size of 189 bp. This large range of k-mer lengths should give us a good assembly, given the data. However, it may take a while to run. This might be a good time to read on or take a break whilst the command runs.</p>
 <p>If you need a command prompt (your current one is busy because MEGAHIT is running), right click on the main screen, choose <code>Applications</code> -&gt; <code>Shell</code> -&gt; <code>bash</code>.</p>
 <p>Once the assembly is completed, we can look at the output FASTA file containing the contigs:</p>
-<div class="sourceCode" id="cb64"><pre class="sourceCode bash"><code class="sourceCode bash"><span id="cb64-1"><a href="16_Megahit.html#cb64-1" aria-hidden="true" tabindex="-1"></a><span class="fu">less</span> K1/final.contigs.fa</span></code></pre></div>
+<div class="sourceCode" id="cb63"><pre class="sourceCode bash"><code class="sourceCode bash"><span id="cb63-1"><a href="16_Megahit.html#cb63-1" aria-hidden="true" tabindex="-1"></a><span class="fu">less</span> K1/final.contigs.fa</span></code></pre></div>
 <p>There is not much to see. When happy, quit the <code>less</code> (<code>q</code>) and carry on to <code>QUAST</code>.</p>
 </div>
 </div>
@@ -365,27 +364,27 @@ code span.wa { color: #60a0b0; font-weight: bold; font-style: italic; } /* Warni
 <p><img src="figures/conda.png" width="10%" style="display: block; margin: auto;" /></p>
 <p>Due to a python version conflict we need to use another conda environment.</p>
 <p>Open a new terminal (right click on the main screen, choose <code>Applications</code> -&gt; <code>Shell</code> -&gt; <code>bash</code>) and run the below.</p>
-<div class="sourceCode" id="cb65"><pre class="sourceCode bash"><code class="sourceCode bash"><span id="cb65-1"><a href="16_Megahit.html#cb65-1" aria-hidden="true" tabindex="-1"></a><span class="co">#use script to activate conda env</span></span>
-<span id="cb65-2"><a href="16_Megahit.html#cb65-2" aria-hidden="true" tabindex="-1"></a><span class="bu">.</span> usegenoassess</span></code></pre></div>
+<div class="sourceCode" id="cb64"><pre class="sourceCode bash"><code class="sourceCode bash"><span id="cb64-1"><a href="16_Megahit.html#cb64-1" aria-hidden="true" tabindex="-1"></a><span class="co">#use script to activate conda env</span></span>
+<span id="cb64-2"><a href="16_Megahit.html#cb64-2" aria-hidden="true" tabindex="-1"></a><span class="bu">.</span> usegenoassess</span></code></pre></div>
 <p>We will use <code>QUAST</code> for genome contiguity assessment but first we will change directory to <code>6-Assembly</code> and create a directory for the <code>QUAST</code> output.</p>
-<div class="sourceCode" id="cb66"><pre class="sourceCode bash"><code class="sourceCode bash"><span id="cb66-1"><a href="16_Megahit.html#cb66-1" aria-hidden="true" tabindex="-1"></a><span class="co">#Change directory</span></span>
-<span id="cb66-2"><a href="16_Megahit.html#cb66-2" aria-hidden="true" tabindex="-1"></a><span class="bu">cd</span> ~/6-Assembly</span>
-<span id="cb66-3"><a href="16_Megahit.html#cb66-3" aria-hidden="true" tabindex="-1"></a><span class="co">#Create QUAST output directory</span></span>
-<span id="cb66-4"><a href="16_Megahit.html#cb66-4" aria-hidden="true" tabindex="-1"></a><span class="co">#The option -p will create a directory and any required</span></span>
-<span id="cb66-5"><a href="16_Megahit.html#cb66-5" aria-hidden="true" tabindex="-1"></a><span class="co">#parent directories</span></span>
-<span id="cb66-6"><a href="16_Megahit.html#cb66-6" aria-hidden="true" tabindex="-1"></a><span class="fu">mkdir</span> <span class="at">-p</span> quast/K1</span></code></pre></div>
+<div class="sourceCode" id="cb65"><pre class="sourceCode bash"><code class="sourceCode bash"><span id="cb65-1"><a href="16_Megahit.html#cb65-1" aria-hidden="true" tabindex="-1"></a><span class="co">#Change directory</span></span>
+<span id="cb65-2"><a href="16_Megahit.html#cb65-2" aria-hidden="true" tabindex="-1"></a><span class="bu">cd</span> ~/6-Assembly</span>
+<span id="cb65-3"><a href="16_Megahit.html#cb65-3" aria-hidden="true" tabindex="-1"></a><span class="co">#Create QUAST output directory</span></span>
+<span id="cb65-4"><a href="16_Megahit.html#cb65-4" aria-hidden="true" tabindex="-1"></a><span class="co">#The option -p will create a directory and any required</span></span>
+<span id="cb65-5"><a href="16_Megahit.html#cb65-5" aria-hidden="true" tabindex="-1"></a><span class="co">#parent directories</span></span>
+<span id="cb65-6"><a href="16_Megahit.html#cb65-6" aria-hidden="true" tabindex="-1"></a><span class="fu">mkdir</span> <span class="at">-p</span> quast/K1</span></code></pre></div>
 </div>
 <div id="quast-run" class="section level3 hasAnchor" number="16.2.2">
 <h3><span class="header-section-number">16.2.2</span> QUAST: run<a href="16_Megahit.html#quast-run" class="anchor-section" aria-label="Anchor link to header"></a></h3>
 <p><img src="figures/play_green.png" width="10%" style="display: block; margin: auto;" /></p>
 <p>Now to run <code>QUAST</code>.</p>
-<div class="sourceCode" id="cb67"><pre class="sourceCode bash"><code class="sourceCode bash"><span id="cb67-1"><a href="16_Megahit.html#cb67-1" aria-hidden="true" tabindex="-1"></a><span class="ex">quast</span> <span class="at">-o</span> quast/K1 K1/final.contigs.fa</span></code></pre></div>
+<div class="sourceCode" id="cb66"><pre class="sourceCode bash"><code class="sourceCode bash"><span id="cb66-1"><a href="16_Megahit.html#cb66-1" aria-hidden="true" tabindex="-1"></a><span class="ex">quast</span> <span class="at">-o</span> quast/K1 K1/final.contigs.fa</span></code></pre></div>
 </div>
 <div id="quast-visualise" class="section level3 hasAnchor" number="16.2.3">
 <h3><span class="header-section-number">16.2.3</span> QUAST: visualise<a href="16_Megahit.html#quast-visualise" class="anchor-section" aria-label="Anchor link to header"></a></h3>
 <p><img src="figures/eye_green.png" width="10%" style="display: block; margin: auto;" /></p>
 <p><code>QUAST</code> will run relatively quickly. Once complete view the output with <code>firefox</code>.</p>
-<div class="sourceCode" id="cb68"><pre class="sourceCode bash"><code class="sourceCode bash"><span id="cb68-1"><a href="16_Megahit.html#cb68-1" aria-hidden="true" tabindex="-1"></a><span class="ex">firefox</span> quast/K1/report.html</span></code></pre></div>
+<div class="sourceCode" id="cb67"><pre class="sourceCode bash"><code class="sourceCode bash"><span id="cb67-1"><a href="16_Megahit.html#cb67-1" aria-hidden="true" tabindex="-1"></a><span class="ex">firefox</span> quast/K1/report.html</span></code></pre></div>
 <p>The report tells us quite a bit about the assembly quality. Two definitions that you may not be aware are <strong>N50</strong> and <strong>L50</strong>. To calculate these values:</p>
 <ul>
 <li>Order the contigs from largest to smallest.</li>
@@ -401,28 +400,28 @@ code span.wa { color: #60a0b0; font-weight: bold; font-style: italic; } /* Warni
 <p><img src="figures/question_bubble_green.png" width="10%" style="display: block; margin: auto;" /></p>
 <ol style="list-style-type: decimal">
 <li>What is the total length of the assembly?
-<div id="radio_KCHHWGVDAI" class="webex-radiogroup">
-<label><input type="radio" autocomplete="off" name="radio_KCHHWGVDAI" value=""></input> <span><strong>39.88</strong></span></label><label><input type="radio" autocomplete="off" name="radio_KCHHWGVDAI" value=""></input> <span><strong>18,650</strong></span></label><label><input type="radio" autocomplete="off" name="radio_KCHHWGVDAI" value="answer"></input> <span><strong>16,187,295</strong></span></label>
+<div id="radio_CUUWRHZCNW" class="webex-radiogroup">
+<label><input type="radio" autocomplete="off" name="radio_CUUWRHZCNW" value=""></input> <span><strong>39.88</strong></span></label><label><input type="radio" autocomplete="off" name="radio_CUUWRHZCNW" value=""></input> <span><strong>18,650</strong></span></label><label><input type="radio" autocomplete="off" name="radio_CUUWRHZCNW" value="answer"></input> <span><strong>16,187,295</strong></span></label>
 </div></li>
 <li>How many contigs does the assembly consist of?
-<div id="radio_RDQFOFMEJP" class="webex-radiogroup">
-<label><input type="radio" autocomplete="off" name="radio_RDQFOFMEJP" value=""></input> <span><strong>39.88</strong></span></label><label><input type="radio" autocomplete="off" name="radio_RDQFOFMEJP" value="answer"></input> <span><strong>18,650</strong></span></label><label><input type="radio" autocomplete="off" name="radio_RDQFOFMEJP" value=""></input> <span><strong>16,187,295</strong></span></label>
+<div id="radio_WNGCMRROBB" class="webex-radiogroup">
+<label><input type="radio" autocomplete="off" name="radio_WNGCMRROBB" value=""></input> <span><strong>39.88</strong></span></label><label><input type="radio" autocomplete="off" name="radio_WNGCMRROBB" value="answer"></input> <span><strong>18,650</strong></span></label><label><input type="radio" autocomplete="off" name="radio_WNGCMRROBB" value=""></input> <span><strong>16,187,295</strong></span></label>
 </div></li>
 <li>What is the GC% of the assembly?
-<div id="radio_UVAZAFJOEO" class="webex-radiogroup">
-<label><input type="radio" autocomplete="off" name="radio_UVAZAFJOEO" value="answer"></input> <span><strong>39.88</strong></span></label><label><input type="radio" autocomplete="off" name="radio_UVAZAFJOEO" value=""></input> <span><strong>18,650</strong></span></label><label><input type="radio" autocomplete="off" name="radio_UVAZAFJOEO" value=""></input> <span><strong>16,187,295</strong></span></label>
+<div id="radio_JIBODUPIOA" class="webex-radiogroup">
+<label><input type="radio" autocomplete="off" name="radio_JIBODUPIOA" value="answer"></input> <span><strong>39.88</strong></span></label><label><input type="radio" autocomplete="off" name="radio_JIBODUPIOA" value=""></input> <span><strong>18,650</strong></span></label><label><input type="radio" autocomplete="off" name="radio_JIBODUPIOA" value=""></input> <span><strong>16,187,295</strong></span></label>
 </div></li>
 <li>What is the N50 of the assembly?
-<div id="radio_PJDIJXSZBB" class="webex-radiogroup">
-<label><input type="radio" autocomplete="off" name="radio_PJDIJXSZBB" value="answer"></input> <span><strong>1,363</strong></span></label><label><input type="radio" autocomplete="off" name="radio_PJDIJXSZBB" value=""></input> <span><strong>2,178</strong></span></label><label><input type="radio" autocomplete="off" name="radio_PJDIJXSZBB" value=""></input> <span><strong>87,586</strong></span></label>
+<div id="radio_TGSBHPEYXC" class="webex-radiogroup">
+<label><input type="radio" autocomplete="off" name="radio_TGSBHPEYXC" value="answer"></input> <span><strong>1,363</strong></span></label><label><input type="radio" autocomplete="off" name="radio_TGSBHPEYXC" value=""></input> <span><strong>2,178</strong></span></label><label><input type="radio" autocomplete="off" name="radio_TGSBHPEYXC" value=""></input> <span><strong>87,586</strong></span></label>
 </div></li>
 <li>What is the L50 of the assembly?
-<div id="radio_VNJRQIAREF" class="webex-radiogroup">
-<label><input type="radio" autocomplete="off" name="radio_VNJRQIAREF" value=""></input> <span><strong>1,363</strong></span></label><label><input type="radio" autocomplete="off" name="radio_VNJRQIAREF" value="answer"></input> <span><strong>2,178</strong></span></label><label><input type="radio" autocomplete="off" name="radio_VNJRQIAREF" value=""></input> <span><strong>87,586</strong></span></label>
+<div id="radio_QXMHATVTTF" class="webex-radiogroup">
+<label><input type="radio" autocomplete="off" name="radio_QXMHATVTTF" value=""></input> <span><strong>1,363</strong></span></label><label><input type="radio" autocomplete="off" name="radio_QXMHATVTTF" value="answer"></input> <span><strong>2,178</strong></span></label><label><input type="radio" autocomplete="off" name="radio_QXMHATVTTF" value=""></input> <span><strong>87,586</strong></span></label>
 </div></li>
 <li>what is the length of the largest contig?
-<div id="radio_FKXODVCMVD" class="webex-radiogroup">
-<label><input type="radio" autocomplete="off" name="radio_FKXODVCMVD" value=""></input> <span><strong>1,363</strong></span></label><label><input type="radio" autocomplete="off" name="radio_FKXODVCMVD" value=""></input> <span><strong>2,178</strong></span></label><label><input type="radio" autocomplete="off" name="radio_FKXODVCMVD" value="answer"></input> <span><strong>87,586</strong></span></label>
+<div id="radio_QSQXDEJLNL" class="webex-radiogroup">
+<label><input type="radio" autocomplete="off" name="radio_QSQXDEJLNL" value=""></input> <span><strong>1,363</strong></span></label><label><input type="radio" autocomplete="off" name="radio_QSQXDEJLNL" value=""></input> <span><strong>2,178</strong></span></label><label><input type="radio" autocomplete="off" name="radio_QSQXDEJLNL" value="answer"></input> <span><strong>87,586</strong></span></label>
 </div></li>
 </ol>
 <p><strong>Questions</strong>
