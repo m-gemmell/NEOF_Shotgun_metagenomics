@@ -94,7 +94,7 @@ lefse_plot_res.py --dpi 200 --format png all_num.lefse.out biomarkers.png
 - `all_num.lefse.out` : `LEfSe` output to visualise.
 - `biomarkers.png` : Plot showing the LDA scores of the species detected as biomarkers. Colouring shows which class (K or W) the species is found in higher abundance.
 
-Look at the figure with the program `okular`:
+Look at the figure with `firefox`:
 
 ```{bash eval=FALSE}
 firefox biomarkers.png
