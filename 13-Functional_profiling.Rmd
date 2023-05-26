@@ -25,15 +25,14 @@ knitr::include_graphics(path = "figures/humann2.png", auto_pdf = TRUE)
 
 First, we will carry out an example run of the software and briefly explore the output files. `HUMAnN` can take a long time to run so we will use a small amount of example data. Additionally, we will use a subset of the `HUMAnN` databases for the analysis but when running analysis on your own data you should use the full databases. information on installing `HUMAnN` and its databases can be found on its online [Home Page](https://huttenhower.sph.harvard.edu/humann/).
 
-### HUMAnN: conda, directories, and files
-```{r, fig.align = 'center',out.width= '10%', echo=FALSE }
-knitr::include_graphics(path = "figures/conda.png", auto_pdf = TRUE)
+### HUMAnN: mamba, directories, and files
+```{r, fig.align = 'center',out.width= '30%', echo=FALSE }
+knitr::include_graphics(path = "figures/mamba_logo.png", auto_pdf = TRUE)
 ```
 
-We need a new conda environment again. Open a new terminal (right click on the main screen background, choose `Applications` -> `Shell` -> `bash`) and run the below:
+We need a new `mamba` environment. Open a new terminal (right click on the main screen background, choose `Terminal`) and run the below:
 
 ```{bash eval=FALSE}
-chos 8
 . usebiobakery3
 ```
 
@@ -47,7 +46,7 @@ cd ~/4-FunctionalProfiling
 Copy over some test data we will carry out the analysis on. This is a demonstration FASTQ file that we will use. It will be small enough to run `HUMAnN` in a reasonable amount of time.
 
 ```{bash eval=FALSE}
-cp /pub39/tea/nsc006/NEOF/Shotgun_metagenomics/humann/demo.fastq.gz .
+cp /pub14/tea/nsc206/NEOF/Shotgun_metagenomics/humann/demo.fastq.gz .
 ```
 
 ### HUMAnN: run
@@ -125,7 +124,7 @@ For the purposes of this comparison, we will look at the pathway abundances only
 #Ensure you are in the correct directory
 cd ~/4-FunctionalProfiling
 #Copy directory with pre made results
-cp –r /pub39/tea/nsc006/NEOF/Shotgun_metagenomics/DietPathAbundance .
+cp –r /pub14/tea/nsc206/NEOF/Shotgun_metagenomics/DietPathAbundance .
 #Move into the copied directory
 cd DietPathAbundance
 #List files
@@ -260,7 +259,7 @@ Next using your text editor of choice carry out the following changes on the fil
 `r hide("Issues with creating file?")`
 If you are having issues with creating and editing the file `all_num.lefse.bracken` you can copy a pre-made version.
 ```{bash, eval=FALSE}
-cp /pub39/tea/nsc006/Shotgun_metagenomics/lefse/diet_unstratified.relab.comp.tsv
+cp /pub14/tea/nsc206/Shotgun_metagenomics/lefse/diet_unstratified.relab.comp.tsv
 ```
 `r unhide()`
 
@@ -360,7 +359,7 @@ Look at the output and see what pathways count as biomarkers for the 2 groups.
 
 Carry out all the steps starting from [Multi sample processing](#humannmultisampleprocessing) with the gene families information.
 
-- Copy the gene families data from `/pub39/tea/nsc006/NEOF/Shotgun_metagenomics/DietGeneFamilies`
+- Copy the gene families data from `/pub14/tea/nsc206/NEOF/Shotgun_metagenomics/DietGeneFamilies`
 - Ensure you set the `--units` option to `cpm` in the [renormalising data](#humannrenormalise) step.
 - On top of analysing the unstratified data you can also analyse the stratified data.
 

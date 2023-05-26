@@ -28,8 +28,6 @@ mamba install -c bioconda fastqc trim-galore multiqc bowtie2 kraken2 krona brack
 ktUpdateTaxonomy.sh
 ```
 
-#Install minpath
-
 Install [MinPath](https://github.com/mgtools/MinPath) via `git`.
 I suggest creating a directory called "git_installs" in your home directory and running this code there.
 
@@ -46,18 +44,23 @@ If you installed these in your "~/git_installs" examples are below.
 
 ```{bash, eval=FALSE}
 #MinPath help page
-python ~/git_installs/SequelTools/Scripts/SequelTools.sh -h
+python ~/git_installs/Minpath/MinPath.py -h
 ```
 
 To create the mamba environment `biobakery` run the below commands in your bash. You will need to have installed `mamba` first.
 
 ```{bash, eval=FALSE}
-#
-mamba create -n biobakery
-mamba activate biobakery
-
-
-
+#biobakery3
+mamba create -n biobakery3
+mamba activate biobakery3
+#Add required channels
+conda config --add channels defaults
+conda config --add channels bioconda
+conda config --add channels conda-forge
+conda config --add channels biobakery
+#Install packages
+mamba install -c biobakery humann
+mamba install -c bioconda hclust2 lefse
 ```
 
 # Next steps
