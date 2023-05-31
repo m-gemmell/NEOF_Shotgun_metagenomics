@@ -48,7 +48,7 @@ lefse-mcqs
 kraken2-and-bracken-databases
 functprofile
 humann
-humann-conda-directories-and-files
+humann-mamba-directories-and-files
 humann-run
 humann-output
 humannmultisampleprocessing

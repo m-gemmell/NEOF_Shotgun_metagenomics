@@ -1216,7 +1216,7 @@ lefse_plot_res.py --dpi 200 --format png all_num.lefse.out biomarkers.png
 - `all_num.lefse.out` : `LEfSe` output to visualise.
 - `biomarkers.png` : Plot showing the LDA scores of the species detected as biomarkers. Colouring shows which class (K or W) the species is found in higher abundance.
 
-Look at the figure with the program `okular`:
+Look at the figure with `firefox`:
 
 ```{bash eval=FALSE}
 firefox biomarkers.png
@@ -1326,15 +1326,14 @@ knitr::include_graphics(path = "figures/humann2.png", auto_pdf = TRUE)
 
 First, we will carry out an example run of the software and briefly explore the output files. `HUMAnN` can take a long time to run so we will use a small amount of example data. Additionally, we will use a subset of the `HUMAnN` databases for the analysis but when running analysis on your own data you should use the full databases. information on installing `HUMAnN` and its databases can be found on its online [Home Page](https://huttenhower.sph.harvard.edu/humann/).
 
-### HUMAnN: conda, directories, and files
-```{r, fig.align = 'center',out.width= '10%', echo=FALSE }
-knitr::include_graphics(path = "figures/conda.png", auto_pdf = TRUE)
+### HUMAnN: mamba, directories, and files
+```{r, fig.align = 'center',out.width= '30%', echo=FALSE }
+knitr::include_graphics(path = "figures/mamba_logo.png", auto_pdf = TRUE)
 ```
 
-We need a new conda environment again. Open a new terminal (right click on the main screen background, choose `Applications` -> `Shell` -> `bash`) and run the below:
+We need a new `mamba` environment. Open a new terminal (right click on the main screen background, choose `Terminal`) and run the below:
 
 ```{bash eval=FALSE}
-chos 8
 . usebiobakery3
 ```
 
@@ -1348,7 +1347,7 @@ cd ~/4-FunctionalProfiling
 Copy over some test data we will carry out the analysis on. This is a demonstration FASTQ file that we will use. It will be small enough to run `HUMAnN` in a reasonable amount of time.
 
 ```{bash eval=FALSE}
-cp /pub39/tea/nsc006/NEOF/Shotgun_metagenomics/humann/demo.fastq.gz .
+cp /pub14/tea/nsc206/NEOF/Shotgun_metagenomics/humann/demo.fastq.gz .
 ```
 
 ### HUMAnN: run
@@ -1426,7 +1425,7 @@ For the purposes of this comparison, we will look at the pathway abundances only
 #Ensure you are in the correct directory
 cd ~/4-FunctionalProfiling
 #Copy directory with pre made results
-cp –r /pub39/tea/nsc006/NEOF/Shotgun_metagenomics/DietPathAbundance .
+cp –r /pub14/tea/nsc206/NEOF/Shotgun_metagenomics/DietPathAbundance .
 #Move into the copied directory
 cd DietPathAbundance
 #List files
@@ -1561,7 +1560,7 @@ Next using your text editor of choice carry out the following changes on the fil
 `r hide("Issues with creating file?")`
 If you are having issues with creating and editing the file `all_num.lefse.bracken` you can copy a pre-made version.
 ```{bash, eval=FALSE}
-cp /pub39/tea/nsc006/Shotgun_metagenomics/lefse/diet_unstratified.relab.comp.tsv
+cp /pub14/tea/nsc206/Shotgun_metagenomics/lefse/diet_unstratified.relab.comp.tsv
 ```
 `r unhide()`
 
@@ -1661,7 +1660,7 @@ Look at the output and see what pathways count as biomarkers for the 2 groups.
 
 Carry out all the steps starting from [Multi sample processing](#humannmultisampleprocessing) with the gene families information.
 
-- Copy the gene families data from `/pub39/tea/nsc006/NEOF/Shotgun_metagenomics/DietGeneFamilies`
+- Copy the gene families data from `/pub14/tea/nsc206/NEOF/Shotgun_metagenomics/DietGeneFamilies`
 - Ensure you set the `--units` option to `cpm` in the [renormalising data](#humannrenormalise) step.
 - On top of analysing the unstratified data you can also analyse the stratified data.
 
@@ -2863,8 +2862,6 @@ mamba install -c bioconda fastqc trim-galore multiqc bowtie2 kraken2 krona brack
 ktUpdateTaxonomy.sh
 ```
 
-#Install minpath
-
 Install [MinPath](https://github.com/mgtools/MinPath) via `git`.
 I suggest creating a directory called "git_installs" in your home directory and running this code there.
 
@@ -2881,19 +2878,59 @@ If you installed these in your "~/git_installs" examples are below.
 
 ```{bash, eval=FALSE}
 #MinPath help page
-python ~/git_installs/SequelTools/Scripts/SequelTools.sh -h
+python ~/git_installs/Minpath/MinPath.py -h
 ```
 
 To create the mamba environment `biobakery` run the below commands in your bash. You will need to have installed `mamba` first.
 
 ```{bash, eval=FALSE}
-#
-mamba create -n biobakery
-mamba activate biobakery
-
-
-
+#biobakery3
+mamba create -n biobakery3
+mamba activate biobakery3
+#Add required channels
+conda config --add channels defaults
+conda config --add channels bioconda
+conda config --add channels conda-forge
+conda config --add channels biobakery
+#Install packages
+mamba install -c biobakery humann
+mamba install -c bioconda hclust2 lefse
 ```
+
+Next you will need to install the `HUMAnN` and `MetaPhlAn` databases.
+
+```{bash, eval=FALSE}
+#Ensure you have biobakery3 mamba environment activated
+#Update HUMAnN databases
+humann_databases --download chocophlan full /path/to/databases --update-config yes
+humann_databases --download uniref uniref90_diamond /path/to/databases --update-config yes
+humann_databases --download utility_mapping full /path/to/databases --update-config yes
+#Install MetaPhlAn databases
+metaphlan --install
+```
+
+Installing the `MetaPhlAn` databases may not work with the command above. If not follow the below instrcutions.
+
+- Go to the following link: http://cmprod1.cibio.unitn.it/biobakery4/metaphlan_databases/
+- Download the following files (or more recent versions if available):
+  - __mpa_vOct22_CHOCOPhlAnSGB_202212.md5__
+  - __mpa_vOct22_CHOCOPhlAnSGB_202212.tar__
+  - __bowtie2_indexes/mpa_vOct22_CHOCOPhlAnSGB_202212_bt2.md5__
+  - __bowtie2_indexes/mpa_vOct22_CHOCOPhlAnSGB_202212_bt2.tar__
+- Put these in the `MetaPhlAn` databases directory. This will be in your mamba environment directory.
+  - E.g.: ~/mambaforge/envs/biobakery3/lib/python3.7/site-packages/metaphlan/metaphlan_databases
+  - Note: this may not be your exact path.
+- Run `metaphlan --install` again.
+- Untar the CHOCOPhlan tar file
+  - Change directory to your `MetaPhlAn` database directory.
+  - `tar -xvf mpa_vOct22_CHOCOPhlAnSGB_202212.tar`
+
+Once the databses are all setup you can test `HUMAnN`.
+
+```{bash, eval = FALSE}
+humann_test
+```
+
 
 # Next steps
 ```{r, fig.align = 'center',out.width= '15%', echo=FALSE }
@@ -2948,7 +2985,7 @@ LEfSe: https://huttenhower.sph.harvard.edu/lefse/
 
 HUMAnN 3.0: https://huttenhower.sph.harvard.edu/humann/
 
-MetaPhlAn 3.0: https://huttenhower.sph.harvard.edu/metaphlan/
+MetaPhlAn 4.0: https://github.com/biobakery/MetaPhlAn/wiki/MetaPhlAn-4
 
 Biobakery: https://github.com/biobakery/biobakery
 

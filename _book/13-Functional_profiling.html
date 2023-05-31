@@ -23,7 +23,7 @@
 <meta name="author" content="Sam Haldenby and Matthew R. Gemmell" />
 
 
-<meta name="date" content="2023-05-23" />
+<meta name="date" content="2023-05-31" />
 
   <meta name="viewport" content="width=device-width, initial-scale=1" />
   <meta name="apple-mobile-web-app-capable" content="yes" />
@@ -217,7 +217,7 @@ code span.wa { color: #60a0b0; font-weight: bold; font-style: italic; } /* Warni
 <ul>
 <li class="chapter" data-level="13.1" data-path="13-Functional_profiling.html"><a href="13-Functional_profiling.html#humann"><i class="fa fa-check"></i><b>13.1</b> HUMAnN</a>
 <ul>
-<li class="chapter" data-level="13.1.1" data-path="13-Functional_profiling.html"><a href="13-Functional_profiling.html#humann-conda-directories-and-files"><i class="fa fa-check"></i><b>13.1.1</b> HUMAnN: conda, directories, and files</a></li>
+<li class="chapter" data-level="13.1.1" data-path="13-Functional_profiling.html"><a href="13-Functional_profiling.html#humann-mamba-directories-and-files"><i class="fa fa-check"></i><b>13.1.1</b> HUMAnN: mamba, directories, and files</a></li>
 <li class="chapter" data-level="13.1.2" data-path="13-Functional_profiling.html"><a href="13-Functional_profiling.html#humann-run"><i class="fa fa-check"></i><b>13.1.2</b> HUMAnN: run</a></li>
 <li class="chapter" data-level="13.1.3" data-path="13-Functional_profiling.html"><a href="13-Functional_profiling.html#humann-output"><i class="fa fa-check"></i><b>13.1.3</b> HUMAnN: output</a></li>
 </ul></li>
@@ -330,17 +330,16 @@ code span.wa { color: #60a0b0; font-weight: bold; font-style: italic; } /* Warni
 <h2><span class="header-section-number">13.1</span> HUMAnN<a href="13-Functional_profiling.html#humann" class="anchor-section" aria-label="Anchor link to header"></a></h2>
 <p><img src="figures/humann2.png" width="15%" style="display: block; margin: auto;" /></p>
 <p>First, we will carry out an example run of the software and briefly explore the output files. <code>HUMAnN</code> can take a long time to run so we will use a small amount of example data. Additionally, we will use a subset of the <code>HUMAnN</code> databases for the analysis but when running analysis on your own data you should use the full databases. information on installing <code>HUMAnN</code> and its databases can be found on its online <a href="https://huttenhower.sph.harvard.edu/humann/">Home Page</a>.</p>
-<div id="humann-conda-directories-and-files" class="section level3 hasAnchor" number="13.1.1">
-<h3><span class="header-section-number">13.1.1</span> HUMAnN: conda, directories, and files<a href="13-Functional_profiling.html#humann-conda-directories-and-files" class="anchor-section" aria-label="Anchor link to header"></a></h3>
-<p><img src="figures/conda.png" width="10%" style="display: block; margin: auto;" /></p>
-<p>We need a new conda environment again. Open a new terminal (right click on the main screen background, choose <code>Applications</code> -&gt; <code>Shell</code> -&gt; <code>bash</code>) and run the below:</p>
-<div class="sourceCode" id="cb40"><pre class="sourceCode bash"><code class="sourceCode bash"><span id="cb40-1"><a href="13-Functional_profiling.html#cb40-1" aria-hidden="true" tabindex="-1"></a><span class="ex">chos</span> 8</span>
-<span id="cb40-2"><a href="13-Functional_profiling.html#cb40-2" aria-hidden="true" tabindex="-1"></a><span class="bu">.</span> usebiobakery3</span></code></pre></div>
+<div id="humann-mamba-directories-and-files" class="section level3 hasAnchor" number="13.1.1">
+<h3><span class="header-section-number">13.1.1</span> HUMAnN: mamba, directories, and files<a href="13-Functional_profiling.html#humann-mamba-directories-and-files" class="anchor-section" aria-label="Anchor link to header"></a></h3>
+<p><img src="figures/mamba_logo.png" width="30%" style="display: block; margin: auto;" /></p>
+<p>We need a new <code>mamba</code> environment. Open a new terminal (right click on the main screen background, choose <code>Terminal</code>) and run the below:</p>
+<div class="sourceCode" id="cb40"><pre class="sourceCode bash"><code class="sourceCode bash"><span id="cb40-1"><a href="13-Functional_profiling.html#cb40-1" aria-hidden="true" tabindex="-1"></a><span class="bu">.</span> usebiobakery3</span></code></pre></div>
 <p>Make a new directory and move into it.</p>
 <div class="sourceCode" id="cb41"><pre class="sourceCode bash"><code class="sourceCode bash"><span id="cb41-1"><a href="13-Functional_profiling.html#cb41-1" aria-hidden="true" tabindex="-1"></a><span class="fu">mkdir</span> ~/4-FunctionalProfiling</span>
 <span id="cb41-2"><a href="13-Functional_profiling.html#cb41-2" aria-hidden="true" tabindex="-1"></a><span class="bu">cd</span> ~/4-FunctionalProfiling</span></code></pre></div>
 <p>Copy over some test data we will carry out the analysis on. This is a demonstration FASTQ file that we will use. It will be small enough to run <code>HUMAnN</code> in a reasonable amount of time.</p>
-<div class="sourceCode" id="cb42"><pre class="sourceCode bash"><code class="sourceCode bash"><span id="cb42-1"><a href="13-Functional_profiling.html#cb42-1" aria-hidden="true" tabindex="-1"></a><span class="fu">cp</span> /pub39/tea/nsc006/NEOF/Shotgun_metagenomics/humann/demo.fastq.gz .</span></code></pre></div>
+<div class="sourceCode" id="cb42"><pre class="sourceCode bash"><code class="sourceCode bash"><span id="cb42-1"><a href="13-Functional_profiling.html#cb42-1" aria-hidden="true" tabindex="-1"></a><span class="fu">cp</span> /pub14/tea/nsc206/NEOF/Shotgun_metagenomics/humann/demo.fastq.gz .</span></code></pre></div>
 </div>
 <div id="humann-run" class="section level3 hasAnchor" number="13.1.2">
 <h3><span class="header-section-number">13.1.2</span> HUMAnN: run<a href="13-Functional_profiling.html#humann-run" class="anchor-section" aria-label="Anchor link to header"></a></h3>
@@ -396,7 +395,7 @@ code span.wa { color: #60a0b0; font-weight: bold; font-style: italic; } /* Warni
 <div class="sourceCode" id="cb46"><pre class="sourceCode bash"><code class="sourceCode bash"><span id="cb46-1"><a href="13-Functional_profiling.html#cb46-1" aria-hidden="true" tabindex="-1"></a><span class="co">#Ensure you are in the correct directory</span></span>
 <span id="cb46-2"><a href="13-Functional_profiling.html#cb46-2" aria-hidden="true" tabindex="-1"></a><span class="bu">cd</span> ~/4-FunctionalProfiling</span>
 <span id="cb46-3"><a href="13-Functional_profiling.html#cb46-3" aria-hidden="true" tabindex="-1"></a><span class="co">#Copy directory with pre made results</span></span>
-<span id="cb46-4"><a href="13-Functional_profiling.html#cb46-4" aria-hidden="true" tabindex="-1"></a><span class="fu">cp</span> –r /pub39/tea/nsc006/NEOF/Shotgun_metagenomics/DietPathAbundance .</span>
+<span id="cb46-4"><a href="13-Functional_profiling.html#cb46-4" aria-hidden="true" tabindex="-1"></a><span class="fu">cp</span> –r /pub14/tea/nsc206/NEOF/Shotgun_metagenomics/DietPathAbundance .</span>
 <span id="cb46-5"><a href="13-Functional_profiling.html#cb46-5" aria-hidden="true" tabindex="-1"></a><span class="co">#Move into the copied directory</span></span>
 <span id="cb46-6"><a href="13-Functional_profiling.html#cb46-6" aria-hidden="true" tabindex="-1"></a><span class="bu">cd</span> DietPathAbundance</span>
 <span id="cb46-7"><a href="13-Functional_profiling.html#cb46-7" aria-hidden="true" tabindex="-1"></a><span class="co">#List files</span></span>
@@ -481,7 +480,7 @@ code span.wa { color: #60a0b0; font-weight: bold; font-style: italic; } /* Warni
 Issues with creating file?
 </button>
 <p>If you are having issues with creating and editing the file <code>all_num.lefse.bracken</code> you can copy a pre-made version.</p>
-<div class="sourceCode" id="cb54"><pre class="sourceCode bash"><code class="sourceCode bash"><span id="cb54-1"><a href="13-Functional_profiling.html#cb54-1" aria-hidden="true" tabindex="-1"></a><span class="fu">cp</span> /pub39/tea/nsc006/Shotgun_metagenomics/lefse/diet_unstratified.relab.comp.tsv</span></code></pre></div>
+<div class="sourceCode" id="cb54"><pre class="sourceCode bash"><code class="sourceCode bash"><span id="cb54-1"><a href="13-Functional_profiling.html#cb54-1" aria-hidden="true" tabindex="-1"></a><span class="fu">cp</span> /pub14/tea/nsc206/Shotgun_metagenomics/lefse/diet_unstratified.relab.comp.tsv</span></code></pre></div>
 </div>
 <p>Now we can use the <code>hclust2</code> tool to create a heatmap of our pathway abundances.</p>
 <div class="sourceCode" id="cb55"><pre class="sourceCode bash"><code class="sourceCode bash"><span id="cb55-1"><a href="13-Functional_profiling.html#cb55-1" aria-hidden="true" tabindex="-1"></a><span class="ex">hclust2.py</span> <span class="dt">\</span></span>
@@ -520,16 +519,16 @@ Issues with creating file?
 <h4>MCQs<a href="13-Functional_profiling.html#mcqs" class="anchor-section" aria-label="Anchor link to header"></a></h4>
 <ol style="list-style-type: decimal">
 <li>Which pathway stands out the most?
-<div id="radio_HUITDVDTZO" class="webex-radiogroup">
-<label><input type="radio" autocomplete="off" name="radio_HUITDVDTZO" value=""></input> <span><strong>ARO-PWY</strong></span></label><label><input type="radio" autocomplete="off" name="radio_HUITDVDTZO" value="answer"></input> <span><strong>DTDPRHAMSYN</strong></span></label><label><input type="radio" autocomplete="off" name="radio_HUITDVDTZO" value=""></input> <span><strong>PWY-6385</strong></span></label>
+<div id="radio_LJUNIFFCLK" class="webex-radiogroup">
+<label><input type="radio" autocomplete="off" name="radio_LJUNIFFCLK" value=""></input> <span><strong>ARO-PWY</strong></span></label><label><input type="radio" autocomplete="off" name="radio_LJUNIFFCLK" value="answer"></input> <span><strong>DTDPRHAMSYN</strong></span></label><label><input type="radio" autocomplete="off" name="radio_LJUNIFFCLK" value=""></input> <span><strong>PWY-6385</strong></span></label>
 </div></li>
 <li>How many clusters are formed based on diet (Colours on tree at top of heatmap)?
-<div id="radio_UIFMUPPEWE" class="webex-radiogroup">
-<label><input type="radio" autocomplete="off" name="radio_UIFMUPPEWE" value=""></input> <span><strong>1</strong></span></label><label><input type="radio" autocomplete="off" name="radio_UIFMUPPEWE" value="answer"></input> <span><strong>2</strong></span></label><label><input type="radio" autocomplete="off" name="radio_UIFMUPPEWE" value=""></input> <span><strong>3</strong></span></label>
+<div id="radio_CMLAPZIQZW" class="webex-radiogroup">
+<label><input type="radio" autocomplete="off" name="radio_CMLAPZIQZW" value=""></input> <span><strong>1</strong></span></label><label><input type="radio" autocomplete="off" name="radio_CMLAPZIQZW" value="answer"></input> <span><strong>2</strong></span></label><label><input type="radio" autocomplete="off" name="radio_CMLAPZIQZW" value=""></input> <span><strong>3</strong></span></label>
 </div></li>
 <li>How many clusters are formed based on pathways (Colours on tree at the side of heatmap)?
-<div id="radio_ORTXPTEZSM" class="webex-radiogroup">
-<label><input type="radio" autocomplete="off" name="radio_ORTXPTEZSM" value=""></input> <span><strong>1</strong></span></label><label><input type="radio" autocomplete="off" name="radio_ORTXPTEZSM" value=""></input> <span><strong>2</strong></span></label><label><input type="radio" autocomplete="off" name="radio_ORTXPTEZSM" value="answer"></input> <span><strong>3</strong></span></label>
+<div id="radio_BHCIIZJDPV" class="webex-radiogroup">
+<label><input type="radio" autocomplete="off" name="radio_BHCIIZJDPV" value=""></input> <span><strong>1</strong></span></label><label><input type="radio" autocomplete="off" name="radio_BHCIIZJDPV" value=""></input> <span><strong>2</strong></span></label><label><input type="radio" autocomplete="off" name="radio_BHCIIZJDPV" value="answer"></input> <span><strong>3</strong></span></label>
 </div></li>
 </ol>
 <p>You can look up the pathway names in the table file to see a fuller description.</p>
@@ -564,7 +563,7 @@ Issues with creating file?
 <h2><span class="header-section-number">13.5</span> Optional task<a href="13-Functional_profiling.html#optional-task" class="anchor-section" aria-label="Anchor link to header"></a></h2>
 <p>Carry out all the steps starting from <a href="13-Functional_profiling.html#humannmultisampleprocessing">Multi sample processing</a> with the gene families information.</p>
 <ul>
-<li>Copy the gene families data from <code>/pub39/tea/nsc006/NEOF/Shotgun_metagenomics/DietGeneFamilies</code></li>
+<li>Copy the gene families data from <code>/pub14/tea/nsc206/NEOF/Shotgun_metagenomics/DietGeneFamilies</code></li>
 <li>Ensure you set the <code>--units</code> option to <code>cpm</code> in the <a href="13-Functional_profiling.html#humannrenormalise">renormalising data</a> step.</li>
 <li>On top of analysing the unstratified data you can also analyse the stratified data.</li>
 </ul>
