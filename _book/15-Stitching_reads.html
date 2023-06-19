@@ -23,7 +23,7 @@
 <meta name="author" content="Sam Haldenby and Matthew R. Gemmell" />
 
 
-<meta name="date" content="2023-05-31" />
+<meta name="date" content="2023-06-19" />
 
   <meta name="viewport" content="width=device-width, initial-scale=1" />
   <meta name="apple-mobile-web-app-capable" content="yes" />
@@ -332,14 +332,14 @@ code span.wa { color: #60a0b0; font-weight: bold; font-style: italic; } /* Warni
 <h2><span class="header-section-number">15.1</span> FLASH: run<a href="15-Stitching_reads.html#flash-run" class="anchor-section" aria-label="Anchor link to header"></a></h2>
 <p><img src="figures/play_red.png" width="10%" style="display: block; margin: auto;" /></p>
 <p>Make a new output directory for the stitched reads and run <code>FLASH</code>:</p>
-<div class="sourceCode" id="cb58"><pre class="sourceCode bash"><code class="sourceCode bash"><span id="cb58-1"><a href="15-Stitching_reads.html#cb58-1" aria-hidden="true" tabindex="-1"></a><span class="co">#Change directory to home</span></span>
-<span id="cb58-2"><a href="15-Stitching_reads.html#cb58-2" aria-hidden="true" tabindex="-1"></a><span class="bu">cd</span> ~</span>
-<span id="cb58-3"><a href="15-Stitching_reads.html#cb58-3" aria-hidden="true" tabindex="-1"></a><span class="co">#Make and move into new directory</span></span>
-<span id="cb58-4"><a href="15-Stitching_reads.html#cb58-4" aria-hidden="true" tabindex="-1"></a><span class="fu">mkdir</span> 5-Stitched</span>
-<span id="cb58-5"><a href="15-Stitching_reads.html#cb58-5" aria-hidden="true" tabindex="-1"></a><span class="bu">cd</span> 5-Stitched</span>
-<span id="cb58-6"><a href="15-Stitching_reads.html#cb58-6" aria-hidden="true" tabindex="-1"></a><span class="co">#Run flash</span></span>
-<span id="cb58-7"><a href="15-Stitching_reads.html#cb58-7" aria-hidden="true" tabindex="-1"></a><span class="ex">flash</span>  <span class="at">-o</span> K1 <span class="at">-z</span> <span class="at">-t</span> 12 <span class="at">-d</span> . <span class="dt">\</span></span>
-<span id="cb58-8"><a href="15-Stitching_reads.html#cb58-8" aria-hidden="true" tabindex="-1"></a>../2-Trimmed/K1_R1.fq.gz ../2-Trimmed/K1_R2.fq.gz</span></code></pre></div>
+<div class="sourceCode" id="cb59"><pre class="sourceCode bash"><code class="sourceCode bash"><span id="cb59-1"><a href="15-Stitching_reads.html#cb59-1" tabindex="-1"></a><span class="co">#Change directory to home</span></span>
+<span id="cb59-2"><a href="15-Stitching_reads.html#cb59-2" tabindex="-1"></a><span class="bu">cd</span> ~</span>
+<span id="cb59-3"><a href="15-Stitching_reads.html#cb59-3" tabindex="-1"></a><span class="co">#Make and move into new directory</span></span>
+<span id="cb59-4"><a href="15-Stitching_reads.html#cb59-4" tabindex="-1"></a><span class="fu">mkdir</span> 5-Stitched</span>
+<span id="cb59-5"><a href="15-Stitching_reads.html#cb59-5" tabindex="-1"></a><span class="bu">cd</span> 5-Stitched</span>
+<span id="cb59-6"><a href="15-Stitching_reads.html#cb59-6" tabindex="-1"></a><span class="co">#Run flash</span></span>
+<span id="cb59-7"><a href="15-Stitching_reads.html#cb59-7" tabindex="-1"></a><span class="ex">flash</span>  <span class="at">-o</span> K1 <span class="at">-z</span> <span class="at">-t</span> 12 <span class="at">-d</span> . <span class="dt">\</span></span>
+<span id="cb59-8"><a href="15-Stitching_reads.html#cb59-8" tabindex="-1"></a>../2-Trimmed/K1_R1.fq.gz ../2-Trimmed/K1_R2.fq.gz</span></code></pre></div>
 <div id="parameters-7" class="section level4 unnumbered hasAnchor">
 <h4>Parameters<a href="15-Stitching_reads.html#parameters-7" class="anchor-section" aria-label="Anchor link to header"></a></h4>
 <p><img src="figures/parameter_red.png" width="10%" style="display: block; margin: auto;" /></p>
@@ -356,10 +356,10 @@ code span.wa { color: #60a0b0; font-weight: bold; font-style: italic; } /* Warni
 <h2><span class="header-section-number">15.2</span> FLASH: Output<a href="15-Stitching_reads.html#flash-output" class="anchor-section" aria-label="Anchor link to header"></a></h2>
 <p><img src="figures/output_file_red.png" width="10%" style="display: block; margin: auto;" /></p>
 <p>Once <code>FLASH</code> has finished running, it will display on screen how well the stitching process went, in this case a low amount of reads were combined. Have a look what files have been generated.</p>
-<div class="sourceCode" id="cb59"><pre class="sourceCode bash"><code class="sourceCode bash"><span id="cb59-1"><a href="15-Stitching_reads.html#cb59-1" aria-hidden="true" tabindex="-1"></a><span class="fu">ls</span></span></code></pre></div>
+<div class="sourceCode" id="cb60"><pre class="sourceCode bash"><code class="sourceCode bash"><span id="cb60-1"><a href="15-Stitching_reads.html#cb60-1" tabindex="-1"></a><span class="fu">ls</span></span></code></pre></div>
 <p>We have three new fastq.gz files. One containing the stitched reads (<code>K1.extendedFrags.fastq.gz</code>) and two containing the reads from pairs that could not be combined (<code>K1.notCombined_1.fastq.gz</code> and <code>K1.notCombined_2.fastq.gz)</code>.</p>
 <p>We can also see what the new read lengths are:</p>
-<div class="sourceCode" id="cb60"><pre class="sourceCode bash"><code class="sourceCode bash"><span id="cb60-1"><a href="15-Stitching_reads.html#cb60-1" aria-hidden="true" tabindex="-1"></a><span class="fu">less</span> K1.histogram</span></code></pre></div>
+<div class="sourceCode" id="cb61"><pre class="sourceCode bash"><code class="sourceCode bash"><span id="cb61-1"><a href="15-Stitching_reads.html#cb61-1" tabindex="-1"></a><span class="fu">less</span> K1.histogram</span></code></pre></div>
 <p>Scroll down with the down key and you will see that we are looking at a histogram showing the proportion of stitched reads at different lengths.</p>
 </div>
 <div id="flash-mcqs" class="section level2 hasAnchor" number="15.3">
@@ -367,12 +367,12 @@ code span.wa { color: #60a0b0; font-weight: bold; font-style: italic; } /* Warni
 <p><img src="figures/question_bubble_red.png" width="10%" style="display: block; margin: auto;" /></p>
 <ol style="list-style-type: decimal">
 <li>What length has the highest proportion of stitched reads?
-<div id="radio_VQIUANDQUI" class="webex-radiogroup">
-<label><input type="radio" autocomplete="off" name="radio_VQIUANDQUI" value=""></input> <span><strong>101</strong></span></label><label><input type="radio" autocomplete="off" name="radio_VQIUANDQUI" value=""></input> <span><strong>177</strong></span></label><label><input type="radio" autocomplete="off" name="radio_VQIUANDQUI" value="answer"></input> <span><strong>188</strong></span></label>
+<div id="radio_LKAWXBGXHS" class="webex-radiogroup">
+<label><input type="radio" autocomplete="off" name="radio_LKAWXBGXHS" value=""></input> <span><strong>101</strong></span></label><label><input type="radio" autocomplete="off" name="radio_LKAWXBGXHS" value=""></input> <span><strong>177</strong></span></label><label><input type="radio" autocomplete="off" name="radio_LKAWXBGXHS" value="answer"></input> <span><strong>188</strong></span></label>
 </div></li>
 <li>What length has the lowest proportion of stitched reads?
-<div id="radio_NKJDUKPBRJ" class="webex-radiogroup">
-<label><input type="radio" autocomplete="off" name="radio_NKJDUKPBRJ" value="answer"></input> <span><strong>101</strong></span></label><label><input type="radio" autocomplete="off" name="radio_NKJDUKPBRJ" value=""></input> <span><strong>177</strong></span></label><label><input type="radio" autocomplete="off" name="radio_NKJDUKPBRJ" value=""></input> <span><strong>188</strong></span></label>
+<div id="radio_DHAUFMEMFP" class="webex-radiogroup">
+<label><input type="radio" autocomplete="off" name="radio_DHAUFMEMFP" value="answer"></input> <span><strong>101</strong></span></label><label><input type="radio" autocomplete="off" name="radio_DHAUFMEMFP" value=""></input> <span><strong>177</strong></span></label><label><input type="radio" autocomplete="off" name="radio_DHAUFMEMFP" value=""></input> <span><strong>188</strong></span></label>
 </div></li>
 </ol>
 

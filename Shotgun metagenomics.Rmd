@@ -1327,7 +1327,7 @@ knitr::include_graphics(path = "figures/humann2.png", auto_pdf = TRUE)
 First, we will carry out an example run of the software and briefly explore the output files. `HUMAnN` can take a long time to run so we will use a small amount of example data. Additionally, we will use a subset of the `HUMAnN` databases for the analysis but when running analysis on your own data you should use the full databases. information on installing `HUMAnN` and its databases can be found on its online [Home Page](https://huttenhower.sph.harvard.edu/humann/).
 
 ### HUMAnN: mamba, directories, and files
-```{r, fig.align = 'center',out.width= '30%', echo=FALSE }
+```{r, fig.align = 'center',out.width= '25%', echo=FALSE }
 knitr::include_graphics(path = "figures/mamba_logo.png", auto_pdf = TRUE)
 ```
 
@@ -1367,6 +1367,15 @@ humann \
 Here, we are telling the software to use `demo.fastq.gz` as input and to create a new output directory called `demo.humann` where the results will be generated. 
 
 As the software runs you might notice that `HUMAnN` runs `MetaPhlAn`. The purpose of this is to identify what species are present in the sample, so `HUMAnN` can tailor generate an appropriate database of genes (from those species) to map against. It will carry out this alignment against the gene database, then a protein database, and finally compute which gene families are present. `HUMAnN` will determine which functional pathways are present and how abundant they are.
+
+If you are using paired end reads the `HUMAnN` developers recommend concatenating your reads into one file and running `HUMAnN` on the concatenated file [source](https://forum.biobakery.org/t/humann3-paired-end-reads/862/3).
+
+For example (don't run the below):
+
+```{bash, eval=FALSE}
+cat K1_R1.fq.gz K1_R2.fq.gz > K1.fq.gz
+humann --input K1.fq.gz --output humann_output --threads
+```
 
 ### HUMAnN: output
 ```{r, fig.align = 'center',out.width= '10%', echo=FALSE }
@@ -2857,9 +2866,11 @@ To create the mamba environment `shotgun_meta` run the below commands in your ba
 mamba create -n shotgun_meta
 mamba activate shotgun_meta
 #Install packages
-mamba install -c bioconda fastqc trim-galore multiqc bowtie2 kraken2 krona bracken lefse flash megahit quast metabat2 prokka bbmap
+mamba install -c bioconda fastqc trim-galore multiqc bowtie2 kraken2 krona bracken lefse flash megahit quast metabat2 prokka bbmap bakta circos
 #Update krona taxonomy database
 ktUpdateTaxonomy.sh
+#Install GenoVi via pip
+pip install genovi
 ```
 
 Install [MinPath](https://github.com/mgtools/MinPath) via `git`.
