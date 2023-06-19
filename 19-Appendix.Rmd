@@ -23,9 +23,11 @@ To create the mamba environment `shotgun_meta` run the below commands in your ba
 mamba create -n shotgun_meta
 mamba activate shotgun_meta
 #Install packages
-mamba install -c bioconda fastqc trim-galore multiqc bowtie2 kraken2 krona bracken lefse flash megahit quast metabat2 prokka bbmap
+mamba install -c bioconda fastqc trim-galore multiqc bowtie2 kraken2 krona bracken lefse flash megahit quast metabat2 prokka bbmap bakta circos
 #Update krona taxonomy database
 ktUpdateTaxonomy.sh
+#Install GenoVi via pip
+pip install genovi
 ```
 
 Install [MinPath](https://github.com/mgtools/MinPath) via `git`.
