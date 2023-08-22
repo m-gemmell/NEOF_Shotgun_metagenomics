@@ -49,6 +49,15 @@ If you installed these in your "~/git_installs" examples are below.
 python ~/git_installs/Minpath/MinPath.py -h
 ```
 
+To create the mamba environment `checkm` run the below commands in your bash. You will need to have installed `mamba` first.
+
+```{bash, eval=FALSE}
+#checkm
+mamba create -n checkm
+mamba activate checkm
+mamba install -c bioconda checkm-genome
+```
+
 To create the mamba environment `biobakery` run the below commands in your bash. You will need to have installed `mamba` first.
 
 ```{bash, eval=FALSE}

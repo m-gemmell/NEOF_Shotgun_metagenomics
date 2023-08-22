@@ -30,14 +30,7 @@ We will use `MetaBAT2` for our genome binning. It is a relatively new binning to
 2. It performs very well amongst genome binners.
 3. It is computationally efficient compared to other binners (requires less RAM, cores etc.)
 
-### MetaBAT2: Conda environment & directory
-```{r, fig.align = 'center',out.width= '10%', echo=FALSE }
-knitr::include_graphics(path = "figures/conda.png", auto_pdf = TRUE)
-``` 
-
-We will use the `shotgun_meta` conda environment to start for this chapter.
-
-Additionally, make a new directory and move into it.
+Make a new directory and move into it.
 
 ```{bash eval=FALSE}
 #Make directory
@@ -165,7 +158,7 @@ knitr::include_graphics(path = "figures/parameter_orange.png", auto_pdf = TRUE)
 knitr::include_graphics(path = "figures/output_file_orange.png", auto_pdf = TRUE)
 ``` 
 
-List the contents of the output directory and you'll see there are 2 fasta files with the prefix of `K1`. These are the 2 bins that will hopefully contain 1 MAG (Metagenome-Assembled Genome).
+List the contents of the output directory and you'll see there is 1 fasta file with the prefix of `K1`. This is a bin that will hopefully contain 1 MAG (Metagenome-Assembled Genome). In your future analysis you may get many bins, each hopefully only having one MAG.
 
 ```{bash eval=FALSE}
 ls bins

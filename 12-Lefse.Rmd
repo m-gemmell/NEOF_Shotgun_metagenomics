@@ -29,7 +29,7 @@ The singular line should match the order of your samples within the file. This i
 `r hide("Issues with creating file?")`
 If you are having issues with creating and editing the file `all_num.lefse.bracken` you can copy a pre-made version.
 ```{bash, eval=FALSE}
-cp /pub39/tea/nsc006/Shotgun_metagenomics/lefse/all_num.lefse.bracken
+cp /pub14/tea/nsc206/NEOF/Shotgun_metagenomics/lefse/all_num.lefse.bracken .
 ```
 `r unhide()`
 
@@ -130,17 +130,17 @@ opts_p <- c("__Korean__",answer="__Western__")
 4. Which class has more biomarkers associated with it? `r longmcq(opts_p)`
 
 ```{r, echo = FALSE}
-opts_p <- c(answer="__0.0022136919545913936__","__3.0266165524513937__","__3.314396201978439__")
+opts_p <- c(answer="__0.0014961642897455565__","__3.0272759627443127__","__3.3145045719482846__")
 ```
 5. What is the LEfSe p-value for __Campylobactercoli__? `r longmcq(opts_p)`
 
 ```{r, echo = FALSE}
-opts_p <- c("__0.0022136919545913936__",answer="__3.0266165524513937__","__3.314396201978439__")
+opts_p <- c("__0.0014961642897455565__",answer="__3.0272759627443127__","__3.3145045719482846__")
 ```
 6. What is the Log of highest class average for __Streptococcussuis__? `r longmcq(opts_p)`
 
 ```{r, echo = FALSE}
-opts_p <- c("__0.0022136919545913936__","__3.0266165524513937__",answer="__3.314396201978439__")
+opts_p <- c("__0.0014961642897455565__","__3.0272759627443127__",answer="__3.3145045719482846__")
 ```
 7. What is the LDA effect size for __Bifidobacteriumlongum__? `r longmcq(opts_p)`
 
