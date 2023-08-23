@@ -21,6 +21,14 @@ knitr::write_bib(c(
 ), 'packages.bib')
 ```
 
+```{r, echo=FALSE}
+#Change colour, border, and text of code chunks
+#Check style.css for .Rchunk
+#https://stackoverflow.com/questions/65627531/change-r-chunk-background-color-in-bookdown-gitbook
+#https://bookdown.org/yihui/rmarkdown-cookbook/chunk-styling.html
+knitr::opts_chunk$set(class.source="Rchunk") 
+```
+
 ```{r, fig.align = 'center',out.width= '30%', echo=FALSE }
 knitr::include_graphics(path = "figures/NEOF.png", auto_pdf = TRUE)
 ``` 

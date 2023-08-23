@@ -59,11 +59,9 @@ There is not much to see. When happy, quit the `less` (`q`) and carry on to `QUA
 knitr::include_graphics(path = "figures/inspect.png", auto_pdf = TRUE)
 ``` 
 
-We can generate some metrics based on the assembly with `QUAST`,  but first we will change directory to `6-Assembly` and create a directory for the `QUAST` output.
+We can generate some metrics based on the assembly with `QUAST`,  but first we will create a directory for the `QUAST` output.
 
 ```{bash eval=FALSE}
-#Change directory
-cd ~/6-Assembly
 #Create QUAST output directory
 #The option -p will create a directory and any required
 #parent directories

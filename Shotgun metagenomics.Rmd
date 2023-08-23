@@ -38,6 +38,14 @@ knitr::write_bib(c(
 ), 'packages.bib')
 ```
 
+```{r, echo=FALSE}
+#Change colour, border, and text of code chunks
+#Check style.css for .Rchunk
+#https://stackoverflow.com/questions/65627531/change-r-chunk-background-color-in-bookdown-gitbook
+#https://bookdown.org/yihui/rmarkdown-cookbook/chunk-styling.html
+knitr::opts_chunk$set(class.source="Rchunk") 
+```
+
 ```{r, fig.align = 'center',out.width= '30%', echo=FALSE }
 knitr::include_graphics(path = "figures/NEOF.png", auto_pdf = TRUE)
 ``` 
@@ -726,7 +734,7 @@ knitr::include_graphics(path = "figures/kraken.png", auto_pdf = TRUE)
 Prior to running `Kraken2` we need to set a variable so `Kraken2` knows where to look for the databases it will use.
 
 ```{bash eval=FALSE}
-export KRAKEN2_DB_PATH=/pub39/tea/nsc006/NEOF/Shotgun_metagenomics/kraken2_db
+export KRAKEN2_DB_PATH=/pub14/tea/nsc206/NEOF/Shotgun_metagenomics/kraken2_db
 ```
 
 __Note__: You can look at the contents of the above directory to see it currently contains the MiniKraken database. This database contains only a subset of the bacteria, archaea, and viral `Kraken2` libraries. This is used in this practical due to restrictions on time and computational resources. For your own analyses we would recommend the full `Kraken2` database which uses all the bacteria, achaeal and viral complete genomes that are in Refseq at the time of building. See the following links for info on installing the databases.
@@ -1151,7 +1159,7 @@ The singular line should match the order of your samples within the file. This i
 `r hide("Issues with creating file?")`
 If you are having issues with creating and editing the file `all_num.lefse.bracken` you can copy a pre-made version.
 ```{bash, eval=FALSE}
-cp /pub39/tea/nsc006/Shotgun_metagenomics/lefse/all_num.lefse.bracken
+cp /pub14/tea/nsc206/NEOF/Shotgun_metagenomics/lefse/all_num.lefse.bracken .
 ```
 `r unhide()`
 
@@ -1252,17 +1260,17 @@ opts_p <- c("__Korean__",answer="__Western__")
 4. Which class has more biomarkers associated with it? `r longmcq(opts_p)`
 
 ```{r, echo = FALSE}
-opts_p <- c(answer="__0.0022136919545913936__","__3.0266165524513937__","__3.314396201978439__")
+opts_p <- c(answer="__0.0014961642897455565__","__3.0272759627443127__","__3.3145045719482846__")
 ```
 5. What is the LEfSe p-value for __Campylobactercoli__? `r longmcq(opts_p)`
 
 ```{r, echo = FALSE}
-opts_p <- c("__0.0022136919545913936__",answer="__3.0266165524513937__","__3.314396201978439__")
+opts_p <- c("__0.0014961642897455565__",answer="__3.0272759627443127__","__3.3145045719482846__")
 ```
 6. What is the Log of highest class average for __Streptococcussuis__? `r longmcq(opts_p)`
 
 ```{r, echo = FALSE}
-opts_p <- c("__0.0022136919545913936__","__3.0266165524513937__",answer="__3.314396201978439__")
+opts_p <- c("__0.0014961642897455565__","__3.0272759627443127__",answer="__3.3145045719482846__")
 ```
 7. What is the LDA effect size for __Bifidobacteriumlongum__? `r longmcq(opts_p)`
 
@@ -1712,9 +1720,9 @@ For this reason, it is sometimes advantageous to assemble the reads into contigs
 
 Here, we will carry out a couple of assemblies on our dataset.
 
-## Metagenome assembly: Conda
+## Metagenome assembly: Mamba
 ```{r, fig.align = 'center',out.width= '10%', echo=FALSE }
-knitr::include_graphics(path = "figures/conda.png", auto_pdf = TRUE)
+knitr::include_graphics(path = "figures/mamba_logo.png", auto_pdf = TRUE)
 ```
 
 We will use the `shotgun_meta` conda environment so use a terminal where this is activated or open a new one and run `. useshotgun`.
@@ -1935,27 +1943,9 @@ There is not much to see. When happy, quit the `less` (`q`) and carry on to `QUA
 knitr::include_graphics(path = "figures/inspect.png", auto_pdf = TRUE)
 ``` 
 
-We can generate some metrics based on the assembly with `QUAST`.
-
-### QUAST: conda
-```{r, fig.align = 'center',out.width= '10%', echo=FALSE }
-knitr::include_graphics(path = "figures/conda.png", auto_pdf = TRUE)
-```
-
-Due to a python version conflict we need to use another conda environment.
-
-Open a new terminal (right click on the main screen, choose `Applications` -> `Shell` -> `bash`) and run the below.
+We can generate some metrics based on the assembly with `QUAST`,  but first we will create a directory for the `QUAST` output.
 
 ```{bash eval=FALSE}
-#use script to activate conda env
-. usegenoassess
-```
-
-We will use `QUAST` for genome contiguity assessment but first we will change directory to `6-Assembly` and create a directory for the `QUAST` output.
-
-```{bash eval=FALSE}
-#Change directory
-cd ~/6-Assembly
 #Create QUAST output directory
 #The option -p will create a directory and any required
 #parent directories
@@ -2094,14 +2084,7 @@ We will use `MetaBAT2` for our genome binning. It is a relatively new binning to
 2. It performs very well amongst genome binners.
 3. It is computationally efficient compared to other binners (requires less RAM, cores etc.)
 
-### MetaBAT2: Conda environment & directory
-```{r, fig.align = 'center',out.width= '10%', echo=FALSE }
-knitr::include_graphics(path = "figures/conda.png", auto_pdf = TRUE)
-``` 
-
-We will use the `shotgun_meta` conda environment to start for this chapter.
-
-Additionally, make a new directory and move into it.
+Make a new directory and move into it.
 
 ```{bash eval=FALSE}
 #Make directory
@@ -2229,7 +2212,7 @@ knitr::include_graphics(path = "figures/parameter_orange.png", auto_pdf = TRUE)
 knitr::include_graphics(path = "figures/output_file_orange.png", auto_pdf = TRUE)
 ``` 
 
-List the contents of the output directory and you'll see there are 2 fasta files with the prefix of `K1`. These are the 2 bins that will hopefully contain 1 MAG (Metagenome-Assembled Genome).
+List the contents of the output directory and you'll see there is 1 fasta file with the prefix of `K1`. This is a bin that will hopefully contain 1 MAG (Metagenome-Assembled Genome). In your future analysis you may get many bins, each hopefully only having one MAG.
 
 ```{bash eval=FALSE}
 ls bins
@@ -2256,9 +2239,9 @@ An important part of CheckM is the ubiquitous and single-copy genes it utilises.
    - Only one copy of each gene should be present (single-copy).
    - Are there any markers for other lineages present?
 
-### CheckM: Conda
+### CheckM: Mamba
 ```{r, fig.align = 'center',out.width= '10%', echo=FALSE }
-knitr::include_graphics(path = "figures/conda.png", auto_pdf = TRUE)
+knitr::include_graphics(path = "figures/mamba_logo.png", auto_pdf = TRUE)
 ``` 
 
 Due to program version conflicts we will use the `checkm` conda environment for this section.
@@ -2305,7 +2288,7 @@ knitr::include_graphics(path = "figures/parameter_black.png", auto_pdf = TRUE)
 - `--tab_table` : Prints results to a tab separated table.
 - `-f` : File name to print result to (if not specified results will go to stdout).
 - `-x` : Suffix/extension of bin files. Other files are ignored in the specified bin directory.
-   - `fa` is used as our `MetaBAT2` produce fasta files that end in `.fa`.
+   - `fa` is used as our `MetaBAT2` analysis produced fasta files that end in `.fa`.
 - `bins` : The second last argument is the `bin_dir`, the directory containing all the bins to be analysed in fasta format.
 - `checkm_output` : The last argument is the directory to store the output to. This directory should not exist prior to running.
 
@@ -2332,7 +2315,7 @@ less MAGS_checkm.tsv
 ```
 
 `r hide("CheckM statistics definitions")`
-List of statistics definitions from [CheckM wiki](https://github.com/Ecogenomics/CheckM/wiki/Reported-Statistics))
+List of statistics definitions from [CheckM wiki](https://github.com/Ecogenomics/CheckM/wiki/Reported-Statistics)
 
 - __bin id__: unique identifier of genome bin (derived from input fasta file)
 - __marker lineage__: indicates the taxonomic rank of the lineage-specific marker set used to estimated genome completeness, contamination, and strain heterogeneity. More detailed information about the placement of a genome within the reference genome tree can be obtained with the tree_qa command. The UID indicates the branch within the reference tree used to infer the marker set applied to estimate the bins quality.
@@ -2357,6 +2340,8 @@ marker sets: number of co-located marker sets within the inferred lineage-specif
 - __# predicted genes__: number of predicted coding sequences (CDS) within the genome as determined using Prodigal
 `r unhide()`
 
+### CheckM: Quality score
+
 One quick way to calculate the overall quality of a bin is with the following equation:
 
 $$
@@ -2370,6 +2355,8 @@ Where:
 
 A score of at least 70-80% would be the aim, with a maximum/perfect value being 100% (100% completeness, 0% contamination). Therefore let us calculate this for the bins with some bash and `awk` scripting.
 
+#### Tab to comma seperated {-}
+
 First it is good to make a copy of the file in case we make a mistake and want to start over. Additionally, we will make the copy a comma separated file. I find these easier to edit as typing comma characters (`,`) in commands is more reliable than tab characters (`\t`).
 
 This is carried out with `tr` which can translate characters. In the below case we translate/convert the tabs (`\t`) into commas (`,`). The converted output is then redirected (`>`) to the file "MAGS_checkm.csv".
@@ -2378,11 +2365,15 @@ This is carried out with `tr` which can translate characters. In the below case 
 cat MAGS_checkm.tsv | tr "\t" "," > MAGS_checkm.csv
 ```
 
+#### Quality file {-}
+
 We will create a new file with only the quality information. We'll start by making a file with only a header.
 
 ```{bash eval=FALSE}
 echo "Quality" > MAGS_quality.csv
 ```
+
+#### Calculate quality with awk {-}
 
 Next is the most complicated command. We will be calculating the Overall quality (see calculation above) for each row except the header row.
 
@@ -2390,7 +2381,7 @@ We will be using a complicated linux based language called `awk`. This is very u
 
 As this is new and complicated we will build up our command step by step.
 
-First step is to extract the completeness and contamination fields/columns.
+__The first step__ is to extract the completeness and contamination fields/columns.
 
 ```{bash eval=FALSE}
 awk -F, '{print $12,$13}' MAGS_checkm.csv
@@ -2402,7 +2393,7 @@ awk -F, '{print $12,$13}' MAGS_checkm.csv
 - `print $12,$13`: This function instructs `awk` to print the 12th (completeness) and 13th (contamination) fields. It is common to put commas (`,`) between fields if printing multiple fields.
 - `MAGS_checkm.csv`: Our last parameter is the input file. We are not changing the contents of the file, only printing information to screen/stdout.
 
-We do not want the header in our calculation so we will add an extra `awk` option.
+__We do not want the header__ in our calculation so we will add an extra `awk` option.
 
 ```{bash eval=FALSE}
 awk -F, 'NR>1 {print $12,$13}' MAGS_checkm.csv
@@ -2410,7 +2401,7 @@ awk -F, 'NR>1 {print $12,$13}' MAGS_checkm.csv
 
 - `NR>1`: `NR` stands for number of records. Rows are called records in `awk`. Therefore `NR>1` means `awk` will only carry out the functions on the records numbered greater than 1. I.e. skip row 1, the header row.
 
-The __final__ step is to carry out the overall quality calculation and append the information to the "MAGS_quality.csv" file.
+__The final step__ is to carry out the overall quality calculation and append the information to the "MAGS_quality.csv" file.
 
 ```{bash eval=FALSE}
 awk -F, 'NR>1 {print $12 - (5 * $13)}' MAGS_checkm.csv >> MAGS_quality.csv
@@ -2425,7 +2416,9 @@ You can view the file to ensure it worked. The first and second values should be
 less MAGS_quality.csv
 ```
 
-The last step is to combine the files "MAGS_checkm.csv" and "MAGS_quality.csv" with the `paste` command. The `-d ","` options indicates the merged files will be separated by commas (`,`), matching the column separation in "MAGS_checkm.csv".
+#### Add quality to checkm results file {-}
+
+Now we can combine the files "MAGS_checkm.csv" and "MAGS_quality.csv" with the `paste` command. The `-d ","` options indicates the merged files will be separated by commas (`,`), matching the column separation in "MAGS_checkm.csv".
 
 ```{bash eval=FALSE}
 paste -d "," MAGS_checkm.csv MAGS_quality.csv > MAGS_checkm_quality.csv
@@ -2890,6 +2883,15 @@ If you installed these in your "~/git_installs" examples are below.
 ```{bash, eval=FALSE}
 #MinPath help page
 python ~/git_installs/Minpath/MinPath.py -h
+```
+
+To create the mamba environment `checkm` run the below commands in your bash. You will need to have installed `mamba` first.
+
+```{bash, eval=FALSE}
+#checkm
+mamba create -n checkm
+mamba activate checkm
+mamba install -c bioconda checkm-genome
 ```
 
 To create the mamba environment `biobakery` run the below commands in your bash. You will need to have installed `mamba` first.

@@ -16,9 +16,9 @@ For this reason, it is sometimes advantageous to assemble the reads into contigs
 
 Here, we will carry out a couple of assemblies on our dataset.
 
-## Metagenome assembly: Conda
+## Metagenome assembly: Mamba
 ```{r, fig.align = 'center',out.width= '10%', echo=FALSE }
-knitr::include_graphics(path = "figures/conda.png", auto_pdf = TRUE)
+knitr::include_graphics(path = "figures/mamba_logo.png", auto_pdf = TRUE)
 ```
 
 We will use the `shotgun_meta` conda environment so use a terminal where this is activated or open a new one and run `. useshotgun`.

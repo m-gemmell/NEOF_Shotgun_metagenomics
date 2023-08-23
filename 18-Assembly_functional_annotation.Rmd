@@ -8,7 +8,7 @@ knitr::include_graphics(path = "figures/pathways.png", auto_pdf = TRUE)
 knitr::include_graphics(path = "figures/classification.png", auto_pdf = TRUE)
 ``` 
 
-Taxonomic annotation of bins can be carried out with `Kraken2`. As we have already done this for the reads and taxonomic results from read and assembly approaches have similar performances we will not cover it here, and instead move straight onto functional annotation with `Prokka`.
+Taxonomic annotation of bins can be carried out with `Kraken2`. As we have already done this for the reads and taxonomic results from read and assembly approaches have similar performances we will not cover it here. Instead we will move straight onto functional annotation with `Prokka`.
 
 ## Prokka
 ```{r, fig.align = 'center',out.width= '10%', echo=FALSE }
