@@ -30,6 +30,12 @@ ktUpdateTaxonomy.sh
 pip install genovi
 ```
 
+You will need to install the `Bakta` database as well. This requires you have a directory to store the database. In the below example you will need a directory with the path `~/databases/bakta_db`, of course feel free to use a different location you have.
+
+```{bash, eval=FALSE}
+bakta_db download --output ~/databases/bakta --type full
+```
+
 Install [MinPath](https://github.com/mgtools/MinPath) via `git`.
 I suggest creating a directory called "git_installs" in your home directory and running this code there.
 

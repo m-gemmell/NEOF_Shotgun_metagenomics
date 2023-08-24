@@ -8,26 +8,14 @@ knitr::include_graphics(path = "figures/pathways.png", auto_pdf = TRUE)
 knitr::include_graphics(path = "figures/classification.png", auto_pdf = TRUE)
 ``` 
 
-Taxonomic annotation of bins can be carried out with `Kraken2`. As we have already done this for the reads and taxonomic results from read and assembly approaches have similar performances we will not cover it here. Instead we will move straight onto functional annotation with `Prokka`.
+Taxonomic annotation of bins can be carried out with `Kraken2`. As we have already done this for the reads and taxonomic results from read and assembly approaches have similar performances we will not cover it here. Instead we will move straight onto functional annotation with [`Bakta`](https://github.com/oschwengers/bakta).
 
-## Prokka
+## Bakta
 ```{r, fig.align = 'center',out.width= '10%', echo=FALSE }
 knitr::include_graphics(path = "figures/quokka.png", auto_pdf = TRUE)
 ``` 
 
-We will carry out `Prokka` functional annotation using `MetaWRAP`. `MetaWRAP` is a very useful program with many tools for metagenome analysis but we will only use it to carry out functional annotations for now.
-
-### Prokka: conda and directories {#prokka_conda}
-```{r, fig.align = 'center',out.width= '10%', echo=FALSE }
-knitr::include_graphics(path = "figures/conda.png", auto_pdf = TRUE)
-```
-
-Now to activate a `MetaWRAP` environment in a new terminal (right click on the main screen background, choose `Applications` -> `Shell` -> `bash`). The first step is to use `chos 8` which is a custom command for our cluster. It will Change the Unix OS to version 8 as version 7 (default in our cluster) is too old for some of the programs.
-
-```{bash eval=FALSE}
-chos 8
-. usemetawrap
-```
+We will carry out `Bakta` functional annotation using. `Bakta` can annotate bacterial genomes and plasmids from both isolates and MAGs.
 
 Make a new directory and move into it.
 
@@ -36,20 +24,20 @@ mkdir ~/8-metawrap_anno
 cd ~/8-metawrap_anno
 ```
 
-### Prokka: run
+### Bakta: run
 ```{r, fig.align = 'center',out.width= '10%', echo=FALSE }
 knitr::include_graphics(path = "figures/play_blue.png", auto_pdf = TRUE)
 ``` 
 
-Now we can annotate the bins.
+Now we can annotate one of the bins.
 
 The below will take a long time to run (>1 hour). Instead of running it skip onto the next step to copy pre-made output to continue with. This command is here so you know what to run in your own future analyses.
 
 ```{bash eval=FALSE}
-metawrap annotate_bins \
--b ~/7-Binning/K1/bins \
--o ./K1 \
--t 8
+bakta \
+--db /pub14/tea/nsc206/NEOF/databases/bakta/db/ \
+-o K1.1 \
+~/7-Binning/K1_fullset/bins/K1.1.fa
 ```
 
 #### Parameters {-}
@@ -57,30 +45,72 @@ metawrap annotate_bins \
 knitr::include_graphics(path = "figures/parameter_blue.png", auto_pdf = TRUE)
 ```
 
-- `-b`: The directory containing the assembled bins in fasta format.
-- `-o`: The output directory.
-- `-t`: Number of threads to use for the command.
+- `--db`: Location of `Bakta` database. You will need to install this in your own installation. Instructions are in the [appendix](#mamba_install).
+- `-o`: The output directory. This must not exist before running the command.
+- The last parameter is the fasta file containing the genome/plasmid you would like annotated.
 
-### Prokka: output
+### Bakta: output
 ```{r, fig.align = 'center',out.width= '10%', echo=FALSE }
 knitr::include_graphics(path = "figures/output_file_blue.png", auto_pdf = TRUE)
 ``` 
 
-Like in previous steps we will copy over premade results for the full dataset.
+Move into the newly created K1.1 directory and list the files. Each of the files has the prefix "K1.1" and contain the following information:
+
+- __<prefix>.tsv__: annotations as simple human readble TSV
+- __<prefix>.gff3__: annotations & sequences in GFF3 format
+- __<prefix>.gbff__: annotations & sequences in (multi) GenBank format
+- __<prefix>.embl__: annotations & sequences in (multi) EMBL format
+- __<prefix>.fna__: replicon/contig DNA sequences as FASTA
+- __<prefix>.ffn__: feature nucleotide sequences as FASTA
+- __<prefix>.faa__: CDS/sORF amino acid sequences as FASTA
+- __<prefix>.hypotheticals.tsv__: further information on hypothetical protein CDS as simple human readble tab separated values
+- __<prefix>.hypotheticals.faa__: hypothetical protein CDS amino acid sequences as FASTA
+- __<prefix>.json__: all (internal) annotation & sequence information as JSON
+- __<prefix>.txt__: summary as TXT
+- __<prefix>.png__: circular genome annotation plot as PNG
+  - These are only useful for complete/near complete circular genomes.
+  - I would suggest looking at [GenoVi](https://github.com/robotoD/GenoVi/wiki/User-guide#tutorials-) for circular genome plots.
+- __<prefix>.svg__: circular genome annotation plot as SVG
+
+View the summary file for bin K1.1.
 
 ```{bash eval=FALSE}
-#Copy over directory
-cp -r /pub39/tea/nsc006/NEOF/Shotgun_metagenomics/prokka/K1_fullset ~/8-metawrap_anno
-#Change into copied directory
-cd ~/8-metawrap_anno/K1_fullset
+less K1.1/K1.1.txt
 ```
 
-There are many directories but the one we are interested is `bin_funct_annotations` . This contains a GFF file for each bin.
+`r hide("Summary fields")`
+Sequence infomration
 
-Look at the gff file for bin 1.
+- Length: Number of bases.
+- Count: Number of contigs/scaffolds.
+- GC: GC%.
+- N50: [N50](#quast-visualise).
+- N ratio: Ratio of N bases to non-N bases.
+- coding density: Percentage of bases within coding regions.
+
+Annotation information.
+
+- tRNAs: Transfer RNAs.
+- tmRNAs: Transfer-messenger RNA.
+- rRNAs: Ribosomal RNAs.
+- ncRNAs: Non-coding RNAs.
+- ncRNA regions: Non-coding RNA regions.
+- CRISPR arrays: CRISPR arrays.
+- CDSs: Coding sequences.
+- pseudogenes: Segments of DNA that structurally resembles a gene but is not capable of coding for a protein
+- hypotheticals: Hypothetical genes, which are predicted solely by computer algorithms, are experimentally uncharacterized genes.
+- signal peptides: Short peptides (usually 16-30 amino acids long) normally present at the N-terminus of most newly synthesized proteins that are destined toward the secretory pathway.
+- sORFs: Short open reading frames (<100 amino acids).
+- gaps: Gaps in the genome assembly.
+- oriCs: Chromosome replication origin for bacteria.
+- oriVs: Plasmid replication origin.
+- oriTs: An origin of transfer (oriT) is a short sequence ranging from 40-500 base pairs in length. It is necessary for the transfer of DNA from a gram-negative bacterial donor to recipient during bacterial conjugation.
+`r unhide()`
+
+View the gff file for bin K1.1.
 
 ```{bash eval=FALSE}
-less bin_funct_annotations/K1.1.gff
+less K1.1/K1.1.gff3
 ```
 
 The GFF file is a tab delimited file contain annotation information for the features in the assembly/bin. In this case it is a GFF3 file (most curent version of GFF).
@@ -89,15 +119,21 @@ There is quite a lot of information contained in each row so instead of listing 
 
 https://github.com/The-Sequence-Ontology/Specifications/blob/master/gff3.md
 
+Link the pre-made results for all the K1 bins.
+
+```{bash eval=FALSE}
+ln -s /pub14/tea/nsc206/NEOF/Shotgun_metagenomics/bakta/K1_fullset/* .
+```
+
 A quick thing we can do with these files is to see if any of the bins contain a specific annotation. For example, if we wanted to know if there were any ATP-binding proteins in any of the bins we could carry out the below command.
 
 ```{bash eval=FALSE}
-grep "ATP-binding protein" bin_funct_annotations/K1*gff | less
+grep "ATP-binding protein" */*gff3 | less
 ```
 
 We can now view the lines containing "ATP-binding protein" with the start of the line containing the file name the line belongs to.
 
-IN your future analyses you can expect these files further with excel, R, or visualisation software like `IGV` (https://software.broadinstitute.org/software/igv/GFF).
+In your future analyses you can expect these files further with excel, R, or visualisation software like `IGV` (https://software.broadinstitute.org/software/igv/GFF).
 
 What if you want to know about pathways?
 
@@ -300,3 +336,104 @@ grep "PWY-6972" *minpath | less
 ```
 
 With this file you can then investigate what bins have which pathways. Additionally, with more samples analysed you can determine which samples have which pathways present.
+
+
+
+## Old stuff
+
+
+
+
+Taxonomic annotation of bins can be carried out with `Kraken2`. As we have already done this for the reads and taxonomic results from read and assembly approaches have similar performances we will not cover it here. Instead we will move straight onto functional annotation with `Prokka`.
+
+## Prokka
+```{r, fig.align = 'center',out.width= '10%', echo=FALSE }
+knitr::include_graphics(path = "figures/quokka.png", auto_pdf = TRUE)
+``` 
+
+We will carry out `Prokka` functional annotation using `MetaWRAP`. `MetaWRAP` is a very useful program with many tools for metagenome analysis but we will only use it to carry out functional annotations for now.
+
+### Prokka: conda and directories {#prokka_conda}
+```{r, fig.align = 'center',out.width= '10%', echo=FALSE }
+knitr::include_graphics(path = "figures/conda.png", auto_pdf = TRUE)
+```
+
+Now to activate a `MetaWRAP` environment in a new terminal (right click on the main screen background, choose `Applications` -> `Shell` -> `bash`). The first step is to use `chos 8` which is a custom command for our cluster. It will Change the Unix OS to version 8 as version 7 (default in our cluster) is too old for some of the programs.
+
+```{bash eval=FALSE}
+chos 8
+. usemetawrap
+```
+
+Make a new directory and move into it.
+
+```{bash eval=FALSE}
+mkdir ~/8-metawrap_anno
+cd ~/8-metawrap_anno
+```
+
+### Prokka: run
+```{r, fig.align = 'center',out.width= '10%', echo=FALSE }
+knitr::include_graphics(path = "figures/play_blue.png", auto_pdf = TRUE)
+``` 
+
+Now we can annotate the bins.
+
+The below will take a long time to run (>1 hour). Instead of running it skip onto the next step to copy pre-made output to continue with. This command is here so you know what to run in your own future analyses.
+
+```{bash eval=FALSE}
+metawrap annotate_bins \
+-b ~/7-Binning/K1/bins \
+-o ./K1 \
+-t 8
+```
+
+#### Parameters {-}
+```{r, fig.align = 'center',out.width= '10%', echo=FALSE }
+knitr::include_graphics(path = "figures/parameter_blue.png", auto_pdf = TRUE)
+```
+
+- `-b`: The directory containing the assembled bins in fasta format.
+- `-o`: The output directory.
+- `-t`: Number of threads to use for the command.
+
+### Prokka: output
+```{r, fig.align = 'center',out.width= '10%', echo=FALSE }
+knitr::include_graphics(path = "figures/output_file_blue.png", auto_pdf = TRUE)
+``` 
+
+Like in previous steps we will copy over premade results for the full dataset.
+
+```{bash eval=FALSE}
+#Copy over directory
+cp -r /pub39/tea/nsc006/NEOF/Shotgun_metagenomics/prokka/K1_fullset ~/8-metawrap_anno
+#Change into copied directory
+cd ~/8-metawrap_anno/K1_fullset
+```
+
+There are many directories but the one we are interested is `bin_funct_annotations` . This contains a GFF file for each bin.
+
+Look at the gff file for bin 1.
+
+```{bash eval=FALSE}
+less bin_funct_annotations/K1.1.gff
+```
+
+The GFF file is a tab delimited file contain annotation information for the features in the assembly/bin. In this case it is a GFF3 file (most curent version of GFF).
+
+There is quite a lot of information contained in each row so instead of listing all the columns here please have a look at the official documentation:
+
+https://github.com/The-Sequence-Ontology/Specifications/blob/master/gff3.md
+
+A quick thing we can do with these files is to see if any of the bins contain a specific annotation. For example, if we wanted to know if there were any ATP-binding proteins in any of the bins we could carry out the below command.
+
+```{bash eval=FALSE}
+grep "ATP-binding protein" bin_funct_annotations/K1*gff | less
+```
+
+We can now view the lines containing "ATP-binding protein" with the start of the line containing the file name the line belongs to.
+
+IN your future analyses you can expect these files further with excel, R, or visualisation software like `IGV` (https://software.broadinstitute.org/software/igv/GFF).
+
+What if you want to know about pathways?
+
