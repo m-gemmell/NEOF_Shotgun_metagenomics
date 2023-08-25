@@ -11,8 +11,8 @@ knitr::include_graphics(path = "figures/classification.png", auto_pdf = TRUE)
 Taxonomic annotation of bins can be carried out with `Kraken2`. As we have already done this for the reads and taxonomic results from read and assembly approaches have similar performances we will not cover it here. Instead we will move straight onto functional annotation with [`Bakta`](https://github.com/oschwengers/bakta).
 
 ## Bakta
-```{r, fig.align = 'center',out.width= '10%', echo=FALSE }
-knitr::include_graphics(path = "figures/quokka.png", auto_pdf = TRUE)
+```{r, fig.align = 'center',out.width= '25%', echo=FALSE }
+knitr::include_graphics(path = "figures/bakta_logo.png", auto_pdf = TRUE)
 ``` 
 
 We will carry out `Bakta` functional annotation using. `Bakta` can annotate bacterial genomes and plasmids from both isolates and MAGs.
@@ -20,8 +20,8 @@ We will carry out `Bakta` functional annotation using. `Bakta` can annotate bact
 Make a new directory and move into it.
 
 ```{bash eval=FALSE}
-mkdir ~/8-metawrap_anno
-cd ~/8-metawrap_anno
+mkdir ~/8-Annotation
+cd ~/8-Annotation
 ```
 
 ### Bakta: run
@@ -122,8 +122,22 @@ https://github.com/The-Sequence-Ontology/Specifications/blob/master/gff3.md
 Link the pre-made results for all the K1 bins.
 
 ```{bash eval=FALSE}
+#Remove you K1.1 annotation
+rm -r k1.1
+#Link all data
 ln -s /pub14/tea/nsc206/NEOF/Shotgun_metagenomics/bakta/K1_fullset/* .
 ```
+
+`r hide("Loop used to analyse all bins")`
+The code below is for your future analysis, do not run it now as it will take to long.
+```{bash eval=FALSE}
+ls -1 ~/7-Biinning/K1_fullset/bins/*fa | while read f ; \
+do s=$(basename $f | sed "s/.fa//") ; echo $s ; \
+bakta --db /pub14/tea/nsc206/NEOF/databases/bakta/db/ \
+-o ${s} \
+~/7-Binning/K1_fullset/bins/K1.1.fa
+```
+`r unhide()`
 
 A quick thing we can do with these files is to see if any of the bins contain a specific annotation. For example, if we wanted to know if there were any ATP-binding proteins in any of the bins we could carry out the below command.
 
@@ -144,14 +158,7 @@ knitr::include_graphics(path = "figures/pathways_2.png", auto_pdf = TRUE)
 
 `MinPath` can predict `MetaCyc` metabolic pathways. These pathway are made up of sets of enzymes that catalyse various reactions.
 
-### MinPath: conda and directory
-```{r, fig.align = 'center',out.width= '10%', echo=FALSE }
-knitr::include_graphics(path = "figures/conda.png", auto_pdf = TRUE)
-```
-
-Use the `MetaWRAP` environment in `chos 8` for this section.
-
-Ensure you start in the `~/8-metawrap_anno/K1_fullset` directory.
+Ensure you start in the `~/8-Annotation/K1_fullset` directory.
 
 ### MinPath: EC extraction
 ```{r, fig.align = 'center',out.width= '10%', echo=FALSE }
@@ -171,66 +178,74 @@ With all that information we will extract the EC annotations from the GFF files.
 ```{bash eval=FALSE}
 #Create EC directory
 mkdir EC
-#Change into GFF directory
-cd bin_funct_annotations/
 ```
 
-We will now use a loop with various parts to create an EC annotation file (`.ec`).
+We will now use a loop with various parts to create an EC annotation files.
+The input`.ec` files required for `MinPath` are tab delimited with two columns:
+
+1. Protein/sequence id. E.g. GDGAPA_12670.
+2. EC annotation. E.g. 6.1.1.4.
 
 __Note__: The lack of `\` at the end of most of the ines is intentional. 
 The below is all one command over multiple lines but loops work slightly different and don't need `\` in certain parts. 
 Ensure you do press enter at the end of each line.
 
 ```{bash eval=FALSE}
-ls -1 *gff | sed "s/.gff//" | while read bin
+ls -1 */*gff3 | sed "s|.*/||" | sed "s/.gff3//" | while read bin
 do
-cat ${bin}.gff | grep "eC_number=" | cut -f 9 | cut -f 1,2 -d ';' | \
-sed "s/ID=//g" | sed "s/;eC_number=/\t/g" > ../EC/${bin}.ec
+cat ${bin}/${bin}.gff3 | grep "EC:" | cut -f 9 | sed "s/ID=//" \
+sed "s/;.*EC:/\t/" | sed "s/,.*//" >../EC/${bin}.ec
 done
 ```
 
 #### Code explanation
 
-That is quite a bit of code. You don't need to undertsand it as it should always work for `PROKKA` output. 
+That is quite a bit of code. You don't need to understand it as it should always work for `Bakta` output. 
 If you are not currently interested you can skip to the [`MinPath`: run section](#minpathrun)
 
 If you are interested in how it works we'll break it down with examples for you to run. 
 
-The first part lists all our `.gff` files on one line each (`ls -1 *gff`). 
+The first part lists all our `.gff` files on one line each (`ls -1 *gff`).
+Next, we remove the directory name (`sed "s|.*||"`).
 Then the suffix `.gff` is substituted with nothing `sed "s/.gff//"`. 
 This gives us the name of each bin (e.g. `K1.1`, `K1.2`).
 
 ```{bash eval=FALSE}
 #List all gff files on one (-1) each
-ls -1 *gff
+ls -1 */*gff3
+#Remove the directory name
+#You can use any character as the divider in sed
+#Useful when you want to move slashes from a file name
+ls -1 */*gff3 | sed "s|.*/||"
 #List all the file prefixes (on one line each)
-ls -1 *gff | sed "s/.gff//"
+ls -1 */*gff3 | sed "s|.*/||" | sed "s/.gff3//"
 ```
 
-Next we loop through each file prefix and use the variable `bin` (arbitrarily chosen) which contains the file prefix. 
+With the above code we can loop through each file prefix and use the variable `bin` (arbitrarily chosen) which contains the file prefix. 
 This is carried out with `while read bin`. 
 All the lines between the `do` (start of the loop) and `done` (end of loop) are line run in the loop.
 
 Run the loop with an echo command to show we are using the `${bin}` variable to specify the input and output files.
 
 ```{bash eval=FALSE}
-ls -1 *gff | sed "s/.gff//" | while read bin
+ls -1 */*gff3 | sed "s|.*/||" | sed "s/.gff3//" | while read bin
 do
-echo "${bin}.gff ../EC/${bin}.ec"
+echo "${bin}/${bin}.gff3 ../EC/${bin}.ec"
 done
 ```
 
 Now to look at the command within the loop:
 
-`cat ${bin}.gff | grep "eC_number=" | cut -f 9 | cut -f 1,2 -d ';' | \`
-`sed "s/ID=//g" | sed "s/;eC_number=/\t/g" > ../EC/${bin}.ec`
+`cat ${bin}.gff3 | grep "EC:" | cut -f 9 | \`
+`sed "s/ID=//" | sed "s/;.*;Dbxref=/,/" | \`
+`sed "s/,.*EC:/\t/" | sed "s/,.*//" >../EC/${bin}.ec`
 
-A good way to figure out what a pipe workflow is by building it up step by step.
+A good way to figure out what a pipe workflow is doing, is by building it up step by step.
 Run the first part of workflow and then add the next section, run, repeat.
 This shows you how each new section is affecting the output. 
 Additionally, it is always good to run it on one file and `head` the output so we have a manageable amount of data to look at.
 
-We'll do that with the `K1.1.gff` file.
+We'll do that with the `K1.1.gff3` file.
 
 __Note__: Remember we are adding `head` to the end for ease of viewing.
 
@@ -240,30 +255,31 @@ __Tips__:
 - Remember the `clear` command.
 
 ```{bash eval=FALSE}
-#Grab every line containing "ec_number="
-cat K1.1.gff | grep "eC_number=" | head
+#Grab every line containing "EC:"
+cat K1.1/K1.1.gff3 | grep "EC:" | head
 #Cut out the 9th column/field (-f) (i.e. only keep the 9th column)
+#This is the attributes field in GFF3
+#This contains a plethora of information including the EC annotation if present
 #cut uses tabs as the default column/field delimiter
-cat K1.1.gff | grep "eC_number=" | cut -f 9 | head
-#Cut out the 1st and 2nd field based on the delimeter ";" (-d ";")
-cat K1.1.gff | grep "eC_number=" | cut -f 9 | cut -f 1,2 -d ';' | \
-head
-#Substitute (s/) ID= for nothing (/ID//)
-#/g indicates to carry it out for every instance in every line
-#Default is to only substitute the first instance in each line
-cat K1.1.gff | grep "eC_number=" | cut -f 9 | cut -f 1,2 -d ';' | \
-sed "s/ID=//g" | head
-#Substitute ;eC_number= for a tab (\t)
-cat K1.1.gff | grep "eC_number=" | cut -f 9 | cut -f 1,2 -d ';' | \
-sed "s/ID=//g" | sed "s/;eC_number=/\t/g" | head
+cat K1.1/K1.1.gff3 | grep "EC:" | cut -f 9 | head
+#The gff3 attributes field starts with the ID
+#We want to keep this but remove the "ID=" part
+cat K1.1/K1.1.gff3 | grep "EC:" | cut -f 9 | sed "s/ID=//" | head
+#We don't want any of the info between the ID and the EC number
+#Therefore we want to remove everything (.*) between
+# the first "," (at the end of the ID info)
+# and "EC="
+#We'll replace this with a \t to seprarate the ID and EC
+# columns with a tab (required by MinPath)
+cat K1.1/K1.1.gff3 | grep "EC:" | cut -f 9 |  sed "s/ID=//" | \
+sed "s/;.*EC:/\t/" | head
+#Finally remove all the info after the EC number
+#This info will be after the last ,
+cat K1.1/K1.1.gff3 | grep "EC:" | cut -f 9 | sed "s/ID=//" \
+sed "s/;.*EC:/\t/" | sed "s/,.*//" | head
 ```
 
-In the looped command output is written into files: `> ../EC/${bin}.ec`.
-
-The output `.ec` files are required for `MinPath` and are tab delimited with two columns:
-
-1. protein/sequence id
-2. annotation (in this case the EC number)
+In the looped command, output is written into files: `> EC/${bin}.ec`.
 
 ### MinPath: run {#minpathrun}
 ```{r, fig.align = 'center',out.width= '10%', echo=FALSE }
@@ -284,7 +300,7 @@ Now we can loop through the file suffixes to run MinPath.
 ```{bash eval=FALSE}
 ls -1 *ec | sed "s/.ec//" | while read bin
 do
-python /pub39/tea/nsc006/programs/MinPath/MinPath.py \
+python /pub14/tea/nsc206/git_installs/MinPath/MinPath.py \
 -ec ${bin}.ec \
 -report ../MetaCyc/${bin}.minpath
 done
@@ -297,7 +313,7 @@ A lot of output will be printed to screen but this can be ignored unless you see
 knitr::include_graphics(path = "figures/output_file_green.png", auto_pdf = TRUE)
 ``` 
 
-First step is to change directory into the `MetaCyc` directory.
+First, change directory into the `MetaCyc` directory.
 
 ```{bash eval=FALSE}
 #Change directory
@@ -335,105 +351,36 @@ wc -l *minpath
 grep "PWY-6972" *minpath | less
 ```
 
-With this file you can then investigate what bins have which pathways. Additionally, with more samples analysed you can determine which samples have which pathways present.
-
-
-
-## Old stuff
-
-
-
-
-Taxonomic annotation of bins can be carried out with `Kraken2`. As we have already done this for the reads and taxonomic results from read and assembly approaches have similar performances we will not cover it here. Instead we will move straight onto functional annotation with `Prokka`.
-
-## Prokka
+### KEGGs
 ```{r, fig.align = 'center',out.width= '10%', echo=FALSE }
-knitr::include_graphics(path = "figures/quokka.png", auto_pdf = TRUE)
-``` 
-
-We will carry out `Prokka` functional annotation using `MetaWRAP`. `MetaWRAP` is a very useful program with many tools for metagenome analysis but we will only use it to carry out functional annotations for now.
-
-### Prokka: conda and directories {#prokka_conda}
-```{r, fig.align = 'center',out.width= '10%', echo=FALSE }
-knitr::include_graphics(path = "figures/conda.png", auto_pdf = TRUE)
+knitr::include_graphics(path = "figures/KEGG.png", auto_pdf = TRUE)
 ```
 
-Now to activate a `MetaWRAP` environment in a new terminal (right click on the main screen background, choose `Applications` -> `Shell` -> `bash`). The first step is to use `chos 8` which is a custom command for our cluster. It will Change the Unix OS to version 8 as version 7 (default in our cluster) is too old for some of the programs.
+You can also get KEGG information with `MinPath`.
+The code:
 
 ```{bash eval=FALSE}
-chos 8
-. usemetawrap
+#Change to correct directory
+cd ~/8-Annotation
+#Make directory for KEGGs
+mkdir KEGG
+#KEGG extractions
+ls -1 */*gff3 | sed "s|.*/||" | sed "s/.gff3//" | while read bin
+do
+cat ${bin}/${bin}.gff3 | grep "KEGG:" | cut -f 9 | sed "s/ID=//" \
+sed "s/;.*KEGG:/\t/" | sed "s/,.*//" >../KEGG/${bin}.kegg
+done
+#Make directory for KEGG minpath output
+mkdir KEGG_minpath
+#Change directory to KEGG
+cd KEGG
+#Run MinPath
+ls -1 *kegg | sed "s/.kegg//" | while read bin
+do
+python /pub14/tea/nsc206/git_installs/MinPath/MinPath.py \
+-ko ${bin}.kegg \
+-report ../KEGG_minpath/${bin}.minpath
+done
 ```
 
-Make a new directory and move into it.
-
-```{bash eval=FALSE}
-mkdir ~/8-metawrap_anno
-cd ~/8-metawrap_anno
-```
-
-### Prokka: run
-```{r, fig.align = 'center',out.width= '10%', echo=FALSE }
-knitr::include_graphics(path = "figures/play_blue.png", auto_pdf = TRUE)
-``` 
-
-Now we can annotate the bins.
-
-The below will take a long time to run (>1 hour). Instead of running it skip onto the next step to copy pre-made output to continue with. This command is here so you know what to run in your own future analyses.
-
-```{bash eval=FALSE}
-metawrap annotate_bins \
--b ~/7-Binning/K1/bins \
--o ./K1 \
--t 8
-```
-
-#### Parameters {-}
-```{r, fig.align = 'center',out.width= '10%', echo=FALSE }
-knitr::include_graphics(path = "figures/parameter_blue.png", auto_pdf = TRUE)
-```
-
-- `-b`: The directory containing the assembled bins in fasta format.
-- `-o`: The output directory.
-- `-t`: Number of threads to use for the command.
-
-### Prokka: output
-```{r, fig.align = 'center',out.width= '10%', echo=FALSE }
-knitr::include_graphics(path = "figures/output_file_blue.png", auto_pdf = TRUE)
-``` 
-
-Like in previous steps we will copy over premade results for the full dataset.
-
-```{bash eval=FALSE}
-#Copy over directory
-cp -r /pub39/tea/nsc006/NEOF/Shotgun_metagenomics/prokka/K1_fullset ~/8-metawrap_anno
-#Change into copied directory
-cd ~/8-metawrap_anno/K1_fullset
-```
-
-There are many directories but the one we are interested is `bin_funct_annotations` . This contains a GFF file for each bin.
-
-Look at the gff file for bin 1.
-
-```{bash eval=FALSE}
-less bin_funct_annotations/K1.1.gff
-```
-
-The GFF file is a tab delimited file contain annotation information for the features in the assembly/bin. In this case it is a GFF3 file (most curent version of GFF).
-
-There is quite a lot of information contained in each row so instead of listing all the columns here please have a look at the official documentation:
-
-https://github.com/The-Sequence-Ontology/Specifications/blob/master/gff3.md
-
-A quick thing we can do with these files is to see if any of the bins contain a specific annotation. For example, if we wanted to know if there were any ATP-binding proteins in any of the bins we could carry out the below command.
-
-```{bash eval=FALSE}
-grep "ATP-binding protein" bin_funct_annotations/K1*gff | less
-```
-
-We can now view the lines containing "ATP-binding protein" with the start of the line containing the file name the line belongs to.
-
-IN your future analyses you can expect these files further with excel, R, or visualisation software like `IGV` (https://software.broadinstitute.org/software/igv/GFF).
-
-What if you want to know about pathways?
-
+With these files you can then investigate what bins have which pathways. Additionally, with more samples analysed you can determine which samples have which pathways present.

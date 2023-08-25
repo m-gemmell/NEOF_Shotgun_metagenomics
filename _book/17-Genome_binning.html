@@ -23,7 +23,7 @@
 <meta name="author" content="Sam Haldenby and Matthew R. Gemmell" />
 
 
-<meta name="date" content="2023-08-23" />
+<meta name="date" content="2023-08-25" />
 
   <meta name="viewport" content="width=device-width, initial-scale=1" />
   <meta name="apple-mobile-web-app-capable" content="yes" />
@@ -275,18 +275,17 @@ code span.wa { color: #60a0b0; font-weight: bold; font-style: italic; } /* Warni
 <li class="chapter" data-level="18" data-path="18-Assembly_functional_annotation.html"><a href="18-Assembly_functional_annotation.html"><i class="fa fa-check"></i><b>18</b> Assembly functional annotation</a>
 <ul>
 <li class="chapter" data-level="18.1" data-path="18-Assembly_functional_annotation.html"><a href="18-Assembly_functional_annotation.html#taxonomic-annotation"><i class="fa fa-check"></i><b>18.1</b> Taxonomic annotation</a></li>
-<li class="chapter" data-level="18.2" data-path="18-Assembly_functional_annotation.html"><a href="18-Assembly_functional_annotation.html#prokka"><i class="fa fa-check"></i><b>18.2</b> Prokka</a>
+<li class="chapter" data-level="18.2" data-path="18-Assembly_functional_annotation.html"><a href="18-Assembly_functional_annotation.html#bakta"><i class="fa fa-check"></i><b>18.2</b> Bakta</a>
 <ul>
-<li class="chapter" data-level="18.2.1" data-path="18-Assembly_functional_annotation.html"><a href="18-Assembly_functional_annotation.html#prokka_conda"><i class="fa fa-check"></i><b>18.2.1</b> Prokka: conda and directories</a></li>
-<li class="chapter" data-level="18.2.2" data-path="18-Assembly_functional_annotation.html"><a href="18-Assembly_functional_annotation.html#prokka-run"><i class="fa fa-check"></i><b>18.2.2</b> Prokka: run</a></li>
-<li class="chapter" data-level="18.2.3" data-path="18-Assembly_functional_annotation.html"><a href="18-Assembly_functional_annotation.html#prokka-output"><i class="fa fa-check"></i><b>18.2.3</b> Prokka: output</a></li>
+<li class="chapter" data-level="18.2.1" data-path="18-Assembly_functional_annotation.html"><a href="18-Assembly_functional_annotation.html#bakta-run"><i class="fa fa-check"></i><b>18.2.1</b> Bakta: run</a></li>
+<li class="chapter" data-level="18.2.2" data-path="18-Assembly_functional_annotation.html"><a href="18-Assembly_functional_annotation.html#bakta-output"><i class="fa fa-check"></i><b>18.2.2</b> Bakta: output</a></li>
 </ul></li>
 <li class="chapter" data-level="18.3" data-path="18-Assembly_functional_annotation.html"><a href="18-Assembly_functional_annotation.html#minpath"><i class="fa fa-check"></i><b>18.3</b> MinPath</a>
 <ul>
-<li class="chapter" data-level="18.3.1" data-path="18-Assembly_functional_annotation.html"><a href="18-Assembly_functional_annotation.html#minpath-conda-and-directory"><i class="fa fa-check"></i><b>18.3.1</b> MinPath: conda and directory</a></li>
-<li class="chapter" data-level="18.3.2" data-path="18-Assembly_functional_annotation.html"><a href="18-Assembly_functional_annotation.html#minpath-ec-extraction"><i class="fa fa-check"></i><b>18.3.2</b> MinPath: EC extraction</a></li>
-<li class="chapter" data-level="18.3.3" data-path="18-Assembly_functional_annotation.html"><a href="18-Assembly_functional_annotation.html#minpathrun"><i class="fa fa-check"></i><b>18.3.3</b> MinPath: run</a></li>
-<li class="chapter" data-level="18.3.4" data-path="18-Assembly_functional_annotation.html"><a href="18-Assembly_functional_annotation.html#minpath-output"><i class="fa fa-check"></i><b>18.3.4</b> MinPath: output</a></li>
+<li class="chapter" data-level="18.3.1" data-path="18-Assembly_functional_annotation.html"><a href="18-Assembly_functional_annotation.html#minpath-ec-extraction"><i class="fa fa-check"></i><b>18.3.1</b> MinPath: EC extraction</a></li>
+<li class="chapter" data-level="18.3.2" data-path="18-Assembly_functional_annotation.html"><a href="18-Assembly_functional_annotation.html#minpathrun"><i class="fa fa-check"></i><b>18.3.2</b> MinPath: run</a></li>
+<li class="chapter" data-level="18.3.3" data-path="18-Assembly_functional_annotation.html"><a href="18-Assembly_functional_annotation.html#minpath-output"><i class="fa fa-check"></i><b>18.3.3</b> MinPath: output</a></li>
+<li class="chapter" data-level="18.3.4" data-path="18-Assembly_functional_annotation.html"><a href="18-Assembly_functional_annotation.html#keggs"><i class="fa fa-check"></i><b>18.3.4</b> KEGGs</a></li>
 </ul></li>
 </ul></li>
 <li class="appendix"><span><b>Appendix</b></span></li>
@@ -497,7 +496,7 @@ First you will need to copy them.</p>
 <div class="sourceCode" id="cb83"><pre class="sourceCode bash Rchunk"><code class="sourceCode bash"><span id="cb83-1"><a href="17-Genome_binning.html#cb83-1" tabindex="-1"></a><span class="bu">cd</span> ~/7-Binning</span>
 <span id="cb83-2"><a href="17-Genome_binning.html#cb83-2" tabindex="-1"></a><span class="fu">mkdir</span> K1_fullset</span>
 <span id="cb83-3"><a href="17-Genome_binning.html#cb83-3" tabindex="-1"></a><span class="bu">cd</span> K1_fullset</span>
-<span id="cb83-4"><a href="17-Genome_binning.html#cb83-4" tabindex="-1"></a><span class="fu">ln</span> <span class="at">-s</span> /pub39/tea/nsc006/NEOF/Shotgun_metagenomics/binning/K1_fullset/<span class="pp">*</span> .</span></code></pre></div>
+<span id="cb83-4"><a href="17-Genome_binning.html#cb83-4" tabindex="-1"></a><span class="fu">ln</span> <span class="at">-s</span> /pub14/tea/nsc206/NEOF/Shotgun_metagenomics/binning/K1_fullset/<span class="pp">*</span> .</span></code></pre></div>
 <p>Now we can look at the results table that is in your current directory.</p>
 <div class="sourceCode" id="cb84"><pre class="sourceCode bash Rchunk"><code class="sourceCode bash"><span id="cb84-1"><a href="17-Genome_binning.html#cb84-1" tabindex="-1"></a><span class="fu">less</span> MAGS_checkm.tsv</span></code></pre></div>
 <div class="webex-solution">
@@ -582,9 +581,9 @@ Where:</p>
 <p>You can view the file to ensure it worked. The first and second values should be 33.62 and -0.89</p>
 <div class="sourceCode" id="cb90"><pre class="sourceCode bash Rchunk"><code class="sourceCode bash"><span id="cb90-1"><a href="17-Genome_binning.html#cb90-1" tabindex="-1"></a><span class="fu">less</span> MAGS_quality.csv</span></code></pre></div>
 </div>
-<div id="add-quality-to-checkm-results-file" class="section level4 unnumbered hasAnchor">
-<h4>Add quality to checkm results file<a href="17-Genome_binning.html#add-quality-to-checkm-results-file" class="anchor-section" aria-label="Anchor link to header"></a></h4>
-<p>Now we can combine the files "MAGS_checkm.csv" and "MAGS_quality.csv" with the <code>paste</code> command. The <code>-d ","</code> options indicates the merged files will be separated by commas (<code>,</code>), matching the column separation in "MAGS_checkm.csv".</p>
+<div id="add-quality-to-the-checkm-results-file" class="section level4 unnumbered hasAnchor">
+<h4>Add quality to the checkm results file<a href="17-Genome_binning.html#add-quality-to-the-checkm-results-file" class="anchor-section" aria-label="Anchor link to header"></a></h4>
+<p>Now we can combine the files "MAGS_checkm.csv" and "MAGS_quality.csv" with the <code>paste</code> command. The <code>-d ","</code> option indicates the merged files will be separated by commas (<code>,</code>), matching the column separation in "MAGS_checkm.csv".</p>
 <div class="sourceCode" id="cb91"><pre class="sourceCode bash Rchunk"><code class="sourceCode bash"><span id="cb91-1"><a href="17-Genome_binning.html#cb91-1" tabindex="-1"></a><span class="fu">paste</span> <span class="at">-d</span> <span class="st">&quot;,&quot;</span> MAGS_checkm.csv MAGS_quality.csv <span class="op">&gt;</span> MAGS_checkm_quality.csv</span></code></pre></div>
 </div>
 </div>
@@ -598,40 +597,40 @@ Where:</p>
 <span id="cb92-3"><a href="17-Genome_binning.html#cb92-3" tabindex="-1"></a><span class="fu">cut</span> <span class="at">-d</span> <span class="st">&quot;,&quot;</span> <span class="at">-f</span> 1,15 MAGS_checkm_quality.csv <span class="kw">|</span> <span class="fu">tr</span> <span class="st">&quot;,&quot;</span> <span class="st">&quot;\t&quot;</span></span></code></pre></div>
 <ol style="list-style-type: decimal">
 <li>What lineage was assigned to bin <strong>K1.1</strong>?
-<div id="radio_EMVBVSNCJE" class="webex-radiogroup">
-<label><input type="radio" autocomplete="off" name="radio_EMVBVSNCJE" value=""></input> <span><strong>root (UID1)</strong></span></label><label><input type="radio" autocomplete="off" name="radio_EMVBVSNCJE" value="answer"></input> <span><strong>k_Bacteria (UID203)</strong></span></label><label><input type="radio" autocomplete="off" name="radio_EMVBVSNCJE" value=""></input> <span><strong>o_Lachnospiraceae</strong></span></label>
+<div id="radio_FZJRTVLQEO" class="webex-radiogroup">
+<label><input type="radio" autocomplete="off" name="radio_FZJRTVLQEO" value=""></input> <span><strong>root (UID1)</strong></span></label><label><input type="radio" autocomplete="off" name="radio_FZJRTVLQEO" value="answer"></input> <span><strong>k_Bacteria (UID203)</strong></span></label><label><input type="radio" autocomplete="off" name="radio_FZJRTVLQEO" value=""></input> <span><strong>o_Lachnospiraceae</strong></span></label>
 </div></li>
 <li>What lineage was assigned to bin <strong>K1.22</strong>?
-<div id="radio_WPVYOASQVN" class="webex-radiogroup">
-<label><input type="radio" autocomplete="off" name="radio_WPVYOASQVN" value=""></input> <span><strong>root (UID1)</strong></span></label><label><input type="radio" autocomplete="off" name="radio_WPVYOASQVN" value=""></input> <span><strong>k_Bacteria (UID203)</strong></span></label><label><input type="radio" autocomplete="off" name="radio_WPVYOASQVN" value="answer"></input> <span><strong>o_Lachnospiraceae</strong></span></label>
+<div id="radio_PPFFKHCWTQ" class="webex-radiogroup">
+<label><input type="radio" autocomplete="off" name="radio_PPFFKHCWTQ" value=""></input> <span><strong>root (UID1)</strong></span></label><label><input type="radio" autocomplete="off" name="radio_PPFFKHCWTQ" value=""></input> <span><strong>k_Bacteria (UID203)</strong></span></label><label><input type="radio" autocomplete="off" name="radio_PPFFKHCWTQ" value="answer"></input> <span><strong>o_Lachnospiraceae</strong></span></label>
 </div></li>
 <li>What lineage was assigned to bin <strong>K1.8</strong>?
-<div id="radio_OJCBWOHXTV" class="webex-radiogroup">
-<label><input type="radio" autocomplete="off" name="radio_OJCBWOHXTV" value="answer"></input> <span><strong>root (UID1)</strong></span></label><label><input type="radio" autocomplete="off" name="radio_OJCBWOHXTV" value=""></input> <span><strong>k_Bacteria (UID203)</strong></span></label><label><input type="radio" autocomplete="off" name="radio_OJCBWOHXTV" value=""></input> <span><strong>o_Lachnospiraceae</strong></span></label>
+<div id="radio_NTFISIXVTL" class="webex-radiogroup">
+<label><input type="radio" autocomplete="off" name="radio_NTFISIXVTL" value="answer"></input> <span><strong>root (UID1)</strong></span></label><label><input type="radio" autocomplete="off" name="radio_NTFISIXVTL" value=""></input> <span><strong>k_Bacteria (UID203)</strong></span></label><label><input type="radio" autocomplete="off" name="radio_NTFISIXVTL" value=""></input> <span><strong>o_Lachnospiraceae</strong></span></label>
 </div></li>
 <li>What is the quality value of K1.1?
-<div id="radio_HOPAVOQRPK" class="webex-radiogroup">
-<label><input type="radio" autocomplete="off" name="radio_HOPAVOQRPK" value=""></input> <span><strong>4.17</strong></span></label><label><input type="radio" autocomplete="off" name="radio_HOPAVOQRPK" value="answer"></input> <span><strong>33.62</strong></span></label><label><input type="radio" autocomplete="off" name="radio_HOPAVOQRPK" value=""></input> <span><strong>172</strong></span></label>
+<div id="radio_VGJQJVLVPJ" class="webex-radiogroup">
+<label><input type="radio" autocomplete="off" name="radio_VGJQJVLVPJ" value=""></input> <span><strong>4.17</strong></span></label><label><input type="radio" autocomplete="off" name="radio_VGJQJVLVPJ" value="answer"></input> <span><strong>33.62</strong></span></label><label><input type="radio" autocomplete="off" name="radio_VGJQJVLVPJ" value=""></input> <span><strong>172</strong></span></label>
 </div></li>
-<li>What is the completeness value of K1.27?
-<div id="radio_OHMYJIDIPV" class="webex-radiogroup">
-<label><input type="radio" autocomplete="off" name="radio_OHMYJIDIPV" value="answer"></input> <span><strong>4.17</strong></span></label><label><input type="radio" autocomplete="off" name="radio_OHMYJIDIPV" value=""></input> <span><strong>33.62</strong></span></label><label><input type="radio" autocomplete="off" name="radio_OHMYJIDIPV" value=""></input> <span><strong>172</strong></span></label>
+<li>What is the completeness value of <strong>K1.27</strong>?
+<div id="radio_YGQKLCVWHL" class="webex-radiogroup">
+<label><input type="radio" autocomplete="off" name="radio_YGQKLCVWHL" value="answer"></input> <span><strong>4.17</strong></span></label><label><input type="radio" autocomplete="off" name="radio_YGQKLCVWHL" value=""></input> <span><strong>33.62</strong></span></label><label><input type="radio" autocomplete="off" name="radio_YGQKLCVWHL" value=""></input> <span><strong>172</strong></span></label>
 </div></li>
-<li>How many genomes are within the K1.12 bin?
-<div id="radio_VAMSLFOLPC" class="webex-radiogroup">
-<label><input type="radio" autocomplete="off" name="radio_VAMSLFOLPC" value=""></input> <span><strong>4.17</strong></span></label><label><input type="radio" autocomplete="off" name="radio_VAMSLFOLPC" value=""></input> <span><strong>33.62</strong></span></label><label><input type="radio" autocomplete="off" name="radio_VAMSLFOLPC" value="answer"></input> <span><strong>172</strong></span></label>
+<li>How many genomes are within the <strong>K1.12</strong> bin?
+<div id="radio_IIZRSQADEN" class="webex-radiogroup">
+<label><input type="radio" autocomplete="off" name="radio_IIZRSQADEN" value=""></input> <span><strong>4.17</strong></span></label><label><input type="radio" autocomplete="off" name="radio_IIZRSQADEN" value=""></input> <span><strong>33.62</strong></span></label><label><input type="radio" autocomplete="off" name="radio_IIZRSQADEN" value="answer"></input> <span><strong>172</strong></span></label>
 </div></li>
 <li>Which bin has the highest quality value (96.38%)?
-<div id="radio_DFDGYXPHFX" class="webex-radiogroup">
-<label><input type="radio" autocomplete="off" name="radio_DFDGYXPHFX" value=""></input> <span><strong>K1.20</strong></span></label><label><input type="radio" autocomplete="off" name="radio_DFDGYXPHFX" value=""></input> <span><strong>K1.21</strong></span></label><label><input type="radio" autocomplete="off" name="radio_DFDGYXPHFX" value="answer"></input> <span><strong>K1.22</strong></span></label>
+<div id="radio_BKTIETRRZP" class="webex-radiogroup">
+<label><input type="radio" autocomplete="off" name="radio_BKTIETRRZP" value=""></input> <span><strong>K1.20</strong></span></label><label><input type="radio" autocomplete="off" name="radio_BKTIETRRZP" value=""></input> <span><strong>K1.21</strong></span></label><label><input type="radio" autocomplete="off" name="radio_BKTIETRRZP" value="answer"></input> <span><strong>K1.22</strong></span></label>
 </div></li>
 <li>Which bin has the lowest quality value (-300.67%)?
-<div id="radio_KKBFBYGVCO" class="webex-radiogroup">
-<label><input type="radio" autocomplete="off" name="radio_KKBFBYGVCO" value="answer"></input> <span><strong>K1.20</strong></span></label><label><input type="radio" autocomplete="off" name="radio_KKBFBYGVCO" value=""></input> <span><strong>K1.21</strong></span></label><label><input type="radio" autocomplete="off" name="radio_KKBFBYGVCO" value=""></input> <span><strong>K1.22</strong></span></label>
+<div id="radio_RMVKVPCFQR" class="webex-radiogroup">
+<label><input type="radio" autocomplete="off" name="radio_RMVKVPCFQR" value="answer"></input> <span><strong>K1.20</strong></span></label><label><input type="radio" autocomplete="off" name="radio_RMVKVPCFQR" value=""></input> <span><strong>K1.21</strong></span></label><label><input type="radio" autocomplete="off" name="radio_RMVKVPCFQR" value=""></input> <span><strong>K1.22</strong></span></label>
 </div></li>
 <li>Which bin has the highest completeness value (98.27%)?
-<div id="radio_WLBUPGEUHS" class="webex-radiogroup">
-<label><input type="radio" autocomplete="off" name="radio_WLBUPGEUHS" value=""></input> <span><strong>K1.20</strong></span></label><label><input type="radio" autocomplete="off" name="radio_WLBUPGEUHS" value="answer"></input> <span><strong>K1.21</strong></span></label><label><input type="radio" autocomplete="off" name="radio_WLBUPGEUHS" value=""></input> <span><strong>K1.22</strong></span></label>
+<div id="radio_XXNNOHIOWA" class="webex-radiogroup">
+<label><input type="radio" autocomplete="off" name="radio_XXNNOHIOWA" value=""></input> <span><strong>K1.20</strong></span></label><label><input type="radio" autocomplete="off" name="radio_XXNNOHIOWA" value="answer"></input> <span><strong>K1.21</strong></span></label><label><input type="radio" autocomplete="off" name="radio_XXNNOHIOWA" value=""></input> <span><strong>K1.22</strong></span></label>
 </div></li>
 </ol>
 </div>

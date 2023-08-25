@@ -23,7 +23,7 @@
 <meta name="author" content="Sam Haldenby and Matthew R. Gemmell" />
 
 
-<meta name="date" content="2023-08-23" />
+<meta name="date" content="2023-08-25" />
 
   <meta name="viewport" content="width=device-width, initial-scale=1" />
   <meta name="apple-mobile-web-app-capable" content="yes" />
@@ -275,18 +275,17 @@ code span.wa { color: #60a0b0; font-weight: bold; font-style: italic; } /* Warni
 <li class="chapter" data-level="18" data-path="18-Assembly_functional_annotation.html"><a href="18-Assembly_functional_annotation.html"><i class="fa fa-check"></i><b>18</b> Assembly functional annotation</a>
 <ul>
 <li class="chapter" data-level="18.1" data-path="18-Assembly_functional_annotation.html"><a href="18-Assembly_functional_annotation.html#taxonomic-annotation"><i class="fa fa-check"></i><b>18.1</b> Taxonomic annotation</a></li>
-<li class="chapter" data-level="18.2" data-path="18-Assembly_functional_annotation.html"><a href="18-Assembly_functional_annotation.html#prokka"><i class="fa fa-check"></i><b>18.2</b> Prokka</a>
+<li class="chapter" data-level="18.2" data-path="18-Assembly_functional_annotation.html"><a href="18-Assembly_functional_annotation.html#bakta"><i class="fa fa-check"></i><b>18.2</b> Bakta</a>
 <ul>
-<li class="chapter" data-level="18.2.1" data-path="18-Assembly_functional_annotation.html"><a href="18-Assembly_functional_annotation.html#prokka_conda"><i class="fa fa-check"></i><b>18.2.1</b> Prokka: conda and directories</a></li>
-<li class="chapter" data-level="18.2.2" data-path="18-Assembly_functional_annotation.html"><a href="18-Assembly_functional_annotation.html#prokka-run"><i class="fa fa-check"></i><b>18.2.2</b> Prokka: run</a></li>
-<li class="chapter" data-level="18.2.3" data-path="18-Assembly_functional_annotation.html"><a href="18-Assembly_functional_annotation.html#prokka-output"><i class="fa fa-check"></i><b>18.2.3</b> Prokka: output</a></li>
+<li class="chapter" data-level="18.2.1" data-path="18-Assembly_functional_annotation.html"><a href="18-Assembly_functional_annotation.html#bakta-run"><i class="fa fa-check"></i><b>18.2.1</b> Bakta: run</a></li>
+<li class="chapter" data-level="18.2.2" data-path="18-Assembly_functional_annotation.html"><a href="18-Assembly_functional_annotation.html#bakta-output"><i class="fa fa-check"></i><b>18.2.2</b> Bakta: output</a></li>
 </ul></li>
 <li class="chapter" data-level="18.3" data-path="18-Assembly_functional_annotation.html"><a href="18-Assembly_functional_annotation.html#minpath"><i class="fa fa-check"></i><b>18.3</b> MinPath</a>
 <ul>
-<li class="chapter" data-level="18.3.1" data-path="18-Assembly_functional_annotation.html"><a href="18-Assembly_functional_annotation.html#minpath-conda-and-directory"><i class="fa fa-check"></i><b>18.3.1</b> MinPath: conda and directory</a></li>
-<li class="chapter" data-level="18.3.2" data-path="18-Assembly_functional_annotation.html"><a href="18-Assembly_functional_annotation.html#minpath-ec-extraction"><i class="fa fa-check"></i><b>18.3.2</b> MinPath: EC extraction</a></li>
-<li class="chapter" data-level="18.3.3" data-path="18-Assembly_functional_annotation.html"><a href="18-Assembly_functional_annotation.html#minpathrun"><i class="fa fa-check"></i><b>18.3.3</b> MinPath: run</a></li>
-<li class="chapter" data-level="18.3.4" data-path="18-Assembly_functional_annotation.html"><a href="18-Assembly_functional_annotation.html#minpath-output"><i class="fa fa-check"></i><b>18.3.4</b> MinPath: output</a></li>
+<li class="chapter" data-level="18.3.1" data-path="18-Assembly_functional_annotation.html"><a href="18-Assembly_functional_annotation.html#minpath-ec-extraction"><i class="fa fa-check"></i><b>18.3.1</b> MinPath: EC extraction</a></li>
+<li class="chapter" data-level="18.3.2" data-path="18-Assembly_functional_annotation.html"><a href="18-Assembly_functional_annotation.html#minpathrun"><i class="fa fa-check"></i><b>18.3.2</b> MinPath: run</a></li>
+<li class="chapter" data-level="18.3.3" data-path="18-Assembly_functional_annotation.html"><a href="18-Assembly_functional_annotation.html#minpath-output"><i class="fa fa-check"></i><b>18.3.3</b> MinPath: output</a></li>
+<li class="chapter" data-level="18.3.4" data-path="18-Assembly_functional_annotation.html"><a href="18-Assembly_functional_annotation.html#keggs"><i class="fa fa-check"></i><b>18.3.4</b> KEGGs</a></li>
 </ul></li>
 </ul></li>
 <li class="appendix"><span><b>Appendix</b></span></li>
@@ -373,16 +372,16 @@ K2 &amp; W1 Bracken commands
 <p>Viewing the Bracken output files (<code>.bracken</code>) with your favourite text viewer (<code>less</code>, <code>nano</code>, <code>vim</code>, etc.), attempt the below MCQs.</p>
 <ol style="list-style-type: decimal">
 <li>In <strong>K1</strong>, how many total reads after abundance reestimation are there for <strong>Prevotella fusca</strong>?
-<div id="radio_QTMJNQXVFG" class="webex-radiogroup">
-<label><input type="radio" autocomplete="off" name="radio_QTMJNQXVFG" value=""></input> <span><strong>0.00011</strong></span></label><label><input type="radio" autocomplete="off" name="radio_QTMJNQXVFG" value="answer"></input> <span><strong>16</strong></span></label><label><input type="radio" autocomplete="off" name="radio_QTMJNQXVFG" value=""></input> <span><strong>702</strong></span></label>
+<div id="radio_OWAHQCMVUN" class="webex-radiogroup">
+<label><input type="radio" autocomplete="off" name="radio_OWAHQCMVUN" value=""></input> <span><strong>0.00011</strong></span></label><label><input type="radio" autocomplete="off" name="radio_OWAHQCMVUN" value="answer"></input> <span><strong>16</strong></span></label><label><input type="radio" autocomplete="off" name="radio_OWAHQCMVUN" value=""></input> <span><strong>702</strong></span></label>
 </div></li>
 <li>In <strong>K2</strong>, how many reads after abundance reestimation were added for <strong>Bacteroides caccae</strong>?
-<div id="radio_LNFPMFVAPG" class="webex-radiogroup">
-<label><input type="radio" autocomplete="off" name="radio_LNFPMFVAPG" value=""></input> <span><strong>0.00011</strong></span></label><label><input type="radio" autocomplete="off" name="radio_LNFPMFVAPG" value=""></input> <span><strong>16</strong></span></label><label><input type="radio" autocomplete="off" name="radio_LNFPMFVAPG" value="answer"></input> <span><strong>702</strong></span></label>
+<div id="radio_UFMNPCQTWI" class="webex-radiogroup">
+<label><input type="radio" autocomplete="off" name="radio_UFMNPCQTWI" value=""></input> <span><strong>0.00011</strong></span></label><label><input type="radio" autocomplete="off" name="radio_UFMNPCQTWI" value=""></input> <span><strong>16</strong></span></label><label><input type="radio" autocomplete="off" name="radio_UFMNPCQTWI" value="answer"></input> <span><strong>702</strong></span></label>
 </div></li>
 <li>In <strong>W1</strong>, what is the fraction of total reads (after abundance reestimation) for <strong>Tannerella forsythia</strong>?
-<div id="radio_YJNWCGQRSM" class="webex-radiogroup">
-<label><input type="radio" autocomplete="off" name="radio_YJNWCGQRSM" value="answer"></input> <span><strong>0.00011</strong></span></label><label><input type="radio" autocomplete="off" name="radio_YJNWCGQRSM" value=""></input> <span><strong>16</strong></span></label><label><input type="radio" autocomplete="off" name="radio_YJNWCGQRSM" value=""></input> <span><strong>702</strong></span></label>
+<div id="radio_NMABBSUZYI" class="webex-radiogroup">
+<label><input type="radio" autocomplete="off" name="radio_NMABBSUZYI" value="answer"></input> <span><strong>0.00011</strong></span></label><label><input type="radio" autocomplete="off" name="radio_NMABBSUZYI" value=""></input> <span><strong>16</strong></span></label><label><input type="radio" autocomplete="off" name="radio_NMABBSUZYI" value=""></input> <span><strong>702</strong></span></label>
 </div></li>
 </ol>
 </div>

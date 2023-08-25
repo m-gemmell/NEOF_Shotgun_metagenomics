@@ -23,7 +23,7 @@
 <meta name="author" content="Sam Haldenby and Matthew R. Gemmell" />
 
 
-<meta name="date" content="2023-08-23" />
+<meta name="date" content="2023-08-25" />
 
   <meta name="viewport" content="width=device-width, initial-scale=1" />
   <meta name="apple-mobile-web-app-capable" content="yes" />
@@ -275,18 +275,17 @@ code span.wa { color: #60a0b0; font-weight: bold; font-style: italic; } /* Warni
 <li class="chapter" data-level="18" data-path="18-Assembly_functional_annotation.html"><a href="18-Assembly_functional_annotation.html"><i class="fa fa-check"></i><b>18</b> Assembly functional annotation</a>
 <ul>
 <li class="chapter" data-level="18.1" data-path="18-Assembly_functional_annotation.html"><a href="18-Assembly_functional_annotation.html#taxonomic-annotation"><i class="fa fa-check"></i><b>18.1</b> Taxonomic annotation</a></li>
-<li class="chapter" data-level="18.2" data-path="18-Assembly_functional_annotation.html"><a href="18-Assembly_functional_annotation.html#prokka"><i class="fa fa-check"></i><b>18.2</b> Prokka</a>
+<li class="chapter" data-level="18.2" data-path="18-Assembly_functional_annotation.html"><a href="18-Assembly_functional_annotation.html#bakta"><i class="fa fa-check"></i><b>18.2</b> Bakta</a>
 <ul>
-<li class="chapter" data-level="18.2.1" data-path="18-Assembly_functional_annotation.html"><a href="18-Assembly_functional_annotation.html#prokka_conda"><i class="fa fa-check"></i><b>18.2.1</b> Prokka: conda and directories</a></li>
-<li class="chapter" data-level="18.2.2" data-path="18-Assembly_functional_annotation.html"><a href="18-Assembly_functional_annotation.html#prokka-run"><i class="fa fa-check"></i><b>18.2.2</b> Prokka: run</a></li>
-<li class="chapter" data-level="18.2.3" data-path="18-Assembly_functional_annotation.html"><a href="18-Assembly_functional_annotation.html#prokka-output"><i class="fa fa-check"></i><b>18.2.3</b> Prokka: output</a></li>
+<li class="chapter" data-level="18.2.1" data-path="18-Assembly_functional_annotation.html"><a href="18-Assembly_functional_annotation.html#bakta-run"><i class="fa fa-check"></i><b>18.2.1</b> Bakta: run</a></li>
+<li class="chapter" data-level="18.2.2" data-path="18-Assembly_functional_annotation.html"><a href="18-Assembly_functional_annotation.html#bakta-output"><i class="fa fa-check"></i><b>18.2.2</b> Bakta: output</a></li>
 </ul></li>
 <li class="chapter" data-level="18.3" data-path="18-Assembly_functional_annotation.html"><a href="18-Assembly_functional_annotation.html#minpath"><i class="fa fa-check"></i><b>18.3</b> MinPath</a>
 <ul>
-<li class="chapter" data-level="18.3.1" data-path="18-Assembly_functional_annotation.html"><a href="18-Assembly_functional_annotation.html#minpath-conda-and-directory"><i class="fa fa-check"></i><b>18.3.1</b> MinPath: conda and directory</a></li>
-<li class="chapter" data-level="18.3.2" data-path="18-Assembly_functional_annotation.html"><a href="18-Assembly_functional_annotation.html#minpath-ec-extraction"><i class="fa fa-check"></i><b>18.3.2</b> MinPath: EC extraction</a></li>
-<li class="chapter" data-level="18.3.3" data-path="18-Assembly_functional_annotation.html"><a href="18-Assembly_functional_annotation.html#minpathrun"><i class="fa fa-check"></i><b>18.3.3</b> MinPath: run</a></li>
-<li class="chapter" data-level="18.3.4" data-path="18-Assembly_functional_annotation.html"><a href="18-Assembly_functional_annotation.html#minpath-output"><i class="fa fa-check"></i><b>18.3.4</b> MinPath: output</a></li>
+<li class="chapter" data-level="18.3.1" data-path="18-Assembly_functional_annotation.html"><a href="18-Assembly_functional_annotation.html#minpath-ec-extraction"><i class="fa fa-check"></i><b>18.3.1</b> MinPath: EC extraction</a></li>
+<li class="chapter" data-level="18.3.2" data-path="18-Assembly_functional_annotation.html"><a href="18-Assembly_functional_annotation.html#minpathrun"><i class="fa fa-check"></i><b>18.3.2</b> MinPath: run</a></li>
+<li class="chapter" data-level="18.3.3" data-path="18-Assembly_functional_annotation.html"><a href="18-Assembly_functional_annotation.html#minpath-output"><i class="fa fa-check"></i><b>18.3.3</b> MinPath: output</a></li>
+<li class="chapter" data-level="18.3.4" data-path="18-Assembly_functional_annotation.html"><a href="18-Assembly_functional_annotation.html#keggs"><i class="fa fa-check"></i><b>18.3.4</b> KEGGs</a></li>
 </ul></li>
 </ul></li>
 <li class="appendix"><span><b>Appendix</b></span></li>
@@ -388,28 +387,28 @@ code span.wa { color: #60a0b0; font-weight: bold; font-style: italic; } /* Warni
 <p><img src="figures/question_bubble_green.png" width="10%" style="display: block; margin: auto;" /></p>
 <ol style="list-style-type: decimal">
 <li>What is the total length of the assembly?
-<div id="radio_PWNCRRLRHY" class="webex-radiogroup">
-<label><input type="radio" autocomplete="off" name="radio_PWNCRRLRHY" value=""></input> <span><strong>39.88</strong></span></label><label><input type="radio" autocomplete="off" name="radio_PWNCRRLRHY" value=""></input> <span><strong>18,650</strong></span></label><label><input type="radio" autocomplete="off" name="radio_PWNCRRLRHY" value="answer"></input> <span><strong>16,187,295</strong></span></label>
+<div id="radio_PXUBMFPZXO" class="webex-radiogroup">
+<label><input type="radio" autocomplete="off" name="radio_PXUBMFPZXO" value=""></input> <span><strong>39.88</strong></span></label><label><input type="radio" autocomplete="off" name="radio_PXUBMFPZXO" value=""></input> <span><strong>18,650</strong></span></label><label><input type="radio" autocomplete="off" name="radio_PXUBMFPZXO" value="answer"></input> <span><strong>16,187,295</strong></span></label>
 </div></li>
 <li>How many contigs does the assembly consist of?
-<div id="radio_UGWQCOLXAZ" class="webex-radiogroup">
-<label><input type="radio" autocomplete="off" name="radio_UGWQCOLXAZ" value=""></input> <span><strong>39.88</strong></span></label><label><input type="radio" autocomplete="off" name="radio_UGWQCOLXAZ" value="answer"></input> <span><strong>18,650</strong></span></label><label><input type="radio" autocomplete="off" name="radio_UGWQCOLXAZ" value=""></input> <span><strong>16,187,295</strong></span></label>
+<div id="radio_IRBNAXQVHG" class="webex-radiogroup">
+<label><input type="radio" autocomplete="off" name="radio_IRBNAXQVHG" value=""></input> <span><strong>39.88</strong></span></label><label><input type="radio" autocomplete="off" name="radio_IRBNAXQVHG" value="answer"></input> <span><strong>18,650</strong></span></label><label><input type="radio" autocomplete="off" name="radio_IRBNAXQVHG" value=""></input> <span><strong>16,187,295</strong></span></label>
 </div></li>
 <li>What is the GC% of the assembly?
-<div id="radio_TLDYTZUPFQ" class="webex-radiogroup">
-<label><input type="radio" autocomplete="off" name="radio_TLDYTZUPFQ" value="answer"></input> <span><strong>39.88</strong></span></label><label><input type="radio" autocomplete="off" name="radio_TLDYTZUPFQ" value=""></input> <span><strong>18,650</strong></span></label><label><input type="radio" autocomplete="off" name="radio_TLDYTZUPFQ" value=""></input> <span><strong>16,187,295</strong></span></label>
+<div id="radio_MDSOUGRAIF" class="webex-radiogroup">
+<label><input type="radio" autocomplete="off" name="radio_MDSOUGRAIF" value="answer"></input> <span><strong>39.88</strong></span></label><label><input type="radio" autocomplete="off" name="radio_MDSOUGRAIF" value=""></input> <span><strong>18,650</strong></span></label><label><input type="radio" autocomplete="off" name="radio_MDSOUGRAIF" value=""></input> <span><strong>16,187,295</strong></span></label>
 </div></li>
 <li>What is the N50 of the assembly?
-<div id="radio_SULMQXZXMT" class="webex-radiogroup">
-<label><input type="radio" autocomplete="off" name="radio_SULMQXZXMT" value="answer"></input> <span><strong>1,363</strong></span></label><label><input type="radio" autocomplete="off" name="radio_SULMQXZXMT" value=""></input> <span><strong>2,178</strong></span></label><label><input type="radio" autocomplete="off" name="radio_SULMQXZXMT" value=""></input> <span><strong>87,586</strong></span></label>
+<div id="radio_YBUBACAZPL" class="webex-radiogroup">
+<label><input type="radio" autocomplete="off" name="radio_YBUBACAZPL" value="answer"></input> <span><strong>1,363</strong></span></label><label><input type="radio" autocomplete="off" name="radio_YBUBACAZPL" value=""></input> <span><strong>2,178</strong></span></label><label><input type="radio" autocomplete="off" name="radio_YBUBACAZPL" value=""></input> <span><strong>87,586</strong></span></label>
 </div></li>
 <li>What is the L50 of the assembly?
-<div id="radio_ZTNFWVDAWP" class="webex-radiogroup">
-<label><input type="radio" autocomplete="off" name="radio_ZTNFWVDAWP" value=""></input> <span><strong>1,363</strong></span></label><label><input type="radio" autocomplete="off" name="radio_ZTNFWVDAWP" value="answer"></input> <span><strong>2,178</strong></span></label><label><input type="radio" autocomplete="off" name="radio_ZTNFWVDAWP" value=""></input> <span><strong>87,586</strong></span></label>
+<div id="radio_SDJNSXPEOA" class="webex-radiogroup">
+<label><input type="radio" autocomplete="off" name="radio_SDJNSXPEOA" value=""></input> <span><strong>1,363</strong></span></label><label><input type="radio" autocomplete="off" name="radio_SDJNSXPEOA" value="answer"></input> <span><strong>2,178</strong></span></label><label><input type="radio" autocomplete="off" name="radio_SDJNSXPEOA" value=""></input> <span><strong>87,586</strong></span></label>
 </div></li>
 <li>what is the length of the largest contig?
-<div id="radio_YJQVZKIXMT" class="webex-radiogroup">
-<label><input type="radio" autocomplete="off" name="radio_YJQVZKIXMT" value=""></input> <span><strong>1,363</strong></span></label><label><input type="radio" autocomplete="off" name="radio_YJQVZKIXMT" value=""></input> <span><strong>2,178</strong></span></label><label><input type="radio" autocomplete="off" name="radio_YJQVZKIXMT" value="answer"></input> <span><strong>87,586</strong></span></label>
+<div id="radio_LDIMXFLYAG" class="webex-radiogroup">
+<label><input type="radio" autocomplete="off" name="radio_LDIMXFLYAG" value=""></input> <span><strong>1,363</strong></span></label><label><input type="radio" autocomplete="off" name="radio_LDIMXFLYAG" value=""></input> <span><strong>2,178</strong></span></label><label><input type="radio" autocomplete="off" name="radio_LDIMXFLYAG" value="answer"></input> <span><strong>87,586</strong></span></label>
 </div></li>
 </ol>
 <p><strong>Questions</strong>

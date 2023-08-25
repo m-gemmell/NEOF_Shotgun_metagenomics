@@ -23,7 +23,7 @@
 <meta name="author" content="Sam Haldenby and Matthew R. Gemmell" />
 
 
-<meta name="date" content="2023-08-23" />
+<meta name="date" content="2023-08-25" />
 
   <meta name="viewport" content="width=device-width, initial-scale=1" />
   <meta name="apple-mobile-web-app-capable" content="yes" />
@@ -275,18 +275,17 @@ code span.wa { color: #60a0b0; font-weight: bold; font-style: italic; } /* Warni
 <li class="chapter" data-level="18" data-path="18-Assembly_functional_annotation.html"><a href="18-Assembly_functional_annotation.html"><i class="fa fa-check"></i><b>18</b> Assembly functional annotation</a>
 <ul>
 <li class="chapter" data-level="18.1" data-path="18-Assembly_functional_annotation.html"><a href="18-Assembly_functional_annotation.html#taxonomic-annotation"><i class="fa fa-check"></i><b>18.1</b> Taxonomic annotation</a></li>
-<li class="chapter" data-level="18.2" data-path="18-Assembly_functional_annotation.html"><a href="18-Assembly_functional_annotation.html#prokka"><i class="fa fa-check"></i><b>18.2</b> Prokka</a>
+<li class="chapter" data-level="18.2" data-path="18-Assembly_functional_annotation.html"><a href="18-Assembly_functional_annotation.html#bakta"><i class="fa fa-check"></i><b>18.2</b> Bakta</a>
 <ul>
-<li class="chapter" data-level="18.2.1" data-path="18-Assembly_functional_annotation.html"><a href="18-Assembly_functional_annotation.html#prokka_conda"><i class="fa fa-check"></i><b>18.2.1</b> Prokka: conda and directories</a></li>
-<li class="chapter" data-level="18.2.2" data-path="18-Assembly_functional_annotation.html"><a href="18-Assembly_functional_annotation.html#prokka-run"><i class="fa fa-check"></i><b>18.2.2</b> Prokka: run</a></li>
-<li class="chapter" data-level="18.2.3" data-path="18-Assembly_functional_annotation.html"><a href="18-Assembly_functional_annotation.html#prokka-output"><i class="fa fa-check"></i><b>18.2.3</b> Prokka: output</a></li>
+<li class="chapter" data-level="18.2.1" data-path="18-Assembly_functional_annotation.html"><a href="18-Assembly_functional_annotation.html#bakta-run"><i class="fa fa-check"></i><b>18.2.1</b> Bakta: run</a></li>
+<li class="chapter" data-level="18.2.2" data-path="18-Assembly_functional_annotation.html"><a href="18-Assembly_functional_annotation.html#bakta-output"><i class="fa fa-check"></i><b>18.2.2</b> Bakta: output</a></li>
 </ul></li>
 <li class="chapter" data-level="18.3" data-path="18-Assembly_functional_annotation.html"><a href="18-Assembly_functional_annotation.html#minpath"><i class="fa fa-check"></i><b>18.3</b> MinPath</a>
 <ul>
-<li class="chapter" data-level="18.3.1" data-path="18-Assembly_functional_annotation.html"><a href="18-Assembly_functional_annotation.html#minpath-conda-and-directory"><i class="fa fa-check"></i><b>18.3.1</b> MinPath: conda and directory</a></li>
-<li class="chapter" data-level="18.3.2" data-path="18-Assembly_functional_annotation.html"><a href="18-Assembly_functional_annotation.html#minpath-ec-extraction"><i class="fa fa-check"></i><b>18.3.2</b> MinPath: EC extraction</a></li>
-<li class="chapter" data-level="18.3.3" data-path="18-Assembly_functional_annotation.html"><a href="18-Assembly_functional_annotation.html#minpathrun"><i class="fa fa-check"></i><b>18.3.3</b> MinPath: run</a></li>
-<li class="chapter" data-level="18.3.4" data-path="18-Assembly_functional_annotation.html"><a href="18-Assembly_functional_annotation.html#minpath-output"><i class="fa fa-check"></i><b>18.3.4</b> MinPath: output</a></li>
+<li class="chapter" data-level="18.3.1" data-path="18-Assembly_functional_annotation.html"><a href="18-Assembly_functional_annotation.html#minpath-ec-extraction"><i class="fa fa-check"></i><b>18.3.1</b> MinPath: EC extraction</a></li>
+<li class="chapter" data-level="18.3.2" data-path="18-Assembly_functional_annotation.html"><a href="18-Assembly_functional_annotation.html#minpathrun"><i class="fa fa-check"></i><b>18.3.2</b> MinPath: run</a></li>
+<li class="chapter" data-level="18.3.3" data-path="18-Assembly_functional_annotation.html"><a href="18-Assembly_functional_annotation.html#minpath-output"><i class="fa fa-check"></i><b>18.3.3</b> MinPath: output</a></li>
+<li class="chapter" data-level="18.3.4" data-path="18-Assembly_functional_annotation.html"><a href="18-Assembly_functional_annotation.html#keggs"><i class="fa fa-check"></i><b>18.3.4</b> KEGGs</a></li>
 </ul></li>
 </ul></li>
 <li class="appendix"><span><b>Appendix</b></span></li>
@@ -522,16 +521,16 @@ Issues with creating file?
 <h4>MCQs<a href="13-Functional_profiling.html#mcqs" class="anchor-section" aria-label="Anchor link to header"></a></h4>
 <ol style="list-style-type: decimal">
 <li>Which pathway stands out the most?
-<div id="radio_CCJCYNQXZD" class="webex-radiogroup">
-<label><input type="radio" autocomplete="off" name="radio_CCJCYNQXZD" value=""></input> <span><strong>ARO-PWY</strong></span></label><label><input type="radio" autocomplete="off" name="radio_CCJCYNQXZD" value="answer"></input> <span><strong>DTDPRHAMSYN</strong></span></label><label><input type="radio" autocomplete="off" name="radio_CCJCYNQXZD" value=""></input> <span><strong>PWY-6385</strong></span></label>
+<div id="radio_LSLNIQJYYP" class="webex-radiogroup">
+<label><input type="radio" autocomplete="off" name="radio_LSLNIQJYYP" value=""></input> <span><strong>ARO-PWY</strong></span></label><label><input type="radio" autocomplete="off" name="radio_LSLNIQJYYP" value="answer"></input> <span><strong>DTDPRHAMSYN</strong></span></label><label><input type="radio" autocomplete="off" name="radio_LSLNIQJYYP" value=""></input> <span><strong>PWY-6385</strong></span></label>
 </div></li>
 <li>How many clusters are formed based on diet (Colours on tree at top of heatmap)?
-<div id="radio_TUPOCYLCAJ" class="webex-radiogroup">
-<label><input type="radio" autocomplete="off" name="radio_TUPOCYLCAJ" value=""></input> <span><strong>1</strong></span></label><label><input type="radio" autocomplete="off" name="radio_TUPOCYLCAJ" value="answer"></input> <span><strong>2</strong></span></label><label><input type="radio" autocomplete="off" name="radio_TUPOCYLCAJ" value=""></input> <span><strong>3</strong></span></label>
+<div id="radio_XNFTOZXJOD" class="webex-radiogroup">
+<label><input type="radio" autocomplete="off" name="radio_XNFTOZXJOD" value=""></input> <span><strong>1</strong></span></label><label><input type="radio" autocomplete="off" name="radio_XNFTOZXJOD" value="answer"></input> <span><strong>2</strong></span></label><label><input type="radio" autocomplete="off" name="radio_XNFTOZXJOD" value=""></input> <span><strong>3</strong></span></label>
 </div></li>
 <li>How many clusters are formed based on pathways (Colours on tree at the side of heatmap)?
-<div id="radio_XSANPXWZSP" class="webex-radiogroup">
-<label><input type="radio" autocomplete="off" name="radio_XSANPXWZSP" value=""></input> <span><strong>1</strong></span></label><label><input type="radio" autocomplete="off" name="radio_XSANPXWZSP" value=""></input> <span><strong>2</strong></span></label><label><input type="radio" autocomplete="off" name="radio_XSANPXWZSP" value="answer"></input> <span><strong>3</strong></span></label>
+<div id="radio_BFHUEJFSEE" class="webex-radiogroup">
+<label><input type="radio" autocomplete="off" name="radio_BFHUEJFSEE" value=""></input> <span><strong>1</strong></span></label><label><input type="radio" autocomplete="off" name="radio_BFHUEJFSEE" value=""></input> <span><strong>2</strong></span></label><label><input type="radio" autocomplete="off" name="radio_BFHUEJFSEE" value="answer"></input> <span><strong>3</strong></span></label>
 </div></li>
 </ol>
 <p>You can look up the pathway names in the table file to see a fuller description.</p>
