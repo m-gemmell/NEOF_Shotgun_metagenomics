@@ -1,4 +1,4 @@
---- 
+---
 title: "Shotgun Metagenomics"
 author: "Sam Haldenby and Matthew R. Gemmell"
 date: "`r Sys.Date()`"
@@ -48,26 +48,39 @@ knitr::opts_chunk$set(class.source="Rchunk")
 
 ```{r, fig.align = 'center',out.width= '30%', echo=FALSE }
 knitr::include_graphics(path = "figures/NEOF.png", auto_pdf = TRUE)
-``` 
+```
 
 # Introduction
+
 ```{r, fig.align = 'center',out.width= '20%', echo=FALSE }
 knitr::include_graphics(path = "figures/squid.png", auto_pdf = TRUE)
-``` 
+```
 
 This practical session aims to introduce you to the analysis of Shotgun metagenomic data. The topics covered are:
 
-- [Overview](#overview)
-- [Raw data](#rawdata)
-- [Trimming data](#qualcont)
-- [Host removal](#hostremoval)
-- [Taxonomic profiling](#taxprofile)
-- [Functional profiling](#functprofile)
-- [Metagenome assembly](#metagenomeassembly)
-- [Binning](#binning)
-- [Functional annotation](#funcanno)
++:-------------------------------------------------------------------------:+:-----------------------------------------------------------:+
+| [**Overview**](#overview)                                                 | [**Raw data**](#rawdata)                                    |
+|                                                                           |                                                             |
+| [![](figures/overview.png){width="135"}](#overview)                       | [![](figures/usb_stick.png){width="154"}](#rawdata)         |
++---------------------------------------------------------------------------+-------------------------------------------------------------+
+| [**Trimming data**](#qualcont)                                            | [**Host removal**](#hostremoval)                            |
+|                                                                           |                                                             |
+| [![](figures/quality_trimming_and_filtering.png){width="274"}](#qualcont) | [![](figures/bowtie2.png){width="208"}](#hostremoval)       |
++---------------------------------------------------------------------------+-------------------------------------------------------------+
+| [**Taxonomic profiling**](#taxprofile)                                    | [**Functional profiling**](#functprofile)                   |
+|                                                                           |                                                             |
+| [![](figures/classification.png){width="158"}](#taxprofile)               | [![](figures/profile.png){width="113"}](#functprofile)      |
++---------------------------------------------------------------------------+-------------------------------------------------------------+
+| [**Metagenome assembly**](#metagenomeassembly)                            | [**Binning**](#binning)                                     |
+|                                                                           |                                                             |
+| [![](figures/jigsaw.png){width="211"}](#metagenomeassembly)               | [![](figures/yarn_binning.png){width="343"}](#binning)      |
++---------------------------------------------------------------------------+-------------------------------------------------------------+
+| [**Functional annotation**](#funcanno)                                    | [**Appendix**](#mamba-installs)                             |
+|                                                                           |                                                             |
+| [![](figures/pathways.png){width="150"}](#funcanno)                       | [![](figures/mamba_logo.png){width="217"}](#mamba-installs) |
++---------------------------------------------------------------------------+-------------------------------------------------------------+
 
-<a rel="license" href="http://creativecommons.org/licenses/by-nc-sa/4.0/"><img alt="Creative Commons Licence" style="border-width:0" src="https://i.creativecommons.org/l/by-nc-sa/4.0/88x31.png" /></a><br />This work is licensed under a <a rel="license" href="http://creativecommons.org/licenses/by-nc-sa/4.0/">Creative Commons Attribution-NonCommercial-ShareAlike 4.0 International License</a>.
+<a rel="license" href="http://creativecommons.org/licenses/by-nc-sa/4.0/"><img src="https://i.creativecommons.org/l/by-nc-sa/4.0/88x31.png" alt="Creative Commons Licence" style="border-width:0"/></a><br />This work is licensed under a <a rel="license" href="http://creativecommons.org/licenses/by-nc-sa/4.0/">Creative Commons Attribution-NonCommercial-ShareAlike 4.0 International License</a>.
 
 <!--chapter:end:01-Shotgun_metagenomics.Rmd-->
 
