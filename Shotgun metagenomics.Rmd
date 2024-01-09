@@ -13,21 +13,7 @@ description: NEOF book for the Microbial shotgun metagenomics workshop
 cover-image: "figures/NEOF.png"
 ---
 ```{r include=FALSE, cache=FALSE}
-suppressPackageStartupMessages({
-  library(webexercises)
-})
-
-knitr::knit_hooks$set(webex.hide = function(before, options, envir) {
-  if (before) {
-    if (is.character(options$webex.hide)) {
-      hide(options$webex.hide)
-    } else {
-      hide()
-    }
-  } else {
-    unhide()
-  }
-})
+library(webexercises)
 ```
 
 ```{r cite-packages, include = FALSE}
@@ -104,21 +90,7 @@ At the end of the course learners will be able to:
 <!--chapter:end:01-Shotgun_metagenomics.Rmd-->
 
 ```{r include=FALSE, cache=FALSE}
-suppressPackageStartupMessages({
-  library(webexercises)
-})
-
-knitr::knit_hooks$set(webex.hide = function(before, options, envir) {
-  if (before) {
-    if (is.character(options$webex.hide)) {
-      hide(options$webex.hide)
-    } else {
-      hide()
-    }
-  } else {
-    unhide()
-  }
-})
+library(webexercises)
 ```
 # Overview {#overview}
 ```{r, fig.align = 'center',out.width= '20%', echo=FALSE }
@@ -189,21 +161,7 @@ This practical is broken up into the following broad sections.
 <!--chapter:end:02-Overview.Rmd-->
 
 ```{r include=FALSE, cache=FALSE}
-suppressPackageStartupMessages({
-  library(webexercises)
-})
-
-knitr::knit_hooks$set(webex.hide = function(before, options, envir) {
-  if (before) {
-    if (is.character(options$webex.hide)) {
-      hide(options$webex.hide)
-    } else {
-      hide()
-    }
-  } else {
-    unhide()
-  }
-})
+library(webexercises)
 ```
 # Cluster Introduction
 ```{r, fig.align = 'center',out.width= '20%', echo=FALSE }
@@ -244,21 +202,7 @@ __To open a new terminal window__, right click on the main screen, choose `Appli
 <!--chapter:end:03-Cluster_Introduction.Rmd-->
 
 ```{r include=FALSE, cache=FALSE}
-suppressPackageStartupMessages({
-  library(webexercises)
-})
-
-knitr::knit_hooks$set(webex.hide = function(before, options, envir) {
-  if (before) {
-    if (is.character(options$webex.hide)) {
-      hide(options$webex.hide)
-    } else {
-      hide()
-    }
-  } else {
-    unhide()
-  }
-})
+library(webexercises)
 ```
 # Startup & mamba
 ```{r, fig.align = 'center',out.width= '30%', echo=FALSE }
@@ -282,21 +226,7 @@ cd ~
 <!--chapter:end:04-Start_conda.Rmd-->
 
 ```{r include=FALSE, cache=FALSE}
-suppressPackageStartupMessages({
-  library(webexercises)
-})
-
-knitr::knit_hooks$set(webex.hide = function(before, options, envir) {
-  if (before) {
-    if (is.character(options$webex.hide)) {
-      hide(options$webex.hide)
-    } else {
-      hide()
-    }
-  } else {
-    unhide()
-  }
-})
+library(webexercises)
 ```
 # (PART\*) Data & QC {-}
 
@@ -435,21 +365,7 @@ Once you have finished inspecting, minimise the Firefox window.
 <!--chapter:end:05-Raw_data.Rmd-->
 
 ```{r include=FALSE, cache=FALSE}
-suppressPackageStartupMessages({
-  library(webexercises)
-})
-
-knitr::knit_hooks$set(webex.hide = function(before, options, envir) {
-  if (before) {
-    if (is.character(options$webex.hide)) {
-      hide(options$webex.hide)
-    } else {
-      hide()
-    }
-  } else {
-    unhide()
-  }
-})
+library(webexercises)
 ```
 # Quality control {#qualcont}
 ```{r, fig.align = 'center',out.width= '30%', echo=FALSE }
@@ -557,21 +473,7 @@ multiqc -o R2_fastqc/multiqc R2_fastqc
 <!--chapter:end:06-Trimming_data.Rmd-->
 
 ```{r include=FALSE, cache=FALSE}
-suppressPackageStartupMessages({
-  library(webexercises)
-})
-
-knitr::knit_hooks$set(webex.hide = function(before, options, envir) {
-  if (before) {
-    if (is.character(options$webex.hide)) {
-      hide(options$webex.hide)
-    } else {
-      hide()
-    }
-  } else {
-    unhide()
-  }
-})
+library(webexercises)
 ```
 # Host removal {#hostremoval}
 ```{r, fig.align = 'center',out.width= '30%', echo=FALSE }
@@ -706,21 +608,7 @@ The assembly we used was: https://ftp.ncbi.nlm.nih.gov/refseq/H_sapiens/annotati
 <!--chapter:end:07-Host_removal.Rmd-->
 
 ```{r include=FALSE, cache=FALSE}
-suppressPackageStartupMessages({
-  library(webexercises)
-})
-
-knitr::knit_hooks$set(webex.hide = function(before, options, envir) {
-  if (before) {
-    if (is.character(options$webex.hide)) {
-      hide(options$webex.hide)
-    } else {
-      hide()
-    }
-  } else {
-    unhide()
-  }
-})
+library(webexercises)
 ```
 # (PART\*) Taxonomy of reads {-}
 
@@ -742,21 +630,7 @@ cd 3-Taxonomy
 <!--chapter:end:08-Taxonomic_profiling.Rmd-->
 
 ```{r include=FALSE, cache=FALSE}
-suppressPackageStartupMessages({
-  library(webexercises)
-})
-
-knitr::knit_hooks$set(webex.hide = function(before, options, envir) {
-  if (before) {
-    if (is.character(options$webex.hide)) {
-      hide(options$webex.hide)
-    } else {
-      hide()
-    }
-  } else {
-    unhide()
-  }
-})
+library(webexercises)
 ```
 # Kraken2
 ```{r, fig.align = 'center',out.width= '15%', echo=FALSE }
@@ -892,21 +766,7 @@ opts_p <- c(answer="__0.12__", "__0.59__", "__14.89__")
 <!--chapter:end:09-Kraken2.Rmd-->
 
 ```{r include=FALSE, cache=FALSE}
-suppressPackageStartupMessages({
-  library(webexercises)
-})
-
-knitr::knit_hooks$set(webex.hide = function(before, options, envir) {
-  if (before) {
-    if (is.character(options$webex.hide)) {
-      hide(options$webex.hide)
-    } else {
-      hide()
-    }
-  } else {
-    unhide()
-  }
-})
+library(webexercises)
 ```
 # Krona plot
 ```{r, fig.align = 'center',out.width= '15%', echo=FALSE }
@@ -992,21 +852,7 @@ opts_p <- c("__39%__", answer="__8%__", "__6%__")
 <!--chapter:end:10-Krona.Rmd-->
 
 ```{r include=FALSE, cache=FALSE}
-suppressPackageStartupMessages({
-  library(webexercises)
-})
-
-knitr::knit_hooks$set(webex.hide = function(before, options, envir) {
-  if (before) {
-    if (is.character(options$webex.hide)) {
-      hide(options$webex.hide)
-    } else {
-      hide()
-    }
-  } else {
-    unhide()
-  }
-})
+library(webexercises)
 ```
 # Bracken
 ```{r, fig.align = 'center',out.width= '15%', echo=FALSE }
@@ -1144,21 +990,7 @@ cat all.bracken | cut -f 1,$bracken_num_columns > all_num.bracken
 <!--chapter:end:11-Bracken.Rmd-->
 
 ```{r include=FALSE, cache=FALSE}
-suppressPackageStartupMessages({
-  library(webexercises)
-})
-
-knitr::knit_hooks$set(webex.hide = function(before, options, envir) {
-  if (before) {
-    if (is.character(options$webex.hide)) {
-      hide(options$webex.hide)
-    } else {
-      hide()
-    }
-  } else {
-    unhide()
-  }
-})
+library(webexercises)
 ```
 # LEfSe biomarker detection
 ```{r, fig.align = 'center',out.width= '15%', echo=FALSE }
@@ -1323,21 +1155,7 @@ In your own future analysis you will need to create your own `Kraken2` and `Brac
 <!--chapter:end:12-Lefse.Rmd-->
 
 ```{r include=FALSE, cache=FALSE}
-suppressPackageStartupMessages({
-  library(webexercises)
-})
-
-knitr::knit_hooks$set(webex.hide = function(before, options, envir) {
-  if (before) {
-    if (is.character(options$webex.hide)) {
-      hide(options$webex.hide)
-    } else {
-      hide()
-    }
-  } else {
-    unhide()
-  }
-})
+library(webexercises)
 ```
 # (PART\*) Functional profiling of reads {-}
 
@@ -1718,21 +1536,7 @@ That completes the non assembly approach to shotgun metagenomic analysis. The ne
 <!--chapter:end:13-Functional_profiling.Rmd-->
 
 ```{r include=FALSE, cache=FALSE}
-suppressPackageStartupMessages({
-  library(webexercises)
-})
-
-knitr::knit_hooks$set(webex.hide = function(before, options, envir) {
-  if (before) {
-    if (is.character(options$webex.hide)) {
-      hide(options$webex.hide)
-    } else {
-      hide()
-    }
-  } else {
-    unhide()
-  }
-})
+library(webexercises)
 ```
 # (PART\*) Assembly Approach {-}
 
@@ -1793,21 +1597,7 @@ Fortunately, the assembler we will use, `MEGAHIT`, allows us to build an assembl
 <!--chapter:end:14-Metagenome_assembly.Rmd-->
 
 ```{r include=FALSE, cache=FALSE}
-suppressPackageStartupMessages({
-  library(webexercises)
-})
-
-knitr::knit_hooks$set(webex.hide = function(before, options, envir) {
-  if (before) {
-    if (is.character(options$webex.hide)) {
-      hide(options$webex.hide)
-    } else {
-      hide()
-    }
-  } else {
-    unhide()
-  }
-})
+library(webexercises)
 ```
 # Stitching read pairs
 ```{r, fig.align = 'center',out.width= '15%', echo=FALSE }
@@ -1898,21 +1688,7 @@ opts_p <- c(answer="__101__", "__177__", "__188__")
 <!--chapter:end:15-Stitching_reads.Rmd-->
 
 ```{r include=FALSE, cache=FALSE}
-suppressPackageStartupMessages({
-  library(webexercises)
-})
-
-knitr::knit_hooks$set(webex.hide = function(before, options, envir) {
-  if (before) {
-    if (is.character(options$webex.hide)) {
-      hide(options$webex.hide)
-    } else {
-      hide()
-    }
-  } else {
-    unhide()
-  }
-})
+library(webexercises)
 ```
 # Megahit Assembly
 ```{r, fig.align = 'center',out.width= '20%', echo=FALSE }
@@ -2068,21 +1844,7 @@ There is also a `metaQUAST` specifically for metagenome assemblies but it requir
 <!--chapter:end:16_Megahit.Rmd-->
 
 ```{r include=FALSE, cache=FALSE}
-suppressPackageStartupMessages({
-  library(webexercises)
-})
-
-knitr::knit_hooks$set(webex.hide = function(before, options, envir) {
-  if (before) {
-    if (is.character(options$webex.hide)) {
-      hide(options$webex.hide)
-    } else {
-      hide()
-    }
-  } else {
-    unhide()
-  }
-})
+library(webexercises)
 ```
 # Genome binning {#binning}
 ```{r, fig.align = 'center',out.width= '40%', echo=FALSE }
@@ -2528,21 +2290,7 @@ We have some good quality bins. However, the best bins would only have one genom
 <!--chapter:end:17-Genome_binning.Rmd-->
 
 ```{r include=FALSE, cache=FALSE}
-suppressPackageStartupMessages({
-  library(webexercises)
-})
-
-knitr::knit_hooks$set(webex.hide = function(before, options, envir) {
-  if (before) {
-    if (is.character(options$webex.hide)) {
-      hide(options$webex.hide)
-    } else {
-      hide()
-    }
-  } else {
-    unhide()
-  }
-})
+library(webexercises)
 ```
 # Assembly functional annotation {#funcanno}
 ```{r, fig.align = 'center',out.width= '20%', echo=FALSE }
@@ -2934,21 +2682,7 @@ With these files you can then investigate what bins have which pathways. Additio
 <!--chapter:end:18-Assembly_functional_annotation.Rmd-->
 
 ```{r include=FALSE, cache=FALSE}
-suppressPackageStartupMessages({
-  library(webexercises)
-})
-
-knitr::knit_hooks$set(webex.hide = function(before, options, envir) {
-  if (before) {
-    if (is.character(options$webex.hide)) {
-      hide(options$webex.hide)
-    } else {
-      hide()
-    }
-  } else {
-    unhide()
-  }
-})
+library(webexercises)
 ```
 # (APPENDIX) Appendix {-}
 
