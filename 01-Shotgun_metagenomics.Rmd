@@ -26,7 +26,7 @@ knitr::write_bib(c(
 #Check style.css for .Rchunk
 #https://stackoverflow.com/questions/65627531/change-r-chunk-background-color-in-bookdown-gitbook
 #https://bookdown.org/yihui/rmarkdown-cookbook/chunk-styling.html
-knitr::opts_chunk$set(class.source="Rchunk") 
+knitr::opts_chunk$set(class.source="Rchunk")
 ```
 
 ```{r, fig.align = 'center',out.width= '30%', echo=FALSE }
