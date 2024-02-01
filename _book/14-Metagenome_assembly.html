@@ -6,7 +6,7 @@
   <meta http-equiv="X-UA-Compatible" content="IE=edge" />
   <title>Chapter 14 Metagenome assembly | Shotgun Metagenomics</title>
   <meta name="description" content="NEOF book for the Microbial shotgun metagenomics workshop" />
-  <meta name="generator" content="bookdown 0.36 and GitBook 2.6.7" />
+  <meta name="generator" content="bookdown 0.35 and GitBook 2.6.7" />
 
   <meta property="og:title" content="Chapter 14 Metagenome assembly | Shotgun Metagenomics" />
   <meta property="og:type" content="book" />
@@ -23,7 +23,7 @@
 <meta name="author" content="Sam Haldenby and Matthew R. Gemmell" />
 
 
-<meta name="date" content="2024-01-09" />
+<meta name="date" content="2024-02-01" />
 
   <meta name="viewport" content="width=device-width, initial-scale=1" />
   <meta name="apple-mobile-web-app-capable" content="yes" />
@@ -138,7 +138,7 @@ code span.wa { color: #60a0b0; font-weight: bold; font-style: italic; } /* Warni
       <nav role="navigation">
 
 <ul class="summary">
-<li class="toc-logo"><a href="https://neof.org.uk/" target="blank"><img src="figures/neof_small_logo.png"></a></li>
+<li class="toc-logo"><a href="https://neof.org.uk/" target="blank"><img src="figures/NEOF_bordered_small.png"></a></li>
 <li><a>Shotgun Metagenomics</a></li>
 
 <li class="divider"></li>
@@ -332,7 +332,7 @@ code span.wa { color: #60a0b0; font-weight: bold; font-style: italic; } /* Warni
 <p>Here, we will carry out a couple of assemblies on our dataset.</p>
 <div id="metagenome-assembly-mamba" class="section level2 hasAnchor" number="14.1">
 <h2><span class="header-section-number">14.1</span> Metagenome assembly: Mamba<a href="14-Metagenome_assembly.html#metagenome-assembly-mamba" class="anchor-section" aria-label="Anchor link to header"></a></h2>
-<p><img src="figures/mamba_logo.png" width="10%" style="display: block; margin: auto;" /></p>
+<p><img src="figures/mamba_logo.png" width="20%" style="display: block; margin: auto;" /></p>
 <p>We will use the <code>shotgun_meta</code> conda environment so use a terminal where this is activated or open a new one and run <code>. useshotgun</code>.</p>
 </div>
 <div id="a-primer-on-short-read-assembly" class="section level2 hasAnchor" number="14.2">
@@ -342,15 +342,21 @@ code span.wa { color: #60a0b0; font-weight: bold; font-style: italic; } /* Warni
 <ol style="list-style-type: decimal">
 <li>All reads are broken down into k-length overlapping fragments (k-mers). e.g. if we choose a k-mer size of 5 bp, the following two sequences (blue) would be broken down into the k-mers below them (red):</li>
 </ol>
-<p><img src="figures/reads_aligned.png" width="40%" style="display: block; margin: auto;" /></p>
+<center>
+<img src="figures/reads_aligned.png" style="border-radius: 15px; width: 40%" />
+</center>
 <ol start="2" style="list-style-type: decimal">
 <li>All k-mers are linked to other k-mers which match with a k-1 length overlap (i.e. that overlap by all but one base):</li>
 </ol>
-<p><img src="figures/graph_simple.png" width="80%" style="display: block; margin: auto;" /></p>
+<center>
+<img src="figures/graph_simple.png" style="border-radius: 15px; width: 80%" />
+</center>
 <ol start="3" style="list-style-type: decimal">
 <li>Paths are routed through the graph and longer contigs are generated:</li>
 </ol>
-<p><img src="figures/graph_complex.png" width="80%" style="display: block; margin: auto;" /></p>
+<center>
+<img src="figures/graph_complex.png" style="border-radius: 15px; width: 80%" />
+</center>
 <p>The example here is a vast oversimplification of the complexity of a De Bruijn graph (i.e. there are no branches!). Routing through the graph is never as simple as this as some k-mers will lead to multiple k-mers, which can result in the break point of a contig. This is especially true for complex metagenomic data.</p>
 <p>Generally speaking, the shorter the k-mer, the more branches there will be, the trickier the graph is to resolve, so the resulting contigs are smaller. Assemblers usually perform better with longer k-mer lengths but even then there might not be enough depth of sequencing to generate all k-mers that form overlaps, therefore leading to break points. Finding the right k-mer size usually involves testing several.</p>
 <p>Fortunately, the assembler we will use, <code>MEGAHIT</code>, allows us to build an assembly using multiple k-mer lengths iteratively. The other great advantage about <code>MEGAHIT</code> is that it is quick and efficient. We will use <code>MEGAHIT</code> on our data soon, but first there is an additional processing step for our sequences...</p>

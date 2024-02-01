@@ -11,9 +11,7 @@ knitr::include_graphics(path = "figures/classification.png", auto_pdf = TRUE)
 Taxonomic annotation of bins can be carried out with `Kraken2`. As we have already done this for the reads and taxonomic results from read and assembly approaches have similar performances we will not cover it here. Instead we will move straight onto functional annotation with [`Bakta`](https://github.com/oschwengers/bakta).
 
 ## Bakta
-```{r, fig.align = 'center',out.width= '25%', echo=FALSE }
-knitr::include_graphics(path = "figures/bakta_logo.png", auto_pdf = TRUE)
-``` 
+<center>![](figures/bakta_logo.png){style="border-radius: 15px; width: 25%"}</center>
 
 We will carry out `Bakta` functional annotation using. `Bakta` can annotate bacterial genomes and plasmids from both isolates and MAGs.
 

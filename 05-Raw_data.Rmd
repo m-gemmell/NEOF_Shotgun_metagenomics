@@ -53,9 +53,7 @@ The three samples are:
 
 So, what do the R1 and R2 actually mean? With Illumina sequencing the vast majority of sequencing is paired end. i.e. DNA is first fragmented and both ends of each fragment are sequenced as shown here:
 
-```{r, fig.align = 'center',out.width= '40%', echo=FALSE }
-knitr::include_graphics(path = "figures/paired_reads.png", auto_pdf = TRUE)
-``` 
+<center>![](figures/paired_reads.png){style="border-radius: 15px; width: 40%"}</center>
 
 This results in two sequences generated for each sequenced fragment: One reading in from the 3' end (R1) and the other reading in from the 5' end (R2).
 

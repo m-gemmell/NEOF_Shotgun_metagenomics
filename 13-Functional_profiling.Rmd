@@ -13,10 +13,7 @@ It is highly recommended you use the new version of `HUMAnN` as it contains 2 ti
 
 Please see below for a diagram showing the pipline of `HUMAnN`:
 
-```{r, fig.align = 'center',out.width= '75%', echo=FALSE }
-knitr::include_graphics(path = "figures/humann3_workflow.png", auto_pdf = TRUE)
-``` 
-
+<center>![](figures/humann3_workflow.png){style="border-radius: 15px; width: 75%"}</center>
 
 ## HUMAnN 
 ```{r, fig.align = 'center',out.width= '15%', echo=FALSE }
@@ -308,9 +305,7 @@ firefox diet_unstratified.relab.heatmap.png
 
 From this, we can see that there is a small amount of clustering caused by the differences between the Korean and Western diet. Other factors that we do not know about the samples must also come into play. This is normal as we cannot account for everything but it is good to try to account for as much as possible.
 
-```{r, fig.align = 'center',out.width= '75%', echo=FALSE }
-knitr::include_graphics(path = "figures/humann_heatmap.png", auto_pdf = TRUE)
-```
+<center>![](figures/humann_heatmap.png){style="border-radius: 15px; width: 75%"}</center>
 
 #### MCQs {-}
 

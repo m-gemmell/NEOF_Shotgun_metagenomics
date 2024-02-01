@@ -6,7 +6,7 @@
   <meta http-equiv="X-UA-Compatible" content="IE=edge" />
   <title>Chapter 16 Megahit Assembly | Shotgun Metagenomics</title>
   <meta name="description" content="NEOF book for the Microbial shotgun metagenomics workshop" />
-  <meta name="generator" content="bookdown 0.36 and GitBook 2.6.7" />
+  <meta name="generator" content="bookdown 0.35 and GitBook 2.6.7" />
 
   <meta property="og:title" content="Chapter 16 Megahit Assembly | Shotgun Metagenomics" />
   <meta property="og:type" content="book" />
@@ -23,7 +23,7 @@
 <meta name="author" content="Sam Haldenby and Matthew R. Gemmell" />
 
 
-<meta name="date" content="2024-01-09" />
+<meta name="date" content="2024-02-01" />
 
   <meta name="viewport" content="width=device-width, initial-scale=1" />
   <meta name="apple-mobile-web-app-capable" content="yes" />
@@ -138,7 +138,7 @@ code span.wa { color: #60a0b0; font-weight: bold; font-style: italic; } /* Warni
       <nav role="navigation">
 
 <ul class="summary">
-<li class="toc-logo"><a href="https://neof.org.uk/" target="blank"><img src="figures/neof_small_logo.png"></a></li>
+<li class="toc-logo"><a href="https://neof.org.uk/" target="blank"><img src="figures/NEOF_bordered_small.png"></a></li>
 <li><a>Shotgun Metagenomics</a></li>
 
 <li class="divider"></li>
@@ -383,35 +383,37 @@ code span.wa { color: #60a0b0; font-weight: bold; font-style: italic; } /* Warni
 <li><strong>N50</strong> equals the length of the N50 contig.</li>
 <li><strong>L50</strong> is the number of contigs with a length equal to or greater than N50.</li>
 </ul>
-<p><img src="figures/n50_n90.png" width="40%" style="display: block; margin: auto;" /></p>
+<center>
+<img src="figures/n50_n90.png" style="border-radius: 15px; width: 40%" />
+</center>
 </div>
 <div id="quast-mcqs" class="section level3 hasAnchor" number="16.2.3">
 <h3><span class="header-section-number">16.2.3</span> QUAST: MCQs<a href="16_Megahit.html#quast-mcqs" class="anchor-section" aria-label="Anchor link to header"></a></h3>
 <p><img src="figures/question_bubble_green.png" width="10%" style="display: block; margin: auto;" /></p>
 <ol style="list-style-type: decimal">
 <li>What is the total length of the assembly?
-<div id="radio_SRLRZHZRRS" class="webex-radiogroup">
-<label><input type="radio" autocomplete="off" name="radio_SRLRZHZRRS" value=""></input> <span><strong>39.88</strong></span></label><label><input type="radio" autocomplete="off" name="radio_SRLRZHZRRS" value=""></input> <span><strong>18,650</strong></span></label><label><input type="radio" autocomplete="off" name="radio_SRLRZHZRRS" value="answer"></input> <span><strong>16,187,295</strong></span></label>
+<div id="radio_NZEZSLGIRC" class="webex-radiogroup">
+<label><input type="radio" autocomplete="off" name="radio_NZEZSLGIRC" value=""></input> <span><strong>39.88</strong></span></label><label><input type="radio" autocomplete="off" name="radio_NZEZSLGIRC" value=""></input> <span><strong>18,650</strong></span></label><label><input type="radio" autocomplete="off" name="radio_NZEZSLGIRC" value="answer"></input> <span><strong>16,187,295</strong></span></label>
 </div></li>
 <li>How many contigs does the assembly consist of?
-<div id="radio_EYWRHGERSQ" class="webex-radiogroup">
-<label><input type="radio" autocomplete="off" name="radio_EYWRHGERSQ" value=""></input> <span><strong>39.88</strong></span></label><label><input type="radio" autocomplete="off" name="radio_EYWRHGERSQ" value="answer"></input> <span><strong>18,650</strong></span></label><label><input type="radio" autocomplete="off" name="radio_EYWRHGERSQ" value=""></input> <span><strong>16,187,295</strong></span></label>
+<div id="radio_ZEUZVIRPQP" class="webex-radiogroup">
+<label><input type="radio" autocomplete="off" name="radio_ZEUZVIRPQP" value=""></input> <span><strong>39.88</strong></span></label><label><input type="radio" autocomplete="off" name="radio_ZEUZVIRPQP" value="answer"></input> <span><strong>18,650</strong></span></label><label><input type="radio" autocomplete="off" name="radio_ZEUZVIRPQP" value=""></input> <span><strong>16,187,295</strong></span></label>
 </div></li>
 <li>What is the GC% of the assembly?
-<div id="radio_CSJWAXPEIU" class="webex-radiogroup">
-<label><input type="radio" autocomplete="off" name="radio_CSJWAXPEIU" value="answer"></input> <span><strong>39.88</strong></span></label><label><input type="radio" autocomplete="off" name="radio_CSJWAXPEIU" value=""></input> <span><strong>18,650</strong></span></label><label><input type="radio" autocomplete="off" name="radio_CSJWAXPEIU" value=""></input> <span><strong>16,187,295</strong></span></label>
+<div id="radio_MWCRDZJRSG" class="webex-radiogroup">
+<label><input type="radio" autocomplete="off" name="radio_MWCRDZJRSG" value="answer"></input> <span><strong>39.88</strong></span></label><label><input type="radio" autocomplete="off" name="radio_MWCRDZJRSG" value=""></input> <span><strong>18,650</strong></span></label><label><input type="radio" autocomplete="off" name="radio_MWCRDZJRSG" value=""></input> <span><strong>16,187,295</strong></span></label>
 </div></li>
 <li>What is the N50 of the assembly?
-<div id="radio_HKMIUCVZUV" class="webex-radiogroup">
-<label><input type="radio" autocomplete="off" name="radio_HKMIUCVZUV" value="answer"></input> <span><strong>1,363</strong></span></label><label><input type="radio" autocomplete="off" name="radio_HKMIUCVZUV" value=""></input> <span><strong>2,178</strong></span></label><label><input type="radio" autocomplete="off" name="radio_HKMIUCVZUV" value=""></input> <span><strong>87,586</strong></span></label>
+<div id="radio_NKOTBIFAZC" class="webex-radiogroup">
+<label><input type="radio" autocomplete="off" name="radio_NKOTBIFAZC" value="answer"></input> <span><strong>1,363</strong></span></label><label><input type="radio" autocomplete="off" name="radio_NKOTBIFAZC" value=""></input> <span><strong>2,178</strong></span></label><label><input type="radio" autocomplete="off" name="radio_NKOTBIFAZC" value=""></input> <span><strong>87,586</strong></span></label>
 </div></li>
 <li>What is the L50 of the assembly?
-<div id="radio_LPTJVNEITM" class="webex-radiogroup">
-<label><input type="radio" autocomplete="off" name="radio_LPTJVNEITM" value=""></input> <span><strong>1,363</strong></span></label><label><input type="radio" autocomplete="off" name="radio_LPTJVNEITM" value="answer"></input> <span><strong>2,178</strong></span></label><label><input type="radio" autocomplete="off" name="radio_LPTJVNEITM" value=""></input> <span><strong>87,586</strong></span></label>
+<div id="radio_NNSNKTDKED" class="webex-radiogroup">
+<label><input type="radio" autocomplete="off" name="radio_NNSNKTDKED" value=""></input> <span><strong>1,363</strong></span></label><label><input type="radio" autocomplete="off" name="radio_NNSNKTDKED" value="answer"></input> <span><strong>2,178</strong></span></label><label><input type="radio" autocomplete="off" name="radio_NNSNKTDKED" value=""></input> <span><strong>87,586</strong></span></label>
 </div></li>
 <li>what is the length of the largest contig?
-<div id="radio_TNQMSZNEZM" class="webex-radiogroup">
-<label><input type="radio" autocomplete="off" name="radio_TNQMSZNEZM" value=""></input> <span><strong>1,363</strong></span></label><label><input type="radio" autocomplete="off" name="radio_TNQMSZNEZM" value=""></input> <span><strong>2,178</strong></span></label><label><input type="radio" autocomplete="off" name="radio_TNQMSZNEZM" value="answer"></input> <span><strong>87,586</strong></span></label>
+<div id="radio_HWWNBVVVGB" class="webex-radiogroup">
+<label><input type="radio" autocomplete="off" name="radio_HWWNBVVVGB" value=""></input> <span><strong>1,363</strong></span></label><label><input type="radio" autocomplete="off" name="radio_HWWNBVVVGB" value=""></input> <span><strong>2,178</strong></span></label><label><input type="radio" autocomplete="off" name="radio_HWWNBVVVGB" value="answer"></input> <span><strong>87,586</strong></span></label>
 </div></li>
 </ol>
 <p><strong>Questions</strong>

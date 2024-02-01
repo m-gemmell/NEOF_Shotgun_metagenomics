@@ -27,9 +27,9 @@ knitr::include_graphics(path = "figures/terminal_window.png", auto_pdf = TRUE)
 
 Already there is useful information for us on the terminal window.
 
-- __nsc065__: This is the login name, also known as the username. In this case nsc065 is a demonstrator's account. Your screen should show a different account name which will be your username for the Linux machine/cluster you are logged into.
-- __gauss03__: This is the machine name the user is logged into.
+- __nsc206__: This is the login name, also known as the username. In this case nsc206 is a demonstrator's account. Your screen should show a different account name which will be your username for the Linux machine/cluster you are logged into.
+- __ada02__: This is the machine name the user is logged into.
 - __\~__: This represents the current directory of the user, or the directory a command was run in. In the Linux OS and others __'~'__ is a shortcut to the user's home directory.
 - Everything after the __'$'__ is where commands are typed into the terminal. This is also referred to as the command line.
 
-__To open a new terminal window__, right click on the main screen, choose `Applications` -> `Shell` -> `bash`
+__To open a new terminal window__, right click on the main screen, choose `Terminal`

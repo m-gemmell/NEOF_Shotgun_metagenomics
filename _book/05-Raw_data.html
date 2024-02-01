@@ -6,7 +6,7 @@
   <meta http-equiv="X-UA-Compatible" content="IE=edge" />
   <title>Chapter 5 Raw data | Shotgun Metagenomics</title>
   <meta name="description" content="NEOF book for the Microbial shotgun metagenomics workshop" />
-  <meta name="generator" content="bookdown 0.36 and GitBook 2.6.7" />
+  <meta name="generator" content="bookdown 0.35 and GitBook 2.6.7" />
 
   <meta property="og:title" content="Chapter 5 Raw data | Shotgun Metagenomics" />
   <meta property="og:type" content="book" />
@@ -23,7 +23,7 @@
 <meta name="author" content="Sam Haldenby and Matthew R. Gemmell" />
 
 
-<meta name="date" content="2024-01-09" />
+<meta name="date" content="2024-02-01" />
 
   <meta name="viewport" content="width=device-width, initial-scale=1" />
   <meta name="apple-mobile-web-app-capable" content="yes" />
@@ -138,7 +138,7 @@ code span.wa { color: #60a0b0; font-weight: bold; font-style: italic; } /* Warni
       <nav role="navigation">
 
 <ul class="summary">
-<li class="toc-logo"><a href="https://neof.org.uk/" target="blank"><img src="figures/neof_small_logo.png"></a></li>
+<li class="toc-logo"><a href="https://neof.org.uk/" target="blank"><img src="figures/NEOF_bordered_small.png"></a></li>
 <li><a>Shotgun Metagenomics</a></li>
 
 <li class="divider"></li>
@@ -350,7 +350,9 @@ code span.wa { color: #60a0b0; font-weight: bold; font-style: italic; } /* Warni
 <li><strong>W1</strong>: Fecal sample of individual of Western diets</li>
 </ul>
 <p>So, what do the R1 and R2 actually mean? With Illumina sequencing the vast majority of sequencing is paired end. i.e. DNA is first fragmented and both ends of each fragment are sequenced as shown here:</p>
-<p><img src="figures/paired_reads.png" width="40%" style="display: block; margin: auto;" /></p>
+<center>
+<img src="figures/paired_reads.png" style="border-radius: 15px; width: 40%" />
+</center>
 <p>This results in two sequences generated for each sequenced fragment: One reading in from the 3' end (R1) and the other reading in from the 5' end (R2).</p>
 <p>FASTQ is a sequence format much like FASTA, with the addition of quality scores. To see what a FASTQ file looks like, we can inspect the first few lines on one of our sequence files:</p>
 <div class="sourceCode" id="cb6"><pre class="sourceCode bash Rchunk"><code class="sourceCode bash"><span id="cb6-1"><a href="05-Raw_data.html#cb6-1" tabindex="-1"></a><span class="fu">zcat</span> K1_R1.fastq.gz <span class="kw">|</span> <span class="fu">head</span> <span class="at">-n</span> 4 <span class="kw">|</span> <span class="fu">less</span> <span class="at">-S</span></span></code></pre></div>

@@ -186,9 +186,7 @@ An important part of CheckM is the ubiquitous and single-copy genes it utilises.
    - Are there any markers for other lineages present?
 
 ### CheckM: Mamba
-```{r, fig.align = 'center',out.width= '10%', echo=FALSE }
-knitr::include_graphics(path = "figures/mamba_logo.png", auto_pdf = TRUE)
-``` 
+<center>![](figures/mamba_logo.png){style="width: 20%"}</center>
 
 Due to program version conflicts we will use the `checkm` conda environment for this section.
 

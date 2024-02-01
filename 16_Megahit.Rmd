@@ -98,9 +98,7 @@ The report tells us quite a bit about the assembly quality. Two definitions that
 - __N50__ equals the length of the N50 contig. 
 - __L50__ is the number of contigs with a length equal to or greater than N50.
 
-```{r, fig.align = 'center',out.width= '40%', echo=FALSE }
-knitr::include_graphics(path = "figures/n50_n90.png", auto_pdf = TRUE)
-``` 
+<center>![](figures/n50_n90.png){style="border-radius: 15px; width: 40%"}</center>
 
 ### QUAST: MCQs
 ```{r, fig.align = 'center',out.width= '10%', echo=FALSE }
