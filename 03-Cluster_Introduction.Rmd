@@ -1,5 +1,5 @@
 # Cluster Introduction
-```{r, fig.align = 'center',out.width= '20%', echo=FALSE }
+```{r, fig.align = 'center',out.width= '200px', echo=FALSE }
 knitr::include_graphics(path = "figures/cluster.png", auto_pdf = TRUE)
 ``` 
 
@@ -8,7 +8,7 @@ For this workshop we will be using Virtual Network Computing (VNC). Connect to t
 
 You will now be in a logged-in Linux VNC desktop. You will see something as below (there may be only one terminal which is fine). If you do not see something similar please ask for assistance.
 
-```{r, fig.align = 'center',out.width= '80%', echo=FALSE }
+```{r, fig.align = 'center',out.width= '800px', echo=FALSE }
 knitr::include_graphics(path = "figures/logon_pic.png", auto_pdf = TRUE)
 ``` 
 
@@ -21,7 +21,7 @@ https://linuxmint-installation-guide.readthedocs.io/en/latest/
 
 ## The Terminal Window
 In our case the terminal window looks like the picture below. We are using the terminal window as our shell to interpret our commands to the kernel. Depending on your system and preferences it may look different.
-```{r, fig.align = 'center',out.width= '80%', echo=FALSE }
+```{r, fig.align = 'center',out.width= '800px', echo=FALSE }
 knitr::include_graphics(path = "figures/terminal_window.png", auto_pdf = TRUE)
 ``` 
 

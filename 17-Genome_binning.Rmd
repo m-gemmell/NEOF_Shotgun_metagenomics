@@ -1,5 +1,5 @@
 # Genome binning {#binning}
-```{r, fig.align = 'center',out.width= '40%', echo=FALSE }
+```{r, fig.align = 'center',out.width= '400px', echo=FALSE }
 knitr::include_graphics(path = "figures/yarn_binning.png", auto_pdf = TRUE)
 ``` 
 
@@ -20,7 +20,7 @@ Binning produces "bins" of contigs of various quality (e.g. draft, complete). Th
 It is recommended to ensure you do not have a poor quality metagenome assembly. Binning requires contigs of good length and good coverage. Extremely low coverage and very short contigs will be excluded from binning.
 
 ## MetaBAT2
-```{r, fig.align = 'center',out.width= '10%', echo=FALSE }
+```{r, fig.align = 'center',out.width= '200px', echo=FALSE }
 knitr::include_graphics(path = "figures/bat.png", auto_pdf = TRUE)
 ``` 
 
@@ -40,7 +40,7 @@ cd ~/7-Binning/K1
 ```
 
 ### MetaBAT2: depth calculation
-```{r, fig.align = 'center',out.width= '10%', echo=FALSE }
+```{r, fig.align = 'center',out.width= '100px', echo=FALSE }
 knitr::include_graphics(path = "figures/submarine.png", auto_pdf = TRUE)
 ``` 
 
@@ -124,7 +124,7 @@ q()
 __Note__: One of the reasons for our short contigs is that we only used a subset of our sequencing dataset for this tutorial due to time concerns.
 
 ### MetaBAT2: run
-```{r, fig.align = 'center',out.width= '10%', echo=FALSE }
+```{r, fig.align = 'center',out.width= '100px', echo=FALSE }
 knitr::include_graphics(path = "figures/play_orange.png", auto_pdf = TRUE)
 ``` 
 
@@ -142,7 +142,7 @@ metabat2 \
 ```
 
 #### Parameters {-}
-```{r, fig.align = 'center',out.width= '10%', echo=FALSE }
+```{r, fig.align = 'center',out.width= '100px', echo=FALSE }
 knitr::include_graphics(path = "figures/parameter_orange.png", auto_pdf = TRUE)
 ```
 
@@ -154,7 +154,7 @@ knitr::include_graphics(path = "figures/parameter_orange.png", auto_pdf = TRUE)
   - We used the minimum value of 1500 as we are using tutorial data. We recommend using the default in your own analysis.
 
 ### MetaBAT2: output
-```{r, fig.align = 'center',out.width= '10%', echo=FALSE }
+```{r, fig.align = 'center',out.width= '100px', echo=FALSE }
 knitr::include_graphics(path = "figures/output_file_orange.png", auto_pdf = TRUE)
 ``` 
 
@@ -165,7 +165,7 @@ ls bins
 ```
 
 ## CheckM
-```{r, fig.align = 'center',out.width= '40%', echo=FALSE }
+```{r, fig.align = 'center',out.width= '400px', echo=FALSE }
 knitr::include_graphics(path = "figures/CheckM.png", auto_pdf = TRUE)
 ``` 
 
@@ -186,7 +186,7 @@ An important part of CheckM is the ubiquitous and single-copy genes it utilises.
    - Are there any markers for other lineages present?
 
 ### CheckM: Mamba
-<center>![](figures/mamba_logo.png){style="width: 20%"}</center>
+<center>![](figures/mamba_logo.png){style="width: 200px"}</center>
 
 Due to program version conflicts we will use the `checkm` conda environment for this section.
 
@@ -203,7 +203,7 @@ cd ~/7-Binning/K1/
 ```
 
 ### CheckM: run
-```{r, fig.align = 'center',out.width= '10%', echo=FALSE }
+```{r, fig.align = 'center',out.width= '100px', echo=FALSE }
 knitr::include_graphics(path = "figures/play_black.png", auto_pdf = TRUE)
 ``` 
 
@@ -225,7 +225,7 @@ bins/ checkm_output
 ```
 
 #### Parameters {-}
-```{r, fig.align = 'center',out.width= '10%', echo=FALSE }
+```{r, fig.align = 'center',out.width= '100px', echo=FALSE }
 knitr::include_graphics(path = "figures/parameter_black.png", auto_pdf = TRUE)
 ```
 
@@ -237,7 +237,7 @@ knitr::include_graphics(path = "figures/parameter_black.png", auto_pdf = TRUE)
 - `checkm_output` : The last argument is the directory to store the output to. This directory should not exist prior to running.
 
 ### CheckM: output
-```{r, fig.align = 'center',out.width= '10%', echo=FALSE }
+```{r, fig.align = 'center',out.width= '100px', echo=FALSE }
 knitr::include_graphics(path = "figures/output_file_black.png", auto_pdf = TRUE)
 ``` 
 
@@ -369,7 +369,7 @@ paste -d "," MAGS_checkm.csv MAGS_quality.csv > MAGS_checkm_quality.csv
 ```
 
 ### CheckM: MCQs
-```{r, fig.align = 'center',out.width= '10%', echo=FALSE }
+```{r, fig.align = 'center',out.width= '100px', echo=FALSE }
 knitr::include_graphics(path = "figures/question_bubble_blue.png", auto_pdf = TRUE)
 ```
 
@@ -429,7 +429,7 @@ opts_p <- c("__K1.20__", answer="__K1.21__", "__K1.22__")
 9. Which bin has the highest completeness value (98.27%)? `r longmcq(opts_p)`
 
 ## Binning summary
-```{r, fig.align = 'center',out.width= '10%', echo=FALSE }
+```{r, fig.align = 'center',out.width= '100px', echo=FALSE }
 knitr::include_graphics(path = "figures/sum_black.png", auto_pdf = TRUE)
 ```
 

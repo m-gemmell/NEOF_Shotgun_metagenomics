@@ -1,7 +1,7 @@
 # (PART\*) Taxonomy of reads {-}
 
 # Taxonomic profiling {#taxprofile}
-```{r, fig.align = 'center',out.width= '30%', echo=FALSE }
+```{r, fig.align = 'center',out.width= '300px', echo=FALSE }
 knitr::include_graphics(path = "figures/classification.png", auto_pdf = TRUE)
 ``` 
 

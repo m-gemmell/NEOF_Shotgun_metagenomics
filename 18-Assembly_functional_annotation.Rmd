@@ -1,17 +1,17 @@
 # Assembly functional annotation {#funcanno}
-```{r, fig.align = 'center',out.width= '20%', echo=FALSE }
+```{r, fig.align = 'center',out.width= '200px', echo=FALSE }
 knitr::include_graphics(path = "figures/pathways.png", auto_pdf = TRUE)
 ``` 
 
 ## Taxonomic annotation
-```{r, fig.align = 'center',out.width= '10%', echo=FALSE }
+```{r, fig.align = 'center',out.width= '100px', echo=FALSE }
 knitr::include_graphics(path = "figures/classification.png", auto_pdf = TRUE)
 ``` 
 
 Taxonomic annotation of bins can be carried out with `Kraken2`. As we have already done this for the reads and taxonomic results from read and assembly approaches have similar performances we will not cover it here. Instead we will move straight onto functional annotation with [`Bakta`](https://github.com/oschwengers/bakta).
 
 ## Bakta
-<center>![](figures/bakta_logo.png){style="border-radius: 15px; width: 25%"}</center>
+<center>![](figures/bakta_logo.png){style="border-radius: 15px; width: 250px; border: 5px solid #333333"}</center>
 
 We will carry out `Bakta` functional annotation using. `Bakta` can annotate bacterial genomes and plasmids from both isolates and MAGs.
 
@@ -23,7 +23,7 @@ cd ~/8-Annotation
 ```
 
 ### Bakta: run
-```{r, fig.align = 'center',out.width= '10%', echo=FALSE }
+```{r, fig.align = 'center',out.width= '100px', echo=FALSE }
 knitr::include_graphics(path = "figures/play_blue.png", auto_pdf = TRUE)
 ``` 
 
@@ -39,7 +39,7 @@ bakta \
 ```
 
 #### Parameters {-}
-```{r, fig.align = 'center',out.width= '10%', echo=FALSE }
+```{r, fig.align = 'center',out.width= '100px', echo=FALSE }
 knitr::include_graphics(path = "figures/parameter_blue.png", auto_pdf = TRUE)
 ```
 
@@ -48,7 +48,7 @@ knitr::include_graphics(path = "figures/parameter_blue.png", auto_pdf = TRUE)
 - The last parameter is the fasta file containing the genome/plasmid you would like annotated.
 
 ### Bakta: output
-```{r, fig.align = 'center',out.width= '10%', echo=FALSE }
+```{r, fig.align = 'center',out.width= '100px', echo=FALSE }
 knitr::include_graphics(path = "figures/output_file_blue.png", auto_pdf = TRUE)
 ``` 
 
@@ -150,7 +150,7 @@ In your future analyses you can expect these files further with excel, R, or vis
 What if you want to know about pathways?
 
 ## MinPath
-```{r, fig.align = 'center',out.width= '15%', echo=FALSE }
+```{r, fig.align = 'center',out.width= '150px', echo=FALSE }
 knitr::include_graphics(path = "figures/pathways_2.png", auto_pdf = TRUE)
 ```
 
@@ -159,7 +159,7 @@ knitr::include_graphics(path = "figures/pathways_2.png", auto_pdf = TRUE)
 Ensure you start in the `~/8-Annotation/K1_fullset` directory.
 
 ### MinPath: EC extraction
-```{r, fig.align = 'center',out.width= '10%', echo=FALSE }
+```{r, fig.align = 'center',out.width= '100px', echo=FALSE }
 knitr::include_graphics(path = "figures/exctractor.png", auto_pdf = TRUE)
 ```
 
@@ -280,7 +280,7 @@ sed "s/;.*EC:/\t/" | sed "s/,.*//" | head
 In the looped command, output is written into files: `> EC/${bin}.ec`.
 
 ### MinPath: run {#minpathrun}
-```{r, fig.align = 'center',out.width= '10%', echo=FALSE }
+```{r, fig.align = 'center',out.width= '100px', echo=FALSE }
 knitr::include_graphics(path = "figures/play_green.png", auto_pdf = TRUE)
 ``` 
 
@@ -307,7 +307,7 @@ done
 A lot of output will be printed to screen but this can be ignored unless you see warnings.
 
 ### MinPath: output
-```{r, fig.align = 'center',out.width= '10%', echo=FALSE }
+```{r, fig.align = 'center',out.width= '100px', echo=FALSE }
 knitr::include_graphics(path = "figures/output_file_green.png", auto_pdf = TRUE)
 ``` 
 
@@ -350,7 +350,7 @@ grep "PWY-6972" *minpath | less
 ```
 
 ### KEGGs
-```{r, fig.align = 'center',out.width= '10%', echo=FALSE }
+```{r, fig.align = 'center',out.width= '100px', echo=FALSE }
 knitr::include_graphics(path = "figures/KEGG.png", auto_pdf = TRUE)
 ```
 

@@ -1,12 +1,12 @@
 # Krona plot
-```{r, fig.align = 'center',out.width= '15%', echo=FALSE }
+```{r, fig.align = 'center',out.width= '150px', echo=FALSE }
 knitr::include_graphics(path = "figures/krona.png", auto_pdf = TRUE)
 ``` 
 
 `Krona` is an interactive metagenome species abundance visualisation tool. 
 
 ## Krona: run
-```{r, fig.align = 'center',out.width= '10%', echo=FALSE }
+```{r, fig.align = 'center',out.width= '100px', echo=FALSE }
 knitr::include_graphics(path = "figures/play_red.png", auto_pdf = TRUE)
 ``` 
 
@@ -21,7 +21,7 @@ ktImportTaxonomy -o kraken2.krona.html *.kreport2
 You will get a warning that not all taxonomy IDs were found. We will ignore this but in your own future installations this should be addressed with `Krona`'s `updateTaxonomy.sh` command.
 
 ## Krona: visualise
-```{r, fig.align = 'center',out.width= '10%', echo=FALSE }
+```{r, fig.align = 'center',out.width= '100px', echo=FALSE }
 knitr::include_graphics(path = "figures/eye_red.png", auto_pdf = TRUE)
 ``` 
 
@@ -43,7 +43,7 @@ This is an interactive multi-tiered pie chart with many options. Some of the int
   - E.g. Click on Proteobacteria to see the percentage of the Root it accounts for and to see the percentage of Bacteria it accounts for in the sample.
 
 ## Krona: MCQs
-```{r, fig.align = 'center',out.width= '10%', echo=FALSE }
+```{r, fig.align = 'center',out.width= '100px', echo=FALSE }
 knitr::include_graphics(path = "figures/question_bubble_red.png", auto_pdf = TRUE)
 ```
 

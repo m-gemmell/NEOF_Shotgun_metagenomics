@@ -1,12 +1,12 @@
 # Megahit Assembly
-```{r, fig.align = 'center',out.width= '20%', echo=FALSE }
+```{r, fig.align = 'center',out.width= '200px', echo=FALSE }
 knitr::include_graphics(path = "figures/puzzle.png", auto_pdf = TRUE)
 ``` 
 
 We will use our stitched and unstitched reads to produce an assembly with`MEGAHIT`. 
 
 ## MEGAHIT
-```{r, fig.align = 'center',out.width= '10%', echo=FALSE }
+```{r, fig.align = 'center',out.width= '100px', echo=FALSE }
 knitr::include_graphics(path = "figures/play_blue.png", auto_pdf = TRUE)
 ```
 
@@ -31,7 +31,7 @@ megahit \
 ```
 
 #### Parameters {-}
-```{r, fig.align = 'center',out.width= '10%', echo=FALSE }
+```{r, fig.align = 'center',out.width= '100px', echo=FALSE }
 knitr::include_graphics(path = "figures/parameter_blue.png", auto_pdf = TRUE)
 ```
 
@@ -55,7 +55,7 @@ less K1/final.contigs.fa
 There is not much to see. When happy, quit the `less` (`q`) and carry on to `QUAST`.
 
 ## QUAST
-```{r, fig.align = 'center',out.width= '15%', echo=FALSE }
+```{r, fig.align = 'center',out.width= '150px', echo=FALSE }
 knitr::include_graphics(path = "figures/inspect.png", auto_pdf = TRUE)
 ``` 
 
@@ -69,7 +69,7 @@ mkdir -p quast/K1
 ```
 
 ### QUAST: run
-```{r, fig.align = 'center',out.width= '10%', echo=FALSE }
+```{r, fig.align = 'center',out.width= '100px', echo=FALSE }
 knitr::include_graphics(path = "figures/play_green.png", auto_pdf = TRUE)
 ``` 
 
@@ -80,7 +80,7 @@ quast -o quast/K1 K1/final.contigs.fa
 ```
 
 ### QUAST: visualise
-```{r, fig.align = 'center',out.width= '10%', echo=FALSE }
+```{r, fig.align = 'center',out.width= '100px', echo=FALSE }
 knitr::include_graphics(path = "figures/eye_green.png", auto_pdf = TRUE)
 ```
 
@@ -98,10 +98,10 @@ The report tells us quite a bit about the assembly quality. Two definitions that
 - __N50__ equals the length of the N50 contig. 
 - __L50__ is the number of contigs with a length equal to or greater than N50.
 
-<center>![](figures/n50_n90.png){style="border-radius: 15px; width: 40%"}</center>
+<center>![](figures/n50_n90.png){style="border-radius: 15px; width: 400px; border: 5px solid #333333"}</center>
 
 ### QUAST: MCQs
-```{r, fig.align = 'center',out.width= '10%', echo=FALSE }
+```{r, fig.align = 'center',out.width= '100px', echo=FALSE }
 knitr::include_graphics(path = "figures/question_bubble_green.png", auto_pdf = TRUE)
 ```
 
@@ -139,7 +139,7 @@ __Questions__
 - How do the contig metrics compare to the original reads? 
 
 ## Metagenome assembly summary
-```{r, fig.align = 'center',out.width= '10%', echo=FALSE }
+```{r, fig.align = 'center',out.width= '100px', echo=FALSE }
 knitr::include_graphics(path = "figures/sum_black.png", auto_pdf = TRUE)
 ```
 

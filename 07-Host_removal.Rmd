@@ -1,5 +1,5 @@
 # Host removal {#hostremoval}
-```{r, fig.align = 'center',out.width= '30%', echo=FALSE }
+```{r, fig.align = 'center',out.width= '300px', echo=FALSE }
 knitr::include_graphics(path = "figures/bowtie2.png", auto_pdf = TRUE)
 ``` 
 
@@ -16,7 +16,7 @@ cp /pub14/tea/nsc206/NEOF/Shotgun_metagenomics/GRCh38_slice.fasta .
 ```
 
 ## Index reference
-```{r, fig.align = 'center',out.width= '15%', echo=FALSE }
+```{r, fig.align = 'center',out.width= '150px', echo=FALSE }
 knitr::include_graphics(path = "figures/index.png", auto_pdf = TRUE)
 ``` 
 
@@ -29,7 +29,7 @@ bowtie2-build GRCh38_slice.fasta GRCh38_slice.fasta
 If you use `ls` you will now see a bunch of files starting with `GRCh38_slice.fasta` and ending with various suffixes that contain `bt2`. These are the index files which allow us to use the reference with `Bowtie2`.
 
 ## Alignment
-```{r, fig.align = 'center',out.width= '15%', echo=FALSE }
+```{r, fig.align = 'center',out.width= '150px', echo=FALSE }
 knitr::include_graphics(path = "figures/alignment.png", auto_pdf = TRUE)
 ``` 
 
@@ -41,7 +41,7 @@ bowtie2 -x GRCh38_slice.fasta -1 K1_R1.fq.gz -2 K1_R2.fq.gz \
 ```
 
 #### Parameters {-}
-```{r, fig.align = 'center',out.width= '10%', echo=FALSE }
+```{r, fig.align = 'center',out.width= '100px', echo=FALSE }
 knitr::include_graphics(path = "figures/parameter_black.png", auto_pdf = TRUE)
 ```
 
@@ -67,7 +67,7 @@ The parameters for `samtools view` are:
 The binary alignment is redirected to a new file called `K1_mapped.bam`. For more information on redirection please see our [Intro to Unix course book](http://www.cgr.liv.ac.uk/illum/NEOFworkshops_5bfa93ca0482d69d/Intro_to_Unix/12-Advanced_linux_practice.html#redirection).
 
 ## Unmapped read extraction
-```{r, fig.align = 'center',out.width= '15%', echo=FALSE }
+```{r, fig.align = 'center',out.width= '150px', echo=FALSE }
 knitr::include_graphics(path = "figures/exctractor.png", auto_pdf = TRUE)
 ``` 
 
@@ -78,7 +78,7 @@ samtools fastq -f 4 -1 K1_R1.u.fastq -2 K1_R2.u.fastq K1_mapped.bam
 ```
  
 #### Parameters {-}
-```{r, fig.align = 'center',out.width= '10%', echo=FALSE }
+```{r, fig.align = 'center',out.width= '100px', echo=FALSE }
 knitr::include_graphics(path = "figures/parameter_green.png", auto_pdf = TRUE)
 ```
 
@@ -91,7 +91,7 @@ knitr::include_graphics(path = "figures/parameter_green.png", auto_pdf = TRUE)
 This step may make unmatched paired files (why we have `.u.` in the output file names). This occurs when a read from R2 is removed but the matching read in R1 is not removed, or vice versa. This will cause issues for further analysis. 
 
 ## Re-pair
-```{r, fig.align = 'center',out.width= '30%', echo=FALSE }
+```{r, fig.align = 'center',out.width= '300px', echo=FALSE }
 knitr::include_graphics(path = "figures/repair.png", auto_pdf = TRUE)
 ``` 
 
@@ -104,7 +104,7 @@ outs=singletons.fastq
 ```
 
 #### Parameters {-}
-```{r, fig.align = 'center',out.width= '10%', echo=FALSE }
+```{r, fig.align = 'center',out.width= '100px', echo=FALSE }
 knitr::include_graphics(path = "figures/parameter_blue.png", auto_pdf = TRUE)
 ```
 
@@ -116,7 +116,7 @@ knitr::include_graphics(path = "figures/parameter_blue.png", auto_pdf = TRUE)
   - This file can normally be ignored.
 
 ## Host removal summary
-```{r, fig.align = 'center',out.width= '10%', echo=FALSE }
+```{r, fig.align = 'center',out.width= '100px', echo=FALSE }
 knitr::include_graphics(path = "figures/sum_blue.png", auto_pdf = TRUE)
 ```
 

@@ -1,7 +1,7 @@
 # (PART\*) Data & QC {-}
 
 # Raw data {#rawdata}
-```{r, fig.align = 'center',out.width= '20%', echo=FALSE }
+```{r, fig.align = 'center',out.width= '200px', echo=FALSE }
 knitr::include_graphics(path = "figures/usb_stick.png", auto_pdf = TRUE)
 ``` 
 
@@ -12,7 +12,7 @@ Have a browse of some of the projects by selecting one of the biomes on the webs
 We have selected a dataset from this site that consists of DNA shotgun data generated from 24 human faecal samples. 12 of these samples are from subjects who were fed a western diet and 12 are from subjects who were fed a Korean diet. This dataset comes from the EBI metagenomics resource (https://www.ebi.ac.uk/metagenomics/projects/ERP005558).
 
 ## Obtaining the data
-```{r, fig.align = 'center',out.width= '15%', echo=FALSE }
+```{r, fig.align = 'center',out.width= '150px', echo=FALSE }
 knitr::include_graphics(path = "figures/link.png", auto_pdf = TRUE)
 ``` 
 
@@ -53,7 +53,7 @@ The three samples are:
 
 So, what do the R1 and R2 actually mean? With Illumina sequencing the vast majority of sequencing is paired end. i.e. DNA is first fragmented and both ends of each fragment are sequenced as shown here:
 
-<center>![](figures/paired_reads.png){style="border-radius: 15px; width: 40%"}</center>
+<center>![](figures/paired_reads.png){style="border-radius: 15px; width: 300px; border: 5px solid #333333"}</center>
 
 This results in two sequences generated for each sequenced fragment: One reading in from the 3' end (R1) and the other reading in from the 5' end (R2).
 
@@ -72,7 +72,7 @@ __To return to the command prompt, press__ `q`.
 Due to computational constraints, the files you have linked to are a subset of the original data (i.e. 1 million read pairs from each sample).
 
 ## Checking quality control
-```{r, fig.align = 'center',out.width= '15%', echo=FALSE }
+```{r, fig.align = 'center',out.width= '150px', echo=FALSE }
 knitr::include_graphics(path = "figures/mangify_glass.png", auto_pdf = TRUE)
 ``` 
 

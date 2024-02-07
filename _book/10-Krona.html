@@ -6,7 +6,7 @@
   <meta http-equiv="X-UA-Compatible" content="IE=edge" />
   <title>Chapter 10 Krona plot | Shotgun Metagenomics</title>
   <meta name="description" content="NEOF book for the Microbial shotgun metagenomics workshop" />
-  <meta name="generator" content="bookdown 0.35 and GitBook 2.6.7" />
+  <meta name="generator" content="bookdown 0.36 and GitBook 2.6.7" />
 
   <meta property="og:title" content="Chapter 10 Krona plot | Shotgun Metagenomics" />
   <meta property="og:type" content="book" />
@@ -23,7 +23,7 @@
 <meta name="author" content="Sam Haldenby and Matthew R. Gemmell" />
 
 
-<meta name="date" content="2024-02-01" />
+<meta name="date" content="2024-02-07" />
 
   <meta name="viewport" content="width=device-width, initial-scale=1" />
   <meta name="apple-mobile-web-app-capable" content="yes" />
@@ -321,11 +321,11 @@ code span.wa { color: #60a0b0; font-weight: bold; font-style: italic; } /* Warni
             <section class="normal" id="section-">
 <div id="krona-plot" class="section level1 hasAnchor" number="10">
 <h1><span class="header-section-number">Chapter 10</span> Krona plot<a href="10-Krona.html#krona-plot" class="anchor-section" aria-label="Anchor link to header"></a></h1>
-<p><img src="figures/krona.png" width="15%" style="display: block; margin: auto;" /></p>
+<p><img src="figures/krona.png" width="150px" style="display: block; margin: auto;" /></p>
 <p><code>Krona</code> is an interactive metagenome species abundance visualisation tool.</p>
 <div id="krona-run" class="section level2 hasAnchor" number="10.1">
 <h2><span class="header-section-number">10.1</span> Krona: run<a href="10-Krona.html#krona-run" class="anchor-section" aria-label="Anchor link to header"></a></h2>
-<p><img src="figures/play_red.png" width="10%" style="display: block; margin: auto;" /></p>
+<p><img src="figures/play_red.png" width="100px" style="display: block; margin: auto;" /></p>
 <p>We can use the <code>Kraken2</code> report files to create our Krona plots. With the below command we can import our <code>Kraken2</code> taxonomy (within the report file) into a <code>Krona</code> html.</p>
 <div class="sourceCode" id="cb26"><pre class="sourceCode bash Rchunk"><code class="sourceCode bash"><span id="cb26-1"><a href="10-Krona.html#cb26-1" tabindex="-1"></a><span class="ex">ktImportTaxonomy</span> <span class="at">-o</span> kraken2.krona.html <span class="pp">*</span>.kreport2</span></code></pre></div>
 <p><code>-o</code> is our output html file, and the final argument <code>*.kreport2</code> represents all of our <code>.kreport2</code> files in the current directory. The <code>*</code> is a wild-card, meaning any characters any number of times. Therefore <code>*.kreport2</code> identifies the files <code>K1.kreport2</code> <code>K2.kreport2</code> and <code>W1.kreport2</code>.</p>
@@ -333,7 +333,7 @@ code span.wa { color: #60a0b0; font-weight: bold; font-style: italic; } /* Warni
 </div>
 <div id="krona-visualise" class="section level2 hasAnchor" number="10.2">
 <h2><span class="header-section-number">10.2</span> Krona: visualise<a href="10-Krona.html#krona-visualise" class="anchor-section" aria-label="Anchor link to header"></a></h2>
-<p><img src="figures/eye_red.png" width="10%" style="display: block; margin: auto;" /></p>
+<p><img src="figures/eye_red.png" width="100px" style="display: block; margin: auto;" /></p>
 <p>We can view our interactive chart in a web browser. This shows the percentage of reads that were classified to various taxonomies at different levels.</p>
 <div class="sourceCode" id="cb27"><pre class="sourceCode bash Rchunk"><code class="sourceCode bash"><span id="cb27-1"><a href="10-Krona.html#cb27-1" tabindex="-1"></a><span class="ex">firefox</span> kraken2.krona.html <span class="kw">&amp;</span></span></code></pre></div>
 <p>This is an interactive multi-tiered pie chart with many options. Some of the interactivity is described below:</p>
@@ -356,32 +356,32 @@ code span.wa { color: #60a0b0; font-weight: bold; font-style: italic; } /* Warni
 </div>
 <div id="krona-mcqs" class="section level2 hasAnchor" number="10.3">
 <h2><span class="header-section-number">10.3</span> Krona: MCQs<a href="10-Krona.html#krona-mcqs" class="anchor-section" aria-label="Anchor link to header"></a></h2>
-<p><img src="figures/question_bubble_red.png" width="10%" style="display: block; margin: auto;" /></p>
+<p><img src="figures/question_bubble_red.png" width="100px" style="display: block; margin: auto;" /></p>
 <p>Viewing the Krona, attempt the below MCQs.</p>
 <ol style="list-style-type: decimal">
 <li>What percentage of the <strong>root</strong> was classified to <strong>Bacteria</strong> for <strong>K1</strong>?
-<div id="radio_RJHPODLONS" class="webex-radiogroup">
-<label><input type="radio" autocomplete="off" name="radio_RJHPODLONS" value=""></input> <span><strong>2%</strong></span></label><label><input type="radio" autocomplete="off" name="radio_RJHPODLONS" value=""></input> <span><strong>34%</strong></span></label><label><input type="radio" autocomplete="off" name="radio_RJHPODLONS" value="answer"></input> <span><strong>35%</strong></span></label>
+<div id="radio_KWYNYZVDCS" class="webex-radiogroup">
+<label><input type="radio" autocomplete="off" name="radio_KWYNYZVDCS" value=""></input> <span><strong>2%</strong></span></label><label><input type="radio" autocomplete="off" name="radio_KWYNYZVDCS" value=""></input> <span><strong>34%</strong></span></label><label><input type="radio" autocomplete="off" name="radio_KWYNYZVDCS" value="answer"></input> <span><strong>35%</strong></span></label>
 </div></li>
 <li>What percentage of <strong>bacteria</strong> was classified to <strong>Pseudomonadota</strong> for <strong>K2</strong>?
-<div id="radio_DLMVMFWSMA" class="webex-radiogroup">
-<label><input type="radio" autocomplete="off" name="radio_DLMVMFWSMA" value=""></input> <span><strong>2%</strong></span></label><label><input type="radio" autocomplete="off" name="radio_DLMVMFWSMA" value="answer"></input> <span><strong>34%</strong></span></label><label><input type="radio" autocomplete="off" name="radio_DLMVMFWSMA" value=""></input> <span><strong>35%</strong></span></label>
+<div id="radio_ZGPSASIFEJ" class="webex-radiogroup">
+<label><input type="radio" autocomplete="off" name="radio_ZGPSASIFEJ" value=""></input> <span><strong>2%</strong></span></label><label><input type="radio" autocomplete="off" name="radio_ZGPSASIFEJ" value="answer"></input> <span><strong>34%</strong></span></label><label><input type="radio" autocomplete="off" name="radio_ZGPSASIFEJ" value=""></input> <span><strong>35%</strong></span></label>
 </div></li>
 <li>What percentage of the <strong>root</strong> was classified to <strong>Myxococcota</strong> for <strong>W1</strong>?
-<div id="radio_XUHJHTXVHR" class="webex-radiogroup">
-<label><input type="radio" autocomplete="off" name="radio_XUHJHTXVHR" value="answer"></input> <span><strong>2%</strong></span></label><label><input type="radio" autocomplete="off" name="radio_XUHJHTXVHR" value=""></input> <span><strong>34%</strong></span></label><label><input type="radio" autocomplete="off" name="radio_XUHJHTXVHR" value=""></input> <span><strong>35%</strong></span></label>
+<div id="radio_RDRDUIFEVW" class="webex-radiogroup">
+<label><input type="radio" autocomplete="off" name="radio_RDRDUIFEVW" value="answer"></input> <span><strong>2%</strong></span></label><label><input type="radio" autocomplete="off" name="radio_RDRDUIFEVW" value=""></input> <span><strong>34%</strong></span></label><label><input type="radio" autocomplete="off" name="radio_RDRDUIFEVW" value=""></input> <span><strong>35%</strong></span></label>
 </div></li>
 <li>What percentage of the <strong>Terrabacteria groups</strong> was classified to <strong>Cellulomonas gilvus</strong> for <strong>K2</strong>?
-<div id="radio_NPWNHYPNUK" class="webex-radiogroup">
-<label><input type="radio" autocomplete="off" name="radio_NPWNHYPNUK" value="answer"></input> <span><strong>39%</strong></span></label><label><input type="radio" autocomplete="off" name="radio_NPWNHYPNUK" value=""></input> <span><strong>8%</strong></span></label><label><input type="radio" autocomplete="off" name="radio_NPWNHYPNUK" value=""></input> <span><strong>6%</strong></span></label>
+<div id="radio_RNECITLMDP" class="webex-radiogroup">
+<label><input type="radio" autocomplete="off" name="radio_RNECITLMDP" value="answer"></input> <span><strong>39%</strong></span></label><label><input type="radio" autocomplete="off" name="radio_RNECITLMDP" value=""></input> <span><strong>8%</strong></span></label><label><input type="radio" autocomplete="off" name="radio_RNECITLMDP" value=""></input> <span><strong>6%</strong></span></label>
 </div></li>
 <li>What percentage of <strong>Alphaproteobacteria</strong> was classified to <strong>Phenylobacterium immobile</strong> for <strong>K1</strong>?
-<div id="radio_ABALUJVMRL" class="webex-radiogroup">
-<label><input type="radio" autocomplete="off" name="radio_ABALUJVMRL" value=""></input> <span><strong>39%</strong></span></label><label><input type="radio" autocomplete="off" name="radio_ABALUJVMRL" value=""></input> <span><strong>8%</strong></span></label><label><input type="radio" autocomplete="off" name="radio_ABALUJVMRL" value="answer"></input> <span><strong>6%</strong></span></label>
+<div id="radio_DXCLUNQHRL" class="webex-radiogroup">
+<label><input type="radio" autocomplete="off" name="radio_DXCLUNQHRL" value=""></input> <span><strong>39%</strong></span></label><label><input type="radio" autocomplete="off" name="radio_DXCLUNQHRL" value=""></input> <span><strong>8%</strong></span></label><label><input type="radio" autocomplete="off" name="radio_DXCLUNQHRL" value="answer"></input> <span><strong>6%</strong></span></label>
 </div></li>
 <li>What percentage of <strong>Viridiplantae</strong> (in Eukaryota) was classified to <strong>Parasponia</strong> for <strong>W1</strong>?
-<div id="radio_QHPFFDAYIN" class="webex-radiogroup">
-<label><input type="radio" autocomplete="off" name="radio_QHPFFDAYIN" value=""></input> <span><strong>39%</strong></span></label><label><input type="radio" autocomplete="off" name="radio_QHPFFDAYIN" value="answer"></input> <span><strong>8%</strong></span></label><label><input type="radio" autocomplete="off" name="radio_QHPFFDAYIN" value=""></input> <span><strong>6%</strong></span></label>
+<div id="radio_MJBSBCZQWX" class="webex-radiogroup">
+<label><input type="radio" autocomplete="off" name="radio_MJBSBCZQWX" value=""></input> <span><strong>39%</strong></span></label><label><input type="radio" autocomplete="off" name="radio_MJBSBCZQWX" value="answer"></input> <span><strong>8%</strong></span></label><label><input type="radio" autocomplete="off" name="radio_MJBSBCZQWX" value=""></input> <span><strong>6%</strong></span></label>
 </div></li>
 </ol>
 

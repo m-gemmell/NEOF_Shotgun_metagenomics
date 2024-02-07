@@ -1,5 +1,5 @@
 # Stitching read pairs
-```{r, fig.align = 'center',out.width= '15%', echo=FALSE }
+```{r, fig.align = 'center',out.width= '150px', echo=FALSE }
 knitr::include_graphics(path = "figures/stitch.png", auto_pdf = TRUE)
 ``` 
 
@@ -11,16 +11,14 @@ A read pair consists of two sequences read from each end of a fragment of DNA (o
 
 First, we obtain our forward and reverse reads, derived from different ends of the same fragment. Second, we look for sufficient overlap between the 3' ends of our sequences. Third, if there is sufficient overlap, we combine, or stitch, the two reads together to form one long sequence.
 
-```{r, fig.align = 'center',out.width= '40%', echo=FALSE }
-knitr::include_graphics(path = "figures/merging_paired_reads.png", auto_pdf = TRUE)
-``` 
+<center>![](figures/merging_paired_reads.png){style="width: 400px; border-radius: 15px; border: 5px solid #333333; background-color: white"}</center>
 
 Once we have longer stitched reads, we can increase the k-mer length for our assembly. 
 
 There are a number of pieces of software that can be used to stitch reads (e.g. `Pear`,  `Pandaseq`) but today we will use one called `FLASH`:
 
 ## FLASH: run
-```{r, fig.align = 'center',out.width= '10%', echo=FALSE }
+```{r, fig.align = 'center',out.width= '100px', echo=FALSE }
 knitr::include_graphics(path = "figures/play_red.png", auto_pdf = TRUE)
 ``` 
 
@@ -38,7 +36,7 @@ flash  -o K1 -z -t 12 -d . \
 ```
 
 #### Parameters {-}
-```{r, fig.align = 'center',out.width= '10%', echo=FALSE }
+```{r, fig.align = 'center',out.width= '100px', echo=FALSE }
 knitr::include_graphics(path = "figures/parameter_red.png", auto_pdf = TRUE)
 ```
 
@@ -49,7 +47,7 @@ knitr::include_graphics(path = "figures/parameter_red.png", auto_pdf = TRUE)
 - The last 2 flag-less parameters are the forward and reverse read files for stitching.
 
 ## FLASH: Output
-```{r, fig.align = 'center',out.width= '10%', echo=FALSE }
+```{r, fig.align = 'center',out.width= '100px', echo=FALSE }
 knitr::include_graphics(path = "figures/output_file_red.png", auto_pdf = TRUE)
 ``` 
 
@@ -70,7 +68,7 @@ less K1.histogram
 Scroll down with the down key and you will see that we are looking at a histogram showing the proportion of stitched reads at different lengths. 
 
 ## FLASH: MCQs
-```{r, fig.align = 'center',out.width= '10%', echo=FALSE }
+```{r, fig.align = 'center',out.width= '100px', echo=FALSE }
 knitr::include_graphics(path = "figures/question_bubble_red.png", auto_pdf = TRUE)
 ```
 

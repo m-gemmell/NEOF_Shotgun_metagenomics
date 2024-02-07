@@ -1,12 +1,12 @@
 # Bracken
-```{r, fig.align = 'center',out.width= '15%', echo=FALSE }
+```{r, fig.align = 'center',out.width= '150px', echo=FALSE }
 knitr::include_graphics(path = "figures/bracken.png", auto_pdf = TRUE)
 ```
 
 `Bracken` (Bayesian Reestimation of Abundance with KrakEN) uses taxonomy labels assigned by `Kraken2` to compute estimated abundances of species in a metagenomic sample. 
 
 ### Bracken: run
-```{r, fig.align = 'center',out.width= '10%', echo=FALSE }
+```{r, fig.align = 'center',out.width= '100px', echo=FALSE }
 knitr::include_graphics(path = "figures/play_green.png", auto_pdf = TRUE)
 ``` 
 
@@ -18,7 +18,7 @@ bracken -d $KRAKEN2_DB_PATH/minikraken2_v1_8GB \
 ```
 
 #### Parameters {-}
-```{r, fig.align = 'center',out.width= '10%', echo=FALSE }
+```{r, fig.align = 'center',out.width= '100px', echo=FALSE }
 knitr::include_graphics(path = "figures/parameter_green.png", auto_pdf = TRUE)
 ```
 
@@ -31,7 +31,7 @@ knitr::include_graphics(path = "figures/parameter_green.png", auto_pdf = TRUE)
 - `-t 5`: This specifies the minimum number of reads required for a classification at the specified rank. Any classifications with fewer reads than the specified threshold will not receive additional reads from higher taxonomy levels when distributing reads for abundance estimation. Five has been chosen here for this example data but in real datasets you may want to increase this number (default is 10).
 
 ## Bracken: output
-```{r, fig.align = 'center',out.width= '10%', echo=FALSE }
+```{r, fig.align = 'center',out.width= '100px', echo=FALSE }
 knitr::include_graphics(path = "figures/output_file_green.png", auto_pdf = TRUE)
 ``` 
 
@@ -59,7 +59,7 @@ bracken -d $KRAKEN2_DB_PATH/minikraken2_v1_8GB \
 `r unhide()`
 
 ## Bracken: MCQs
-```{r, fig.align = 'center',out.width= '10%', echo=FALSE }
+```{r, fig.align = 'center',out.width= '100px', echo=FALSE }
 knitr::include_graphics(path = "figures/question_bubble_green.png", auto_pdf = TRUE)
 ```
 
@@ -81,7 +81,7 @@ opts_p <- c(answer="__0.00011__","__16__", "__702__")
 3. In __W1__, what is the fraction of total reads (after abundance reestimation) for __Tannerella forsythia__? `r longmcq(opts_p)`
 
 ## Bracken: merging output
-```{r, fig.align = 'center',out.width= '10%', echo=FALSE }
+```{r, fig.align = 'center',out.width= '100px', echo=FALSE }
 knitr::include_graphics(path = "figures/merge.png", auto_pdf = TRUE)
 ``` 
 
@@ -109,7 +109,7 @@ After these columns are the following two columns for each sample.
 - `${SampleName}.bracken_frac`: Relative abundance of the group in the sample
 
 ## Bracken: extracting output
-```{r, fig.align = 'center',out.width= '10%', echo=FALSE }
+```{r, fig.align = 'center',out.width= '100px', echo=FALSE }
 knitr::include_graphics(path = "figures/exctractor.png", auto_pdf = TRUE)
 ``` 
 

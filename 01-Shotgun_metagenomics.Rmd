@@ -29,13 +29,13 @@ knitr::write_bib(c(
 knitr::opts_chunk$set(class.source="Rchunk")
 ```
 
-```{r, fig.align = 'center',out.width= '30%', echo=FALSE }
+```{r, fig.align = 'center',out.width= '300px', echo=FALSE }
 knitr::include_graphics(path = "figures/NEOF_bordered.png", auto_pdf = TRUE)
 ```
 
 # Introduction
 
-```{r, fig.align = 'center',out.width= '20%', echo=FALSE }
+```{r, fig.align = 'center',out.width= '200px', echo=FALSE }
 knitr::include_graphics(path = "figures/squid.png", auto_pdf = TRUE)
 ```
 

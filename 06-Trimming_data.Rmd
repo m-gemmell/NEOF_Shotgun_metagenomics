@@ -1,5 +1,5 @@
 # Quality control {#qualcont}
-```{r, fig.align = 'center',out.width= '30%', echo=FALSE }
+```{r, fig.align = 'center',out.width= '300px', echo=FALSE }
 knitr::include_graphics(path = "figures/quality_trimming_and_filtering.png", auto_pdf = TRUE)
 ``` 
 
@@ -12,7 +12,7 @@ There are two main methods employed to clean sequence data, and a third method s
 - Host removal: If a metagenomic sample derives from a host species then it may be advisable to remove any reads associated with the host genome.
 
 ## Removing adapters and low quality bases
-```{r, fig.align = 'center',out.width= '15%', echo=FALSE }
+```{r, fig.align = 'center',out.width= '150px', echo=FALSE }
 knitr::include_graphics(path = "figures/hedge_trimming.png", auto_pdf = TRUE)
 ``` 
 
@@ -47,7 +47,7 @@ trim_galore --paired --quality 20 --stringency 4 \
 `r unhide()`
 
 ## Rename the files
-```{r, fig.align = 'center',out.width= '15%', echo=FALSE }
+```{r, fig.align = 'center',out.width= '150px', echo=FALSE }
 knitr::include_graphics(path = "figures/rename.png", auto_pdf = TRUE)
 ``` 
 
@@ -73,7 +73,7 @@ __Tip__: If you want to edit and reuse previous commands, press the up arrow key
 __Task__: Briefly inspect the log files to see how the trimming went (e.g. K1_R1.fastq.gz_trimming_report.txt).
 
 ## Inspect the trimmed data
-```{r, fig.align = 'center',out.width= '15%', echo=FALSE }
+```{r, fig.align = 'center',out.width= '150px', echo=FALSE }
 knitr::include_graphics(path = "figures/magnify_glass_good.png", auto_pdf = TRUE)
 ``` 
 

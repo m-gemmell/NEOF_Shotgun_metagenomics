@@ -1,7 +1,7 @@
 # (PART\*) Functional profiling of reads {-}
 
 # HUMAnN Functional profiling {#functprofile}
-```{r, fig.align = 'center',out.width= '15%', echo=FALSE }
+```{r, fig.align = 'center',out.width= '150px', echo=FALSE }
 knitr::include_graphics(path = "figures/profile.png", auto_pdf = TRUE)
 ``` 
 
@@ -13,17 +13,17 @@ It is highly recommended you use the new version of `HUMAnN` as it contains 2 ti
 
 Please see below for a diagram showing the pipline of `HUMAnN`:
 
-<center>![](figures/humann3_workflow.png){style="border-radius: 15px; width: 75%"}</center>
+<center>![](figures/humann3_workflow.png){style="width: 750px; border-radius: 15px; border: 5px solid #333333"}</center>
 
 ## HUMAnN 
-```{r, fig.align = 'center',out.width= '15%', echo=FALSE }
+```{r, fig.align = 'center',out.width= '150px', echo=FALSE }
 knitr::include_graphics(path = "figures/humann2.png", auto_pdf = TRUE)
 ``` 
 
 First, we will carry out an example run of the software and briefly explore the output files. `HUMAnN` can take a long time to run so we will use a small amount of example data. Additionally, we will use a subset of the `HUMAnN` databases for the analysis but when running analysis on your own data you should use the full databases. information on installing `HUMAnN` and its databases can be found on its online [Home Page](https://huttenhower.sph.harvard.edu/humann/).
 
 ### HUMAnN: mamba, directories, and files
-```{r, fig.align = 'center',out.width= '25%', echo=FALSE }
+```{r, fig.align = 'center',out.width= '250px', echo=FALSE }
 knitr::include_graphics(path = "figures/mamba_logo.png", auto_pdf = TRUE)
 ```
 
@@ -47,7 +47,7 @@ cp /pub14/tea/nsc206/NEOF/Shotgun_metagenomics/humann/demo.fastq.gz .
 ```
 
 ### HUMAnN: run
-```{r, fig.align = 'center',out.width= '10%', echo=FALSE }
+```{r, fig.align = 'center',out.width= '100px', echo=FALSE }
 knitr::include_graphics(path = "figures/play_orange.png", auto_pdf = TRUE)
 ``` 
 
@@ -74,7 +74,7 @@ humann --input K1.fq.gz --output humann_output --threads
 ```
 
 ### HUMAnN: output
-```{r, fig.align = 'center',out.width= '10%', echo=FALSE }
+```{r, fig.align = 'center',out.width= '100px', echo=FALSE }
 knitr::include_graphics(path = "figures/output_file_orange.png", auto_pdf = TRUE)
 ``` 
 
@@ -116,7 +116,7 @@ __Note__: The directory `demo_humann2_temp` can be very large and so should be d
 __Note__: Link to more detail on [Output files](https://github.com/biobakery/humann#output-files)
 
 ## Multi sample processing {#humannmultisampleprocessing}
-```{r, fig.align = 'center',out.width= '15%', echo=FALSE }
+```{r, fig.align = 'center',out.width= '150px', echo=FALSE }
 knitr::include_graphics(path = "figures/k_w_venn.png", auto_pdf = TRUE)
 ``` 
 
@@ -168,7 +168,7 @@ With this information we will carry out some comparisons including biomarker det
 __Note__: The following methods/pipeline can be used for the genefamilies and pathcoverage tables in your own future analyses.
 
 ### HUMAnN: combining data
-```{r, fig.align = 'center',out.width= '10%', echo=FALSE }
+```{r, fig.align = 'center',out.width= '100px', echo=FALSE }
 knitr::include_graphics(path = "figures/merge.png", auto_pdf = TRUE)
 ``` 
 
@@ -188,7 +188,7 @@ less -S diet.tsv
 ```
 
 ### HUMAnN: split stratified table
-```{r, fig.align = 'center',out.width= '10%', echo=FALSE }
+```{r, fig.align = 'center',out.width= '100px', echo=FALSE }
 knitr::include_graphics(path = "figures/split.png", auto_pdf = TRUE)
 ``` 
 
@@ -210,7 +210,7 @@ Before you move on feel free to inspect the output files with the `less` command
 __Note__: You can use any of the three tables (unsplit table, unstratified table, or stratified table) in your own analysis. This depends on your question and data.
 
 ### HUMAnN: renormalising data {#humannrenormalise}
-```{r, fig.align = 'center',out.width= '10%', echo=FALSE }
+```{r, fig.align = 'center',out.width= '100px', echo=FALSE }
 knitr::include_graphics(path = "figures/normalisation.png", auto_pdf = TRUE)
 ``` 
 
@@ -233,7 +233,7 @@ This command generates the normalised data in the new table `diet_unstratified.r
 __Note:__ With the gene families information ensure you normalise by CPM (counts per million) with the option `--units cpm`. More info can be found on the [Normalizing RPKs to relative abundance](https://github.com/biobakery/biobakery/wiki/humann3#31-normalizing-rpks-to-relative-abundance) section of the HUMAnN 3.0 tutorial.
 
 ## Heatmap
-```{r, fig.align = 'center',out.width= '15%', echo=FALSE }
+```{r, fig.align = 'center',out.width= '150px', echo=FALSE }
 knitr::include_graphics(path = "figures/heatmap.png", auto_pdf = TRUE)
 ``` 
 
@@ -305,7 +305,7 @@ firefox diet_unstratified.relab.heatmap.png
 
 From this, we can see that there is a small amount of clustering caused by the differences between the Korean and Western diet. Other factors that we do not know about the samples must also come into play. This is normal as we cannot account for everything but it is good to try to account for as much as possible.
 
-<center>![](figures/humann_heatmap.png){style="border-radius: 15px; width: 75%"}</center>
+<center>![](figures/humann_heatmap.png){style="border-radius: 15px; width: 750px; border: 5px solid #333333"}</center>
 
 #### MCQs {-}
 
@@ -327,7 +327,7 @@ opts_p <- c("__1__","__2__",answer="__3__")
 You can look up the pathway names in the table file to see a fuller description.
 
 ## LEfSe {#humann_lefse}
-```{r, fig.align = 'center',out.width= '15%', echo=FALSE }
+```{r, fig.align = 'center',out.width= '150px', echo=FALSE }
 knitr::include_graphics(path = "figures/lefse_flip.png", auto_pdf = TRUE)
 ``` 
 

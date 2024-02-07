@@ -1,5 +1,5 @@
 # Kraken2
-```{r, fig.align = 'center',out.width= '15%', echo=FALSE }
+```{r, fig.align = 'center',out.width= '150px', echo=FALSE }
 knitr::include_graphics(path = "figures/kraken.png", auto_pdf = TRUE)
 ``` 
 
@@ -15,7 +15,7 @@ __Note__: You can look at the contents of the above directory to see it currentl
 - Custom `Kraken2` databases: https://github.com/DerrickWood/kraken2/wiki/Manual#custom-databases
 
 ## Kraken2: run
-```{r, fig.align = 'center',out.width= '10%', echo=FALSE }
+```{r, fig.align = 'center',out.width= '100px', echo=FALSE }
 knitr::include_graphics(path = "figures/play_blue.png", auto_pdf = TRUE)
 ``` 
 
@@ -30,7 +30,7 @@ kraken2 --paired --db minikraken2_v1_8GB \
 ```  
 
 #### Parameters {-}
-```{r, fig.align = 'center',out.width= '10%', echo=FALSE }
+```{r, fig.align = 'center',out.width= '100px', echo=FALSE }
 knitr::include_graphics(path = "figures/parameter_blue.png", auto_pdf = TRUE)
 ```
 
@@ -44,7 +44,7 @@ knitr::include_graphics(path = "figures/parameter_blue.png", auto_pdf = TRUE)
 - __`~/2-Trimmed/K1_R1.fq.gz ~/2-Trimmed/K1_R2.fq.gz`__: The trimmed read pairs for K1, which we will use as input.
 
 ## Kraken2: output
-```{r, fig.align = 'center',out.width= '10%', echo=FALSE }
+```{r, fig.align = 'center',out.width= '100px', echo=FALSE }
 knitr::include_graphics(path = "figures/output_file_blue.png", auto_pdf = TRUE)
 ``` 
 
@@ -93,7 +93,7 @@ kraken2 --paired --db minikraken2_v1_8GB \
 `r unhide()`
 
 ## Kraken 2: MCQs
-```{r, fig.align = 'center',out.width= '10%', echo=FALSE }
+```{r, fig.align = 'center',out.width= '100px', echo=FALSE }
 knitr::include_graphics(path = "figures/question_bubble_blue.png", auto_pdf = TRUE)
 ```
 

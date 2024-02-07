@@ -1,7 +1,7 @@
 # (APPENDIX) Appendix {-}
 
 # Mamba installs
-```{r, fig.align = 'center',out.width= '20%', echo=FALSE }
+```{r, fig.align = 'center',out.width= '200px', echo=FALSE }
 knitr::include_graphics(path = "figures/mamba_logo.png", auto_pdf = TRUE)
 ```
 
@@ -117,7 +117,7 @@ humann_test
 
 
 # Next steps
-```{r, fig.align = 'center',out.width= '15%', echo=FALSE }
+```{r, fig.align = 'center',out.width= '150px', echo=FALSE }
 knitr::include_graphics(path = "figures/step.png", auto_pdf = TRUE)
 ``` 
 
@@ -141,7 +141,7 @@ _ Methods for Metagenomic data visualisation and analysis
    - https://www.researchgate.net/publication/318252633_Methods_for_The_Metagenomic_Data_Visualization_and_Analysis
 
 # Manuals
-```{r, fig.align = 'center',out.width= '15%', echo=FALSE }
+```{r, fig.align = 'center',out.width= '15opx', echo=FALSE }
 knitr::include_graphics(path = "figures/manual.png", auto_pdf = TRUE)
 ``` 
 
