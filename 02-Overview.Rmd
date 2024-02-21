@@ -22,9 +22,9 @@ Microbes exist virtually everywhere on Earth, even in some of the most seemingly
 While much can be learned from studying the genome of a single microbial species in isolation, it does not provide us with any information regarding that species' neighbours, i.e. what else is in its natural environment?  Metagenomics offers a top-down approach which allows researchers to investigate and understand interactions between species in different environments, thus providing a much broader and complete picture.
 
 ## Metagenomics vs Metagenetics
-```{r, fig.align = 'center',out.width= '150px', echo=FALSE }
-knitr::include_graphics(path = "figures/16s_vs_shotgun.png", auto_pdf = TRUE)
-``` 
+<center>
+![](figures/16s_vs_shotgun.png){style="width:150px; border-radius:15px; border:5px solid #333333; background-color:white"}
+</center>
 
 Broadly speaking, there are two families of metagenomic analysis: 
 
@@ -49,9 +49,9 @@ We prefer to allow people to work at a pace that they are comfortable with rathe
 If at any point you are having trouble or have a question, let one of us know and we'll provide 1-to-1 assistance.
 
 ### Content
-```{r, fig.align = 'center',out.width= '100px', echo=FALSE }
-knitr::include_graphics(path = "figures/sections.png", auto_pdf = TRUE)
-``` 
+<center>
+![](figures/sections.png){style="width:100px; border-radius:5px; border:5px solid #333333; background-color:white"}
+</center>
 
 This practical is broken up into the following broad sections.
 

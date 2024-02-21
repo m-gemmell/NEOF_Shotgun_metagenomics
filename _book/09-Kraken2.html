@@ -23,7 +23,7 @@
 <meta name="author" content="Sam Haldenby and Matthew R. Gemmell" />
 
 
-<meta name="date" content="2024-02-07" />
+<meta name="date" content="2024-02-21" />
 
   <meta name="viewport" content="width=device-width, initial-scale=1" />
   <meta name="apple-mobile-web-app-capable" content="yes" />
@@ -344,7 +344,7 @@ code span.wa { color: #60a0b0; font-weight: bold; font-style: italic; } /* Warni
 <li><strong><code>--paired</code></strong>: Indicates that we are providing paired reads to <code>Kraken2</code>. Internally, <code>Kraken2</code> will concatenate the R1 and R2 reads into one sequence with an N between them.</li>
 <li><strong><code>--db</code></strong>: Specify the <code>Kraken2</code> database to be used for taxonomic classification.
 <ul>
-<li>Previous to the command we set the <code>KRAKEN_DB_PATH</code> so in this case the command will look for the directory called <code>minikraken2_v1_8GB</code> within <code>KRAKEN_DB_PATH</code>.</li>
+<li>Previous to the command we set the <code>KRAKEN2_DB_PATH</code> so in this case the command will look for the directory called <code>minikraken2_v1_8GB</code> within <code>KRAKEN2_DB_PATH</code>.</li>
 <li>Alternatively the full path of the required database could be provided (<code>/pub39/tea/nsc006/NEOF/Shotgun_metagenomics/kraken2_db/minikraken2_v1_8GB</code>).</li>
 </ul></li>
 <li><strong><code>--threads</code></strong>: Number of CPUs the process will use.</li>
@@ -409,28 +409,28 @@ K2 &amp; W1 Kraken 2 commands
 <p>Viewing the Kraken2 output files with your favourite text viewer (<code>less</code>, <code>nano</code>, <code>vim</code>, etc.), attempt the below MCQs.</p>
 <ol style="list-style-type: decimal">
 <li>How many paired reads were unclassified for K1?
-<div id="radio_HSNSHPPEUQ" class="webex-radiogroup">
-<label><input type="radio" autocomplete="off" name="radio_HSNSHPPEUQ" value=""></input> <span><strong>2</strong></span></label><label><input type="radio" autocomplete="off" name="radio_HSNSHPPEUQ" value=""></input> <span><strong>486,723</strong></span></label><label><input type="radio" autocomplete="off" name="radio_HSNSHPPEUQ" value="answer"></input> <span><strong>555,162</strong></span></label>
+<div id="radio_WWOQMOMDQH" class="webex-radiogroup">
+<label><input type="radio" autocomplete="off" name="radio_WWOQMOMDQH" value=""></input> <span><strong>2</strong></span></label><label><input type="radio" autocomplete="off" name="radio_WWOQMOMDQH" value=""></input> <span><strong>486,723</strong></span></label><label><input type="radio" autocomplete="off" name="radio_WWOQMOMDQH" value="answer"></input> <span><strong>555,162</strong></span></label>
 </div></li>
 <li>How many paired reads were classified for K2 (i.e. number of reads classified at root level and below)?
-<div id="radio_XIGQSHCEJT" class="webex-radiogroup">
-<label><input type="radio" autocomplete="off" name="radio_XIGQSHCEJT" value=""></input> <span><strong>2</strong></span></label><label><input type="radio" autocomplete="off" name="radio_XIGQSHCEJT" value="answer"></input> <span><strong>486,723</strong></span></label><label><input type="radio" autocomplete="off" name="radio_XIGQSHCEJT" value=""></input> <span><strong>555,162</strong></span></label>
+<div id="radio_HFLKHHDBCF" class="webex-radiogroup">
+<label><input type="radio" autocomplete="off" name="radio_HFLKHHDBCF" value=""></input> <span><strong>2</strong></span></label><label><input type="radio" autocomplete="off" name="radio_HFLKHHDBCF" value="answer"></input> <span><strong>486,723</strong></span></label><label><input type="radio" autocomplete="off" name="radio_HFLKHHDBCF" value=""></input> <span><strong>555,162</strong></span></label>
 </div></li>
 <li>How many paired reads were assigned directly to root level for W1?
-<div id="radio_LKEUIHVKZI" class="webex-radiogroup">
-<label><input type="radio" autocomplete="off" name="radio_LKEUIHVKZI" value="answer"></input> <span><strong>2</strong></span></label><label><input type="radio" autocomplete="off" name="radio_LKEUIHVKZI" value=""></input> <span><strong>486,723</strong></span></label><label><input type="radio" autocomplete="off" name="radio_LKEUIHVKZI" value=""></input> <span><strong>555,162</strong></span></label>
+<div id="radio_HXVUNLEHQY" class="webex-radiogroup">
+<label><input type="radio" autocomplete="off" name="radio_HXVUNLEHQY" value="answer"></input> <span><strong>2</strong></span></label><label><input type="radio" autocomplete="off" name="radio_HXVUNLEHQY" value=""></input> <span><strong>486,723</strong></span></label><label><input type="radio" autocomplete="off" name="radio_HXVUNLEHQY" value=""></input> <span><strong>555,162</strong></span></label>
 </div></li>
 <li>What percentage of W1's paired reads were assigned to the clade of Bacteroidetes (Phylum)?
-<div id="radio_FSELZFKDWZ" class="webex-radiogroup">
-<label><input type="radio" autocomplete="off" name="radio_FSELZFKDWZ" value=""></input> <span><strong>0.12</strong></span></label><label><input type="radio" autocomplete="off" name="radio_FSELZFKDWZ" value=""></input> <span><strong>0.59</strong></span></label><label><input type="radio" autocomplete="off" name="radio_FSELZFKDWZ" value="answer"></input> <span><strong>14.89</strong></span></label>
+<div id="radio_QPMEDNHRRF" class="webex-radiogroup">
+<label><input type="radio" autocomplete="off" name="radio_QPMEDNHRRF" value=""></input> <span><strong>0.12</strong></span></label><label><input type="radio" autocomplete="off" name="radio_QPMEDNHRRF" value=""></input> <span><strong>0.59</strong></span></label><label><input type="radio" autocomplete="off" name="radio_QPMEDNHRRF" value="answer"></input> <span><strong>14.89</strong></span></label>
 </div></li>
 <li>What percentage of K2's paired reads were assigned to the clade of Rikenellaceae (Family)?
-<div id="radio_GBRDMTWEIS" class="webex-radiogroup">
-<label><input type="radio" autocomplete="off" name="radio_GBRDMTWEIS" value=""></input> <span><strong>0.12</strong></span></label><label><input type="radio" autocomplete="off" name="radio_GBRDMTWEIS" value="answer"></input> <span><strong>0.59</strong></span></label><label><input type="radio" autocomplete="off" name="radio_GBRDMTWEIS" value=""></input> <span><strong>14.89</strong></span></label>
+<div id="radio_TYJBWISXRG" class="webex-radiogroup">
+<label><input type="radio" autocomplete="off" name="radio_TYJBWISXRG" value=""></input> <span><strong>0.12</strong></span></label><label><input type="radio" autocomplete="off" name="radio_TYJBWISXRG" value="answer"></input> <span><strong>0.59</strong></span></label><label><input type="radio" autocomplete="off" name="radio_TYJBWISXRG" value=""></input> <span><strong>14.89</strong></span></label>
 </div></li>
 <li>What percentage of K1's paired reads were assigned to the clade of Bacteroides helcogenes (Species)?
-<div id="radio_ALDXBIHVAR" class="webex-radiogroup">
-<label><input type="radio" autocomplete="off" name="radio_ALDXBIHVAR" value="answer"></input> <span><strong>0.12</strong></span></label><label><input type="radio" autocomplete="off" name="radio_ALDXBIHVAR" value=""></input> <span><strong>0.59</strong></span></label><label><input type="radio" autocomplete="off" name="radio_ALDXBIHVAR" value=""></input> <span><strong>14.89</strong></span></label>
+<div id="radio_FQAGCUFCPT" class="webex-radiogroup">
+<label><input type="radio" autocomplete="off" name="radio_FQAGCUFCPT" value="answer"></input> <span><strong>0.12</strong></span></label><label><input type="radio" autocomplete="off" name="radio_FQAGCUFCPT" value=""></input> <span><strong>0.59</strong></span></label><label><input type="radio" autocomplete="off" name="radio_FQAGCUFCPT" value=""></input> <span><strong>14.89</strong></span></label>
 </div></li>
 </ol>
 

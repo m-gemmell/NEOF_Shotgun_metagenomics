@@ -58,7 +58,7 @@ At the end of the course learners will be able to:
 -   Profile the microbial pathways in metagenomic sequencing data with the bioBakery suite of tools, including HUMAnN.
 -   Perform a metagenome assembly with MEGAHIT, and assess it with QUAST.
 -   Carry out genomic binning of the metagenome assembly with MetaBAT2 to try to separate the different species present.
--   Functional annotate the bins with Prokka.
+-   Functionally annotate the bins with Prokka.
 
 ## Table of contents {.unnumbered}
 
@@ -115,9 +115,9 @@ Microbes exist virtually everywhere on Earth, even in some of the most seemingly
 While much can be learned from studying the genome of a single microbial species in isolation, it does not provide us with any information regarding that species' neighbours, i.e. what else is in its natural environment?  Metagenomics offers a top-down approach which allows researchers to investigate and understand interactions between species in different environments, thus providing a much broader and complete picture.
 
 ## Metagenomics vs Metagenetics
-```{r, fig.align = 'center',out.width= '150px', echo=FALSE }
-knitr::include_graphics(path = "figures/16s_vs_shotgun.png", auto_pdf = TRUE)
-``` 
+<center>
+![](figures/16s_vs_shotgun.png){style="width:150px; border-radius:15px; border:5px solid #333333; background-color:white"}
+</center>
 
 Broadly speaking, there are two families of metagenomic analysis: 
 
@@ -142,9 +142,9 @@ We prefer to allow people to work at a pace that they are comfortable with rathe
 If at any point you are having trouble or have a question, let one of us know and we'll provide 1-to-1 assistance.
 
 ### Content
-```{r, fig.align = 'center',out.width= '100px', echo=FALSE }
-knitr::include_graphics(path = "figures/sections.png", auto_pdf = TRUE)
-``` 
+<center>
+![](figures/sections.png){style="width:100px; border-radius:5px; border:5px solid #333333; background-color:white"}
+</center>
 
 This practical is broken up into the following broad sections.
 
@@ -525,8 +525,8 @@ This command is split into two commands. The first is `bowtie2` that creates the
 - __`-1`__: The forward reads.
 - __`-2`__: The reverse reads.
 - __`-p`__: Number of threads to be used. 12 in this case.
-- __`2>`__: This will cause the standard error to be redirected to the chosen file. In this case `out.log`.
-  - This useful for commands that may produce a lot of output to screen. If an error occurs you can view this file to see the error messages.
+- __`2>`__: This will cause the standard error to be redirected to the chosen file. In this case `K1_bowtie2_out.log`.
+  - This is useful for commands that may produce a lot of output to screen. If an error occurs you can view this file to see the error messages.
   
 The alignment is then piped (`|`) to the command `samtools view`. For more information on pipes please see our [Intro to Unix course book](http://www.cgr.liv.ac.uk/illum/NEOFworkshops_5bfa93ca0482d69d/Intro_to_Unix/12-Advanced_linux_practice.html#pipes).
 
@@ -561,6 +561,7 @@ knitr::include_graphics(path = "figures/parameter_green.png", auto_pdf = TRUE)
   - The following link is very useful to create a SAM flag you may need: https://broadinstitute.github.io/picard/explain-flags.html.
 - __`-1`__: The output R1 fastq file of unmapped reads.
 - __`-2`__: The output R2 fastq file of unmapped reads.
+- __Last file__: The last file name is the input file for the command, `K1_mapped.bam` in this case.
 
 This step may make unmatched paired files (why we have `.u.` in the output file names). This occurs when a read from R2 is removed but the matching read in R1 is not removed, or vice versa. This will cause issues for further analysis. 
 
@@ -667,7 +668,7 @@ knitr::include_graphics(path = "figures/parameter_blue.png", auto_pdf = TRUE)
 
 - __`--paired`__: Indicates that we are providing paired reads to `Kraken2`. Internally, `Kraken2` will concatenate the R1 and R2 reads into one sequence with an N between them.
 - __`--db`__: Specify the `Kraken2` database to be used for taxonomic classification. 
-  - Previous to the command we set the `KRAKEN_DB_PATH` so in this case the command will look for the directory called `minikraken2_v1_8GB` within `KRAKEN_DB_PATH`. 
+  - Previous to the command we set the `KRAKEN2_DB_PATH` so in this case the command will look for the directory called `minikraken2_v1_8GB` within `KRAKEN2_DB_PATH`. 
   - Alternatively the full path of the required database could be provided (`/pub39/tea/nsc006/NEOF/Shotgun_metagenomics/kraken2_db/minikraken2_v1_8GB`).
 - __`--threads`__: Number of CPUs the process will use.
 - __`--output`__: The output file. More info below.
@@ -807,7 +808,7 @@ This is an interactive multi-tiered pie chart with many options. Some of the int
   - E.g. click the word "root" in the middle of the pie chart to zoom back out from any lower level of taxonomy.
 - To view percentage stats of a taxonomy, click on the taxonomy name on the pie chart. 
   - This will display the percentage this taxonomy covers of all the different taxonomies above it that it belongs to. This is displayed on the right side of the screen.
-  - E.g. Click on Proteobacteria to see the percentage of the Root it accounts for and to see the percentage of Bacteria it accounts for in the sample.
+  - E.g. Click on Pseudomonadota to see the percentage of the Root it accounts for and to see the percentage of Bacteria it accounts for in the sample.
 
 ## Krona: MCQs
 ```{r, fig.align = 'center',out.width= '100px', echo=FALSE }

@@ -23,7 +23,7 @@
 <meta name="author" content="Sam Haldenby and Matthew R. Gemmell" />
 
 
-<meta name="date" content="2024-02-07" />
+<meta name="date" content="2024-02-21" />
 
   <meta name="viewport" content="width=device-width, initial-scale=1" />
   <meta name="apple-mobile-web-app-capable" content="yes" />
@@ -349,9 +349,9 @@ code span.wa { color: #60a0b0; font-weight: bold; font-style: italic; } /* Warni
 <li><strong><code>-1</code></strong>: The forward reads.</li>
 <li><strong><code>-2</code></strong>: The reverse reads.</li>
 <li><strong><code>-p</code></strong>: Number of threads to be used. 12 in this case.</li>
-<li><strong><code>2&gt;</code></strong>: This will cause the standard error to be redirected to the chosen file. In this case <code>out.log</code>.
+<li><strong><code>2&gt;</code></strong>: This will cause the standard error to be redirected to the chosen file. In this case <code>K1_bowtie2_out.log</code>.
 <ul>
-<li>This useful for commands that may produce a lot of output to screen. If an error occurs you can view this file to see the error messages.</li>
+<li>This is useful for commands that may produce a lot of output to screen. If an error occurs you can view this file to see the error messages.</li>
 </ul></li>
 </ul>
 <p>The alignment is then piped (<code>|</code>) to the command <code>samtools view</code>. For more information on pipes please see our <a href="http://www.cgr.liv.ac.uk/illum/NEOFworkshops_5bfa93ca0482d69d/Intro_to_Unix/12-Advanced_linux_practice.html#pipes">Intro to Unix course book</a>.</p>
@@ -384,6 +384,7 @@ code span.wa { color: #60a0b0; font-weight: bold; font-style: italic; } /* Warni
 </ul></li>
 <li><strong><code>-1</code></strong>: The output R1 fastq file of unmapped reads.</li>
 <li><strong><code>-2</code></strong>: The output R2 fastq file of unmapped reads.</li>
+<li><strong>Last file</strong>: The last file name is the input file for the command, <code>K1_mapped.bam</code> in this case.</li>
 </ul>
 <p>This step may make unmatched paired files (why we have <code>.u.</code> in the output file names). This occurs when a read from R2 is removed but the matching read in R1 is not removed, or vice versa. This will cause issues for further analysis.</p>
 </div>

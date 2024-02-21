@@ -36,7 +36,7 @@ knitr::include_graphics(path = "figures/parameter_blue.png", auto_pdf = TRUE)
 
 - __`--paired`__: Indicates that we are providing paired reads to `Kraken2`. Internally, `Kraken2` will concatenate the R1 and R2 reads into one sequence with an N between them.
 - __`--db`__: Specify the `Kraken2` database to be used for taxonomic classification. 
-  - Previous to the command we set the `KRAKEN_DB_PATH` so in this case the command will look for the directory called `minikraken2_v1_8GB` within `KRAKEN_DB_PATH`. 
+  - Previous to the command we set the `KRAKEN2_DB_PATH` so in this case the command will look for the directory called `minikraken2_v1_8GB` within `KRAKEN2_DB_PATH`. 
   - Alternatively the full path of the required database could be provided (`/pub39/tea/nsc006/NEOF/Shotgun_metagenomics/kraken2_db/minikraken2_v1_8GB`).
 - __`--threads`__: Number of CPUs the process will use.
 - __`--output`__: The output file. More info below.

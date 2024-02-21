@@ -51,8 +51,8 @@ This command is split into two commands. The first is `bowtie2` that creates the
 - __`-1`__: The forward reads.
 - __`-2`__: The reverse reads.
 - __`-p`__: Number of threads to be used. 12 in this case.
-- __`2>`__: This will cause the standard error to be redirected to the chosen file. In this case `out.log`.
-  - This useful for commands that may produce a lot of output to screen. If an error occurs you can view this file to see the error messages.
+- __`2>`__: This will cause the standard error to be redirected to the chosen file. In this case `K1_bowtie2_out.log`.
+  - This is useful for commands that may produce a lot of output to screen. If an error occurs you can view this file to see the error messages.
   
 The alignment is then piped (`|`) to the command `samtools view`. For more information on pipes please see our [Intro to Unix course book](http://www.cgr.liv.ac.uk/illum/NEOFworkshops_5bfa93ca0482d69d/Intro_to_Unix/12-Advanced_linux_practice.html#pipes).
 
@@ -87,6 +87,7 @@ knitr::include_graphics(path = "figures/parameter_green.png", auto_pdf = TRUE)
   - The following link is very useful to create a SAM flag you may need: https://broadinstitute.github.io/picard/explain-flags.html.
 - __`-1`__: The output R1 fastq file of unmapped reads.
 - __`-2`__: The output R2 fastq file of unmapped reads.
+- __Last file__: The last file name is the input file for the command, `K1_mapped.bam` in this case.
 
 This step may make unmatched paired files (why we have `.u.` in the output file names). This occurs when a read from R2 is removed but the matching read in R1 is not removed, or vice versa. This will cause issues for further analysis. 
 

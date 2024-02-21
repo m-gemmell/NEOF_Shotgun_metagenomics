@@ -40,7 +40,7 @@ This is an interactive multi-tiered pie chart with many options. Some of the int
   - E.g. click the word "root" in the middle of the pie chart to zoom back out from any lower level of taxonomy.
 - To view percentage stats of a taxonomy, click on the taxonomy name on the pie chart. 
   - This will display the percentage this taxonomy covers of all the different taxonomies above it that it belongs to. This is displayed on the right side of the screen.
-  - E.g. Click on Proteobacteria to see the percentage of the Root it accounts for and to see the percentage of Bacteria it accounts for in the sample.
+  - E.g. Click on Pseudomonadota to see the percentage of the Root it accounts for and to see the percentage of Bacteria it accounts for in the sample.
 
 ## Krona: MCQs
 ```{r, fig.align = 'center',out.width= '100px', echo=FALSE }
