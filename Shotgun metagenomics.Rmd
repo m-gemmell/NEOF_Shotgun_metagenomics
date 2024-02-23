@@ -876,12 +876,12 @@ bracken -d $KRAKEN2_DB_PATH/minikraken2_v1_8GB \
 knitr::include_graphics(path = "figures/parameter_green.png", auto_pdf = TRUE)
 ```
 
-- `-d` : Specifies the `Kraken2` database that was used for taxonomic classification. In this case bracken requires the variable `$KRAKEN_DB_PATH` so the option is provided the full path to the kraken database. For clarity try the command `ls $KRAKEN2_DB_PATH/minikraken2_v1_8GB`. 
+- `-d` : Specifies the `Kraken2` database that was used for taxonomic classification. In this case bracken requires the variable `$KRAKEN2_DB_PATH` so the option is provided the full path to the kraken database. For clarity try the command `ls $KRAKEN2_DB_PATH/minikraken2_v1_8GB`. 
 - `-i` : The `Kraken2` report file, this will be used as the input.
 - `-o` : The output `Bracken` file. Information about its contents is below.
 - `-w`: Output report file. This contains the `Bracken` read counts in a kraken-style report. This is an essential file if you want to use the `Bracken` output in R using the `phyloseq` object. This is covered in our R community analysis workshop. We won't cover it more here.
 - `-r 100`: This is the ideal length of the reads that were used in the `Kraken2` classification. It is recommended that the initial read length of the sequencing data is used. We are using 100 here as we used a paired library of 100bp*2 reads.
-- `-l S`: This specifies the taxonomic level/rank of the `Bracken` output. In this case `S` is equal to species with the other options being `D`, `P`, `C`, `O`,`F` and `G`.
+- `-l S`: This specifies the taxonomic level/rank of the `Bracken` output. In this case `S` is equal to species with the other options being `D`, `P`, `C`, `O`, `F` and `G`.
 - `-t 5`: This specifies the minimum number of reads required for a classification at the specified rank. Any classifications with fewer reads than the specified threshold will not receive additional reads from higher taxonomy levels when distributing reads for abundance estimation. Five has been chosen here for this example data but in real datasets you may want to increase this number (default is 10).
 
 ## Bracken: output
@@ -894,10 +894,10 @@ The output file of `Bracken` contains the following columns:
 1. __Name__: Name of taxonomy at the specified taxonomic level.
 2. __Taxonomy ID__: NCBI taxonomy id
 3. __Level ID__: Letter signifying the taxonomic level of the classification
-4. __Kraken assigned read__: Number of reads assigned to the taxonomy by `Kraken2`.
-5. __Added reads with abundance reestimation__: Number of reads added to the taxonomy by Bracken abundance reestimation. 
-6. __Total reads after abundance reestimation__: Number from field 4 and 5 summed. This is the field that will be used for downstream analysis.
-7. __Fraction of total reads__: Relative abundance of the taxonomy.
+4. __Kraken assigned read__: Number of reads assigned to the taxonomy by `Kraken2`
+5. __Added reads with abundance reestimation__: Number of reads added to the taxonomy by Bracken abundance reestimation.
+6. __Total reads after abundance reestimation__: Number from field 4 and 5 summed. This is the field that will be used for downstream analysis
+7. __Fraction of total reads__: Relative abundance of the taxonomy
 
 __Task__: Repeat the above commands for K2 and W1
 
@@ -1065,10 +1065,10 @@ The output file is a tab-delimited file which contains a row for each species. B
 - __Biomarker name__
 - __Log of highest class average__: I.e. get the class with the greater amounts of the biomarker, average the counts and then get the log of this value.
 - __Class with the greater amounts of biomarker__
-- __LDA effect size__: A statistical figure for `LEfSe`..
+- __LDA effect size__: A statistical figure for `LEfSe`.
 - __p-value__: Biomarkers must have a p-value of <0.05 to be considered significant.
 
-The __LDA effect__ size indicates how much of an effect each biomarker has. The default is to only count a species with an LDA effect size of greater than 2 or less than -2 as a biomarker. The further the LDA effect size is from 0 the greater the effect the species causes.
+The __LDA effect__ size indicates how much of an effect each biomarker has. The default is to only count a species with an LDA effect size of greater than 2 or less than -2 as a biomarker. The further the LDA effect size is from 0 the greater the effect the species causes. Generally, it can be through of as the order of magnitude difference in the abundance of the biomarker between the sample groups.
 
 ## LEfSe: visualisation
 ```{r, fig.align = 'center',out.width= '100px', echo=FALSE }
@@ -1122,17 +1122,17 @@ opts_p <- c("__Korean__",answer="__Western__")
 4. Which class has more biomarkers associated with it? `r longmcq(opts_p)`
 
 ```{r, echo = FALSE}
-opts_p <- c(answer="__0.0014961642897455565__","__3.0272759627443127__","__3.3145045719482846__")
+opts_p <- c(answer="__0.0014961642897455565__","__3.0266165524513937__","__3.314396201978439__")
 ```
 5. What is the LEfSe p-value for __Campylobactercoli__? `r longmcq(opts_p)`
 
 ```{r, echo = FALSE}
-opts_p <- c("__0.0014961642897455565__",answer="__3.0272759627443127__","__3.3145045719482846__")
+opts_p <- c("__0.0014961642897455565__",answer="__3.0266165524513937__","__3.314396201978439__")
 ```
 6. What is the Log of highest class average for __Streptococcussuis__? `r longmcq(opts_p)`
 
 ```{r, echo = FALSE}
-opts_p <- c("__0.0014961642897455565__","__3.0272759627443127__",answer="__3.3145045719482846__")
+opts_p <- c("__0.0014961642897455565__","__3.0266165524513937__",answer="__3.314396201978439__")
 ```
 7. What is the LDA effect size for __Bifidobacteriumlongum__? `r longmcq(opts_p)`
 
@@ -1141,7 +1141,7 @@ opts_p <- c("__0.0014961642897455565__","__3.0272759627443127__",answer="__3.314
 knitr::include_graphics(path = "figures/database.png", auto_pdf = TRUE)
 ``` 
 
-In your own future analysis you will need to create your own `Kraken2` and `Bracken` databases. Please sse the following links on information for this:
+In your own future analysis you will need to create your own `Kraken2` and `Bracken` databases. Please see the following links on information for this:
 
 - `Kraken2`
    - Standard `Kraken2` databases: https://github.com/DerrickWood/kraken2/wiki/Manual#standard-kraken-2-database
@@ -1177,7 +1177,7 @@ Please see below for a diagram showing the pipline of `HUMAnN`:
 knitr::include_graphics(path = "figures/humann2.png", auto_pdf = TRUE)
 ``` 
 
-First, we will carry out an example run of the software and briefly explore the output files. `HUMAnN` can take a long time to run so we will use a small amount of example data. Additionally, we will use a subset of the `HUMAnN` databases for the analysis but when running analysis on your own data you should use the full databases. information on installing `HUMAnN` and its databases can be found on its online [Home Page](https://huttenhower.sph.harvard.edu/humann/).
+First, we will carry out an example run of the software and briefly explore the output files. `HUMAnN` can take a long time to run so we will use a small amount of example data. Additionally, we will use a subset of the `HUMAnN` databases for the analysis but when running analysis on your own data you should use the full databases. Information on installing `HUMAnN` and its databases can be found on its online [Home Page](https://huttenhower.sph.harvard.edu/humann/).
 
 ### HUMAnN: mamba, directories, and files
 ```{r, fig.align = 'center',out.width= '250px', echo=FALSE }
@@ -1401,7 +1401,7 @@ Now that we have our combined, unstratified, and normalised table, we can visual
 
 To visualise this we will create a heatmap with `hclust2`.
 
-Before carrying out the command we will need edit the file. Carry out the following alterations:
+Before carrying out the command we will need to edit the file. Carry out the following alterations:
 
 Remove the `_Abundance` part of the sample names whilst creating a copy that we will use (It is always a good idea to keep the original file in case a mistake happens).
 
@@ -1462,7 +1462,9 @@ firefox diet_unstratified.relab.heatmap.png
 
 From this, we can see that there is a small amount of clustering caused by the differences between the Korean and Western diet. Other factors that we do not know about the samples must also come into play. This is normal as we cannot account for everything but it is good to try to account for as much as possible.
 
-<center>![](figures/humann_heatmap.png){style="border-radius: 15px; width: 750px; border: 5px solid #333333"}</center>
+<center>
+![](figures/humann_heatmap.png){style="border-radius: 15px; width: 750px; border: 5px solid #333333"}
+</center>
 
 #### MCQs {-}
 
@@ -1490,22 +1492,22 @@ knitr::include_graphics(path = "figures/lefse_flip.png", auto_pdf = TRUE)
 
 For the final part of this section, we will see if there are any statistically significant differences between the two sample groups. There are several ways in which this can be achieved but we will carry out `LEfSe` again.
 
-__Task__: Go back to your `LEfSe` terminal (or create a new one and use `. uselefse`). Then change directory to `4-FunctionalProfiling`)
+__Task__: Go back to your `shotgun_meta` terminal (or create a new one and use `. useshotgun`). Then change directory to `4-FunctionalProfiling`)
 
 Thankfully we already formatted the file to work with `LEfSe` when we formatted it for `hclust2`
 
 ```{bash eval=FALSE}
 #LEfSe format
-lefse-format_input.py \
+lefse_format_input.py \
 diet_unstratified.relab.comp.tsv \
 diet_unstratified.relab.comp.lefse \
 -c 2 -u 1 -o 1000000
 #Run LEfSe
-run_lefse.py \
+lefse_run.py \
 diet_unstratified.relab.comp.lefse \
 diet_unstratified.relab.comp.lefse.out
 #Produce LEfSe plot
-lefse-plot_res.py \
+lefse_plot_res.py \
 --dpi 200 \
 --format png \
 diet_unstratified.relab.comp.lefse.out \

@@ -23,7 +23,7 @@
 <meta name="author" content="Sam Haldenby and Matthew R. Gemmell" />
 
 
-<meta name="date" content="2024-02-21" />
+<meta name="date" content="2024-02-23" />
 
   <meta name="viewport" content="width=device-width, initial-scale=1" />
   <meta name="apple-mobile-web-app-capable" content="yes" />
@@ -332,7 +332,7 @@ code span.wa { color: #60a0b0; font-weight: bold; font-style: italic; } /* Warni
 <div id="humann" class="section level2 hasAnchor" number="13.1">
 <h2><span class="header-section-number">13.1</span> HUMAnN<a href="13-Functional_profiling.html#humann" class="anchor-section" aria-label="Anchor link to header"></a></h2>
 <p><img src="figures/humann2.png" width="150px" style="display: block; margin: auto;" /></p>
-<p>First, we will carry out an example run of the software and briefly explore the output files. <code>HUMAnN</code> can take a long time to run so we will use a small amount of example data. Additionally, we will use a subset of the <code>HUMAnN</code> databases for the analysis but when running analysis on your own data you should use the full databases. information on installing <code>HUMAnN</code> and its databases can be found on its online <a href="https://huttenhower.sph.harvard.edu/humann/">Home Page</a>.</p>
+<p>First, we will carry out an example run of the software and briefly explore the output files. <code>HUMAnN</code> can take a long time to run so we will use a small amount of example data. Additionally, we will use a subset of the <code>HUMAnN</code> databases for the analysis but when running analysis on your own data you should use the full databases. Information on installing <code>HUMAnN</code> and its databases can be found on its online <a href="https://huttenhower.sph.harvard.edu/humann/">Home Page</a>.</p>
 <div id="humann-mamba-directories-and-files" class="section level3 hasAnchor" number="13.1.1">
 <h3><span class="header-section-number">13.1.1</span> HUMAnN: mamba, directories, and files<a href="13-Functional_profiling.html#humann-mamba-directories-and-files" class="anchor-section" aria-label="Anchor link to header"></a></h3>
 <p><img src="figures/mamba_logo.png" width="250px" style="display: block; margin: auto;" /></p>
@@ -469,7 +469,7 @@ code span.wa { color: #60a0b0; font-weight: bold; font-style: italic; } /* Warni
 <li>Are samples from one diet group distinguishable from those from the other diet group?</li>
 </ul>
 <p>To visualise this we will create a heatmap with <code>hclust2</code>.</p>
-<p>Before carrying out the command we will need edit the file. Carry out the following alterations:</p>
+<p>Before carrying out the command we will need to edit the file. Carry out the following alterations:</p>
 <p>Remove the <code>_Abundance</code> part of the sample names whilst creating a copy that we will use (It is always a good idea to keep the original file in case a mistake happens).</p>
 <div class="sourceCode" id="cb54"><pre class="sourceCode bash Rchunk"><code class="sourceCode bash"><span id="cb54-1"><a href="13-Functional_profiling.html#cb54-1" tabindex="-1"></a><span class="fu">cat</span> diet_unstratified.relab.tsv <span class="kw">|</span> <span class="fu">sed</span> <span class="st">&quot;s/_Abundance//g&quot;</span> <span class="op">&gt;</span> diet_unstratified.relab.comp.tsv</span></code></pre></div>
 <p><strong>Intro to unix links</strong>:</p>
@@ -528,16 +528,16 @@ Issues with creating file?
 <h4>MCQs<a href="13-Functional_profiling.html#mcqs" class="anchor-section" aria-label="Anchor link to header"></a></h4>
 <ol style="list-style-type: decimal">
 <li>Which pathway stands out the most?
-<div id="radio_OGXSWJZFSH" class="webex-radiogroup">
-<label><input type="radio" autocomplete="off" name="radio_OGXSWJZFSH" value=""></input> <span><strong>ARO-PWY</strong></span></label><label><input type="radio" autocomplete="off" name="radio_OGXSWJZFSH" value="answer"></input> <span><strong>DTDPRHAMSYN</strong></span></label><label><input type="radio" autocomplete="off" name="radio_OGXSWJZFSH" value=""></input> <span><strong>PWY-6385</strong></span></label>
+<div id="radio_MPXWZDFKCD" class="webex-radiogroup">
+<label><input type="radio" autocomplete="off" name="radio_MPXWZDFKCD" value=""></input> <span><strong>ARO-PWY</strong></span></label><label><input type="radio" autocomplete="off" name="radio_MPXWZDFKCD" value="answer"></input> <span><strong>DTDPRHAMSYN</strong></span></label><label><input type="radio" autocomplete="off" name="radio_MPXWZDFKCD" value=""></input> <span><strong>PWY-6385</strong></span></label>
 </div></li>
 <li>How many clusters are formed based on diet (Colours on tree at top of heatmap)?
-<div id="radio_ZCPIODJPPH" class="webex-radiogroup">
-<label><input type="radio" autocomplete="off" name="radio_ZCPIODJPPH" value=""></input> <span><strong>1</strong></span></label><label><input type="radio" autocomplete="off" name="radio_ZCPIODJPPH" value="answer"></input> <span><strong>2</strong></span></label><label><input type="radio" autocomplete="off" name="radio_ZCPIODJPPH" value=""></input> <span><strong>3</strong></span></label>
+<div id="radio_MRDJRAYVKB" class="webex-radiogroup">
+<label><input type="radio" autocomplete="off" name="radio_MRDJRAYVKB" value=""></input> <span><strong>1</strong></span></label><label><input type="radio" autocomplete="off" name="radio_MRDJRAYVKB" value="answer"></input> <span><strong>2</strong></span></label><label><input type="radio" autocomplete="off" name="radio_MRDJRAYVKB" value=""></input> <span><strong>3</strong></span></label>
 </div></li>
 <li>How many clusters are formed based on pathways (Colours on tree at the side of heatmap)?
-<div id="radio_DHCMYNPPKT" class="webex-radiogroup">
-<label><input type="radio" autocomplete="off" name="radio_DHCMYNPPKT" value=""></input> <span><strong>1</strong></span></label><label><input type="radio" autocomplete="off" name="radio_DHCMYNPPKT" value=""></input> <span><strong>2</strong></span></label><label><input type="radio" autocomplete="off" name="radio_DHCMYNPPKT" value="answer"></input> <span><strong>3</strong></span></label>
+<div id="radio_RABNCFUVNF" class="webex-radiogroup">
+<label><input type="radio" autocomplete="off" name="radio_RABNCFUVNF" value=""></input> <span><strong>1</strong></span></label><label><input type="radio" autocomplete="off" name="radio_RABNCFUVNF" value=""></input> <span><strong>2</strong></span></label><label><input type="radio" autocomplete="off" name="radio_RABNCFUVNF" value="answer"></input> <span><strong>3</strong></span></label>
 </div></li>
 </ol>
 <p>You can look up the pathway names in the table file to see a fuller description.</p>
@@ -547,19 +547,19 @@ Issues with creating file?
 <h2><span class="header-section-number">13.4</span> LEfSe<a href="13-Functional_profiling.html#humann_lefse" class="anchor-section" aria-label="Anchor link to header"></a></h2>
 <p><img src="figures/lefse_flip.png" width="150px" style="display: block; margin: auto;" /></p>
 <p>For the final part of this section, we will see if there are any statistically significant differences between the two sample groups. There are several ways in which this can be achieved but we will carry out <code>LEfSe</code> again.</p>
-<p><strong>Task</strong>: Go back to your <code>LEfSe</code> terminal (or create a new one and use <code>. uselefse</code>). Then change directory to <code>4-FunctionalProfiling</code>)</p>
+<p><strong>Task</strong>: Go back to your <code>shotgun_meta</code> terminal (or create a new one and use <code>. useshotgun</code>). Then change directory to <code>4-FunctionalProfiling</code>)</p>
 <p>Thankfully we already formatted the file to work with <code>LEfSe</code> when we formatted it for <code>hclust2</code></p>
 <div class="sourceCode" id="cb58"><pre class="sourceCode bash Rchunk"><code class="sourceCode bash"><span id="cb58-1"><a href="13-Functional_profiling.html#cb58-1" tabindex="-1"></a><span class="co">#LEfSe format</span></span>
-<span id="cb58-2"><a href="13-Functional_profiling.html#cb58-2" tabindex="-1"></a><span class="ex">lefse-format_input.py</span> <span class="dt">\</span></span>
+<span id="cb58-2"><a href="13-Functional_profiling.html#cb58-2" tabindex="-1"></a><span class="ex">lefse_format_input.py</span> <span class="dt">\</span></span>
 <span id="cb58-3"><a href="13-Functional_profiling.html#cb58-3" tabindex="-1"></a>diet_unstratified.relab.comp.tsv <span class="dt">\</span></span>
 <span id="cb58-4"><a href="13-Functional_profiling.html#cb58-4" tabindex="-1"></a>diet_unstratified.relab.comp.lefse <span class="dt">\</span></span>
 <span id="cb58-5"><a href="13-Functional_profiling.html#cb58-5" tabindex="-1"></a>-c 2 <span class="at">-u</span> 1 <span class="at">-o</span> 1000000</span>
 <span id="cb58-6"><a href="13-Functional_profiling.html#cb58-6" tabindex="-1"></a><span class="co">#Run LEfSe</span></span>
-<span id="cb58-7"><a href="13-Functional_profiling.html#cb58-7" tabindex="-1"></a><span class="ex">run_lefse.py</span> <span class="dt">\</span></span>
+<span id="cb58-7"><a href="13-Functional_profiling.html#cb58-7" tabindex="-1"></a><span class="ex">lefse_run.py</span> <span class="dt">\</span></span>
 <span id="cb58-8"><a href="13-Functional_profiling.html#cb58-8" tabindex="-1"></a>diet_unstratified.relab.comp.lefse <span class="dt">\</span></span>
 <span id="cb58-9"><a href="13-Functional_profiling.html#cb58-9" tabindex="-1"></a>diet_unstratified.relab.comp.lefse.out</span>
 <span id="cb58-10"><a href="13-Functional_profiling.html#cb58-10" tabindex="-1"></a><span class="co">#Produce LEfSe plot</span></span>
-<span id="cb58-11"><a href="13-Functional_profiling.html#cb58-11" tabindex="-1"></a><span class="ex">lefse-plot_res.py</span> <span class="dt">\</span></span>
+<span id="cb58-11"><a href="13-Functional_profiling.html#cb58-11" tabindex="-1"></a><span class="ex">lefse_plot_res.py</span> <span class="dt">\</span></span>
 <span id="cb58-12"><a href="13-Functional_profiling.html#cb58-12" tabindex="-1"></a>--dpi 200 <span class="dt">\</span></span>
 <span id="cb58-13"><a href="13-Functional_profiling.html#cb58-13" tabindex="-1"></a>--format png <span class="dt">\</span></span>
 <span id="cb58-14"><a href="13-Functional_profiling.html#cb58-14" tabindex="-1"></a>diet_unstratified.relab.comp.lefse.out <span class="dt">\</span></span>

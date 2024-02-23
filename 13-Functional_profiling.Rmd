@@ -20,7 +20,7 @@ Please see below for a diagram showing the pipline of `HUMAnN`:
 knitr::include_graphics(path = "figures/humann2.png", auto_pdf = TRUE)
 ``` 
 
-First, we will carry out an example run of the software and briefly explore the output files. `HUMAnN` can take a long time to run so we will use a small amount of example data. Additionally, we will use a subset of the `HUMAnN` databases for the analysis but when running analysis on your own data you should use the full databases. information on installing `HUMAnN` and its databases can be found on its online [Home Page](https://huttenhower.sph.harvard.edu/humann/).
+First, we will carry out an example run of the software and briefly explore the output files. `HUMAnN` can take a long time to run so we will use a small amount of example data. Additionally, we will use a subset of the `HUMAnN` databases for the analysis but when running analysis on your own data you should use the full databases. Information on installing `HUMAnN` and its databases can be found on its online [Home Page](https://huttenhower.sph.harvard.edu/humann/).
 
 ### HUMAnN: mamba, directories, and files
 ```{r, fig.align = 'center',out.width= '250px', echo=FALSE }
@@ -244,7 +244,7 @@ Now that we have our combined, unstratified, and normalised table, we can visual
 
 To visualise this we will create a heatmap with `hclust2`.
 
-Before carrying out the command we will need edit the file. Carry out the following alterations:
+Before carrying out the command we will need to edit the file. Carry out the following alterations:
 
 Remove the `_Abundance` part of the sample names whilst creating a copy that we will use (It is always a good idea to keep the original file in case a mistake happens).
 
@@ -265,7 +265,7 @@ Next using your text editor of choice carry out the following changes on the fil
 `r hide("Issues with creating file?")`
 If you are having issues with creating and editing the file `all_num.lefse.bracken` you can copy a pre-made version.
 ```{bash, eval=FALSE}
-cp /pub14/tea/nsc206/Shotgun_metagenomics/lefse/diet_unstratified.relab.comp.tsv
+cp /pub14/tea/nsc206/Shotgun_metagenomics/lefse/diet_unstratified.relab.comp.tsv .
 ```
 `r unhide()`
 
@@ -305,7 +305,9 @@ firefox diet_unstratified.relab.heatmap.png
 
 From this, we can see that there is a small amount of clustering caused by the differences between the Korean and Western diet. Other factors that we do not know about the samples must also come into play. This is normal as we cannot account for everything but it is good to try to account for as much as possible.
 
-<center>![](figures/humann_heatmap.png){style="border-radius: 15px; width: 750px; border: 5px solid #333333"}</center>
+<center>
+![](figures/humann_heatmap.png){style="border-radius: 15px; width: 750px; border: 5px solid #333333"}
+</center>
 
 #### MCQs {-}
 
@@ -333,24 +335,27 @@ knitr::include_graphics(path = "figures/lefse_flip.png", auto_pdf = TRUE)
 
 For the final part of this section, we will see if there are any statistically significant differences between the two sample groups. There are several ways in which this can be achieved but we will carry out `LEfSe` again.
 
-__Task__: Go back to your `LEfSe` terminal (or create a new one and use `. uselefse`). Then change directory to `4-FunctionalProfiling`)
+__Task__: Go back to your `shotgun_meta` terminal (or create a new one and use `. useshotgun`). Then change directory to `4-FunctionalProfiling`)
 
 Thankfully we already formatted the file to work with `LEfSe` when we formatted it for `hclust2`
 
 ```{bash eval=FALSE}
 #LEfSe format
-lefse-format_input.py \
+lefse_format_input.py \
 diet_unstratified.relab.comp.tsv \
 diet_unstratified.relab.comp.lefse \
 -c 2 -u 1 -o 1000000
 #Run LEfSe
-run_lefse.py \
+lefse_run.py \
 diet_unstratified.relab.comp.lefse \
 diet_unstratified.relab.comp.lefse.out
 #Produce LEfSe plot
-lefse-plot_res.py \
+lefse_plot_res.py \
 --dpi 200 \
 --format png \
+#Below options added to increase max length of feature string
+#TypeError: slice indices must be integers or None or have an __index__ method
+--max_feature_len 200 \
 diet_unstratified.relab.comp.lefse.out \
 diet_unstratified.relab.comp.lefse.png
 #View plot

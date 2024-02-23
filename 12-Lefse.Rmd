@@ -73,10 +73,10 @@ The output file is a tab-delimited file which contains a row for each species. B
 - __Biomarker name__
 - __Log of highest class average__: I.e. get the class with the greater amounts of the biomarker, average the counts and then get the log of this value.
 - __Class with the greater amounts of biomarker__
-- __LDA effect size__: A statistical figure for `LEfSe`..
+- __LDA effect size__: A statistical figure for `LEfSe`.
 - __p-value__: Biomarkers must have a p-value of <0.05 to be considered significant.
 
-The __LDA effect__ size indicates how much of an effect each biomarker has. The default is to only count a species with an LDA effect size of greater than 2 or less than -2 as a biomarker. The further the LDA effect size is from 0 the greater the effect the species causes.
+The __LDA effect__ size indicates how much of an effect each biomarker has. The default is to only count a species with an LDA effect size of greater than 2 or less than -2 as a biomarker. The further the LDA effect size is from 0 the greater the effect the species causes. Generally, it can be through of as the order of magnitude difference in the abundance of the biomarker between the sample groups.
 
 ## LEfSe: visualisation
 ```{r, fig.align = 'center',out.width= '100px', echo=FALSE }
@@ -130,17 +130,17 @@ opts_p <- c("__Korean__",answer="__Western__")
 4. Which class has more biomarkers associated with it? `r longmcq(opts_p)`
 
 ```{r, echo = FALSE}
-opts_p <- c(answer="__0.0014961642897455565__","__3.0272759627443127__","__3.3145045719482846__")
+opts_p <- c(answer="__0.0014961642897455565__","__3.0266165524513937__","__3.314396201978439__")
 ```
 5. What is the LEfSe p-value for __Campylobactercoli__? `r longmcq(opts_p)`
 
 ```{r, echo = FALSE}
-opts_p <- c("__0.0014961642897455565__",answer="__3.0272759627443127__","__3.3145045719482846__")
+opts_p <- c("__0.0014961642897455565__",answer="__3.0266165524513937__","__3.314396201978439__")
 ```
 6. What is the Log of highest class average for __Streptococcussuis__? `r longmcq(opts_p)`
 
 ```{r, echo = FALSE}
-opts_p <- c("__0.0014961642897455565__","__3.0272759627443127__",answer="__3.3145045719482846__")
+opts_p <- c("__0.0014961642897455565__","__3.0266165524513937__",answer="__3.314396201978439__")
 ```
 7. What is the LDA effect size for __Bifidobacteriumlongum__? `r longmcq(opts_p)`
 
@@ -149,7 +149,7 @@ opts_p <- c("__0.0014961642897455565__","__3.0272759627443127__",answer="__3.314
 knitr::include_graphics(path = "figures/database.png", auto_pdf = TRUE)
 ``` 
 
-In your own future analysis you will need to create your own `Kraken2` and `Bracken` databases. Please sse the following links on information for this:
+In your own future analysis you will need to create your own `Kraken2` and `Bracken` databases. Please see the following links on information for this:
 
 - `Kraken2`
    - Standard `Kraken2` databases: https://github.com/DerrickWood/kraken2/wiki/Manual#standard-kraken-2-database
