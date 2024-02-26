@@ -23,7 +23,7 @@
 <meta name="author" content="Sam Haldenby and Matthew R. Gemmell" />
 
 
-<meta name="date" content="2024-02-23" />
+<meta name="date" content="2024-02-26" />
 
   <meta name="viewport" content="width=device-width, initial-scale=1" />
   <meta name="apple-mobile-web-app-capable" content="yes" />
@@ -281,7 +281,8 @@ code span.wa { color: #60a0b0; font-weight: bold; font-style: italic; } /* Warni
 <li class="chapter" data-level="18.2" data-path="18-Assembly_functional_annotation.html"><a href="18-Assembly_functional_annotation.html#bakta"><i class="fa fa-check"></i><b>18.2</b> Bakta</a>
 <ul>
 <li class="chapter" data-level="18.2.1" data-path="18-Assembly_functional_annotation.html"><a href="18-Assembly_functional_annotation.html#bakta-run"><i class="fa fa-check"></i><b>18.2.1</b> Bakta: run</a></li>
-<li class="chapter" data-level="18.2.2" data-path="18-Assembly_functional_annotation.html"><a href="18-Assembly_functional_annotation.html#bakta-output"><i class="fa fa-check"></i><b>18.2.2</b> Bakta: output</a></li>
+<li class="chapter" data-level="18.2.2" data-path="18-Assembly_functional_annotation.html"><a href="18-Assembly_functional_annotation.html#bakta-premade-results"><i class="fa fa-check"></i><b>18.2.2</b> Bakta: premade results</a></li>
+<li class="chapter" data-level="18.2.3" data-path="18-Assembly_functional_annotation.html"><a href="18-Assembly_functional_annotation.html#bakta-output"><i class="fa fa-check"></i><b>18.2.3</b> Bakta: output</a></li>
 </ul></li>
 <li class="chapter" data-level="18.3" data-path="18-Assembly_functional_annotation.html"><a href="18-Assembly_functional_annotation.html#minpath"><i class="fa fa-check"></i><b>18.3</b> MinPath</a>
 <ul>
@@ -487,7 +488,7 @@ code span.wa { color: #60a0b0; font-weight: bold; font-style: italic; } /* Warni
 Issues with creating file?
 </button>
 <p>If you are having issues with creating and editing the file <code>all_num.lefse.bracken</code> you can copy a pre-made version.</p>
-<div class="sourceCode" id="cb55"><pre class="sourceCode bash Rchunk"><code class="sourceCode bash"><span id="cb55-1"><a href="13-Functional_profiling.html#cb55-1" tabindex="-1"></a><span class="fu">cp</span> /pub14/tea/nsc206/Shotgun_metagenomics/lefse/diet_unstratified.relab.comp.tsv</span></code></pre></div>
+<div class="sourceCode" id="cb55"><pre class="sourceCode bash Rchunk"><code class="sourceCode bash"><span id="cb55-1"><a href="13-Functional_profiling.html#cb55-1" tabindex="-1"></a><span class="fu">cp</span> /pub14/tea/nsc206/Shotgun_metagenomics/lefse/diet_unstratified.relab.comp.tsv .</span></code></pre></div>
 </div>
 <p>Now we can use the <code>hclust2</code> tool to create a heatmap of our pathway abundances.</p>
 <div class="sourceCode" id="cb56"><pre class="sourceCode bash Rchunk"><code class="sourceCode bash"><span id="cb56-1"><a href="13-Functional_profiling.html#cb56-1" tabindex="-1"></a><span class="ex">hclust2.py</span> <span class="dt">\</span></span>
@@ -528,16 +529,16 @@ Issues with creating file?
 <h4>MCQs<a href="13-Functional_profiling.html#mcqs" class="anchor-section" aria-label="Anchor link to header"></a></h4>
 <ol style="list-style-type: decimal">
 <li>Which pathway stands out the most?
-<div id="radio_MPXWZDFKCD" class="webex-radiogroup">
-<label><input type="radio" autocomplete="off" name="radio_MPXWZDFKCD" value=""></input> <span><strong>ARO-PWY</strong></span></label><label><input type="radio" autocomplete="off" name="radio_MPXWZDFKCD" value="answer"></input> <span><strong>DTDPRHAMSYN</strong></span></label><label><input type="radio" autocomplete="off" name="radio_MPXWZDFKCD" value=""></input> <span><strong>PWY-6385</strong></span></label>
+<div id="radio_QDVROEDEBB" class="webex-radiogroup">
+<label><input type="radio" autocomplete="off" name="radio_QDVROEDEBB" value=""></input> <span><strong>ARO-PWY</strong></span></label><label><input type="radio" autocomplete="off" name="radio_QDVROEDEBB" value="answer"></input> <span><strong>DTDPRHAMSYN</strong></span></label><label><input type="radio" autocomplete="off" name="radio_QDVROEDEBB" value=""></input> <span><strong>PWY-6385</strong></span></label>
 </div></li>
 <li>How many clusters are formed based on diet (Colours on tree at top of heatmap)?
-<div id="radio_MRDJRAYVKB" class="webex-radiogroup">
-<label><input type="radio" autocomplete="off" name="radio_MRDJRAYVKB" value=""></input> <span><strong>1</strong></span></label><label><input type="radio" autocomplete="off" name="radio_MRDJRAYVKB" value="answer"></input> <span><strong>2</strong></span></label><label><input type="radio" autocomplete="off" name="radio_MRDJRAYVKB" value=""></input> <span><strong>3</strong></span></label>
+<div id="radio_RFBYWIAIPB" class="webex-radiogroup">
+<label><input type="radio" autocomplete="off" name="radio_RFBYWIAIPB" value=""></input> <span><strong>1</strong></span></label><label><input type="radio" autocomplete="off" name="radio_RFBYWIAIPB" value="answer"></input> <span><strong>2</strong></span></label><label><input type="radio" autocomplete="off" name="radio_RFBYWIAIPB" value=""></input> <span><strong>3</strong></span></label>
 </div></li>
 <li>How many clusters are formed based on pathways (Colours on tree at the side of heatmap)?
-<div id="radio_RABNCFUVNF" class="webex-radiogroup">
-<label><input type="radio" autocomplete="off" name="radio_RABNCFUVNF" value=""></input> <span><strong>1</strong></span></label><label><input type="radio" autocomplete="off" name="radio_RABNCFUVNF" value=""></input> <span><strong>2</strong></span></label><label><input type="radio" autocomplete="off" name="radio_RABNCFUVNF" value="answer"></input> <span><strong>3</strong></span></label>
+<div id="radio_GJACWBVDGS" class="webex-radiogroup">
+<label><input type="radio" autocomplete="off" name="radio_GJACWBVDGS" value=""></input> <span><strong>1</strong></span></label><label><input type="radio" autocomplete="off" name="radio_GJACWBVDGS" value=""></input> <span><strong>2</strong></span></label><label><input type="radio" autocomplete="off" name="radio_GJACWBVDGS" value="answer"></input> <span><strong>3</strong></span></label>
 </div></li>
 </ol>
 <p>You can look up the pathway names in the table file to see a fuller description.</p>
@@ -562,10 +563,13 @@ Issues with creating file?
 <span id="cb58-11"><a href="13-Functional_profiling.html#cb58-11" tabindex="-1"></a><span class="ex">lefse_plot_res.py</span> <span class="dt">\</span></span>
 <span id="cb58-12"><a href="13-Functional_profiling.html#cb58-12" tabindex="-1"></a>--dpi 200 <span class="dt">\</span></span>
 <span id="cb58-13"><a href="13-Functional_profiling.html#cb58-13" tabindex="-1"></a>--format png <span class="dt">\</span></span>
-<span id="cb58-14"><a href="13-Functional_profiling.html#cb58-14" tabindex="-1"></a>diet_unstratified.relab.comp.lefse.out <span class="dt">\</span></span>
-<span id="cb58-15"><a href="13-Functional_profiling.html#cb58-15" tabindex="-1"></a>diet_unstratified.relab.comp.lefse.png</span>
-<span id="cb58-16"><a href="13-Functional_profiling.html#cb58-16" tabindex="-1"></a><span class="co">#View plot</span></span>
-<span id="cb58-17"><a href="13-Functional_profiling.html#cb58-17" tabindex="-1"></a><span class="ex">firefox</span> diet_unstratified.relab.comp.lefse.png</span></code></pre></div>
+<span id="cb58-14"><a href="13-Functional_profiling.html#cb58-14" tabindex="-1"></a>#Below options added to increase max length of feature string</span>
+<span id="cb58-15"><a href="13-Functional_profiling.html#cb58-15" tabindex="-1"></a><span class="co">#TypeError: slice indices must be integers or None or have an __index__ method</span></span>
+<span id="cb58-16"><a href="13-Functional_profiling.html#cb58-16" tabindex="-1"></a><span class="ex">--max_feature_len</span> 200 <span class="dt">\</span></span>
+<span id="cb58-17"><a href="13-Functional_profiling.html#cb58-17" tabindex="-1"></a>diet_unstratified.relab.comp.lefse.out <span class="dt">\</span></span>
+<span id="cb58-18"><a href="13-Functional_profiling.html#cb58-18" tabindex="-1"></a>diet_unstratified.relab.comp.lefse.png</span>
+<span id="cb58-19"><a href="13-Functional_profiling.html#cb58-19" tabindex="-1"></a><span class="co">#View plot</span></span>
+<span id="cb58-20"><a href="13-Functional_profiling.html#cb58-20" tabindex="-1"></a><span class="ex">firefox</span> diet_unstratified.relab.comp.lefse.png</span></code></pre></div>
 <p>Look at the output and see what pathways count as biomarkers for the 2 groups.</p>
 </div>
 <div id="optional-task" class="section level2 hasAnchor" number="13.5">

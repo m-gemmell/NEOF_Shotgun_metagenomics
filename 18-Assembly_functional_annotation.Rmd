@@ -13,7 +13,7 @@ Taxonomic annotation of bins can be carried out with `Kraken2`. As we have alrea
 ## Bakta
 <center>![](figures/bakta_logo.png){style="border-radius: 15px; width: 250px; border: 5px solid #333333"}</center>
 
-We will carry out `Bakta` functional annotation using. `Bakta` can annotate bacterial genomes and plasmids from both isolates and MAGs.
+We will carry out `Bakta` functional annotation. `Bakta` can annotate bacterial genomes and plasmids from both isolates and MAGs.
 
 Make a new directory and move into it.
 
@@ -29,7 +29,7 @@ knitr::include_graphics(path = "figures/play_blue.png", auto_pdf = TRUE)
 
 Now we can annotate one of the bins.
 
-The below will take a long time to run (>1 hour). Instead of running it skip onto the next step to copy pre-made output to continue with. This command is here so you know what to run in your own future analyses.
+The below will take a long time to run (>1 hour). Instead of running it skip onto the next section to copy pre-made output to continue with. This command is here so you know what to run in your own future analyses.
 
 ```{bash eval=FALSE}
 bakta \
@@ -47,12 +47,21 @@ knitr::include_graphics(path = "figures/parameter_blue.png", auto_pdf = TRUE)
 - `-o`: The output directory. This must not exist before running the command.
 - The last parameter is the fasta file containing the genome/plasmid you would like annotated.
 
+### Bakta: premade results
+
+Link the pre-made results for all the K1 bins.
+
+```{bash eval=FALSE}
+#Link all data
+ln -s /pub14/tea/nsc206/NEOF/Shotgun_metagenomics/bakta/K1_fullset/* .
+```
+
 ### Bakta: output
 ```{r, fig.align = 'center',out.width= '100px', echo=FALSE }
 knitr::include_graphics(path = "figures/output_file_blue.png", auto_pdf = TRUE)
 ``` 
 
-Move into the newly created K1.1 directory and list the files. Each of the files has the prefix "K1.1" and contain the following information:
+List the files in the newly created K1.1 directory. Each of the files has the prefix "K1.1" and contains the following information:
 
 - __<prefix>.tsv__: annotations as simple human readble TSV
 - __<prefix>.gff3__: annotations & sequences in GFF3 format
@@ -69,6 +78,7 @@ Move into the newly created K1.1 directory and list the files. Each of the files
   - These are only useful for complete/near complete circular genomes.
   - I would suggest looking at [GenoVi](https://github.com/robotoD/GenoVi/wiki/User-guide#tutorials-) for circular genome plots.
 - __<prefix>.svg__: circular genome annotation plot as SVG
+- __<prefix>.log__: Log file of command.
 
 View the summary file for bin K1.1.
 
@@ -117,15 +127,6 @@ There is quite a lot of information contained in each row so instead of listing 
 
 https://github.com/The-Sequence-Ontology/Specifications/blob/master/gff3.md
 
-Link the pre-made results for all the K1 bins.
-
-```{bash eval=FALSE}
-#Remove you K1.1 annotation
-rm -r k1.1
-#Link all data
-ln -s /pub14/tea/nsc206/NEOF/Shotgun_metagenomics/bakta/K1_fullset/* .
-```
-
 `r hide("Loop used to analyse all bins")`
 The code below is for your future analysis, do not run it now as it will take to long.
 ```{bash eval=FALSE}
@@ -156,7 +157,7 @@ knitr::include_graphics(path = "figures/pathways_2.png", auto_pdf = TRUE)
 
 `MinPath` can predict `MetaCyc` metabolic pathways. These pathway are made up of sets of enzymes that catalyse various reactions.
 
-Ensure you start in the `~/8-Annotation/K1_fullset` directory.
+Ensure you start in the `~/8-Annotation` directory.
 
 ### MinPath: EC extraction
 ```{r, fig.align = 'center',out.width= '100px', echo=FALSE }
@@ -165,20 +166,20 @@ knitr::include_graphics(path = "figures/exctractor.png", auto_pdf = TRUE)
 
 Before we can estimate the pathways we need to extract the EC numbers predictions from the GFF file. EC (Enzyme Commission) numbers are a numerical classification for enzymes based on the reaction they catalyse.
 
-Unless you know the EC scheme well they are generally not helpful by themselves. An example EC number is EC 3.1.1.The numbers represents the group the enzyme belongs to with the first number being the biggest group. From highest to the lowest grouping 3.1.1. represents:
+Unless you know the EC scheme well they are generally not helpful by themselves. An example EC number is EC 3.1.1. The numbers represents the group the enzyme belongs to with the first number being the biggest group. From highest to the lowest grouping 3.1.1 represents:
 
 - __3__: Hydrolase enzymes.
 - __3.1__: Hydrolase enzymes that act on ester bonds.
 - __3.1.1__: Carboxylic Ester Hydrolases.
 
-With all that information we will extract the EC annotations from the GFF files. First we'll create a directory for the output and move into the GFF directory.
+With all that information we will extract the EC annotations from the GFF files. First we'll create a directory for the output.
 
 ```{bash eval=FALSE}
 #Create EC directory
 mkdir EC
 ```
 
-We will now use a loop with various parts to create an EC annotation files.
+We will now use a loop with various parts to create EC annotation files.
 The input`.ec` files required for `MinPath` are tab delimited with two columns:
 
 1. Protein/sequence id. E.g. GDGAPA_12670.
@@ -191,8 +192,8 @@ Ensure you do press enter at the end of each line.
 ```{bash eval=FALSE}
 ls -1 */*gff3 | sed "s|.*/||" | sed "s/.gff3//" | while read bin
 do
-cat ${bin}/${bin}.gff3 | grep "EC:" | cut -f 9 | sed "s/ID=//" \
-sed "s/;.*EC:/\t/" | sed "s/,.*//" >../EC/${bin}.ec
+cat ${bin}/${bin}.gff3 | grep "EC:" | cut -f 9 | sed "s/ID=//" | \
+sed "s/;.*EC:/\t/" | sed "s/,.*//" > EC/${bin}.ec
 done
 ```
 
@@ -234,11 +235,13 @@ done
 
 Now to look at the command within the loop:
 
-`cat ${bin}.gff3 | grep "EC:" | cut -f 9 | \`
-`sed "s/ID=//" | sed "s/;.*;Dbxref=/,/" | \`
-`sed "s/,.*EC:/\t/" | sed "s/,.*//" >../EC/${bin}.ec`
+```{bash eval=FALSE}
+cat ${bin}.gff3 | grep "EC:" | cut -f 9 | \
+sed "s/ID=//" | sed "s/;.*;Dbxref=/,/" | \
+sed "s/,.*EC:/\t/" | sed "s/,.*//" >../EC/${bin}.ec
+```
 
-A good way to figure out what a pipe workflow is doing, is by building it up step by step.
+A good way to figure out what a workflow is doing, is by building it up step by step.
 Run the first part of workflow and then add the next section, run, repeat.
 This shows you how each new section is affecting the output. 
 Additionally, it is always good to run it on one file and `head` the output so we have a manageable amount of data to look at.
@@ -289,7 +292,7 @@ With our `.ec` files we can create our MetaCyc predictions.
 First we'll change directory into the EC directory. Then create an output directory for the MetaCyc predictions.
 
 ```{bash eval=FALSE}
-cd ../EC
+cd ./EC
 mkdir ../MetaCyc
 ```
 
@@ -365,8 +368,8 @@ mkdir KEGG
 #KEGG extractions
 ls -1 */*gff3 | sed "s|.*/||" | sed "s/.gff3//" | while read bin
 do
-cat ${bin}/${bin}.gff3 | grep "KEGG:" | cut -f 9 | sed "s/ID=//" \
-sed "s/;.*KEGG:/\t/" | sed "s/,.*//" >../KEGG/${bin}.kegg
+cat ${bin}/${bin}.gff3 | grep "KEGG:" | cut -f 9 | sed "s/ID=//" | \
+sed "s/;.*KEGG:/\t/" | sed "s/,.*//" > KEGG/${bin}.kegg
 done
 #Make directory for KEGG minpath output
 mkdir KEGG_minpath

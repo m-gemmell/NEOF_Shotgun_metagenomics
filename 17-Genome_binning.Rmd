@@ -15,7 +15,7 @@ To alleviate these issues genomic binning can be carried out. This will cluster 
 
 Genomic binning has been used to discover many new genomes. Additionally, it makes downstream analyses quicker as the downstream steps will be carried out on the sets of bins rather than on one large metagenome assembly.
 
-Binning produces "bins" of contigs of various quality (e.g. draft, complete). These bins are also know as MAGs (Metagenome-assembled genomes). In other words a MAG is a single assembled genome that was assembled with other genomes in a metagenome assembly but later separated from the other assemblies. The term MAG  has been adopted by the GSC (Genomics Standards Consortium).
+Binning produces "bins" of contigs of various quality (e.g. draft, complete). These bins are also known as MAGs (Metagenome-assembled genomes). In other words a MAG is a single assembled genome that was assembled with other genomes in a metagenome assembly but later separated from the other assemblies. The term MAG  has been adopted by the GSC (Genomics Standards Consortium).
 
 It is recommended to ensure you do not have a poor quality metagenome assembly. Binning requires contigs of good length and good coverage. Extremely low coverage and very short contigs will be excluded from binning.
 
@@ -24,7 +24,7 @@ It is recommended to ensure you do not have a poor quality metagenome assembly. 
 knitr::include_graphics(path = "figures/bat.png", auto_pdf = TRUE)
 ``` 
 
-We will use `MetaBAT2` for our genome binning. It is a relatively new binning tool with three major upsides that makes it very popular:
+We will use `MetaBAT2` for our genome binning. It has three major upsides that makes it very popular:
 
 1. It has very reliable default parameters meaning virtually no parameter optimisation is required.
 2. It performs very well amongst genome binners.
@@ -113,7 +113,7 @@ df_min1500len <- df[df$contigLen >= 1500,]
 summary(df_min1500len)
 ```
 
-That is looking better. The minimum average coverage for `MetaBAT2` is 1 and our minimum value is 2.844 with a maximum of 92.967. Now you can quit R and continue.
+That is looking better. The minimum average coverage for `MetaBAT2` is 1 and our minimum value is 2.700 with a maximum of 93.285. Now you can quit R and continue.
 
 ```{r eval=FALSE}
 #quit R
@@ -261,11 +261,14 @@ less MAGS_checkm.tsv
 `r hide("CheckM statistics definitions")`
 List of statistics definitions from [CheckM wiki](https://github.com/Ecogenomics/CheckM/wiki/Reported-Statistics)
 
+__Note:__ These may not all appear in your `MAGS_checkm.tsv` file.
+
 - __bin id__: unique identifier of genome bin (derived from input fasta file)
 - __marker lineage__: indicates the taxonomic rank of the lineage-specific marker set used to estimated genome completeness, contamination, and strain heterogeneity. More detailed information about the placement of a genome within the reference genome tree can be obtained with the tree_qa command. The UID indicates the branch within the reference tree used to infer the marker set applied to estimate the bins quality.
 - __# genomes__: number of reference genomes used to infer the lineage-specific marker set
 - __markers__: number of marker genes within the inferred lineage-specific marker set
 marker sets: number of co-located marker sets within the inferred lineage-specific marker set
+- __marker sets__: number of co-located marker sets within the inferred lineage-specific marker set
 - __0-5+__: number of times each marker gene is identified
 - __completeness__: estimated completeness of genome as determined from the presence/absence of marker genes and the expected collocalization of these genes (see Methods in the PeerJ preprint for details)
 - __contamination__: estimated contamination of genome as determined by the presence of multi-copy marker genes and the expected collocalization of these genes (see Methods in the PeerJ preprint for details)
@@ -384,17 +387,17 @@ cut -d "," -f 1,15 MAGS_checkm_quality.csv | tr "," "\t"
 ```
 
 ```{r, echo = FALSE}
-opts_p <- c("__root (UID1)__", answer="__k_Bacteria (UID203)__", "__o_Lachnospiraceae__")
+opts_p <- c("__root (UID1)__", answer="__k_Bacteria (UID203)__", "__o_Lachnospiraceae (UID1286)__")
 ```
 1. What lineage was assigned to bin __K1.1__? `r longmcq(opts_p)`
 
 ```{r, echo = FALSE}
-opts_p <- c("__root (UID1)__", "__k_Bacteria (UID203)__", answer="__o_Lachnospiraceae__")
+opts_p <- c("__root (UID1)__", "__k_Bacteria (UID203)__", answer="__o_Lachnospiraceae (UID1286)__")
 ```
 2. What lineage was assigned to bin __K1.22__? `r longmcq(opts_p)`
 
 ```{r, echo = FALSE}
-opts_p <- c(answer="__root (UID1)__", "__k_Bacteria (UID203)__", "__o_Lachnospiraceae__")
+opts_p <- c(answer="__root (UID1)__", "__k_Bacteria (UID203)__", "__o_Lachnospiraceae (UID1286)__")
 ```
 3. What lineage was assigned to bin __K1.8__? `r longmcq(opts_p)`
 

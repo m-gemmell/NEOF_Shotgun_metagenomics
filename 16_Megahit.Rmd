@@ -1,7 +1,7 @@
 # Megahit Assembly
-```{r, fig.align = 'center',out.width= '200px', echo=FALSE }
-knitr::include_graphics(path = "figures/puzzle.png", auto_pdf = TRUE)
-``` 
+<center>
+![](figures/puzzle.png){style="width: 200px; border-radius: 15px; border: 5px solid #333333; background-color: white"}
+</center>
 
 We will use our stitched and unstitched reads to produce an assembly with`MEGAHIT`. 
 
@@ -44,7 +44,7 @@ knitr::include_graphics(path = "figures/parameter_blue.png", auto_pdf = TRUE)
 
 The __k-mer list__ instructs `MEGAHIT` to first generate an assembly using a k-mer size of 29 bp and when that is complete, integrate the results into an assembly using a k-mer size of 49 bp, and so on up to a final iteration using a k-mer size of 189 bp. This large range of k-mer lengths should give us a good assembly, given the data. However, it may take a while to run. This might be a good time to read on or take a break whilst the command runs. 
 
-If you need a command prompt (your current one is busy because MEGAHIT is running), right click on the main screen, choose `Applications` -> `Shell` -> `bash`.
+If you need a command prompt (your current one is busy because MEGAHIT is running), right click on the main screen, choose `Terminal`.
 
 Once the assembly is completed, we can look at the output FASTA file containing the contigs:
 
@@ -98,7 +98,9 @@ The report tells us quite a bit about the assembly quality. Two definitions that
 - __N50__ equals the length of the N50 contig. 
 - __L50__ is the number of contigs with a length equal to or greater than N50.
 
-<center>![](figures/n50_n90.png){style="border-radius: 15px; width: 400px; border: 5px solid #333333"}</center>
+<center>
+![](figures/n50_n90.png){style="border-radius: 15px; width: 400px; border: 5px solid #333333"}
+</center>
 
 ### QUAST: MCQs
 ```{r, fig.align = 'center',out.width= '100px', echo=FALSE }

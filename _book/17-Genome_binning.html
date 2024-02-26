@@ -23,7 +23,7 @@
 <meta name="author" content="Sam Haldenby and Matthew R. Gemmell" />
 
 
-<meta name="date" content="2024-02-23" />
+<meta name="date" content="2024-02-26" />
 
   <meta name="viewport" content="width=device-width, initial-scale=1" />
   <meta name="apple-mobile-web-app-capable" content="yes" />
@@ -281,7 +281,8 @@ code span.wa { color: #60a0b0; font-weight: bold; font-style: italic; } /* Warni
 <li class="chapter" data-level="18.2" data-path="18-Assembly_functional_annotation.html"><a href="18-Assembly_functional_annotation.html#bakta"><i class="fa fa-check"></i><b>18.2</b> Bakta</a>
 <ul>
 <li class="chapter" data-level="18.2.1" data-path="18-Assembly_functional_annotation.html"><a href="18-Assembly_functional_annotation.html#bakta-run"><i class="fa fa-check"></i><b>18.2.1</b> Bakta: run</a></li>
-<li class="chapter" data-level="18.2.2" data-path="18-Assembly_functional_annotation.html"><a href="18-Assembly_functional_annotation.html#bakta-output"><i class="fa fa-check"></i><b>18.2.2</b> Bakta: output</a></li>
+<li class="chapter" data-level="18.2.2" data-path="18-Assembly_functional_annotation.html"><a href="18-Assembly_functional_annotation.html#bakta-premade-results"><i class="fa fa-check"></i><b>18.2.2</b> Bakta: premade results</a></li>
+<li class="chapter" data-level="18.2.3" data-path="18-Assembly_functional_annotation.html"><a href="18-Assembly_functional_annotation.html#bakta-output"><i class="fa fa-check"></i><b>18.2.3</b> Bakta: output</a></li>
 </ul></li>
 <li class="chapter" data-level="18.3" data-path="18-Assembly_functional_annotation.html"><a href="18-Assembly_functional_annotation.html#minpath"><i class="fa fa-check"></i><b>18.3</b> MinPath</a>
 <ul>
@@ -333,12 +334,12 @@ code span.wa { color: #60a0b0; font-weight: bold; font-style: italic; } /* Warni
 <li><strong>Composition</strong>: Contigs with similar GC content are more likely to belong to the same genome.</li>
 </ul>
 <p>Genomic binning has been used to discover many new genomes. Additionally, it makes downstream analyses quicker as the downstream steps will be carried out on the sets of bins rather than on one large metagenome assembly.</p>
-<p>Binning produces "bins" of contigs of various quality (e.g. draft, complete). These bins are also know as MAGs (Metagenome-assembled genomes). In other words a MAG is a single assembled genome that was assembled with other genomes in a metagenome assembly but later separated from the other assemblies. The term MAG has been adopted by the GSC (Genomics Standards Consortium).</p>
+<p>Binning produces "bins" of contigs of various quality (e.g. draft, complete). These bins are also known as MAGs (Metagenome-assembled genomes). In other words a MAG is a single assembled genome that was assembled with other genomes in a metagenome assembly but later separated from the other assemblies. The term MAG has been adopted by the GSC (Genomics Standards Consortium).</p>
 <p>It is recommended to ensure you do not have a poor quality metagenome assembly. Binning requires contigs of good length and good coverage. Extremely low coverage and very short contigs will be excluded from binning.</p>
 <div id="metabat2" class="section level2 hasAnchor" number="17.1">
 <h2><span class="header-section-number">17.1</span> MetaBAT2<a href="17-Genome_binning.html#metabat2" class="anchor-section" aria-label="Anchor link to header"></a></h2>
 <p><img src="figures/bat.png" width="200px" style="display: block; margin: auto;" /></p>
-<p>We will use <code>MetaBAT2</code> for our genome binning. It is a relatively new binning tool with three major upsides that makes it very popular:</p>
+<p>We will use <code>MetaBAT2</code> for our genome binning. It has three major upsides that makes it very popular:</p>
 <ol style="list-style-type: decimal">
 <li>It has very reliable default parameters meaning virtually no parameter optimisation is required.</li>
 <li>It performs very well amongst genome binners.</li>
@@ -386,7 +387,7 @@ code span.wa { color: #60a0b0; font-weight: bold; font-style: italic; } /* Warni
 <span id="cb76-4"><a href="17-Genome_binning.html#cb76-4" tabindex="-1"></a>df_min1500len <span class="ot">&lt;-</span> df[df<span class="sc">$</span>contigLen <span class="sc">&gt;=</span> <span class="dv">1500</span>,]</span>
 <span id="cb76-5"><a href="17-Genome_binning.html#cb76-5" tabindex="-1"></a><span class="co">#Summary of our new data frame</span></span>
 <span id="cb76-6"><a href="17-Genome_binning.html#cb76-6" tabindex="-1"></a><span class="fu">summary</span>(df_min1500len)</span></code></pre></div>
-<p>That is looking better. The minimum average coverage for <code>MetaBAT2</code> is 1 and our minimum value is 2.844 with a maximum of 92.967. Now you can quit R and continue.</p>
+<p>That is looking better. The minimum average coverage for <code>MetaBAT2</code> is 1 and our minimum value is 2.700 with a maximum of 93.285. Now you can quit R and continue.</p>
 <div class="sourceCode" id="cb77"><pre class="sourceCode r Rchunk"><code class="sourceCode r"><span id="cb77-1"><a href="17-Genome_binning.html#cb77-1" tabindex="-1"></a><span class="co">#quit R</span></span>
 <span id="cb77-2"><a href="17-Genome_binning.html#cb77-2" tabindex="-1"></a><span class="fu">q</span>()</span>
 <span id="cb77-3"><a href="17-Genome_binning.html#cb77-3" tabindex="-1"></a><span class="co">#On the prompt to save your workspace press &quot;n&quot; and then enter.</span></span></code></pre></div>
@@ -509,12 +510,14 @@ First you will need to copy them.</p>
 CheckM statistics definitions
 </button>
 <p>List of statistics definitions from <a href="https://github.com/Ecogenomics/CheckM/wiki/Reported-Statistics">CheckM wiki</a></p>
+<p><strong>Note:</strong> These may not all appear in your <code>MAGS_checkm.tsv</code> file.</p>
 <ul>
 <li><strong>bin id</strong>: unique identifier of genome bin (derived from input fasta file)</li>
 <li><strong>marker lineage</strong>: indicates the taxonomic rank of the lineage-specific marker set used to estimated genome completeness, contamination, and strain heterogeneity. More detailed information about the placement of a genome within the reference genome tree can be obtained with the tree_qa command. The UID indicates the branch within the reference tree used to infer the marker set applied to estimate the bins quality.</li>
 <li><strong># genomes</strong>: number of reference genomes used to infer the lineage-specific marker set</li>
 <li><strong>markers</strong>: number of marker genes within the inferred lineage-specific marker set
 marker sets: number of co-located marker sets within the inferred lineage-specific marker set</li>
+<li><strong>marker sets</strong>: number of co-located marker sets within the inferred lineage-specific marker set</li>
 <li><strong>0-5+</strong>: number of times each marker gene is identified</li>
 <li><strong>completeness</strong>: estimated completeness of genome as determined from the presence/absence of marker genes and the expected collocalization of these genes (see Methods in the PeerJ preprint for details)</li>
 <li><strong>contamination</strong>: estimated contamination of genome as determined by the presence of multi-copy marker genes and the expected collocalization of these genes (see Methods in the PeerJ preprint for details)</li>
@@ -602,40 +605,40 @@ Where:</p>
 <span id="cb92-3"><a href="17-Genome_binning.html#cb92-3" tabindex="-1"></a><span class="fu">cut</span> <span class="at">-d</span> <span class="st">&quot;,&quot;</span> <span class="at">-f</span> 1,15 MAGS_checkm_quality.csv <span class="kw">|</span> <span class="fu">tr</span> <span class="st">&quot;,&quot;</span> <span class="st">&quot;\t&quot;</span></span></code></pre></div>
 <ol style="list-style-type: decimal">
 <li>What lineage was assigned to bin <strong>K1.1</strong>?
-<div id="radio_OQZSNNTSQV" class="webex-radiogroup">
-<label><input type="radio" autocomplete="off" name="radio_OQZSNNTSQV" value=""></input> <span><strong>root (UID1)</strong></span></label><label><input type="radio" autocomplete="off" name="radio_OQZSNNTSQV" value="answer"></input> <span><strong>k_Bacteria (UID203)</strong></span></label><label><input type="radio" autocomplete="off" name="radio_OQZSNNTSQV" value=""></input> <span><strong>o_Lachnospiraceae</strong></span></label>
+<div id="radio_NIXZDQJVHQ" class="webex-radiogroup">
+<label><input type="radio" autocomplete="off" name="radio_NIXZDQJVHQ" value=""></input> <span><strong>root (UID1)</strong></span></label><label><input type="radio" autocomplete="off" name="radio_NIXZDQJVHQ" value="answer"></input> <span><strong>k_Bacteria (UID203)</strong></span></label><label><input type="radio" autocomplete="off" name="radio_NIXZDQJVHQ" value=""></input> <span><strong>o_Lachnospiraceae (UID1286)</strong></span></label>
 </div></li>
 <li>What lineage was assigned to bin <strong>K1.22</strong>?
-<div id="radio_PZYMVQUDTP" class="webex-radiogroup">
-<label><input type="radio" autocomplete="off" name="radio_PZYMVQUDTP" value=""></input> <span><strong>root (UID1)</strong></span></label><label><input type="radio" autocomplete="off" name="radio_PZYMVQUDTP" value=""></input> <span><strong>k_Bacteria (UID203)</strong></span></label><label><input type="radio" autocomplete="off" name="radio_PZYMVQUDTP" value="answer"></input> <span><strong>o_Lachnospiraceae</strong></span></label>
+<div id="radio_WBFKMRTJQO" class="webex-radiogroup">
+<label><input type="radio" autocomplete="off" name="radio_WBFKMRTJQO" value=""></input> <span><strong>root (UID1)</strong></span></label><label><input type="radio" autocomplete="off" name="radio_WBFKMRTJQO" value=""></input> <span><strong>k_Bacteria (UID203)</strong></span></label><label><input type="radio" autocomplete="off" name="radio_WBFKMRTJQO" value="answer"></input> <span><strong>o_Lachnospiraceae (UID1286)</strong></span></label>
 </div></li>
 <li>What lineage was assigned to bin <strong>K1.8</strong>?
-<div id="radio_KBQAGQOJPT" class="webex-radiogroup">
-<label><input type="radio" autocomplete="off" name="radio_KBQAGQOJPT" value="answer"></input> <span><strong>root (UID1)</strong></span></label><label><input type="radio" autocomplete="off" name="radio_KBQAGQOJPT" value=""></input> <span><strong>k_Bacteria (UID203)</strong></span></label><label><input type="radio" autocomplete="off" name="radio_KBQAGQOJPT" value=""></input> <span><strong>o_Lachnospiraceae</strong></span></label>
+<div id="radio_CBCPCFEESQ" class="webex-radiogroup">
+<label><input type="radio" autocomplete="off" name="radio_CBCPCFEESQ" value="answer"></input> <span><strong>root (UID1)</strong></span></label><label><input type="radio" autocomplete="off" name="radio_CBCPCFEESQ" value=""></input> <span><strong>k_Bacteria (UID203)</strong></span></label><label><input type="radio" autocomplete="off" name="radio_CBCPCFEESQ" value=""></input> <span><strong>o_Lachnospiraceae (UID1286)</strong></span></label>
 </div></li>
 <li>What is the quality value of K1.1?
-<div id="radio_AWTPEMBTMS" class="webex-radiogroup">
-<label><input type="radio" autocomplete="off" name="radio_AWTPEMBTMS" value=""></input> <span><strong>4.17</strong></span></label><label><input type="radio" autocomplete="off" name="radio_AWTPEMBTMS" value="answer"></input> <span><strong>33.62</strong></span></label><label><input type="radio" autocomplete="off" name="radio_AWTPEMBTMS" value=""></input> <span><strong>172</strong></span></label>
+<div id="radio_EGGHRGIDQW" class="webex-radiogroup">
+<label><input type="radio" autocomplete="off" name="radio_EGGHRGIDQW" value=""></input> <span><strong>4.17</strong></span></label><label><input type="radio" autocomplete="off" name="radio_EGGHRGIDQW" value="answer"></input> <span><strong>33.62</strong></span></label><label><input type="radio" autocomplete="off" name="radio_EGGHRGIDQW" value=""></input> <span><strong>172</strong></span></label>
 </div></li>
 <li>What is the completeness value of <strong>K1.27</strong>?
-<div id="radio_GIUPKQNCJZ" class="webex-radiogroup">
-<label><input type="radio" autocomplete="off" name="radio_GIUPKQNCJZ" value="answer"></input> <span><strong>4.17</strong></span></label><label><input type="radio" autocomplete="off" name="radio_GIUPKQNCJZ" value=""></input> <span><strong>33.62</strong></span></label><label><input type="radio" autocomplete="off" name="radio_GIUPKQNCJZ" value=""></input> <span><strong>172</strong></span></label>
+<div id="radio_XYDAWHTAUP" class="webex-radiogroup">
+<label><input type="radio" autocomplete="off" name="radio_XYDAWHTAUP" value="answer"></input> <span><strong>4.17</strong></span></label><label><input type="radio" autocomplete="off" name="radio_XYDAWHTAUP" value=""></input> <span><strong>33.62</strong></span></label><label><input type="radio" autocomplete="off" name="radio_XYDAWHTAUP" value=""></input> <span><strong>172</strong></span></label>
 </div></li>
 <li>How many genomes are within the <strong>K1.12</strong> bin?
-<div id="radio_ZGFHNCYRCR" class="webex-radiogroup">
-<label><input type="radio" autocomplete="off" name="radio_ZGFHNCYRCR" value=""></input> <span><strong>4.17</strong></span></label><label><input type="radio" autocomplete="off" name="radio_ZGFHNCYRCR" value=""></input> <span><strong>33.62</strong></span></label><label><input type="radio" autocomplete="off" name="radio_ZGFHNCYRCR" value="answer"></input> <span><strong>172</strong></span></label>
+<div id="radio_KOCURBCVPK" class="webex-radiogroup">
+<label><input type="radio" autocomplete="off" name="radio_KOCURBCVPK" value=""></input> <span><strong>4.17</strong></span></label><label><input type="radio" autocomplete="off" name="radio_KOCURBCVPK" value=""></input> <span><strong>33.62</strong></span></label><label><input type="radio" autocomplete="off" name="radio_KOCURBCVPK" value="answer"></input> <span><strong>172</strong></span></label>
 </div></li>
 <li>Which bin has the highest quality value (96.38%)?
-<div id="radio_HIVJLXEDQG" class="webex-radiogroup">
-<label><input type="radio" autocomplete="off" name="radio_HIVJLXEDQG" value=""></input> <span><strong>K1.20</strong></span></label><label><input type="radio" autocomplete="off" name="radio_HIVJLXEDQG" value=""></input> <span><strong>K1.21</strong></span></label><label><input type="radio" autocomplete="off" name="radio_HIVJLXEDQG" value="answer"></input> <span><strong>K1.22</strong></span></label>
+<div id="radio_GBZVSEDMZE" class="webex-radiogroup">
+<label><input type="radio" autocomplete="off" name="radio_GBZVSEDMZE" value=""></input> <span><strong>K1.20</strong></span></label><label><input type="radio" autocomplete="off" name="radio_GBZVSEDMZE" value=""></input> <span><strong>K1.21</strong></span></label><label><input type="radio" autocomplete="off" name="radio_GBZVSEDMZE" value="answer"></input> <span><strong>K1.22</strong></span></label>
 </div></li>
 <li>Which bin has the lowest quality value (-300.67%)?
-<div id="radio_MWYSVUVOJM" class="webex-radiogroup">
-<label><input type="radio" autocomplete="off" name="radio_MWYSVUVOJM" value="answer"></input> <span><strong>K1.20</strong></span></label><label><input type="radio" autocomplete="off" name="radio_MWYSVUVOJM" value=""></input> <span><strong>K1.21</strong></span></label><label><input type="radio" autocomplete="off" name="radio_MWYSVUVOJM" value=""></input> <span><strong>K1.22</strong></span></label>
+<div id="radio_NPTXNROSJJ" class="webex-radiogroup">
+<label><input type="radio" autocomplete="off" name="radio_NPTXNROSJJ" value="answer"></input> <span><strong>K1.20</strong></span></label><label><input type="radio" autocomplete="off" name="radio_NPTXNROSJJ" value=""></input> <span><strong>K1.21</strong></span></label><label><input type="radio" autocomplete="off" name="radio_NPTXNROSJJ" value=""></input> <span><strong>K1.22</strong></span></label>
 </div></li>
 <li>Which bin has the highest completeness value (98.27%)?
-<div id="radio_KPHMMKTDGA" class="webex-radiogroup">
-<label><input type="radio" autocomplete="off" name="radio_KPHMMKTDGA" value=""></input> <span><strong>K1.20</strong></span></label><label><input type="radio" autocomplete="off" name="radio_KPHMMKTDGA" value="answer"></input> <span><strong>K1.21</strong></span></label><label><input type="radio" autocomplete="off" name="radio_KPHMMKTDGA" value=""></input> <span><strong>K1.22</strong></span></label>
+<div id="radio_GWILSSGXZT" class="webex-radiogroup">
+<label><input type="radio" autocomplete="off" name="radio_GWILSSGXZT" value=""></input> <span><strong>K1.20</strong></span></label><label><input type="radio" autocomplete="off" name="radio_GWILSSGXZT" value="answer"></input> <span><strong>K1.21</strong></span></label><label><input type="radio" autocomplete="off" name="radio_GWILSSGXZT" value=""></input> <span><strong>K1.22</strong></span></label>
 </div></li>
 </ol>
 </div>

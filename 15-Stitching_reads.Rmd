@@ -11,7 +11,9 @@ A read pair consists of two sequences read from each end of a fragment of DNA (o
 
 First, we obtain our forward and reverse reads, derived from different ends of the same fragment. Second, we look for sufficient overlap between the 3' ends of our sequences. Third, if there is sufficient overlap, we combine, or stitch, the two reads together to form one long sequence.
 
-<center>![](figures/merging_paired_reads.png){style="width: 400px; border-radius: 15px; border: 5px solid #333333; background-color: white"}</center>
+<center>
+![](figures/merging_paired_reads.png){style="width: 400px; border-radius: 15px; border: 5px solid #333333; background-color: white"}
+</center>
 
 Once we have longer stitched reads, we can increase the k-mer length for our assembly. 
 

@@ -35,15 +35,21 @@ Illumina reads are too short and numerous to use traditional overlap-layout-cons
 
 1.  All reads are broken down into k-length overlapping fragments (k-mers). e.g. if we choose a k-mer size of 5 bp, the following two sequences (blue) would be broken down into the k-mers below them (red):
 
-<center>![](figures/reads_aligned.png){style="border-radius: 10px; width: 400px; border: 5px solid #333333"}</center>
+<center>
+![](figures/reads_aligned.png){style="border-radius: 10px; width: 400px; border: 5px solid #333333"}
+</center>
 
 2.  All k-mers are linked to other k-mers which match with a k-1 length overlap (i.e. that overlap by all but one base):
 
-<center>![](figures/graph_simple.png){style="border-radius: 10px; width: 800px; border: 5px solid #333333"}</center>
+<center>
+![](figures/graph_simple.png){style="border-radius: 10px; width: 800px; border: 5px solid #333333"}
+</center>
 
 3.  Paths are routed through the graph and longer contigs are generated:
 
-<center>![](figures/graph_complex.png){style="border-radius: 10px; width: 800px; border: 5px solid #333333"}</center>
+<center>
+![](figures/graph_complex.png){style="border-radius: 10px; width: 800px; border: 5px solid #333333"}
+</center>
 
 The example here is a vast oversimplification of the complexity of a De Bruijn graph (i.e. there are no branches!). Routing through the graph is never as simple as this as some k-mers will lead to multiple k-mers, which can result in the break point of a contig. This is especially true for complex metagenomic data.
 
