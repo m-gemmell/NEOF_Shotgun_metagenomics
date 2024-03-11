@@ -113,7 +113,7 @@ df_min1500len <- df[df$contigLen >= 1500,]
 summary(df_min1500len)
 ```
 
-That is looking better. The minimum average coverage for `MetaBAT2` is 1 and our minimum value is 2.700 with a maximum of 93.285. Now you can quit R and continue.
+That is looking better. The minimum average coverage for `MetaBAT2` is 1 and our minimum value is 2.700 with a maximum of 93.285 (your values may differ slightly). Now you can quit R and continue.
 
 ```{r eval=FALSE}
 #quit R
@@ -267,7 +267,6 @@ __Note:__ These may not all appear in your `MAGS_checkm.tsv` file.
 - __marker lineage__: indicates the taxonomic rank of the lineage-specific marker set used to estimated genome completeness, contamination, and strain heterogeneity. More detailed information about the placement of a genome within the reference genome tree can be obtained with the tree_qa command. The UID indicates the branch within the reference tree used to infer the marker set applied to estimate the bins quality.
 - __# genomes__: number of reference genomes used to infer the lineage-specific marker set
 - __markers__: number of marker genes within the inferred lineage-specific marker set
-marker sets: number of co-located marker sets within the inferred lineage-specific marker set
 - __marker sets__: number of co-located marker sets within the inferred lineage-specific marker set
 - __0-5+__: number of times each marker gene is identified
 - __completeness__: estimated completeness of genome as determined from the presence/absence of marker genes and the expected collocalization of these genes (see Methods in the PeerJ preprint for details)

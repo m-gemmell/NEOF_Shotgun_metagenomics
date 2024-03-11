@@ -83,11 +83,11 @@ List the files in the newly created K1.1 directory. Each of the files has the pr
 View the summary file for bin K1.1.
 
 ```{bash eval=FALSE}
-less K1.1/K1.1.txt
+less -S K1.1/K1.1.txt
 ```
 
 `r hide("Summary fields")`
-Sequence infomration
+Sequence information
 
 - Length: Number of bases.
 - Count: Number of contigs/scaffolds.
@@ -121,7 +121,7 @@ View the gff file for bin K1.1.
 less K1.1/K1.1.gff3
 ```
 
-The GFF file is a tab delimited file contain annotation information for the features in the assembly/bin. In this case it is a GFF3 file (most curent version of GFF).
+The GFF file is a tab delimited file containing annotation information for the features in the assembly/bin. In this case it is a GFF3 file (most curent version of GFF).
 
 There is quite a lot of information contained in each row so instead of listing all the columns here please have a look at the official documentation:
 
@@ -141,7 +141,7 @@ bakta --db /pub14/tea/nsc206/NEOF/databases/bakta/db/ \
 A quick thing we can do with these files is to see if any of the bins contain a specific annotation. For example, if we wanted to know if there were any ATP-binding proteins in any of the bins we could carry out the below command.
 
 ```{bash eval=FALSE}
-grep "ATP-binding protein" */*gff3 | less
+grep "ATP-binding protein" */*gff3 | less -S
 ```
 
 We can now view the lines containing "ATP-binding protein" with the start of the line containing the file name the line belongs to.
@@ -185,7 +185,7 @@ The input`.ec` files required for `MinPath` are tab delimited with two columns:
 1. Protein/sequence id. E.g. GDGAPA_12670.
 2. EC annotation. E.g. 6.1.1.4.
 
-__Note__: The lack of `\` at the end of most of the ines is intentional. 
+__Note__: The lack of `\` at the end of most of the lines is intentional. 
 The below is all one command over multiple lines but loops work slightly different and don't need `\` in certain parts. 
 Ensure you do press enter at the end of each line.
 
@@ -301,7 +301,7 @@ Now we can loop through the file suffixes to run MinPath.
 ```{bash eval=FALSE}
 ls -1 *ec | sed "s/.ec//" | while read bin
 do
-python /pub14/tea/nsc206/git_installs/MinPath/MinPath.py \
+python /pub14/tea/nsc206/git_installs/Minpath/MinPath.py \
 -ec ${bin}.ec \
 -report ../MetaCyc/${bin}.minpath
 done
@@ -378,7 +378,7 @@ cd KEGG
 #Run MinPath
 ls -1 *kegg | sed "s/.kegg//" | while read bin
 do
-python /pub14/tea/nsc206/git_installs/MinPath/MinPath.py \
+python /pub14/tea/nsc206/git_installs/Minpath/MinPath.py \
 -ko ${bin}.kegg \
 -report ../KEGG_minpath/${bin}.minpath
 done

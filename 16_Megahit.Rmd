@@ -107,6 +107,8 @@ The report tells us quite a bit about the assembly quality. Two definitions that
 knitr::include_graphics(path = "figures/question_bubble_green.png", auto_pdf = TRUE)
 ```
 
+__Note:__ Due to the assembly process you values may be slightly different (< 1%). Please choose the closest value
+
 ```{r, echo = FALSE}
 opts_p <- c("__39.88__", "__18,650__",answer="__16,187,295__")
 ```
