@@ -87,7 +87,9 @@ mkdir R1_fastqc/multiqc
 multiqc -o R1_fastqc/multiqc R1_fastqc
 ```
 
-__Task__: Run `FastQC` and `MultiQC` for the R2 files and then view the R1 and R2 `MultiQC` reports with firefox. Try to run the commands without looking at the help box below.
+#### Task {-}
+
+Run `FastQC` and `MultiQC` for the R2 files and then view the R1 and R2 `MultiQC` reports with firefox. Try to run the commands without looking at the help box below.
 
 How does the quality compare to the untrimmed data?
 

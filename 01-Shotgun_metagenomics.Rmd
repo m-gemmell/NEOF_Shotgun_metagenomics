@@ -39,11 +39,9 @@ knitr::include_graphics(path = "figures/NEOF_bordered.png", auto_pdf = TRUE)
 knitr::include_graphics(path = "figures/squid.png", auto_pdf = TRUE)
 ```
 
-This practical session aims to introduce you to the analysis of Shotgun metagenomic data. The topics covered are:
+There are many unknown and unculturable microbes found in a vast array of different environments. Shotgun metagenomics is an approach to capture all the genetic information in a sample, providing the taxonomic and metabolic information of all present organisms. In this course we will analyse shotgun metagenomic sequencing data from stool samples to compare Western and Korean diets.
 
-There are many unknown and unculturable microbes found in a vast array of different environments. Shotgun metagenomics is an approach to capture all the genetic information in a sample, providing the taxonomic and metabolic information of all present organisms. In this course we will analyse shotgun metagenomic sequencing data from stool samples to compare western and Korean diets.
-
-Sessions will start with a brief presentation followed by self-paced computer practicals guided by an online interactive book. The book will contain theory and practice code. Multiple choice questions will guide the interpretation of results.
+Sessions will start with a brief presentation followed by self-paced computer practicals guided by this online interactive book. This book will contain theory and practice code. Multiple choice questions will guide the interpretation of results.
 
 At the end of the course learners will be able to:
 

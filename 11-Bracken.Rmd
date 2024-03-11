@@ -22,7 +22,8 @@ bracken -d $KRAKEN2_DB_PATH/minikraken2_v1_8GB \
 knitr::include_graphics(path = "figures/parameter_green.png", auto_pdf = TRUE)
 ```
 
-- `-d` : Specifies the `Kraken2` database that was used for taxonomic classification. In this case bracken requires the variable `$KRAKEN2_DB_PATH` so the option is provided the full path to the kraken database. For clarity try the command `ls $KRAKEN2_DB_PATH/minikraken2_v1_8GB`. 
+- `-d` : Specifies the `Kraken2` database that was used for taxonomic classification. In this case bracken requires the variable `$KRAKEN2_DB_PATH` so the option is provided the full path to the kraken database. 
+  - For clarity try the command `ls $KRAKEN2_DB_PATH/minikraken2_v1_8GB`. 
 - `-i` : The `Kraken2` report file, this will be used as the input.
 - `-o` : The output `Bracken` file. Information about its contents is below.
 - `-w`: Output report file. This contains the `Bracken` read counts in a kraken-style report. This is an essential file if you want to use the `Bracken` output in R using the `phyloseq` object. This is covered in our R community analysis workshop. We won't cover it more here.
@@ -45,7 +46,9 @@ The output file of `Bracken` contains the following columns:
 6. __Total reads after abundance reestimation__: Number from field 4 and 5 summed. This is the field that will be used for downstream analysis
 7. __Fraction of total reads__: Relative abundance of the taxonomy
 
-__Task__: Repeat the above commands for K2 and W1
+#### Task {-}
+
+Repeat the above commands for K2 and W1
 
 `r hide("K2 & W1 Bracken commands")`
 ```{bash eval=FALSE}

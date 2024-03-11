@@ -16,7 +16,9 @@ We can use the `Kraken2` report files to create our Krona plots. With the below 
 ktImportTaxonomy -o kraken2.krona.html *.kreport2
 ```
 
-`-o` is our output html file, and the final argument `*.kreport2` represents all of our `.kreport2` files in the current directory. The `*` is a wild-card, meaning any characters any number of times. Therefore `*.kreport2` identifies the files `K1.kreport2` `K2.kreport2` and `W1.kreport2`.
+- `-o` is our output html file
+- The final argument `*.kreport2` represents all of our `.kreport2` files in the current directory.
+  - The `*` is a wild-card, meaning any characters any number of times. Therefore `*.kreport2` identifies the files `K1.kreport2` `K2.kreport2` and `W1.kreport2`.
 
 You will get a warning that not all taxonomy IDs were found. We will ignore this but in your own future installations this should be addressed with `Krona`'s `updateTaxonomy.sh` command.
 
