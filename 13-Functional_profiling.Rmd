@@ -62,7 +62,7 @@ Run the `HUMAnN` pipeline with our demo data:
 ```{bash eval=FALSE}
 humann \
 --input demo.fastq.gz \
---output demo.humann \ 
+--output demo.humann \
 --threads 10
 ```
 
@@ -138,7 +138,7 @@ For the purposes of this comparison, we will look at the pathway abundances only
 #Ensure you are in the correct directory
 cd ~/4-FunctionalProfiling
 #Copy directory with pre made results
-cp –r /pub14/tea/nsc206/NEOF/Shotgun_metagenomics/DietPathAbundance .
+cp -r /pub14/tea/nsc206/NEOF/Shotgun_metagenomics/DietPathAbundance .
 #Move into the copied directory
 cd DietPathAbundance
 #List files
