@@ -272,12 +272,12 @@ cat diet_unstratified.relab.tsv | sed "s/_Abundance//g" > diet_unstratified.rela
 Next using your text editor of choice carry out the following changes on the file `diet_unstratified.relab.comp.tsv`.
 
 -   Remove the `#` (including the one space after the `#`) from the start of the header so it starts as `Pathway`.
--   Add in the same metadata line as we did for [8.4.1](#kraken2_lefse_metadata) but this time below the header line, i.e. as the 2nd line (ensure you are using tabs instead of spaces).
+-   Add in the same metadata line as we did for [12.1](#kraken2_lefse_metadata) but this time below the header line, i.e. as the 2nd line (ensure you are using tabs instead of spaces).
 
 `r hide("Issues with creating file?")` If you are having issues with creating and editing the file `all_num.lefse.bracken` you can copy a pre-made version.
 
 ```{bash, eval=FALSE}
-cp /pub14/tea/nsc206/Shotgun_metagenomics/lefse/diet_unstratified.relab.comp.tsv .
+cp /pub14/tea/nsc206/NEOF/Shotgun_metagenomics/lefse/diet_unstratified.relab.comp.tsv .
 ```
 
 `r unhide()`
