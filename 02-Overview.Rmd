@@ -1,21 +1,21 @@
 # Overview {#overview}
-```{r, fig.align = 'center',out.width= '200px', echo=FALSE }
-knitr::include_graphics(path = "figures/overview.png", auto_pdf = TRUE)
-``` 
+<center>
+![](figures/overview.png){style="width:200px"}
+</center>
 
 ## What is metagenomics?
-```{r, fig.align = 'center',out.width= '100px', echo=FALSE }
-knitr::include_graphics(path = "figures/what.png", auto_pdf = TRUE)
-``` 
+<center>
+![](figures/what.png){style="width:100px"}
+</center>
 
 __Meta /ˈmɛtə/ : prefix meaning “higher” or “beyond”__
 
 Metagenomics is the study of genes and genetic material recovered from environmental samples (whether from the sea, soil, human gut, or anywhere else you can imagine). Unlike genomics, metagenomics deals with a multitude of usually diverse species rather than focussing on a single species/genome.
 
 ## Why metagenomics?
-```{r, fig.align = 'center',out.width= '100px', echo=FALSE }
-knitr::include_graphics(path = "figures/why.png", auto_pdf = TRUE)
-``` 
+<center>
+![](figures/why.png){style="width:100px"}
+</center>
 
 Microbes exist virtually everywhere on Earth, even in some of the most seemingly hostile environments. Every process on our planet is influenced in some way by the actions of microbes, and all higher organisms are intrinsically associated with microbial communities. 
 
@@ -23,7 +23,7 @@ While much can be learned from studying the genome of a single microbial species
 
 ## Metagenomics vs Metagenetics
 <center>
-![](figures/16s_vs_shotgun.png){style="width:150px; border-radius:15px; border:5px solid #333333; background-color:white"}
+![](figures/16s_vs_shotgun.png){style="width:150px; border-radius:15px; background-color:white"}
 </center>
 
 Broadly speaking, there are two families of metagenomic analysis: 
@@ -32,9 +32,9 @@ Broadly speaking, there are two families of metagenomic analysis:
 - __Shotgun__: This utilises sequencing data generated from random fragments from total genomic DNA from environmental samples, rather than targeting specific genes. This approach allows for not only species abundance determination but direct functional analysis, too, due to having information on a wide range of genetic data sampled from the population. This is sometimes referenced as metagenomics, as it involves genome-wide analyses. Shotgun metagenomics is the focus of this practical session.
 
 ## Tutorial overview
-```{r, fig.align = 'center',out.width= '150px', echo=FALSE }
-knitr::include_graphics(path = "figures/tutorial.png", auto_pdf = TRUE)
-``` 
+<center>
+![](figures/tutorial.png){style="width:200px"}
+</center>
 
 ### Basics
 
@@ -50,7 +50,7 @@ If at any point you are having trouble or have a question, let one of us know an
 
 ### Content
 <center>
-![](figures/sections.png){style="width:100px; border-radius:5px; border:5px solid #333333; background-color:white"}
+![](figures/sections.png){style="width:100px; border-radius:5px; background-color:white"}
 </center>
 
 This practical is broken up into the following broad sections.

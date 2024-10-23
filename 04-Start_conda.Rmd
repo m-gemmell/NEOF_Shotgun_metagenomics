@@ -1,7 +1,7 @@
 # Startup & mamba
-```{r, fig.align = 'center',out.width= '300px', echo=FALSE }
-knitr::include_graphics(path = "figures/mamba_logo.png", auto_pdf = TRUE)
-```
+<center>
+![](figures/mamba_logo.png){style="width:200px; border-radius:5px"}
+</center>
 
 During this practical you will use a number of installed programs and scripts. To ensure that the system knows where to look for the scripts, run the following command (ensure this starts with a full stop and a space `. `):
 

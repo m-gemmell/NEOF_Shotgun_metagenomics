@@ -1,7 +1,7 @@
 # Stitching read pairs
-```{r, fig.align = 'center',out.width= '150px', echo=FALSE }
-knitr::include_graphics(path = "figures/stitch.png", auto_pdf = TRUE)
-``` 
+<center>
+![](figures/stitch.png){style="width:150px"}
+</center>
 
 Longer k-mers generally perform better for assemblies. However, our maximum read length is 100 bp so we are limited to a maximum k-mer length of 99 bp. Thankfully we can get even longer k-mers if we stitch our read pairs together.
 
@@ -12,7 +12,7 @@ A read pair consists of two sequences read from each end of a fragment of DNA (o
 First, we obtain our forward and reverse reads, derived from different ends of the same fragment. Second, we look for sufficient overlap between the 3' ends of our sequences. Third, if there is sufficient overlap, we combine, or stitch, the two reads together to form one long sequence.
 
 <center>
-![](figures/merging_paired_reads.png){style="width: 400px; border-radius: 15px; border: 5px solid #333333; background-color: white"}
+![](figures/merging_paired_reads.png){style="width: 400px; border-radius: 15px; border: 5px solid white; background-color: white"}
 </center>
 
 Once we have longer stitched reads, we can increase the k-mer length for our assembly. 
@@ -20,9 +20,9 @@ Once we have longer stitched reads, we can increase the k-mer length for our ass
 There are a number of pieces of software that can be used to stitch reads (e.g. `Pear`,  `Pandaseq`) but today we will use one called `FLASH`:
 
 ## FLASH: run
-```{r, fig.align = 'center',out.width= '100px', echo=FALSE }
-knitr::include_graphics(path = "figures/play_red.png", auto_pdf = TRUE)
-``` 
+<center>
+![](figures/play_red.png){style="width:100px"}
+</center>
 
 Make a new output directory for the stitched reads and run `FLASH`:
 
@@ -38,9 +38,9 @@ flash  -o K1 -z -t 12 -d . \
 ```
 
 #### Parameters {-}
-```{r, fig.align = 'center',out.width= '100px', echo=FALSE }
-knitr::include_graphics(path = "figures/parameter_red.png", auto_pdf = TRUE)
-```
+<center>
+![](figures/parameter_red.png){style="width:100px"}
+</center>
 
 - `-o`: Sets the prefix of the output files.
 - `-z`: The input is zipped.
@@ -49,9 +49,9 @@ knitr::include_graphics(path = "figures/parameter_red.png", auto_pdf = TRUE)
 - The last 2 flag-less parameters are the forward and reverse read files for stitching.
 
 ## FLASH: Output
-```{r, fig.align = 'center',out.width= '100px', echo=FALSE }
-knitr::include_graphics(path = "figures/output_file_red.png", auto_pdf = TRUE)
-``` 
+<center>
+![](figures/output_file_red.png){style="width:100px"}
+</center>
 
 Once `FLASH` has finished running, it will display on screen how well the stitching process went, in this case a low amount of reads were combined. Have a look what files have been generated.
 
@@ -70,9 +70,9 @@ less K1.histogram
 Scroll down with the down key and you will see that we are looking at a histogram showing the proportion of stitched reads at different lengths. 
 
 ## FLASH: MCQs
-```{r, fig.align = 'center',out.width= '100px', echo=FALSE }
-knitr::include_graphics(path = "figures/question_bubble_red.png", auto_pdf = TRUE)
-```
+<center>
+![](figures/question_bubble_red.png){style="width:100px"}
+</center>
 
 ```{r, echo = FALSE}
 opts_p <- c("__101__", "__177__", answer="__188__")

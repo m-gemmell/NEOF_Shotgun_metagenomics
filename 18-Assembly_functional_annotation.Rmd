@@ -1,17 +1,19 @@
 # Assembly functional annotation {#funcanno}
-```{r, fig.align = 'center',out.width= '200px', echo=FALSE }
-knitr::include_graphics(path = "figures/pathways.png", auto_pdf = TRUE)
-``` 
+<center>
+![](figures/pathways.png){style="width:200px; background:white; border-radius:5px"}
+</center>
 
 ## Taxonomic annotation
-```{r, fig.align = 'center',out.width= '100px', echo=FALSE }
-knitr::include_graphics(path = "figures/classification.png", auto_pdf = TRUE)
-``` 
+<center>
+![](figures/classification.png){style="width:150px; background:white; border-radius:5px"}
+</center>
 
 Taxonomic annotation of bins can be carried out with `Kraken2`. As we have already done this for the reads and taxonomic results from read and assembly approaches have similar performances we will not cover it here. Instead we will move straight onto functional annotation with [`Bakta`](https://github.com/oschwengers/bakta).
 
 ## Bakta
-<center>![](figures/bakta_logo.png){style="border-radius: 15px; width: 250px; border: 5px solid #333333"}</center>
+<center>
+![](figures/bakta_logo.png){style="border-radius: 15px; width: 250px; border: 5px solid white"}
+</center>
 
 We will carry out `Bakta` functional annotation. `Bakta` can annotate bacterial genomes and plasmids from both isolates and MAGs.
 
@@ -23,9 +25,9 @@ cd ~/8-Annotation
 ```
 
 ### Bakta: run
-```{r, fig.align = 'center',out.width= '100px', echo=FALSE }
-knitr::include_graphics(path = "figures/play_blue.png", auto_pdf = TRUE)
-``` 
+<center>
+![](figures/play_blue.png){style="width:100px"}
+</center>
 
 Now we can annotate one of the bins.
 
@@ -39,9 +41,9 @@ bakta \
 ```
 
 #### Parameters {-}
-```{r, fig.align = 'center',out.width= '100px', echo=FALSE }
-knitr::include_graphics(path = "figures/parameter_blue.png", auto_pdf = TRUE)
-```
+<center>
+![](figures/parameter_blue.png){style="width:100px"}
+</center>
 
 - `--db`: Location of `Bakta` database. You will need to install this in your own installation. Instructions are in the [appendix](#mamba_install).
 - `-o`: The output directory. This must not exist before running the command.
@@ -57,9 +59,9 @@ ln -s /pub14/tea/nsc206/NEOF/Shotgun_metagenomics/bakta/K1_fullset/* .
 ```
 
 ### Bakta: output
-```{r, fig.align = 'center',out.width= '100px', echo=FALSE }
-knitr::include_graphics(path = "figures/output_file_blue.png", auto_pdf = TRUE)
-``` 
+<center>
+![](figures/output_file_blue.png){style="width:100px"}
+</center>
 
 List the files in the newly created K1.1 directory. Each of the files has the prefix "K1.1" and contains the following information:
 
@@ -151,18 +153,19 @@ In your future analyses you can expect these files further with excel, R, or vis
 What if you want to know about pathways?
 
 ## MinPath
-```{r, fig.align = 'center',out.width= '150px', echo=FALSE }
-knitr::include_graphics(path = "figures/pathways_2.png", auto_pdf = TRUE)
-```
+
+<center>
+![](figures/pathways_2.png){style="width:150px; background:white;border-radius:5px"}
+</center>
 
 `MinPath` can predict `MetaCyc` metabolic pathways. These pathway are made up of sets of enzymes that catalyse various reactions.
 
 Ensure you start in the `~/8-Annotation` directory.
 
 ### MinPath: EC extraction
-```{r, fig.align = 'center',out.width= '100px', echo=FALSE }
-knitr::include_graphics(path = "figures/exctractor.png", auto_pdf = TRUE)
-```
+<center>
+![](figures/exctractor.png){style="width:100px; background:white;border-radius:5px"}
+</center>
 
 Before we can estimate the pathways we need to extract the EC numbers predictions from the GFF file. EC (Enzyme Commission) numbers are a numerical classification for enzymes based on the reaction they catalyse.
 
@@ -283,9 +286,9 @@ sed "s/;.*EC:/\t/" | sed "s/,.*//" | head
 In the looped command, output is written into files: `> EC/${bin}.ec`.
 
 ### MinPath: run {#minpathrun}
-```{r, fig.align = 'center',out.width= '100px', echo=FALSE }
-knitr::include_graphics(path = "figures/play_green.png", auto_pdf = TRUE)
-``` 
+<center>
+![](figures/play_green.png){style="width:100px"}
+</center>
 
 With our `.ec` files we can create our MetaCyc predictions.
 
@@ -310,9 +313,9 @@ done
 A lot of output will be printed to screen but this can be ignored unless you see warnings.
 
 ### MinPath: output
-```{r, fig.align = 'center',out.width= '100px', echo=FALSE }
-knitr::include_graphics(path = "figures/output_file_green.png", auto_pdf = TRUE)
-``` 
+<center>
+![](figures/output_file_green.png){style="width:100px"}
+</center>
 
 First, change directory into the `MetaCyc` directory.
 
@@ -353,9 +356,9 @@ grep "PWY-6972" *minpath | less
 ```
 
 ### KEGGs
-```{r, fig.align = 'center',out.width= '100px', echo=FALSE }
-knitr::include_graphics(path = "figures/KEGG.png", auto_pdf = TRUE)
-```
+<center>
+![](figures/KEGG.png){style="width:100px"}
+</center>
 
 You can also get KEGG information with `MinPath`.
 The code:

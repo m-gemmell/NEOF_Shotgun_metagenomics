@@ -1,7 +1,7 @@
 # Quality control {#qualcont}
-```{r, fig.align = 'center',out.width= '300px', echo=FALSE }
-knitr::include_graphics(path = "figures/quality_trimming_and_filtering.png", auto_pdf = TRUE)
-``` 
+<center>
+![](figures/quality_trimming_and_filtering.png){style="width:300px"}
+</center>
 
 Now that we've obtained the raw data and had a look at it, we should clean it up. With any sequencing data, it is very important to ensure that you use the highest quality data possible: Rubbish goes in, rubbish comes out. 
 
@@ -12,9 +12,9 @@ There are two main methods employed to clean sequence data, and a third method s
 - Host removal: If a metagenomic sample derives from a host species then it may be advisable to remove any reads associated with the host genome.
 
 ## Removing adapters and low quality bases
-```{r, fig.align = 'center',out.width= '150px', echo=FALSE }
-knitr::include_graphics(path = "figures/hedge_trimming.png", auto_pdf = TRUE)
-``` 
+<center>
+![](figures/hedge_trimming.png){style="width:150px"}
+</center>
 
 Go back to your home directory and create a new directory where we will clean the sequences up:
 
@@ -47,9 +47,9 @@ trim_galore --paired --quality 20 --stringency 4 \
 `r unhide()`
 
 ## Rename the files
-```{r, fig.align = 'center',out.width= '150px', echo=FALSE }
-knitr::include_graphics(path = "figures/rename.png", auto_pdf = TRUE)
-``` 
+<center>
+![](figures/rename.png){style="width:150px"}
+</center>
 
 Once that is complete list the contents of your directory:
 
@@ -73,9 +73,9 @@ __Tip__: If you want to edit and reuse previous commands, press the up arrow key
 __Task__: Briefly inspect the log files to see how the trimming went (e.g. K1_R1.fastq.gz_trimming_report.txt).
 
 ## Inspect the trimmed data
-```{r, fig.align = 'center',out.width= '150px', echo=FALSE }
-knitr::include_graphics(path = "figures/magnify_glass_good.png", auto_pdf = TRUE)
-``` 
+<center>
+![](figures/magnify_glass_good.png){style="width:150px"}
+</center>
 
 To see what difference the trimming made, run `FastQC` and `MultiQC` again on the trimmed output files and view it. 
 

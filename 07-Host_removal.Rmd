@@ -1,7 +1,7 @@
 # Host removal {#hostremoval}
-```{r, fig.align = 'center',out.width= '300px', echo=FALSE }
-knitr::include_graphics(path = "figures/bowtie2.png", auto_pdf = TRUE)
-``` 
+<center>
+![](figures/bowtie2.png){style="width:300px"}
+</center>
 
 It is good practice to remove any host sequences from your data before further analysis. A good method for this is to align/map your reads to a reference of your host genome and remove the mapped sequences (i.e sequences we believe to belong to the host).
 
@@ -16,9 +16,9 @@ cp /pub14/tea/nsc206/NEOF/Shotgun_metagenomics/GRCh38_slice.fasta .
 ```
 
 ## Index reference
-```{r, fig.align = 'center',out.width= '150px', echo=FALSE }
-knitr::include_graphics(path = "figures/index.png", auto_pdf = TRUE)
-``` 
+<center>
+![](figures/index.png){style="width:150px"}
+</center>
 
 We will will use the `Bowtie2` aligner for mapping/aligning. Prior to alignment/mapping we need to index our reference.
 
@@ -29,9 +29,9 @@ bowtie2-build GRCh38_slice.fasta GRCh38_slice.fasta
 If you use `ls` you will now see a bunch of files starting with `GRCh38_slice.fasta` and ending with various suffixes that contain `bt2`. These are the index files which allow us to use the reference with `Bowtie2`.
 
 ## Alignment
-```{r, fig.align = 'center',out.width= '150px', echo=FALSE }
-knitr::include_graphics(path = "figures/alignment.png", auto_pdf = TRUE)
-``` 
+<center>
+![](figures/alignment.png){style="width:200px; background: white; border-radius:5px; border: white 5px solid"}
+</center>
 
 With the indexed reference we will align the K1 reads to the reference. This creates a BAM file that contains alignment and read information (`K1_mapped.bam`).
 
@@ -41,9 +41,9 @@ bowtie2 -x GRCh38_slice.fasta -1 K1_R1.fq.gz -2 K1_R2.fq.gz \
 ```
 
 #### Parameters {-}
-```{r, fig.align = 'center',out.width= '100px', echo=FALSE }
-knitr::include_graphics(path = "figures/parameter_black.png", auto_pdf = TRUE)
-```
+<center>
+![](figures/parameter_black.png){style="width:100px; background: white; border-radius:5px; border:white 5px solid"}
+</center>
 
 This command is split into two commands. The first is `bowtie2` that creates the alignment. The parameters for the command are:
 
@@ -67,9 +67,9 @@ The parameters for `samtools view` are:
 The binary alignment is redirected to a new file called `K1_mapped.bam`. For more information on redirection please see our [Intro to Unix course book](http://www.cgr.liv.ac.uk/illum/NEOFworkshops_5bfa93ca0482d69d/Intro_to_Unix/12-Advanced_linux_practice.html#redirection).
 
 ## Unmapped read extraction
-```{r, fig.align = 'center',out.width= '150px', echo=FALSE }
-knitr::include_graphics(path = "figures/exctractor.png", auto_pdf = TRUE)
-``` 
+<center>
+![](figures/exctractor.png){style="width:150px; border-radius:5px; background: white"}
+</center>
 
 Next step is to extract the reads that did not map to the host reference from the `K1_mapped.bam` file with the `samtools fastq` command (unmapped reads).
 
@@ -78,9 +78,9 @@ samtools fastq -f 4 -1 K1_R1.u.fastq -2 K1_R2.u.fastq K1_mapped.bam
 ```
  
 #### Parameters {-}
-```{r, fig.align = 'center',out.width= '100px', echo=FALSE }
-knitr::include_graphics(path = "figures/parameter_green.png", auto_pdf = TRUE)
-```
+<center>
+![](figures/parameter_green.png){style="width:100px"}
+</center>
 
 - __`-f`__: Output reads that only include the SAM flag.
   - In this case `4` stands for unmapped reads. Therefore, our resulting fastq files will only contain unmapped reads. 
@@ -92,9 +92,9 @@ knitr::include_graphics(path = "figures/parameter_green.png", auto_pdf = TRUE)
 This step may make unmatched paired files (why we have `.u.` in the output file names). This occurs when a read from R2 is removed but the matching read in R1 is not removed, or vice versa. This will cause issues for further analysis. 
 
 ## Re-pair
-```{r, fig.align = 'center',out.width= '300px', echo=FALSE }
-knitr::include_graphics(path = "figures/repair.png", auto_pdf = TRUE)
-``` 
+<center>
+![](figures/repair.png){style="width:300px; background:white; border-radius:5px"}
+</center>
 
 The below `BBTools` command will re-pair the reads by removing reads with a missing pair. The command ensures the order of the reads are identical in the 2 output paired files.
 
@@ -105,9 +105,9 @@ outs=singletons.fastq
 ```
 
 #### Parameters {-}
-```{r, fig.align = 'center',out.width= '100px', echo=FALSE }
-knitr::include_graphics(path = "figures/parameter_blue.png", auto_pdf = TRUE)
-```
+<center>
+![](figures/parameter_blue.png){style="width:100px"}
+</center>
 
 - __`in1=`__: The input R1 fastq file of unmapped unpaired reads.
 - __`in2=`__: The input R2 fastq file of unmapped unpaired reads.
@@ -117,9 +117,9 @@ knitr::include_graphics(path = "figures/parameter_blue.png", auto_pdf = TRUE)
   - This file can normally be ignored.
 
 ## Host removal summary
-```{r, fig.align = 'center',out.width= '100px', echo=FALSE }
-knitr::include_graphics(path = "figures/sum_blue.png", auto_pdf = TRUE)
-```
+<center>
+![](figures/sum_blue.png){style="width:100px"}
+</center>
 
 We have run through quality control including host removal for our K1 sample. As our data has pretty much no human data we will skip this step for the other samples and use the trimmed data for the downstream analysis.
 

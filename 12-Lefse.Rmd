@@ -1,16 +1,16 @@
 # LEfSe biomarker detection
-```{r, fig.align = 'center',out.width= '150px', echo=FALSE }
-knitr::include_graphics(path = "figures/lefse.png", auto_pdf = TRUE)
-```
+<center>
+![](figures/lefse.png){style="width:150px"}
+</center>
 
 We will use `LEfSe` (Linear discriminant analysis Effect Size) to determine which taxa can most likely explain the differences between the Western and Korean diet. `LEfSe` couples standard tests for statistical significance with additional tests encoding biological consistency and effect relevance. It can be used with other features such as organisms, clades, operational taxonomic units, genes, or functions.
 
 In essence it allows for the detection of biomarkers when comparing sample groups. In the `LEfSe` terminology the sample groups are called the class.
 
 ## LEfSe: add metadata {#kraken2_lefse_metadata}
-```{r, fig.align = 'center',out.width= '100px', echo=FALSE }
-knitr::include_graphics(path = "figures/header.png", auto_pdf = TRUE)
-```
+<center>
+![](figures/header.png){style="width:100px; background:white;border-radius:5px"}
+</center>
 
 We need to add metadata to our `Bracken` file to be ready for `LEfSe.` First we will copy the file so we have a backup in case we do anything wrong.
 
@@ -34,9 +34,9 @@ cp /pub14/tea/nsc206/NEOF/Shotgun_metagenomics/lefse/all_num.lefse.bracken .
 `r unhide()`
 
 ## LEfSe: format
-```{r, fig.align = 'center',out.width= '100px', echo=FALSE }
-knitr::include_graphics(path = "figures/lefse_format.png", auto_pdf = TRUE)
-```
+<center>
+![](figures/lefse_format.png){style="width:100px;background:white;border-radius:5px"}
+</center>
 
 We need to further format and preprocess our file with a `LEfSe` script.
 
@@ -45,9 +45,9 @@ lefse_format_input.py all_num.lefse.bracken all_num.lefse -c 1 -u 2 -o 1000000
 ```
 
 #### Parameters {-}
-```{r, fig.align = 'center',out.width= '100px', echo=FALSE }
-knitr::include_graphics(path = "figures/parameter_purple.png", auto_pdf = TRUE)
-```
+<center>
+![](figures/parameter_purple.png){style="width:100px"}
+</center>
 
 - `all_num.lefse.bracken` : Input `Bracken` file.
 - `all_num.lefse` : Output file formatted for the run_lefse command, which we will soon run.
@@ -56,9 +56,9 @@ knitr::include_graphics(path = "figures/parameter_purple.png", auto_pdf = TRUE)
 - `-o 1000000` : An integer can be indicated to determine to what size (count sum value) each sample should be normalised to. `LEfSe` developers recommend 1000000 (1 million) when very low values are present. We generally always use 1 million for consistency.
 
 ## LEfSe: run
-```{r, fig.align = 'center',out.width= '100px', echo=FALSE }
-knitr::include_graphics(path = "figures/play_purple.png", auto_pdf = TRUE)
-``` 
+<center>
+![](figures/play_purple.png){style="width:100px"}
+</center>
 
 Now to run `LEfSe.` All we need to do is run the command with the formatted input and provide an output file name.
 
@@ -79,9 +79,9 @@ The output file is a tab-delimited file which contains a row for each species. B
 The __LDA effect__ size indicates how much of an effect each biomarker has. The default is to only count a species with an LDA effect size of greater than 2 or less than -2 as a biomarker. The further the LDA effect size is from 0 the greater the effect the species causes. Generally, it can be thought of as the order of magnitude difference in the abundance of the biomarker between the sample groups.
 
 ## LEfSe: visualisation
-```{r, fig.align = 'center',out.width= '100px', echo=FALSE }
-knitr::include_graphics(path = "figures/bar_chart_horizontal.png", auto_pdf = TRUE)
-``` 
+<center>
+![](figures/bar_chart_horizontal.png){style="width:100px; background:white;border-radius:5px"}
+</center>
 
 Next we can visualise the output.
 
@@ -101,9 +101,9 @@ firefox biomarkers.png
 ```
 
 ## LEfSe: MCQs
-```{r, fig.align = 'center',out.width= '100px', echo=FALSE }
-knitr::include_graphics(path = "figures/question_bubble_purple.png", auto_pdf = TRUE)
-```
+<center>
+![](figures/question_bubble_purple.png){style="width:100px"}
+</center>
 
 Interrogating the biomarkers.png plot and the all_num.lefse.out file, attempt the below MCQs.
 
@@ -145,9 +145,9 @@ opts_p <- c("__0.0022136919545913936__","__3.0266165524513937__",answer="__3.314
 7. What is the LDA effect size for __Bifidobacteriumlongum__? `r longmcq(opts_p)`
 
 ## Kraken2 and Bracken databases
-```{r, fig.align = 'center',out.width= '150px', echo=FALSE }
-knitr::include_graphics(path = "figures/database.png", auto_pdf = TRUE)
-``` 
+<center>
+![](figures/database.png){style="width:150px"}
+</center>
 
 In your own future analysis you will need to create your own `Kraken2` and `Bracken` databases. Please see the following links on information for this:
 

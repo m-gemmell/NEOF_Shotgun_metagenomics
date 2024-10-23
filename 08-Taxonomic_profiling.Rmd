@@ -1,9 +1,9 @@
 # (PART\*) Taxonomy of reads {-}
 
 # Taxonomic profiling {#taxprofile}
-```{r, fig.align = 'center',out.width= '300px', echo=FALSE }
-knitr::include_graphics(path = "figures/classification.png", auto_pdf = TRUE)
-``` 
+<center>
+![](figures/classification.png){style="width:300px; background:white; border-radius:5px"}
+</center>
 
 There are a number of methods for determining the species composition of a metagenomic dataset, but for the purposes of this practical we will use `Kraken2` & `Bracken` (Bayesian Reestimation of Abundance with KrakEN).  `Kraken2` classifies short DNA with taxonomic labels and is frequently used for metagenomic studies. `Bracken` uses the taxonomic labels assigned by `Kraken2` to compute the abundance of species in a set of DNA sequences.
 

@@ -1,9 +1,9 @@
 # (APPENDIX) Appendix {-}
 
 # Mamba installs
-```{r, fig.align = 'center',out.width= '200px', echo=FALSE }
-knitr::include_graphics(path = "figures/mamba_logo.png", auto_pdf = TRUE)
-```
+<center>
+![](figures/mamba_logo.png){style="width:200px; border-radius:5px"}
+</center>
 
 ## Mamba installation and environment {#mamba_install}
 
@@ -117,9 +117,9 @@ humann_test
 
 
 # Next steps
-```{r, fig.align = 'center',out.width= '150px', echo=FALSE }
-knitr::include_graphics(path = "figures/step.png", auto_pdf = TRUE)
-``` 
+<center>
+![](figures/step.png){style="width:200px"}
+</center>
 
 Below are some good links to start with before carrying out your own projects.
 
@@ -141,9 +141,9 @@ _ Methods for Metagenomic data visualisation and analysis
    - https://www.researchgate.net/publication/318252633_Methods_for_The_Metagenomic_Data_Visualization_and_Analysis
 
 # Manuals
-```{r, fig.align = 'center',out.width= '15opx', echo=FALSE }
-knitr::include_graphics(path = "figures/manual.png", auto_pdf = TRUE)
-``` 
+<center>
+![](figures/manual.png){style="width:150px"}
+</center>
 
 Conda: https://conda.io/projects/conda/en/latest/user-guide/getting-started.html
 

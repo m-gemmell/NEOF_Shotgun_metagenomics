@@ -29,15 +29,15 @@ knitr::write_bib(c(
 knitr::opts_chunk$set(class.source="Rchunk")
 ```
 
-```{r, fig.align = 'center',out.width= '300px', echo=FALSE }
-knitr::include_graphics(path = "figures/NEOF_bordered.png", auto_pdf = TRUE)
-```
+<center>
+![](figures/NEOF_rounded_corners.png){style="width:300px"}
+</center>
 
 # Introduction
 
-```{r, fig.align = 'center',out.width= '200px', echo=FALSE }
-knitr::include_graphics(path = "figures/squid.png", auto_pdf = TRUE)
-```
+<center>
+![](figures/squid.png){style="width:200px"}
+</center>
 
 There are many unknown and unculturable microbes found in a vast array of different environments. Shotgun metagenomics is an approach to capture all the genetic information in a sample, providing the taxonomic and metabolic information of all present organisms. In this course we will analyse shotgun metagenomic sequencing data from stool samples to compare Western and Korean diets.
 
@@ -57,26 +57,51 @@ At the end of the course learners will be able to:
 
 ## Table of contents {.unnumbered}
 
-+:-------------------------------------------------------------------------:+:-----------------------------------------------------------:+
-| [**Overview**](#overview)                                                 | [**Raw data**](#rawdata)                                    |
-|                                                                           |                                                             |
-| [![](figures/overview.png){width="135"}](#overview)                       | [![](figures/usb_stick.png){width="154"}](#rawdata)         |
-+---------------------------------------------------------------------------+-------------------------------------------------------------+
-| [**Trimming data**](#qualcont)                                            | [**Host removal**](#hostremoval)                            |
-|                                                                           |                                                             |
-| [![](figures/quality_trimming_and_filtering.png){width="274"}](#qualcont) | [![](figures/bowtie2.png){width="208"}](#hostremoval)       |
-+---------------------------------------------------------------------------+-------------------------------------------------------------+
-| [**Taxonomic profiling**](#taxprofile)                                    | [**Functional profiling**](#functprofile)                   |
-|                                                                           |                                                             |
-| [![](figures/classification.png){width="158"}](#taxprofile)               | [![](figures/profile.png){width="113"}](#functprofile)      |
-+---------------------------------------------------------------------------+-------------------------------------------------------------+
-| [**Metagenome assembly**](#metagenomeassembly)                            | [**Binning**](#binning)                                     |
-|                                                                           |                                                             |
-| [![](figures/jigsaw.png){width="211"}](#metagenomeassembly)               | [![](figures/yarn_binning.png){width="343"}](#binning)      |
-+---------------------------------------------------------------------------+-------------------------------------------------------------+
-| [**Functional annotation**](#funcanno)                                    | [**Appendix**](#mamba-installs)                             |
-|                                                                           |                                                             |
-| [![](figures/pathways.png){width="150"}](#funcanno)                       | [![](figures/mamba_logo.png){width="217"}](#mamba-installs) |
-+---------------------------------------------------------------------------+-------------------------------------------------------------+
+```{r, echo=FALSE, align="centre"}
+#Create 2 column dataframe
+column_1 <- c(
+  #1 Overview
+  '[**Overview**](#overview)', 
+ '[![](figures/overview.png){style="height:150px"}](#overview)',
+ #3 Trimming data
+    '[**Trimming data**](#qualcont)', 
+ '[![](figures/quality_trimming_and_filtering.png){height="150px"}](#qualcont)',
+ #5 Taxonomic profiling
+   '[**Taxonomic profiling**](#taxprofile)', 
+ '[![](figures/classification.png){height="150px"}](#taxprofile)',
+ #7 Metagenome assembly
+   '[**Metagenome assembly**](#metagenomeassembly)', 
+ '[![](figures/jigsaw.png){style="height:150px; border-radius:15px; border:5px solid #333333; background:white"}](#metagenomeassembly)',
+  #9 Functional annotation
+   '[**Functional annotation**](#funcanno)', 
+ '[![](figures/pathways.png){style="height:150px"}](#funcanno)'
+)
+column_2 <- c(
+  #2 Raw data
+  '[**Raw data**](#rawdata)', 
+ '[![](figures/usb_stick.png){style="height:150px"}](#rawdata)',
+ #4 Host removal
+   '[**Host removal**](#hostremoval)', 
+ '[![](figures/bowtie2.png){height="150"}](#hostremoval)',
+ #6 Functional profiling
+   '[**Functional profiling**](#functprofile)', 
+ '[![](figures/profile.png){height="150"}](#functprofile)',
+ #8 Binning
+   '[**Binning**](#binning)', 
+ '[![](figures/yarn_binning.png){style="height:150px; border-radius:15px"}](#binning)',
+   #10 Appendix
+   '[**Appendix**](#mamba-installs)', 
+ '[![](figures/mamba_logo.png){style="height:150px; border-radius:15px"}](#mamba-installs)'
+)
+table_df <- data.frame(column_1, column_2)
+#Kable and kableextra libraries
+library(knitr)
+library(kableExtra)
+#Create table
+#ALign both column in centre (align = "cc")
+table_df %>%
+  kbl(align= "cc", col.names = NULL) %>%
+  kable_styling(position = "center")
+```
 
 <a rel="license" href="http://creativecommons.org/licenses/by-nc-sa/4.0/"><img src="https://i.creativecommons.org/l/by-nc-sa/4.0/88x31.png" alt="Creative Commons Licence" style="border-width:0"/></a><br />This work is licensed under a <a rel="license" href="http://creativecommons.org/licenses/by-nc-sa/4.0/">Creative Commons Attribution-NonCommercial-ShareAlike 4.0 International License</a>.

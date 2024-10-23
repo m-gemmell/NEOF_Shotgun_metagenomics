@@ -1,10 +1,9 @@
 # (PART\*) Assembly Approach {.unnumbered}
 
 # Metagenome assembly {#metagenomeassembly}
-
-```{r, fig.align = 'center',out.width= '300px', echo=FALSE }
-knitr::include_graphics(path = "figures/jigsaw.png", auto_pdf = TRUE)
-```
+<center>
+![](figures/jigsaw.png){style="width:300px"}
+</center>
 
 So far we have directly analysed the read data itself which is perfectly fine for taxonomic profiling and for certain methods of functional profiling. However, Illumina reads are generally short and therefore can not provide us with much data on larger constructs that are in the metagenomic samples, e.g. genes. While it is possible to predict from which gene a sequence read might originate, the short nature of the query can sometimes lead to ambiguous results.
 
@@ -18,37 +17,35 @@ For this reason, it is sometimes advantageous to assemble the reads into contigs
 Here, we will carry out a couple of assemblies on our dataset.
 
 ## Metagenome assembly: Mamba
-
-```{r, fig.align = 'center',out.width= '200px', echo=FALSE }
-knitr::include_graphics(path = "figures/mamba_logo.png", auto_pdf = TRUE)
-```
+<center>
+![](figures/mamba_logo.png){style="width:200px; border-radius:5px"}
+</center>
 
 We will use the `shotgun_meta` conda environment so use a terminal where this is activated or open a new one and run `. useshotgun`.
 
 ## A primer on short read assembly
-
-```{r, fig.align = 'center',out.width= '150px', echo=FALSE }
-knitr::include_graphics(path = "figures/dna_laptop.png", auto_pdf = TRUE)
-```
+<center>
+![](figures/dna_laptop.png){style="width:150px"}
+</center>
 
 Illumina reads are too short and numerous to use traditional overlap-layout-consensus assemblers as such an approach would be far too computationally intensive. Instead, we use De Bruijn graph based assemblers. Briefly, these operate as follows:
 
 1.  All reads are broken down into k-length overlapping fragments (k-mers). e.g. if we choose a k-mer size of 5 bp, the following two sequences (blue) would be broken down into the k-mers below them (red):
 
 <center>
-![](figures/reads_aligned.png){style="border-radius: 10px; width: 400px; border: 5px solid #333333"}
+![](figures/reads_aligned.png){style="border-radius: 10px; width: 400px"}
 </center>
 
 2.  All k-mers are linked to other k-mers which match with a k-1 length overlap (i.e. that overlap by all but one base):
 
 <center>
-![](figures/graph_simple.png){style="border-radius: 10px; width: 800px; border: 5px solid #333333"}
+![](figures/graph_simple.png){style="border-radius: 10px; width: 800px"}
 </center>
 
 3.  Paths are routed through the graph and longer contigs are generated:
 
 <center>
-![](figures/graph_complex.png){style="border-radius: 10px; width: 800px; border: 5px solid #333333"}
+![](figures/graph_complex.png){style="border-radius: 10px; width: 800px"}
 </center>
 
 The example here is a vast oversimplification of the complexity of a De Bruijn graph (i.e. there are no branches!). Routing through the graph is never as simple as this as some k-mers will lead to multiple k-mers, which can result in the break point of a contig. This is especially true for complex metagenomic data.
