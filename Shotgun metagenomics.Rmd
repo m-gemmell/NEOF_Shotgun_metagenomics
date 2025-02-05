@@ -607,7 +607,7 @@ The below `BBTools` command will re-pair the reads by removing reads with a miss
 ```{bash eval=FALSE}
 repair.sh in1=K1_R1.u.fastq in2=K1_R2.u.fastq \
 out1=K1_R1.final.fastq out2=K1_R2.final.fastq \
-outs=singletons.fastq
+outs=K1_singletons.fastq
 ```
 
 #### Parameters {-}
