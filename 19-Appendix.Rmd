@@ -24,7 +24,8 @@ To create the mamba environment `shotgun_meta` run the below commands in your ba
 mamba create -n shotgun_meta
 mamba activate shotgun_meta
 #Install packages
-mamba install -c bioconda fastqc trim-galore multiqc bowtie2 kraken2 krona bracken lefse flash megahit quast metabat2 prokka bbmap bakta circos
+mamba install -c bioconda fastqc trim-galore multiqc bowtie2 kraken2 \
+krona bracken lefse flash megahit quast metabat2 prokka bbmap bakta circos
 #Update krona taxonomy database
 ktUpdateTaxonomy.sh
 #Install GenoVi via pip
@@ -65,20 +66,21 @@ mamba activate checkm
 mamba install -c bioconda checkm-genome
 ```
 
-To create the mamba environment `biobakery` run the below commands in your bash. You will need to have installed `mamba` first.
+To create the mamba environment `biobakery3.9` run the below commands in your bash. You will need to have installed `mamba` first.
 
 ```{bash, eval=FALSE}
 #biobakery3
-mamba create -n biobakery3
-mamba activate biobakery3
+mamba create -n biobakery3.9
+mamba activate biobakery3.9
 #Add required channels
 conda config --add channels defaults
 conda config --add channels bioconda
 conda config --add channels conda-forge
 conda config --add channels biobakery
-#Install packages
-mamba install -c biobakery humann
-mamba install -c bioconda hclust2 lefse
+#Install huamnn3.9
+mamba install -c biobakery humann=3.9
+#Install hclust2 and matplotlib
+mamba install bioncda::hclust2=1.0.0 conda-forge::matplotlib=3.7.3
 ```
 
 Next you will need to install the `HUMAnN` and `MetaPhlAn` databases.
@@ -90,24 +92,24 @@ humann_databases --download chocophlan full /path/to/databases --update-config y
 humann_databases --download uniref uniref90_diamond /path/to/databases --update-config yes
 humann_databases --download utility_mapping full /path/to/databases --update-config yes
 #Install MetaPhlAn databases
-metaphlan --install
+metaphlan --install --index mpa_vOct22_CHOCOPhlAnSGB_202403
 ```
 
-Installing the `MetaPhlAn` databases may not work with the command above. If not follow the below instrcutions.
+Installing the `MetaPhlAn` databases may not work with the command above. If not follow the below instructions.
 
 - Go to the following link: http://cmprod1.cibio.unitn.it/biobakery4/metaphlan_databases/
-- Download the following files (or more recent versions if available):
-  - __mpa_vOct22_CHOCOPhlAnSGB_202212.md5__
-  - __mpa_vOct22_CHOCOPhlAnSGB_202212.tar__
-  - __bowtie2_indexes/mpa_vOct22_CHOCOPhlAnSGB_202212_bt2.md5__
-  - __bowtie2_indexes/mpa_vOct22_CHOCOPhlAnSGB_202212_bt2.tar__
+- Download the following files (or the most recent vOct22 files):
+  - [__mpa_vOct22_CHOCOPhlAnSGB_202403.md5__](http://cmprod1.cibio.unitn.it/biobakery4/metaphlan_databases/mpa_vOct22_CHOCOPhlAnSGB_202403.md5)
+  - [__mpa_vOct22_CHOCOPhlAnSGB_202403.tar__](http://cmprod1.cibio.unitn.it/biobakery4/metaphlan_databases/mpa_vOct22_CHOCOPhlAnSGB_202403.tar)
+  - [__bowtie2_indexes/mpa_vOct22_CHOCOPhlAnSGB_202403_bt2.md5__](http://cmprod1.cibio.unitn.it/biobakery4/metaphlan_databases/bowtie2_indexes/mpa_vOct22_CHOCOPhlAnSGB_202403_bt2.md5)
+  - [__bowtie2_indexes/mpa_vOct22_CHOCOPhlAnSGB_202403_bt2.tar__](http://cmprod1.cibio.unitn.it/biobakery4/metaphlan_databases/bowtie2_indexes/mpa_vOct22_CHOCOPhlAnSGB_202403_bt2.tar)
 - Put these in the `MetaPhlAn` databases directory. This will be in your mamba environment directory.
-  - E.g.: ~/mambaforge/envs/biobakery3/lib/python3.7/site-packages/metaphlan/metaphlan_databases
+  - E.g.: ~/mambaforge/envs/biobakery3.9/lib/python3.7/site-packages/metaphlan/metaphlan_databases
   - Note: this may not be your exact path.
-- Run `metaphlan --install` again.
+- Run `metaphlan --install --index mpa_vOct22_CHOCOPhlAnSGB_202403` again.
 - Untar the CHOCOPhlan tar file
   - Change directory to your `MetaPhlAn` database directory.
-  - `tar -xvf mpa_vOct22_CHOCOPhlAnSGB_202212.tar`
+  - `tar -xvf mpa_vOct22_CHOCOPhlAnSGB_202403.tar`
 
 Once the databses are all setup you can test `HUMAnN`.
 

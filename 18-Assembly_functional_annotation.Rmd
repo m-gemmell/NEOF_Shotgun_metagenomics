@@ -10,6 +10,8 @@
 
 Taxonomic annotation of bins can be carried out with `Kraken2`. As we have already done this for the reads and taxonomic results from read and assembly approaches have similar performances we will not cover it here. Instead we will move straight onto functional annotation with [`Bakta`](https://github.com/oschwengers/bakta).
 
+__Conda Environment__: Go back to your shotgun_meta terminal (or create a new one and use `. useshotgun`).
+
 ## Bakta
 <center>
 ![](figures/bakta_logo.png){style="border-radius: 15px; width: 250px; border: 5px solid white"}

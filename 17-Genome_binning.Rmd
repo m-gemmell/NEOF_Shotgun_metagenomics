@@ -405,7 +405,7 @@ opts_p <- c(answer="__root (UID1)__", "__k_Bacteria (UID203)__", "__o_Lachnospir
 ```{r, echo = FALSE}
 opts_p <- c("__4.17__", answer="__33.62__", "__172__")
 ```
-4. What is the quality value of K1.1? `r longmcq(opts_p)`
+4. What is the quality value of __K1.1__? `r longmcq(opts_p)`
 
 ```{r, echo = FALSE}
 opts_p <- c(answer="__4.17__", "__33.62__", "__172__")

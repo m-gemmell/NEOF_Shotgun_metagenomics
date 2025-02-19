@@ -1158,17 +1158,17 @@ Interrogating the biomarkers.png plot and the all_num.lefse.out file, attempt th
 __Note__: In this instance green bars represent biomarkers in higher abundance in the W samples whilst the red bars represent biomarkers in higher abundance in the K samples.
 
 ```{r, echo = FALSE}
-opts_p <- c("__Adlercreutziaequolifaciens__",answer="__Alistipesshahhii__","__Methanosphaerastadtmanae__")
+opts_p <- c("__Ruminococcuschampanellensis__",answer="__Alistipesshahii__","__Methanosphaerastadtmanae__")
 ```
 1. Which species biomarker causes the biggest effect in the __W__ class? `r longmcq(opts_p)`
 
 ```{r, echo = FALSE}
-opts_p <- c("__Adlercreutziaequolifaciens__","__Alistipesshahhii__",answer="__Methanosphaerastadtmanae__")
+opts_p <- c("__Ruminococcuschampanellensis__","__Alistipesshahii__",answer="__Methanosphaerastadtmanae__")
 ```
 2. Which species biomarker causes the biggest effect in the __K__ class? `r longmcq(opts_p)`
 
 ```{r, echo = FALSE}
-opts_p <- c(answer="__Adlercreutziaequolifaciens__","__Alistipesshahhii__","__Methanosphaerastadtmanae__")
+opts_p <- c(answer="__Ruminococcuschampanellensis__","__Alistipesshahii__","__Methanosphaerastadtmanae__")
 ```
 3. Which species biomarker (i.e. present in the plot) causes the lowest effect in the __W__ class? `r longmcq(opts_p)`
 
@@ -1178,17 +1178,17 @@ opts_p <- c("__Korean__",answer="__Western__")
 4. Which class has more biomarkers associated with it? `r longmcq(opts_p)`
 
 ```{r, echo = FALSE}
-opts_p <- c(answer="__0.0022136919545913936__","__3.0266165524513937__","__3.314396201978439__")
+opts_p <- c(answer="__0.0022136919545913936__","__3.0271864317141715__","__3.3224493820428482__")
 ```
 5. What is the LEfSe p-value for __Campylobactercoli__? `r longmcq(opts_p)`
 
 ```{r, echo = FALSE}
-opts_p <- c("__0.0022136919545913936__",answer="__3.0266165524513937__","__3.314396201978439__")
+opts_p <- c("__0.0022136919545913936__",answer="__3.0271864317141715__","__3.3224493820428482__")
 ```
 6. What is the Log of highest class average for __Streptococcussuis__? `r longmcq(opts_p)`
 
 ```{r, echo = FALSE}
-opts_p <- c("__0.0022136919545913936__","__3.0266165524513937__",answer="__3.314396201978439__")
+opts_p <- c("__0.0022136919545913936__","__3.0271864317141715__",answer="__3.3224493820428482__")
 ```
 7. What is the LDA effect size for __Bifidobacteriumlongum__? `r longmcq(opts_p)`
 
@@ -1222,13 +1222,16 @@ It is possible to investigate functional differences between metagenome (and met
 
 `HUMAnN` is on its third version and was developed in tandem with the third version of `MetaPhlAn`, a computational tool for profiling the composition of microbial communities from metagenomic data.
 
-It is highly recommended you use the new version of `HUMAnN` as it contains 2 times more species pangenomes and 3 times more gene families than `HUMAnN2`.
-
-Please see below for a diagram showing the pipline of `HUMAnN`:
+Please see below for a diagram showing the pipeline of `HUMAnN`:
 
 <center>
 ![](figures/humann3_workflow.png){style="width: 750px; border-radius: 15px"}
 </center>
+
+`r hide("HUMAnN 4")`
+HUMAnN 4 is currently in alpha: (https://forum.biobakery.org/t/announcing-humann-4-0-alpha/7531)
+I have tested it and could not install it correctly so we will not be teaching its use in this course till it is out of alpha and stable.
+`r unhide()`
 
 ## HUMAnN
 <center>
@@ -1245,7 +1248,7 @@ First, we will carry out an example run of the software and briefly explore the 
 We need a new `mamba` environment. Open a new terminal (right click on the main screen background, choose `Terminal`) and run the below:
 
 ```{bash eval=FALSE}
-. usebiobakery3
+. usebiobakery3.9
 ```
 
 Make a new directory and move into it.
@@ -1573,7 +1576,6 @@ lefse_plot_res.py \
 --dpi 200 \
 --format png \
 #Below options added to increase max length of feature string
-#TypeError: slice indices must be integers or None or have an __index__ method
 --max_feature_len 200 \
 diet_unstratified.relab.comp.lefse.out \
 diet_unstratified.relab.comp.lefse.png
@@ -1862,17 +1864,17 @@ The report tells us quite a bit about the assembly quality. Two definitions that
 __Note:__ Due to the assembly process you values may be slightly different (< 1%). Please choose the closest value
 
 ```{r, echo = FALSE}
-opts_p <- c("__39.88__", "__18,650__",answer="__16,187,295__")
+opts_p <- c("__39.88__", "__18,650__",answer="__16,187,259__")
 ```
 1. What is the total length of the assembly? `r longmcq(opts_p)`
 
 ```{r, echo = FALSE}
-opts_p <- c("__39.88__", answer="__18,650__","__16,187,295__")
+opts_p <- c("__39.88__", answer="__18,650__","__16,187,259__")
 ```
 2. How many contigs does the assembly consist of? `r longmcq(opts_p)`
 
 ```{r, echo = FALSE}
-opts_p <- c(answer="__39.88__", "__18,650__","__16,187,295__")
+opts_p <- c(answer="__39.88__", "__18,650__","__16,187,259__")
 ```
 3. What is the GC% of the assembly? `r longmcq(opts_p)`
 
@@ -2315,7 +2317,7 @@ opts_p <- c(answer="__root (UID1)__", "__k_Bacteria (UID203)__", "__o_Lachnospir
 ```{r, echo = FALSE}
 opts_p <- c("__4.17__", answer="__33.62__", "__172__")
 ```
-4. What is the quality value of K1.1? `r longmcq(opts_p)`
+4. What is the quality value of __K1.1__? `r longmcq(opts_p)`
 
 ```{r, echo = FALSE}
 opts_p <- c(answer="__4.17__", "__33.62__", "__172__")
@@ -2367,6 +2369,8 @@ library(webexercises)
 </center>
 
 Taxonomic annotation of bins can be carried out with `Kraken2`. As we have already done this for the reads and taxonomic results from read and assembly approaches have similar performances we will not cover it here. Instead we will move straight onto functional annotation with [`Bakta`](https://github.com/oschwengers/bakta).
+
+__Conda Environment__: Go back to your shotgun_meta terminal (or create a new one and use `. useshotgun`).
 
 ## Bakta
 <center>
@@ -2778,7 +2782,8 @@ To create the mamba environment `shotgun_meta` run the below commands in your ba
 mamba create -n shotgun_meta
 mamba activate shotgun_meta
 #Install packages
-mamba install -c bioconda fastqc trim-galore multiqc bowtie2 kraken2 krona bracken lefse flash megahit quast metabat2 prokka bbmap bakta circos
+mamba install -c bioconda fastqc trim-galore multiqc bowtie2 kraken2 \
+krona bracken lefse flash megahit quast metabat2 prokka bbmap bakta circos
 #Update krona taxonomy database
 ktUpdateTaxonomy.sh
 #Install GenoVi via pip
@@ -2819,20 +2824,21 @@ mamba activate checkm
 mamba install -c bioconda checkm-genome
 ```
 
-To create the mamba environment `biobakery` run the below commands in your bash. You will need to have installed `mamba` first.
+To create the mamba environment `biobakery3.9` run the below commands in your bash. You will need to have installed `mamba` first.
 
 ```{bash, eval=FALSE}
 #biobakery3
-mamba create -n biobakery3
-mamba activate biobakery3
+mamba create -n biobakery3.9
+mamba activate biobakery3.9
 #Add required channels
 conda config --add channels defaults
 conda config --add channels bioconda
 conda config --add channels conda-forge
 conda config --add channels biobakery
-#Install packages
-mamba install -c biobakery humann
-mamba install -c bioconda hclust2 lefse
+#Install huamnn3.9
+mamba install -c biobakery humann=3.9
+#Install hclust2 and matplotlib
+mamba install bioncda::hclust2=1.0.0 conda-forge::matplotlib=3.7.3
 ```
 
 Next you will need to install the `HUMAnN` and `MetaPhlAn` databases.
@@ -2844,24 +2850,24 @@ humann_databases --download chocophlan full /path/to/databases --update-config y
 humann_databases --download uniref uniref90_diamond /path/to/databases --update-config yes
 humann_databases --download utility_mapping full /path/to/databases --update-config yes
 #Install MetaPhlAn databases
-metaphlan --install
+metaphlan --install --index mpa_vOct22_CHOCOPhlAnSGB_202403
 ```
 
-Installing the `MetaPhlAn` databases may not work with the command above. If not follow the below instrcutions.
+Installing the `MetaPhlAn` databases may not work with the command above. If not follow the below instructions.
 
 - Go to the following link: http://cmprod1.cibio.unitn.it/biobakery4/metaphlan_databases/
-- Download the following files (or more recent versions if available):
-  - __mpa_vOct22_CHOCOPhlAnSGB_202212.md5__
-  - __mpa_vOct22_CHOCOPhlAnSGB_202212.tar__
-  - __bowtie2_indexes/mpa_vOct22_CHOCOPhlAnSGB_202212_bt2.md5__
-  - __bowtie2_indexes/mpa_vOct22_CHOCOPhlAnSGB_202212_bt2.tar__
+- Download the following files (or the most recent vOct22 files):
+  - [__mpa_vOct22_CHOCOPhlAnSGB_202403.md5__](http://cmprod1.cibio.unitn.it/biobakery4/metaphlan_databases/mpa_vOct22_CHOCOPhlAnSGB_202403.md5)
+  - [__mpa_vOct22_CHOCOPhlAnSGB_202403.tar__](http://cmprod1.cibio.unitn.it/biobakery4/metaphlan_databases/mpa_vOct22_CHOCOPhlAnSGB_202403.tar)
+  - [__bowtie2_indexes/mpa_vOct22_CHOCOPhlAnSGB_202403_bt2.md5__](http://cmprod1.cibio.unitn.it/biobakery4/metaphlan_databases/bowtie2_indexes/mpa_vOct22_CHOCOPhlAnSGB_202403_bt2.md5)
+  - [__bowtie2_indexes/mpa_vOct22_CHOCOPhlAnSGB_202403_bt2.tar__](http://cmprod1.cibio.unitn.it/biobakery4/metaphlan_databases/bowtie2_indexes/mpa_vOct22_CHOCOPhlAnSGB_202403_bt2.tar)
 - Put these in the `MetaPhlAn` databases directory. This will be in your mamba environment directory.
-  - E.g.: ~/mambaforge/envs/biobakery3/lib/python3.7/site-packages/metaphlan/metaphlan_databases
+  - E.g.: ~/mambaforge/envs/biobakery3.9/lib/python3.7/site-packages/metaphlan/metaphlan_databases
   - Note: this may not be your exact path.
-- Run `metaphlan --install` again.
+- Run `metaphlan --install --index mpa_vOct22_CHOCOPhlAnSGB_202403` again.
 - Untar the CHOCOPhlan tar file
   - Change directory to your `MetaPhlAn` database directory.
-  - `tar -xvf mpa_vOct22_CHOCOPhlAnSGB_202212.tar`
+  - `tar -xvf mpa_vOct22_CHOCOPhlAnSGB_202403.tar`
 
 Once the databses are all setup you can test `HUMAnN`.
 

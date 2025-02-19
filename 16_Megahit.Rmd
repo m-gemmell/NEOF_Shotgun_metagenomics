@@ -110,17 +110,17 @@ The report tells us quite a bit about the assembly quality. Two definitions that
 __Note:__ Due to the assembly process you values may be slightly different (< 1%). Please choose the closest value
 
 ```{r, echo = FALSE}
-opts_p <- c("__39.88__", "__18,650__",answer="__16,187,295__")
+opts_p <- c("__39.88__", "__18,650__",answer="__16,187,259__")
 ```
 1. What is the total length of the assembly? `r longmcq(opts_p)`
 
 ```{r, echo = FALSE}
-opts_p <- c("__39.88__", answer="__18,650__","__16,187,295__")
+opts_p <- c("__39.88__", answer="__18,650__","__16,187,259__")
 ```
 2. How many contigs does the assembly consist of? `r longmcq(opts_p)`
 
 ```{r, echo = FALSE}
-opts_p <- c(answer="__39.88__", "__18,650__","__16,187,295__")
+opts_p <- c(answer="__39.88__", "__18,650__","__16,187,259__")
 ```
 3. What is the GC% of the assembly? `r longmcq(opts_p)`
 

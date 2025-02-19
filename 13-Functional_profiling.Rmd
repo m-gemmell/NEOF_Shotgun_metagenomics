@@ -9,13 +9,16 @@ It is possible to investigate functional differences between metagenome (and met
 
 `HUMAnN` is on its third version and was developed in tandem with the third version of `MetaPhlAn`, a computational tool for profiling the composition of microbial communities from metagenomic data.
 
-It is highly recommended you use the new version of `HUMAnN` as it contains 2 times more species pangenomes and 3 times more gene families than `HUMAnN2`.
-
-Please see below for a diagram showing the pipline of `HUMAnN`:
+Please see below for a diagram showing the pipeline of `HUMAnN`:
 
 <center>
 ![](figures/humann3_workflow.png){style="width: 750px; border-radius: 15px"}
 </center>
+
+`r hide("HUMAnN 4")`
+HUMAnN 4 is currently in alpha: (https://forum.biobakery.org/t/announcing-humann-4-0-alpha/7531)
+I have tested it and could not install it correctly so we will not be teaching its use in this course till it is out of alpha and stable.
+`r unhide()`
 
 ## HUMAnN
 <center>
@@ -32,7 +35,7 @@ First, we will carry out an example run of the software and briefly explore the 
 We need a new `mamba` environment. Open a new terminal (right click on the main screen background, choose `Terminal`) and run the below:
 
 ```{bash eval=FALSE}
-. usebiobakery3
+. usebiobakery3.9
 ```
 
 Make a new directory and move into it.
@@ -360,7 +363,6 @@ lefse_plot_res.py \
 --dpi 200 \
 --format png \
 #Below options added to increase max length of feature string
-#TypeError: slice indices must be integers or None or have an __index__ method
 --max_feature_len 200 \
 diet_unstratified.relab.comp.lefse.out \
 diet_unstratified.relab.comp.lefse.png
