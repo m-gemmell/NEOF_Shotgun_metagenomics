@@ -141,6 +141,8 @@ Below are some good links to start with before carrying out your own projects.
    - https://github.com/soedinglab/metaeuk
 _ Methods for Metagenomic data visualisation and analysis
    - https://www.researchgate.net/publication/318252633_Methods_for_The_Metagenomic_Data_Visualization_and_Analysis
+- Visualizing metagenomic and metatranscriptomic data: A comprehensive review
+  - https://www.sciencedirect.com/science/article/pii/S2001037024001430
 
 # Manuals
 <center>
