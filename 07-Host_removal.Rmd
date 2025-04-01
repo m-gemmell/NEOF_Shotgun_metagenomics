@@ -3,7 +3,7 @@
 ![](figures/bowtie2.png){style="width:300px"}
 </center>
 
-It is good practice to remove any host sequences from your data before further analysis. A good method for this is to align/map your reads to a reference of your host genome and remove the mapped sequences (i.e sequences we believe to belong to the host).
+It is good practice to remove any host sequences from your data before further analysis. A good method for this is to align/map your reads to a reference of your host genome and remove the mapped sequences (i.e sequences we believe belong to the host).
 
 If there is no host genome available before you start your sample collections and sequencing it may be a good idea to attempt to sequence and assemble the host genome. We would recommend long read technologies for single genome assembly projects.
 
@@ -54,7 +54,7 @@ This command is split into two commands. The first is `bowtie2` that creates the
 - __`2>`__: This will cause the standard error to be redirected to the chosen file. In this case `K1_bowtie2_out.log`.
   - This is useful for commands that may produce a lot of output to screen. If an error occurs you can view this file to see the error messages.
   
-The alignment is then piped (`|`) to the command `samtools view`. For more information on pipes please see our [Intro to Unix course book](http://www.cgr.liv.ac.uk/illum/NEOFworkshops_5bfa93ca0482d69d/Intro_to_Unix/12-Advanced_linux_practice.html#pipes).
+The alignment is then piped (`|`) to the command `samtools view`. For more information on pipes please see our [Intro to Unix course book](https://neof-workshops.github.io/Unix_nxcdf7/Course/12-Advanced_linux_practice.html#pipes).
 
 The parameters for `samtools view` are:
 
@@ -64,7 +64,7 @@ The parameters for `samtools view` are:
 - __`-S`__: Auto detect input format.
 - __`-h`__: Include header.
 
-The binary alignment is redirected to a new file called `K1_mapped.bam`. For more information on redirection please see our [Intro to Unix course book](http://www.cgr.liv.ac.uk/illum/NEOFworkshops_5bfa93ca0482d69d/Intro_to_Unix/12-Advanced_linux_practice.html#redirection).
+The binary alignment is redirected to a new file called `K1_mapped.bam`. For more information on redirection please see our [Intro to Unix course book](https://neof-workshops.github.io/Unix_nxcdf7/Course/12-Advanced_linux_practice.html#redirection).
 
 ## Unmapped read extraction
 <center>

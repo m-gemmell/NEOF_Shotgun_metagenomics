@@ -53,7 +53,7 @@ At the end of the course learners will be able to:
 -   Profile the microbial pathways in metagenomic sequencing data with the bioBakery suite of tools, including HUMAnN.
 -   Perform a metagenome assembly with MEGAHIT, and assess it with QUAST.
 -   Carry out genomic binning of the metagenome assembly with MetaBAT2 to try to separate the different species present.
--   Functionally annotate the bins with Prokka.
+-   Functionally annotate the bins with Bakta.
 
 ## Table of contents {.unnumbered}
 
