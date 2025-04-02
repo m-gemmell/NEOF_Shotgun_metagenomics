@@ -46,11 +46,15 @@ cd ~/7-Binning/K1
 
 To carry out effective genome binning `MetaBAT2` uses coverage information of the contigs. To calculate depth we need to align the reads to the metagenome assembly.
 
+#### Index assembly {-}
+
 For the alignment we will use `bwa`. We need to index our assembly file prior to alignment.
 
 ```{bash eval=FALSE}
 bwa index ~/6-Assembly/K1/final.contigs.fa
 ```
+
+#### Alignment {-}
 
 Next we will align our trimmed paired reads we used to create the stitched reads. We will carry this out with the `bwa mem` command. `bwa mem` is a good aligner for short reads. If you are using long reads (PacBio or Nanopore) `minimap2` will be more appropriate.
 
@@ -59,6 +63,8 @@ bwa mem ~/6-Assembly/K1/final.contigs.fa \
 ~/2-Trimmed/K1_R1.fq.gz ~/2-Trimmed/K1_R2.fq.gz > \
 K1.sam
 ```
+
+#### Sam to sorted bam {-}
 
 After alignment we need to get the file ready for the contig depth summarisation step. This requires converting the `sam` file to a `bam` (binary form of a `sam` file) file and then sorting the `bam` file.
 
@@ -69,11 +75,15 @@ samtools view -bu K1.sam > K1.bam
 samtools sort K1.bam > K1.sort.bam
 ```
 
+#### Summarise depths {-}
+
 Now we can summarise the contig depths from the sorted `bam` files with `MetaBAT2`'s `jgi_summarize_bam_contig_depths` command.
 
 ```{bash eval=FALSE}
 jgi_summarize_bam_contig_depths --outputDepth K1.depth.txt K1.sort.bam
 ```
+
+#### View summary depth {-}
 
 You can have a look at the depth file and you will notice there are many contigs with low coverage (<10) and of short length (<1500).
 

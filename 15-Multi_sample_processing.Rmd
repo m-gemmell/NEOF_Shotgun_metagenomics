@@ -1,0 +1,141 @@
+# Multi sample processing {#humannmultisampleprocessing}
+<center>
+![](figures/k_w_venn.png){style="width:150px"}
+</center>
+
+Looking at the functional profile of one sample in isolation is usually not very informative. First, there is nothing to compare it to and second, there are no biological replicates. We will therefore use all the Korean and Western diet samples.
+
+It would take many hours to analyse all of the data using `HUMAnN` and is outside the scope of this course. For this reason, samples were analysed prior to the workshop to generate the output files we covered above.
+
+For the purposes of this comparison, we will look at the pathway abundances only. First copy over the data directory containg the gene families tables and have a look in it.
+
+```{bash eval=FALSE}
+#Ensure you are in the correct directory
+cd ~/4-FunctionalProfiling
+#Copy directory with pre made results
+cp -r /pub14/tea/nsc206/NEOF/Shotgun_metagenomics/DietPathAbundance .
+#Move into the copied directory
+cd DietPathAbundance
+#List files
+ls
+```
+
+You will see there are 12 files prefixed with K and 12 prefixed with W, for the Korean diet and Western diet samples, respectively. Take a look at the file for K1.
+
+```{bash eval=FALSE}
+less K1_pathabundance.tsv
+```
+
+There are a lot of pathways in the file. Quit out of the `less` viewer (`q`) and look at the entries for one specific pathway, COA-PWY-1 (a coenzyme A biosynthesis II pathway).
+
+```{bash eval=FALSE}
+grep COA-PWY-1 K1_pathabundance.tsv | less
+```
+
+This shows 30 entries/lines with the top entry/line:
+
+**`COA-PWY-1: superpathway of coenzyme A biosynthesis III (mammals)        6790.1517478104`**
+
+This shows the abundance of the pathway across the entire sample (6790.1517478104).
+
+The other entries show the species stratification information (mentioned above) of the pathway. I.e. the second line:
+
+**`COA-PWY-1: superpathway of coenzyme A biosynthesis III (mammals)|g__Bacteroides.s__Bacteroides_dorei    1292.7711872228`**
+
+shows the abundance of the pathway that is contributed by the species *Bacteroides dorei* (1292.7711872228).
+
+**Note**: The species stratified pathway abundances may not equal the total community pathway abundance. Please see this [forum post](https://forum.biobakery.org/t/humann3-pathway-abundance-table-pathway-sum-and-species-sum-different/1471) for details.
+
+With this information we will carry out some comparisons including biomarker detection to determine which pathways are differentially abundant between the Western diet and Korean diet samples.
+
+**Note**: The following methods/pipeline can be used for the genefamilies and pathcoverage tables in your own future analyses.
+
+## Combining data
+<center>
+![](figures/merge.png){style="width:100px; background:white; border-radius:5px"}
+</center>
+
+First, we need to combine these 24 tables into one large results table. `HUMAnN` provides a tool to do this:
+
+```{bash eval=FALSE}
+#Change directory to main Functional profiling directory
+cd ~/4-FunctionalProfiling
+#Join the tables
+humann_join_tables --input DietPathAbundance/ --output diet.tsv
+```
+
+This command will look for all tables in the `DietPathAbundance` directory and generate a large, 25 column table called `diet.tsv`. You can inspect the file to ensure that this has worked correctly.
+
+```{bash eval=FALSE}
+less -S diet.tsv
+```
+
+## Split stratified table
+<center>
+![](figures/split.png){style="width:100px; background:white; border-radius:5px"}
+</center>
+
+For this tutorial we do not want the species stratification information. We will therefore split the table to create 2 new files:
+
+-   `diet_unstratified.tsv`: This table only contains the total abundance values for the pathways. It does not contain any species stratification information.
+-   `diet_stratified.tsv`: This table only contains the species stratification abundance values for the pathways. It does not contain the total abundance information.
+
+To create the split files and output them to your current directory, run the following command:
+
+```{bash eval=FALSE}
+humann_split_stratified_table --input diet.tsv --output .
+```
+
+We will use the file `diet_unstratified.tsv` for our downstream analysis.
+
+Before you move on feel free to inspect the output files with the `less` command.
+
+**Note**: You can use any of the three tables (unsplit table, unstratified table, or stratified table) in your own analysis. This depends on your question and data.
+
+## Renormalising data {#humannrenormalise}
+<center>
+![](figures/normalisation.png){style="width:100px; background:white; border-radius:5px"}
+</center>
+
+The next step is to renormalise the data. Currently, all of the abundance values are only normalised within each sample (RPKs). However, they are not normalised between samples, and this is very important to do. For example, if we had sequenced two samples, A and B, and we obtained 5 million reads for sample A and 20 million reads for sample B, without normalisation, it might look there was up to 4x as much functional activity in sample B!
+
+To correct for this, we normalise the abundance values based on the number of reads in each sample. We will normalise to relative abundance (`--units relab`) where all abundances for each sample add up to 1.
+
+Renormalisation command:
+
+```{bash eval=FALSE}
+humann_renorm_table \
+--units relab \
+--input diet_unstratified.tsv \
+--special n \
+--output diet_unstratified.relab.tsv
+```
+
+This command generates the normalised data in the new table `diet_unstratified.relab.tsv`. The `--special n` option tells the script to remove all unmapped and unassigned values (**UNMAPPED** & **UNINTEGRATED**) from the table.
+
+**Note:** With the gene families information ensure you normalise by CPM (counts per million) with the option `--units cpm`. More info can be found on the [Normalizing RPKs to relative abundance](https://github.com/biobakery/biobakery/wiki/humann3#31-normalizing-rpks-to-relative-abundance) section of the HUMAnN 3.0 tutorial.
+
+
+</center>
+
+#### MCQs {.unnumbered}
+
+```{r, echo = FALSE}
+opts_p <- c("__ARO-PWY__",answer="__DTDPRHAMSYN__","__PWY-6385__")
+```
+
+1.  Which pathway stands out the most? `r longmcq(opts_p)`
+
+```{r, echo = FALSE}
+opts_p <- c("__1__",answer="__2__","__3__")
+```
+
+2.  How many clusters are formed based on diet (Colours on tree at top of heatmap)? `r longmcq(opts_p)`
+
+```{r, echo = FALSE}
+opts_p <- c("__1__","__2__",answer="__3__")
+```
+
+3.  How many clusters are formed based on pathways (Colours on tree at the side of heatmap)? `r longmcq(opts_p)`
+
+You can look up the pathway names in the table file to see a fuller description.

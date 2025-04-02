@@ -59,7 +59,7 @@ Once `FLASH` has finished running, it will display on screen how well the stitch
 ls
 ```
 
-We have three new fastq.gz files. One containing the stitched reads (`K1.extendedFrags.fastq.gz`) and two containing the reads from pairs that could not be combined (`K1.notCombined_1.fastq.gz` and `K1.notCombined_2.fastq.gz)`.
+We have three new fastq.gz files. One containing the stitched reads (`K1.extendedFrags.fastq.gz`) and two containing the reads from pairs that could not be combined (`K1.notCombined_1.fastq.gz` and `K1.notCombined_2.fastq.gz`).
 
 We can also see what the new read lengths are:
 

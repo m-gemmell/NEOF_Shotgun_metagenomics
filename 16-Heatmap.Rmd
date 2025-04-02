@@ -1,0 +1,99 @@
+# Heatmap
+<center>
+![](figures/heatmap.png){style="width:150px; background:white; border-radius:5px"}
+</center>
+
+Now that we have our combined, unstratified, and normalised table, we can visualise the dataset to see how the two groups compare.
+
+-   Do samples in the same diet group appear to correlate well with each other?
+-   Are samples from one diet group distinguishable from those from the other diet group?
+
+To visualise this we will create a heatmap with `hclust2`.
+
+Before carrying out the command we will need to edit the file. Carry out the following alterations:
+
+Remove the `_Abundance` part of the sample names whilst creating a copy that we will use (It is always a good idea to keep the original file in case a mistake happens).
+
+```{bash eval=FALSE}
+cat diet_unstratified.relab.tsv | sed "s/_Abundance//g" > diet_unstratified.relab.comp.tsv
+```
+
+**Intro to unix links**:
+
+-   [Text editing with **`sed`**](https://neof-workshops.github.io/Unix_nxcdf7/Course/12-Advanced_linux_practice.html#sed)
+-   [Redirection with **`>`**](https://neof-workshops.github.io/Unix_nxcdf7/Course/12-Advanced_linux_practice.html#redirection)
+
+Next using your text editor of choice carry out the following changes on the file `diet_unstratified.relab.comp.tsv`.
+
+-   Remove the `#` (including the one space after the `#`) from the start of the header so it starts as `Pathway`.
+-   Add in the same metadata line as we did for [12.1](#kraken2_lefse_metadata) but this time below the header line, i.e. as the 2nd line (ensure you are using tabs instead of spaces).
+
+`r hide("Issues with creating file?")` If you are having issues with creating and editing the file `all_num.lefse.bracken` you can copy a pre-made version.
+
+```{bash, eval=FALSE}
+cp /pub14/tea/nsc206/NEOF/Shotgun_metagenomics/lefse/diet_unstratified.relab.comp.tsv .
+```
+
+`r unhide()`
+
+Now we can use the `hclust2` tool to create a heatmap of our pathway abundances.
+
+```{bash eval=FALSE}
+hclust2.py \
+-i diet_unstratified.relab.comp.tsv \
+-o diet_unstratified.relab.heatmap.png \
+--ftop 40 \
+--metadata_rows 1 \
+--dpi 300
+```
+
+**Note:** You will get 2 `MatplotlibDeprecationWarnings`, these are normal and can be ignored. However, ensure these are the only warnings/errors before continuing.
+
+#### Parameters {.unnumbered}
+
+-   `-i`: The input table file.
+-   `-o`: The output image file. The tool does not specify what types of image files you can use but `.png` is always a good image file format.
+-   `--ftop`: Specifies how many of the top features (pathways in this case) to be included in the heatmap.
+-   `--metadata_rows`: Specifies which row/s contain the metadata information to be used for the group colouring at the top of the heatmap.
+    -   Row numbers start at 0 for this tool. Therefore our sample names are in row 0 and the diet info is in row 1.
+    -   Multiple rows can be specified if you have multiple rows of metadata.
+        -   e.g. `--metadata_rows 1,2,3`.
+-   `--dpi`: The image resolution in dpi (dots per inch). 300 dpi is used for publication quality images.
+
+There are many more options that can be seen on the [hclust2 github](https://github.com/SegataLab/hclust2).
+
+#### Visualise {.unnumbered}
+
+Now we can view the plot.
+
+```{bash eval=FALSE}
+firefox diet_unstratified.relab.heatmap.png
+```
+
+From this, we can see that there is a small amount of clustering caused by the differences between the Korean and Western diet. Other factors that we do not know about the samples must also come into play. This is normal as we cannot account for everything but it is good to try to account for as much as possible.
+
+<center>
+![](figures/humann_heatmap.png){style="border-radius: 15px; width: 750px; border: 5px solid white"}
+</center>
+
+#### MCQs {.unnumbered}
+
+```{r, echo = FALSE}
+opts_p <- c("__ARO-PWY__",answer="__DTDPRHAMSYN__","__PWY-6385__")
+```
+
+1.  Which pathway stands out the most? `r longmcq(opts_p)`
+
+```{r, echo = FALSE}
+opts_p <- c("__1__",answer="__2__","__3__")
+```
+
+2.  How many clusters are formed based on diet (Colours on tree at top of heatmap)? `r longmcq(opts_p)`
+
+```{r, echo = FALSE}
+opts_p <- c("__1__","__2__",answer="__3__")
+```
+
+3.  How many clusters are formed based on pathways (Colours on tree at the side of heatmap)? `r longmcq(opts_p)`
+
+You can look up the pathway names in the table file to see a fuller description.

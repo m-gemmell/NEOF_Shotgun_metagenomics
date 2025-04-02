@@ -90,7 +90,7 @@ quast -o quast/K1 K1/final.contigs.fa
 firefox quast/K1/report.html
 ```
 
-The report tells us quite a bit about the assembly quality. Two definitions that you may not be aware are __N50__ and __L50__. To calculate these values:
+The report tells us quite a bit about the assembly quality. Two definitions that you may not be aware of are __N50__ and __L50__. To calculate these values:
 
 - Order the contigs from largest to smallest.
 - Total up the sizes from biggest downwards.
@@ -107,7 +107,7 @@ The report tells us quite a bit about the assembly quality. Two definitions that
 ![](figures/question_bubble_green.png){style="width:100px"}
 </center>
 
-__Note:__ Due to the assembly process you values may be slightly different (< 1%). Please choose the closest value
+__Note:__ Due to the assembly process your values may be slightly different (< 1%). Please choose the closest value
 
 ```{r, echo = FALSE}
 opts_p <- c("__39.88__", "__18,650__",answer="__16,187,259__")

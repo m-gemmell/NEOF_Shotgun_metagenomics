@@ -1,0 +1,34 @@
+# LEfSe {#humann_lefse}
+<center>
+![](figures/lefse_flip.png){style="width:150px"}
+</center>
+
+For the final part of this section, we will see if there are any statistically significant differences between the two sample groups. There are several ways in which this can be achieved but we will carry out `LEfSe` again.
+
+**Task**: Go back to your `shotgun_meta` terminal (or create a new one and use `. useshotgun`). Then change directory to `4-FunctionalProfiling`)
+
+Thankfully we already formatted the file to work with `LEfSe` when we formatted it for `hclust2`
+
+```{bash eval=FALSE}
+#LEfSe format
+lefse_format_input.py \
+diet_unstratified.relab.comp.tsv \
+diet_unstratified.relab.comp.lefse \
+-c 2 -u 1 -o 1000000
+#Run LEfSe
+lefse_run.py \
+diet_unstratified.relab.comp.lefse \
+diet_unstratified.relab.comp.lefse.out
+#Produce LEfSe plot
+lefse_plot_res.py \
+--dpi 200 \
+--format png \
+#Below options added to increase max length of feature string
+--max_feature_len 200 \
+diet_unstratified.relab.comp.lefse.out \
+diet_unstratified.relab.comp.lefse.png
+#View plot
+firefox diet_unstratified.relab.comp.lefse.png
+```
+
+Look at the output and see what pathways count as biomarkers for the 2 groups.

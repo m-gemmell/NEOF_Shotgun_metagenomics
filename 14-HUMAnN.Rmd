@@ -1,0 +1,99 @@
+# HUMAnN
+<center>
+![](figures/humann2.png){style="width:150px; background:white;border-radius:5px"}
+</center>
+
+First, we will carry out an example run of the software and briefly explore the output files. `HUMAnN` can take a long time to run so we will use a small amount of example data. Additionally, we will use a subset of the `HUMAnN` databases for the analysis but when running analysis on your own data you should use the full databases. Information on installing `HUMAnN` and its databases can be found on its online [Home Page](https://huttenhower.sph.harvard.edu/humann/).
+
+## HUMAnN: mamba, directories, and files
+<center>
+![](figures/mamba_logo.png){style="width:200px; border-radius:5px"}
+</center>
+
+We need a new `mamba` environment. Open a new terminal (right click on the main screen background, choose `Terminal`) and run the below:
+
+```{bash eval=FALSE}
+. usebiobakery3.9
+```
+
+Make a new directory and move into it.
+
+```{bash eval=FALSE}
+mkdir ~/4-FunctionalProfiling
+cd ~/4-FunctionalProfiling
+```
+
+Copy over some test data we will carry out the analysis on. This is a demonstration FASTQ file that we will use. It will be small enough to run `HUMAnN` in a reasonable amount of time.
+
+```{bash eval=FALSE}
+cp /pub14/tea/nsc206/NEOF/Shotgun_metagenomics/humann/demo.fastq.gz .
+```
+
+## HUMAnN: run
+<center>
+![](figures/play_orange.png){style="width:100px"}
+</center>
+
+Run the `HUMAnN` pipeline with our demo data:
+
+```{bash eval=FALSE}
+humann \
+--input demo.fastq.gz \
+--output demo.humann \
+--threads 10
+```
+
+Here, we are telling the software to use `demo.fastq.gz` as input and to create a new output directory called `demo.humann` where the results will be generated.
+
+As the software runs you might notice that `HUMAnN` runs `MetaPhlAn`. The purpose of this is to identify what species are present in the sample, so `HUMAnN` can tailor generate an appropriate database of genes (from those species) to map against. It will carry out this alignment against the gene database, then a protein database, and finally compute which gene families are present. `HUMAnN` will determine which functional pathways are present and how abundant they are.
+
+If you are using paired end reads the `HUMAnN` developers recommend concatenating your reads into one file and running `HUMAnN` on the concatenated file [source](https://forum.biobakery.org/t/humann3-paired-end-reads/862/3).
+
+For example (don't run the below):
+
+```{bash, eval=FALSE}
+cat K1_R1.fq.gz K1_R2.fq.gz > K1.fq.gz
+humann --input K1.fq.gz --output humann_output --threads
+```
+
+## HUMAnN: output
+<center>
+![](figures/output_file_orange.png){style="width:100px"}
+</center>
+
+Once the run has completed, change into the newly created output directory and list the files that are present.
+
+```{bash eval=FALSE}
+cd demo.humann
+ls
+```
+
+You will see that there are three files and one directory. The directory (`demo_humann_temp`) contains intermediate temporary files and can be disregarded here.
+
+The three output files are:
+
+-   **`demo_genefamilies.tsv`**: A table file showing the number of reads mapping to each UniRef90 gene family. Values are normalised by the length of each gene family (i.e. RPK, or Reads per Kilobase). Additionally, the values are stratified so that they show the overall community abundance but also a breakdown of abundance per species detected. This allows researchers to delve into species specific functions, rather than only looking at the metagenomic functions as a whole.
+-   **`demo_pathabundance.tsv`**: A table file showing the normalised abundance of MetaCyc pathways (RPKs). These abundances are calculated based on the UniRef90 gene family mapping data and are also stratified by species.
+-   **`demo_pathcoverage.tsv`**: A table file that shows the coverage, or completeness, of pathways. For example, a pathway may contain 5 components (or genes/proteins)
+    -   Pathway1 : A → B → C → D → E 100% complete
+    -   A species identified in the sample may only have four of the components, meaning that the pathway is only 80% complete (represented as 0.8)
+    -   Pathway1 : A → B → C → ~~D~~ → E 80% complete
+
+The basic format of these three output files is the same, so let's take a look at the pathway abundance table.
+
+```{bash eval=FALSE}
+less demo_pathabundance.tsv
+```
+
+You will see that there are two columns:
+
+1.  The first column shows the pathways.
+    -   **UNMAPPED** indicates reads that could not be aligned.
+    -   **UNINTEGRATED** indicates reads that aligned to targets not implicated in any pathways.
+2.  The second column shows the abundance.
+
+This file is not too interesting to look at as it is only demo data. Therefore, press `q` to exit `less` and let's look at some real data.
+
+**Note**: The directory `demo_humann_temp` can be very large and so should be deleted in real projects once you are certain they are not needed. However, these files can be useful for debugging.
+
+**Note**: Link to more detail on [Output files](https://github.com/biobakery/humann#output-files)

@@ -1213,7 +1213,7 @@ library(webexercises)
 ```
 # (PART\*) Functional profiling of reads {.unnumbered}
 
-# HUMAnN Functional profiling {#functprofile}
+# Functional profiling {#functprofile}
 <center>
 ![](figures/profile.png){style="width:150px; background:white;border-radius:5px"}
 </center>
@@ -1233,14 +1233,19 @@ HUMAnN 4 is currently in alpha: (https://forum.biobakery.org/t/announcing-humann
 I have tested it and could not install it correctly so we will not be teaching its use in this course till it is out of alpha and stable.
 `r unhide()`
 
-## HUMAnN
+<!--chapter:end:13-Functional_profiling.Rmd-->
+
+```{r include=FALSE, cache=FALSE}
+library(webexercises)
+```
+# HUMAnN
 <center>
 ![](figures/humann2.png){style="width:150px; background:white;border-radius:5px"}
 </center>
 
 First, we will carry out an example run of the software and briefly explore the output files. `HUMAnN` can take a long time to run so we will use a small amount of example data. Additionally, we will use a subset of the `HUMAnN` databases for the analysis but when running analysis on your own data you should use the full databases. Information on installing `HUMAnN` and its databases can be found on its online [Home Page](https://huttenhower.sph.harvard.edu/humann/).
 
-### HUMAnN: mamba, directories, and files
+## HUMAnN: mamba, directories, and files
 <center>
 ![](figures/mamba_logo.png){style="width:200px; border-radius:5px"}
 </center>
@@ -1264,7 +1269,7 @@ Copy over some test data we will carry out the analysis on. This is a demonstrat
 cp /pub14/tea/nsc206/NEOF/Shotgun_metagenomics/humann/demo.fastq.gz .
 ```
 
-### HUMAnN: run
+## HUMAnN: run
 <center>
 ![](figures/play_orange.png){style="width:100px"}
 </center>
@@ -1291,7 +1296,7 @@ cat K1_R1.fq.gz K1_R2.fq.gz > K1.fq.gz
 humann --input K1.fq.gz --output humann_output --threads
 ```
 
-### HUMAnN: output
+## HUMAnN: output
 <center>
 ![](figures/output_file_orange.png){style="width:100px"}
 </center>
@@ -1303,11 +1308,11 @@ cd demo.humann
 ls
 ```
 
-You will see that there are three files and one directory. The directory (`demo_humann2_temp`) contains intermediate temporary files and can be disregarded here.
+You will see that there are three files and one directory. The directory (`demo_humann_temp`) contains intermediate temporary files and can be disregarded here.
 
 The three output files are:
 
--   **`demo_genefamilies.tsv`**: A table file showing the number of reads mapping to each UniRef90 gene family. Values are normalised by the length of each gene family (i.e. RPK, or Reads per Kilobase). Additionally, the values are stratified so that they show the overall community abundance but also a breakdown of abundance per species detected. This allows researchers to delve into species specific functions, rather than only looking at the metagenomic functions as a whole,
+-   **`demo_genefamilies.tsv`**: A table file showing the number of reads mapping to each UniRef90 gene family. Values are normalised by the length of each gene family (i.e. RPK, or Reads per Kilobase). Additionally, the values are stratified so that they show the overall community abundance but also a breakdown of abundance per species detected. This allows researchers to delve into species specific functions, rather than only looking at the metagenomic functions as a whole.
 -   **`demo_pathabundance.tsv`**: A table file showing the normalised abundance of MetaCyc pathways (RPKs). These abundances are calculated based on the UniRef90 gene family mapping data and are also stratified by species.
 -   **`demo_pathcoverage.tsv`**: A table file that shows the coverage, or completeness, of pathways. For example, a pathway may contain 5 components (or genes/proteins)
     -   Pathway1 : A → B → C → D → E 100% complete
@@ -1329,11 +1334,16 @@ You will see that there are two columns:
 
 This file is not too interesting to look at as it is only demo data. Therefore, press `q` to exit `less` and let's look at some real data.
 
-**Note**: The directory `demo_humann2_temp` can be very large and so should be deleted in real projects once you are certain they are not needed. However, these files can be useful for debugging.
+**Note**: The directory `demo_humann_temp` can be very large and so should be deleted in real projects once you are certain they are not needed. However, these files can be useful for debugging.
 
 **Note**: Link to more detail on [Output files](https://github.com/biobakery/humann#output-files)
 
-## Multi sample processing {#humannmultisampleprocessing}
+<!--chapter:end:14-HUMAnN.Rmd-->
+
+```{r include=FALSE, cache=FALSE}
+library(webexercises)
+```
+# Multi sample processing {#humannmultisampleprocessing}
 <center>
 ![](figures/k_w_venn.png){style="width:150px"}
 </center>
@@ -1385,7 +1395,7 @@ With this information we will carry out some comparisons including biomarker det
 
 **Note**: The following methods/pipeline can be used for the genefamilies and pathcoverage tables in your own future analyses.
 
-### HUMAnN: combining data
+## Combining data
 <center>
 ![](figures/merge.png){style="width:100px; background:white; border-radius:5px"}
 </center>
@@ -1405,7 +1415,7 @@ This command will look for all tables in the `DietPathAbundance` directory and g
 less -S diet.tsv
 ```
 
-### HUMAnN: split stratified table
+## Split stratified table
 <center>
 ![](figures/split.png){style="width:100px; background:white; border-radius:5px"}
 </center>
@@ -1427,12 +1437,12 @@ Before you move on feel free to inspect the output files with the `less` command
 
 **Note**: You can use any of the three tables (unsplit table, unstratified table, or stratified table) in your own analysis. This depends on your question and data.
 
-### HUMAnN: renormalising data {#humannrenormalise}
+## Renormalising data {#humannrenormalise}
 <center>
 ![](figures/normalisation.png){style="width:100px; background:white; border-radius:5px"}
 </center>
 
-The next step is to renormalise the data. Currently, all of the abundance values are only normalised within each sample (RPKs). However, they are not normalised between samples, and this is very important to do. For example, if we had sequenced two samples, A and B, and we obtained 5 million reads for sample A and 20 million reads for sample B, without normalisation, it might look that there was up to 4x as much functional activity in sample B!
+The next step is to renormalise the data. Currently, all of the abundance values are only normalised within each sample (RPKs). However, they are not normalised between samples, and this is very important to do. For example, if we had sequenced two samples, A and B, and we obtained 5 million reads for sample A and 20 million reads for sample B, without normalisation, it might look there was up to 4x as much functional activity in sample B!
 
 To correct for this, we normalise the abundance values based on the number of reads in each sample. We will normalise to relative abundance (`--units relab`) where all abundances for each sample add up to 1.
 
@@ -1450,7 +1460,37 @@ This command generates the normalised data in the new table `diet_unstratified.r
 
 **Note:** With the gene families information ensure you normalise by CPM (counts per million) with the option `--units cpm`. More info can be found on the [Normalizing RPKs to relative abundance](https://github.com/biobakery/biobakery/wiki/humann3#31-normalizing-rpks-to-relative-abundance) section of the HUMAnN 3.0 tutorial.
 
-## Heatmap
+
+</center>
+
+#### MCQs {.unnumbered}
+
+```{r, echo = FALSE}
+opts_p <- c("__ARO-PWY__",answer="__DTDPRHAMSYN__","__PWY-6385__")
+```
+
+1.  Which pathway stands out the most? `r longmcq(opts_p)`
+
+```{r, echo = FALSE}
+opts_p <- c("__1__",answer="__2__","__3__")
+```
+
+2.  How many clusters are formed based on diet (Colours on tree at top of heatmap)? `r longmcq(opts_p)`
+
+```{r, echo = FALSE}
+opts_p <- c("__1__","__2__",answer="__3__")
+```
+
+3.  How many clusters are formed based on pathways (Colours on tree at the side of heatmap)? `r longmcq(opts_p)`
+
+You can look up the pathway names in the table file to see a fuller description.
+
+<!--chapter:end:15-Multi_sample_processing.Rmd-->
+
+```{r include=FALSE, cache=FALSE}
+library(webexercises)
+```
+# Heatmap
 <center>
 ![](figures/heatmap.png){style="width:150px; background:white; border-radius:5px"}
 </center>
@@ -1472,8 +1512,8 @@ cat diet_unstratified.relab.tsv | sed "s/_Abundance//g" > diet_unstratified.rela
 
 **Intro to unix links**:
 
--   [Text editing with **`sed`**](http://www.cgr.liv.ac.uk/illum/NEOFworkshops_5bfa93ca0482d69d/Intro_to_Unix/12-Advanced_linux_practice.html#sed)
--   [Redirection with **`>`**](http://www.cgr.liv.ac.uk/illum/NEOFworkshops_5bfa93ca0482d69d/Intro_to_Unix/12-Advanced_linux_practice.html#redirection)
+-   [Text editing with **`sed`**](https://neof-workshops.github.io/Unix_nxcdf7/Course/12-Advanced_linux_practice.html#sed)
+-   [Redirection with **`>`**](https://neof-workshops.github.io/Unix_nxcdf7/Course/12-Advanced_linux_practice.html#redirection)
 
 Next using your text editor of choice carry out the following changes on the file `diet_unstratified.relab.comp.tsv`.
 
@@ -1550,7 +1590,12 @@ opts_p <- c("__1__","__2__",answer="__3__")
 
 You can look up the pathway names in the table file to see a fuller description.
 
-## LEfSe {#humann_lefse}
+<!--chapter:end:16-Heatmap.Rmd-->
+
+```{r include=FALSE, cache=FALSE}
+library(webexercises)
+```
+# LEfSe {#humann_lefse}
 <center>
 ![](figures/lefse_flip.png){style="width:150px"}
 </center>
@@ -1585,7 +1630,12 @@ firefox diet_unstratified.relab.comp.lefse.png
 
 Look at the output and see what pathways count as biomarkers for the 2 groups.
 
-## Optional task
+<!--chapter:end:17-LEfSe_humann.Rmd-->
+
+```{r include=FALSE, cache=FALSE}
+library(webexercises)
+```
+# Optional task
 
 Carry out all the steps starting from [Multi sample processing](#humannmultisampleprocessing) with the gene families information.
 
@@ -1595,7 +1645,7 @@ Carry out all the steps starting from [Multi sample processing](#humannmultisamp
 
 That completes the non assembly approach to shotgun metagenomic analysis. The next chapters will cover an assembly approach.
 
-<!--chapter:end:13-Functional_profiling.Rmd-->
+<!--chapter:end:18-HUMAnN_task.Rmd-->
 
 ```{r include=FALSE, cache=FALSE}
 library(webexercises)
@@ -1656,7 +1706,7 @@ Generally speaking, the shorter the k-mer, the more branches there will be, the 
 
 Fortunately, the assembler we will use, `MEGAHIT`, allows us to build an assembly using multiple k-mer lengths iteratively. The other great advantage about `MEGAHIT` is that it is quick and efficient. We will use `MEGAHIT` on our data soon, but first there is an additional processing step for our sequences...
 
-<!--chapter:end:14-Metagenome_assembly.Rmd-->
+<!--chapter:end:19-Metagenome_assembly.Rmd-->
 
 ```{r include=FALSE, cache=FALSE}
 library(webexercises)
@@ -1722,7 +1772,7 @@ Once `FLASH` has finished running, it will display on screen how well the stitch
 ls
 ```
 
-We have three new fastq.gz files. One containing the stitched reads (`K1.extendedFrags.fastq.gz`) and two containing the reads from pairs that could not be combined (`K1.notCombined_1.fastq.gz` and `K1.notCombined_2.fastq.gz)`.
+We have three new fastq.gz files. One containing the stitched reads (`K1.extendedFrags.fastq.gz`) and two containing the reads from pairs that could not be combined (`K1.notCombined_1.fastq.gz` and `K1.notCombined_2.fastq.gz`).
 
 We can also see what the new read lengths are:
 
@@ -1747,7 +1797,7 @@ opts_p <- c(answer="__101__", "__177__", "__188__")
 ```
 2. What length has the lowest proportion of stitched reads? `r longmcq(opts_p)`
 
-<!--chapter:end:15-Stitching_reads.Rmd-->
+<!--chapter:end:20-Stitching_reads.Rmd-->
 
 ```{r include=FALSE, cache=FALSE}
 library(webexercises)
@@ -1844,7 +1894,7 @@ quast -o quast/K1 K1/final.contigs.fa
 firefox quast/K1/report.html
 ```
 
-The report tells us quite a bit about the assembly quality. Two definitions that you may not be aware are __N50__ and __L50__. To calculate these values:
+The report tells us quite a bit about the assembly quality. Two definitions that you may not be aware of are __N50__ and __L50__. To calculate these values:
 
 - Order the contigs from largest to smallest.
 - Total up the sizes from biggest downwards.
@@ -1861,7 +1911,7 @@ The report tells us quite a bit about the assembly quality. Two definitions that
 ![](figures/question_bubble_green.png){style="width:100px"}
 </center>
 
-__Note:__ Due to the assembly process you values may be slightly different (< 1%). Please choose the closest value
+__Note:__ Due to the assembly process your values may be slightly different (< 1%). Please choose the closest value
 
 ```{r, echo = FALSE}
 opts_p <- c("__39.88__", "__18,650__",answer="__16,187,259__")
@@ -1905,7 +1955,7 @@ We now have an assembly. It is not a brilliant one due to us only having used 1 
 
 There is also a `metaQUAST` specifically for metagenome assemblies but it requires reference assemblies be provided.
 
-<!--chapter:end:16_Megahit.Rmd-->
+<!--chapter:end:21_Megahit.Rmd-->
 
 ```{r include=FALSE, cache=FALSE}
 library(webexercises)
@@ -1958,11 +2008,15 @@ cd ~/7-Binning/K1
 
 To carry out effective genome binning `MetaBAT2` uses coverage information of the contigs. To calculate depth we need to align the reads to the metagenome assembly.
 
+#### Index assembly {-}
+
 For the alignment we will use `bwa`. We need to index our assembly file prior to alignment.
 
 ```{bash eval=FALSE}
 bwa index ~/6-Assembly/K1/final.contigs.fa
 ```
+
+#### Alignment {-}
 
 Next we will align our trimmed paired reads we used to create the stitched reads. We will carry this out with the `bwa mem` command. `bwa mem` is a good aligner for short reads. If you are using long reads (PacBio or Nanopore) `minimap2` will be more appropriate.
 
@@ -1971,6 +2025,8 @@ bwa mem ~/6-Assembly/K1/final.contigs.fa \
 ~/2-Trimmed/K1_R1.fq.gz ~/2-Trimmed/K1_R2.fq.gz > \
 K1.sam
 ```
+
+#### Sam to sorted bam {-}
 
 After alignment we need to get the file ready for the contig depth summarisation step. This requires converting the `sam` file to a `bam` (binary form of a `sam` file) file and then sorting the `bam` file.
 
@@ -1981,11 +2037,15 @@ samtools view -bu K1.sam > K1.bam
 samtools sort K1.bam > K1.sort.bam
 ```
 
+#### Summarise depths {-}
+
 Now we can summarise the contig depths from the sorted `bam` files with `MetaBAT2`'s `jgi_summarize_bam_contig_depths` command.
 
 ```{bash eval=FALSE}
 jgi_summarize_bam_contig_depths --outputDepth K1.depth.txt K1.sort.bam
 ```
+
+#### View summary depth {-}
 
 You can have a look at the depth file and you will notice there are many contigs with low coverage (<10) and of short length (<1500).
 
@@ -2353,7 +2413,7 @@ It is always useful to know the quality of your bins so you know which are more 
 
 We have some good quality bins. However, the best bins would only have one genome. Ultimately binning is trying to separate all the genomes from each other. A better metagenome assembly would most likely have led to better binning.
 
-<!--chapter:end:17-Genome_binning.Rmd-->
+<!--chapter:end:22-Genome_binning.Rmd-->
 
 ```{r include=FALSE, cache=FALSE}
 library(webexercises)
@@ -2526,7 +2586,7 @@ Ensure you start in the `~/8-Annotation` directory.
 
 ### MinPath: EC extraction
 <center>
-![](figures/exctractor.png){style="width:100px; background:white;border-radius:5px"}
+![](figures/exctractor.png){style="width:150px; background:white;border-radius:5px"}
 </center>
 
 Before we can estimate the pathways we need to extract the EC numbers predictions from the GFF file. EC (Enzyme Commission) numbers are a numerical classification for enzymes based on the reaction they catalyse.
@@ -2545,7 +2605,7 @@ mkdir EC
 ```
 
 We will now use a loop with various parts to create EC annotation files.
-The input`.ec` files required for `MinPath` are tab delimited with two columns:
+The input `.ec` files required for `MinPath` are tab delimited with two columns:
 
 1. Protein/sequence id. E.g. GDGAPA_12670.
 2. EC annotation. E.g. 6.1.1.4.
@@ -2623,22 +2683,30 @@ __Tips__:
 ```{bash eval=FALSE}
 #Grab every line containing "EC:"
 cat K1.1/K1.1.gff3 | grep "EC:" | head
+```
+```{bash eval=FALSE}
 #Cut out the 9th column/field (-f) (i.e. only keep the 9th column)
 #This is the attributes field in GFF3
 #This contains a plethora of information including the EC annotation if present
 #cut uses tabs as the default column/field delimiter
 cat K1.1/K1.1.gff3 | grep "EC:" | cut -f 9 | head
+```
+```{bash eval=FALSE}
 #The gff3 attributes field starts with the ID
 #We want to keep this but remove the "ID=" part
 cat K1.1/K1.1.gff3 | grep "EC:" | cut -f 9 | sed "s/ID=//" | head
+```
+```{bash eval=FALSE}
 #We don't want any of the info between the ID and the EC number
 #Therefore we want to remove everything (.*) between
-# the first "," (at the end of the ID info)
+# the first ";" (at the end of the ID info)
 # and "EC="
 #We'll replace this with a \t to seprarate the ID and EC
 # columns with a tab (required by MinPath)
 cat K1.1/K1.1.gff3 | grep "EC:" | cut -f 9 |  sed "s/ID=//" | \
 sed "s/;.*EC:/\t/" | head
+```
+```{bash eval=FALSE}
 #Finally remove all the info after the EC number
 #This info will be after the last ,
 cat K1.1/K1.1.gff3 | grep "EC:" | cut -f 9 | sed "s/ID=//" \
@@ -2751,7 +2819,7 @@ done
 
 With these files you can then investigate what bins have which pathways. Additionally, with more samples analysed you can determine which samples have which pathways present.
 
-<!--chapter:end:18-Assembly_functional_annotation.Rmd-->
+<!--chapter:end:23-Assembly_functional_annotation.Rmd-->
 
 ```{r include=FALSE, cache=FALSE}
 library(webexercises)
@@ -3010,5 +3078,5 @@ wget -O W12_R1.fastq.gz ftp://ftp.sra.ebi.ac.uk/vol1/fastq/ERR505/ERR505083/ERR5
 wget -O W12_R2.fastq.gz ftp://ftp.sra.ebi.ac.uk/vol1/fastq/ERR505/ERR505083/ERR505083_2.fastq.gz
 ```
 
-<!--chapter:end:19-Appendix.Rmd-->
+<!--chapter:end:24-Appendix.Rmd-->
 

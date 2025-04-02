@@ -1,0 +1,9 @@
+# Optional task
+
+Carry out all the steps starting from [Multi sample processing](#humannmultisampleprocessing) with the gene families information.
+
+-   Copy the gene families data from `/pub14/tea/nsc206/NEOF/Shotgun_metagenomics/DietGeneFamilies`
+-   Ensure you set the `--units` option to `cpm` in the [renormalising data](#humannrenormalise) step.
+-   On top of analysing the unstratified data you can also analyse the stratified data.
+
+That completes the non assembly approach to shotgun metagenomic analysis. The next chapters will cover an assembly approach.
