@@ -2527,7 +2527,7 @@ There is quite a lot of information contained in each row so instead of listing 
 https://github.com/The-Sequence-Ontology/Specifications/blob/master/gff3.md
 
 `r hide("Loop used to analyse all bins")`
-The code below is for your future analysis, do not run it now as it will take to long.
+The code below is for your future analysis, do not run it now as it will take too long.
 ```{bash eval=FALSE}
 ls -1 ~/7-Biinning/K1_fullset/bins/*fa | while read f ; \
 do s=$(basename $f | sed "s/.fa//") ; echo $s ; \
