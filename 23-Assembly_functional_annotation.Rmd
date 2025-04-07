@@ -289,7 +289,7 @@ sed "s/;.*EC:/\t/" | head
 ```{bash eval=FALSE}
 #Finally remove all the info after the EC number
 #This info will be after the last ,
-cat K1.1/K1.1.gff3 | grep "EC:" | cut -f 9 | sed "s/ID=//" \
+cat K1.1/K1.1.gff3 | grep "EC:" | cut -f 9 | sed "s/ID=//" | \
 sed "s/;.*EC:/\t/" | sed "s/,.*//" | head
 ```
 
