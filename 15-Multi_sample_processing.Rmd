@@ -114,28 +114,3 @@ humann_renorm_table \
 This command generates the normalised data in the new table `diet_unstratified.relab.tsv`. The `--special n` option tells the script to remove all unmapped and unassigned values (**UNMAPPED** & **UNINTEGRATED**) from the table.
 
 **Note:** With the gene families information ensure you normalise by CPM (counts per million) with the option `--units cpm`. More info can be found on the [Normalizing RPKs to relative abundance](https://github.com/biobakery/biobakery/wiki/humann3#31-normalizing-rpks-to-relative-abundance) section of the HUMAnN 3.0 tutorial.
-
-
-</center>
-
-#### MCQs {.unnumbered}
-
-```{r, echo = FALSE}
-opts_p <- c("__ARO-PWY__",answer="__DTDPRHAMSYN__","__PWY-6385__")
-```
-
-1.  Which pathway stands out the most? `r longmcq(opts_p)`
-
-```{r, echo = FALSE}
-opts_p <- c("__1__",answer="__2__","__3__")
-```
-
-2.  How many clusters are formed based on diet (Colours on tree at top of heatmap)? `r longmcq(opts_p)`
-
-```{r, echo = FALSE}
-opts_p <- c("__1__","__2__",answer="__3__")
-```
-
-3.  How many clusters are formed based on pathways (Colours on tree at the side of heatmap)? `r longmcq(opts_p)`
-
-You can look up the pathway names in the table file to see a fuller description.
