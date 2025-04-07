@@ -1158,17 +1158,17 @@ Interrogating the biomarkers.png plot and the all_num.lefse.out file, attempt th
 __Note__: In this instance green bars represent biomarkers in higher abundance in the W samples whilst the red bars represent biomarkers in higher abundance in the K samples.
 
 ```{r, echo = FALSE}
-opts_p <- c("__Ruminococcuschampanellensis__",answer="__Alistipesshahii__","__Methanosphaerastadtmanae__")
+opts_p <- c("__Adlercreutziaequolifaciens__",answer="__Alistipesshahii__","__Methanosphaerastadtmanae__")
 ```
 1. Which species biomarker causes the biggest effect in the __W__ class? `r longmcq(opts_p)`
 
 ```{r, echo = FALSE}
-opts_p <- c("__Ruminococcuschampanellensis__","__Alistipesshahii__",answer="__Methanosphaerastadtmanae__")
+opts_p <- c("__Adlercreutziaequolifaciens__","__Alistipesshahii__",answer="__Methanosphaerastadtmanae__")
 ```
 2. Which species biomarker causes the biggest effect in the __K__ class? `r longmcq(opts_p)`
 
 ```{r, echo = FALSE}
-opts_p <- c(answer="__Ruminococcuschampanellensis__","__Alistipesshahii__","__Methanosphaerastadtmanae__")
+opts_p <- c(answer="__Adlercreutziaequolifaciens__","__Alistipesshahii__","__Methanosphaerastadtmanae__")
 ```
 3. Which species biomarker (i.e. present in the plot) causes the lowest effect in the __W__ class? `r longmcq(opts_p)`
 
