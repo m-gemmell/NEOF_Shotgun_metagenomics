@@ -912,7 +912,7 @@ library(webexercises)
 
 `Bracken` (Bayesian Reestimation of Abundance with KrakEN) uses taxonomy labels assigned by `Kraken2` to compute estimated abundances of species in a metagenomic sample. 
 
-### Bracken: run
+## Bracken: run
 <center>
 ![](figures/play_green.png){style="width:100px"}
 </center>
