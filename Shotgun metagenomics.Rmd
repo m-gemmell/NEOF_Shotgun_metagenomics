@@ -1178,17 +1178,17 @@ opts_p <- c("__Korean__",answer="__Western__")
 4. Which class has more biomarkers associated with it? `r longmcq(opts_p)`
 
 ```{r, echo = FALSE}
-opts_p <- c(answer="__0.0022136919545913936__","__3.0271864317141715__","__3.3224493820428482__")
+opts_p <- c(answer="__0.0022136919545913936__","__3.0266165524513937__","__3.314396201978439__")
 ```
 5. What is the LEfSe p-value for __Campylobactercoli__? `r longmcq(opts_p)`
 
 ```{r, echo = FALSE}
-opts_p <- c("__0.0022136919545913936__",answer="__3.0271864317141715__","__3.3224493820428482__")
+opts_p <- c("__0.0022136919545913936__",answer="__3.0266165524513937__","__3.314396201978439__")
 ```
 6. What is the Log of highest class average for __Streptococcussuis__? `r longmcq(opts_p)`
 
 ```{r, echo = FALSE}
-opts_p <- c("__0.0022136919545913936__","__3.0271864317141715__",answer="__3.3224493820428482__")
+opts_p <- c("__0.0022136919545913936__","__3.0266165524513937__",answer="__3.314396201978439__")
 ```
 7. What is the LDA effect size for __Bifidobacteriumlongum__? `r longmcq(opts_p)`
 
