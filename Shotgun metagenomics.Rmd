@@ -2432,7 +2432,7 @@ The below will take a long time to run (>1 hour). Instead of running it skip ont
 
 ```{bash eval=FALSE}
 bakta \
---db /pub14/tea/nsc206/NEOF/databases/bakta/db/ \
+--db /pub14/tea/nsc206/databases/bakta/db/ \
 -o K1.1 \
 ~/7-Binning/K1_fullset/bins/K1.1.fa
 ```
@@ -2531,7 +2531,7 @@ The code below is for your future analysis, do not run it now as it will take to
 ```{bash eval=FALSE}
 ls -1 ~/7-Biinning/K1_fullset/bins/*fa | while read f ; \
 do s=$(basename $f | sed "s/.fa//") ; echo $s ; \
-bakta --db /pub14/tea/nsc206/NEOF/databases/bakta/db/ \
+bakta --db /pub14/tea/nsc206/databases/bakta/db/ \
 -o ${s} \
 ~/7-Binning/K1_fullset/bins/K1.1.fa
 ```
