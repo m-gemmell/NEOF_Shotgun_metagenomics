@@ -36,7 +36,7 @@ knitr::opts_chunk$set(class.source="Rchunk")
 # Introduction
 
 <center>
-![](figures/squid.png){style="width:200px"}
+![](figures/squid.png){style="width:200px; background: white; border-radius:5px"}
 </center>
 
 There are many unknown and unculturable microbes found in a vast array of different environments. Shotgun metagenomics is an approach to capture all the genetic information in a sample, providing the taxonomic and metabolic information of all present organisms. In this course we will analyse shotgun metagenomic sequencing data from stool samples to compare Western and Korean diets.

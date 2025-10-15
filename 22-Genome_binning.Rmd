@@ -174,38 +174,35 @@ List the contents of the output directory and you'll see there is 1 fasta file w
 ls bins
 ```
 
-## CheckM
+## CoCoPyE
+
+`CoCoPyE` is a useful tool to assess the quality of assembled microbial genomes. This can be used on assemblies produced from single cell, single isolate, or metagenome data. Additionally, it can be used to identify bins that are likely candidates for merging. This occurs when one genome has been separated into different bins.
+
+FINISH EXPLANATION BELOW
+
+
+`CoCoPyE` estimates quality of a genome by estimating completeness and contamination. It carries this out in 2 stages:
+
+1. __Extraction__: 
+2. __Transformation__: 
+
 <center>
-![](figures/CheckM.png){style="width:400px"}
+![](figures/cocopye_workflow.jpeg){style="width: 800px; border-radius: 5px; border: white 5px solid"}
 </center>
 
-`CheckM` is a useful tool to assess the quality of assembled bacterial and archaeal genomes. This can be used on assemblies produced from single cell, single isolate, or metagenome data. Additionally, it can be used to identify bins that are likely candidates for merging. This occurs when one genome has been separated into different bins.
+CoCoPyE publications: https://academic.oup.com/gigascience/article/doi/10.1093/gigascience/giae079/7841111
 
-An important part of CheckM is the ubiquitous and single-copy genes it utilises. It has sets of these genes for different phylogenetic lineages. With these it can determine:
-
-- What lineage a bin/MAG belongs to. 
-   - Does it contain genes only found in _Escherichia_?
-- How complete the bin/MAG is. A set of lineage specific genes should all be found in a genome belonging to the lineage (ubiquitous).
-   - What percentage of these lineage specific genes are present in the MAG? 
-   - \>95% is very good
-   - \>80% is good
-   - \>70% is ok
-   - <70% is poor to poorer
-- How contaminated the bin/MAG is.
-   - Only one copy of each gene should be present (single-copy).
-   - Are there any markers for other lineages present?
-
-### CheckM: Mamba
+### CoCoPyE: Mamba
 <center>
 ![](figures/mamba_logo.png){style="width: 200px; border-radius: 5px"}
 </center>
 
-Due to program version conflicts we will use the `checkm` conda environment for this section.
+Due to program version conflicts we will use the `CoCoPyE` conda environment for this section.
 
-Open a new terminal and activate the `checkm` environment.
+Open a new terminal and activate the `CoCoPyE` environment.
 
 ```{bash eval=FALSE}
-. usecheckm
+. usecocopye
 ```
 
 Ensure you are in the correct directory.
@@ -214,26 +211,20 @@ Ensure you are in the correct directory.
 cd ~/7-Binning/K1/
 ```
 
-### CheckM: run
+### CoCoPyE: run
 <center>
 ![](figures/play_black.png){style="width:100px"}
 </center>
 
-`CheckM` has many different commands. We will use one of the common workflows it provides called `lineage_wf`. This carries out five of its commands in a workflow (i.e. the next step uses output from the previous step).
+`CoCoPyE` has one main command to predict bin quality: `CoCoPyE run`. 
 
-1. `tree` - Places bins in the reference genome tree. This reference tree comes with `CheckM`.
-2. `tree_qa` - Assess the phylogenetic markers found in each bin.
-3. `lineage_set` - Infers lineage-specific marker sets for each bin. 
-4. `analyze` - Identifies marker genes in bins.
-5. `qa` - Assesses the bins for contamination and completeness.
-
-Run the `CheckM` command (this will take a while):
+Run the `CoCoPyE` command (this will take a while):
 
 ```{bash eval=FALSE}
-checkm lineage_wf \
---tab_table -f MAGS_checkm.tsv \
--x fa \
-bins/ checkm_output
+CoCoPyE run \
+-t 12 \
+-i bins/ \
+-o cocopye_output.csv
 ```
 
 #### Parameters {-}
@@ -241,14 +232,20 @@ bins/ checkm_output
 ![](figures/parameter_black.png){style="width:100px"}
 </center>
 
-- `--tab_table` : Prints results to a tab separated table.
-- `-f` : File name to print result to (if not specified results will go to stdout).
-- `-x` : Suffix/extension of bin files. Other files are ignored in the specified bin directory.
-   - `fa` is used as our `MetaBAT2` analysis produced fasta files that end in `.fa`.
-- `bins` : The second last argument is the `bin_dir`, the directory containing all the bins to be analysed in fasta format.
-- `checkm_output` : The last argument is the directory to store the output to. This directory should not exist prior to running.
+- `-t` : Number of threads/cores/CPUs to utilise for the process.
+- `-i` : Input directory containing the bins in FASTA format.
+- `-o` : Output file (more info below)
 
-### CheckM: output
+Other options include:
+
+- `--file-extensions` : The allowed file extensions for input files within the input directory.
+  - The default is `fasta,fna,fa`. Our bin files produced from `MetaBAT2` have the file extension/suffix of `.fa` so the default works.
+- `-v` : The output file verbosity. 
+  - Values are: `standard` (default), `extended`, and `full`.
+  - More information on the output below.
+  
+
+### CoCoPyE: output
 <center>
 ![](figures/output_file_black.png){style="width:100px"}
 </center>
@@ -267,38 +264,26 @@ ln -s /pub14/tea/nsc206/NEOF/Shotgun_metagenomics/binning/K1_fullset/* .
 Now we can look at the results table that is in your current directory.
 
 ```{bash eval=FALSE}
-less MAGS_checkm.tsv
+#Use tr to tranform commas (,) to tabs (\t)
+#This makes it easier to visually parse the columns
+cat cocopye_output.csv | tr "," "\t" | less
 ```
 
-`r hide("CheckM statistics definitions")`
-List of statistics definitions from [CheckM wiki](https://github.com/Ecogenomics/CheckM/wiki/Reported-Statistics)
+`r hide("CoCoPye statistics definitions")`
+Output columns when `-v` set to `standard` (also the default)
 
-__Note:__ These may not all appear in your `MAGS_checkm.tsv` file.
+- `bin`: Name of the input bin (filename excluding file extension)
+- `completeness`: Completeness value between 0 and 1
+- `contamination`: Contamination value between 0 and 1
+- `method`: Either markers or markers + neural network
+- `taxonomy`: Taxonomy estimate based on a consensus between the nearest neighbors
+- `taxonomy_level`: Rank of the taxonomy estimate
+- `notes`: Additional notes (currently this is always empty, but we might add some notes in the future)
 
-- __bin id__: unique identifier of genome bin (derived from input fasta file)
-- __marker lineage__: indicates the taxonomic rank of the lineage-specific marker set used to estimated genome completeness, contamination, and strain heterogeneity. More detailed information about the placement of a genome within the reference genome tree can be obtained with the tree_qa command. The UID indicates the branch within the reference tree used to infer the marker set applied to estimate the bins quality.
-- __# genomes__: number of reference genomes used to infer the lineage-specific marker set
-- __markers__: number of marker genes within the inferred lineage-specific marker set
-- __marker sets__: number of co-located marker sets within the inferred lineage-specific marker set
-- __0-5+__: number of times each marker gene is identified
-- __completeness__: estimated completeness of genome as determined from the presence/absence of marker genes and the expected collocalization of these genes (see Methods in the PeerJ preprint for details)
-- __contamination__: estimated contamination of genome as determined by the presence of multi-copy marker genes and the expected collocalization of these genes (see Methods in the PeerJ preprint for details)
-- __strain heterogeneity__: estimated strain heterogeneity as determined from the number of multi-copy marker pairs which exceed a specified amino acid identity threshold (default = 90%). High strain heterogeneity suggests the majority of reported contamination is from one or more closely related organisms (i.e. potentially the same species), while low strain heterogeneity suggests the majority of contamination is from more phylogenetically diverse sources (see Methods in the CheckM manuscript for more details).
-- __genome size__: number of nucleotides (including unknowns specified by N's) in the genome
-- __# ambiguous bases__: number of ambiguous (N's) bases in the genome
-- __# scaffolds__: number of scaffolds within the genome
-- __# contigs__: number of contigs within the genome as determined by splitting scaffolds at any position consisting of more than 10 consecutive ambiguous bases
-- __N50 (scaffolds)__: N50 statistics as calculated over all scaffolds
-- __N50 (contigs)__: N50 statistics as calculated over all contigs
-- __longest scaffold__: the longest scaffold within the genome
-- __longest contig__: the longest contig within the genome
-- __GC__: number of G/C nucleotides relative to all A,C,G, and T nucleotides in the genome
-- __coding density__: the number of nucleotides within a coding sequence (CDS) relative to all nucleotides in the genome
-- __translation table__: indicates which genetic code was used to translate nucleotides into amino acids
-- __# predicted genes__: number of predicted coding sequences (CDS) within the genome as determined using Prodigal
+Please see the full list of statistics definitions from [CoCoPyE wiki](https://github.com/gobics/cocopye/wiki/Output). This includes the defintions when `-v` is set to `extended` or `full`.
 `r unhide()`
 
-### CheckM: Quality score
+### CoCoPyE: Quality score
 
 One quick way to calculate the overall quality of a bin is with the following equation:
 
@@ -311,24 +296,19 @@ Where:
 - __comp__ = Completeness
 - __cont__ = Contamination
 
-A score of at least 70-80% would be the aim, with a maximum/perfect value being 100% (100% completeness, 0% contamination). Therefore let us calculate this for the bins with some bash and `awk` scripting.
+A score of at least 70-80% (i.e. 0.7 to 0.8) would be the aim, with a maximum/perfect value being 100% (100% completeness, 0% contamination). Therefore let us calculate this for the bins with some bash and `awk` scripting.
 
-#### Tab to comma seperated {-}
+__Note__: Values will range from:
 
-First it is good to make a copy of the file in case we make a mistake and want to start over. Additionally, we will make the copy a comma separated file. I find these easier to edit as typing comma characters (`,`) in commands is more reliable than tab characters (`\t`).
-
-This is carried out with `tr` which can translate characters. In the below case we translate/convert the tabs (`\t`) into commas (`,`). The converted output is then redirected (`>`) to the file "MAGS_checkm.csv".
-
-```{bash eval=FALSE}
-cat MAGS_checkm.tsv | tr "\t" "," > MAGS_checkm.csv
-```
+- 100% (i.e. 1): 1 Completeness - (5 * 0 Contamination)
+- -500% (i.e. -5): 0 Completeness - (5 * 1 Contamination)
 
 #### Quality file {-}
 
 We will create a new file with only the quality information. We'll start by making a file with only a header.
 
 ```{bash eval=FALSE}
-echo "Quality" > MAGS_quality.csv
+echo "quality" > MAGS_quality.csv
 ```
 
 #### Calculate quality with awk {-}
@@ -339,36 +319,71 @@ We will be using a complicated linux based language called `awk`. This is very u
 
 As this is new and complicated we will build up our command step by step.
 
+##### Extract fields/columns {-}
+
 __The first step__ is to extract the completeness and contamination fields/columns.
 
 ```{bash eval=FALSE}
-awk -F, '{print $12,$13}' MAGS_checkm.csv
+awk -F, '{print $2,$3}' cocopye_output.csv
 ```
 
 - `-F,`: Indicates the input fields are separated by commas (`,`).
 - `''`: All the `awk` options are contained within the quotes.
 - `{}`: We can supply a function to `awk` within the braces.
-- `print $12,$13`: This function instructs `awk` to print the 12th (completeness) and 13th (contamination) fields. It is common to put commas (`,`) between fields if printing multiple fields.
+- `print $2,$3`: This function instructs `awk` to print the 2nd (completeness) and 3rd (contamination) fields. It is common to put commas (`,`) between fields if printing multiple fields.
 - `MAGS_checkm.csv`: Our last parameter is the input file. We are not changing the contents of the file, only printing information to screen/stdout.
+
+##### Ignore header {-}
 
 __We do not want the header__ in our calculation so we will add an extra `awk` option.
 
 ```{bash eval=FALSE}
-awk -F, 'NR>1 {print $12,$13}' MAGS_checkm.csv
+awk -F, 'NR>1 {print $2,$3}' cocopye_output.csv
 ```
 
 - `NR>1`: `NR` stands for number of records. Rows are called records in `awk`. Therefore `NR>1` means `awk` will only carry out the functions on the records numbered greater than 1. I.e. skip row 1, the header row.
 
-__The final step__ is to carry out the overall quality calculation and append the information to the "MAGS_quality.csv" file.
+##### Calculate quality {-}
+
+__The next step__ is to carry out the overall quality calculation and append the information to the "MAGS_quality.csv" file.
 
 ```{bash eval=FALSE}
-awk -F, 'NR>1 {print $12 - (5 * $13)}' MAGS_checkm.csv >> MAGS_quality.csv
+awk -F, 'NR>1 {print $2 - (5 * $3)}' cocopye_output.csv
 ```
 
-- `{print $12 - (5 * $13)}`: Our new function carries out the overall quality calculation and prints it for each record/row except the first (`NR>1`).
-- `>> MAGS_quality.csv`: The printed information is appended (`>>`) to the file "MAGS_quality.csv". We append because we want to retain the header we added to the file earlier.
+Our new function, `{print $12 - (5 * $13)}`, carries out the overall quality calculation and prints it for each record/row except the first (`NR>1`).
 
-You can view the file to ensure it worked. The first and second values should be 33.62 and -0.89
+You will notice that we have values that equal 4.
+Let us fix that.
+
+##### Fix values {-}
+
+Some quality values come out as 4.
+This is not correct and comes about as the completeness and contamination values have been set to -1 (-1 - (5 * -1) = 4).
+If you look at the file `cocopye_output.csv` you will notice the bins with -1 values have the `rejected` for their `method` value.
+We will therefore change these quality values to the lowest possible value of -5 (0 - (5 * 1) = -5).
+
+```{bash eval=FALSE}
+awk -F, 'NR>1 {print $2 - (5 * $3)}' cocopye_output.csv | \
+sed "s/^4$/-5/"
+```
+
+In this case we [pipe (`|`)](https://neof-workshops.github.io/Unix_nxcdf7/Course/12-Advanced_linux_practice.html#pipes) our output to [`sed`](https://neof-workshops.github.io/Unix_nxcdf7/Course/12-Advanced_linux_practice.html#sed) to substitute lines that start with (`^`) and end with (`$`) the same `4` with `-5`.
+
+In other words we replace lines that only contain a 4 with a -5.
+
+##### Append to quality file {-}
+
+Finally we can append the quality values to our `MAGS_quality.csv` file.
+
+```{bash eval=FALSE}
+awk -F, 'NR>1 {print $2 - (5 * $3)}' cocopye_output.csv | \
+sed "s/^4$/-5/" >> MAGS_quality.csv
+```
+
+In the above case we use `>>` to append the infomration to the file `MAGS_quality.csv`. We append because we want to retain the header we added to the file earlier.
+
+You can view the file to ensure it worked. The first and second values should be 0.9838 and 0.493
 
 ```{bash eval=FALSE}
 less MAGS_quality.csv
@@ -376,10 +391,10 @@ less MAGS_quality.csv
 
 #### Add quality to the checkm results file {-}
 
-Now we can combine the files "MAGS_checkm.csv" and "MAGS_quality.csv" with the `paste` command. The `-d ","` option indicates the merged files will be separated by commas (`,`), matching the column separation in "MAGS_checkm.csv".
+Now we can combine the files "cocopye_output.csv" and "MAGS_quality.csv" with the `paste` command. The `-d ","` option indicates the merged files will be separated by commas (`,`), matching the column separation in "MAGS_checkm.csv".
 
 ```{bash eval=FALSE}
-paste -d "," MAGS_checkm.csv MAGS_quality.csv > MAGS_checkm_quality.csv
+paste -d "," cocopye_output.csv MAGS_quality.csv > cocopye_quality.csv
 ```
 
 ### CheckM: MCQs
@@ -392,55 +407,55 @@ Viewing the file "MAGS_checkm_quality.csv" attempt the below questions.
 __Tip__: You can use the `cut` command to look at specific columns. For example:
 
 ```{bash eval=FALSE}
-#look at the "Bin Id" and "Quality"
+#look at the "bin" and "quality" columns
 #Convert the printed output's commas to tabs for readability
-cut -d "," -f 1,15 MAGS_checkm_quality.csv | tr "," "\t"
+cut -d "," -f 1,8 cocopye_quality.csv | tr "," "\t"
 ```
 
 ```{r, echo = FALSE}
-opts_p <- c("__root (UID1)__", answer="__k_Bacteria (UID203)__", "__o_Lachnospiraceae (UID1286)__")
+opts_p <- c("__Bacteria__", answer="__Bacteroides__", "__Lachnospiraceae__")
 ```
 1. What lineage was assigned to bin __K1.1__? `r longmcq(opts_p)`
 
 ```{r, echo = FALSE}
-opts_p <- c("__root (UID1)__", "__k_Bacteria (UID203)__", answer="__o_Lachnospiraceae (UID1286)__")
+opts_p <- c("__Bacteria__", "__Bacteroides__", answer="__Lachnospiraceae__")
 ```
 2. What lineage was assigned to bin __K1.22__? `r longmcq(opts_p)`
 
 ```{r, echo = FALSE}
-opts_p <- c(answer="__root (UID1)__", "__k_Bacteria (UID203)__", "__o_Lachnospiraceae (UID1286)__")
+opts_p <- c(answer="__Bacteria__", "__Bacteroides__", "__Lachnospiraceae__")
 ```
 3. What lineage was assigned to bin __K1.8__? `r longmcq(opts_p)`
 
 ```{r, echo = FALSE}
-opts_p <- c("__4.17__", answer="__33.62__", "__172__")
+opts_p <- c("__0.0202__", answer="__0.6724__", "__0.9769__")
 ```
 4. What is the quality value of __K1.1__? `r longmcq(opts_p)`
 
 ```{r, echo = FALSE}
-opts_p <- c(answer="__4.17__", "__33.62__", "__172__")
+opts_p <- c("__0.0202__", "__0.6724__", answer="__0.9769__")
 ```
-5. What is the completeness value of __K1.27__? `r longmcq(opts_p)`
+5. What is the completeness value of __K1.30__? `r longmcq(opts_p)`
 
 ```{r, echo = FALSE}
-opts_p <- c("__4.17__", "__33.62__", answer="__172__")
+opts_p <- c(answer="__0.0202__", "__0.6724__", "__0.9769__")
 ```
-6. How many genomes are within the __K1.12__ bin? `r longmcq(opts_p)`
+6. What is the contamination value of __K1.12__ bin? `r longmcq(opts_p)`
 
 ```{r, echo = FALSE}
-opts_p <- c("__K1.20__", "__K1.21__", answer="__K1.22__")
+opts_p <- c("__K1.20__", "__K1.26__", answer="__K1.22__")
 ```
-7. Which bin has the highest quality value (96.38%)? `r longmcq(opts_p)`
+7. Which bin has the highest quality value (98.38%)? `r longmcq(opts_p)`
 
 ```{r, echo = FALSE}
-opts_p <- c(answer="__K1.20__", "__K1.21__", "__K1.22__")
+opts_p <- c(answer="__K1.20__", "__K1.26__", "__K1.22__")
 ```
-8. Which bin has the lowest quality value (-300.67%)? `r longmcq(opts_p)`
+8. Which bin has the quality value of -2.9215? `r longmcq(opts_p)`
 
 ```{r, echo = FALSE}
-opts_p <- c("__K1.20__", answer="__K1.21__", "__K1.22__")
+opts_p <- c("__K1.20__", answer="__K1.26__", "__K1.22__")
 ```
-9. Which bin has the highest completeness value (98.27%)? `r longmcq(opts_p)`
+9. Which bin has the highest completeness value (98.59%)? `r longmcq(opts_p)`
 
 ## Binning summary
 <center>

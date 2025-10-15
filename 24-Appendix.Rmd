@@ -57,13 +57,15 @@ If you installed these in your "~/git_installs" examples are below.
 python ~/git_installs/Minpath/MinPath.py -h
 ```
 
-To create the mamba environment `checkm` run the below commands in your bash. You will need to have installed `mamba` first.
+To create the mamba environment `cocopye` run the below commands in your bash. You will need to have installed `mamba` first.
 
 ```{bash, eval=FALSE}
 #checkm
-mamba create -n checkm
-mamba activate checkm
-mamba install -c bioconda checkm-genome
+mamba create -n cocopye
+mamba activate checkm2
+mamba install bioconda::checkm2=1.1.0
+#Download required databases
+checkm2 database --download
 ```
 
 To create the mamba environment `biobakery3.9` run the below commands in your bash. You will need to have installed `mamba` first.
@@ -187,7 +189,7 @@ minimap2: https://github.com/lh3/minimap2
 
 MetaBAT2: https://bitbucket.org/berkeleylab/metabat/src/master/
 
-CheckM: https://github.com/Ecogenomics/CheckM/wiki
+CoCoPyE: https://github.com/gobics/cocopye
 
 PhyloPhlAn: https://github.com/biobakery/phylophlan/wiki
 

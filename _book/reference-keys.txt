@@ -77,11 +77,11 @@ metabat2
 metabat2-depth-calculation
 metabat2-run
 metabat2-output
-checkm
-checkm-mamba
-checkm-run
-checkm-output
-checkm-quality-score
+cocopye
+cocopye-mamba
+cocopye-run
+cocopye-output
+cocopye-quality-score
 checkm-mcqs
 binning-summary
 funcanno
