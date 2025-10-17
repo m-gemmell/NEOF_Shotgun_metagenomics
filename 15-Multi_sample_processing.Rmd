@@ -1,6 +1,6 @@
 # Multi sample processing {#humannmultisampleprocessing}
 <center>
-![](figures/k_w_venn.png){style="width:150px"}
+![](figures/k_w_venn.png){style="width:150px; background: white; border-radius:5px; border: white solid 5px"}
 </center>
 
 Looking at the functional profile of one sample in isolation is usually not very informative. First, there is nothing to compare it to and second, there are no biological replicates. We will therefore use all the Korean and Western diet samples.

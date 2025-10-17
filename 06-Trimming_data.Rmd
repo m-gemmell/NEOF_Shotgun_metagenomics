@@ -1,6 +1,6 @@
 # Quality control {#qualcont}
 <center>
-![](figures/quality_trimming_and_filtering.png){style="width:300px"}
+![](figures/quality_trimming_and_filtering.png){style="width:300px; background: white; border-radius:5px; border: white solid 5px"}
 </center>
 
 Now that we've obtained the raw data and had a look at it, we should clean it up. With any sequencing data, it is very important to ensure that you use the highest quality data possible: Rubbish goes in, rubbish comes out. 
@@ -13,7 +13,7 @@ There are two main methods employed to clean sequence data, and a third method s
 
 ## Removing adapters and low quality bases
 <center>
-![](figures/hedge_trimming.png){style="width:150px"}
+![](figures/hedge_trimming.png){style="width:150px; background: white; border-radius:5px; border: white solid 5px"}
 </center>
 
 Go back to your home directory and create a new directory where we will clean the sequences up:
@@ -48,7 +48,7 @@ trim_galore --paired --quality 20 --stringency 4 \
 
 ## Rename the files
 <center>
-![](figures/rename.png){style="width:150px"}
+![](figures/rename.png){style="width:150px; background: white; border-radius:5px; border: white solid 5px"}
 </center>
 
 Once that is complete list the contents of your directory:
@@ -74,7 +74,7 @@ __Task__: Briefly inspect the log files to see how the trimming went (e.g. K1_R1
 
 ## Inspect the trimmed data
 <center>
-![](figures/magnify_glass_good.png){style="width:150px"}
+![](figures/magnify_glass_good.png){style="width:150px; background: white; border-radius:5px; border: white solid 5px"}
 </center>
 
 To see what difference the trimming made, run `FastQC` and `MultiQC` again on the trimmed output files and view it. 

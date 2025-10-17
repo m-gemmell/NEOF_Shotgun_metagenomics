@@ -1,11 +1,11 @@
 # Overview {#overview}
 <center>
-![](figures/overview.png){style="width:200px"}
+![](figures/overview.png){style="width:200px; background: white; border-radius:5px; border: white solid 5px"}
 </center>
 
 ## What is metagenomics?
 <center>
-![](figures/what.png){style="width:100px"}
+![](figures/what.png){style="width:100px; background: white; border-radius:5px; border: white solid 5px"}
 </center>
 
 __Meta /ˈmɛtə/ : prefix meaning “higher” or “beyond”__
@@ -14,7 +14,7 @@ Metagenomics is the study of genes and genetic material recovered from environme
 
 ## Why metagenomics?
 <center>
-![](figures/why.png){style="width:100px"}
+![](figures/why.png){style="width:100px; background: white; border-radius:5px; border: white solid 5px"}
 </center>
 
 Microbes exist virtually everywhere on Earth, even in some of the most seemingly hostile environments. Every process on our planet is influenced in some way by the actions of microbes, and all higher organisms are intrinsically associated with microbial communities. 
@@ -33,7 +33,7 @@ Broadly speaking, there are two families of metagenomic analysis:
 
 ## Tutorial overview
 <center>
-![](figures/tutorial.png){style="width:200px"}
+![](figures/tutorial.png){style="width:200px; background: white; border-radius:5px; border: white solid 5px"}
 </center>
 
 ### Basics

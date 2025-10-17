@@ -1,13 +1,13 @@
 # Krona plot
 <center>
-![](figures/krona.png){style="width:150px"}
+![](figures/krona.png){style="width:150px; background: white; border-radius:5px; border: white solid 5px"}
 </center>
 
 `Krona` is an interactive metagenome species abundance visualisation tool. 
 
 ## Krona: run
 <center>
-![](figures/play_red.png){style="width:100px"}
+![](figures/play_red.png){style="width:100px; background: white; border-radius:5px; border: white solid 5px"}
 </center>
 
 We can use the `Kraken2` report files to create our Krona plots. With the below command we can import our `Kraken2` taxonomy (within the report file) into a `Krona` html.
@@ -24,7 +24,7 @@ You will get a warning that not all taxonomy IDs were found. We will ignore this
 
 ## Krona: visualise
 <center>
-![](figures/eye_red.png){style="width:100px"}
+![](figures/eye_red.png){style="width:100px; background: white; border-radius:5px; border: white solid 5px"}
 </center>
 
 We can view our interactive chart in a web browser. This shows the percentage of reads that were classified to various taxonomies at different levels.
@@ -46,7 +46,7 @@ This is an interactive multi-tiered pie chart with many options. Some of the int
 
 ## Krona: MCQs
 <center>
-![](figures/question_bubble_red.png){style="width:100px"}
+![](figures/question_bubble_red.png){style="width:100px; background: white; border-radius:5px; border: white solid 5px"}
 </center>
 
 Viewing the Krona, attempt the below MCQs.

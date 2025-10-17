@@ -1,6 +1,6 @@
 # Kraken2
 <center>
-![](figures/kraken.png){style="width:150px"}
+![](figures/kraken.png){style="width:150px; background: white; border-radius:5px; border: white solid 5px"}
 </center>
 
 Prior to running `Kraken2` we need to set a variable so `Kraken2` knows where to look for the databases it will use.
@@ -16,7 +16,7 @@ export KRAKEN2_DB_PATH=/pub14/tea/nsc206/NEOF/Shotgun_metagenomics/kraken2_db
 
 ## Kraken2: run
 <center>
-![](figures/play_blue.png){style="width:100px"}
+![](figures/play_blue.png){style="width:100px; background: white; border-radius:5px; border: white solid 5px"}
 </center>
 
 Now, run `Kraken2` on sample K1 by running the following command.
@@ -31,7 +31,7 @@ kraken2 --paired --db minikraken2_v1_8GB \
 
 #### Parameters {.unnumbered}
 <center>
-![](figures/parameter_blue.png){style="width:100px"}
+![](figures/parameter_blue.png){style="width:100px; background: white; border-radius:5px; border: white solid 5px"}
 </center>
 
 -   **`--paired`**: Indicates that we are providing paired reads to `Kraken2`. Internally, `Kraken2` will concatenate the R1 and R2 reads into one sequence with an N between them.
@@ -107,7 +107,7 @@ kraken2 --paired --db minikraken2_v1_8GB \
 
 ## Kraken 2: MCQs
 <center>
-![](figures/question_bubble_blue.png){style="width:100px"}
+![](figures/question_bubble_blue.png){style="width:100px; background: white; border-radius:5px; border: white solid 5px"}
 </center>
 
 Viewing the Kraken2 output files with your favourite text viewer (`less`, `nano`, `vim`, etc.), attempt the below MCQs.

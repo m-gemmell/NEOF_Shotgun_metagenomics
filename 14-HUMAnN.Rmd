@@ -31,7 +31,7 @@ cp /pub14/tea/nsc206/NEOF/Shotgun_metagenomics/humann/demo.fastq.gz .
 
 ## HUMAnN: run
 <center>
-![](figures/play_orange.png){style="width:100px"}
+![](figures/play_orange.png){style="width:100px; background: white; border-radius:5px; border: white solid 5px"}
 </center>
 
 Run the `HUMAnN` pipeline with our demo data:

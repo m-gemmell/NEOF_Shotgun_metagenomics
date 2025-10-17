@@ -1,6 +1,6 @@
 # Host removal {#hostremoval}
 <center>
-![](figures/bowtie2.png){style="width:300px"}
+![](figures/bowtie2.png){style="width:300px; background: white; border-radius:5px"}
 </center>
 
 It is good practice to remove any host sequences from your data before further analysis. A good method for this is to align/map your reads to a reference of your host genome and remove the mapped sequences (i.e sequences we believe belong to the host).
@@ -17,7 +17,7 @@ cp /pub14/tea/nsc206/NEOF/Shotgun_metagenomics/GRCh38_slice.fasta .
 
 ## Index reference
 <center>
-![](figures/index.png){style="width:150px"}
+![](figures/index.png){style="width:150px; background: white; border-radius:5px; border: white solid 5px"}
 </center>
 
 We will will use the `Bowtie2` aligner for mapping/aligning. Prior to alignment/mapping we need to index our reference.
@@ -79,7 +79,7 @@ samtools fastq -f 4 -1 K1_R1.u.fastq -2 K1_R2.u.fastq K1_mapped.bam
  
 #### Parameters {-}
 <center>
-![](figures/parameter_green.png){style="width:100px"}
+![](figures/parameter_green.png){style="width:100px; background: white; border-radius:5px; border: white solid 5px"}
 </center>
 
 - __`-f`__: Output reads that only include the SAM flag.
@@ -106,7 +106,7 @@ outs=K1_singletons.fastq
 
 #### Parameters {-}
 <center>
-![](figures/parameter_blue.png){style="width:100px"}
+![](figures/parameter_blue.png){style="width:100px; background: white; border-radius:5px; border: white solid 5px"}
 </center>
 
 - __`in1=`__: The input R1 fastq file of unmapped unpaired reads.
@@ -118,7 +118,7 @@ outs=K1_singletons.fastq
 
 ## Host removal summary
 <center>
-![](figures/sum_blue.png){style="width:100px"}
+![](figures/sum_blue.png){style="width:100px; background: white; border-radius:5px; border: white solid 5px"}
 </center>
 
 We have run through quality control including host removal for our K1 sample. As our data has pretty much no human data we will skip this step for the other samples and use the trimmed data for the downstream analysis.

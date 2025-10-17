@@ -46,7 +46,7 @@ lefse_format_input.py all_num.lefse.bracken all_num.lefse -c 1 -u 2 -o 1000000
 
 #### Parameters {-}
 <center>
-![](figures/parameter_purple.png){style="width:100px"}
+![](figures/parameter_purple.png){style="width:100px; background: white; border-radius:5px; border: white solid 5px"}
 </center>
 
 - `all_num.lefse.bracken` : Input `Bracken` file.
@@ -57,7 +57,7 @@ lefse_format_input.py all_num.lefse.bracken all_num.lefse -c 1 -u 2 -o 1000000
 
 ## LEfSe: run
 <center>
-![](figures/play_purple.png){style="width:100px"}
+![](figures/play_purple.png){style="width:100px; background: white; border-radius:5px; border: white solid 5px"}
 </center>
 
 Now to run `LEfSe.` All we need to do is run the command with the formatted input and provide an output file name.
@@ -102,7 +102,7 @@ firefox biomarkers.png
 
 ## LEfSe: MCQs
 <center>
-![](figures/question_bubble_purple.png){style="width:100px"}
+![](figures/question_bubble_purple.png){style="width:100px; background: white; border-radius:5px; border: white solid 5px"}
 </center>
 
 Interrogating the biomarkers.png plot and the all_num.lefse.out file, attempt the below MCQs.
@@ -146,7 +146,7 @@ opts_p <- c("__0.0022136919545913936__","__3.0266165524513937__",answer="__3.314
 
 ## Kraken2 and Bracken databases
 <center>
-![](figures/database.png){style="width:150px"}
+![](figures/database.png){style="width:150px; background: white; border-radius:5px; border: white solid 5px"}
 </center>
 
 In your own future analysis you will need to create your own `Kraken2` and `Bracken` databases. Please see the following links on information for this:

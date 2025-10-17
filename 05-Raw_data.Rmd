@@ -2,7 +2,7 @@
 
 # Raw data {#rawdata}
 <center>
-![](figures/usb_stick.png){style="width:200px"}
+![](figures/usb_stick.png){style="width:200px; background: white; border-radius:5px; border: white solid 5px"}
 </center>
 
 The very first thing we need to do is to obtain a dataset to work with. The European Bioinformatics Institute (EBI) provides an excellent metagenomics resource (https://www.ebi.ac.uk/metagenomics/) which allows users to download publicly available metagenomic and metagenetic datasets.
@@ -13,7 +13,7 @@ We have selected a dataset from this site that consists of DNA shotgun data gene
 
 ## Obtaining the data
 <center>
-![](figures/link.png){style="width:150px"}
+![](figures/link.png){style="width:150px; background: white; border-radius:5px; border: white solid 5px"}
 </center>
 
 First, we need to create a directory to put the data in and then change directory to it.
@@ -79,7 +79,7 @@ Due to computational constraints, the files you have linked to are a subset of t
 
 ## Checking quality control
 <center>
-![](figures/mangify_glass.png){style="width:150px"}
+![](figures/mangify_glass.png){style="width:150px; background: white; border-radius:5px; border: white solid 5px"}
 </center>
 
 We can generate and visualise various sequence data metrics for quality control purposes using `FastQC`. We will run `FastQC` on the R1 and R2 reads separately as it is good to visualise them in two different reports. This is because R1 and R2 reads have different quality patterns, generally due to the poorer quality of R2. 

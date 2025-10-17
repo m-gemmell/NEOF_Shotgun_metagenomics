@@ -1,6 +1,6 @@
 # Stitching read pairs
 <center>
-![](figures/stitch.png){style="width:150px"}
+![](figures/stitch.png){style="width:150px; background: white; border-radius:5px; border: white solid 5px"}
 </center>
 
 Longer k-mers generally perform better for assemblies. However, our maximum read length is 100 bp so we are limited to a maximum k-mer length of 99 bp. Thankfully we can get even longer k-mers if we stitch our read pairs together.
@@ -21,7 +21,7 @@ There are a number of pieces of software that can be used to stitch reads (e.g. 
 
 ## FLASH: run
 <center>
-![](figures/play_red.png){style="width:100px"}
+![](figures/play_red.png){style="width:100px; background: white; border-radius:5px; border: white solid 5px"}
 </center>
 
 Make a new output directory for the stitched reads and run `FLASH`:
@@ -39,7 +39,7 @@ flash  -o K1 -z -t 12 -d . \
 
 #### Parameters {-}
 <center>
-![](figures/parameter_red.png){style="width:100px"}
+![](figures/parameter_red.png){style="width:100px; background: white; border-radius:5px; border: white solid 5px"}
 </center>
 
 - `-o`: Sets the prefix of the output files.
@@ -71,7 +71,7 @@ Scroll down with the down key and you will see that we are looking at a histogra
 
 ## FLASH: MCQs
 <center>
-![](figures/question_bubble_red.png){style="width:100px"}
+![](figures/question_bubble_red.png){style="width:100px; background: white; border-radius:5px; border: white solid 5px"}
 </center>
 
 ```{r, echo = FALSE}

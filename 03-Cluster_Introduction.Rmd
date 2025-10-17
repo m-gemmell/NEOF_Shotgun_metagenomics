@@ -1,6 +1,6 @@
 # Cluster Introduction {#cluster}
 <center>
-![](figures/cluster.png){style="width:200px"}
+![](figures/cluster.png){style="width:200px; background: white; border-radius:5px; border: white solid 5px"}
 </center>
 
 ## Logon instructions

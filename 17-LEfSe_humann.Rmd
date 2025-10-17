@@ -1,6 +1,6 @@
 # LEfSe {#humann_lefse}
 <center>
-![](figures/lefse_flip.png){style="width:150px"}
+![](figures/lefse_flip.png){style="width:150px; background: white; border-radius:5px; border: white solid 5px"}
 </center>
 
 For the final part of this section, we will see if there are any statistically significant differences between the two sample groups. There are several ways in which this can be achieved but we will carry out `LEfSe` again.

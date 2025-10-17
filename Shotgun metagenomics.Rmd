@@ -116,12 +116,12 @@ library(webexercises)
 ```
 # Overview {#overview}
 <center>
-![](figures/overview.png){style="width:200px"}
+![](figures/overview.png){style="width:200px; background: white; border-radius:5px; border: white solid 5px"}
 </center>
 
 ## What is metagenomics?
 <center>
-![](figures/what.png){style="width:100px"}
+![](figures/what.png){style="width:100px; background: white; border-radius:5px; border: white solid 5px"}
 </center>
 
 __Meta /ˈmɛtə/ : prefix meaning “higher” or “beyond”__
@@ -130,7 +130,7 @@ Metagenomics is the study of genes and genetic material recovered from environme
 
 ## Why metagenomics?
 <center>
-![](figures/why.png){style="width:100px"}
+![](figures/why.png){style="width:100px; background: white; border-radius:5px; border: white solid 5px"}
 </center>
 
 Microbes exist virtually everywhere on Earth, even in some of the most seemingly hostile environments. Every process on our planet is influenced in some way by the actions of microbes, and all higher organisms are intrinsically associated with microbial communities. 
@@ -149,7 +149,7 @@ Broadly speaking, there are two families of metagenomic analysis:
 
 ## Tutorial overview
 <center>
-![](figures/tutorial.png){style="width:200px"}
+![](figures/tutorial.png){style="width:200px; background: white; border-radius:5px; border: white solid 5px"}
 </center>
 
 ### Basics
@@ -187,7 +187,7 @@ library(webexercises)
 ```
 # Cluster Introduction {#cluster}
 <center>
-![](figures/cluster.png){style="width:200px"}
+![](figures/cluster.png){style="width:200px; background: white; border-radius:5px; border: white solid 5px"}
 </center>
 
 ## Logon instructions
@@ -296,7 +296,7 @@ library(webexercises)
 
 # Raw data {#rawdata}
 <center>
-![](figures/usb_stick.png){style="width:200px"}
+![](figures/usb_stick.png){style="width:200px; background: white; border-radius:5px; border: white solid 5px"}
 </center>
 
 The very first thing we need to do is to obtain a dataset to work with. The European Bioinformatics Institute (EBI) provides an excellent metagenomics resource (https://www.ebi.ac.uk/metagenomics/) which allows users to download publicly available metagenomic and metagenetic datasets.
@@ -307,7 +307,7 @@ We have selected a dataset from this site that consists of DNA shotgun data gene
 
 ## Obtaining the data
 <center>
-![](figures/link.png){style="width:150px"}
+![](figures/link.png){style="width:150px; background: white; border-radius:5px; border: white solid 5px"}
 </center>
 
 First, we need to create a directory to put the data in and then change directory to it.
@@ -373,7 +373,7 @@ Due to computational constraints, the files you have linked to are a subset of t
 
 ## Checking quality control
 <center>
-![](figures/mangify_glass.png){style="width:150px"}
+![](figures/mangify_glass.png){style="width:150px; background: white; border-radius:5px; border: white solid 5px"}
 </center>
 
 We can generate and visualise various sequence data metrics for quality control purposes using `FastQC`. We will run `FastQC` on the R1 and R2 reads separately as it is good to visualise them in two different reports. This is because R1 and R2 reads have different quality patterns, generally due to the poorer quality of R2. 
@@ -437,7 +437,7 @@ library(webexercises)
 ```
 # Quality control {#qualcont}
 <center>
-![](figures/quality_trimming_and_filtering.png){style="width:300px"}
+![](figures/quality_trimming_and_filtering.png){style="width:300px; background: white; border-radius:5px; border: white solid 5px"}
 </center>
 
 Now that we've obtained the raw data and had a look at it, we should clean it up. With any sequencing data, it is very important to ensure that you use the highest quality data possible: Rubbish goes in, rubbish comes out. 
@@ -450,7 +450,7 @@ There are two main methods employed to clean sequence data, and a third method s
 
 ## Removing adapters and low quality bases
 <center>
-![](figures/hedge_trimming.png){style="width:150px"}
+![](figures/hedge_trimming.png){style="width:150px; background: white; border-radius:5px; border: white solid 5px"}
 </center>
 
 Go back to your home directory and create a new directory where we will clean the sequences up:
@@ -485,7 +485,7 @@ trim_galore --paired --quality 20 --stringency 4 \
 
 ## Rename the files
 <center>
-![](figures/rename.png){style="width:150px"}
+![](figures/rename.png){style="width:150px; background: white; border-radius:5px; border: white solid 5px"}
 </center>
 
 Once that is complete list the contents of your directory:
@@ -511,7 +511,7 @@ __Task__: Briefly inspect the log files to see how the trimming went (e.g. K1_R1
 
 ## Inspect the trimmed data
 <center>
-![](figures/magnify_glass_good.png){style="width:150px"}
+![](figures/magnify_glass_good.png){style="width:150px; background: white; border-radius:5px; border: white solid 5px"}
 </center>
 
 To see what difference the trimming made, run `FastQC` and `MultiQC` again on the trimmed output files and view it. 
@@ -547,7 +547,7 @@ library(webexercises)
 ```
 # Host removal {#hostremoval}
 <center>
-![](figures/bowtie2.png){style="width:300px"}
+![](figures/bowtie2.png){style="width:300px; background: white; border-radius:5px"}
 </center>
 
 It is good practice to remove any host sequences from your data before further analysis. A good method for this is to align/map your reads to a reference of your host genome and remove the mapped sequences (i.e sequences we believe belong to the host).
@@ -564,7 +564,7 @@ cp /pub14/tea/nsc206/NEOF/Shotgun_metagenomics/GRCh38_slice.fasta .
 
 ## Index reference
 <center>
-![](figures/index.png){style="width:150px"}
+![](figures/index.png){style="width:150px; background: white; border-radius:5px; border: white solid 5px"}
 </center>
 
 We will will use the `Bowtie2` aligner for mapping/aligning. Prior to alignment/mapping we need to index our reference.
@@ -626,7 +626,7 @@ samtools fastq -f 4 -1 K1_R1.u.fastq -2 K1_R2.u.fastq K1_mapped.bam
  
 #### Parameters {-}
 <center>
-![](figures/parameter_green.png){style="width:100px"}
+![](figures/parameter_green.png){style="width:100px; background: white; border-radius:5px; border: white solid 5px"}
 </center>
 
 - __`-f`__: Output reads that only include the SAM flag.
@@ -653,7 +653,7 @@ outs=K1_singletons.fastq
 
 #### Parameters {-}
 <center>
-![](figures/parameter_blue.png){style="width:100px"}
+![](figures/parameter_blue.png){style="width:100px; background: white; border-radius:5px; border: white solid 5px"}
 </center>
 
 - __`in1=`__: The input R1 fastq file of unmapped unpaired reads.
@@ -665,7 +665,7 @@ outs=K1_singletons.fastq
 
 ## Host removal summary
 <center>
-![](figures/sum_blue.png){style="width:100px"}
+![](figures/sum_blue.png){style="width:100px; background: white; border-radius:5px; border: white solid 5px"}
 </center>
 
 We have run through quality control including host removal for our K1 sample. As our data has pretty much no human data we will skip this step for the other samples and use the trimmed data for the downstream analysis.
@@ -705,7 +705,7 @@ library(webexercises)
 ```
 # Kraken2
 <center>
-![](figures/kraken.png){style="width:150px"}
+![](figures/kraken.png){style="width:150px; background: white; border-radius:5px; border: white solid 5px"}
 </center>
 
 Prior to running `Kraken2` we need to set a variable so `Kraken2` knows where to look for the databases it will use.
@@ -721,7 +721,7 @@ export KRAKEN2_DB_PATH=/pub14/tea/nsc206/NEOF/Shotgun_metagenomics/kraken2_db
 
 ## Kraken2: run
 <center>
-![](figures/play_blue.png){style="width:100px"}
+![](figures/play_blue.png){style="width:100px; background: white; border-radius:5px; border: white solid 5px"}
 </center>
 
 Now, run `Kraken2` on sample K1 by running the following command.
@@ -736,7 +736,7 @@ kraken2 --paired --db minikraken2_v1_8GB \
 
 #### Parameters {.unnumbered}
 <center>
-![](figures/parameter_blue.png){style="width:100px"}
+![](figures/parameter_blue.png){style="width:100px; background: white; border-radius:5px; border: white solid 5px"}
 </center>
 
 -   **`--paired`**: Indicates that we are providing paired reads to `Kraken2`. Internally, `Kraken2` will concatenate the R1 and R2 reads into one sequence with an N between them.
@@ -812,7 +812,7 @@ kraken2 --paired --db minikraken2_v1_8GB \
 
 ## Kraken 2: MCQs
 <center>
-![](figures/question_bubble_blue.png){style="width:100px"}
+![](figures/question_bubble_blue.png){style="width:100px; background: white; border-radius:5px; border: white solid 5px"}
 </center>
 
 Viewing the Kraken2 output files with your favourite text viewer (`less`, `nano`, `vim`, etc.), attempt the below MCQs.
@@ -860,14 +860,14 @@ library(webexercises)
 ```
 # Krona plot
 <center>
-![](figures/krona.png){style="width:150px"}
+![](figures/krona.png){style="width:150px; background: white; border-radius:5px; border: white solid 5px"}
 </center>
 
 `Krona` is an interactive metagenome species abundance visualisation tool. 
 
 ## Krona: run
 <center>
-![](figures/play_red.png){style="width:100px"}
+![](figures/play_red.png){style="width:100px; background: white; border-radius:5px; border: white solid 5px"}
 </center>
 
 We can use the `Kraken2` report files to create our Krona plots. With the below command we can import our `Kraken2` taxonomy (within the report file) into a `Krona` html.
@@ -884,7 +884,7 @@ You will get a warning that not all taxonomy IDs were found. We will ignore this
 
 ## Krona: visualise
 <center>
-![](figures/eye_red.png){style="width:100px"}
+![](figures/eye_red.png){style="width:100px; background: white; border-radius:5px; border: white solid 5px"}
 </center>
 
 We can view our interactive chart in a web browser. This shows the percentage of reads that were classified to various taxonomies at different levels.
@@ -906,7 +906,7 @@ This is an interactive multi-tiered pie chart with many options. Some of the int
 
 ## Krona: MCQs
 <center>
-![](figures/question_bubble_red.png){style="width:100px"}
+![](figures/question_bubble_red.png){style="width:100px; background: white; border-radius:5px; border: white solid 5px"}
 </center>
 
 Viewing the Krona, attempt the below MCQs.
@@ -948,14 +948,14 @@ library(webexercises)
 ```
 # Bracken
 <center>
-![](figures/bracken.png){style="width:150px"}
+![](figures/bracken.png){style="width:150px; background: white; border-radius:5px; border: white solid 5px"}
 </center>
 
 `Bracken` (Bayesian Reestimation of Abundance with KrakEN) uses taxonomy labels assigned by `Kraken2` to compute estimated abundances of species in a metagenomic sample. 
 
 ## Bracken: run
 <center>
-![](figures/play_green.png){style="width:100px"}
+![](figures/play_green.png){style="width:100px; background: white; border-radius:5px; border: white solid 5px"}
 </center>
 
 Just like with `Krona` we can use the `Kraken2` report files to run bracken.
@@ -967,7 +967,7 @@ bracken -d $KRAKEN2_DB_PATH/minikraken2_v1_8GB \
 
 #### Parameters {-}
 <center>
-![](figures/parameter_green.png){style="width:100px"}
+![](figures/parameter_green.png){style="width:100px; background: white; border-radius:5px; border: white solid 5px"}
 </center>
 
 - `-d` : Specifies the `Kraken2` database that was used for taxonomic classification. In this case bracken requires the variable `$KRAKEN2_DB_PATH` so the option is provided the full path to the kraken database. 
@@ -1011,7 +1011,7 @@ bracken -d $KRAKEN2_DB_PATH/minikraken2_v1_8GB \
 
 ## Bracken: MCQs
 <center>
-![](figures/question_bubble_green.png){style="width:100px"}
+![](figures/question_bubble_green.png){style="width:100px; background: white; border-radius:5px; border: white solid 5px"}
 </center>
 
 Viewing the Bracken output files (`.bracken`) with your favourite text viewer (`less`, `nano`, `vim`, etc.), attempt the below MCQs.
@@ -1061,7 +1061,7 @@ After these columns are the following two columns for each sample.
 
 ## Bracken: extracting output
 <center>
-![](figures/exctractor.png){style="width:100px; background:white;border-radius:5px"}
+![](figures/exctractor.png){style="width:100px; background:white;border-radius:5px; border: white 5px solid"}
 </center>
 
 We want a file with only the first column (organism name) and the `bracken_num` columns for each sample. To carry this out we  first create a sequence of numbers that will match the `bracken_num` column numbers. These start at column 4 and are every even numbered column after this. We will use `seq` to create a sequence of numbers starting at `4` and including every second (`2`) number up to and including `50` with commas (`,`) as separators (`-s`). 
@@ -1135,7 +1135,7 @@ lefse_format_input.py all_num.lefse.bracken all_num.lefse -c 1 -u 2 -o 1000000
 
 #### Parameters {-}
 <center>
-![](figures/parameter_purple.png){style="width:100px"}
+![](figures/parameter_purple.png){style="width:100px; background: white; border-radius:5px; border: white solid 5px"}
 </center>
 
 - `all_num.lefse.bracken` : Input `Bracken` file.
@@ -1146,7 +1146,7 @@ lefse_format_input.py all_num.lefse.bracken all_num.lefse -c 1 -u 2 -o 1000000
 
 ## LEfSe: run
 <center>
-![](figures/play_purple.png){style="width:100px"}
+![](figures/play_purple.png){style="width:100px; background: white; border-radius:5px; border: white solid 5px"}
 </center>
 
 Now to run `LEfSe.` All we need to do is run the command with the formatted input and provide an output file name.
@@ -1191,7 +1191,7 @@ firefox biomarkers.png
 
 ## LEfSe: MCQs
 <center>
-![](figures/question_bubble_purple.png){style="width:100px"}
+![](figures/question_bubble_purple.png){style="width:100px; background: white; border-radius:5px; border: white solid 5px"}
 </center>
 
 Interrogating the biomarkers.png plot and the all_num.lefse.out file, attempt the below MCQs.
@@ -1235,7 +1235,7 @@ opts_p <- c("__0.0022136919545913936__","__3.0266165524513937__",answer="__3.314
 
 ## Kraken2 and Bracken databases
 <center>
-![](figures/database.png){style="width:150px"}
+![](figures/database.png){style="width:150px; background: white; border-radius:5px; border: white solid 5px"}
 </center>
 
 In your own future analysis you will need to create your own `Kraken2` and `Bracken` databases. Please see the following links on information for this:
@@ -1312,7 +1312,7 @@ cp /pub14/tea/nsc206/NEOF/Shotgun_metagenomics/humann/demo.fastq.gz .
 
 ## HUMAnN: run
 <center>
-![](figures/play_orange.png){style="width:100px"}
+![](figures/play_orange.png){style="width:100px; background: white; border-radius:5px; border: white solid 5px"}
 </center>
 
 Run the `HUMAnN` pipeline with our demo data:
@@ -1386,7 +1386,7 @@ library(webexercises)
 ```
 # Multi sample processing {#humannmultisampleprocessing}
 <center>
-![](figures/k_w_venn.png){style="width:150px"}
+![](figures/k_w_venn.png){style="width:150px; background: white; border-radius:5px; border: white solid 5px"}
 </center>
 
 Looking at the functional profile of one sample in isolation is usually not very informative. First, there is nothing to compare it to and second, there are no biological replicates. We will therefore use all the Korean and Western diet samples.
@@ -1508,7 +1508,7 @@ library(webexercises)
 ```
 # Heatmap
 <center>
-![](figures/heatmap.png){style="width:150px; background:white; border-radius:5px"}
+![](figures/heatmap.png){style="width:150px; background:white; border-radius:5px; border: 5px white solid"}
 </center>
 
 Now that we have our combined, unstratified, and normalised table, we can visualise the dataset to see how the two groups compare.
@@ -1613,7 +1613,7 @@ library(webexercises)
 ```
 # LEfSe {#humann_lefse}
 <center>
-![](figures/lefse_flip.png){style="width:150px"}
+![](figures/lefse_flip.png){style="width:150px; background: white; border-radius:5px; border: white solid 5px"}
 </center>
 
 For the final part of this section, we will see if there are any statistically significant differences between the two sample groups. There are several ways in which this can be achieved but we will carry out `LEfSe` again.
@@ -1670,7 +1670,7 @@ library(webexercises)
 
 # Metagenome assembly {#metagenomeassembly}
 <center>
-![](figures/jigsaw.png){style="width:300px"}
+![](figures/jigsaw.png){style="width:300px; background: white; border-radius:5px"}
 </center>
 
 So far we have directly analysed the read data itself which is perfectly fine for taxonomic profiling and for certain methods of functional profiling. However, Illumina reads are generally short and therefore can not provide us with much data on larger constructs that are in the metagenomic samples, e.g. genes. While it is possible to predict from which gene a sequence read might originate, the short nature of the query can sometimes lead to ambiguous results.
@@ -1693,7 +1693,7 @@ We will use the `shotgun_meta` conda environment so use a terminal where this is
 
 ## A primer on short read assembly
 <center>
-![](figures/dna_laptop.png){style="width:150px"}
+![](figures/dna_laptop.png){style="width:150px; background: white; border-radius:5px; border: white solid 5px"}
 </center>
 
 Illumina reads are too short and numerous to use traditional overlap-layout-consensus assemblers as such an approach would be far too computationally intensive. Instead, we use De Bruijn graph based assemblers. Briefly, these operate as follows:
@@ -1729,7 +1729,7 @@ library(webexercises)
 ```
 # Stitching read pairs
 <center>
-![](figures/stitch.png){style="width:150px"}
+![](figures/stitch.png){style="width:150px; background: white; border-radius:5px; border: white solid 5px"}
 </center>
 
 Longer k-mers generally perform better for assemblies. However, our maximum read length is 100 bp so we are limited to a maximum k-mer length of 99 bp. Thankfully we can get even longer k-mers if we stitch our read pairs together.
@@ -1750,7 +1750,7 @@ There are a number of pieces of software that can be used to stitch reads (e.g. 
 
 ## FLASH: run
 <center>
-![](figures/play_red.png){style="width:100px"}
+![](figures/play_red.png){style="width:100px; background: white; border-radius:5px; border: white solid 5px"}
 </center>
 
 Make a new output directory for the stitched reads and run `FLASH`:
@@ -1768,7 +1768,7 @@ flash  -o K1 -z -t 12 -d . \
 
 #### Parameters {-}
 <center>
-![](figures/parameter_red.png){style="width:100px"}
+![](figures/parameter_red.png){style="width:100px; background: white; border-radius:5px; border: white solid 5px"}
 </center>
 
 - `-o`: Sets the prefix of the output files.
@@ -1800,7 +1800,7 @@ Scroll down with the down key and you will see that we are looking at a histogra
 
 ## FLASH: MCQs
 <center>
-![](figures/question_bubble_red.png){style="width:100px"}
+![](figures/question_bubble_red.png){style="width:100px; background: white; border-radius:5px; border: white solid 5px"}
 </center>
 
 ```{r, echo = FALSE}
@@ -1827,7 +1827,7 @@ We will use our stitched and unstitched reads to produce an assembly with`MEGAHI
 
 ## MEGAHIT
 <center>
-![](figures/play_blue.png){style="width:100px"}
+![](figures/play_blue.png){style="width:100px; background: white; border-radius:5px; border: white solid 5px"}
 </center>
 
 Create a new directory to store our assembly in. 
@@ -1852,7 +1852,7 @@ megahit \
 
 #### Parameters {-}
 <center>
-![](figures/parameter_blue.png){style="width:100px"}
+![](figures/parameter_blue.png){style="width:100px; background: white; border-radius:5px; border: white solid 5px"}
 </center>
 
 - `-r`: Single-end reads to be used for assembly. We are using our successfully stitched reads.
@@ -1876,7 +1876,7 @@ There is not much to see. When happy, quit the `less` (`q`) and carry on to `QUA
 
 ## QUAST
 <center>
-![](figures/inspect.png){style="width:150px"}
+![](figures/inspect.png){style="width:150px; background: white; border-radius:5px; border: white solid 5px"}
 </center>
 
 We can generate some metrics based on the assembly with `QUAST`,  but first we will create a directory for the `QUAST` output.
@@ -1890,7 +1890,7 @@ mkdir -p quast/K1
 
 ### QUAST: run
 <center>
-![](figures/play_green.png){style="width:100px"}
+![](figures/play_green.png){style="width:100px; background: white; border-radius:5px; border: white solid 5px"}
 </center>
 
 Now to run `QUAST`. 
@@ -1901,7 +1901,7 @@ quast -o quast/K1 K1/final.contigs.fa
 
 ### QUAST: visualise
 <center>
-![](figures/eye_green.png){style="width:100px"}
+![](figures/eye_green.png){style="width:100px; background: white; border-radius:5px; border: white solid 5px"}
 </center>
 
 `QUAST` will run relatively quickly. Once complete view the output with `firefox`.
@@ -1924,7 +1924,7 @@ The report tells us quite a bit about the assembly quality. Two definitions that
 
 ### QUAST: MCQs
 <center>
-![](figures/question_bubble_green.png){style="width:100px"}
+![](figures/question_bubble_green.png){style="width:100px; background: white; border-radius:5px; border: white solid 5px"}
 </center>
 
 __Note:__ Due to the assembly process your values may be slightly different (< 1%). Please choose the closest value
@@ -1964,7 +1964,7 @@ __Questions__
 
 ## Metagenome assembly summary
 <center>
-![](figures/sum_black.png){style="width:100px"}
+![](figures/sum_black.png){style="width:100px; background: white; border-radius:5px; border: white solid 5px"}
 </center>
 
 We now have an assembly. It is not a brilliant one due to us only having used 1 million reads. In real analysis we would prefer fewer but longer contigs. We will explore some tools we can use with our metagenome assembly in the next chapters.
@@ -1978,7 +1978,7 @@ library(webexercises)
 ```
 # Genome binning {#binning}
 <center>
-![](figures/yarn_binning.png){style="width:400px"}
+![](figures/yarn_binning.png){style="width:400px; background: white; border-radius:5px; border: white solid 5px"}
 </center>
 
 A metagenome assembly consists of contigs from many different genomes. At this stage we don't know which contigs are from which species. We could try to taxonomically classify each contig but there are 2 problems with this approach:
@@ -1999,7 +1999,7 @@ It is recommended to ensure you do not have a poor quality metagenome assembly. 
 
 ## MetaBAT2
 <center>
-![](figures/bat.png){style="width:200px"}
+![](figures/bat.png){style="width:200px; background: white; border-radius:5px"}
 </center>
 
 We will use `MetaBAT2` for our genome binning. It has three major upsides that makes it very popular:
@@ -2019,7 +2019,7 @@ cd ~/7-Binning/K1
 
 ### MetaBAT2: depth calculation
 <center>
-![](figures/submarine.png){style="width:100px"}
+![](figures/submarine.png){style="width:100px; background: white; border-radius:5px; border: white solid 5px"}
 </center>
 
 To carry out effective genome binning `MetaBAT2` uses coverage information of the contigs. To calculate depth we need to align the reads to the metagenome assembly.
@@ -2113,7 +2113,7 @@ __Note__: One of the reasons for our short contigs is that we only used a subset
 
 ### MetaBAT2: run
 <center>
-![](figures/play_orange.png){style="width:100px"}
+![](figures/play_orange.png){style="width:100px; background: white; border-radius:5px; border: white solid 5px"}
 </center>
 
 With our assembly and its depth information we can run `MetaBAT2` for binning.
@@ -2131,7 +2131,7 @@ metabat2 \
 
 #### Parameters {-}
 <center>
-![](figures/parameter_orange.png){style="width:100px"}
+![](figures/parameter_orange.png){style="width:100px; background: white; border-radius:5px; border: white solid 5px"}
 </center>
 
 - `--inFile`: Input metagenome assembly fasta file.
@@ -2152,25 +2152,113 @@ List the contents of the output directory and you'll see there is 1 fasta file w
 ls bins
 ```
 
-## CoCoPyE
+In the next chapter we will assess the quality of these bins.
 
-`CoCoPyE` is a useful tool to assess the quality of assembled microbial genomes. This can be used on assemblies produced from single cell, single isolate, or metagenome data. Additionally, it can be used to identify bins that are likely candidates for merging. This occurs when one genome has been separated into different bins.
+<!--chapter:end:22-Genome_binning.Rmd-->
 
-FINISH EXPLANATION BELOW
+```{r include=FALSE, cache=FALSE}
+library(webexercises)
+```
+# Bin quality
 
+<center>
+![](figures/bin_quality.png){style="width: 400px; border-radius: 5px; background: white; border: white 5px solid"}
+</center>
 
-`CoCoPyE` estimates quality of a genome by estimating completeness and contamination. It carries this out in 2 stages:
+`CoCoPyE` is a useful tool to assess the quality of assembled microbial genomes. 
+This can be used on assemblies produced from single cell, single isolate, or metagenome data. 
 
-1. __Extraction__: 
-2. __Transformation__: 
+## Workflow concept
+
+The tool utilises protein domain families from the Pfam database.
+A protein domain is a region of a protein that fold independently from the rest and they vary in length from ~50-250 amino acids.
+Many proteins consist of several domains and a domain can appear in many different proteins.
+
+`CoCoPyE` estimates quality of a genome by estimating completeness and contamination through an Input-Preprocessing step followed by a two stage prediction step. 
+
+Below is the workflow as a diagram and then some quick information amount how it works. 
+For full details please see the CoCoPyE publication: https://academic.oup.com/gigascience/article/doi/10.1093/gigascience/giae079/7841111
 
 <center>
 ![](figures/cocopye_workflow.jpeg){style="width: 800px; border-radius: 5px; border: white 5px solid"}
 </center>
 
-CoCoPyE publications: https://academic.oup.com/gigascience/article/doi/10.1093/gigascience/giae079/7841111
+### Input Pre-processing
 
-### CoCoPyE: Mamba
+A protein domain search is carried out on all translated open reading frames of our our query genomes, MAGs/bins in our case.
+The Pfam protein database is used and the tool produces protein domain counts for our query genomes.
+
+Query genomes (MAGS/bins) with a completeness score <10% are rejected and removed from further analysis.
+
+### Stage I
+
+In Stage I the nearest neighbours of our query's protein domains are searched for in the Pfam database.
+This creates a list of reference protein domains for our query.
+
+Next a specific marker prediction is carried out to create the stage I (i.e. marker based) completeness & contamination values.
+The Pfam database has information on which taxa these domains are present in.
+Therefore, sets of domains can be used as markers for specific lineages.
+
+Let's go through a fictional example where we have 26 protein domains PDA-Z which cover 2 different lineages: Gigabacteria and Birthobacteria.
+
+- Both Gigabacteria and Birthobacteria contain domains PDA-F
+- Domains PDG-P are only present in Gigabacteria
+- Domains PDQ-Z are only present in Birtobacteria
+
+We put our query genome into this anlaysis which finds it contains the domain families PDD-R. 
+We therefore acquire the below results:
+
+- It is classified as belonging to the Gigabacteria lineage as it contains many (in this case all) the domains unique to Gigabacteria and many of the domains present in both.
+- Completeness: 81.25%
+  - It is missing 3 of the domains found in Gigabacteria (PDA-C) 13/16 = 0.8125 = 81.25%
+- Contamination: 13.33%
+  - Of the 15 domains our query has 2 of them do not belong to it in the reference (PDQ & PDR) 2/15 = 0.1333 = 13.33%.
+
+Any results with a completeness value of <60% or contamination value >30% are recorded and further analysis is not carried out.
+Other queries move onto the neural network stage (stage II).
+
+### Stage II
+
+The next step utilises the domain database neighbours found in stage I.
+With this it creates a count ratio histogram (CRH) to use for a machine learning (ML)/neural network approach.
+This is carried out to reduce the dimensionality of the data to improve iterative training and reduce the risk of overfitting.
+But what is a CRH?
+
+Each Pfam domain family is given a count ratio of Cq:Cr.
+
+- Cq: The count of the domain family in the query genome.
+- Cr: The count of the domain family in the reference genome. 
+  - The reference genome is determined in stage I.
+
+Examples:
+
+- In a perfect example both the reference and query has 5 counts of domain family PDA. This indicates high completeness and low contamination.
+- If domain family PDH appears 4 times across all proteins in the query and only twice in the reference the count ratio will be 2/1. This would indicate contamination.
+- If domain family PDS appears 4 times across all proteins in the query and 12 times in the reference the count ratio will be 1/3. This indicates low completeness.
+
+
+The relative frequency of all the count ratios are used to create a histogram, the CRH.
+The process itself will use a text histogram but below are two visualisations of CRHs.
+
+The main features of a CRH are:
+
+- __The central point (1/1):__ This indicates high completeness and low contamination.
+  - If the central peak contained 100% of the count ratios this would indicate 100% completeness and 0% contamination.
+- __Right of the central point:__ Histograms bins on the right hand side indicate contamination.
+- __Left of the central point:__ Histogram bins on the left hand side indicate decreasing completeness.
+
+<center>
+![](figures/crh1.png){style="width: 600px; border-radius: 5px; border: white 5px solid"} 
+<br>*The Above plot was created from a query genome with 61% completeness and 30% contamination.*
+</center>
+<br>
+
+<center>
+![](figures/crh2.png){style="width: 600px; border-radius: 5px; border: white 5px solid"}
+<br> *The Above plot was created from a query genome with 90% completeness and 10% contamination.*
+</center>
+
+## Mamba
 <center>
 ![](figures/mamba_logo.png){style="width: 200px; border-radius: 5px"}
 </center>
@@ -2189,9 +2277,9 @@ Ensure you are in the correct directory.
 cd ~/7-Binning/K1/
 ```
 
-### CoCoPyE: run
+## CoCoPyE: run
 <center>
-![](figures/play_black.png){style="width:100px"}
+![](figures/play_black.png){style="width:150px; background: white; border-radius: 5px; border: 5px white solid"}
 </center>
 
 `CoCoPyE` has one main command to predict bin quality: `CoCoPyE run`. 
@@ -2205,9 +2293,9 @@ CoCoPyE run \
 -o cocopye_output.csv
 ```
 
-#### Parameters {-}
+### Parameters {-}
 <center>
-![](figures/parameter_black.png){style="width:100px"}
+![](figures/parameter_black.png){style="width:150px; background: white; border-radius: 5px; border: 5px white solid"}
 </center>
 
 - `-t` : Number of threads/cores/CPUs to utilise for the process.
@@ -2223,9 +2311,9 @@ Other options include:
   - More information on the output below.
   
 
-### CoCoPyE: output
+## CoCoPyE: output
 <center>
-![](figures/output_file_black.png){style="width:100px"}
+![](figures/output_file_black.png){style="width:150px"}
 </center>
 
 As we have only used a subset of data the results are not very good. We'll therefore look at premade results. 
@@ -2261,7 +2349,10 @@ Output columns when `-v` set to `standard` (also the default)
 Please see the full list of statistics definitions from [CoCoPyE wiki](https://github.com/gobics/cocopye/wiki/Output). This includes the defintions when `-v` is set to `extended` or `full`.
 `r unhide()`
 
-### CoCoPyE: Quality score
+## CoCoPyE: Quality score
+<center>
+![](figures/quality_ribbon.png){style="width:200px; background: white ; border-radius: 5px; border: white solid 5px"}
+</center>
 
 One quick way to calculate the overall quality of a bin is with the following equation:
 
@@ -2281,7 +2372,7 @@ __Note__: Values will range from:
 - 100% (i.e. 1): 1 Completeness - (5 * 0 Contamination)
 - -500% (i.e. -5): 0 Completeness - (5 * 1 Contamination)
 
-#### Quality file {-}
+### Quality file {-}
 
 We will create a new file with only the quality information. We'll start by making a file with only a header.
 
@@ -2289,7 +2380,7 @@ We will create a new file with only the quality information. We'll start by maki
 echo "quality" > MAGS_quality.csv
 ```
 
-#### Calculate quality with awk {-}
+### Calculate quality with awk {-}
 
 Next is the most complicated command. We will be calculating the Overall quality (see calculation above) for each row except the header row.
 
@@ -2297,7 +2388,7 @@ We will be using a complicated linux based language called `awk`. This is very u
 
 As this is new and complicated we will build up our command step by step.
 
-##### Extract fields/columns {-}
+#### Extract fields/columns {-}
 
 __The first step__ is to extract the completeness and contamination fields/columns.
 
@@ -2311,7 +2402,7 @@ awk -F, '{print $2,$3}' cocopye_output.csv
 - `print $2,$3`: This function instructs `awk` to print the 2nd (completeness) and 3rd (contamination) fields. It is common to put commas (`,`) between fields if printing multiple fields.
 - `MAGS_checkm.csv`: Our last parameter is the input file. We are not changing the contents of the file, only printing information to screen/stdout.
 
-##### Ignore header {-}
+#### Ignore header {-}
 
 __We do not want the header__ in our calculation so we will add an extra `awk` option.
 
@@ -2321,7 +2412,7 @@ awk -F, 'NR>1 {print $2,$3}' cocopye_output.csv
 
 - `NR>1`: `NR` stands for number of records. Rows are called records in `awk`. Therefore `NR>1` means `awk` will only carry out the functions on the records numbered greater than 1. I.e. skip row 1, the header row.
 
-##### Calculate quality {-}
+#### Calculate quality {-}
 
 __The next step__ is to carry out the overall quality calculation and append the information to the "MAGS_quality.csv" file.
 
@@ -2334,11 +2425,13 @@ Our new function, `{print $12 - (5 * $13)}`, carries out the overall quality cal
 You will notice that we have values that equal 4.
 Let us fix that.
 
-##### Fix values {-}
+#### Fix values {-}
 
 Some quality values come out as 4.
 This is not correct and comes about as the completeness and contamination values have been set to -1 (-1 - (5 * -1) = 4).
 If you look at the file `cocopye_output.csv` you will notice the bins with -1 values have the `rejected` for their `method` value.
+These are bins which failed the Input Pre-procesing step.
+
 We will therefore change these quality values to the lowest possible value of -5 (0 - (5 * 1) = -5).
 
 ```{bash eval=FALSE}
@@ -2350,7 +2443,7 @@ In this case we [pipe (`|`)](https://neof-workshops.github.io/Unix_nxcdf7/Course
 
 In other words we replace lines that only contain a 4 with a -5.
 
-##### Append to quality file {-}
+#### Append to quality file {-}
 
 Finally we can append the quality values to our `MAGS_quality.csv` file.
 
@@ -2367,7 +2460,7 @@ You can view the file to ensure it worked. The first and second values should be
 less MAGS_quality.csv
 ```
 
-#### Add quality to the checkm results file {-}
+### Add quality to the checkm results file {-}
 
 Now we can combine the files "cocopye_output.csv" and "MAGS_quality.csv" with the `paste` command. The `-d ","` option indicates the merged files will be separated by commas (`,`), matching the column separation in "MAGS_checkm.csv".
 
@@ -2375,9 +2468,9 @@ Now we can combine the files "cocopye_output.csv" and "MAGS_quality.csv" with th
 paste -d "," cocopye_output.csv MAGS_quality.csv > cocopye_quality.csv
 ```
 
-### CheckM: MCQs
+## CheckM: MCQs
 <center>
-![](figures/question_bubble_blue.png){style="width:100px"}
+![](figures/question_bubble_blue.png){style="width:150px; background: white; border-radius: 5px; border: 5px white solid"}
 </center>
 
 Viewing the file "MAGS_checkm_quality.csv" attempt the below questions.
@@ -2435,16 +2528,16 @@ opts_p <- c("__K1.20__", answer="__K1.26__", "__K1.22__")
 ```
 9. Which bin has the highest completeness value (98.59%)? `r longmcq(opts_p)`
 
-## Binning summary
+## Bin quality summary
 <center>
-![](figures/sum_black.png){style="width:100px"}
+![](figures/sum_black.png){style="width:150px; background: white ; border-radius:5px; border: 5px white solid"}
 </center>
 
 It is always useful to know the quality of your bins so you know which are more reliable than others. With that information you can be more or less certain when concluding your findings.
 
 We have some good quality bins. However, the best bins would only have one genome. Ultimately binning is trying to separate all the genomes from each other. A better metagenome assembly would most likely have led to better binning.
 
-<!--chapter:end:22-Genome_binning.Rmd-->
+<!--chapter:end:23-Bin_quality.Rmd-->
 
 ```{r include=FALSE, cache=FALSE}
 library(webexercises)
@@ -2850,7 +2943,7 @@ done
 
 With these files you can then investigate what bins have which pathways. Additionally, with more samples analysed you can determine which samples have which pathways present.
 
-<!--chapter:end:23-Assembly_functional_annotation.Rmd-->
+<!--chapter:end:24-Assembly_functional_annotation.Rmd-->
 
 ```{r include=FALSE, cache=FALSE}
 library(webexercises)
@@ -3111,5 +3204,5 @@ wget -O W12_R1.fastq.gz ftp://ftp.sra.ebi.ac.uk/vol1/fastq/ERR505/ERR505083/ERR5
 wget -O W12_R2.fastq.gz ftp://ftp.sra.ebi.ac.uk/vol1/fastq/ERR505/ERR505083/ERR505083_2.fastq.gz
 ```
 
-<!--chapter:end:24-Appendix.Rmd-->
+<!--chapter:end:25-Appendix.Rmd-->
 

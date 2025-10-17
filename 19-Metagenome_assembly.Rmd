@@ -2,7 +2,7 @@
 
 # Metagenome assembly {#metagenomeassembly}
 <center>
-![](figures/jigsaw.png){style="width:300px"}
+![](figures/jigsaw.png){style="width:300px; background: white; border-radius:5px"}
 </center>
 
 So far we have directly analysed the read data itself which is perfectly fine for taxonomic profiling and for certain methods of functional profiling. However, Illumina reads are generally short and therefore can not provide us with much data on larger constructs that are in the metagenomic samples, e.g. genes. While it is possible to predict from which gene a sequence read might originate, the short nature of the query can sometimes lead to ambiguous results.
@@ -25,7 +25,7 @@ We will use the `shotgun_meta` conda environment so use a terminal where this is
 
 ## A primer on short read assembly
 <center>
-![](figures/dna_laptop.png){style="width:150px"}
+![](figures/dna_laptop.png){style="width:150px; background: white; border-radius:5px; border: white solid 5px"}
 </center>
 
 Illumina reads are too short and numerous to use traditional overlap-layout-consensus assemblers as such an approach would be far too computationally intensive. Instead, we use De Bruijn graph based assemblers. Briefly, these operate as follows:
