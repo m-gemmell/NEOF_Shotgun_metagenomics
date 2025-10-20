@@ -7,6 +7,15 @@ We will use `LEfSe` (Linear discriminant analysis Effect Size) to determine whic
 
 In essence it allows for the detection of biomarkers when comparing sample groups. In the `LEfSe` terminology the sample groups are called the class.
 
+Although `LEfSe` is a nic tool to use for a tutorial there are more robust tools.
+Two recommended tools are:
+
+- [ANCOM-BC2](https://www.nature.com/articles/s41592-023-02092-7)
+- [MaAsLin3](https://huttenhower.sph.harvard.edu/MaAsLin3)
+
+They both require `R` and so are not included in this tutorial. 
+However, our R community analysis workshop does include how to use `ANCOM-BC2`.
+
 ## LEfSe: add metadata {#kraken2_lefse_metadata}
 <center>
 ![](figures/header.png){style="width:100px; background:white;border-radius:5px"}
