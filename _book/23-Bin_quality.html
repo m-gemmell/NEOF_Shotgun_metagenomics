@@ -23,7 +23,7 @@
 <meta name="author" content="Sam Haldenby and Matthew R. Gemmell" />
 
 
-<meta name="date" content="2025-10-17" />
+<meta name="date" content="2025-10-20" />
 
   <meta name="viewport" content="width=device-width, initial-scale=1" />
   <meta name="apple-mobile-web-app-capable" content="yes" />
@@ -356,37 +356,45 @@ This can be used on assemblies produced from single cell, single isolate, or met
 <div id="workflow-concept" class="section level2 hasAnchor" number="23.1">
 <h2><span class="header-section-number">23.1</span> Workflow concept<a href="23-Bin_quality.html#workflow-concept" class="anchor-section" aria-label="Anchor link to header"></a></h2>
 <p>The tool utilises protein domain families from the Pfam database.
-A protein domain is a region of a protein that fold independently from the rest and they vary in length from ~50-250 amino acids.
+A protein domain is a region of a protein that folds independently from the rest and they vary in length from ~50-250 amino acids.
 Many proteins consist of several domains and a domain can appear in many different proteins.</p>
-<p><code>CoCoPyE</code> estimates quality of a genome by estimating completeness and contamination through an Input-Preprocessing step followed by a two stage prediction step.</p>
-<p>Below is the workflow as a diagram and then some quick information amount how it works.
+<p><code>CoCoPyE</code> estimates quality of a genome by estimating completeness and contamination through an input-preprocessing step followed by a two stage prediction step.</p>
+<p>Below is the workflow as a diagram followed by some quick information on how it works.
 For full details please see the CoCoPyE publication: <a href="https://academic.oup.com/gigascience/article/doi/10.1093/gigascience/giae079/7841111" class="uri">https://academic.oup.com/gigascience/article/doi/10.1093/gigascience/giae079/7841111</a></p>
 <center>
 <img src="figures/cocopye_workflow.jpeg" style="width: 800px; border-radius: 5px; border: white 5px solid" />
 </center>
 <div id="input-pre-processing" class="section level3 hasAnchor" number="23.1.1">
 <h3><span class="header-section-number">23.1.1</span> Input Pre-processing<a href="23-Bin_quality.html#input-pre-processing" class="anchor-section" aria-label="Anchor link to header"></a></h3>
+<center>
+<img src="figures/cocopye_workflow_step_1.png" style="width: 800px; border-radius: 5px" />
+</center>
 <p>A protein domain search is carried out on all translated open reading frames of our our query genomes, MAGs/bins in our case.
 The Pfam protein database is used and the tool produces protein domain counts for our query genomes.</p>
 <p>Query genomes (MAGS/bins) with a completeness score &lt;10% are rejected and removed from further analysis.</p>
 </div>
 <div id="stage-i" class="section level3 hasAnchor" number="23.1.2">
 <h3><span class="header-section-number">23.1.2</span> Stage I<a href="23-Bin_quality.html#stage-i" class="anchor-section" aria-label="Anchor link to header"></a></h3>
+<center>
+<img src="figures/cocopye_workflow_stage_1.png" style="width: 800px; border-radius: 5px" />
+</center>
 <p>In Stage I the nearest neighbours of our query's protein domains are searched for in the Pfam database.
 This creates a list of reference protein domains for our query.</p>
 <p>Next a specific marker prediction is carried out to create the stage I (i.e. marker based) completeness &amp; contamination values.
 The Pfam database has information on which taxa these domains are present in.
 Therefore, sets of domains can be used as markers for specific lineages.</p>
+<div id="prediction-example" class="section level4 unnumbered hasAnchor">
+<h4>Prediction example<a href="23-Bin_quality.html#prediction-example" class="anchor-section" aria-label="Anchor link to header"></a></h4>
 <p>Let's go through a fictional example where we have 26 protein domains PDA-Z which cover 2 different lineages: Gigabacteria and Birthobacteria.</p>
 <ul>
 <li>Both Gigabacteria and Birthobacteria contain domains PDA-F</li>
 <li>Domains PDG-P are only present in Gigabacteria</li>
-<li>Domains PDQ-Z are only present in Birtobacteria</li>
+<li>Domains PDQ-Z are only present in Birthobacteria</li>
 </ul>
-<p>We put our query genome into this anlaysis which finds it contains the domain families PDD-R.
+<p>Analysis finds that our query genome contains the domain families PDD-R.
 We therefore acquire the below results:</p>
 <ul>
-<li>It is classified as belonging to the Gigabacteria lineage as it contains many (in this case all) the domains unique to Gigabacteria and many of the domains present in both.</li>
+<li>The query genome is classified as belonging to the Gigabacteria lineage as it contains many (in this case all) the domains unique to Gigabacteria (PDG-P) and many of the domains shared by both bacteria.</li>
 <li>Completeness: 81.25%
 <ul>
 <li>It is missing 3 of the domains found in Gigabacteria (PDA-C) 13/16 = 0.8125 = 81.25%</li>
@@ -396,15 +404,24 @@ We therefore acquire the below results:</p>
 <li>Of the 15 domains our query has 2 of them do not belong to it in the reference (PDQ &amp; PDR) 2/15 = 0.1333 = 13.33%.</li>
 </ul></li>
 </ul>
-<p>Any results with a completeness value of &lt;60% or contamination value &gt;30% are recorded and further analysis is not carried out.
-Other queries move onto the neural network stage (stage II).</p>
+</div>
+<div id="thresholds" class="section level4 unnumbered hasAnchor">
+<h4>Thresholds<a href="23-Bin_quality.html#thresholds" class="anchor-section" aria-label="Anchor link to header"></a></h4>
+<p>Any query genomes with a completeness value of &lt;60% or contamination value &gt;30% have these values recorded as their output but they do not move onto stage II.
+Other query genomes move onto the neural network stage (stage II).</p>
+</div>
 </div>
 <div id="stage-ii" class="section level3 hasAnchor" number="23.1.3">
 <h3><span class="header-section-number">23.1.3</span> Stage II<a href="23-Bin_quality.html#stage-ii" class="anchor-section" aria-label="Anchor link to header"></a></h3>
+<center>
+<img src="figures/cocopye_workflow_stage_2.png" style="width: 800px; border-radius: 5px" />
+</center>
 <p>The next step utilises the domain database neighbours found in stage I.
 With this it creates a count ratio histogram (CRH) to use for a machine learning (ML)/neural network approach.
 This is carried out to reduce the dimensionality of the data to improve iterative training and reduce the risk of overfitting.
 But what is a CRH?</p>
+<div id="count-ratio-histogram" class="section level4 unnumbered hasAnchor">
+<h4>Count Ratio Histogram<a href="23-Bin_quality.html#count-ratio-histogram" class="anchor-section" aria-label="Anchor link to header"></a></h4>
 <p>Each Pfam domain family is given a count ratio of Cq:Cr.</p>
 <ul>
 <li>Cq: The count of the domain family in the query genome.</li>
@@ -415,9 +432,27 @@ But what is a CRH?</p>
 </ul>
 <p>Examples:</p>
 <ul>
-<li>In a perfect example both the reference and query has 5 counts of domain family PDA. This indicates high completeness and low contamination.</li>
-<li>If domain family PDH appears 4 times across all proteins in the query and only twice in the reference the count ratio will be 2/1. This would indicate contamination.</li>
-<li>If domain family PDS appears 4 times across all proteins in the query and 12 times in the reference the count ratio will be 1/3. This indicates low completeness.</li>
+<li><strong>PDA</strong> domain
+<ul>
+<li>Appears <strong>2</strong> times in the <strong>query</strong></li>
+<li>Appears <strong>2</strong> times in the <strong>reference</strong></li>
+<li><strong>Count ratio</strong> = <strong>1/1</strong></li>
+<li>This indicates high completeness and low contamination.</li>
+</ul></li>
+<li><strong>PDH</strong> domain
+<ul>
+<li>Appears <strong>4</strong> times in the <strong>query</strong></li>
+<li>Appears <strong>2</strong> times in the <strong>reference</strong></li>
+<li><strong>Count ratio</strong> = <strong>2/1</strong></li>
+<li>This indicates <strong>contamination</strong> because there are too many copies of the domain in our query</li>
+</ul></li>
+<li><strong>PDS</strong> domain
+<ul>
+<li>Appears <strong>4</strong> times in the <strong>query</strong></li>
+<li>Appears <strong>12</strong> times in the <strong>reference</strong></li>
+<li><strong>Count ratio</strong> = <strong>1/3</strong></li>
+<li>This indicates low <strong>completeness</strong> because ther eare too few copies of the domain in our query</li>
+</ul></li>
 </ul>
 <p>The relative frequency of all the count ratios are used to create a histogram, the CRH.
 The process itself will use a text histogram but below are two visualisations of CRHs.</p>
@@ -427,7 +462,7 @@ The process itself will use a text histogram but below are two visualisations of
 <ul>
 <li>If the central peak contained 100% of the count ratios this would indicate 100% completeness and 0% contamination.</li>
 </ul></li>
-<li><strong>Right of the central point:</strong> Histograms bins on the right hand side indicate contamination.</li>
+<li><strong>Right of the central point:</strong> Histogram bins on the right hand side indicate contamination.</li>
 <li><strong>Left of the central point:</strong> Histogram bins on the left hand side indicate decreasing completeness.</li>
 </ul>
 <center>
@@ -439,6 +474,12 @@ The process itself will use a text histogram but below are two visualisations of
 <img src="figures/crh2.png" style="width: 600px; border-radius: 5px; border: white 5px solid" />
 <br> <em>The Above plot was created from a query genome with 90% completeness and 10% contamination.</em>
 </center>
+</div>
+<div id="machine-learning" class="section level4 unnumbered hasAnchor">
+<h4>Machine learning<a href="23-Bin_quality.html#machine-learning" class="anchor-section" aria-label="Anchor link to header"></a></h4>
+<p>The machine learning step uses he CRHs of the query genomes and will create the completeness and completion values.</p>
+<p>If you are interested in how the machine leanring step work please see the CoCoPyE publication: <a href="https://academic.oup.com/gigascience/article/doi/10.1093/gigascience/giae079/7841111" class="uri">https://academic.oup.com/gigascience/article/doi/10.1093/gigascience/giae079/7841111</a></p>
+</div>
 </div>
 </div>
 <div id="mamba" class="section level2 hasAnchor" number="23.2">
@@ -471,7 +512,7 @@ The process itself will use a text histogram but below are two visualisations of
 <ul>
 <li><code>-t</code> : Number of threads/cores/CPUs to utilise for the process.</li>
 <li><code>-i</code> : Input directory containing the bins in FASTA format.</li>
-<li><code>-o</code> : Output file (more info below)</li>
+<li><code>-o</code> : Output file (more info below).</li>
 </ul>
 <p>Other options include:</p>
 <ul>
@@ -512,7 +553,12 @@ CoCoPye statistics definitions
 <li><code>bin</code>: Name of the input bin (filename excluding file extension)</li>
 <li><code>completeness</code>: Completeness value between 0 and 1</li>
 <li><code>contamination</code>: Contamination value between 0 and 1</li>
-<li><code>method</code>: Either markers or markers + neural network</li>
+<li><code>method</code>: One of three results:
+<ul>
+<li><strong>rejected</strong>: Failed the threshold in the input-preprocessing step.</li>
+<li><strong>markers</strong>: Values based on stage I as failed to pass onto stage II due to the stage I thresholds</li>
+<li><strong>markers + neural network</strong>: Values based on stage II as passed all thresholds</li>
+</ul></li>
 <li><code>taxonomy</code>: Taxonomy estimate based on a consensus between the nearest neighbors</li>
 <li><code>taxonomy_level</code>: Rank of the taxonomy estimate</li>
 <li><code>notes</code>: Additional notes (currently this is always empty, but we might add some notes in the future)</li>
@@ -560,7 +606,7 @@ Where:</p>
 <li><code>''</code>: All the <code>awk</code> options are contained within the quotes.</li>
 <li><code>{}</code>: We can supply a function to <code>awk</code> within the braces.</li>
 <li><code>print $2,$3</code>: This function instructs <code>awk</code> to print the 2nd (completeness) and 3rd (contamination) fields. It is common to put commas (<code>,</code>) between fields if printing multiple fields.</li>
-<li><code>MAGS_checkm.csv</code>: Our last parameter is the input file. We are not changing the contents of the file, only printing information to screen/stdout.</li>
+<li><code>cocopye_output.csv</code>: Our last parameter is the input file. We are not changing the contents of the file, only printing information to screen/stdout.</li>
 </ul>
 </div>
 <div id="ignore-header" class="section level4 unnumbered hasAnchor">
@@ -575,7 +621,7 @@ Where:</p>
 <h4>Calculate quality<a href="23-Bin_quality.html#calculate-quality" class="anchor-section" aria-label="Anchor link to header"></a></h4>
 <p><strong>The next step</strong> is to carry out the overall quality calculation and append the information to the "MAGS_quality.csv" file.</p>
 <div class="sourceCode" id="cb88"><pre class="sourceCode bash Rchunk"><code class="sourceCode bash"><span id="cb88-1"><a href="23-Bin_quality.html#cb88-1" tabindex="-1"></a><span class="fu">awk</span> <span class="at">-F,</span> <span class="st">&#39;NR&gt;1 {print $2 - (5 * $3)}&#39;</span> cocopye_output.csv</span></code></pre></div>
-<p>Our new function, <code>{print $12 - (5 * $13)}</code>, carries out the overall quality calculation and prints it for each record/row except the first (<code>NR&gt;1</code>).</p>
+<p>Our new function, <code>{print $2 - (5 * 13)}</code>, carries out the overall quality calculation and prints it for each record/row except the first (<code>NR&gt;1</code>).</p>
 <p>You will notice that we have values that equal 4.
 Let us fix that.</p>
 </div>
@@ -596,14 +642,14 @@ These are bins which failed the Input Pre-procesing step.</p>
 <p>Finally we can append the quality values to our <code>MAGS_quality.csv</code> file.</p>
 <div class="sourceCode" id="cb90"><pre class="sourceCode bash Rchunk"><code class="sourceCode bash"><span id="cb90-1"><a href="23-Bin_quality.html#cb90-1" tabindex="-1"></a><span class="fu">awk</span> <span class="at">-F,</span> <span class="st">&#39;NR&gt;1 {print $2 - (5 * $3)}&#39;</span> cocopye_output.csv <span class="kw">|</span> <span class="dt">\</span></span>
 <span id="cb90-2"><a href="23-Bin_quality.html#cb90-2" tabindex="-1"></a><span class="fu">sed</span> <span class="st">&quot;s/^4$/-5/&quot;</span> <span class="op">&gt;&gt;</span> MAGS_quality.csv</span></code></pre></div>
-<p>In the above case we use <code>&gt;&gt;</code> to append the infomration to the file <code>MAGS_quality.csv</code>. We append because we want to retain the header we added to the file earlier.</p>
+<p>In the above case we use <code>&gt;&gt;</code> to append the information to the file <code>MAGS_quality.csv</code>. We append because we want to retain the header we added to the file earlier.</p>
 <p>You can view the file to ensure it worked. The first and second values should be 0.9838 and 0.493</p>
 <div class="sourceCode" id="cb91"><pre class="sourceCode bash Rchunk"><code class="sourceCode bash"><span id="cb91-1"><a href="23-Bin_quality.html#cb91-1" tabindex="-1"></a><span class="fu">less</span> MAGS_quality.csv</span></code></pre></div>
 </div>
 </div>
 <div id="add-quality-to-the-checkm-results-file" class="section level3 unnumbered hasAnchor">
 <h3>Add quality to the checkm results file<a href="23-Bin_quality.html#add-quality-to-the-checkm-results-file" class="anchor-section" aria-label="Anchor link to header"></a></h3>
-<p>Now we can combine the files "cocopye_output.csv" and "MAGS_quality.csv" with the <code>paste</code> command. The <code>-d ","</code> option indicates the merged files will be separated by commas (<code>,</code>), matching the column separation in "MAGS_checkm.csv".</p>
+<p>Now we can combine the files <code>cocopye_output.csv</code> and <code>MAGS_quality.csv</code> with the <code>paste</code> command into a new file called <code>cocopye_quality.csv</code>. The <code>-d ","</code> option indicates the merged files will be separated by commas (<code>,</code>), matching the column separation in <code>cocopye_output.csv</code>.</p>
 <div class="sourceCode" id="cb92"><pre class="sourceCode bash Rchunk"><code class="sourceCode bash"><span id="cb92-1"><a href="23-Bin_quality.html#cb92-1" tabindex="-1"></a><span class="fu">paste</span> <span class="at">-d</span> <span class="st">&quot;,&quot;</span> cocopye_output.csv MAGS_quality.csv <span class="op">&gt;</span> cocopye_quality.csv</span></code></pre></div>
 </div>
 </div>
@@ -612,47 +658,47 @@ These are bins which failed the Input Pre-procesing step.</p>
 <center>
 <img src="figures/question_bubble_blue.png" style="width:150px; background: white; border-radius: 5px; border: 5px white solid" />
 </center>
-<p>Viewing the file "MAGS_checkm_quality.csv" attempt the below questions.</p>
+<p>Viewing the file <code>cocopye_output.csv</code> attempt the below questions.</p>
 <p><strong>Tip</strong>: You can use the <code>cut</code> command to look at specific columns. For example:</p>
 <div class="sourceCode" id="cb93"><pre class="sourceCode bash Rchunk"><code class="sourceCode bash"><span id="cb93-1"><a href="23-Bin_quality.html#cb93-1" tabindex="-1"></a><span class="co">#look at the &quot;bin&quot; and &quot;quality&quot; columns</span></span>
 <span id="cb93-2"><a href="23-Bin_quality.html#cb93-2" tabindex="-1"></a><span class="co">#Convert the printed output&#39;s commas to tabs for readability</span></span>
 <span id="cb93-3"><a href="23-Bin_quality.html#cb93-3" tabindex="-1"></a><span class="fu">cut</span> <span class="at">-d</span> <span class="st">&quot;,&quot;</span> <span class="at">-f</span> 1,8 cocopye_quality.csv <span class="kw">|</span> <span class="fu">tr</span> <span class="st">&quot;,&quot;</span> <span class="st">&quot;\t&quot;</span></span></code></pre></div>
 <ol style="list-style-type: decimal">
 <li>What lineage was assigned to bin <strong>K1.1</strong>?
-<div id="radio_XTKGHNJUCQ" class="webex-radiogroup">
-<label><input type="radio" autocomplete="off" name="radio_XTKGHNJUCQ" value=""></input> <span><strong>Bacteria</strong></span></label><label><input type="radio" autocomplete="off" name="radio_XTKGHNJUCQ" value="answer"></input> <span><strong>Bacteroides</strong></span></label><label><input type="radio" autocomplete="off" name="radio_XTKGHNJUCQ" value=""></input> <span><strong>Lachnospiraceae</strong></span></label>
+<div id="radio_OKNXIXZRIW" class="webex-radiogroup">
+<label><input type="radio" autocomplete="off" name="radio_OKNXIXZRIW" value=""></input> <span><strong>Bacteria</strong></span></label><label><input type="radio" autocomplete="off" name="radio_OKNXIXZRIW" value="answer"></input> <span><strong>Bacteroides</strong></span></label><label><input type="radio" autocomplete="off" name="radio_OKNXIXZRIW" value=""></input> <span><strong>Lachnospiraceae</strong></span></label>
 </div></li>
 <li>What lineage was assigned to bin <strong>K1.22</strong>?
-<div id="radio_ZLXDEBVYGZ" class="webex-radiogroup">
-<label><input type="radio" autocomplete="off" name="radio_ZLXDEBVYGZ" value=""></input> <span><strong>Bacteria</strong></span></label><label><input type="radio" autocomplete="off" name="radio_ZLXDEBVYGZ" value=""></input> <span><strong>Bacteroides</strong></span></label><label><input type="radio" autocomplete="off" name="radio_ZLXDEBVYGZ" value="answer"></input> <span><strong>Lachnospiraceae</strong></span></label>
+<div id="radio_IWNKSLEFPB" class="webex-radiogroup">
+<label><input type="radio" autocomplete="off" name="radio_IWNKSLEFPB" value=""></input> <span><strong>Bacteria</strong></span></label><label><input type="radio" autocomplete="off" name="radio_IWNKSLEFPB" value=""></input> <span><strong>Bacteroides</strong></span></label><label><input type="radio" autocomplete="off" name="radio_IWNKSLEFPB" value="answer"></input> <span><strong>Lachnospiraceae</strong></span></label>
 </div></li>
 <li>What lineage was assigned to bin <strong>K1.8</strong>?
-<div id="radio_CJOSEAHTTU" class="webex-radiogroup">
-<label><input type="radio" autocomplete="off" name="radio_CJOSEAHTTU" value="answer"></input> <span><strong>Bacteria</strong></span></label><label><input type="radio" autocomplete="off" name="radio_CJOSEAHTTU" value=""></input> <span><strong>Bacteroides</strong></span></label><label><input type="radio" autocomplete="off" name="radio_CJOSEAHTTU" value=""></input> <span><strong>Lachnospiraceae</strong></span></label>
+<div id="radio_FEFMOVILTV" class="webex-radiogroup">
+<label><input type="radio" autocomplete="off" name="radio_FEFMOVILTV" value="answer"></input> <span><strong>Bacteria</strong></span></label><label><input type="radio" autocomplete="off" name="radio_FEFMOVILTV" value=""></input> <span><strong>Bacteroides</strong></span></label><label><input type="radio" autocomplete="off" name="radio_FEFMOVILTV" value=""></input> <span><strong>Lachnospiraceae</strong></span></label>
 </div></li>
 <li>What is the quality value of <strong>K1.1</strong>?
-<div id="radio_FOBBODXFSK" class="webex-radiogroup">
-<label><input type="radio" autocomplete="off" name="radio_FOBBODXFSK" value=""></input> <span><strong>0.0202</strong></span></label><label><input type="radio" autocomplete="off" name="radio_FOBBODXFSK" value="answer"></input> <span><strong>0.6724</strong></span></label><label><input type="radio" autocomplete="off" name="radio_FOBBODXFSK" value=""></input> <span><strong>0.9769</strong></span></label>
+<div id="radio_FARXPHVDIE" class="webex-radiogroup">
+<label><input type="radio" autocomplete="off" name="radio_FARXPHVDIE" value=""></input> <span><strong>0.0202</strong></span></label><label><input type="radio" autocomplete="off" name="radio_FARXPHVDIE" value="answer"></input> <span><strong>0.6724</strong></span></label><label><input type="radio" autocomplete="off" name="radio_FARXPHVDIE" value=""></input> <span><strong>0.9769</strong></span></label>
 </div></li>
 <li>What is the completeness value of <strong>K1.30</strong>?
-<div id="radio_WQVCVFDJSG" class="webex-radiogroup">
-<label><input type="radio" autocomplete="off" name="radio_WQVCVFDJSG" value=""></input> <span><strong>0.0202</strong></span></label><label><input type="radio" autocomplete="off" name="radio_WQVCVFDJSG" value=""></input> <span><strong>0.6724</strong></span></label><label><input type="radio" autocomplete="off" name="radio_WQVCVFDJSG" value="answer"></input> <span><strong>0.9769</strong></span></label>
+<div id="radio_CZBVCYERTQ" class="webex-radiogroup">
+<label><input type="radio" autocomplete="off" name="radio_CZBVCYERTQ" value=""></input> <span><strong>0.0202</strong></span></label><label><input type="radio" autocomplete="off" name="radio_CZBVCYERTQ" value=""></input> <span><strong>0.6724</strong></span></label><label><input type="radio" autocomplete="off" name="radio_CZBVCYERTQ" value="answer"></input> <span><strong>0.9769</strong></span></label>
 </div></li>
 <li>What is the contamination value of <strong>K1.12</strong> bin?
-<div id="radio_XCPTHLUTWD" class="webex-radiogroup">
-<label><input type="radio" autocomplete="off" name="radio_XCPTHLUTWD" value="answer"></input> <span><strong>0.0202</strong></span></label><label><input type="radio" autocomplete="off" name="radio_XCPTHLUTWD" value=""></input> <span><strong>0.6724</strong></span></label><label><input type="radio" autocomplete="off" name="radio_XCPTHLUTWD" value=""></input> <span><strong>0.9769</strong></span></label>
+<div id="radio_UJWVBMRLAY" class="webex-radiogroup">
+<label><input type="radio" autocomplete="off" name="radio_UJWVBMRLAY" value="answer"></input> <span><strong>0.0202</strong></span></label><label><input type="radio" autocomplete="off" name="radio_UJWVBMRLAY" value=""></input> <span><strong>0.6724</strong></span></label><label><input type="radio" autocomplete="off" name="radio_UJWVBMRLAY" value=""></input> <span><strong>0.9769</strong></span></label>
 </div></li>
 <li>Which bin has the highest quality value (98.38%)?
-<div id="radio_DSCQOWAVCX" class="webex-radiogroup">
-<label><input type="radio" autocomplete="off" name="radio_DSCQOWAVCX" value=""></input> <span><strong>K1.20</strong></span></label><label><input type="radio" autocomplete="off" name="radio_DSCQOWAVCX" value=""></input> <span><strong>K1.26</strong></span></label><label><input type="radio" autocomplete="off" name="radio_DSCQOWAVCX" value="answer"></input> <span><strong>K1.22</strong></span></label>
+<div id="radio_YJHIJTRVNH" class="webex-radiogroup">
+<label><input type="radio" autocomplete="off" name="radio_YJHIJTRVNH" value=""></input> <span><strong>K1.20</strong></span></label><label><input type="radio" autocomplete="off" name="radio_YJHIJTRVNH" value=""></input> <span><strong>K1.26</strong></span></label><label><input type="radio" autocomplete="off" name="radio_YJHIJTRVNH" value="answer"></input> <span><strong>K1.22</strong></span></label>
 </div></li>
 <li>Which bin has the quality value of -2.9215?
-<div id="radio_DRPQUJXQOO" class="webex-radiogroup">
-<label><input type="radio" autocomplete="off" name="radio_DRPQUJXQOO" value="answer"></input> <span><strong>K1.20</strong></span></label><label><input type="radio" autocomplete="off" name="radio_DRPQUJXQOO" value=""></input> <span><strong>K1.26</strong></span></label><label><input type="radio" autocomplete="off" name="radio_DRPQUJXQOO" value=""></input> <span><strong>K1.22</strong></span></label>
+<div id="radio_JGAKFJEIKX" class="webex-radiogroup">
+<label><input type="radio" autocomplete="off" name="radio_JGAKFJEIKX" value="answer"></input> <span><strong>K1.20</strong></span></label><label><input type="radio" autocomplete="off" name="radio_JGAKFJEIKX" value=""></input> <span><strong>K1.26</strong></span></label><label><input type="radio" autocomplete="off" name="radio_JGAKFJEIKX" value=""></input> <span><strong>K1.22</strong></span></label>
 </div></li>
 <li>Which bin has the highest completeness value (98.59%)?
-<div id="radio_ZZZBRYAMIQ" class="webex-radiogroup">
-<label><input type="radio" autocomplete="off" name="radio_ZZZBRYAMIQ" value=""></input> <span><strong>K1.20</strong></span></label><label><input type="radio" autocomplete="off" name="radio_ZZZBRYAMIQ" value="answer"></input> <span><strong>K1.26</strong></span></label><label><input type="radio" autocomplete="off" name="radio_ZZZBRYAMIQ" value=""></input> <span><strong>K1.22</strong></span></label>
+<div id="radio_WMGYEXJSJW" class="webex-radiogroup">
+<label><input type="radio" autocomplete="off" name="radio_WMGYEXJSJW" value=""></input> <span><strong>K1.20</strong></span></label><label><input type="radio" autocomplete="off" name="radio_WMGYEXJSJW" value="answer"></input> <span><strong>K1.26</strong></span></label><label><input type="radio" autocomplete="off" name="radio_WMGYEXJSJW" value=""></input> <span><strong>K1.22</strong></span></label>
 </div></li>
 </ol>
 </div>
@@ -662,7 +708,7 @@ These are bins which failed the Input Pre-procesing step.</p>
 <img src="figures/sum_black.png" style="width:150px; background: white ; border-radius:5px; border: 5px white solid" />
 </center>
 <p>It is always useful to know the quality of your bins so you know which are more reliable than others. With that information you can be more or less certain when concluding your findings.</p>
-<p>We have some good quality bins. However, the best bins would only have one genome. Ultimately binning is trying to separate all the genomes from each other. A better metagenome assembly would most likely have led to better binning.</p>
+<p>We have some good quality bins but many poorer quality bins too. Ultimately binning is trying to separate all the genomes from each other. A better metagenome assembly would most likely have led to better binning.</p>
 
 </div>
 </div>
