@@ -55,7 +55,8 @@ At the end of the course learners will be able to:
 -   Utilise LEfSe for biomarker detection.
 -   Profile the microbial pathways in metagenomic sequencing data with the bioBakery suite of tools, including HUMAnN.
 -   Perform a metagenome assembly with MEGAHIT, and assess it with QUAST.
--   Carry out genomic binning of the metagenome assembly with MetaBAT2 to try to separate the different species present.
+-   Carry out genomic binning of the metagenome assembly with MetaBAT2 to try to separate the different species present into Metagenome Assembled Genomes (MAGs).
+-   Assess the quality, completeness, and contamination levels of MAGs with CoCoPyE.
 -   Functional annotation of the bins with Bakta.
 
 ## Table of contents {.unnumbered}
