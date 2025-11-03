@@ -2181,7 +2181,8 @@ This can be used on assemblies produced from single cell, single isolate, or met
 ## Workflow concept
 
 The tool utilises protein domain families from the Pfam database.
-A protein domain is a region of a protein that folds independently from the rest and they vary in length from ~50-250 amino acids.
+A protein domain is a region of a protein that folds independently from the rest of the protein.
+They vary in length from ~50-250 amino acids.
 Many proteins consist of several domains and a domain can appear in many different proteins.
 
 `CoCoPyE` estimates quality of a genome by estimating completeness and contamination through an input-preprocessing step followed by a two stage prediction step. 
