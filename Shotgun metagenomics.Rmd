@@ -2202,6 +2202,8 @@ For full details please see the CoCoPyE publication: https://academic.oup.com/gi
 A protein domain search is carried out on all translated open reading frames of our our query genomes, MAGs/bins in our case.
 The Pfam protein database is used and the tool produces protein domain counts for our query genomes.
 
+The completeness of the query genome is estimated based on one of 2 universal marker sets.
+The universal marker sets contain the protein domains found in either all reference bacterial genomes or all reference archaeal genomes.
 Query genomes (MAGS/bins) with a completeness score <10% are rejected and removed from further analysis.
 
 ### Stage I
