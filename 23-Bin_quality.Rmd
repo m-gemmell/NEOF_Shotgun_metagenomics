@@ -67,7 +67,7 @@ We therefore acquire the below results:
 
 #### Thresholds {-}
 
-Any query genomes with a completeness value of <60% or contamination value >30% have these values recorded as their output but they do not move onto stage II.
+Any query genomes with a completeness value of <60% or contamination value >30% have their values recorded as their output but they do not move onto stage II.
 Other query genomes move onto the neural network stage (stage II).
 
 ### Stage II
@@ -105,9 +105,9 @@ Examples:
   - Appears __4__ times in the __query__
   - Appears __12__ times in the __reference__
   - __Count ratio__ = __1/3__
-  - This indicates low __completeness__ because ther eare too few copies of the domain in our query
+  - This indicates low __completeness__ because there are too few copies of the domain in our query
 
-The relative frequency of all the count ratios are used to create a histogram, the CRH.
+The relative frequency of all the different domain count ratios are used to create a histogram, the CRH.
 The process itself will use a text histogram but below are two visualisations of CRHs.
 
 The main features of a CRH are:
@@ -130,9 +130,13 @@ The main features of a CRH are:
 
 #### Machine learning {-}
 
-The machine learning step uses he CRHs of the query genomes and will create the completeness and completion values.
+The machine learning step uses the CRHs of the query genomes to improve/refine the marker-based estimations from stage I.
 
-If you are interested in how the machine leanring step work please see the CoCoPyE publication: https://academic.oup.com/gigascience/article/doi/10.1093/gigascience/giae079/7841111
+Two neural networks are used in this prediction refinement step.
+One neural network is used to improve the completeness estimation and one neural network is used to improve the contamination estimation.
+
+The neural network implementations are from `sklearn`.
+If you are interested in how the machine learning step work please see the CoCoPyE publication: https://academic.oup.com/gigascience/article/doi/10.1093/gigascience/giae079/7841111
 
 ## Mamba
 <center>
