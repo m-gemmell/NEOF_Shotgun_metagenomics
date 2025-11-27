@@ -162,12 +162,12 @@ cd ~/7-Binning/K1/
 ![](figures/play_black.png){style="width:150px; background: white; border-radius: 5px; border: 5px white solid"}
 </center>
 
-`CoCoPyE` has one main command to predict bin quality: `CoCoPyE run`. 
+`cocopye` has one main command to predict bin quality: `cocopye run`. 
 
-Run the `CoCoPyE` command (this will take a while):
+Run the `cocopye` command (this will take a while):
 
 ```{bash eval=FALSE}
-CoCoPyE run \
+cocopye run \
 -t 12 \
 -i bins/ \
 -o cocopye_output.csv
