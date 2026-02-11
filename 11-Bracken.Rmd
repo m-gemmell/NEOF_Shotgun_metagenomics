@@ -1,11 +1,11 @@
-# Bracken
+# Bracken {#bracken}
 <center>
 ![](figures/bracken.png){style="width:150px; background: white; border-radius:5px; border: white solid 5px"}
 </center>
 
 `Bracken` (Bayesian Reestimation of Abundance with KrakEN) uses taxonomy labels assigned by `Kraken2` to compute estimated abundances of species in a metagenomic sample. 
 
-## Bracken: run
+## Bracken abundance reestimation
 <center>
 ![](figures/play_green.png){style="width:100px; background: white; border-radius:5px; border: white solid 5px"}
 </center>
@@ -31,12 +31,16 @@ bracken -d $KRAKEN2_DB_PATH/minikraken2_v1_8GB \
 - `-l S`: This specifies the taxonomic level/rank of the `Bracken` output. In this case `S` is equal to species with the other options being `D`, `P`, `C`, `O`, `F` and `G`.
 - `-t 5`: This specifies the minimum number of reads required for a classification at the specified rank. Any classifications with fewer reads than the specified threshold will not receive additional reads from higher taxonomy levels when distributing reads for abundance estimation. Five has been chosen here for this example data but in real datasets you may want to increase this number (default is 10).
 
-## Bracken: output
+## Output and report file
 <center>
 ![](figures/output_file_green.png){style="width:100px"}
 </center>
 
-The output file of `Bracken` contains the following columns:
+With our command we created an output and a report file for `bracken`.
+
+### Output
+
+The output file of `Bracken` (`K1.bracken`) contains the following columns:
 
 1. __Name__: Name of taxonomy at the specified taxonomic level.
 2. __Taxonomy ID__: NCBI taxonomy id
@@ -46,7 +50,24 @@ The output file of `Bracken` contains the following columns:
 6. __Total reads after abundance reestimation__: Number from field 4 and 5 summed. This is the field that will be used for downstream analysis
 7. __Fraction of total reads__: Relative abundance of the taxonomy
 
-#### Task {-}
+### Report file
+
+The `--report` created the report file (`K1.breport2`).
+It contains the `Bracken` read counts in the same format as the report file for `kraken2`
+
+This is an essential file if you want to use the `Bracken` output in R using the `phyloseq` object. 
+This is covered in our R community analysis workshop and won't be covered here.
+
+The fields of the output, from left-to-right, are as follows:
+
+1.  Percentage of paired reads covered by the clade rooted at this taxon.
+2.  Number of paired reads covered by the clade rooted at this taxon.
+3.  Number of paired reads assigned directly to this taxon.
+4.  A rank code, indicating (U)nclassified, (R)oot, (D)omain, (K)ingdom, (P)hylum, (C)lass, (O)rder, (F)amily, (G)enus, or (S)pecies. Taxa that are not at any of these 10 ranks have a rank code that is formed by using the rank code of the closest ancestor rank with a number indicating the distance from that rank. E.g., "G2" is a rank code indicating a taxon is between genus and species and the grandparent taxon is at the genus rank.
+5.  NCBI taxonomic ID number
+6.  Indented scientific name
+
+## Bracken task
 
 Repeat the above commands for K2 and W1
 
@@ -61,7 +82,7 @@ bracken -d $KRAKEN2_DB_PATH/minikraken2_v1_8GB \
 ```
 `r unhide()`
 
-## Bracken: MCQs
+## MCQs
 <center>
 ![](figures/question_bubble_green.png){style="width:100px; background: white; border-radius:5px; border: white solid 5px"}
 </center>
@@ -83,7 +104,7 @@ opts_p <- c(answer="__0.00011__","__16__", "__702__")
 ```
 3. In __W1__, what is the fraction of total reads (after abundance reestimation) for __Tannerella forsythia__? `r longmcq(opts_p)`
 
-## Bracken: merging output
+## Merging output
 <center>
 ![](figures/merge.png){style="width:100px; background: white; border-radius:5px"}
 </center>
@@ -111,7 +132,7 @@ After these columns are the following two columns for each sample.
 - `${SampleName}.bracken_num`: The number of reads after abundance reestimation 
 - `${SampleName}.bracken_frac`: Relative abundance of the group in the sample
 
-## Bracken: extracting output
+## Extracting output
 <center>
 ![](figures/exctractor.png){style="width:100px; background:white;border-radius:5px; border: white 5px solid"}
 </center>

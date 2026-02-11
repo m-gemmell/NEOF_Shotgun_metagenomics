@@ -2,7 +2,7 @@
 
 # Functional profiling {#functprofile}
 <center>
-![](figures/profile.png){style="width:150px; background:white;border-radius:5px"}
+![](figures/profile.png){style="width:150px; background:white;border-radius:5px; border: white solid 5px"}
 </center>
 
 It is possible to investigate functional differences between metagenome (and metatranscriptome) samples by directly interrogating the read data. We will look at how this can be done with a package called `HUMAnN` (The HMP Unified Metabolic Analysis Network), a [bioBakery](https://github.com/biobakery/biobakery) pipeline designed to accurately profile the presence/absence and abundance of microbial pathways in metagenomic sequencing data.
@@ -16,6 +16,6 @@ Please see below for a diagram showing the pipeline of `HUMAnN`:
 </center>
 
 `r hide("HUMAnN 4")`
-HUMAnN 4 is currently in alpha: (https://forum.biobakery.org/t/announcing-humann-4-0-alpha/7531)
-I have tested it and could not install it correctly so we will not be teaching its use in this course till it is out of alpha and stable.
+HUMAnN 4 is currently in alpha so these materials teach HUMAnN3. 
+For more information on HUMANnN4 please see: (https://forum.biobakery.org/t/announcing-humann-4-0-alpha/7531)
 `r unhide()`

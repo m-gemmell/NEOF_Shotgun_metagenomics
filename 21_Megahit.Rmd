@@ -40,9 +40,12 @@ megahit \
 - `-2`: Reverse reads of paired end reads to be used for assembly. We are using the reads that did not stitch as they still have useful information.
 - `-o`: Output directory.
 - `-t`: Number of threads to be used for process.
-- `--k-list`: K-mer list.
+- `--k-list`: <u id='kmer'>K-mer</u> list.
 
-The __k-mer list__ instructs `MEGAHIT` to first generate an assembly using a k-mer size of 29 bp and when that is complete, integrate the results into an assembly using a k-mer size of 49 bp, and so on up to a final iteration using a k-mer size of 189 bp. This large range of k-mer lengths should give us a good assembly, given the data. However, it may take a while to run. This might be a good time to read on or take a break whilst the command runs. 
+The __<u id='kmer'>k-mer</u> list__ instructs `MEGAHIT` to first generate an assembly using a <u id='kmer'>k-mer</u> size of 29 bp and when that is complete, integrate the results into an assembly using a <u id='kmer'>k-mer</u> size of 49 bp, and so on up to a final iteration using a <u id='kmer'>k-mer</u> size of 189 bp. 
+This large range of <u id='kmer'>k-mer</u> lengths should give us a good assembly, given the data. 
+However, it may take a while to run. 
+This might be a good time to read on or take a break whilst the command runs. 
 
 If you need a command prompt (your current one is busy because MEGAHIT is running), right click on the main screen, choose `Terminal`.
 
@@ -150,3 +153,15 @@ __Questions__
 We now have an assembly. It is not a brilliant one due to us only having used 1 million reads. In real analysis we would prefer fewer but longer contigs. We will explore some tools we can use with our metagenome assembly in the next chapters.
 
 There is also a `metaQUAST` specifically for metagenome assemblies but it requires reference assemblies be provided.
+
+```{r, echo=FALSE}
+#Tippy tooltips
+#Note, &#013; is a newline entitiy (\n does not work)
+tippy::tippy_this(elementId = "kmer", 
+                  tooltip = "Substrings of length k within a DNA/RNA sequence. 
+                              The 1-mers of 'AGCT' are 'A', 'G', 'C', and 'T'. 
+                              Its 2-mers are 'AG', 'GC' and 'CT'. 
+                              Its 3-mers are 'AGC' and GCT'. 
+                              Its 4-mer is 'AGCT'.",
+                  arrow = TRUE, placement = "bottom")
+```

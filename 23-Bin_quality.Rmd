@@ -157,7 +157,7 @@ Ensure you are in the correct directory.
 cd ~/7-Binning/K1/
 ```
 
-## CoCoPyE: run
+## Run
 <center>
 ![](figures/play_black.png){style="width:150px; background: white; border-radius: 5px; border: 5px white solid"}
 </center>
@@ -191,7 +191,7 @@ Other options include:
   - More information on the output below.
   
 
-## CoCoPyE: output
+## Output
 <center>
 ![](figures/output_file_black.png){style="width:150px"}
 </center>
@@ -232,7 +232,7 @@ Output columns when `-v` set to `standard` (also the default)
 Please see the full list of statistics definitions from [CoCoPyE wiki](https://github.com/gobics/cocopye/wiki/Output). This includes the defintions when `-v` is set to `extended` or `full`.
 `r unhide()`
 
-## CoCoPyE: Quality score
+## Quality score
 <center>
 ![](figures/quality_ribbon.png){style="width:200px; background: white ; border-radius: 5px; border: white solid 5px"}
 </center>
@@ -351,7 +351,7 @@ Now we can combine the files `cocopye_output.csv` and `MAGS_quality.csv` with th
 paste -d "," cocopye_output.csv MAGS_quality.csv > cocopye_quality.csv
 ```
 
-## CheckM: MCQs
+## MCQs
 <center>
 ![](figures/question_bubble_blue.png){style="width:150px; background: white; border-radius: 5px; border: 5px white solid"}
 </center>

@@ -3,6 +3,27 @@
 ![](figures/kraken.png){style="width:150px; background: white; border-radius:5px; border: white solid 5px"}
 </center>
 
+`Kraken2` assigns taxonomic sequence classifications to DNA sequences.
+It carries this out by comparing the <u id='kmer'>k-mers</u> of each DNA sequence to the <u id='kmer'>k-mers</u> in a genomic library.
+Each <u id='kmer'>k-mer</u> in the genomic library has a taxonomy assigned to it based on the LCA (lowest common ancestor) of all the known lineages that have the <u id='kmer'>k-mer</u> in their genome.
+
+One DNA sequence will have many <u id='kmer'>k-mers</u>, each of those <u id='kmer'>k-mers</u> having a classification.
+A single consensus taxonomic classification will be assigned to the DNA sequence.
+This could be at species level or higher.
+If the classification is at genus level then the species will be unknown.
+
+We use and suggest `Kraken2` as a method to assign taxonomies to shotgun metagenomic reads for the following reasons:
+
+- It is computationally efficient, being incredibly quick.
+- It can be used for DNA sequences of any size including short illumina read, longer PacBio or ONT reads, and even assembled contigs.
+- Custom databases can be used so you can in theory classify any organism whose genome has been sufficiently categorised by genomic sequencing.
+- [`Bracken`](#bracken) can be used downstream to produce taxonomy abundances that can be used for community analysis.
+
+For more information please see the `Kraken2` paper:
+[Improved metagenomic analysis with Kraken 2](https://link.springer.com/article/10.1186/s13059-019-1891-0)
+
+## Set Kraken2 database
+
 Prior to running `Kraken2` we need to set a variable so `Kraken2` knows where to look for the databases it will use.
 
 ```{bash eval=FALSE}
@@ -14,14 +35,16 @@ export KRAKEN2_DB_PATH=/pub14/tea/nsc206/NEOF/Shotgun_metagenomics/kraken2_db
 -   Standard `Kraken2` databases: <https://github.com/DerrickWood/kraken2/wiki/Manual#standard-kraken-2-database>
 -   Custom `Kraken2` databases: <https://github.com/DerrickWood/kraken2/wiki/Manual#custom-databases>
 
-## Kraken2: run
+## Classify reads
 <center>
 ![](figures/play_blue.png){style="width:100px; background: white; border-radius:5px; border: white solid 5px"}
 </center>
 
 Now, run `Kraken2` on sample K1 by running the following command.
 
-**Note**: We are not using the host removed data. This is to save time. In your own analysis ensure you are using host removed data.
+**Note**: In this tutorial we are not using the host removed data. 
+This is to save time during the workshop. 
+In your own analysis ensure you are using host removed data if your data is host derived.
 
 ```{bash eval=FALSE}
 kraken2 --paired --db minikraken2_v1_8GB \
@@ -42,14 +65,14 @@ kraken2 --paired --db minikraken2_v1_8GB \
 -   **`--report`**: The output report file. More info below.
 -   **`~/2-Trimmed/K1_R1.fq.gz ~/2-Trimmed/K1_R2.fq.gz`**: The trimmed read pairs for K1, which we will use as input.
 
-## Kraken2: output
+## Output and report files
 <center>
 ![](figures/output_file_blue.png){style="width:100px"}
 </center>
 
 There are two major output formats from Kraken2.
 
-#### Output file {-}
+### Output file
 
 The `--output` parameter creates a `.kraken` file. Each sequence (or sequence pair, in the case of paired reads) classified by `Kraken2` results in a single line of output. `Kraken2`'s output lines contain five tab-delimited fields; from left to right, they are
 
@@ -57,17 +80,21 @@ The `--output` parameter creates a `.kraken` file. Each sequence (or sequence pa
 2.  **Sequence ID:** Obtained from the FASTA/FASTQ header.
 3.  **Taxonomy ID:** Assigned by `Kraken2`. This is 0 if the sequence is unclassified.
 4.  **Length of the sequence in bp:** In the case of paired read data, this will be a string containing the lengths of the two sequences in bp, separated by a pipe character, e.g. "98\|94".
-5.  **LCA mapping:** A space-delimited list indicating the LCA (also known as [MRCA](https://en.wikipedia.org/wiki/Most_recent_common_ancestor)) mapping of each k-mer in the sequence(s). For example, "562:13 561:4 A:31 0:1 562:3" would indicate that:
-    -   562:13 - The first 13 k-mers mapped to taxonomy ID #562
-    -   561:4 - The next 4 k-mers mapped to taxonomy ID #561
-    -   A:31 - The next 31 k-mers contained an ambiguous nucleotide
-    -   0:1 - The next k-mer was not in the database
-    -   562:3 - The last 3 k-mers mapped to taxonomy ID #562
+5.  **LCA mapping:** A space-delimited list indicating the LCA (also known as [MRCA](https://en.wikipedia.org/wiki/Most_recent_common_ancestor)) mapping of each <u id='kmer'>k-mer</u> in the sequence(s). For example, "562:13 561:4 A:31 0:1 562:3" would indicate that:
+    -   562:13 - The first 13 <u id='kmer'>k-mers</u> mapped to taxonomy ID #562
+    -   561:4 - The next 4 <u id='kmer'>k-mers</u> mapped to taxonomy ID #561
+    -   A:31 - The next 31 <u id='kmer'>k-mers</u> contained an ambiguous nucleotide
+    -   0:1 - The next <u id='kmer'>k-mer</u> was not in the database
+    -   562:3 - The last 3 <u id='kmer'>k-mers</u> mapped to taxonomy ID #562
     -   **Note**: that paired read data will contain a "\|:\|" token in this list to indicate the end of one read and the beginning of another.
 
-#### Report file {-}
+### Report file
 
-The `--report` parameter creates a `.kreport2` file. This is the report output format. This is required for bracken. It is tab-delimited with one line per taxon. The fields of the output, from left-to-right, are as follows:
+The `--report` parameter creates a `.kreport2` file. 
+This is the report output format and is required for bracken. 
+It is tab-delimited with one line per taxon. 
+
+The fields of the output, from left-to-right, are as follows:
 
 1.  Percentage of paired reads covered by the clade rooted at this taxon.
 2.  Number of paired reads covered by the clade rooted at this taxon.
@@ -76,15 +103,15 @@ The `--report` parameter creates a `.kreport2` file. This is the report output f
 5.  NCBI taxonomic ID number
 6.  Indented scientific name
 
-#### Screen output {-}
+### Screen output
 
 The output to screen will show how many sequences are classified. This will be lower than normal as we are using a mini `Kraken2` database.
 
-#### Confidence threshold {-}
+## Confidence threshold
 
 In a real analysis you may use the option `--confidence` which represents the **"Confidence score threshold"**. The default is `0.0`, which is the lowest, with the maximum value being `1`. A good place to start may be `0.1`. Too many classifications are removed if you attempt it with this dataset, due to the mini `Kraken2` database used. More info on the confidence scoring can be found at: <https://github.com/DerrickWood/kraken2/wiki/Manual#confidence-scoring>
 
-#### Task {-}
+## Kraken2 task
 
 Once the Kraken2 command has finished running, run it on the other two samples. Attempt the commands without looking at the help box.
 
@@ -105,7 +132,7 @@ kraken2 --paired --db minikraken2_v1_8GB \
 
 `r unhide()`
 
-## Kraken 2: MCQs
+## MCQs
 <center>
 ![](figures/question_bubble_blue.png){style="width:100px; background: white; border-radius:5px; border: white solid 5px"}
 </center>
@@ -147,3 +174,15 @@ opts_p <- c(answer="__0.12__", "__0.59__", "__14.89__")
 ```
 
 6.  What percentage of K1's paired reads were assigned to the clade of Bacteroides helcogenes (Species)? `r longmcq(opts_p)`
+
+```{r, echo=FALSE}
+#Tippy tooltips
+#Note, &#013; is a newline entitiy (\n does not work)
+tippy::tippy_this(elementId = "kmer", 
+                  tooltip = "Substrings of length k within a DNA/RNA sequence. 
+                              The 1-mers of 'AGCT' are 'A', 'G', 'C', and 'T'. 
+                              Its 2-mers are 'AG', 'GC' and 'CT'. 
+                              Its 3-mers are 'AGC' and GCT'. 
+                              Its 4-mer is 'AGCT'.",
+                  arrow = TRUE, placement = "bottom")
+```

@@ -1,11 +1,12 @@
-# Krona plot
+# Krona
 <center>
 ![](figures/krona.png){style="width:150px; background: white; border-radius:5px; border: white solid 5px"}
 </center>
 
-`Krona` is an interactive metagenome species abundance visualisation tool. 
+`Krona` is an interactive metagenome species abundance visualisation tool.
+We will use it to produce interactive tiered pie charts from our `Kraken2` output.
 
-## Krona: run
+## Import taxonomy
 <center>
 ![](figures/play_red.png){style="width:100px; background: white; border-radius:5px; border: white solid 5px"}
 </center>
@@ -22,7 +23,7 @@ ktImportTaxonomy -o kraken2.krona.html *.kreport2
 
 You will get a warning that not all taxonomy IDs were found. We will ignore this but in your own future installations this should be addressed with `Krona`'s `updateTaxonomy.sh` command.
 
-## Krona: visualise
+## Tiered piecharts
 <center>
 ![](figures/eye_red.png){style="width:100px; background: white; border-radius:5px; border: white solid 5px"}
 </center>
@@ -44,7 +45,7 @@ This is an interactive multi-tiered pie chart with many options. Some of the int
   - This will display the percentage this taxonomy covers of all the different taxonomies above it that it belongs to. This is displayed on the right side of the screen.
   - E.g. Click on Pseudomonadota to see the percentage of the Root it accounts for and to see the percentage of Bacteria it accounts for in the sample.
 
-## Krona: MCQs
+## MCQs
 <center>
 ![](figures/question_bubble_red.png){style="width:100px; background: white; border-radius:5px; border: white solid 5px"}
 </center>

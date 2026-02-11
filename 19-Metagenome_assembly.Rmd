@@ -16,7 +16,7 @@ For this reason, it is sometimes advantageous to assemble the reads into contigs
 
 Here, we will carry out a couple of assemblies on our dataset.
 
-## Metagenome assembly: Mamba
+## Mamba
 <center>
 ![](figures/mamba_logo.png){style="width:200px; border-radius:5px"}
 </center>
@@ -30,13 +30,13 @@ We will use the `shotgun_meta` conda environment so use a terminal where this is
 
 Illumina reads are too short and numerous to use traditional overlap-layout-consensus assemblers as such an approach would be far too computationally intensive. Instead, we use De Bruijn graph based assemblers. Briefly, these operate as follows:
 
-1.  All reads are broken down into k-length overlapping fragments (k-mers). e.g. if we choose a k-mer size of 5 bp, the following two sequences (blue) would be broken down into the k-mers below them (red):
+1.  All reads are broken down into k-length overlapping fragments (<u id='kmer'>k-mers</u>). e.g. if we choose a <u id='kmer'>k-mer</u> size of 5 bp, the following two sequences (blue) would be broken down into the <u id='kmer'>k-mers</u> below them (red):
 
 <center>
 ![](figures/reads_aligned.png){style="border-radius: 10px; width: 400px"}
 </center>
 
-2.  All k-mers are linked to other k-mers which match with a k-1 length overlap (i.e. that overlap by all but one base):
+2.  All <u id='kmer'>k-mers</u> are linked to other <u id='kmer'>k-mers</u> which match with a k-1 length overlap (i.e. that overlap by all but one base):
 
 <center>
 ![](figures/graph_simple.png){style="border-radius: 10px; width: 800px"}
@@ -48,8 +48,20 @@ Illumina reads are too short and numerous to use traditional overlap-layout-cons
 ![](figures/graph_complex.png){style="border-radius: 10px; width: 800px"}
 </center>
 
-The example here is a vast oversimplification of the complexity of a De Bruijn graph (i.e. there are no branches!). Routing through the graph is never as simple as this as some k-mers will lead to multiple k-mers, which can result in the break point of a contig. This is especially true for complex metagenomic data.
+The example here is a vast oversimplification of the complexity of a De Bruijn graph (i.e. there are no branches!). Routing through the graph is never as simple as this as some <u id='kmer'>k-mers</u> will lead to multiple <u id='kmer'>k-mers</u>, which can result in the break point of a contig. This is especially true for complex metagenomic data.
 
-Generally speaking, the shorter the k-mer, the more branches there will be, the trickier the graph is to resolve, so the resulting contigs are smaller. Assemblers usually perform better with longer k-mer lengths but even then there might not be enough depth of sequencing to generate all k-mers that form overlaps, therefore leading to break points. Finding the right k-mer size usually involves testing several.
+Generally speaking, the shorter the <u id='kmer'>k-mer</u>, the more branches there will be, the trickier the graph is to resolve, so the resulting contigs are smaller. Assemblers usually perform better with longer <u id='kmer'>k-mer</u> lengths but even then there might not be enough depth of sequencing to generate all k-mers that form overlaps, therefore leading to break points. Finding the right <u id='kmer'>k-mer</u> size usually involves testing several.
 
-Fortunately, the assembler we will use, `MEGAHIT`, allows us to build an assembly using multiple k-mer lengths iteratively. The other great advantage about `MEGAHIT` is that it is quick and efficient. We will use `MEGAHIT` on our data soon, but first there is an additional processing step for our sequences...
+Fortunately, the assembler we will use, `MEGAHIT`, allows us to build an assembly using multiple <u id='kmer'>k-mer</u> lengths iteratively. The other great advantage about `MEGAHIT` is that it is quick and efficient. We will use `MEGAHIT` on our data soon, but first there is an additional processing step for our sequences...
+
+```{r, echo=FALSE}
+#Tippy tooltips
+#Note, &#013; is a newline entitiy (\n does not work)
+tippy::tippy_this(elementId = "kmer", 
+                  tooltip = "Substrings of length k within a DNA/RNA sequence. 
+                              The 1-mers of 'AGCT' are 'A', 'G', 'C', and 'T'. 
+                              Its 2-mers are 'AG', 'GC' and 'CT'. 
+                              Its 3-mers are 'AGC' and GCT'. 
+                              Its 4-mer is 'AGCT'.",
+                  arrow = TRUE, placement = "bottom")
+```

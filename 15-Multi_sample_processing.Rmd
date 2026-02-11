@@ -5,9 +5,12 @@
 
 Looking at the functional profile of one sample in isolation is usually not very informative. First, there is nothing to compare it to and second, there are no biological replicates. We will therefore use all the Korean and Western diet samples.
 
-It would take many hours to analyse all of the data using `HUMAnN` and is outside the scope of this course. For this reason, samples were analysed prior to the workshop to generate the output files we covered above.
+## Pre-made data
 
-For the purposes of this comparison, we will look at the pathway abundances only. First copy over the data directory containg the gene families tables and have a look in it.
+It would take many hours to analyse all of the data using `HUMAnN` and is outside the scope of this course. For this reason, samples were analysed prior to the workshop to generate the output files we covered in the previous chapter.
+
+For the purposes of this comparison, we will look at the pathway abundances only. 
+Copy over the data directory containing the gene families tables and have a look in it.
 
 ```{bash eval=FALSE}
 #Ensure you are in the correct directory
@@ -20,7 +23,10 @@ cd DietPathAbundance
 ls
 ```
 
-You will see there are 12 files prefixed with K and 12 prefixed with W, for the Korean diet and Western diet samples, respectively. Take a look at the file for K1.
+## Pathway abundance file
+
+You will see there are 12 files prefixed with K and 12 prefixed with W, for the Korean diet and Western diet samples, respectively. 
+Take a look at the file for K1.
 
 ```{bash eval=FALSE}
 less K1_pathabundance.tsv

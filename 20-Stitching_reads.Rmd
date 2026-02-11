@@ -3,7 +3,7 @@
 ![](figures/stitch.png){style="width:150px; background: white; border-radius:5px; border: white solid 5px"}
 </center>
 
-Longer k-mers generally perform better for assemblies. However, our maximum read length is 100 bp so we are limited to a maximum k-mer length of 99 bp. Thankfully we can get even longer k-mers if we stitch our read pairs together.
+Longer <u id='kmer'>k-mers</u> generally perform better for assemblies. However, our maximum read length is 100 bp so we are limited to a maximum <u id='kmer'>k-mer</u> length of 99 bp. Thankfully we can get even longer <u id='kmer'>k-mers</u> if we stitch our read pairs together.
 
 __Note__: This method will not work if your reads have no overlap. If you are not sure if your reads have overlap ask the team who sequenced them.
 
@@ -15,11 +15,13 @@ First, we obtain our forward and reverse reads, derived from different ends of t
 ![](figures/merging_paired_reads.png){style="width: 400px; border-radius: 15px; border: 5px solid white; background-color: white"}
 </center>
 
-Once we have longer stitched reads, we can increase the k-mer length for our assembly. 
+Once we have longer stitched reads, we can increase the <u id='kmer'>k-mer</u> length for our assembly. 
+
+## FLASH
 
 There are a number of pieces of software that can be used to stitch reads (e.g. `Pear`,  `Pandaseq`) but today we will use one called `FLASH`:
 
-## FLASH: run
+### Run
 <center>
 ![](figures/play_red.png){style="width:100px; background: white; border-radius:5px; border: white solid 5px"}
 </center>
@@ -48,7 +50,7 @@ flash  -o K1 -z -t 12 -d . \
 - `-d`: The directory the output files will be placed.
 - The last 2 flag-less parameters are the forward and reverse read files for stitching.
 
-## FLASH: Output
+### Output
 <center>
 ![](figures/output_file_red.png){style="width:100px"}
 </center>
@@ -69,7 +71,7 @@ less K1.histogram
 
 Scroll down with the down key and you will see that we are looking at a histogram showing the proportion of stitched reads at different lengths. 
 
-## FLASH: MCQs
+## MCQs
 <center>
 ![](figures/question_bubble_red.png){style="width:100px; background: white; border-radius:5px; border: white solid 5px"}
 </center>
@@ -83,3 +85,15 @@ opts_p <- c("__101__", "__177__", answer="__188__")
 opts_p <- c(answer="__101__", "__177__", "__188__")
 ```
 2. What length has the lowest proportion of stitched reads? `r longmcq(opts_p)`
+
+```{r, echo=FALSE}
+#Tippy tooltips
+#Note, &#013; is a newline entitiy (\n does not work)
+tippy::tippy_this(elementId = "kmer", 
+                  tooltip = "Substrings of length k within a DNA/RNA sequence. 
+                              The 1-mers of 'AGCT' are 'A', 'G', 'C', and 'T'. 
+                              Its 2-mers are 'AG', 'GC' and 'CT'. 
+                              Its 3-mers are 'AGC' and GCT'. 
+                              Its 4-mer is 'AGCT'.",
+                  arrow = TRUE, placement = "bottom")
+```

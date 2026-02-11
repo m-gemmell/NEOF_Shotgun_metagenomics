@@ -3,11 +3,13 @@
 ![](figures/lefse_flip.png){style="width:150px; background: white; border-radius:5px; border: white solid 5px"}
 </center>
 
-For the final part of this section, we will see if there are any statistically significant differences between the two sample groups. There are several ways in which this can be achieved but we will carry out `LEfSe` again.
+For the final part of this section, we will see if there are any statistically significant differences between the two sample groups. 
+There are several ways in which this can be achieved but we will use `LEfSe` again.
 
-**Task**: Go back to your `shotgun_meta` terminal (or create a new one and use `. useshotgun`). Then change directory to `4-FunctionalProfiling`)
+**Task**: Go back to your `shotgun_meta` terminal (or create a new terminal and use `. useshotgun`). 
+Then change directory to `4-FunctionalProfiling`).
 
-Thankfully we already formatted the file to work with `LEfSe` when we formatted it for `hclust2`
+Thankfully we already formatted the file to work with `LEfSe` when we formatted it for `hclust2`.
 
 ```{bash eval=FALSE}
 #LEfSe format

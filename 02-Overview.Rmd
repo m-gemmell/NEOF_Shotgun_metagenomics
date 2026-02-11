@@ -57,7 +57,7 @@ This practical is broken up into the following broad sections.
 
 1. __Raw data__: We will first link to a dataset that we have downloaded for this tutorial. We will take a quick look at what the sequence files look like and briefly discuss the origin of the samples.
 2. __Trimming data__: This entails preprocessing our data to ensure that it is of good quality.
-3. __Host removal__: When sequencing the genomic content of host's microbiota (bacteriome, archaeome, mycobiome, and more) it is likely you will also sequence the host's genome. This step shows a method of removing possible host contamination.
+3. __Host removal__: When sequencing the genomic content of a host's microbiota (bacteriome, archaeome, mycobiome, and more) it is likely you will also sequence the host's genome. This step shows a method of removing possible host contamination.
 3. __Taxonomic profiling__: We will analyse the dataset to determine the species abundance in each sample. Following this, we will visualise the data and compare the samples.
 4. __Functional profiling__: We will analyse the dataset to determine the pathway abundance and completeness in each sample. Following this, we will visualise the data and compare the samples.
 5. __Metagenome assembly__: Here, we will move away from just analysing the reads directly and will assemble the metagenome into contigs. Prior to this, we will 'stitch' the reads together to ensure we get the best assembly possible.

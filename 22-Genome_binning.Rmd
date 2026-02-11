@@ -28,7 +28,7 @@ We will use `MetaBAT2` for our genome binning. It has three major upsides that m
 
 1. It has very reliable default parameters meaning virtually no parameter optimisation is required.
 2. It performs very well amongst genome binners.
-3. It is computationally efficient compared to other binners (requires less RAM, cores etc.)
+3. It is computationally efficient compared to other binners (requires less RAM, cores etc.).
 
 Make a new directory and move into it.
 
@@ -39,14 +39,14 @@ mkdir -p ~/7-Binning/K1
 cd ~/7-Binning/K1
 ```
 
-### MetaBAT2: depth calculation
+## Depth calculation
 <center>
 ![](figures/submarine.png){style="width:100px; background: white; border-radius:5px; border: white solid 5px"}
 </center>
 
 To carry out effective genome binning `MetaBAT2` uses coverage information of the contigs. To calculate depth we need to align the reads to the metagenome assembly.
 
-#### Index assembly {-}
+### Index assembly
 
 For the alignment we will use `bwa`. We need to index our assembly file prior to alignment.
 
@@ -54,7 +54,7 @@ For the alignment we will use `bwa`. We need to index our assembly file prior to
 bwa index ~/6-Assembly/K1/final.contigs.fa
 ```
 
-#### Alignment {-}
+### Alignment
 
 Next we will align our trimmed paired reads we used to create the stitched reads. We will carry this out with the `bwa mem` command. `bwa mem` is a good aligner for short reads. If you are using long reads (PacBio or Nanopore) `minimap2` will be more appropriate.
 
@@ -64,7 +64,7 @@ bwa mem ~/6-Assembly/K1/final.contigs.fa \
 K1.sam
 ```
 
-#### Sam to sorted bam {-}
+### Sam to sorted bam
 
 After alignment we need to get the file ready for the contig depth summarisation step. This requires converting the `sam` file to a `bam` (binary form of a `sam` file) file and then sorting the `bam` file.
 
@@ -75,7 +75,7 @@ samtools view -bu K1.sam > K1.bam
 samtools sort K1.bam > K1.sort.bam
 ```
 
-#### Summarise depths {-}
+### Summarise depths
 
 Now we can summarise the contig depths from the sorted `bam` files with `MetaBAT2`'s `jgi_summarize_bam_contig_depths` command.
 
@@ -83,7 +83,7 @@ Now we can summarise the contig depths from the sorted `bam` files with `MetaBAT
 jgi_summarize_bam_contig_depths --outputDepth K1.depth.txt K1.sort.bam
 ```
 
-#### View summary depth {-}
+### View summary depth
 
 You can have a look at the depth file and you will notice there are many contigs with low coverage (<10) and of short length (<1500).
 
@@ -112,7 +112,9 @@ summary(df)
 
 The last command gave us summary information of all the columns. This includes the minimum, maximum, mean, median, and Inter-Quartile Range (IQR) values. 
 
-We can see the values of the `contigLen` and `totalAvgDepth` are very low. However, this is most likely due to a bunch of short and low coverage contigs which will be ignored by `MetaBAT2`. Therefore we will remove rows with information on contigs shorter than 1500 and rerun the summary. `MetaBAT2`'s documentation dictates the minimum contig length should be >=1500 with its default being 2500.
+We can see the values of the `contigLen` and `totalAvgDepth` are very low. However, this is most likely due to a bunch of short and low coverage contigs which will be ignored by `MetaBAT2`. 
+
+We'll remove rows with information on contigs shorter than 1500 and rerun the summary. `MetaBAT2`'s documentation dictates the minimum contig length should be >=1500 with its default being 2500.
 
 ```{r eval=FALSE}
 #Set the new object "df_min1500len" as all rows
@@ -133,7 +135,7 @@ q()
 
 __Note__: One of the reasons for our short contigs is that we only used a subset of our sequencing dataset for this tutorial due to time concerns.
 
-### MetaBAT2: run
+## Run
 <center>
 ![](figures/play_orange.png){style="width:100px; background: white; border-radius:5px; border: white solid 5px"}
 </center>
@@ -163,7 +165,7 @@ metabat2 \
   - The default is 2500.
   - We used the minimum value of 1500 as we are using tutorial data. We recommend using the default in your own analysis.
 
-### MetaBAT2: output
+## Output
 <center>
 ![](figures/output_file_orange.png){style="width:100px"}
 </center>

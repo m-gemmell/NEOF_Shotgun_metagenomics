@@ -10,6 +10,8 @@ Now that we have our combined, unstratified, and normalised table, we can visual
 
 To visualise this we will create a heatmap with `hclust2`.
 
+## File edit
+
 Before carrying out the command we will need to edit the file. Carry out the following alterations:
 
 Remove the `_Abundance` part of the sample names whilst creating a copy that we will use (It is always a good idea to keep the original file in case a mistake happens).
@@ -35,6 +37,8 @@ cp /pub14/tea/nsc206/NEOF/Shotgun_metagenomics/lefse/diet_unstratified.relab.com
 ```
 
 `r unhide()`
+
+## hclust2
 
 Now we can use the `hclust2` tool to create a heatmap of our pathway abundances.
 
@@ -70,7 +74,7 @@ Now we can view the plot.
 firefox diet_unstratified.relab.heatmap.png
 ```
 
-From this, we can see that there is a small amount of clustering caused by the differences between the Korean and Western diet. Other factors that we do not know about the samples must also come into play. This is normal as we cannot account for everything but it is good to try to account for as much as possible.
+From this, we can see that there is a small amount of clustering caused by the differences between the Korean and Western diet. Other factors that we do not know about the samples must also be casuing an effect. This is normal as we cannot account for everything but it is good to try to account for as much as possible.
 
 <center>
 ![](figures/humann_heatmap.png){style="border-radius: 15px; width: 750px; border: 5px solid white"}

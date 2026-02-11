@@ -3,9 +3,15 @@
 ![](figures/humann2.png){style="width:150px; background:white;border-radius:5px"}
 </center>
 
-First, we will carry out an example run of the software and briefly explore the output files. `HUMAnN` can take a long time to run so we will use a small amount of example data. Additionally, we will use a subset of the `HUMAnN` databases for the analysis but when running analysis on your own data you should use the full databases. Information on installing `HUMAnN` and its databases can be found on its online [Home Page](https://huttenhower.sph.harvard.edu/humann/).
+We will carry out an example run of the software and briefly explore the output files. 
+`HUMAnN` can take a long time to run so we will use a small amount of example data. 
 
-## HUMAnN: mamba, directories, and files
+For this tutorial analysis we will use a subset of the `HUMAnN` databases for speed purposes.
+You should use the full databases in your real life projects.
+
+Information on installing `HUMAnN` and its databases can be found on its online [Home Page](https://huttenhower.sph.harvard.edu/humann/).
+
+## Mamba, directories, and files
 <center>
 ![](figures/mamba_logo.png){style="width:200px; border-radius:5px"}
 </center>
@@ -29,7 +35,7 @@ Copy over some test data we will carry out the analysis on. This is a demonstrat
 cp /pub14/tea/nsc206/NEOF/Shotgun_metagenomics/humann/demo.fastq.gz .
 ```
 
-## HUMAnN: run
+## HUMAnN pipeline
 <center>
 ![](figures/play_orange.png){style="width:100px; background: white; border-radius:5px; border: white solid 5px"}
 </center>
@@ -56,7 +62,7 @@ cat K1_R1.fq.gz K1_R2.fq.gz > K1.fq.gz
 humann --input K1.fq.gz --output humann_output --threads
 ```
 
-## HUMAnN: output
+## Output files
 <center>
 ![](figures/output_file_orange.png){style="width:100px"}
 </center>
@@ -68,7 +74,7 @@ cd demo.humann
 ls
 ```
 
-You will see that there are three files and one directory. The directory (`demo_humann_temp`) contains intermediate temporary files and can be disregarded here.
+You will see that there are three files and one directory. The directory (`demo_humann_temp`) contains intermediate temporary files and can be disregarded for now.
 
 The three output files are:
 
@@ -94,6 +100,48 @@ You will see that there are two columns:
 
 This file is not too interesting to look at as it is only demo data. Therefore, press `q` to exit `less` and let's look at some real data.
 
-**Note**: The directory `demo_humann_temp` can be very large and so should be deleted in real projects once you are certain they are not needed. However, these files can be useful for debugging.
-
 **Note**: Link to more detail on [Output files](https://github.com/biobakery/humann#output-files)
+
+## Intermediary/temp files
+<center>
+![](figures/tmp.png){style="width:150px; background:white; border-radius:5px"}
+</center>
+
+The intermediary output directory created by `HUMANnN` (the directories ending with `temp`) can be used for debugging if the output of the analysis seems strange or if the tool produces a warning or error.
+Information on the files in the intermediary directory can be found in the following link:
+
+[https://github.com/biobakery/humann?tab=readme-ov-file#5-intermediate-temp-output-files](https://github.com/biobakery/humann?tab=readme-ov-file#5-intermediate-temp-output-files)
+
+We won't look at these files as they contain a lot of information and the tool ran with no issues.
+
+Although useful for troubleshooting the intermediary directory for real life projects are normally very large.
+A project with many samples can have 100s to 1000s of Gigabytes of storage taken up by the intermediary directories.
+Storage is a valuable resource on HPCs and computers and so it is best to delete these directories after making sure the HUMAnN run was successful.
+
+### Storage check
+
+To emphasise the largeness of the intermediary files check the size of all your `HUMAnN` output.
+
+The `du` command displays the storage that files and directories take up.
+The parameters used are:
+
+- `h`: Human readable output (uses K, M, G etc. to represent Kilobytes, Megabytes, Gigabytes etc.)
+- `s`: Summarise
+- `c`: Produce a grand total (at bottom of output)
+
+```{bash eval=FALSE}
+du -hsc *
+```
+
+You will see that the intermediary directory takes up 73 megabytes of the total 73 megabytes of all the output.
+In other words the intermediary file takes up much more space than the actual useful output.
+
+### Delete intermediary directory
+
+To keep our computer and system administrator happy delete the intermediary directory.
+
+```{bash eval=FALSE}
+rm -r demo_humann_temp
+```
+
+It is always good practice to delete these intermediary directories when you are happy with your output.

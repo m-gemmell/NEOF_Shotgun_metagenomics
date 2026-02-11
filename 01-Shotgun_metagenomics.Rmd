@@ -46,7 +46,7 @@ Sessions will start with a brief presentation followed by self-paced computer pr
 At the end of the course learners will be able to:
 
 -   Carry out quality control of sequencing data, including host removal.
--   Explain how Kraken2 utilises k-mers to taxonomically classify sequence data.
+-   Explain how Kraken2 utilises <u id='kmer'>k-mers</u> to taxonomically classify sequence data.
 -   Quantify taxonomic composition of shotgun metagenomic data with Kraken2 & Bracken.
 -   View taxonomic abundances with Krona.
 -   Utilise LEfSe for biomarker detection.
@@ -63,33 +63,33 @@ At the end of the course learners will be able to:
 column_1 <- c(
   #1 Overview
   '[**Overview**](#overview)', 
- '[![](figures/overview.png){style="height:150px"}](#overview)',
+ '[![](figures/overview.png){style="height:150px; border-radius:15px; border: white 5px solid; background:white"}](#overview)',
  #3 Trimming data
     '[**Trimming data**](#qualcont)', 
- '[![](figures/quality_trimming_and_filtering.png){height="150px"}](#qualcont)',
+ '[![](figures/quality_trimming_and_filtering.png){style="height:150px; border-radius:15px; border: white 5px solid; background:white"}](#qualcont)',
  #5 Taxonomic profiling
    '[**Taxonomic profiling**](#taxprofile)', 
- '[![](figures/classification.png){height="150px"}](#taxprofile)',
+ '[![](figures/classification.png){style="height:150px; border-radius:15px; background:white"}](#taxprofile)',
  #7 Metagenome assembly
    '[**Metagenome assembly**](#metagenomeassembly)', 
- '[![](figures/jigsaw.png){style="height:150px; border-radius:15px; background:white"}](#metagenomeassembly)',
+ '[![](figures/jigsaw.png){style="height:150px; border-radius:15px; border: white 5px solid; background:white"}](#metagenomeassembly)',
   #9 Functional annotation
    '[**Functional annotation**](#funcanno)', 
- '[![](figures/pathways.png){style="height:150px"}](#funcanno)'
+ '[![](figures/pathways.png){style="height:150px; border-radius:15px; background:white"}](#funcanno)'
 )
 column_2 <- c(
   #2 Raw data
   '[**Raw data**](#rawdata)', 
- '[![](figures/usb_stick.png){style="height:150px"}](#rawdata)',
+ '[![](figures/usb_stick.png){style="height:150px; border-radius:15px; border: white 5px solid; background:white"}](#rawdata)',
  #4 Host removal
    '[**Host removal**](#hostremoval)', 
- '[![](figures/bowtie2.png){height="150"}](#hostremoval)',
+ '[![](figures/bowtie2.png){style="height:150px; border-radius:15px; background:white"}](#hostremoval)',
  #6 Functional profiling
    '[**Functional profiling**](#functprofile)', 
- '[![](figures/profile.png){height="150"}](#functprofile)',
+ '[![](figures/profile.png){style="height:150px; border-radius:15px; border: white 5px solid; background:white"}](#functprofile)',
  #8 Binning
    '[**Binning**](#binning)', 
- '[![](figures/yarn_binning.png){style="height:150px; border-radius:15px"}](#binning)',
+ '[![](figures/yarn_binning.png){style="height:150px; border-radius:15px; background:white"}](#binning)',
    #10 Appendix
    '[**Appendix**](#mamba-installs)', 
  '[![](figures/mamba_logo.png){style="height:150px; border-radius:15px"}](#mamba-installs)'
@@ -103,6 +103,19 @@ library(kableExtra)
 table_df %>%
   kbl(align= "cc", col.names = NULL) %>%
   kable_styling(position = "center")
+```
+
+
+```{r, echo=FALSE}
+#Tippy tooltips
+#Note, &#013; is a newline entitiy (\n does not work)
+tippy::tippy_this(elementId = "kmer", 
+                  tooltip = "K-mers are substrings of length k within a DNA/RNA sequence. 
+                              The 1-mers of 'AGCT' are 'A', 'G', 'C', and 'T'. 
+                              Its 2-mers are 'AG', 'GC' and 'CT'. 
+                              Its 3-mers are 'AGC' and GCT'. 
+                              Its 4-mer is 'AGCT'.",
+                  arrow = TRUE, placement = "bottom")
 ```
 
 <a rel="license" href="http://creativecommons.org/licenses/by-nc-sa/4.0/"><img src="https://i.creativecommons.org/l/by-nc-sa/4.0/88x31.png" alt="Creative Commons Licence" style="border-width:0"/></a><br />This work is licensed under a <a rel="license" href="http://creativecommons.org/licenses/by-nc-sa/4.0/">Creative Commons Attribution-NonCommercial-ShareAlike 4.0 International License</a>.

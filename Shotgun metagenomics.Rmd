@@ -49,7 +49,7 @@ Sessions will start with a brief presentation followed by self-paced computer pr
 At the end of the course learners will be able to:
 
 -   Carry out quality control of sequencing data, including host removal.
--   Explain how Kraken2 utilises k-mers to taxonomically classify sequence data.
+-   Explain how Kraken2 utilises <u id='kmer'>k-mers</u> to taxonomically classify sequence data.
 -   Quantify taxonomic composition of shotgun metagenomic data with Kraken2 & Bracken.
 -   View taxonomic abundances with Krona.
 -   Utilise LEfSe for biomarker detection.
@@ -66,33 +66,33 @@ At the end of the course learners will be able to:
 column_1 <- c(
   #1 Overview
   '[**Overview**](#overview)', 
- '[![](figures/overview.png){style="height:150px"}](#overview)',
+ '[![](figures/overview.png){style="height:150px; border-radius:15px; border: white 5px solid; background:white"}](#overview)',
  #3 Trimming data
     '[**Trimming data**](#qualcont)', 
- '[![](figures/quality_trimming_and_filtering.png){height="150px"}](#qualcont)',
+ '[![](figures/quality_trimming_and_filtering.png){style="height:150px; border-radius:15px; border: white 5px solid; background:white"}](#qualcont)',
  #5 Taxonomic profiling
    '[**Taxonomic profiling**](#taxprofile)', 
- '[![](figures/classification.png){height="150px"}](#taxprofile)',
+ '[![](figures/classification.png){style="height:150px; border-radius:15px; background:white"}](#taxprofile)',
  #7 Metagenome assembly
    '[**Metagenome assembly**](#metagenomeassembly)', 
- '[![](figures/jigsaw.png){style="height:150px; border-radius:15px; background:white"}](#metagenomeassembly)',
+ '[![](figures/jigsaw.png){style="height:150px; border-radius:15px; border: white 5px solid; background:white"}](#metagenomeassembly)',
   #9 Functional annotation
    '[**Functional annotation**](#funcanno)', 
- '[![](figures/pathways.png){style="height:150px"}](#funcanno)'
+ '[![](figures/pathways.png){style="height:150px; border-radius:15px; background:white"}](#funcanno)'
 )
 column_2 <- c(
   #2 Raw data
   '[**Raw data**](#rawdata)', 
- '[![](figures/usb_stick.png){style="height:150px"}](#rawdata)',
+ '[![](figures/usb_stick.png){style="height:150px; border-radius:15px; border: white 5px solid; background:white"}](#rawdata)',
  #4 Host removal
    '[**Host removal**](#hostremoval)', 
- '[![](figures/bowtie2.png){height="150"}](#hostremoval)',
+ '[![](figures/bowtie2.png){style="height:150px; border-radius:15px; background:white"}](#hostremoval)',
  #6 Functional profiling
    '[**Functional profiling**](#functprofile)', 
- '[![](figures/profile.png){height="150"}](#functprofile)',
+ '[![](figures/profile.png){style="height:150px; border-radius:15px; border: white 5px solid; background:white"}](#functprofile)',
  #8 Binning
    '[**Binning**](#binning)', 
- '[![](figures/yarn_binning.png){style="height:150px; border-radius:15px"}](#binning)',
+ '[![](figures/yarn_binning.png){style="height:150px; border-radius:15px; background:white"}](#binning)',
    #10 Appendix
    '[**Appendix**](#mamba-installs)', 
  '[![](figures/mamba_logo.png){style="height:150px; border-radius:15px"}](#mamba-installs)'
@@ -106,6 +106,19 @@ library(kableExtra)
 table_df %>%
   kbl(align= "cc", col.names = NULL) %>%
   kable_styling(position = "center")
+```
+
+
+```{r, echo=FALSE}
+#Tippy tooltips
+#Note, &#013; is a newline entitiy (\n does not work)
+tippy::tippy_this(elementId = "kmer", 
+                  tooltip = "K-mers are substrings of length k within a DNA/RNA sequence. 
+                              The 1-mers of 'AGCT' are 'A', 'G', 'C', and 'T'. 
+                              Its 2-mers are 'AG', 'GC' and 'CT'. 
+                              Its 3-mers are 'AGC' and GCT'. 
+                              Its 4-mer is 'AGCT'.",
+                  arrow = TRUE, placement = "bottom")
 ```
 
 <a rel="license" href="http://creativecommons.org/licenses/by-nc-sa/4.0/"><img src="https://i.creativecommons.org/l/by-nc-sa/4.0/88x31.png" alt="Creative Commons Licence" style="border-width:0"/></a><br />This work is licensed under a <a rel="license" href="http://creativecommons.org/licenses/by-nc-sa/4.0/">Creative Commons Attribution-NonCommercial-ShareAlike 4.0 International License</a>.
@@ -174,7 +187,7 @@ This practical is broken up into the following broad sections.
 
 1. __Raw data__: We will first link to a dataset that we have downloaded for this tutorial. We will take a quick look at what the sequence files look like and briefly discuss the origin of the samples.
 2. __Trimming data__: This entails preprocessing our data to ensure that it is of good quality.
-3. __Host removal__: When sequencing the genomic content of host's microbiota (bacteriome, archaeome, mycobiome, and more) it is likely you will also sequence the host's genome. This step shows a method of removing possible host contamination.
+3. __Host removal__: When sequencing the genomic content of a host's microbiota (bacteriome, archaeome, mycobiome, and more) it is likely you will also sequence the host's genome. This step shows a method of removing possible host contamination.
 3. __Taxonomic profiling__: We will analyse the dataset to determine the species abundance in each sample. Following this, we will visualise the data and compare the samples.
 4. __Functional profiling__: We will analyse the dataset to determine the pathway abundance and completeness in each sample. Following this, we will visualise the data and compare the samples.
 5. __Metagenome assembly__: Here, we will move away from just analysing the reads directly and will assemble the metagenome into contigs. Prior to this, we will 'stitch' the reads together to ensure we get the best assembly possible.
@@ -709,6 +722,27 @@ library(webexercises)
 ![](figures/kraken.png){style="width:150px; background: white; border-radius:5px; border: white solid 5px"}
 </center>
 
+`Kraken2` assigns taxonomic sequence classifications to DNA sequences.
+It carries this out by comparing the <u id='kmer'>k-mers</u> of each DNA sequence to the <u id='kmer'>k-mers</u> in a genomic library.
+Each <u id='kmer'>k-mer</u> in the genomic library has a taxonomy assigned to it based on the LCA (lowest common ancestor) of all the known lineages that have the <u id='kmer'>k-mer</u> in their genome.
+
+One DNA sequence will have many <u id='kmer'>k-mers</u>, each of those <u id='kmer'>k-mers</u> having a classification.
+A single consensus taxonomic classification will be assigned to the DNA sequence.
+This could be at species level or higher.
+If the classification is at genus level then the species will be unknown.
+
+We use and suggest `Kraken2` as a method to assign taxonomies to shotgun metagenomic reads for the following reasons:
+
+- It is computationally efficient, being incredibly quick.
+- It can be used for DNA sequences of any size including short illumina read, longer PacBio or ONT reads, and even assembled contigs.
+- Custom databases can be used so you can in theory classify any organism whose genome has been sufficiently categorised by genomic sequencing.
+- [`Bracken`](#bracken) can be used downstream to produce taxonomy abundances that can be used for community analysis.
+
+For more information please see the `Kraken2` paper:
+[Improved metagenomic analysis with Kraken 2](https://link.springer.com/article/10.1186/s13059-019-1891-0)
+
+## Set Kraken2 database
+
 Prior to running `Kraken2` we need to set a variable so `Kraken2` knows where to look for the databases it will use.
 
 ```{bash eval=FALSE}
@@ -720,14 +754,16 @@ export KRAKEN2_DB_PATH=/pub14/tea/nsc206/NEOF/Shotgun_metagenomics/kraken2_db
 -   Standard `Kraken2` databases: <https://github.com/DerrickWood/kraken2/wiki/Manual#standard-kraken-2-database>
 -   Custom `Kraken2` databases: <https://github.com/DerrickWood/kraken2/wiki/Manual#custom-databases>
 
-## Kraken2: run
+## Classify reads
 <center>
 ![](figures/play_blue.png){style="width:100px; background: white; border-radius:5px; border: white solid 5px"}
 </center>
 
 Now, run `Kraken2` on sample K1 by running the following command.
 
-**Note**: We are not using the host removed data. This is to save time. In your own analysis ensure you are using host removed data.
+**Note**: In this tutorial we are not using the host removed data. 
+This is to save time during the workshop. 
+In your own analysis ensure you are using host removed data if your data is host derived.
 
 ```{bash eval=FALSE}
 kraken2 --paired --db minikraken2_v1_8GB \
@@ -748,14 +784,14 @@ kraken2 --paired --db minikraken2_v1_8GB \
 -   **`--report`**: The output report file. More info below.
 -   **`~/2-Trimmed/K1_R1.fq.gz ~/2-Trimmed/K1_R2.fq.gz`**: The trimmed read pairs for K1, which we will use as input.
 
-## Kraken2: output
+## Output and report files
 <center>
 ![](figures/output_file_blue.png){style="width:100px"}
 </center>
 
 There are two major output formats from Kraken2.
 
-#### Output file {-}
+### Output file
 
 The `--output` parameter creates a `.kraken` file. Each sequence (or sequence pair, in the case of paired reads) classified by `Kraken2` results in a single line of output. `Kraken2`'s output lines contain five tab-delimited fields; from left to right, they are
 
@@ -763,17 +799,21 @@ The `--output` parameter creates a `.kraken` file. Each sequence (or sequence pa
 2.  **Sequence ID:** Obtained from the FASTA/FASTQ header.
 3.  **Taxonomy ID:** Assigned by `Kraken2`. This is 0 if the sequence is unclassified.
 4.  **Length of the sequence in bp:** In the case of paired read data, this will be a string containing the lengths of the two sequences in bp, separated by a pipe character, e.g. "98\|94".
-5.  **LCA mapping:** A space-delimited list indicating the LCA (also known as [MRCA](https://en.wikipedia.org/wiki/Most_recent_common_ancestor)) mapping of each k-mer in the sequence(s). For example, "562:13 561:4 A:31 0:1 562:3" would indicate that:
-    -   562:13 - The first 13 k-mers mapped to taxonomy ID #562
-    -   561:4 - The next 4 k-mers mapped to taxonomy ID #561
-    -   A:31 - The next 31 k-mers contained an ambiguous nucleotide
-    -   0:1 - The next k-mer was not in the database
-    -   562:3 - The last 3 k-mers mapped to taxonomy ID #562
+5.  **LCA mapping:** A space-delimited list indicating the LCA (also known as [MRCA](https://en.wikipedia.org/wiki/Most_recent_common_ancestor)) mapping of each <u id='kmer'>k-mer</u> in the sequence(s). For example, "562:13 561:4 A:31 0:1 562:3" would indicate that:
+    -   562:13 - The first 13 <u id='kmer'>k-mers</u> mapped to taxonomy ID #562
+    -   561:4 - The next 4 <u id='kmer'>k-mers</u> mapped to taxonomy ID #561
+    -   A:31 - The next 31 <u id='kmer'>k-mers</u> contained an ambiguous nucleotide
+    -   0:1 - The next <u id='kmer'>k-mer</u> was not in the database
+    -   562:3 - The last 3 <u id='kmer'>k-mers</u> mapped to taxonomy ID #562
     -   **Note**: that paired read data will contain a "\|:\|" token in this list to indicate the end of one read and the beginning of another.
 
-#### Report file {-}
+### Report file
 
-The `--report` parameter creates a `.kreport2` file. This is the report output format. This is required for bracken. It is tab-delimited with one line per taxon. The fields of the output, from left-to-right, are as follows:
+The `--report` parameter creates a `.kreport2` file. 
+This is the report output format and is required for bracken. 
+It is tab-delimited with one line per taxon. 
+
+The fields of the output, from left-to-right, are as follows:
 
 1.  Percentage of paired reads covered by the clade rooted at this taxon.
 2.  Number of paired reads covered by the clade rooted at this taxon.
@@ -782,15 +822,15 @@ The `--report` parameter creates a `.kreport2` file. This is the report output f
 5.  NCBI taxonomic ID number
 6.  Indented scientific name
 
-#### Screen output {-}
+### Screen output
 
 The output to screen will show how many sequences are classified. This will be lower than normal as we are using a mini `Kraken2` database.
 
-#### Confidence threshold {-}
+## Confidence threshold
 
 In a real analysis you may use the option `--confidence` which represents the **"Confidence score threshold"**. The default is `0.0`, which is the lowest, with the maximum value being `1`. A good place to start may be `0.1`. Too many classifications are removed if you attempt it with this dataset, due to the mini `Kraken2` database used. More info on the confidence scoring can be found at: <https://github.com/DerrickWood/kraken2/wiki/Manual#confidence-scoring>
 
-#### Task {-}
+## Kraken2 task
 
 Once the Kraken2 command has finished running, run it on the other two samples. Attempt the commands without looking at the help box.
 
@@ -811,7 +851,7 @@ kraken2 --paired --db minikraken2_v1_8GB \
 
 `r unhide()`
 
-## Kraken 2: MCQs
+## MCQs
 <center>
 ![](figures/question_bubble_blue.png){style="width:100px; background: white; border-radius:5px; border: white solid 5px"}
 </center>
@@ -854,19 +894,32 @@ opts_p <- c(answer="__0.12__", "__0.59__", "__14.89__")
 
 6.  What percentage of K1's paired reads were assigned to the clade of Bacteroides helcogenes (Species)? `r longmcq(opts_p)`
 
+```{r, echo=FALSE}
+#Tippy tooltips
+#Note, &#013; is a newline entitiy (\n does not work)
+tippy::tippy_this(elementId = "kmer", 
+                  tooltip = "Substrings of length k within a DNA/RNA sequence. 
+                              The 1-mers of 'AGCT' are 'A', 'G', 'C', and 'T'. 
+                              Its 2-mers are 'AG', 'GC' and 'CT'. 
+                              Its 3-mers are 'AGC' and GCT'. 
+                              Its 4-mer is 'AGCT'.",
+                  arrow = TRUE, placement = "bottom")
+```
+
 <!--chapter:end:09-Kraken2.Rmd-->
 
 ```{r include=FALSE, cache=FALSE}
 library(webexercises)
 ```
-# Krona plot
+# Krona
 <center>
 ![](figures/krona.png){style="width:150px; background: white; border-radius:5px; border: white solid 5px"}
 </center>
 
-`Krona` is an interactive metagenome species abundance visualisation tool. 
+`Krona` is an interactive metagenome species abundance visualisation tool.
+We will use it to produce interactive tiered pie charts from our `Kraken2` output.
 
-## Krona: run
+## Import taxonomy
 <center>
 ![](figures/play_red.png){style="width:100px; background: white; border-radius:5px; border: white solid 5px"}
 </center>
@@ -883,7 +936,7 @@ ktImportTaxonomy -o kraken2.krona.html *.kreport2
 
 You will get a warning that not all taxonomy IDs were found. We will ignore this but in your own future installations this should be addressed with `Krona`'s `updateTaxonomy.sh` command.
 
-## Krona: visualise
+## Tiered piecharts
 <center>
 ![](figures/eye_red.png){style="width:100px; background: white; border-radius:5px; border: white solid 5px"}
 </center>
@@ -905,7 +958,7 @@ This is an interactive multi-tiered pie chart with many options. Some of the int
   - This will display the percentage this taxonomy covers of all the different taxonomies above it that it belongs to. This is displayed on the right side of the screen.
   - E.g. Click on Pseudomonadota to see the percentage of the Root it accounts for and to see the percentage of Bacteria it accounts for in the sample.
 
-## Krona: MCQs
+## MCQs
 <center>
 ![](figures/question_bubble_red.png){style="width:100px; background: white; border-radius:5px; border: white solid 5px"}
 </center>
@@ -947,14 +1000,14 @@ opts_p <- c("__39%__", answer="__8%__", "__6%__")
 ```{r include=FALSE, cache=FALSE}
 library(webexercises)
 ```
-# Bracken
+# Bracken {#bracken}
 <center>
 ![](figures/bracken.png){style="width:150px; background: white; border-radius:5px; border: white solid 5px"}
 </center>
 
 `Bracken` (Bayesian Reestimation of Abundance with KrakEN) uses taxonomy labels assigned by `Kraken2` to compute estimated abundances of species in a metagenomic sample. 
 
-## Bracken: run
+## Bracken abundance reestimation
 <center>
 ![](figures/play_green.png){style="width:100px; background: white; border-radius:5px; border: white solid 5px"}
 </center>
@@ -980,12 +1033,16 @@ bracken -d $KRAKEN2_DB_PATH/minikraken2_v1_8GB \
 - `-l S`: This specifies the taxonomic level/rank of the `Bracken` output. In this case `S` is equal to species with the other options being `D`, `P`, `C`, `O`, `F` and `G`.
 - `-t 5`: This specifies the minimum number of reads required for a classification at the specified rank. Any classifications with fewer reads than the specified threshold will not receive additional reads from higher taxonomy levels when distributing reads for abundance estimation. Five has been chosen here for this example data but in real datasets you may want to increase this number (default is 10).
 
-## Bracken: output
+## Output and report file
 <center>
 ![](figures/output_file_green.png){style="width:100px"}
 </center>
 
-The output file of `Bracken` contains the following columns:
+With our command we created an output and a report file for `bracken`.
+
+### Output
+
+The output file of `Bracken` (`K1.bracken`) contains the following columns:
 
 1. __Name__: Name of taxonomy at the specified taxonomic level.
 2. __Taxonomy ID__: NCBI taxonomy id
@@ -995,7 +1052,24 @@ The output file of `Bracken` contains the following columns:
 6. __Total reads after abundance reestimation__: Number from field 4 and 5 summed. This is the field that will be used for downstream analysis
 7. __Fraction of total reads__: Relative abundance of the taxonomy
 
-#### Task {-}
+### Report file
+
+The `--report` created the report file (`K1.breport2`).
+It contains the `Bracken` read counts in the same format as the report file for `kraken2`
+
+This is an essential file if you want to use the `Bracken` output in R using the `phyloseq` object. 
+This is covered in our R community analysis workshop and won't be covered here.
+
+The fields of the output, from left-to-right, are as follows:
+
+1.  Percentage of paired reads covered by the clade rooted at this taxon.
+2.  Number of paired reads covered by the clade rooted at this taxon.
+3.  Number of paired reads assigned directly to this taxon.
+4.  A rank code, indicating (U)nclassified, (R)oot, (D)omain, (K)ingdom, (P)hylum, (C)lass, (O)rder, (F)amily, (G)enus, or (S)pecies. Taxa that are not at any of these 10 ranks have a rank code that is formed by using the rank code of the closest ancestor rank with a number indicating the distance from that rank. E.g., "G2" is a rank code indicating a taxon is between genus and species and the grandparent taxon is at the genus rank.
+5.  NCBI taxonomic ID number
+6.  Indented scientific name
+
+## Bracken task
 
 Repeat the above commands for K2 and W1
 
@@ -1010,7 +1084,7 @@ bracken -d $KRAKEN2_DB_PATH/minikraken2_v1_8GB \
 ```
 `r unhide()`
 
-## Bracken: MCQs
+## MCQs
 <center>
 ![](figures/question_bubble_green.png){style="width:100px; background: white; border-radius:5px; border: white solid 5px"}
 </center>
@@ -1032,7 +1106,7 @@ opts_p <- c(answer="__0.00011__","__16__", "__702__")
 ```
 3. In __W1__, what is the fraction of total reads (after abundance reestimation) for __Tannerella forsythia__? `r longmcq(opts_p)`
 
-## Bracken: merging output
+## Merging output
 <center>
 ![](figures/merge.png){style="width:100px; background: white; border-radius:5px"}
 </center>
@@ -1060,7 +1134,7 @@ After these columns are the following two columns for each sample.
 - `${SampleName}.bracken_num`: The number of reads after abundance reestimation 
 - `${SampleName}.bracken_frac`: Relative abundance of the group in the sample
 
-## Bracken: extracting output
+## Extracting output
 <center>
 ![](figures/exctractor.png){style="width:100px; background:white;border-radius:5px; border: white 5px solid"}
 </center>
@@ -1090,14 +1164,14 @@ library(webexercises)
 ```
 # LEfSe biomarker detection
 <center>
-![](figures/lefse.png){style="width:150px"}
+![](figures/lefse.png){style="width:150px; background:white; border-radius:5px; border: white solid 5px"}
 </center>
 
 We will use `LEfSe` (Linear discriminant analysis Effect Size) to determine which taxa can most likely explain the differences between the Western and Korean diet. `LEfSe` couples standard tests for statistical significance with additional tests encoding biological consistency and effect relevance. It can be used with other features such as organisms, clades, operational taxonomic units, genes, or functions.
 
 In essence it allows for the detection of biomarkers when comparing sample groups. In the `LEfSe` terminology the sample groups are called the class.
 
-Although `LEfSe` is a nic tool to use for a tutorial there are more robust tools.
+Although `LEfSe` is a nice tool to use for a tutorial there are more robust tools.
 Two recommended tools are:
 
 - [ANCOM-BC2](https://www.nature.com/articles/s41592-023-02092-7)
@@ -1106,12 +1180,12 @@ Two recommended tools are:
 They both require `R` and so are not included in this tutorial. 
 However, our R community analysis workshop does include how to use `ANCOM-BC2`.
 
-## LEfSe: add metadata {#kraken2_lefse_metadata}
+## Add metadata {#kraken2_lefse_metadata}
 <center>
-![](figures/header.png){style="width:100px; background:white;border-radius:5px"}
+![](figures/header.png){style="width:100px; background:white; border-radius:5px"}
 </center>
 
-We need to add metadata to our `Bracken` file to be ready for `LEfSe.` First we will copy the file so we have a backup in case we do anything wrong.
+We need to add metadata to our `Bracken` file to be ready for `LEfSe`. First we will copy the file so we have a backup in case we do anything wrong.
 
 ```{bash eval=FALSE}
 cp all_num.bracken all_num.lefse.bracken
@@ -1132,9 +1206,9 @@ cp /pub14/tea/nsc206/NEOF/Shotgun_metagenomics/lefse/all_num.lefse.bracken .
 ```
 `r unhide()`
 
-## LEfSe: format
+## Format file
 <center>
-![](figures/lefse_format.png){style="width:100px;background:white;border-radius:5px"}
+![](figures/lefse_format.png){style="width:100px;background:white;border-radius:5px; border: white 5px solid"}
 </center>
 
 We need to further format and preprocess our file with a `LEfSe` script.
@@ -1154,7 +1228,7 @@ lefse_format_input.py all_num.lefse.bracken all_num.lefse -c 1 -u 2 -o 1000000
 - `-u 2` : Specifies the row with the sample names. This is the second row in this case.
 - `-o 1000000` : An integer can be indicated to determine to what size (count sum value) each sample should be normalised to. `LEfSe` developers recommend 1000000 (1 million) when very low values are present. We generally always use 1 million for consistency.
 
-## LEfSe: run
+## LEfSe run
 <center>
 ![](figures/play_purple.png){style="width:100px; background: white; border-radius:5px; border: white solid 5px"}
 </center>
@@ -1165,9 +1239,13 @@ Now to run `LEfSe.` All we need to do is run the command with the formatted inpu
 lefse_run.py all_num.lefse all_num.lefse.out
 ```
 
-#### Output {-}
+## Out file
+<center>
+![](figures/output_file_purple.png){style="width:100px"}
+</center>
 
-The output file is a tab-delimited file which contains a row for each species. Biomarkers will have the five columns below whilst non-biomarkers will have the first two followed by a "-" .
+The output file (`all_num_lefse.out`) is a tab-delimited file which contains a row for each species. 
+Biomarkers will have the five columns below whilst non-biomarkers will have the first two followed by a "-" .
 
 - __Biomarker name__
 - __Log of highest class average__: I.e. get the class with the greater amounts of the biomarker, average the counts and then get the log of this value.
@@ -1177,7 +1255,7 @@ The output file is a tab-delimited file which contains a row for each species. B
 
 The __LDA effect__ size indicates how much of an effect each biomarker has. The default is to only count a species with an LDA effect size of greater than 2 or less than -2 as a biomarker. The further the LDA effect size is from 0 the greater the effect the species causes. Generally, it can be thought of as the order of magnitude difference in the abundance of the biomarker between the sample groups.
 
-## LEfSe: visualisation
+## Biomarker LDA barchart
 <center>
 ![](figures/bar_chart_horizontal.png){style="width:100px; background:white;border-radius:5px"}
 </center>
@@ -1199,7 +1277,7 @@ Look at the figure with `firefox`:
 firefox biomarkers.png
 ```
 
-## LEfSe: MCQs
+## MCQs
 <center>
 ![](figures/question_bubble_purple.png){style="width:100px; background: white; border-radius:5px; border: white solid 5px"}
 </center>
@@ -1266,7 +1344,7 @@ library(webexercises)
 
 # Functional profiling {#functprofile}
 <center>
-![](figures/profile.png){style="width:150px; background:white;border-radius:5px"}
+![](figures/profile.png){style="width:150px; background:white;border-radius:5px; border: white solid 5px"}
 </center>
 
 It is possible to investigate functional differences between metagenome (and metatranscriptome) samples by directly interrogating the read data. We will look at how this can be done with a package called `HUMAnN` (The HMP Unified Metabolic Analysis Network), a [bioBakery](https://github.com/biobakery/biobakery) pipeline designed to accurately profile the presence/absence and abundance of microbial pathways in metagenomic sequencing data.
@@ -1280,8 +1358,8 @@ Please see below for a diagram showing the pipeline of `HUMAnN`:
 </center>
 
 `r hide("HUMAnN 4")`
-HUMAnN 4 is currently in alpha: (https://forum.biobakery.org/t/announcing-humann-4-0-alpha/7531)
-I have tested it and could not install it correctly so we will not be teaching its use in this course till it is out of alpha and stable.
+HUMAnN 4 is currently in alpha so these materials teach HUMAnN3. 
+For more information on HUMANnN4 please see: (https://forum.biobakery.org/t/announcing-humann-4-0-alpha/7531)
 `r unhide()`
 
 <!--chapter:end:13-Functional_profiling.Rmd-->
@@ -1294,9 +1372,15 @@ library(webexercises)
 ![](figures/humann2.png){style="width:150px; background:white;border-radius:5px"}
 </center>
 
-First, we will carry out an example run of the software and briefly explore the output files. `HUMAnN` can take a long time to run so we will use a small amount of example data. Additionally, we will use a subset of the `HUMAnN` databases for the analysis but when running analysis on your own data you should use the full databases. Information on installing `HUMAnN` and its databases can be found on its online [Home Page](https://huttenhower.sph.harvard.edu/humann/).
+We will carry out an example run of the software and briefly explore the output files. 
+`HUMAnN` can take a long time to run so we will use a small amount of example data. 
 
-## HUMAnN: mamba, directories, and files
+For this tutorial analysis we will use a subset of the `HUMAnN` databases for speed purposes.
+You should use the full databases in your real life projects.
+
+Information on installing `HUMAnN` and its databases can be found on its online [Home Page](https://huttenhower.sph.harvard.edu/humann/).
+
+## Mamba, directories, and files
 <center>
 ![](figures/mamba_logo.png){style="width:200px; border-radius:5px"}
 </center>
@@ -1320,7 +1404,7 @@ Copy over some test data we will carry out the analysis on. This is a demonstrat
 cp /pub14/tea/nsc206/NEOF/Shotgun_metagenomics/humann/demo.fastq.gz .
 ```
 
-## HUMAnN: run
+## HUMAnN pipeline
 <center>
 ![](figures/play_orange.png){style="width:100px; background: white; border-radius:5px; border: white solid 5px"}
 </center>
@@ -1347,7 +1431,7 @@ cat K1_R1.fq.gz K1_R2.fq.gz > K1.fq.gz
 humann --input K1.fq.gz --output humann_output --threads
 ```
 
-## HUMAnN: output
+## Output files
 <center>
 ![](figures/output_file_orange.png){style="width:100px"}
 </center>
@@ -1359,7 +1443,7 @@ cd demo.humann
 ls
 ```
 
-You will see that there are three files and one directory. The directory (`demo_humann_temp`) contains intermediate temporary files and can be disregarded here.
+You will see that there are three files and one directory. The directory (`demo_humann_temp`) contains intermediate temporary files and can be disregarded for now.
 
 The three output files are:
 
@@ -1385,9 +1469,51 @@ You will see that there are two columns:
 
 This file is not too interesting to look at as it is only demo data. Therefore, press `q` to exit `less` and let's look at some real data.
 
-**Note**: The directory `demo_humann_temp` can be very large and so should be deleted in real projects once you are certain they are not needed. However, these files can be useful for debugging.
-
 **Note**: Link to more detail on [Output files](https://github.com/biobakery/humann#output-files)
+
+## Intermediary/temp files
+<center>
+![](figures/tmp.png){style="width:150px; background:white; border-radius:5px"}
+</center>
+
+The intermediary output directory created by `HUMANnN` (the directories ending with `temp`) can be used for debugging if the output of the analysis seems strange or if the tool produces a warning or error.
+Information on the files in the intermediary directory can be found in the following link:
+
+[https://github.com/biobakery/humann?tab=readme-ov-file#5-intermediate-temp-output-files](https://github.com/biobakery/humann?tab=readme-ov-file#5-intermediate-temp-output-files)
+
+We won't look at these files as they contain a lot of information and the tool ran with no issues.
+
+Although useful for troubleshooting the intermediary directory for real life projects are normally very large.
+A project with many samples can have 100s to 1000s of Gigabytes of storage taken up by the intermediary directories.
+Storage is a valuable resource on HPCs and computers and so it is best to delete these directories after making sure the HUMAnN run was successful.
+
+### Storage check
+
+To emphasise the largeness of the intermediary files check the size of all your `HUMAnN` output.
+
+The `du` command displays the storage that files and directories take up.
+The parameters used are:
+
+- `h`: Human readable output (uses K, M, G etc. to represent Kilobytes, Megabytes, Gigabytes etc.)
+- `s`: Summarise
+- `c`: Produce a grand total (at bottom of output)
+
+```{bash eval=FALSE}
+du -hsc *
+```
+
+You will see that the intermediary directory takes up 73 megabytes of the total 73 megabytes of all the output.
+In other words the intermediary file takes up much more space than the actual useful output.
+
+### Delete intermediary directory
+
+To keep our computer and system administrator happy delete the intermediary directory.
+
+```{bash eval=FALSE}
+rm -r demo_humann_temp
+```
+
+It is always good practice to delete these intermediary directories when you are happy with your output.
 
 <!--chapter:end:14-HUMAnN.Rmd-->
 
@@ -1401,9 +1527,12 @@ library(webexercises)
 
 Looking at the functional profile of one sample in isolation is usually not very informative. First, there is nothing to compare it to and second, there are no biological replicates. We will therefore use all the Korean and Western diet samples.
 
-It would take many hours to analyse all of the data using `HUMAnN` and is outside the scope of this course. For this reason, samples were analysed prior to the workshop to generate the output files we covered above.
+## Pre-made data
 
-For the purposes of this comparison, we will look at the pathway abundances only. First copy over the data directory containg the gene families tables and have a look in it.
+It would take many hours to analyse all of the data using `HUMAnN` and is outside the scope of this course. For this reason, samples were analysed prior to the workshop to generate the output files we covered in the previous chapter.
+
+For the purposes of this comparison, we will look at the pathway abundances only. 
+Copy over the data directory containing the gene families tables and have a look in it.
 
 ```{bash eval=FALSE}
 #Ensure you are in the correct directory
@@ -1416,7 +1545,10 @@ cd DietPathAbundance
 ls
 ```
 
-You will see there are 12 files prefixed with K and 12 prefixed with W, for the Korean diet and Western diet samples, respectively. Take a look at the file for K1.
+## Pathway abundance file
+
+You will see there are 12 files prefixed with K and 12 prefixed with W, for the Korean diet and Western diet samples, respectively. 
+Take a look at the file for K1.
 
 ```{bash eval=FALSE}
 less K1_pathabundance.tsv
@@ -1528,6 +1660,8 @@ Now that we have our combined, unstratified, and normalised table, we can visual
 
 To visualise this we will create a heatmap with `hclust2`.
 
+## File edit
+
 Before carrying out the command we will need to edit the file. Carry out the following alterations:
 
 Remove the `_Abundance` part of the sample names whilst creating a copy that we will use (It is always a good idea to keep the original file in case a mistake happens).
@@ -1553,6 +1687,8 @@ cp /pub14/tea/nsc206/NEOF/Shotgun_metagenomics/lefse/diet_unstratified.relab.com
 ```
 
 `r unhide()`
+
+## hclust2
 
 Now we can use the `hclust2` tool to create a heatmap of our pathway abundances.
 
@@ -1588,7 +1724,7 @@ Now we can view the plot.
 firefox diet_unstratified.relab.heatmap.png
 ```
 
-From this, we can see that there is a small amount of clustering caused by the differences between the Korean and Western diet. Other factors that we do not know about the samples must also come into play. This is normal as we cannot account for everything but it is good to try to account for as much as possible.
+From this, we can see that there is a small amount of clustering caused by the differences between the Korean and Western diet. Other factors that we do not know about the samples must also be casuing an effect. This is normal as we cannot account for everything but it is good to try to account for as much as possible.
 
 <center>
 ![](figures/humann_heatmap.png){style="border-radius: 15px; width: 750px; border: 5px solid white"}
@@ -1626,11 +1762,13 @@ library(webexercises)
 ![](figures/lefse_flip.png){style="width:150px; background: white; border-radius:5px; border: white solid 5px"}
 </center>
 
-For the final part of this section, we will see if there are any statistically significant differences between the two sample groups. There are several ways in which this can be achieved but we will carry out `LEfSe` again.
+For the final part of this section, we will see if there are any statistically significant differences between the two sample groups. 
+There are several ways in which this can be achieved but we will use `LEfSe` again.
 
-**Task**: Go back to your `shotgun_meta` terminal (or create a new one and use `. useshotgun`). Then change directory to `4-FunctionalProfiling`)
+**Task**: Go back to your `shotgun_meta` terminal (or create a new terminal and use `. useshotgun`). 
+Then change directory to `4-FunctionalProfiling`).
 
-Thankfully we already formatted the file to work with `LEfSe` when we formatted it for `hclust2`
+Thankfully we already formatted the file to work with `LEfSe` when we formatted it for `hclust2`.
 
 ```{bash eval=FALSE}
 #LEfSe format
@@ -1694,7 +1832,7 @@ For this reason, it is sometimes advantageous to assemble the reads into contigs
 
 Here, we will carry out a couple of assemblies on our dataset.
 
-## Metagenome assembly: Mamba
+## Mamba
 <center>
 ![](figures/mamba_logo.png){style="width:200px; border-radius:5px"}
 </center>
@@ -1708,13 +1846,13 @@ We will use the `shotgun_meta` conda environment so use a terminal where this is
 
 Illumina reads are too short and numerous to use traditional overlap-layout-consensus assemblers as such an approach would be far too computationally intensive. Instead, we use De Bruijn graph based assemblers. Briefly, these operate as follows:
 
-1.  All reads are broken down into k-length overlapping fragments (k-mers). e.g. if we choose a k-mer size of 5 bp, the following two sequences (blue) would be broken down into the k-mers below them (red):
+1.  All reads are broken down into k-length overlapping fragments (<u id='kmer'>k-mers</u>). e.g. if we choose a <u id='kmer'>k-mer</u> size of 5 bp, the following two sequences (blue) would be broken down into the <u id='kmer'>k-mers</u> below them (red):
 
 <center>
 ![](figures/reads_aligned.png){style="border-radius: 10px; width: 400px"}
 </center>
 
-2.  All k-mers are linked to other k-mers which match with a k-1 length overlap (i.e. that overlap by all but one base):
+2.  All <u id='kmer'>k-mers</u> are linked to other <u id='kmer'>k-mers</u> which match with a k-1 length overlap (i.e. that overlap by all but one base):
 
 <center>
 ![](figures/graph_simple.png){style="border-radius: 10px; width: 800px"}
@@ -1726,11 +1864,23 @@ Illumina reads are too short and numerous to use traditional overlap-layout-cons
 ![](figures/graph_complex.png){style="border-radius: 10px; width: 800px"}
 </center>
 
-The example here is a vast oversimplification of the complexity of a De Bruijn graph (i.e. there are no branches!). Routing through the graph is never as simple as this as some k-mers will lead to multiple k-mers, which can result in the break point of a contig. This is especially true for complex metagenomic data.
+The example here is a vast oversimplification of the complexity of a De Bruijn graph (i.e. there are no branches!). Routing through the graph is never as simple as this as some <u id='kmer'>k-mers</u> will lead to multiple <u id='kmer'>k-mers</u>, which can result in the break point of a contig. This is especially true for complex metagenomic data.
 
-Generally speaking, the shorter the k-mer, the more branches there will be, the trickier the graph is to resolve, so the resulting contigs are smaller. Assemblers usually perform better with longer k-mer lengths but even then there might not be enough depth of sequencing to generate all k-mers that form overlaps, therefore leading to break points. Finding the right k-mer size usually involves testing several.
+Generally speaking, the shorter the <u id='kmer'>k-mer</u>, the more branches there will be, the trickier the graph is to resolve, so the resulting contigs are smaller. Assemblers usually perform better with longer <u id='kmer'>k-mer</u> lengths but even then there might not be enough depth of sequencing to generate all k-mers that form overlaps, therefore leading to break points. Finding the right <u id='kmer'>k-mer</u> size usually involves testing several.
 
-Fortunately, the assembler we will use, `MEGAHIT`, allows us to build an assembly using multiple k-mer lengths iteratively. The other great advantage about `MEGAHIT` is that it is quick and efficient. We will use `MEGAHIT` on our data soon, but first there is an additional processing step for our sequences...
+Fortunately, the assembler we will use, `MEGAHIT`, allows us to build an assembly using multiple <u id='kmer'>k-mer</u> lengths iteratively. The other great advantage about `MEGAHIT` is that it is quick and efficient. We will use `MEGAHIT` on our data soon, but first there is an additional processing step for our sequences...
+
+```{r, echo=FALSE}
+#Tippy tooltips
+#Note, &#013; is a newline entitiy (\n does not work)
+tippy::tippy_this(elementId = "kmer", 
+                  tooltip = "Substrings of length k within a DNA/RNA sequence. 
+                              The 1-mers of 'AGCT' are 'A', 'G', 'C', and 'T'. 
+                              Its 2-mers are 'AG', 'GC' and 'CT'. 
+                              Its 3-mers are 'AGC' and GCT'. 
+                              Its 4-mer is 'AGCT'.",
+                  arrow = TRUE, placement = "bottom")
+```
 
 <!--chapter:end:19-Metagenome_assembly.Rmd-->
 
@@ -1742,7 +1892,7 @@ library(webexercises)
 ![](figures/stitch.png){style="width:150px; background: white; border-radius:5px; border: white solid 5px"}
 </center>
 
-Longer k-mers generally perform better for assemblies. However, our maximum read length is 100 bp so we are limited to a maximum k-mer length of 99 bp. Thankfully we can get even longer k-mers if we stitch our read pairs together.
+Longer <u id='kmer'>k-mers</u> generally perform better for assemblies. However, our maximum read length is 100 bp so we are limited to a maximum <u id='kmer'>k-mer</u> length of 99 bp. Thankfully we can get even longer <u id='kmer'>k-mers</u> if we stitch our read pairs together.
 
 __Note__: This method will not work if your reads have no overlap. If you are not sure if your reads have overlap ask the team who sequenced them.
 
@@ -1754,11 +1904,13 @@ First, we obtain our forward and reverse reads, derived from different ends of t
 ![](figures/merging_paired_reads.png){style="width: 400px; border-radius: 15px; border: 5px solid white; background-color: white"}
 </center>
 
-Once we have longer stitched reads, we can increase the k-mer length for our assembly. 
+Once we have longer stitched reads, we can increase the <u id='kmer'>k-mer</u> length for our assembly. 
+
+## FLASH
 
 There are a number of pieces of software that can be used to stitch reads (e.g. `Pear`,  `Pandaseq`) but today we will use one called `FLASH`:
 
-## FLASH: run
+### Run
 <center>
 ![](figures/play_red.png){style="width:100px; background: white; border-radius:5px; border: white solid 5px"}
 </center>
@@ -1787,7 +1939,7 @@ flash  -o K1 -z -t 12 -d . \
 - `-d`: The directory the output files will be placed.
 - The last 2 flag-less parameters are the forward and reverse read files for stitching.
 
-## FLASH: Output
+### Output
 <center>
 ![](figures/output_file_red.png){style="width:100px"}
 </center>
@@ -1808,7 +1960,7 @@ less K1.histogram
 
 Scroll down with the down key and you will see that we are looking at a histogram showing the proportion of stitched reads at different lengths. 
 
-## FLASH: MCQs
+## MCQs
 <center>
 ![](figures/question_bubble_red.png){style="width:100px; background: white; border-radius:5px; border: white solid 5px"}
 </center>
@@ -1822,6 +1974,18 @@ opts_p <- c("__101__", "__177__", answer="__188__")
 opts_p <- c(answer="__101__", "__177__", "__188__")
 ```
 2. What length has the lowest proportion of stitched reads? `r longmcq(opts_p)`
+
+```{r, echo=FALSE}
+#Tippy tooltips
+#Note, &#013; is a newline entitiy (\n does not work)
+tippy::tippy_this(elementId = "kmer", 
+                  tooltip = "Substrings of length k within a DNA/RNA sequence. 
+                              The 1-mers of 'AGCT' are 'A', 'G', 'C', and 'T'. 
+                              Its 2-mers are 'AG', 'GC' and 'CT'. 
+                              Its 3-mers are 'AGC' and GCT'. 
+                              Its 4-mer is 'AGCT'.",
+                  arrow = TRUE, placement = "bottom")
+```
 
 <!--chapter:end:20-Stitching_reads.Rmd-->
 
@@ -1870,9 +2034,12 @@ megahit \
 - `-2`: Reverse reads of paired end reads to be used for assembly. We are using the reads that did not stitch as they still have useful information.
 - `-o`: Output directory.
 - `-t`: Number of threads to be used for process.
-- `--k-list`: K-mer list.
+- `--k-list`: <u id='kmer'>K-mer</u> list.
 
-The __k-mer list__ instructs `MEGAHIT` to first generate an assembly using a k-mer size of 29 bp and when that is complete, integrate the results into an assembly using a k-mer size of 49 bp, and so on up to a final iteration using a k-mer size of 189 bp. This large range of k-mer lengths should give us a good assembly, given the data. However, it may take a while to run. This might be a good time to read on or take a break whilst the command runs. 
+The __<u id='kmer'>k-mer</u> list__ instructs `MEGAHIT` to first generate an assembly using a <u id='kmer'>k-mer</u> size of 29 bp and when that is complete, integrate the results into an assembly using a <u id='kmer'>k-mer</u> size of 49 bp, and so on up to a final iteration using a <u id='kmer'>k-mer</u> size of 189 bp. 
+This large range of <u id='kmer'>k-mer</u> lengths should give us a good assembly, given the data. 
+However, it may take a while to run. 
+This might be a good time to read on or take a break whilst the command runs. 
 
 If you need a command prompt (your current one is busy because MEGAHIT is running), right click on the main screen, choose `Terminal`.
 
@@ -1981,6 +2148,18 @@ We now have an assembly. It is not a brilliant one due to us only having used 1 
 
 There is also a `metaQUAST` specifically for metagenome assemblies but it requires reference assemblies be provided.
 
+```{r, echo=FALSE}
+#Tippy tooltips
+#Note, &#013; is a newline entitiy (\n does not work)
+tippy::tippy_this(elementId = "kmer", 
+                  tooltip = "Substrings of length k within a DNA/RNA sequence. 
+                              The 1-mers of 'AGCT' are 'A', 'G', 'C', and 'T'. 
+                              Its 2-mers are 'AG', 'GC' and 'CT'. 
+                              Its 3-mers are 'AGC' and GCT'. 
+                              Its 4-mer is 'AGCT'.",
+                  arrow = TRUE, placement = "bottom")
+```
+
 <!--chapter:end:21_Megahit.Rmd-->
 
 ```{r include=FALSE, cache=FALSE}
@@ -2016,7 +2195,7 @@ We will use `MetaBAT2` for our genome binning. It has three major upsides that m
 
 1. It has very reliable default parameters meaning virtually no parameter optimisation is required.
 2. It performs very well amongst genome binners.
-3. It is computationally efficient compared to other binners (requires less RAM, cores etc.)
+3. It is computationally efficient compared to other binners (requires less RAM, cores etc.).
 
 Make a new directory and move into it.
 
@@ -2027,14 +2206,14 @@ mkdir -p ~/7-Binning/K1
 cd ~/7-Binning/K1
 ```
 
-### MetaBAT2: depth calculation
+## Depth calculation
 <center>
 ![](figures/submarine.png){style="width:100px; background: white; border-radius:5px; border: white solid 5px"}
 </center>
 
 To carry out effective genome binning `MetaBAT2` uses coverage information of the contigs. To calculate depth we need to align the reads to the metagenome assembly.
 
-#### Index assembly {-}
+### Index assembly
 
 For the alignment we will use `bwa`. We need to index our assembly file prior to alignment.
 
@@ -2042,7 +2221,7 @@ For the alignment we will use `bwa`. We need to index our assembly file prior to
 bwa index ~/6-Assembly/K1/final.contigs.fa
 ```
 
-#### Alignment {-}
+### Alignment
 
 Next we will align our trimmed paired reads we used to create the stitched reads. We will carry this out with the `bwa mem` command. `bwa mem` is a good aligner for short reads. If you are using long reads (PacBio or Nanopore) `minimap2` will be more appropriate.
 
@@ -2052,7 +2231,7 @@ bwa mem ~/6-Assembly/K1/final.contigs.fa \
 K1.sam
 ```
 
-#### Sam to sorted bam {-}
+### Sam to sorted bam
 
 After alignment we need to get the file ready for the contig depth summarisation step. This requires converting the `sam` file to a `bam` (binary form of a `sam` file) file and then sorting the `bam` file.
 
@@ -2063,7 +2242,7 @@ samtools view -bu K1.sam > K1.bam
 samtools sort K1.bam > K1.sort.bam
 ```
 
-#### Summarise depths {-}
+### Summarise depths
 
 Now we can summarise the contig depths from the sorted `bam` files with `MetaBAT2`'s `jgi_summarize_bam_contig_depths` command.
 
@@ -2071,7 +2250,7 @@ Now we can summarise the contig depths from the sorted `bam` files with `MetaBAT
 jgi_summarize_bam_contig_depths --outputDepth K1.depth.txt K1.sort.bam
 ```
 
-#### View summary depth {-}
+### View summary depth
 
 You can have a look at the depth file and you will notice there are many contigs with low coverage (<10) and of short length (<1500).
 
@@ -2100,7 +2279,9 @@ summary(df)
 
 The last command gave us summary information of all the columns. This includes the minimum, maximum, mean, median, and Inter-Quartile Range (IQR) values. 
 
-We can see the values of the `contigLen` and `totalAvgDepth` are very low. However, this is most likely due to a bunch of short and low coverage contigs which will be ignored by `MetaBAT2`. Therefore we will remove rows with information on contigs shorter than 1500 and rerun the summary. `MetaBAT2`'s documentation dictates the minimum contig length should be >=1500 with its default being 2500.
+We can see the values of the `contigLen` and `totalAvgDepth` are very low. However, this is most likely due to a bunch of short and low coverage contigs which will be ignored by `MetaBAT2`. 
+
+We'll remove rows with information on contigs shorter than 1500 and rerun the summary. `MetaBAT2`'s documentation dictates the minimum contig length should be >=1500 with its default being 2500.
 
 ```{r eval=FALSE}
 #Set the new object "df_min1500len" as all rows
@@ -2121,7 +2302,7 @@ q()
 
 __Note__: One of the reasons for our short contigs is that we only used a subset of our sequencing dataset for this tutorial due to time concerns.
 
-### MetaBAT2: run
+## Run
 <center>
 ![](figures/play_orange.png){style="width:100px; background: white; border-radius:5px; border: white solid 5px"}
 </center>
@@ -2151,7 +2332,7 @@ metabat2 \
   - The default is 2500.
   - We used the minimum value of 1500 as we are using tutorial data. We recommend using the default in your own analysis.
 
-### MetaBAT2: output
+## Output
 <center>
 ![](figures/output_file_orange.png){style="width:100px"}
 </center>
@@ -2328,7 +2509,7 @@ Ensure you are in the correct directory.
 cd ~/7-Binning/K1/
 ```
 
-## CoCoPyE: run
+## Run
 <center>
 ![](figures/play_black.png){style="width:150px; background: white; border-radius: 5px; border: 5px white solid"}
 </center>
@@ -2362,7 +2543,7 @@ Other options include:
   - More information on the output below.
   
 
-## CoCoPyE: output
+## Output
 <center>
 ![](figures/output_file_black.png){style="width:150px"}
 </center>
@@ -2403,7 +2584,7 @@ Output columns when `-v` set to `standard` (also the default)
 Please see the full list of statistics definitions from [CoCoPyE wiki](https://github.com/gobics/cocopye/wiki/Output). This includes the defintions when `-v` is set to `extended` or `full`.
 `r unhide()`
 
-## CoCoPyE: Quality score
+## Quality score
 <center>
 ![](figures/quality_ribbon.png){style="width:200px; background: white ; border-radius: 5px; border: white solid 5px"}
 </center>
@@ -2522,7 +2703,7 @@ Now we can combine the files `cocopye_output.csv` and `MAGS_quality.csv` with th
 paste -d "," cocopye_output.csv MAGS_quality.csv > cocopye_quality.csv
 ```
 
-## CheckM: MCQs
+## MCQs
 <center>
 ![](figures/question_bubble_blue.png){style="width:150px; background: white; border-radius: 5px; border: 5px white solid"}
 </center>
