@@ -1,0 +1,158 @@
+# Depth calculation {#depth_calc}
+<center>
+![](figures/submarine.png){style="width:150px; background: white; border-radius:5px; border: white solid 5px"}
+</center>
+
+We will use `MetaBAT2` for genome binning.
+It requires __depth__ information of the contigs.
+
+__Depth__ will be calculated for each base of the assembly by aligning the trimmed reads to the metagenome assembly.
+The __depth__ will be equal to the number of reads/sequences that align to the base, this represents how many times the base was sequenced.
+If a base from an assembly aligns to 10 of the reads/sequences used for assembly it will have a depth of 10x. 
+The average of all the base depths in a contig is its average depth.
+
+## Index assembly
+<center>
+![](figures/index.png){style="width:150px; background: white; border-radius:5px; border: white solid 5px"}
+</center>
+
+For the alignment we will use `bwa`. We need to index our assembly file prior to alignment.
+
+```{bash eval=FALSE}
+bwa index ~/6-Assembly/K1/final.contigs.fa
+```
+
+## Alignment
+<center>
+![](figures/dna_alignment.png){style="width:150px; background: white; border-radius:5px; border: white solid 5px"}
+</center>
+
+Next we will align our trimmed paired reads we used to create the stitched reads. 
+We will carry this out with the `bwa mem` command. 
+
+`bwa mem` is a good aligner for short reads. 
+If you are using long reads (PacBio or Nanopore) `minimap2` will be more appropriate.
+
+```{bash eval=FALSE}
+bwa mem ~/6-Assembly/K1/final.contigs.fa \
+~/2-Trimmed/K1_R1.fq.gz ~/2-Trimmed/K1_R2.fq.gz > \
+K1.sam
+```
+
+## SAM to sorted BAM
+<center>
+![](figures/sort.png){style="width:150px; background: white; border-radius:5px"}
+</center>
+
+After alignment we need to get the file ready for the contig depth summarisation step. This requires converting the `SAM` file to a `BAM` (binary form of a `SAM` file) file and then sorting the `BAM` file.
+
+```{bash eval=FALSE}
+# Convert sam to bam file
+samtools view -bu K1.sam > K1.bam
+# Created sorted bam file
+samtools sort K1.bam > K1.sort.bam
+```
+
+## Summarise depths
+<center>
+![](figures/depth.png){style="width:150px; background: white; border-radius:5px"}
+</center>
+
+Now we can summarise the contig depths from the sorted `bam` files with `MetaBAT2`'s `jgi_summarize_bam_contig_depths` command.
+
+```{bash eval=FALSE}
+jgi_summarize_bam_contig_depths --outputDepth K1.depth.txt K1.sort.bam
+```
+
+## View depths
+<center>
+![](figures/periscope.png){style="width:150px; background: white; border-radius:5px; border: white solid 5px"}
+</center>
+
+Have a look at the depth file.
+
+```{bash eval=FALSE}
+less K1.depth.txt
+```
+
+Many contigs have low depths of less than 10 (`totalAvgDepth`) and short lengths of less than <1500 (`contigLen`).
+
+## Summarise with R
+<center>
+![](figures/R.png){style="width:150px; background: white; border-radius:5px; border: white solid 5px"}
+</center>
+
+For tutorial purposes we will have a better at the depth by summarising the contig depths with `R`.
+
+Activate `R`:
+
+```{bash eval=FALSE}
+R
+```
+
+### Column summaries
+
+Read in the file and get a `summary()` of it.
+
+```{r eval=FALSE}
+#Read in the table as an object called df (short for data frame)
+#We want the first row to be the column names (header=TRUE)
+#We do not want R to check the column names and "fix" them (check.names=FALSE)
+df <- read.table("K1.depth.txt", header=TRUE, check.names=FALSE)
+#Create a summary of the data
+summary(df)
+```
+
+The last command gave us summary information of all the columns. 
+This includes the minimum, maximum, mean, median, and Inter-Quartile Range (IQR) values. 
+
+We can see the values of the `contigLen` and `totalAvgDepth` are very low. However, this is most likely due to a bunch of short and low coverage contigs which will be ignored by `MetaBAT2`, our binning tool. 
+
+### Filter then summarise
+
+We'll remove rows with information on contigs shorter than 1500 and rerun the summary. 
+`MetaBAT2`'s documentation dictates the minimum contig length should be >=1500 with its default being 2500.
+
+```{r eval=FALSE}
+#Set the new object "df_min1500len" as all rows
+#where the value in the column "contigLen" of "df"
+#Is greater than or equal to 1500
+df_min1500len <- df[df$contigLen >= 1500,]
+#Summary of our new data frame
+summary(df_min1500len)
+```
+
+That is looking better. 
+The minimum average depth for `MetaBAT2` is 1 and our minimum value is 2.700 with a maximum of ~93 (your values may differ slightly). 
+
+### Quit R
+
+Now you can quit R and continue.
+
+```{r eval=FALSE}
+#quit R
+q()
+#On the prompt to save your workspace press "n" and then enter.
+```
+
+__Note__: One of the reasons for our short contigs is that we only used a subset of our sequencing dataset for this tutorial due to time concerns.
+
+## Remove SAM and BAM files
+
+SAM and BAM files are large so it is good practice to delete them when you don't need them anymore.
+
+Delete you SAM and BAM files.
+
+```{bash, eval=FALSE}
+rm K1.sam K1.bam K1.sort.bam
+```
+
+Great!
+With our `K1.depth.txt` file we will next carry out `MetaBAT2` genome binning.
+
+```{r, echo=FALSE}
+#Tippy tooltips
+tippy::tippy_this(elementId = "mag", 
+                  tooltip = "Metagenome-Assembled Genome",
+                  arrow = TRUE, placement = "bottom")
+```

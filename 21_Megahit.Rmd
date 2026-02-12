@@ -1,9 +1,9 @@
-# Megahit Assembly
+# MEGAHIT
 <center>
 ![](figures/puzzle.png){style="width: 200px; border-radius: 15px; background-color: white"}
 </center>
 
-We will use our stitched and unstitched reads to produce an assembly with`MEGAHIT`. 
+We will use our stitched and unstitched reads to produce an assembly with `MEGAHIT`. 
 
 ## MEGAHIT
 <center>
@@ -18,7 +18,8 @@ mkdir 6-Assembly
 cd 6-Assembly
 ```
 
-Now run the metagenome assembler `MEGAHIT` using our newly stitched read data.
+Run the metagenome assembler `MEGAHIT` using our stitched read data.
+We are usign the stithced and unstitched reads.
 
 ```{bash eval=FALSE}
 megahit \
@@ -35,9 +36,12 @@ megahit \
 ![](figures/parameter_blue.png){style="width:100px; background: white; border-radius:5px; border: white solid 5px"}
 </center>
 
-- `-r`: Single-end reads to be used for assembly. We are using our successfully stitched reads.
-- `-1`: Forward reads of paired end reads to be used for assembly. We are using the reads that did not stitch as they still have useful information.
-- `-2`: Reverse reads of paired end reads to be used for assembly. We are using the reads that did not stitch as they still have useful information.
+- `-r`: Single-end reads to be used for assembly.
+  - We are using our successfully stitched reads.
+- `-1`: Forward reads of paired end reads to be used for assembly. 
+  - We are using the reads that did not stitch as they still have useful information.
+- `-2`: Reverse reads of paired end reads to be used for assembly. 
+   - We are using the reads that did not stitch as they still have useful information.
 - `-o`: Output directory.
 - `-t`: Number of threads to be used for process.
 - `--k-list`: <u id='kmer'>K-mer</u> list.
@@ -49,45 +53,48 @@ This might be a good time to read on or take a break whilst the command runs.
 
 If you need a command prompt (your current one is busy because MEGAHIT is running), right click on the main screen, choose `Terminal`.
 
-Once the assembly is completed, we can look at the output FASTA file containing the contigs:
+Once the assembly is complete, look at the output FASTA file containing the contigs:
 
 ```{bash eval=FALSE}
 less K1/final.contigs.fa
 ```
 
-There is not much to see. When happy, quit the `less` (`q`) and carry on to `QUAST`.
+There is not much to see. When happy, quit `less` (`q`) and carry on to `QUAST`.
 
 ## QUAST
 <center>
 ![](figures/inspect.png){style="width:150px; background: white; border-radius:5px; border: white solid 5px"}
 </center>
 
-We can generate some metrics based on the assembly with `QUAST`,  but first we will create a directory for the `QUAST` output.
+We will generate assembly metrics with [`QUAST`](https://quast.sourceforge.net/quast.html).
+`QUAST` is a very popular genomeevaluation tool that produces a html report with various metrics such as the number of contigs and length of the assembly. 
 
-```{bash eval=FALSE}
-#Create QUAST output directory
-#The option -p will create a directory and any required
-#parent directories
-mkdir -p quast/K1
-```
-
-### QUAST: run
+### Assembly assessment
 <center>
 ![](figures/play_green.png){style="width:100px; background: white; border-radius:5px; border: white solid 5px"}
 </center>
 
-Now to run `QUAST`. 
+Create a directory for the `QUAST` output.
+
+```{bash eval=FALSE}
+#Create QUAST output directory
+#The option -p will create a directory and any required
+# parent directories
+mkdir -p quast/K1
+```
+
+Run `QUAST`. 
 
 ```{bash eval=FALSE}
 quast -o quast/K1 K1/final.contigs.fa
 ```
 
-### QUAST: visualise
+### Report
 <center>
 ![](figures/eye_green.png){style="width:100px; background: white; border-radius:5px; border: white solid 5px"}
 </center>
 
-`QUAST` will run relatively quickly. Once complete view the output with `firefox`.
+`QUAST` will run relatively quickly. Once complete view the QUAST report with `firefox`.
 
 ```{bash eval=FALSE}
 firefox quast/K1/report.html
@@ -105,12 +112,15 @@ The report tells us quite a bit about the assembly quality. Two definitions that
 ![](figures/n50_n90.png){style="border-radius: 15px; width: 400px; border: 5px solid white"}
 </center>
 
-### QUAST: MCQs
+## MCQs
 <center>
 ![](figures/question_bubble_green.png){style="width:100px; background: white; border-radius:5px; border: white solid 5px"}
 </center>
 
-__Note:__ Due to the assembly process your values may be slightly different (< 1%). Please choose the closest value
+Brilliant! 
+Using the QUAST report answer the below MCQs.
+
+__Note:__ Due to the assembly process your values may be slightly different (< 1%). Please choose the closest value.
 
 ```{r, echo = FALSE}
 opts_p <- c("__39.88__", "__18,650__",answer="__16,187,259__")
@@ -140,10 +150,13 @@ opts_p <- c("__1,363__",answer="__2,178__","__87,586__")
 ```{r, echo = FALSE}
 opts_p <- c("__1,363__","__2,178__",answer="__87,586__")
 ```
-6. what is the length of the largest contig? `r longmcq(opts_p)`
+6. What is the length of the largest contig? `r longmcq(opts_p)`
 
 __Questions__
-- How do the contig metrics compare to the original reads? 
+
+- How do the contig metrics compare to the original reads?
+- Are there more reads than contigs?
+- Are the contigs longer than the original reads?
 
 ## Metagenome assembly summary
 <center>
@@ -152,7 +165,7 @@ __Questions__
 
 We now have an assembly. It is not a brilliant one due to us only having used 1 million reads. In real analysis we would prefer fewer but longer contigs. We will explore some tools we can use with our metagenome assembly in the next chapters.
 
-There is also a `metaQUAST` specifically for metagenome assemblies but it requires reference assemblies be provided.
+There is also a [`metaQUAST`](https://quast.sourceforge.net/metaquast) specifically for metagenome assemblies but it requires reference assemblies.
 
 ```{r, echo=FALSE}
 #Tippy tooltips

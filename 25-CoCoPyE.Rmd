@@ -1,4 +1,4 @@
-# Bin quality
+# CoCoPyE
 
 <center>
 ![](figures/bin_quality.png){style="width: 400px; border-radius: 5px; background: white; border: white 5px solid"}
@@ -29,12 +29,12 @@ For full details please see the CoCoPyE publication: https://academic.oup.com/gi
 ![](figures/cocopye_workflow_step_1.png){style="width: 800px; border-radius: 5px"}
 </center>
 
-A protein domain search is carried out on all translated open reading frames of our our query genomes, MAGs/bins in our case.
+A protein domain search is carried out on all translated open reading frames of our our query genomes, <u id='mag'>MAGs</u>/bins in our case.
 The Pfam protein database is used and the tool produces protein domain counts for our query genomes.
 
 The completeness of the query genome is estimated based on one of 2 universal marker sets.
 The universal marker sets contain the protein domains found in either all reference bacterial genomes or all reference archaeal genomes.
-Query genomes (MAGS/bins) with a completeness score <10% are rejected and removed from further analysis.
+Query genomes (<u id='mag'>MAGs</u>/bins) with a completeness score <10% are rejected and removed from further analysis.
 
 ### Stage I
 <center>
@@ -159,7 +159,7 @@ cd ~/7-Binning/K1/
 
 ## Run
 <center>
-![](figures/play_black.png){style="width:150px; background: white; border-radius: 5px; border: 5px white solid"}
+![](figures/play_black.png){style="width:100px; background: white; border-radius: 5px; border: 5px white solid"}
 </center>
 
 `cocopye` has one main command to predict bin quality: `cocopye run`. 
@@ -175,7 +175,7 @@ cocopye run \
 
 ### Parameters {-}
 <center>
-![](figures/parameter_black.png){style="width:150px; background: white; border-radius: 5px; border: 5px white solid"}
+![](figures/parameter_black.png){style="width:100px; background: white; border-radius: 5px; border: 5px white solid"}
 </center>
 
 - `-t` : Number of threads/cores/CPUs to utilise for the process.
@@ -193,7 +193,7 @@ Other options include:
 
 ## Output
 <center>
-![](figures/output_file_black.png){style="width:150px"}
+![](figures/output_file_black.png){style="width:100px"}
 </center>
 
 As we have only used a subset of data the results are not very good. We'll therefore look at premade results. 
@@ -234,10 +234,10 @@ Please see the full list of statistics definitions from [CoCoPyE wiki](https://g
 
 ## Quality score
 <center>
-![](figures/quality_ribbon.png){style="width:200px; background: white ; border-radius: 5px; border: white solid 5px"}
+![](figures/quality_ribbon.png){style="width:150px; background: white ; border-radius: 5px; border: white solid 5px"}
 </center>
 
-One quick way to calculate the overall quality of a bin is with the following equation:
+One quick way to calculate the overall quality of a <u id='mag'>MAG</u>/bin is with the following equation:
 
 $$
 q = comp - (5 * cont)
@@ -353,7 +353,7 @@ paste -d "," cocopye_output.csv MAGS_quality.csv > cocopye_quality.csv
 
 ## MCQs
 <center>
-![](figures/question_bubble_blue.png){style="width:150px; background: white; border-radius: 5px; border: 5px white solid"}
+![](figures/question_bubble_blue.png){style="width:100px; background: white; border-radius: 5px; border: 5px white solid"}
 </center>
 
 Viewing the file `cocopye_output.csv` attempt the below questions.
@@ -413,9 +413,16 @@ opts_p <- c("__K1.20__", answer="__K1.26__", "__K1.22__")
 
 ## Bin quality summary
 <center>
-![](figures/sum_black.png){style="width:150px; background: white ; border-radius:5px; border: 5px white solid"}
+![](figures/sum_black.png){style="width:100px; background: white ; border-radius:5px; border: 5px white solid"}
 </center>
 
 It is always useful to know the quality of your bins so you know which are more reliable than others. With that information you can be more or less certain when concluding your findings.
 
 We have some good quality bins but many poorer quality bins too. Ultimately binning is trying to separate all the genomes from each other. A better metagenome assembly would most likely have led to better binning.
+
+```{r, echo=FALSE}
+#Tippy tooltips
+tippy::tippy_this(elementId = "mag", 
+                  tooltip = "Metagenome-Assembled Genome",
+                  arrow = TRUE, placement = "bottom")
+```

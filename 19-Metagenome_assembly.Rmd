@@ -1,4 +1,4 @@
-# (PART\*) Assembly Approach {.unnumbered}
+# (PART\*) Assembly {.unnumbered}
 
 # Metagenome assembly {#metagenomeassembly}
 <center>

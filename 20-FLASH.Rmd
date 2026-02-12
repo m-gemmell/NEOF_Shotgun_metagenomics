@@ -1,4 +1,4 @@
-# Stitching read pairs
+# FLASH
 <center>
 ![](figures/stitch.png){style="width:150px; background: white; border-radius:5px; border: white solid 5px"}
 </center>
@@ -17,11 +17,9 @@ First, we obtain our forward and reverse reads, derived from different ends of t
 
 Once we have longer stitched reads, we can increase the <u id='kmer'>k-mer</u> length for our assembly. 
 
-## FLASH
+There are a number of pieces of software that can be used to stitch reads (e.g. `Pear`,  `Pandaseq`) but today we will use one called `FLASH`.
 
-There are a number of pieces of software that can be used to stitch reads (e.g. `Pear`,  `Pandaseq`) but today we will use one called `FLASH`:
-
-### Run
+## Stitching
 <center>
 ![](figures/play_red.png){style="width:100px; background: white; border-radius:5px; border: white solid 5px"}
 </center>
@@ -50,7 +48,7 @@ flash  -o K1 -z -t 12 -d . \
 - `-d`: The directory the output files will be placed.
 - The last 2 flag-less parameters are the forward and reverse read files for stitching.
 
-### Output
+## Sticthed fastqs and histogram
 <center>
 ![](figures/output_file_red.png){style="width:100px"}
 </center>
@@ -61,7 +59,13 @@ Once `FLASH` has finished running, it will display on screen how well the stitch
 ls
 ```
 
-We have three new fastq.gz files. One containing the stitched reads (`K1.extendedFrags.fastq.gz`) and two containing the reads from pairs that could not be combined (`K1.notCombined_1.fastq.gz` and `K1.notCombined_2.fastq.gz`).
+We have three new fastq.gz files:
+
+- The stitched reads: `K1.extendedFrags.fastq.gz`
+- The forward reads unable to be stitched: `K1.notCombined_1.fastq.gz`
+- The reverse reads unable to be sticthed: `K1.notCombined_2.fastq.gz`
+
+__Note:__ The unstitched forward and revers reads (`notCombined`) are paired.
 
 We can also see what the new read lengths are:
 

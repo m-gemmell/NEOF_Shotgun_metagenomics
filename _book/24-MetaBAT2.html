@@ -4,18 +4,18 @@
 
   <meta charset="utf-8" />
   <meta http-equiv="X-UA-Compatible" content="IE=edge" />
-  <title>Chapter 3 Cluster Introduction | Shotgun Metagenomics</title>
+  <title>Chapter 24 MetaBAT2 | Shotgun Metagenomics</title>
   <meta name="description" content="NEOF book for the Microbial shotgun metagenomics workshop" />
   <meta name="generator" content="bookdown 0.46 and GitBook 2.6.7" />
 
-  <meta property="og:title" content="Chapter 3 Cluster Introduction | Shotgun Metagenomics" />
+  <meta property="og:title" content="Chapter 24 MetaBAT2 | Shotgun Metagenomics" />
   <meta property="og:type" content="book" />
   <meta property="og:image" content="/figures/NEOF.png" />
   <meta property="og:description" content="NEOF book for the Microbial shotgun metagenomics workshop" />
   
 
   <meta name="twitter:card" content="summary" />
-  <meta name="twitter:title" content="Chapter 3 Cluster Introduction | Shotgun Metagenomics" />
+  <meta name="twitter:title" content="Chapter 24 MetaBAT2 | Shotgun Metagenomics" />
   
   <meta name="twitter:description" content="NEOF book for the Microbial shotgun metagenomics workshop" />
   <meta name="twitter:image" content="/figures/NEOF.png" />
@@ -30,8 +30,8 @@
   <meta name="apple-mobile-web-app-status-bar-style" content="black" />
   
   <link rel="shortcut icon" href="figures/NEOF_favicon.png" type="image/x-icon" />
-<link rel="prev" href="02-Overview.html"/>
-<link rel="next" href="04-Start_conda.html"/>
+<link rel="prev" href="23-Depth_calculation.html"/>
+<link rel="next" href="25-CoCoPyE.html"/>
 <script src="libs/jquery-3.6.0/jquery-3.6.0.min.js"></script>
 <script src="https://cdn.jsdelivr.net/npm/fuse.js@6.4.6/dist/fuse.min.js"></script>
 <link href="libs/gitbook-2.6.7/css/style.css" rel="stylesheet" />
@@ -407,63 +407,68 @@ code span.wa { color: #60a0b0; font-weight: bold; font-style: italic; } /* Warni
           <div class="page-inner">
 
             <section class="normal" id="section-">
-<div id="cluster" class="section level1 hasAnchor" number="3">
-<h1><span class="header-section-number">Chapter 3</span> Cluster Introduction<a href="03-Cluster_Introduction.html#cluster" class="anchor-section" aria-label="Anchor link to header"></a></h1>
+<div id="metabat2" class="section level1 hasAnchor" number="24">
+<h1><span class="header-section-number">Chapter 24</span> MetaBAT2<a href="24-MetaBAT2.html#metabat2" class="anchor-section" aria-label="Anchor link to header"></a></h1>
 <center>
-<img src="figures/cluster.png" style="width:200px; background: white; border-radius:5px; border: white solid 5px" />
+<img src="figures/bat.png" style="width:200px; background: white; border-radius:5px" />
 </center>
-<div id="logon-instructions" class="section level2 hasAnchor" number="3.1">
-<h2><span class="header-section-number">3.1</span> Logon instructions<a href="03-Cluster_Introduction.html#logon-instructions" class="anchor-section" aria-label="Anchor link to header"></a></h2>
-<p>For this workshop we will be using Virtual Network Computing (<u id='vnc'>VNC</u>). Connect to the <u id='vnc'>VNC</u> with a browser by using the webVNC link you were sent.</p>
-<p>You will now be in a logged-in Linux <u id='vnc'>VNC</u> desktop with two terminals. You will see something as below (there may be only one terminal which is fine). If you do not see something similar please ask for assistance.</p>
+<p>We will use <code>MetaBAT2</code> for genome binning.
+It has three major upsides that makes it very popular:</p>
+<ol style="list-style-type: decimal">
+<li>It has very reliable default parameters meaning virtually no parameter optimisation is required.</li>
+<li>It performs very well amongst genome binners.</li>
+<li>It is computationally efficient compared to other binners (requires less RAM, cores etc.).</li>
+</ol>
+<p>Make a new directory and move into it.</p>
+<div class="sourceCode" id="cb80"><pre class="sourceCode bash Rchunk"><code class="sourceCode bash"><span id="cb80-1"><a href="24-MetaBAT2.html#cb80-1" tabindex="-1"></a><span class="co">#Make directory</span></span>
+<span id="cb80-2"><a href="24-MetaBAT2.html#cb80-2" tabindex="-1"></a><span class="fu">mkdir</span> <span class="at">-p</span> ~/7-Binning/K1</span>
+<span id="cb80-3"><a href="24-MetaBAT2.html#cb80-3" tabindex="-1"></a><span class="co">#Move into it</span></span>
+<span id="cb80-4"><a href="24-MetaBAT2.html#cb80-4" tabindex="-1"></a><span class="bu">cd</span> ~/7-Binning/K1</span></code></pre></div>
+<div id="metabat2-1" class="section level2 hasAnchor" number="24.1">
+<h2><span class="header-section-number">24.1</span> MetaBAT2<a href="24-MetaBAT2.html#metabat2-1" class="anchor-section" aria-label="Anchor link to header"></a></h2>
 <center>
-<img src="figures/nsc200_logon.png" style="width:800px; border-radius:5px; border: #282828 solid 5px" />
+<img src="figures/play_orange.png" style="width:100px; background: white; border-radius:5px; border: white solid 5px" />
 </center>
-<p>If the <u id='vnc'>VNC</u> is taking up too much/little space of your browser you can use the zoom of your browser to adjust the size. Ensure you can see one whole terminal.</p>
-<div class="webex-solution">
-<button>
-How to zoom with your browser
-</button>
-<p>You may need to zoom out with your browser so you can see the full webVNC window.</p>
+<p>With our assembly and its depth information we can run <code>MetaBAT2</code> for binning.</p>
+<div class="sourceCode" id="cb81"><pre class="sourceCode bash Rchunk"><code class="sourceCode bash"><span id="cb81-1"><a href="24-MetaBAT2.html#cb81-1" tabindex="-1"></a><span class="co">#make a diretcory for the bins</span></span>
+<span id="cb81-2"><a href="24-MetaBAT2.html#cb81-2" tabindex="-1"></a><span class="fu">mkdir</span> bins</span>
+<span id="cb81-3"><a href="24-MetaBAT2.html#cb81-3" tabindex="-1"></a><span class="co">#Run MetaBAT2</span></span>
+<span id="cb81-4"><a href="24-MetaBAT2.html#cb81-4" tabindex="-1"></a><span class="ex">metabat2</span> <span class="dt">\</span></span>
+<span id="cb81-5"><a href="24-MetaBAT2.html#cb81-5" tabindex="-1"></a>--inFile ~/6-Assembly/K1/final.contigs.fa <span class="dt">\</span></span>
+<span id="cb81-6"><a href="24-MetaBAT2.html#cb81-6" tabindex="-1"></a>--outFile bins/K1 <span class="dt">\</span></span>
+<span id="cb81-7"><a href="24-MetaBAT2.html#cb81-7" tabindex="-1"></a>--abdFile K1.depth.txt <span class="dt">\</span></span>
+<span id="cb81-8"><a href="24-MetaBAT2.html#cb81-8" tabindex="-1"></a>--minContig 1500</span></code></pre></div>
+<div id="parameters-9" class="section level4 unnumbered hasAnchor">
+<h4>Parameters<a href="24-MetaBAT2.html#parameters-9" class="anchor-section" aria-label="Anchor link to header"></a></h4>
+<center>
+<img src="figures/parameter_orange.png" style="width:100px; background: white; border-radius:5px; border: white solid 5px" />
+</center>
 <ul>
-<li><strong>Chrome</strong>: Click on the <strong>three dots in vertical line</strong> (
-<svg viewBox="0 0 512 512" style="height:1em;position:relative;display:inline-block;top:.1em;background:white;border:solid white;" xmlns="http://www.w3.org/2000/svg"> <circle cx="256" cy="256" r="48"></circle> <circle cx="256" cy="416" r="48"></circle> <circle cx="256" cy="96" r="48"></circle></svg>
-) on the top left for a dropdown menu which includes zoom options.</li>
-<li><strong>Edge</strong>: Click on the <strong>three horizontal lines</strong> (
-<svg viewBox="0 0 512 512" style="height:1em;position:relative;display:inline-block;top:.1em;background:white;border:solid white;" xmlns="http://www.w3.org/2000/svg"> <circle cx="256" cy="256" r="48"></circle> <circle cx="416" cy="256" r="48"></circle> <circle cx="96" cy="256" r="48"></circle></svg>
-) on the top left for a dropdown menu which includes zoom options.</li>
-<li><strong>Firefox</strong>: Click on the <strong>three dots in horizontal line</strong> (
-<svg viewBox="0 0 448 512" style="height:1em;position:relative;display:inline-block;top:.1em;background:white;border:solid white;" xmlns="http://www.w3.org/2000/svg"> <path d="M16 132h416c8.837 0 16-7.163 16-16V76c0-8.837-7.163-16-16-16H16C7.163 60 0 67.163 0 76v40c0 8.837 7.163 16 16 16zm0 160h416c8.837 0 16-7.163 16-16v-40c0-8.837-7.163-16-16-16H16c-8.837 0-16 7.163-16 16v40c0 8.837 7.163 16 16 16zm0 160h416c8.837 0 16-7.163 16-16v-40c0-8.837-7.163-16-16-16H16c-8.837 0-16 7.163-16 16v40c0 8.837 7.163 16 16 16z"></path></svg>
-) on the top left for a dropdown menu which includes zoom options.</li>
+<li><code>--inFile</code>: Input metagenome assembly fasta file.</li>
+<li><code>--outFile</code>: Prefix of output files.</li>
+<li><code>--abdFile</code>: Contig depth file.
+<ul>
+<li>Caluclated in the previous <a href="23-Depth_calculation.html#depth_calc">Depth calculation chapter</a></li>
+</ul></li>
+<li><code>--minContig</code>: Minimum size of contigs to be used for binning.
+<ul>
+<li>The default is 2500.</li>
+<li>We used the minimum value of 1500 as we are using tutorial data. We recommend using the default in your own analysis.</li>
+</ul></li>
 </ul>
 </div>
-<p>These instructions will not work outside of this workshop. If you would like to install your own Linux <u id='os'>OS</u> on your desktop or laptop we would recommend Mint Linux</p>
-<p>The following link is a guide to install Mint Linux:<br />
-<a href="https://linuxmint-installation-guide.readthedocs.io/en/latest/" class="uri">https://linuxmint-installation-guide.readthedocs.io/en/latest/</a></p>
-<p>If you have a windows machine and would like to install linux on it you can install Windows Subsystem for Linux (<u id='wsl'>WSL</u>).</p>
-<p>The following link is a guide to install linux via (<u id='wsl'>WSL</u>):
-<a href="https://learn.microsoft.com/en-us/windows/wsl/install" class="uri">https://learn.microsoft.com/en-us/windows/wsl/install</a></p>
 </div>
-<div id="the-terminal-window" class="section level2 hasAnchor" number="3.2">
-<h2><span class="header-section-number">3.2</span> The Terminal Window<a href="03-Cluster_Introduction.html#the-terminal-window" class="anchor-section" aria-label="Anchor link to header"></a></h2>
-<p>In our case the terminal window looks like the picture below. We are using the terminal window as our shell to interpret our commands to the kernel. Depending on your system and preferences it may look different.</p>
+<div id="bins" class="section level2 hasAnchor" number="24.2">
+<h2><span class="header-section-number">24.2</span> Bins<a href="24-MetaBAT2.html#bins" class="anchor-section" aria-label="Anchor link to header"></a></h2>
 <center>
-<img src="figures/terminal_window.png" style="width:700px; border-radius:5px" />
+<img src="figures/output_file_orange.png" style="width:100px" />
 </center>
-<p>Already there is useful information for us on the terminal window.</p>
-<ul>
-<li><strong>nsc206</strong>: This is the login name, also known as the username. In this case nsc206 is a demonstrator's account. Your screen should show a different account name which will be your username for the Linux machine/cluster you are logged into.</li>
-<li><strong>ada02</strong>: This is the machine name the user is logged into.</li>
-<li><strong>~</strong>: This represents the current directory of the user, or the directory a command was run in. In the Linux (<u id='os'>OS</u>) and others <strong>'~'</strong> is a shortcut to the user's home directory.</li>
-<li>Everything after the <strong>'$'</strong> is where commands are typed into the terminal. This is also referred to as the command line.</li>
-</ul>
-<p>To open a new terminal window, right click on the main screen, choose <code>Terminal</code>.</p>
-<span class="tippy html-widget html-fill-item" height="480" id="htmlwidget-fe5fe7ef77036c79c7f5" width="672"></span>
-<script type="application/json" data-for="htmlwidget-fe5fe7ef77036c79c7f5">{"x":{"element":"os","opts":{"content":"Operating System","arrow":true,"placement":"bottom"}},"evals":[],"jsHooks":[]}</script>
-<span class="tippy html-widget html-fill-item" height="480" id="htmlwidget-1897660cdb10f08e5405" width="672"></span>
-<script type="application/json" data-for="htmlwidget-1897660cdb10f08e5405">{"x":{"element":"vnc","opts":{"content":"Virtual Network Computing","arrow":true,"placement":"bottom"}},"evals":[],"jsHooks":[]}</script>
-<span class="tippy html-widget html-fill-item" height="480" id="htmlwidget-b1f85a2e92ea4c16de3f" width="672"></span>
-<script type="application/json" data-for="htmlwidget-b1f85a2e92ea4c16de3f">{"x":{"element":"wsl","opts":{"content":"Windows Subsystem for Linux","arrow":true,"placement":"bottom"}},"evals":[],"jsHooks":[]}</script>
+<p>List the contents of the output directory and you'll see there is 1 fasta file with the prefix of <code>K1</code>. This is a bin that will hopefully contain 1 <u id='mag'>MAG</u>. In your future analysis you may get many bins, each hopefully containing only one <u id='mag'>MAG</u>.</p>
+<div class="sourceCode" id="cb82"><pre class="sourceCode bash Rchunk"><code class="sourceCode bash"><span id="cb82-1"><a href="24-MetaBAT2.html#cb82-1" tabindex="-1"></a><span class="fu">ls</span> bins</span></code></pre></div>
+<p>Super!
+In the next chapter we will assess the quality of these bins.</p>
+<span class="tippy html-widget html-fill-item" height="480" id="htmlwidget-5c9e0d07612a1d8ec329" width="672"></span>
+<script type="application/json" data-for="htmlwidget-5c9e0d07612a1d8ec329">{"x":{"element":"mag","opts":{"content":"Metagenome-Assembled Genome","arrow":true,"placement":"bottom"}},"evals":[],"jsHooks":[]}</script>
 
 </div>
 </div>
@@ -678,8 +683,8 @@ window.onload = function() {
           </div>
         </div>
       </div>
-<a href="02-Overview.html" class="navigation navigation-prev " aria-label="Previous page"><i class="fa fa-angle-left"></i></a>
-<a href="04-Start_conda.html" class="navigation navigation-next " aria-label="Next page"><i class="fa fa-angle-right"></i></a>
+<a href="23-Depth_calculation.html" class="navigation navigation-prev " aria-label="Previous page"><i class="fa fa-angle-left"></i></a>
+<a href="25-CoCoPyE.html" class="navigation navigation-next " aria-label="Next page"><i class="fa fa-angle-right"></i></a>
     </div>
   </div>
 <script src="libs/gitbook-2.6.7/js/app.min.js"></script>

@@ -4,18 +4,18 @@
 
   <meta charset="utf-8" />
   <meta http-equiv="X-UA-Compatible" content="IE=edge" />
-  <title>Chapter 23 Bin quality | Shotgun Metagenomics</title>
+  <title>Chapter 26 Bin quality | Shotgun Metagenomics</title>
   <meta name="description" content="NEOF book for the Microbial shotgun metagenomics workshop" />
   <meta name="generator" content="bookdown 0.46 and GitBook 2.6.7" />
 
-  <meta property="og:title" content="Chapter 23 Bin quality | Shotgun Metagenomics" />
+  <meta property="og:title" content="Chapter 26 Bin quality | Shotgun Metagenomics" />
   <meta property="og:type" content="book" />
   <meta property="og:image" content="/figures/NEOF.png" />
   <meta property="og:description" content="NEOF book for the Microbial shotgun metagenomics workshop" />
   
 
   <meta name="twitter:card" content="summary" />
-  <meta name="twitter:title" content="Chapter 23 Bin quality | Shotgun Metagenomics" />
+  <meta name="twitter:title" content="Chapter 26 Bin quality | Shotgun Metagenomics" />
   
   <meta name="twitter:description" content="NEOF book for the Microbial shotgun metagenomics workshop" />
   <meta name="twitter:image" content="/figures/NEOF.png" />
@@ -23,15 +23,15 @@
 <meta name="author" content="Sam Haldenby and Matthew R. Gemmell" />
 
 
-<meta name="date" content="2026-02-11" />
+<meta name="date" content="2026-02-12" />
 
   <meta name="viewport" content="width=device-width, initial-scale=1" />
   <meta name="apple-mobile-web-app-capable" content="yes" />
   <meta name="apple-mobile-web-app-status-bar-style" content="black" />
   
   <link rel="shortcut icon" href="figures/NEOF_favicon.png" type="image/x-icon" />
-<link rel="prev" href="22-Genome_binning.html"/>
-<link rel="next" href="24-Assembly_functional_annotation.html"/>
+<link rel="prev" href="25-CoCoPyE.html"/>
+<link rel="next" href="27-Assembly_functional_annotation.html"/>
 <script src="libs/jquery-3.6.0/jquery-3.6.0.min.js"></script>
 <script src="https://cdn.jsdelivr.net/npm/fuse.js@6.4.6/dist/fuse.min.js"></script>
 <link href="libs/gitbook-2.6.7/css/style.css" rel="stylesheet" />
@@ -233,7 +233,7 @@ code span.wa { color: #60a0b0; font-weight: bold; font-style: italic; } /* Warni
 <li class="chapter" data-level="11.5" data-path="11-Bracken.html"><a href="11-Bracken.html#merging-output"><i class="fa fa-check"></i><b>11.5</b> Merging output</a></li>
 <li class="chapter" data-level="11.6" data-path="11-Bracken.html"><a href="11-Bracken.html#extracting-output"><i class="fa fa-check"></i><b>11.6</b> Extracting output</a></li>
 </ul></li>
-<li class="chapter" data-level="12" data-path="12-Lefse.html"><a href="12-Lefse.html"><i class="fa fa-check"></i><b>12</b> LEfSe biomarker detection</a>
+<li class="chapter" data-level="12" data-path="12-Lefse.html"><a href="12-Lefse.html"><i class="fa fa-check"></i><b>12</b> LEfSe</a>
 <ul>
 <li class="chapter" data-level="12.1" data-path="12-Lefse.html"><a href="12-Lefse.html#kraken2_lefse_metadata"><i class="fa fa-check"></i><b>12.1</b> Add metadata</a></li>
 <li class="chapter" data-level="12.2" data-path="12-Lefse.html"><a href="12-Lefse.html#format-file"><i class="fa fa-check"></i><b>12.2</b> Format file</a></li>
@@ -271,94 +271,122 @@ code span.wa { color: #60a0b0; font-weight: bold; font-style: italic; } /* Warni
 </ul></li>
 <li class="chapter" data-level="17" data-path="17-LEfSe_humann.html"><a href="17-LEfSe_humann.html"><i class="fa fa-check"></i><b>17</b> LEfSe</a></li>
 <li class="chapter" data-level="18" data-path="18-HUMAnN_task.html"><a href="18-HUMAnN_task.html"><i class="fa fa-check"></i><b>18</b> Optional task</a></li>
-<li class="part"><span><b>Assembly Approach</b></span></li>
+<li class="part"><span><b>Assembly</b></span></li>
 <li class="chapter" data-level="19" data-path="19-Metagenome_assembly.html"><a href="19-Metagenome_assembly.html"><i class="fa fa-check"></i><b>19</b> Metagenome assembly</a>
 <ul>
 <li class="chapter" data-level="19.1" data-path="19-Metagenome_assembly.html"><a href="19-Metagenome_assembly.html#mamba"><i class="fa fa-check"></i><b>19.1</b> Mamba</a></li>
 <li class="chapter" data-level="19.2" data-path="19-Metagenome_assembly.html"><a href="19-Metagenome_assembly.html#a-primer-on-short-read-assembly"><i class="fa fa-check"></i><b>19.2</b> A primer on short read assembly</a></li>
 </ul></li>
-<li class="chapter" data-level="20" data-path="20-Stitching_reads.html"><a href="20-Stitching_reads.html"><i class="fa fa-check"></i><b>20</b> Stitching read pairs</a>
+<li class="chapter" data-level="20" data-path="20-FLASH.html"><a href="20-FLASH.html"><i class="fa fa-check"></i><b>20</b> FLASH</a>
 <ul>
-<li class="chapter" data-level="20.1" data-path="20-Stitching_reads.html"><a href="20-Stitching_reads.html#flash"><i class="fa fa-check"></i><b>20.1</b> FLASH</a>
-<ul>
-<li class="chapter" data-level="20.1.1" data-path="20-Stitching_reads.html"><a href="20-Stitching_reads.html#run"><i class="fa fa-check"></i><b>20.1.1</b> Run</a></li>
-<li class="chapter" data-level="20.1.2" data-path="20-Stitching_reads.html"><a href="20-Stitching_reads.html#output-1"><i class="fa fa-check"></i><b>20.1.2</b> Output</a></li>
+<li class="chapter" data-level="20.1" data-path="20-FLASH.html"><a href="20-FLASH.html#stitching"><i class="fa fa-check"></i><b>20.1</b> Stitching</a></li>
+<li class="chapter" data-level="20.2" data-path="20-FLASH.html"><a href="20-FLASH.html#sticthed-fastqs-and-histogram"><i class="fa fa-check"></i><b>20.2</b> Sticthed fastqs and histogram</a></li>
+<li class="chapter" data-level="20.3" data-path="20-FLASH.html"><a href="20-FLASH.html#mcqs-5"><i class="fa fa-check"></i><b>20.3</b> MCQs</a></li>
 </ul></li>
-<li class="chapter" data-level="20.2" data-path="20-Stitching_reads.html"><a href="20-Stitching_reads.html#mcqs-5"><i class="fa fa-check"></i><b>20.2</b> MCQs</a></li>
+<li class="chapter" data-level="21" data-path="21_MEGAHIT.html"><a href="21_MEGAHIT.html"><i class="fa fa-check"></i><b>21</b> MEGAHIT</a>
+<ul>
+<li class="chapter" data-level="21.1" data-path="21_MEGAHIT.html"><a href="21_MEGAHIT.html#megahit-1"><i class="fa fa-check"></i><b>21.1</b> MEGAHIT</a></li>
+<li class="chapter" data-level="21.2" data-path="21_MEGAHIT.html"><a href="21_MEGAHIT.html#quast"><i class="fa fa-check"></i><b>21.2</b> QUAST</a>
+<ul>
+<li class="chapter" data-level="21.2.1" data-path="21_MEGAHIT.html"><a href="21_MEGAHIT.html#assembly-assessment"><i class="fa fa-check"></i><b>21.2.1</b> Assembly assessment</a></li>
+<li class="chapter" data-level="21.2.2" data-path="21_MEGAHIT.html"><a href="21_MEGAHIT.html#report"><i class="fa fa-check"></i><b>21.2.2</b> Report</a></li>
 </ul></li>
-<li class="chapter" data-level="21" data-path="21_Megahit.html"><a href="21_Megahit.html"><i class="fa fa-check"></i><b>21</b> Megahit Assembly</a>
-<ul>
-<li class="chapter" data-level="21.1" data-path="21_Megahit.html"><a href="21_Megahit.html#megahit"><i class="fa fa-check"></i><b>21.1</b> MEGAHIT</a></li>
-<li class="chapter" data-level="21.2" data-path="21_Megahit.html"><a href="21_Megahit.html#quast"><i class="fa fa-check"></i><b>21.2</b> QUAST</a>
-<ul>
-<li class="chapter" data-level="21.2.1" data-path="21_Megahit.html"><a href="21_Megahit.html#quast-run"><i class="fa fa-check"></i><b>21.2.1</b> QUAST: run</a></li>
-<li class="chapter" data-level="21.2.2" data-path="21_Megahit.html"><a href="21_Megahit.html#quast-visualise"><i class="fa fa-check"></i><b>21.2.2</b> QUAST: visualise</a></li>
-<li class="chapter" data-level="21.2.3" data-path="21_Megahit.html"><a href="21_Megahit.html#quast-mcqs"><i class="fa fa-check"></i><b>21.2.3</b> QUAST: MCQs</a></li>
+<li class="chapter" data-level="21.3" data-path="21_MEGAHIT.html"><a href="21_MEGAHIT.html#mcqs-6"><i class="fa fa-check"></i><b>21.3</b> MCQs</a></li>
+<li class="chapter" data-level="21.4" data-path="21_MEGAHIT.html"><a href="21_MEGAHIT.html#metagenome-assembly-summary"><i class="fa fa-check"></i><b>21.4</b> Metagenome assembly summary</a></li>
 </ul></li>
-<li class="chapter" data-level="21.3" data-path="21_Megahit.html"><a href="21_Megahit.html#metagenome-assembly-summary"><i class="fa fa-check"></i><b>21.3</b> Metagenome assembly summary</a></li>
+<li class="part"><span><b>Binning</b></span></li>
+<li class="chapter" data-level="22" data-path="22-Genome_binning.html"><a href="22-Genome_binning.html"><i class="fa fa-check"></i><b>22</b> Metagenome binning</a></li>
+<li class="chapter" data-level="23" data-path="23-Depth_calculation.html"><a href="23-Depth_calculation.html"><i class="fa fa-check"></i><b>23</b> Depth calculation</a>
+<ul>
+<li class="chapter" data-level="23.1" data-path="23-Depth_calculation.html"><a href="23-Depth_calculation.html#index-assembly"><i class="fa fa-check"></i><b>23.1</b> Index assembly</a></li>
+<li class="chapter" data-level="23.2" data-path="23-Depth_calculation.html"><a href="23-Depth_calculation.html#alignment-1"><i class="fa fa-check"></i><b>23.2</b> Alignment</a></li>
+<li class="chapter" data-level="23.3" data-path="23-Depth_calculation.html"><a href="23-Depth_calculation.html#sam-to-sorted-bam"><i class="fa fa-check"></i><b>23.3</b> SAM to sorted BAM</a></li>
+<li class="chapter" data-level="23.4" data-path="23-Depth_calculation.html"><a href="23-Depth_calculation.html#summarise-depths"><i class="fa fa-check"></i><b>23.4</b> Summarise depths</a></li>
+<li class="chapter" data-level="23.5" data-path="23-Depth_calculation.html"><a href="23-Depth_calculation.html#view-depths"><i class="fa fa-check"></i><b>23.5</b> View depths</a></li>
+<li class="chapter" data-level="23.6" data-path="23-Depth_calculation.html"><a href="23-Depth_calculation.html#summarise-with-r"><i class="fa fa-check"></i><b>23.6</b> Summarise with R</a>
+<ul>
+<li class="chapter" data-level="23.6.1" data-path="23-Depth_calculation.html"><a href="23-Depth_calculation.html#column-summaries"><i class="fa fa-check"></i><b>23.6.1</b> Column summaries</a></li>
+<li class="chapter" data-level="23.6.2" data-path="23-Depth_calculation.html"><a href="23-Depth_calculation.html#filter-then-summarise"><i class="fa fa-check"></i><b>23.6.2</b> Filter then summarise</a></li>
+<li class="chapter" data-level="23.6.3" data-path="23-Depth_calculation.html"><a href="23-Depth_calculation.html#quit-r"><i class="fa fa-check"></i><b>23.6.3</b> Quit R</a></li>
 </ul></li>
-<li class="chapter" data-level="22" data-path="22-Genome_binning.html"><a href="22-Genome_binning.html"><i class="fa fa-check"></i><b>22</b> Genome binning</a>
-<ul>
-<li class="chapter" data-level="22.1" data-path="22-Genome_binning.html"><a href="22-Genome_binning.html#metabat2"><i class="fa fa-check"></i><b>22.1</b> MetaBAT2</a></li>
-<li class="chapter" data-level="22.2" data-path="22-Genome_binning.html"><a href="22-Genome_binning.html#depth-calculation"><i class="fa fa-check"></i><b>22.2</b> Depth calculation</a>
-<ul>
-<li class="chapter" data-level="22.2.1" data-path="22-Genome_binning.html"><a href="22-Genome_binning.html#index-assembly"><i class="fa fa-check"></i><b>22.2.1</b> Index assembly</a></li>
-<li class="chapter" data-level="22.2.2" data-path="22-Genome_binning.html"><a href="22-Genome_binning.html#alignment-1"><i class="fa fa-check"></i><b>22.2.2</b> Alignment</a></li>
-<li class="chapter" data-level="22.2.3" data-path="22-Genome_binning.html"><a href="22-Genome_binning.html#sam-to-sorted-bam"><i class="fa fa-check"></i><b>22.2.3</b> Sam to sorted bam</a></li>
-<li class="chapter" data-level="22.2.4" data-path="22-Genome_binning.html"><a href="22-Genome_binning.html#summarise-depths"><i class="fa fa-check"></i><b>22.2.4</b> Summarise depths</a></li>
-<li class="chapter" data-level="22.2.5" data-path="22-Genome_binning.html"><a href="22-Genome_binning.html#view-summary-depth"><i class="fa fa-check"></i><b>22.2.5</b> View summary depth</a></li>
+<li class="chapter" data-level="23.7" data-path="23-Depth_calculation.html"><a href="23-Depth_calculation.html#remove-sam-and-bam-files"><i class="fa fa-check"></i><b>23.7</b> Remove SAM and BAM files</a></li>
 </ul></li>
-<li class="chapter" data-level="22.3" data-path="22-Genome_binning.html"><a href="22-Genome_binning.html#run-1"><i class="fa fa-check"></i><b>22.3</b> Run</a></li>
-<li class="chapter" data-level="22.4" data-path="22-Genome_binning.html"><a href="22-Genome_binning.html#output-2"><i class="fa fa-check"></i><b>22.4</b> Output</a></li>
+<li class="chapter" data-level="24" data-path="24-MetaBAT2.html"><a href="24-MetaBAT2.html"><i class="fa fa-check"></i><b>24</b> MetaBAT2</a>
+<ul>
+<li class="chapter" data-level="24.1" data-path="24-MetaBAT2.html"><a href="24-MetaBAT2.html#metabat2-1"><i class="fa fa-check"></i><b>24.1</b> MetaBAT2</a></li>
+<li class="chapter" data-level="24.2" data-path="24-MetaBAT2.html"><a href="24-MetaBAT2.html#bins"><i class="fa fa-check"></i><b>24.2</b> Bins</a></li>
 </ul></li>
-<li class="chapter" data-level="23" data-path="23-Bin_quality.html"><a href="23-Bin_quality.html"><i class="fa fa-check"></i><b>23</b> Bin quality</a>
+<li class="chapter" data-level="25" data-path="25-CoCoPyE.html"><a href="25-CoCoPyE.html"><i class="fa fa-check"></i><b>25</b> CoCoPyE</a>
 <ul>
-<li class="chapter" data-level="23.1" data-path="23-Bin_quality.html"><a href="23-Bin_quality.html#workflow-concept"><i class="fa fa-check"></i><b>23.1</b> Workflow concept</a>
+<li class="chapter" data-level="25.1" data-path="25-CoCoPyE.html"><a href="25-CoCoPyE.html#workflow-concept"><i class="fa fa-check"></i><b>25.1</b> Workflow concept</a>
 <ul>
-<li class="chapter" data-level="23.1.1" data-path="23-Bin_quality.html"><a href="23-Bin_quality.html#input-pre-processing"><i class="fa fa-check"></i><b>23.1.1</b> Input Pre-processing</a></li>
-<li class="chapter" data-level="23.1.2" data-path="23-Bin_quality.html"><a href="23-Bin_quality.html#stage-i"><i class="fa fa-check"></i><b>23.1.2</b> Stage I</a></li>
-<li class="chapter" data-level="23.1.3" data-path="23-Bin_quality.html"><a href="23-Bin_quality.html#stage-ii"><i class="fa fa-check"></i><b>23.1.3</b> Stage II</a></li>
+<li class="chapter" data-level="25.1.1" data-path="25-CoCoPyE.html"><a href="25-CoCoPyE.html#input-pre-processing"><i class="fa fa-check"></i><b>25.1.1</b> Input Pre-processing</a></li>
+<li class="chapter" data-level="25.1.2" data-path="25-CoCoPyE.html"><a href="25-CoCoPyE.html#stage-i"><i class="fa fa-check"></i><b>25.1.2</b> Stage I</a></li>
+<li class="chapter" data-level="25.1.3" data-path="25-CoCoPyE.html"><a href="25-CoCoPyE.html#stage-ii"><i class="fa fa-check"></i><b>25.1.3</b> Stage II</a></li>
 </ul></li>
-<li class="chapter" data-level="23.2" data-path="23-Bin_quality.html"><a href="23-Bin_quality.html#mamba-1"><i class="fa fa-check"></i><b>23.2</b> Mamba</a></li>
-<li class="chapter" data-level="23.3" data-path="23-Bin_quality.html"><a href="23-Bin_quality.html#run-2"><i class="fa fa-check"></i><b>23.3</b> Run</a>
+<li class="chapter" data-level="25.2" data-path="25-CoCoPyE.html"><a href="25-CoCoPyE.html#mamba-1"><i class="fa fa-check"></i><b>25.2</b> Mamba</a></li>
+<li class="chapter" data-level="25.3" data-path="25-CoCoPyE.html"><a href="25-CoCoPyE.html#run"><i class="fa fa-check"></i><b>25.3</b> Run</a>
 <ul>
-<li class="chapter" data-level="" data-path="23-Bin_quality.html"><a href="23-Bin_quality.html#parameters-10"><i class="fa fa-check"></i>Parameters</a></li>
+<li class="chapter" data-level="" data-path="25-CoCoPyE.html"><a href="25-CoCoPyE.html#parameters-10"><i class="fa fa-check"></i>Parameters</a></li>
 </ul></li>
-<li class="chapter" data-level="23.4" data-path="23-Bin_quality.html"><a href="23-Bin_quality.html#output-3"><i class="fa fa-check"></i><b>23.4</b> Output</a></li>
-<li class="chapter" data-level="23.5" data-path="23-Bin_quality.html"><a href="23-Bin_quality.html#quality-score"><i class="fa fa-check"></i><b>23.5</b> Quality score</a>
+<li class="chapter" data-level="25.4" data-path="25-CoCoPyE.html"><a href="25-CoCoPyE.html#output-1"><i class="fa fa-check"></i><b>25.4</b> Output</a></li>
+<li class="chapter" data-level="25.5" data-path="25-CoCoPyE.html"><a href="25-CoCoPyE.html#quality-score"><i class="fa fa-check"></i><b>25.5</b> Quality score</a>
 <ul>
-<li class="chapter" data-level="" data-path="23-Bin_quality.html"><a href="23-Bin_quality.html#quality-file"><i class="fa fa-check"></i>Quality file</a></li>
-<li class="chapter" data-level="" data-path="23-Bin_quality.html"><a href="23-Bin_quality.html#calculate-quality-with-awk"><i class="fa fa-check"></i>Calculate quality with awk</a></li>
-<li class="chapter" data-level="" data-path="23-Bin_quality.html"><a href="23-Bin_quality.html#add-quality-to-the-checkm-results-file"><i class="fa fa-check"></i>Add quality to the checkm results file</a></li>
+<li class="chapter" data-level="" data-path="25-CoCoPyE.html"><a href="25-CoCoPyE.html#quality-file"><i class="fa fa-check"></i>Quality file</a></li>
+<li class="chapter" data-level="" data-path="25-CoCoPyE.html"><a href="25-CoCoPyE.html#calculate-quality-with-awk"><i class="fa fa-check"></i>Calculate quality with awk</a></li>
+<li class="chapter" data-level="" data-path="25-CoCoPyE.html"><a href="25-CoCoPyE.html#add-quality-to-the-checkm-results-file"><i class="fa fa-check"></i>Add quality to the checkm results file</a></li>
 </ul></li>
-<li class="chapter" data-level="23.6" data-path="23-Bin_quality.html"><a href="23-Bin_quality.html#mcqs-6"><i class="fa fa-check"></i><b>23.6</b> MCQs</a></li>
-<li class="chapter" data-level="23.7" data-path="23-Bin_quality.html"><a href="23-Bin_quality.html#bin-quality-summary"><i class="fa fa-check"></i><b>23.7</b> Bin quality summary</a></li>
+<li class="chapter" data-level="25.6" data-path="25-CoCoPyE.html"><a href="25-CoCoPyE.html#mcqs-7"><i class="fa fa-check"></i><b>25.6</b> MCQs</a></li>
+<li class="chapter" data-level="25.7" data-path="25-CoCoPyE.html"><a href="25-CoCoPyE.html#bin-quality-summary"><i class="fa fa-check"></i><b>25.7</b> Bin quality summary</a></li>
 </ul></li>
-<li class="chapter" data-level="24" data-path="24-Assembly_functional_annotation.html"><a href="24-Assembly_functional_annotation.html"><i class="fa fa-check"></i><b>24</b> Assembly functional annotation</a>
+<li class="chapter" data-level="26" data-path="26-Bin_quality_scores.html"><a href="26-Bin_quality_scores.html"><i class="fa fa-check"></i><b>26</b> Bin quality</a>
 <ul>
-<li class="chapter" data-level="24.1" data-path="24-Assembly_functional_annotation.html"><a href="24-Assembly_functional_annotation.html#taxonomic-annotation"><i class="fa fa-check"></i><b>24.1</b> Taxonomic annotation</a></li>
-<li class="chapter" data-level="24.2" data-path="24-Assembly_functional_annotation.html"><a href="24-Assembly_functional_annotation.html#bakta"><i class="fa fa-check"></i><b>24.2</b> Bakta</a>
+<li class="chapter" data-level="26.1" data-path="26-Bin_quality_scores.html"><a href="26-Bin_quality_scores.html#workflow-concept-1"><i class="fa fa-check"></i><b>26.1</b> Workflow concept</a>
 <ul>
-<li class="chapter" data-level="24.2.1" data-path="24-Assembly_functional_annotation.html"><a href="24-Assembly_functional_annotation.html#bakta-run"><i class="fa fa-check"></i><b>24.2.1</b> Bakta: run</a></li>
-<li class="chapter" data-level="24.2.2" data-path="24-Assembly_functional_annotation.html"><a href="24-Assembly_functional_annotation.html#bakta-premade-results"><i class="fa fa-check"></i><b>24.2.2</b> Bakta: premade results</a></li>
-<li class="chapter" data-level="24.2.3" data-path="24-Assembly_functional_annotation.html"><a href="24-Assembly_functional_annotation.html#bakta-output"><i class="fa fa-check"></i><b>24.2.3</b> Bakta: output</a></li>
+<li class="chapter" data-level="26.1.1" data-path="26-Bin_quality_scores.html"><a href="26-Bin_quality_scores.html#input-pre-processing-1"><i class="fa fa-check"></i><b>26.1.1</b> Input Pre-processing</a></li>
+<li class="chapter" data-level="26.1.2" data-path="26-Bin_quality_scores.html"><a href="26-Bin_quality_scores.html#stage-i-1"><i class="fa fa-check"></i><b>26.1.2</b> Stage I</a></li>
+<li class="chapter" data-level="26.1.3" data-path="26-Bin_quality_scores.html"><a href="26-Bin_quality_scores.html#stage-ii-1"><i class="fa fa-check"></i><b>26.1.3</b> Stage II</a></li>
 </ul></li>
-<li class="chapter" data-level="24.3" data-path="24-Assembly_functional_annotation.html"><a href="24-Assembly_functional_annotation.html#minpath"><i class="fa fa-check"></i><b>24.3</b> MinPath</a>
+<li class="chapter" data-level="26.2" data-path="26-Bin_quality_scores.html"><a href="26-Bin_quality_scores.html#mamba-2"><i class="fa fa-check"></i><b>26.2</b> Mamba</a></li>
+<li class="chapter" data-level="26.3" data-path="26-Bin_quality_scores.html"><a href="26-Bin_quality_scores.html#run-1"><i class="fa fa-check"></i><b>26.3</b> Run</a>
 <ul>
-<li class="chapter" data-level="24.3.1" data-path="24-Assembly_functional_annotation.html"><a href="24-Assembly_functional_annotation.html#minpath-ec-extraction"><i class="fa fa-check"></i><b>24.3.1</b> MinPath: EC extraction</a></li>
-<li class="chapter" data-level="24.3.2" data-path="24-Assembly_functional_annotation.html"><a href="24-Assembly_functional_annotation.html#minpathrun"><i class="fa fa-check"></i><b>24.3.2</b> MinPath: run</a></li>
-<li class="chapter" data-level="24.3.3" data-path="24-Assembly_functional_annotation.html"><a href="24-Assembly_functional_annotation.html#minpath-output"><i class="fa fa-check"></i><b>24.3.3</b> MinPath: output</a></li>
-<li class="chapter" data-level="24.3.4" data-path="24-Assembly_functional_annotation.html"><a href="24-Assembly_functional_annotation.html#keggs"><i class="fa fa-check"></i><b>24.3.4</b> KEGGs</a></li>
+<li class="chapter" data-level="" data-path="26-Bin_quality_scores.html"><a href="26-Bin_quality_scores.html#parameters-11"><i class="fa fa-check"></i>Parameters</a></li>
+</ul></li>
+<li class="chapter" data-level="26.4" data-path="26-Bin_quality_scores.html"><a href="26-Bin_quality_scores.html#output-2"><i class="fa fa-check"></i><b>26.4</b> Output</a></li>
+<li class="chapter" data-level="26.5" data-path="26-Bin_quality_scores.html"><a href="26-Bin_quality_scores.html#quality-score-1"><i class="fa fa-check"></i><b>26.5</b> Quality score</a>
+<ul>
+<li class="chapter" data-level="" data-path="26-Bin_quality_scores.html"><a href="26-Bin_quality_scores.html#quality-file-1"><i class="fa fa-check"></i>Quality file</a></li>
+<li class="chapter" data-level="" data-path="26-Bin_quality_scores.html"><a href="26-Bin_quality_scores.html#calculate-quality-with-awk-1"><i class="fa fa-check"></i>Calculate quality with awk</a></li>
+<li class="chapter" data-level="" data-path="26-Bin_quality_scores.html"><a href="26-Bin_quality_scores.html#add-quality-to-the-checkm-results-file-1"><i class="fa fa-check"></i>Add quality to the checkm results file</a></li>
+</ul></li>
+<li class="chapter" data-level="26.6" data-path="26-Bin_quality_scores.html"><a href="26-Bin_quality_scores.html#mcqs-8"><i class="fa fa-check"></i><b>26.6</b> MCQs</a></li>
+<li class="chapter" data-level="26.7" data-path="26-Bin_quality_scores.html"><a href="26-Bin_quality_scores.html#bin-quality-summary-1"><i class="fa fa-check"></i><b>26.7</b> Bin quality summary</a></li>
+</ul></li>
+<li class="chapter" data-level="27" data-path="27-Assembly_functional_annotation.html"><a href="27-Assembly_functional_annotation.html"><i class="fa fa-check"></i><b>27</b> Assembly functional annotation</a>
+<ul>
+<li class="chapter" data-level="27.1" data-path="27-Assembly_functional_annotation.html"><a href="27-Assembly_functional_annotation.html#taxonomic-annotation"><i class="fa fa-check"></i><b>27.1</b> Taxonomic annotation</a></li>
+<li class="chapter" data-level="27.2" data-path="27-Assembly_functional_annotation.html"><a href="27-Assembly_functional_annotation.html#bakta"><i class="fa fa-check"></i><b>27.2</b> Bakta</a>
+<ul>
+<li class="chapter" data-level="27.2.1" data-path="27-Assembly_functional_annotation.html"><a href="27-Assembly_functional_annotation.html#bakta-run"><i class="fa fa-check"></i><b>27.2.1</b> Bakta: run</a></li>
+<li class="chapter" data-level="27.2.2" data-path="27-Assembly_functional_annotation.html"><a href="27-Assembly_functional_annotation.html#bakta-premade-results"><i class="fa fa-check"></i><b>27.2.2</b> Bakta: premade results</a></li>
+<li class="chapter" data-level="27.2.3" data-path="27-Assembly_functional_annotation.html"><a href="27-Assembly_functional_annotation.html#bakta-output"><i class="fa fa-check"></i><b>27.2.3</b> Bakta: output</a></li>
+</ul></li>
+<li class="chapter" data-level="27.3" data-path="27-Assembly_functional_annotation.html"><a href="27-Assembly_functional_annotation.html#minpath"><i class="fa fa-check"></i><b>27.3</b> MinPath</a>
+<ul>
+<li class="chapter" data-level="27.3.1" data-path="27-Assembly_functional_annotation.html"><a href="27-Assembly_functional_annotation.html#minpath-ec-extraction"><i class="fa fa-check"></i><b>27.3.1</b> MinPath: EC extraction</a></li>
+<li class="chapter" data-level="27.3.2" data-path="27-Assembly_functional_annotation.html"><a href="27-Assembly_functional_annotation.html#minpathrun"><i class="fa fa-check"></i><b>27.3.2</b> MinPath: run</a></li>
+<li class="chapter" data-level="27.3.3" data-path="27-Assembly_functional_annotation.html"><a href="27-Assembly_functional_annotation.html#minpath-output"><i class="fa fa-check"></i><b>27.3.3</b> MinPath: output</a></li>
+<li class="chapter" data-level="27.3.4" data-path="27-Assembly_functional_annotation.html"><a href="27-Assembly_functional_annotation.html#keggs"><i class="fa fa-check"></i><b>27.3.4</b> KEGGs</a></li>
 </ul></li>
 </ul></li>
 <li class="appendix"><span><b>Appendix</b></span></li>
-<li class="chapter" data-level="A" data-path="25-Appendix.html"><a href="25-Appendix.html"><i class="fa fa-check"></i><b>A</b> Mamba installs</a>
+<li class="chapter" data-level="A" data-path="28-Appendix.html"><a href="28-Appendix.html"><i class="fa fa-check"></i><b>A</b> Mamba installs</a>
 <ul>
-<li class="chapter" data-level="A.1" data-path="25-Appendix.html"><a href="25-Appendix.html#mamba_install"><i class="fa fa-check"></i><b>A.1</b> Mamba installation and environment</a></li>
+<li class="chapter" data-level="A.1" data-path="28-Appendix.html"><a href="28-Appendix.html#mamba_install"><i class="fa fa-check"></i><b>A.1</b> Mamba installation and environment</a></li>
 </ul></li>
-<li class="chapter" data-level="B" data-path="25-Appendix.html"><a href="25-Appendix.html#next-steps"><i class="fa fa-check"></i><b>B</b> Next steps</a></li>
-<li class="chapter" data-level="C" data-path="25-Appendix.html"><a href="25-Appendix.html#manuals"><i class="fa fa-check"></i><b>C</b> Manuals</a></li>
-<li class="chapter" data-level="D" data-path="25-Appendix.html"><a href="25-Appendix.html#obtaining-read-data"><i class="fa fa-check"></i><b>D</b> Obtaining Read Data</a></li>
+<li class="chapter" data-level="B" data-path="28-Appendix.html"><a href="28-Appendix.html#next-steps"><i class="fa fa-check"></i><b>B</b> Next steps</a></li>
+<li class="chapter" data-level="C" data-path="28-Appendix.html"><a href="28-Appendix.html#manuals"><i class="fa fa-check"></i><b>C</b> Manuals</a></li>
+<li class="chapter" data-level="D" data-path="28-Appendix.html"><a href="28-Appendix.html#obtaining-read-data"><i class="fa fa-check"></i><b>D</b> Obtaining Read Data</a></li>
 <li class="divider"></li>
 <li><a href="https://github.com/rstudio/bookdown" target="blank">Published with bookdown</a></li>
 
@@ -379,15 +407,15 @@ code span.wa { color: #60a0b0; font-weight: bold; font-style: italic; } /* Warni
           <div class="page-inner">
 
             <section class="normal" id="section-">
-<div id="bin-quality" class="section level1 hasAnchor" number="23">
-<h1><span class="header-section-number">Chapter 23</span> Bin quality<a href="23-Bin_quality.html#bin-quality" class="anchor-section" aria-label="Anchor link to header"></a></h1>
+<div id="bin-quality" class="section level1 hasAnchor" number="26">
+<h1><span class="header-section-number">Chapter 26</span> Bin quality<a href="26-Bin_quality_scores.html#bin-quality" class="anchor-section" aria-label="Anchor link to header"></a></h1>
 <center>
 <img src="figures/bin_quality.png" style="width: 400px; border-radius: 5px; background: white; border: white 5px solid" />
 </center>
 <p><code>CoCoPyE</code> is a useful tool to assess the quality of assembled microbial genomes.
 This can be used on assemblies produced from single cell, single isolate, or metagenome data.</p>
-<div id="workflow-concept" class="section level2 hasAnchor" number="23.1">
-<h2><span class="header-section-number">23.1</span> Workflow concept<a href="23-Bin_quality.html#workflow-concept" class="anchor-section" aria-label="Anchor link to header"></a></h2>
+<div id="workflow-concept-1" class="section level2 hasAnchor" number="26.1">
+<h2><span class="header-section-number">26.1</span> Workflow concept<a href="26-Bin_quality_scores.html#workflow-concept-1" class="anchor-section" aria-label="Anchor link to header"></a></h2>
 <p>The tool utilises protein domain families from the Pfam database.
 A protein domain is a region of a protein that folds independently from the rest of the protein.
 They vary in length from ~50-250 amino acids.
@@ -398,19 +426,19 @@ For full details please see the CoCoPyE publication: <a href="https://academic.o
 <center>
 <img src="figures/cocopye_workflow.jpeg" style="width: 800px; border-radius: 5px; border: white 5px solid" />
 </center>
-<div id="input-pre-processing" class="section level3 hasAnchor" number="23.1.1">
-<h3><span class="header-section-number">23.1.1</span> Input Pre-processing<a href="23-Bin_quality.html#input-pre-processing" class="anchor-section" aria-label="Anchor link to header"></a></h3>
+<div id="input-pre-processing-1" class="section level3 hasAnchor" number="26.1.1">
+<h3><span class="header-section-number">26.1.1</span> Input Pre-processing<a href="26-Bin_quality_scores.html#input-pre-processing-1" class="anchor-section" aria-label="Anchor link to header"></a></h3>
 <center>
 <img src="figures/cocopye_workflow_step_1.png" style="width: 800px; border-radius: 5px" />
 </center>
-<p>A protein domain search is carried out on all translated open reading frames of our our query genomes, MAGs/bins in our case.
+<p>A protein domain search is carried out on all translated open reading frames of our our query genomes, <u id='mag'>MAGs</u>/bins in our case.
 The Pfam protein database is used and the tool produces protein domain counts for our query genomes.</p>
 <p>The completeness of the query genome is estimated based on one of 2 universal marker sets.
 The universal marker sets contain the protein domains found in either all reference bacterial genomes or all reference archaeal genomes.
-Query genomes (MAGS/bins) with a completeness score &lt;10% are rejected and removed from further analysis.</p>
+Query genomes (<u id='mag'>MAGs</u>/bins) with a completeness score &lt;10% are rejected and removed from further analysis.</p>
 </div>
-<div id="stage-i" class="section level3 hasAnchor" number="23.1.2">
-<h3><span class="header-section-number">23.1.2</span> Stage I<a href="23-Bin_quality.html#stage-i" class="anchor-section" aria-label="Anchor link to header"></a></h3>
+<div id="stage-i-1" class="section level3 hasAnchor" number="26.1.2">
+<h3><span class="header-section-number">26.1.2</span> Stage I<a href="26-Bin_quality_scores.html#stage-i-1" class="anchor-section" aria-label="Anchor link to header"></a></h3>
 <center>
 <img src="figures/cocopye_workflow_stage_1.png" style="width: 800px; border-radius: 5px" />
 </center>
@@ -419,8 +447,8 @@ This creates a list of reference protein domains for our query.</p>
 <p>Next a specific marker prediction is carried out to create the stage I (i.e. marker based) completeness &amp; contamination values.
 The Pfam database has information on which taxa these domains are present in.
 Therefore, sets of domains can be used as markers for specific lineages.</p>
-<div id="prediction-example" class="section level4 unnumbered hasAnchor">
-<h4>Prediction example<a href="23-Bin_quality.html#prediction-example" class="anchor-section" aria-label="Anchor link to header"></a></h4>
+<div id="prediction-example-1" class="section level4 unnumbered hasAnchor">
+<h4>Prediction example<a href="26-Bin_quality_scores.html#prediction-example-1" class="anchor-section" aria-label="Anchor link to header"></a></h4>
 <p>Let's go through a fictional example where we have 26 protein domains PDA-Z which cover 2 different lineages: Gigabacteria and Birthobacteria.</p>
 <ul>
 <li>Both Gigabacteria and Birthobacteria contain domains PDA-F</li>
@@ -441,14 +469,14 @@ We therefore acquire the below results:</p>
 </ul></li>
 </ul>
 </div>
-<div id="thresholds" class="section level4 unnumbered hasAnchor">
-<h4>Thresholds<a href="23-Bin_quality.html#thresholds" class="anchor-section" aria-label="Anchor link to header"></a></h4>
+<div id="thresholds-1" class="section level4 unnumbered hasAnchor">
+<h4>Thresholds<a href="26-Bin_quality_scores.html#thresholds-1" class="anchor-section" aria-label="Anchor link to header"></a></h4>
 <p>Any query genomes with a completeness value of &lt;60% or contamination value &gt;30% have their values recorded as their output but they do not move onto stage II.
 Other query genomes move onto the neural network stage (stage II).</p>
 </div>
 </div>
-<div id="stage-ii" class="section level3 hasAnchor" number="23.1.3">
-<h3><span class="header-section-number">23.1.3</span> Stage II<a href="23-Bin_quality.html#stage-ii" class="anchor-section" aria-label="Anchor link to header"></a></h3>
+<div id="stage-ii-1" class="section level3 hasAnchor" number="26.1.3">
+<h3><span class="header-section-number">26.1.3</span> Stage II<a href="26-Bin_quality_scores.html#stage-ii-1" class="anchor-section" aria-label="Anchor link to header"></a></h3>
 <center>
 <img src="figures/cocopye_workflow_stage_2.png" style="width: 800px; border-radius: 5px" />
 </center>
@@ -456,8 +484,8 @@ Other query genomes move onto the neural network stage (stage II).</p>
 With this it creates a count ratio histogram (CRH) to use for a machine learning (ML)/neural network approach.
 This is carried out to reduce the dimensionality of the data to improve iterative training and reduce the risk of overfitting.
 But what is a CRH?</p>
-<div id="count-ratio-histogram" class="section level4 unnumbered hasAnchor">
-<h4>Count Ratio Histogram<a href="23-Bin_quality.html#count-ratio-histogram" class="anchor-section" aria-label="Anchor link to header"></a></h4>
+<div id="count-ratio-histogram-1" class="section level4 unnumbered hasAnchor">
+<h4>Count Ratio Histogram<a href="26-Bin_quality_scores.html#count-ratio-histogram-1" class="anchor-section" aria-label="Anchor link to header"></a></h4>
 <p>Each Pfam domain family is given a count ratio of Cq:Cr.</p>
 <ul>
 <li>Cq: The count of the domain family in the query genome.</li>
@@ -511,8 +539,8 @@ The process itself will use a text histogram but below are two visualisations of
 <br> <em>The Above plot was created from a query genome with 90% completeness and 10% contamination.</em>
 </center>
 </div>
-<div id="machine-learning" class="section level4 unnumbered hasAnchor">
-<h4>Machine learning<a href="23-Bin_quality.html#machine-learning" class="anchor-section" aria-label="Anchor link to header"></a></h4>
+<div id="machine-learning-1" class="section level4 unnumbered hasAnchor">
+<h4>Machine learning<a href="26-Bin_quality_scores.html#machine-learning-1" class="anchor-section" aria-label="Anchor link to header"></a></h4>
 <p>The machine learning step uses the CRHs of the query genomes to improve/refine the marker-based estimations from stage I.</p>
 <p>Two neural networks are used in this prediction refinement step.
 One neural network is used to improve the completeness estimation and one neural network is used to improve the contamination estimation.</p>
@@ -521,32 +549,32 @@ If you are interested in how the machine learning step work please see the CoCoP
 </div>
 </div>
 </div>
-<div id="mamba-1" class="section level2 hasAnchor" number="23.2">
-<h2><span class="header-section-number">23.2</span> Mamba<a href="23-Bin_quality.html#mamba-1" class="anchor-section" aria-label="Anchor link to header"></a></h2>
+<div id="mamba-2" class="section level2 hasAnchor" number="26.2">
+<h2><span class="header-section-number">26.2</span> Mamba<a href="26-Bin_quality_scores.html#mamba-2" class="anchor-section" aria-label="Anchor link to header"></a></h2>
 <center>
 <img src="figures/mamba_logo.png" style="width: 200px; border-radius: 5px" />
 </center>
 <p>Due to program version conflicts we will use the <code>CoCoPyE</code> conda environment for this section.</p>
 <p>Open a new terminal and activate the <code>CoCoPyE</code> environment.</p>
-<div class="sourceCode" id="cb82"><pre class="sourceCode bash Rchunk"><code class="sourceCode bash"><span id="cb82-1"><a href="23-Bin_quality.html#cb82-1" tabindex="-1"></a><span class="bu">.</span> usecocopye</span></code></pre></div>
+<div class="sourceCode" id="cb97"><pre class="sourceCode bash Rchunk"><code class="sourceCode bash"><span id="cb97-1"><a href="26-Bin_quality_scores.html#cb97-1" tabindex="-1"></a><span class="bu">.</span> usecocopye</span></code></pre></div>
 <p>Ensure you are in the correct directory.</p>
-<div class="sourceCode" id="cb83"><pre class="sourceCode bash Rchunk"><code class="sourceCode bash"><span id="cb83-1"><a href="23-Bin_quality.html#cb83-1" tabindex="-1"></a><span class="bu">cd</span> ~/7-Binning/K1/</span></code></pre></div>
+<div class="sourceCode" id="cb98"><pre class="sourceCode bash Rchunk"><code class="sourceCode bash"><span id="cb98-1"><a href="26-Bin_quality_scores.html#cb98-1" tabindex="-1"></a><span class="bu">cd</span> ~/7-Binning/K1/</span></code></pre></div>
 </div>
-<div id="run-2" class="section level2 hasAnchor" number="23.3">
-<h2><span class="header-section-number">23.3</span> Run<a href="23-Bin_quality.html#run-2" class="anchor-section" aria-label="Anchor link to header"></a></h2>
+<div id="run-1" class="section level2 hasAnchor" number="26.3">
+<h2><span class="header-section-number">26.3</span> Run<a href="26-Bin_quality_scores.html#run-1" class="anchor-section" aria-label="Anchor link to header"></a></h2>
 <center>
-<img src="figures/play_black.png" style="width:150px; background: white; border-radius: 5px; border: 5px white solid" />
+<img src="figures/play_black.png" style="width:100px; background: white; border-radius: 5px; border: 5px white solid" />
 </center>
 <p><code>cocopye</code> has one main command to predict bin quality: <code>cocopye run</code>.</p>
 <p>Run the <code>cocopye</code> command (this will take a while):</p>
-<div class="sourceCode" id="cb84"><pre class="sourceCode bash Rchunk"><code class="sourceCode bash"><span id="cb84-1"><a href="23-Bin_quality.html#cb84-1" tabindex="-1"></a><span class="ex">cocopye</span> run <span class="dt">\</span></span>
-<span id="cb84-2"><a href="23-Bin_quality.html#cb84-2" tabindex="-1"></a>-t 12 <span class="dt">\</span></span>
-<span id="cb84-3"><a href="23-Bin_quality.html#cb84-3" tabindex="-1"></a>-i bins/ <span class="dt">\</span></span>
-<span id="cb84-4"><a href="23-Bin_quality.html#cb84-4" tabindex="-1"></a>-o cocopye_output.csv</span></code></pre></div>
-<div id="parameters-10" class="section level3 unnumbered hasAnchor">
-<h3>Parameters<a href="23-Bin_quality.html#parameters-10" class="anchor-section" aria-label="Anchor link to header"></a></h3>
+<div class="sourceCode" id="cb99"><pre class="sourceCode bash Rchunk"><code class="sourceCode bash"><span id="cb99-1"><a href="26-Bin_quality_scores.html#cb99-1" tabindex="-1"></a><span class="ex">cocopye</span> run <span class="dt">\</span></span>
+<span id="cb99-2"><a href="26-Bin_quality_scores.html#cb99-2" tabindex="-1"></a>-t 12 <span class="dt">\</span></span>
+<span id="cb99-3"><a href="26-Bin_quality_scores.html#cb99-3" tabindex="-1"></a>-i bins/ <span class="dt">\</span></span>
+<span id="cb99-4"><a href="26-Bin_quality_scores.html#cb99-4" tabindex="-1"></a>-o cocopye_output.csv</span></code></pre></div>
+<div id="parameters-11" class="section level3 unnumbered hasAnchor">
+<h3>Parameters<a href="26-Bin_quality_scores.html#parameters-11" class="anchor-section" aria-label="Anchor link to header"></a></h3>
 <center>
-<img src="figures/parameter_black.png" style="width:150px; background: white; border-radius: 5px; border: 5px white solid" />
+<img src="figures/parameter_black.png" style="width:100px; background: white; border-radius: 5px; border: 5px white solid" />
 </center>
 <ul>
 <li><code>-t</code> : Number of threads/cores/CPUs to utilise for the process.</li>
@@ -567,22 +595,22 @@ If you are interested in how the machine learning step work please see the CoCoP
 </ul>
 </div>
 </div>
-<div id="output-3" class="section level2 hasAnchor" number="23.4">
-<h2><span class="header-section-number">23.4</span> Output<a href="23-Bin_quality.html#output-3" class="anchor-section" aria-label="Anchor link to header"></a></h2>
+<div id="output-2" class="section level2 hasAnchor" number="26.4">
+<h2><span class="header-section-number">26.4</span> Output<a href="26-Bin_quality_scores.html#output-2" class="anchor-section" aria-label="Anchor link to header"></a></h2>
 <center>
-<img src="figures/output_file_black.png" style="width:150px" />
+<img src="figures/output_file_black.png" style="width:100px" />
 </center>
 <p>As we have only used a subset of data the results are not very good. We'll therefore look at premade results.
 These premade results were produced using the entire K1 dataset.
 First you will need to copy them.</p>
-<div class="sourceCode" id="cb85"><pre class="sourceCode bash Rchunk"><code class="sourceCode bash"><span id="cb85-1"><a href="23-Bin_quality.html#cb85-1" tabindex="-1"></a><span class="bu">cd</span> ~/7-Binning</span>
-<span id="cb85-2"><a href="23-Bin_quality.html#cb85-2" tabindex="-1"></a><span class="fu">mkdir</span> K1_fullset</span>
-<span id="cb85-3"><a href="23-Bin_quality.html#cb85-3" tabindex="-1"></a><span class="bu">cd</span> K1_fullset</span>
-<span id="cb85-4"><a href="23-Bin_quality.html#cb85-4" tabindex="-1"></a><span class="fu">ln</span> <span class="at">-s</span> /pub14/tea/nsc206/NEOF/Shotgun_metagenomics/binning/K1_fullset/<span class="pp">*</span> .</span></code></pre></div>
+<div class="sourceCode" id="cb100"><pre class="sourceCode bash Rchunk"><code class="sourceCode bash"><span id="cb100-1"><a href="26-Bin_quality_scores.html#cb100-1" tabindex="-1"></a><span class="bu">cd</span> ~/7-Binning</span>
+<span id="cb100-2"><a href="26-Bin_quality_scores.html#cb100-2" tabindex="-1"></a><span class="fu">mkdir</span> K1_fullset</span>
+<span id="cb100-3"><a href="26-Bin_quality_scores.html#cb100-3" tabindex="-1"></a><span class="bu">cd</span> K1_fullset</span>
+<span id="cb100-4"><a href="26-Bin_quality_scores.html#cb100-4" tabindex="-1"></a><span class="fu">ln</span> <span class="at">-s</span> /pub14/tea/nsc206/NEOF/Shotgun_metagenomics/binning/K1_fullset/<span class="pp">*</span> .</span></code></pre></div>
 <p>Now we can look at the results table that is in your current directory.</p>
-<div class="sourceCode" id="cb86"><pre class="sourceCode bash Rchunk"><code class="sourceCode bash"><span id="cb86-1"><a href="23-Bin_quality.html#cb86-1" tabindex="-1"></a><span class="co">#Use tr to tranform commas (,) to tabs (\t)</span></span>
-<span id="cb86-2"><a href="23-Bin_quality.html#cb86-2" tabindex="-1"></a><span class="co">#This makes it easier to visually parse the columns</span></span>
-<span id="cb86-3"><a href="23-Bin_quality.html#cb86-3" tabindex="-1"></a><span class="fu">cat</span> cocopye_output.csv <span class="kw">|</span> <span class="fu">tr</span> <span class="st">&quot;,&quot;</span> <span class="st">&quot;\t&quot;</span> <span class="kw">|</span> <span class="fu">less</span></span></code></pre></div>
+<div class="sourceCode" id="cb101"><pre class="sourceCode bash Rchunk"><code class="sourceCode bash"><span id="cb101-1"><a href="26-Bin_quality_scores.html#cb101-1" tabindex="-1"></a><span class="co">#Use tr to tranform commas (,) to tabs (\t)</span></span>
+<span id="cb101-2"><a href="26-Bin_quality_scores.html#cb101-2" tabindex="-1"></a><span class="co">#This makes it easier to visually parse the columns</span></span>
+<span id="cb101-3"><a href="26-Bin_quality_scores.html#cb101-3" tabindex="-1"></a><span class="fu">cat</span> cocopye_output.csv <span class="kw">|</span> <span class="fu">tr</span> <span class="st">&quot;,&quot;</span> <span class="st">&quot;\t&quot;</span> <span class="kw">|</span> <span class="fu">less</span></span></code></pre></div>
 <div class="webex-solution">
 <button>
 CoCoPye statistics definitions
@@ -605,12 +633,12 @@ CoCoPye statistics definitions
 <p>Please see the full list of statistics definitions from <a href="https://github.com/gobics/cocopye/wiki/Output">CoCoPyE wiki</a>. This includes the defintions when <code>-v</code> is set to <code>extended</code> or <code>full</code>.</p>
 </div>
 </div>
-<div id="quality-score" class="section level2 hasAnchor" number="23.5">
-<h2><span class="header-section-number">23.5</span> Quality score<a href="23-Bin_quality.html#quality-score" class="anchor-section" aria-label="Anchor link to header"></a></h2>
+<div id="quality-score-1" class="section level2 hasAnchor" number="26.5">
+<h2><span class="header-section-number">26.5</span> Quality score<a href="26-Bin_quality_scores.html#quality-score-1" class="anchor-section" aria-label="Anchor link to header"></a></h2>
 <center>
-<img src="figures/quality_ribbon.png" style="width:200px; background: white ; border-radius: 5px; border: white solid 5px" />
+<img src="figures/quality_ribbon.png" style="width:150px; background: white ; border-radius: 5px; border: white solid 5px" />
 </center>
-<p>One quick way to calculate the overall quality of a bin is with the following equation:</p>
+<p>One quick way to calculate the overall quality of a <u id='mag'>MAG</u>/bin is with the following equation:</p>
 <p><span class="math display">\[
 q = comp - (5 * cont)
 \]</span>
@@ -626,20 +654,20 @@ Where:</p>
 <li>100% (i.e. 1): 1 Completeness - (5 * 0 Contamination)</li>
 <li>-500% (i.e. -5): 0 Completeness - (5 * 1 Contamination)</li>
 </ul>
-<div id="quality-file" class="section level3 unnumbered hasAnchor">
-<h3>Quality file<a href="23-Bin_quality.html#quality-file" class="anchor-section" aria-label="Anchor link to header"></a></h3>
+<div id="quality-file-1" class="section level3 unnumbered hasAnchor">
+<h3>Quality file<a href="26-Bin_quality_scores.html#quality-file-1" class="anchor-section" aria-label="Anchor link to header"></a></h3>
 <p>We will create a new file with only the quality information. We'll start by making a file with only a header.</p>
-<div class="sourceCode" id="cb87"><pre class="sourceCode bash Rchunk"><code class="sourceCode bash"><span id="cb87-1"><a href="23-Bin_quality.html#cb87-1" tabindex="-1"></a><span class="bu">echo</span> <span class="st">&quot;quality&quot;</span> <span class="op">&gt;</span> MAGS_quality.csv</span></code></pre></div>
+<div class="sourceCode" id="cb102"><pre class="sourceCode bash Rchunk"><code class="sourceCode bash"><span id="cb102-1"><a href="26-Bin_quality_scores.html#cb102-1" tabindex="-1"></a><span class="bu">echo</span> <span class="st">&quot;quality&quot;</span> <span class="op">&gt;</span> MAGS_quality.csv</span></code></pre></div>
 </div>
-<div id="calculate-quality-with-awk" class="section level3 unnumbered hasAnchor">
-<h3>Calculate quality with awk<a href="23-Bin_quality.html#calculate-quality-with-awk" class="anchor-section" aria-label="Anchor link to header"></a></h3>
+<div id="calculate-quality-with-awk-1" class="section level3 unnumbered hasAnchor">
+<h3>Calculate quality with awk<a href="26-Bin_quality_scores.html#calculate-quality-with-awk-1" class="anchor-section" aria-label="Anchor link to header"></a></h3>
 <p>Next is the most complicated command. We will be calculating the Overall quality (see calculation above) for each row except the header row.</p>
 <p>We will be using a complicated linux based language called <code>awk</code>. This is very useful as it can carry out calculations on columns or as <code>awk</code> calls them, <strong>fields</strong>.</p>
 <p>As this is new and complicated we will build up our command step by step.</p>
-<div id="extract-fieldscolumns" class="section level4 unnumbered hasAnchor">
-<h4>Extract fields/columns<a href="23-Bin_quality.html#extract-fieldscolumns" class="anchor-section" aria-label="Anchor link to header"></a></h4>
+<div id="extract-fieldscolumns-1" class="section level4 unnumbered hasAnchor">
+<h4>Extract fields/columns<a href="26-Bin_quality_scores.html#extract-fieldscolumns-1" class="anchor-section" aria-label="Anchor link to header"></a></h4>
 <p><strong>The first step</strong> is to extract the completeness and contamination fields/columns.</p>
-<div class="sourceCode" id="cb88"><pre class="sourceCode bash Rchunk"><code class="sourceCode bash"><span id="cb88-1"><a href="23-Bin_quality.html#cb88-1" tabindex="-1"></a><span class="fu">awk</span> <span class="at">-F,</span> <span class="st">&#39;{print $2,$3}&#39;</span> cocopye_output.csv</span></code></pre></div>
+<div class="sourceCode" id="cb103"><pre class="sourceCode bash Rchunk"><code class="sourceCode bash"><span id="cb103-1"><a href="26-Bin_quality_scores.html#cb103-1" tabindex="-1"></a><span class="fu">awk</span> <span class="at">-F,</span> <span class="st">&#39;{print $2,$3}&#39;</span> cocopye_output.csv</span></code></pre></div>
 <ul>
 <li><code>-F,</code>: Indicates the input fields are separated by commas (<code>,</code>).</li>
 <li><code>''</code>: All the <code>awk</code> options are contained within the quotes.</li>
@@ -648,106 +676,108 @@ Where:</p>
 <li><code>cocopye_output.csv</code>: Our last parameter is the input file. We are not changing the contents of the file, only printing information to screen/stdout.</li>
 </ul>
 </div>
-<div id="ignore-header" class="section level4 unnumbered hasAnchor">
-<h4>Ignore header<a href="23-Bin_quality.html#ignore-header" class="anchor-section" aria-label="Anchor link to header"></a></h4>
+<div id="ignore-header-1" class="section level4 unnumbered hasAnchor">
+<h4>Ignore header<a href="26-Bin_quality_scores.html#ignore-header-1" class="anchor-section" aria-label="Anchor link to header"></a></h4>
 <p><strong>We do not want the header</strong> in our calculation so we will add an extra <code>awk</code> option.</p>
-<div class="sourceCode" id="cb89"><pre class="sourceCode bash Rchunk"><code class="sourceCode bash"><span id="cb89-1"><a href="23-Bin_quality.html#cb89-1" tabindex="-1"></a><span class="fu">awk</span> <span class="at">-F,</span> <span class="st">&#39;NR&gt;1 {print $2,$3}&#39;</span> cocopye_output.csv</span></code></pre></div>
+<div class="sourceCode" id="cb104"><pre class="sourceCode bash Rchunk"><code class="sourceCode bash"><span id="cb104-1"><a href="26-Bin_quality_scores.html#cb104-1" tabindex="-1"></a><span class="fu">awk</span> <span class="at">-F,</span> <span class="st">&#39;NR&gt;1 {print $2,$3}&#39;</span> cocopye_output.csv</span></code></pre></div>
 <ul>
 <li><code>NR&gt;1</code>: <code>NR</code> stands for number of records. Rows are called records in <code>awk</code>. Therefore <code>NR&gt;1</code> means <code>awk</code> will only carry out the functions on the records numbered greater than 1. I.e. skip row 1, the header row.</li>
 </ul>
 </div>
-<div id="calculate-quality" class="section level4 unnumbered hasAnchor">
-<h4>Calculate quality<a href="23-Bin_quality.html#calculate-quality" class="anchor-section" aria-label="Anchor link to header"></a></h4>
+<div id="calculate-quality-1" class="section level4 unnumbered hasAnchor">
+<h4>Calculate quality<a href="26-Bin_quality_scores.html#calculate-quality-1" class="anchor-section" aria-label="Anchor link to header"></a></h4>
 <p><strong>The next step</strong> is to carry out the overall quality calculation and append the information to the "MAGS_quality.csv" file.</p>
-<div class="sourceCode" id="cb90"><pre class="sourceCode bash Rchunk"><code class="sourceCode bash"><span id="cb90-1"><a href="23-Bin_quality.html#cb90-1" tabindex="-1"></a><span class="fu">awk</span> <span class="at">-F,</span> <span class="st">&#39;NR&gt;1 {print $2 - (5 * $3)}&#39;</span> cocopye_output.csv</span></code></pre></div>
+<div class="sourceCode" id="cb105"><pre class="sourceCode bash Rchunk"><code class="sourceCode bash"><span id="cb105-1"><a href="26-Bin_quality_scores.html#cb105-1" tabindex="-1"></a><span class="fu">awk</span> <span class="at">-F,</span> <span class="st">&#39;NR&gt;1 {print $2 - (5 * $3)}&#39;</span> cocopye_output.csv</span></code></pre></div>
 <p>Our new function, <code>{print $2 - (5 * 13)}</code>, carries out the overall quality calculation and prints it for each record/row except the first (<code>NR&gt;1</code>).</p>
 <p>You will notice that we have values that equal 4.
 Let us fix that.</p>
 </div>
-<div id="fix-values" class="section level4 unnumbered hasAnchor">
-<h4>Fix values<a href="23-Bin_quality.html#fix-values" class="anchor-section" aria-label="Anchor link to header"></a></h4>
+<div id="fix-values-1" class="section level4 unnumbered hasAnchor">
+<h4>Fix values<a href="26-Bin_quality_scores.html#fix-values-1" class="anchor-section" aria-label="Anchor link to header"></a></h4>
 <p>Some quality values come out as 4.
 This is not correct and comes about as the completeness and contamination values have been set to -1 (-1 - (5 * -1) = 4).
 If you look at the file <code>cocopye_output.csv</code> you will notice the bins with -1 values have the <code>rejected</code> for their <code>method</code> value.
 These are bins which failed the Input Pre-procesing step.</p>
 <p>We will therefore change these quality values to the lowest possible value of -5 (0 - (5 * 1) = -5).</p>
-<div class="sourceCode" id="cb91"><pre class="sourceCode bash Rchunk"><code class="sourceCode bash"><span id="cb91-1"><a href="23-Bin_quality.html#cb91-1" tabindex="-1"></a><span class="fu">awk</span> <span class="at">-F,</span> <span class="st">&#39;NR&gt;1 {print $2 - (5 * $3)}&#39;</span> cocopye_output.csv <span class="kw">|</span> <span class="dt">\</span></span>
-<span id="cb91-2"><a href="23-Bin_quality.html#cb91-2" tabindex="-1"></a><span class="fu">sed</span> <span class="st">&quot;s/^4$/-5/&quot;</span></span></code></pre></div>
+<div class="sourceCode" id="cb106"><pre class="sourceCode bash Rchunk"><code class="sourceCode bash"><span id="cb106-1"><a href="26-Bin_quality_scores.html#cb106-1" tabindex="-1"></a><span class="fu">awk</span> <span class="at">-F,</span> <span class="st">&#39;NR&gt;1 {print $2 - (5 * $3)}&#39;</span> cocopye_output.csv <span class="kw">|</span> <span class="dt">\</span></span>
+<span id="cb106-2"><a href="26-Bin_quality_scores.html#cb106-2" tabindex="-1"></a><span class="fu">sed</span> <span class="st">&quot;s/^4$/-5/&quot;</span></span></code></pre></div>
 <p>In this case we <a href="https://neof-workshops.github.io/Unix_nxcdf7/Course/12-Advanced_linux_practice.html#pipes">pipe (<code>|</code>)</a> our output to <a href="https://neof-workshops.github.io/Unix_nxcdf7/Course/12-Advanced_linux_practice.html#sed"><code>sed</code></a> to substitute lines that start with (<code>^</code>) and end with (<code>$</code>) the same <code>4</code> with <code>-5</code>.</p>
 <p>In other words we replace lines that only contain a 4 with a -5.</p>
 </div>
-<div id="append-to-quality-file" class="section level4 unnumbered hasAnchor">
-<h4>Append to quality file<a href="23-Bin_quality.html#append-to-quality-file" class="anchor-section" aria-label="Anchor link to header"></a></h4>
+<div id="append-to-quality-file-1" class="section level4 unnumbered hasAnchor">
+<h4>Append to quality file<a href="26-Bin_quality_scores.html#append-to-quality-file-1" class="anchor-section" aria-label="Anchor link to header"></a></h4>
 <p>Finally we can append the quality values to our <code>MAGS_quality.csv</code> file.</p>
-<div class="sourceCode" id="cb92"><pre class="sourceCode bash Rchunk"><code class="sourceCode bash"><span id="cb92-1"><a href="23-Bin_quality.html#cb92-1" tabindex="-1"></a><span class="fu">awk</span> <span class="at">-F,</span> <span class="st">&#39;NR&gt;1 {print $2 - (5 * $3)}&#39;</span> cocopye_output.csv <span class="kw">|</span> <span class="dt">\</span></span>
-<span id="cb92-2"><a href="23-Bin_quality.html#cb92-2" tabindex="-1"></a><span class="fu">sed</span> <span class="st">&quot;s/^4$/-5/&quot;</span> <span class="op">&gt;&gt;</span> MAGS_quality.csv</span></code></pre></div>
+<div class="sourceCode" id="cb107"><pre class="sourceCode bash Rchunk"><code class="sourceCode bash"><span id="cb107-1"><a href="26-Bin_quality_scores.html#cb107-1" tabindex="-1"></a><span class="fu">awk</span> <span class="at">-F,</span> <span class="st">&#39;NR&gt;1 {print $2 - (5 * $3)}&#39;</span> cocopye_output.csv <span class="kw">|</span> <span class="dt">\</span></span>
+<span id="cb107-2"><a href="26-Bin_quality_scores.html#cb107-2" tabindex="-1"></a><span class="fu">sed</span> <span class="st">&quot;s/^4$/-5/&quot;</span> <span class="op">&gt;&gt;</span> MAGS_quality.csv</span></code></pre></div>
 <p>In the above case we use <code>&gt;&gt;</code> to append the information to the file <code>MAGS_quality.csv</code>. We append because we want to retain the header we added to the file earlier.</p>
 <p>You can view the file to ensure it worked. The first and second values should be 0.9838 and 0.493</p>
-<div class="sourceCode" id="cb93"><pre class="sourceCode bash Rchunk"><code class="sourceCode bash"><span id="cb93-1"><a href="23-Bin_quality.html#cb93-1" tabindex="-1"></a><span class="fu">less</span> MAGS_quality.csv</span></code></pre></div>
+<div class="sourceCode" id="cb108"><pre class="sourceCode bash Rchunk"><code class="sourceCode bash"><span id="cb108-1"><a href="26-Bin_quality_scores.html#cb108-1" tabindex="-1"></a><span class="fu">less</span> MAGS_quality.csv</span></code></pre></div>
 </div>
 </div>
-<div id="add-quality-to-the-checkm-results-file" class="section level3 unnumbered hasAnchor">
-<h3>Add quality to the checkm results file<a href="23-Bin_quality.html#add-quality-to-the-checkm-results-file" class="anchor-section" aria-label="Anchor link to header"></a></h3>
+<div id="add-quality-to-the-checkm-results-file-1" class="section level3 unnumbered hasAnchor">
+<h3>Add quality to the checkm results file<a href="26-Bin_quality_scores.html#add-quality-to-the-checkm-results-file-1" class="anchor-section" aria-label="Anchor link to header"></a></h3>
 <p>Now we can combine the files <code>cocopye_output.csv</code> and <code>MAGS_quality.csv</code> with the <code>paste</code> command into a new file called <code>cocopye_quality.csv</code>. The <code>-d ","</code> option indicates the merged files will be separated by commas (<code>,</code>), matching the column separation in <code>cocopye_output.csv</code>.</p>
-<div class="sourceCode" id="cb94"><pre class="sourceCode bash Rchunk"><code class="sourceCode bash"><span id="cb94-1"><a href="23-Bin_quality.html#cb94-1" tabindex="-1"></a><span class="fu">paste</span> <span class="at">-d</span> <span class="st">&quot;,&quot;</span> cocopye_output.csv MAGS_quality.csv <span class="op">&gt;</span> cocopye_quality.csv</span></code></pre></div>
+<div class="sourceCode" id="cb109"><pre class="sourceCode bash Rchunk"><code class="sourceCode bash"><span id="cb109-1"><a href="26-Bin_quality_scores.html#cb109-1" tabindex="-1"></a><span class="fu">paste</span> <span class="at">-d</span> <span class="st">&quot;,&quot;</span> cocopye_output.csv MAGS_quality.csv <span class="op">&gt;</span> cocopye_quality.csv</span></code></pre></div>
 </div>
 </div>
-<div id="mcqs-6" class="section level2 hasAnchor" number="23.6">
-<h2><span class="header-section-number">23.6</span> MCQs<a href="23-Bin_quality.html#mcqs-6" class="anchor-section" aria-label="Anchor link to header"></a></h2>
+<div id="mcqs-8" class="section level2 hasAnchor" number="26.6">
+<h2><span class="header-section-number">26.6</span> MCQs<a href="26-Bin_quality_scores.html#mcqs-8" class="anchor-section" aria-label="Anchor link to header"></a></h2>
 <center>
-<img src="figures/question_bubble_blue.png" style="width:150px; background: white; border-radius: 5px; border: 5px white solid" />
+<img src="figures/question_bubble_blue.png" style="width:100px; background: white; border-radius: 5px; border: 5px white solid" />
 </center>
 <p>Viewing the file <code>cocopye_output.csv</code> attempt the below questions.</p>
 <p><strong>Tip</strong>: You can use the <code>cut</code> command to look at specific columns. For example:</p>
-<div class="sourceCode" id="cb95"><pre class="sourceCode bash Rchunk"><code class="sourceCode bash"><span id="cb95-1"><a href="23-Bin_quality.html#cb95-1" tabindex="-1"></a><span class="co">#look at the &quot;bin&quot; and &quot;quality&quot; columns</span></span>
-<span id="cb95-2"><a href="23-Bin_quality.html#cb95-2" tabindex="-1"></a><span class="co">#Convert the printed output&#39;s commas to tabs for readability</span></span>
-<span id="cb95-3"><a href="23-Bin_quality.html#cb95-3" tabindex="-1"></a><span class="fu">cut</span> <span class="at">-d</span> <span class="st">&quot;,&quot;</span> <span class="at">-f</span> 1,8 cocopye_quality.csv <span class="kw">|</span> <span class="fu">tr</span> <span class="st">&quot;,&quot;</span> <span class="st">&quot;\t&quot;</span></span></code></pre></div>
+<div class="sourceCode" id="cb110"><pre class="sourceCode bash Rchunk"><code class="sourceCode bash"><span id="cb110-1"><a href="26-Bin_quality_scores.html#cb110-1" tabindex="-1"></a><span class="co">#look at the &quot;bin&quot; and &quot;quality&quot; columns</span></span>
+<span id="cb110-2"><a href="26-Bin_quality_scores.html#cb110-2" tabindex="-1"></a><span class="co">#Convert the printed output&#39;s commas to tabs for readability</span></span>
+<span id="cb110-3"><a href="26-Bin_quality_scores.html#cb110-3" tabindex="-1"></a><span class="fu">cut</span> <span class="at">-d</span> <span class="st">&quot;,&quot;</span> <span class="at">-f</span> 1,8 cocopye_quality.csv <span class="kw">|</span> <span class="fu">tr</span> <span class="st">&quot;,&quot;</span> <span class="st">&quot;\t&quot;</span></span></code></pre></div>
 <ol style="list-style-type: decimal">
 <li>What lineage was assigned to bin <strong>K1.1</strong>?
-<div id="radio_VLJSAOFYFG" class="webex-radiogroup">
-<label><input type="radio" autocomplete="off" name="radio_VLJSAOFYFG" value=""></input> <span><strong>Bacteria</strong></span></label><label><input type="radio" autocomplete="off" name="radio_VLJSAOFYFG" value="answer"></input> <span><strong>Bacteroides</strong></span></label><label><input type="radio" autocomplete="off" name="radio_VLJSAOFYFG" value=""></input> <span><strong>Lachnospiraceae</strong></span></label>
+<div id="radio_ILFMXJYWOF" class="webex-radiogroup">
+<label><input type="radio" autocomplete="off" name="radio_ILFMXJYWOF" value=""></input> <span><strong>Bacteria</strong></span></label><label><input type="radio" autocomplete="off" name="radio_ILFMXJYWOF" value="answer"></input> <span><strong>Bacteroides</strong></span></label><label><input type="radio" autocomplete="off" name="radio_ILFMXJYWOF" value=""></input> <span><strong>Lachnospiraceae</strong></span></label>
 </div></li>
 <li>What lineage was assigned to bin <strong>K1.22</strong>?
-<div id="radio_MHCBVZTJBK" class="webex-radiogroup">
-<label><input type="radio" autocomplete="off" name="radio_MHCBVZTJBK" value=""></input> <span><strong>Bacteria</strong></span></label><label><input type="radio" autocomplete="off" name="radio_MHCBVZTJBK" value=""></input> <span><strong>Bacteroides</strong></span></label><label><input type="radio" autocomplete="off" name="radio_MHCBVZTJBK" value="answer"></input> <span><strong>Lachnospiraceae</strong></span></label>
+<div id="radio_YQIYNLWFAL" class="webex-radiogroup">
+<label><input type="radio" autocomplete="off" name="radio_YQIYNLWFAL" value=""></input> <span><strong>Bacteria</strong></span></label><label><input type="radio" autocomplete="off" name="radio_YQIYNLWFAL" value=""></input> <span><strong>Bacteroides</strong></span></label><label><input type="radio" autocomplete="off" name="radio_YQIYNLWFAL" value="answer"></input> <span><strong>Lachnospiraceae</strong></span></label>
 </div></li>
 <li>What lineage was assigned to bin <strong>K1.8</strong>?
-<div id="radio_AXRRWXQGDU" class="webex-radiogroup">
-<label><input type="radio" autocomplete="off" name="radio_AXRRWXQGDU" value="answer"></input> <span><strong>Bacteria</strong></span></label><label><input type="radio" autocomplete="off" name="radio_AXRRWXQGDU" value=""></input> <span><strong>Bacteroides</strong></span></label><label><input type="radio" autocomplete="off" name="radio_AXRRWXQGDU" value=""></input> <span><strong>Lachnospiraceae</strong></span></label>
+<div id="radio_ALGEVWDIAC" class="webex-radiogroup">
+<label><input type="radio" autocomplete="off" name="radio_ALGEVWDIAC" value="answer"></input> <span><strong>Bacteria</strong></span></label><label><input type="radio" autocomplete="off" name="radio_ALGEVWDIAC" value=""></input> <span><strong>Bacteroides</strong></span></label><label><input type="radio" autocomplete="off" name="radio_ALGEVWDIAC" value=""></input> <span><strong>Lachnospiraceae</strong></span></label>
 </div></li>
 <li>What is the quality value of <strong>K1.1</strong>?
-<div id="radio_UPITCUCRJC" class="webex-radiogroup">
-<label><input type="radio" autocomplete="off" name="radio_UPITCUCRJC" value=""></input> <span><strong>0.0202</strong></span></label><label><input type="radio" autocomplete="off" name="radio_UPITCUCRJC" value="answer"></input> <span><strong>0.6724</strong></span></label><label><input type="radio" autocomplete="off" name="radio_UPITCUCRJC" value=""></input> <span><strong>0.9769</strong></span></label>
+<div id="radio_QATMESZVRU" class="webex-radiogroup">
+<label><input type="radio" autocomplete="off" name="radio_QATMESZVRU" value=""></input> <span><strong>0.0202</strong></span></label><label><input type="radio" autocomplete="off" name="radio_QATMESZVRU" value="answer"></input> <span><strong>0.6724</strong></span></label><label><input type="radio" autocomplete="off" name="radio_QATMESZVRU" value=""></input> <span><strong>0.9769</strong></span></label>
 </div></li>
 <li>What is the completeness value of <strong>K1.30</strong>?
-<div id="radio_MQEYPSFHPL" class="webex-radiogroup">
-<label><input type="radio" autocomplete="off" name="radio_MQEYPSFHPL" value=""></input> <span><strong>0.0202</strong></span></label><label><input type="radio" autocomplete="off" name="radio_MQEYPSFHPL" value=""></input> <span><strong>0.6724</strong></span></label><label><input type="radio" autocomplete="off" name="radio_MQEYPSFHPL" value="answer"></input> <span><strong>0.9769</strong></span></label>
+<div id="radio_KPNTAMPEYT" class="webex-radiogroup">
+<label><input type="radio" autocomplete="off" name="radio_KPNTAMPEYT" value=""></input> <span><strong>0.0202</strong></span></label><label><input type="radio" autocomplete="off" name="radio_KPNTAMPEYT" value=""></input> <span><strong>0.6724</strong></span></label><label><input type="radio" autocomplete="off" name="radio_KPNTAMPEYT" value="answer"></input> <span><strong>0.9769</strong></span></label>
 </div></li>
 <li>What is the contamination value of <strong>K1.12</strong> bin?
-<div id="radio_DZQRDZFCHV" class="webex-radiogroup">
-<label><input type="radio" autocomplete="off" name="radio_DZQRDZFCHV" value="answer"></input> <span><strong>0.0202</strong></span></label><label><input type="radio" autocomplete="off" name="radio_DZQRDZFCHV" value=""></input> <span><strong>0.6724</strong></span></label><label><input type="radio" autocomplete="off" name="radio_DZQRDZFCHV" value=""></input> <span><strong>0.9769</strong></span></label>
+<div id="radio_BJRVDZPGUI" class="webex-radiogroup">
+<label><input type="radio" autocomplete="off" name="radio_BJRVDZPGUI" value="answer"></input> <span><strong>0.0202</strong></span></label><label><input type="radio" autocomplete="off" name="radio_BJRVDZPGUI" value=""></input> <span><strong>0.6724</strong></span></label><label><input type="radio" autocomplete="off" name="radio_BJRVDZPGUI" value=""></input> <span><strong>0.9769</strong></span></label>
 </div></li>
 <li>Which bin has the highest quality value (98.38%)?
-<div id="radio_RAAJPKTOWF" class="webex-radiogroup">
-<label><input type="radio" autocomplete="off" name="radio_RAAJPKTOWF" value=""></input> <span><strong>K1.20</strong></span></label><label><input type="radio" autocomplete="off" name="radio_RAAJPKTOWF" value=""></input> <span><strong>K1.26</strong></span></label><label><input type="radio" autocomplete="off" name="radio_RAAJPKTOWF" value="answer"></input> <span><strong>K1.22</strong></span></label>
+<div id="radio_SMONIYRXOU" class="webex-radiogroup">
+<label><input type="radio" autocomplete="off" name="radio_SMONIYRXOU" value=""></input> <span><strong>K1.20</strong></span></label><label><input type="radio" autocomplete="off" name="radio_SMONIYRXOU" value=""></input> <span><strong>K1.26</strong></span></label><label><input type="radio" autocomplete="off" name="radio_SMONIYRXOU" value="answer"></input> <span><strong>K1.22</strong></span></label>
 </div></li>
 <li>Which bin has the quality value of -2.9215?
-<div id="radio_UTRKJQBJEN" class="webex-radiogroup">
-<label><input type="radio" autocomplete="off" name="radio_UTRKJQBJEN" value="answer"></input> <span><strong>K1.20</strong></span></label><label><input type="radio" autocomplete="off" name="radio_UTRKJQBJEN" value=""></input> <span><strong>K1.26</strong></span></label><label><input type="radio" autocomplete="off" name="radio_UTRKJQBJEN" value=""></input> <span><strong>K1.22</strong></span></label>
+<div id="radio_ESPPKWZXTJ" class="webex-radiogroup">
+<label><input type="radio" autocomplete="off" name="radio_ESPPKWZXTJ" value="answer"></input> <span><strong>K1.20</strong></span></label><label><input type="radio" autocomplete="off" name="radio_ESPPKWZXTJ" value=""></input> <span><strong>K1.26</strong></span></label><label><input type="radio" autocomplete="off" name="radio_ESPPKWZXTJ" value=""></input> <span><strong>K1.22</strong></span></label>
 </div></li>
 <li>Which bin has the highest completeness value (98.59%)?
-<div id="radio_MULWVGVJJK" class="webex-radiogroup">
-<label><input type="radio" autocomplete="off" name="radio_MULWVGVJJK" value=""></input> <span><strong>K1.20</strong></span></label><label><input type="radio" autocomplete="off" name="radio_MULWVGVJJK" value="answer"></input> <span><strong>K1.26</strong></span></label><label><input type="radio" autocomplete="off" name="radio_MULWVGVJJK" value=""></input> <span><strong>K1.22</strong></span></label>
+<div id="radio_NDACFGXJAN" class="webex-radiogroup">
+<label><input type="radio" autocomplete="off" name="radio_NDACFGXJAN" value=""></input> <span><strong>K1.20</strong></span></label><label><input type="radio" autocomplete="off" name="radio_NDACFGXJAN" value="answer"></input> <span><strong>K1.26</strong></span></label><label><input type="radio" autocomplete="off" name="radio_NDACFGXJAN" value=""></input> <span><strong>K1.22</strong></span></label>
 </div></li>
 </ol>
 </div>
-<div id="bin-quality-summary" class="section level2 hasAnchor" number="23.7">
-<h2><span class="header-section-number">23.7</span> Bin quality summary<a href="23-Bin_quality.html#bin-quality-summary" class="anchor-section" aria-label="Anchor link to header"></a></h2>
+<div id="bin-quality-summary-1" class="section level2 hasAnchor" number="26.7">
+<h2><span class="header-section-number">26.7</span> Bin quality summary<a href="26-Bin_quality_scores.html#bin-quality-summary-1" class="anchor-section" aria-label="Anchor link to header"></a></h2>
 <center>
-<img src="figures/sum_black.png" style="width:150px; background: white ; border-radius:5px; border: 5px white solid" />
+<img src="figures/sum_black.png" style="width:100px; background: white ; border-radius:5px; border: 5px white solid" />
 </center>
 <p>It is always useful to know the quality of your bins so you know which are more reliable than others. With that information you can be more or less certain when concluding your findings.</p>
 <p>We have some good quality bins but many poorer quality bins too. Ultimately binning is trying to separate all the genomes from each other. A better metagenome assembly would most likely have led to better binning.</p>
+<span class="tippy html-widget html-fill-item" height="480" id="htmlwidget-15458f3d86b86aa68713" width="672"></span>
+<script type="application/json" data-for="htmlwidget-15458f3d86b86aa68713">{"x":{"element":"mag","opts":{"content":"Metagenome-Assembled Genome","arrow":true,"placement":"bottom"}},"evals":[],"jsHooks":[]}</script>
 
 </div>
 </div>
@@ -962,8 +992,8 @@ window.onload = function() {
           </div>
         </div>
       </div>
-<a href="22-Genome_binning.html" class="navigation navigation-prev " aria-label="Previous page"><i class="fa fa-angle-left"></i></a>
-<a href="24-Assembly_functional_annotation.html" class="navigation navigation-next " aria-label="Next page"><i class="fa fa-angle-right"></i></a>
+<a href="25-CoCoPyE.html" class="navigation navigation-prev " aria-label="Previous page"><i class="fa fa-angle-left"></i></a>
+<a href="27-Assembly_functional_annotation.html" class="navigation navigation-next " aria-label="Next page"><i class="fa fa-angle-right"></i></a>
     </div>
   </div>
 <script src="libs/gitbook-2.6.7/js/app.min.js"></script>

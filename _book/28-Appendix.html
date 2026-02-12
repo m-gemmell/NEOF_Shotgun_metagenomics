@@ -23,14 +23,14 @@
 <meta name="author" content="Sam Haldenby and Matthew R. Gemmell" />
 
 
-<meta name="date" content="2026-02-11" />
+<meta name="date" content="2026-02-12" />
 
   <meta name="viewport" content="width=device-width, initial-scale=1" />
   <meta name="apple-mobile-web-app-capable" content="yes" />
   <meta name="apple-mobile-web-app-status-bar-style" content="black" />
   
   <link rel="shortcut icon" href="figures/NEOF_favicon.png" type="image/x-icon" />
-<link rel="prev" href="24-Assembly_functional_annotation.html"/>
+<link rel="prev" href="27-Assembly_functional_annotation.html"/>
 
 <script src="libs/jquery-3.6.0/jquery-3.6.0.min.js"></script>
 <script src="https://cdn.jsdelivr.net/npm/fuse.js@6.4.6/dist/fuse.min.js"></script>
@@ -233,7 +233,7 @@ code span.wa { color: #60a0b0; font-weight: bold; font-style: italic; } /* Warni
 <li class="chapter" data-level="11.5" data-path="11-Bracken.html"><a href="11-Bracken.html#merging-output"><i class="fa fa-check"></i><b>11.5</b> Merging output</a></li>
 <li class="chapter" data-level="11.6" data-path="11-Bracken.html"><a href="11-Bracken.html#extracting-output"><i class="fa fa-check"></i><b>11.6</b> Extracting output</a></li>
 </ul></li>
-<li class="chapter" data-level="12" data-path="12-Lefse.html"><a href="12-Lefse.html"><i class="fa fa-check"></i><b>12</b> LEfSe biomarker detection</a>
+<li class="chapter" data-level="12" data-path="12-Lefse.html"><a href="12-Lefse.html"><i class="fa fa-check"></i><b>12</b> LEfSe</a>
 <ul>
 <li class="chapter" data-level="12.1" data-path="12-Lefse.html"><a href="12-Lefse.html#kraken2_lefse_metadata"><i class="fa fa-check"></i><b>12.1</b> Add metadata</a></li>
 <li class="chapter" data-level="12.2" data-path="12-Lefse.html"><a href="12-Lefse.html#format-file"><i class="fa fa-check"></i><b>12.2</b> Format file</a></li>
@@ -271,94 +271,122 @@ code span.wa { color: #60a0b0; font-weight: bold; font-style: italic; } /* Warni
 </ul></li>
 <li class="chapter" data-level="17" data-path="17-LEfSe_humann.html"><a href="17-LEfSe_humann.html"><i class="fa fa-check"></i><b>17</b> LEfSe</a></li>
 <li class="chapter" data-level="18" data-path="18-HUMAnN_task.html"><a href="18-HUMAnN_task.html"><i class="fa fa-check"></i><b>18</b> Optional task</a></li>
-<li class="part"><span><b>Assembly Approach</b></span></li>
+<li class="part"><span><b>Assembly</b></span></li>
 <li class="chapter" data-level="19" data-path="19-Metagenome_assembly.html"><a href="19-Metagenome_assembly.html"><i class="fa fa-check"></i><b>19</b> Metagenome assembly</a>
 <ul>
 <li class="chapter" data-level="19.1" data-path="19-Metagenome_assembly.html"><a href="19-Metagenome_assembly.html#mamba"><i class="fa fa-check"></i><b>19.1</b> Mamba</a></li>
 <li class="chapter" data-level="19.2" data-path="19-Metagenome_assembly.html"><a href="19-Metagenome_assembly.html#a-primer-on-short-read-assembly"><i class="fa fa-check"></i><b>19.2</b> A primer on short read assembly</a></li>
 </ul></li>
-<li class="chapter" data-level="20" data-path="20-Stitching_reads.html"><a href="20-Stitching_reads.html"><i class="fa fa-check"></i><b>20</b> Stitching read pairs</a>
+<li class="chapter" data-level="20" data-path="20-FLASH.html"><a href="20-FLASH.html"><i class="fa fa-check"></i><b>20</b> FLASH</a>
 <ul>
-<li class="chapter" data-level="20.1" data-path="20-Stitching_reads.html"><a href="20-Stitching_reads.html#flash"><i class="fa fa-check"></i><b>20.1</b> FLASH</a>
-<ul>
-<li class="chapter" data-level="20.1.1" data-path="20-Stitching_reads.html"><a href="20-Stitching_reads.html#run"><i class="fa fa-check"></i><b>20.1.1</b> Run</a></li>
-<li class="chapter" data-level="20.1.2" data-path="20-Stitching_reads.html"><a href="20-Stitching_reads.html#output-1"><i class="fa fa-check"></i><b>20.1.2</b> Output</a></li>
+<li class="chapter" data-level="20.1" data-path="20-FLASH.html"><a href="20-FLASH.html#stitching"><i class="fa fa-check"></i><b>20.1</b> Stitching</a></li>
+<li class="chapter" data-level="20.2" data-path="20-FLASH.html"><a href="20-FLASH.html#sticthed-fastqs-and-histogram"><i class="fa fa-check"></i><b>20.2</b> Sticthed fastqs and histogram</a></li>
+<li class="chapter" data-level="20.3" data-path="20-FLASH.html"><a href="20-FLASH.html#mcqs-5"><i class="fa fa-check"></i><b>20.3</b> MCQs</a></li>
 </ul></li>
-<li class="chapter" data-level="20.2" data-path="20-Stitching_reads.html"><a href="20-Stitching_reads.html#mcqs-5"><i class="fa fa-check"></i><b>20.2</b> MCQs</a></li>
+<li class="chapter" data-level="21" data-path="21_MEGAHIT.html"><a href="21_MEGAHIT.html"><i class="fa fa-check"></i><b>21</b> MEGAHIT</a>
+<ul>
+<li class="chapter" data-level="21.1" data-path="21_MEGAHIT.html"><a href="21_MEGAHIT.html#megahit-1"><i class="fa fa-check"></i><b>21.1</b> MEGAHIT</a></li>
+<li class="chapter" data-level="21.2" data-path="21_MEGAHIT.html"><a href="21_MEGAHIT.html#quast"><i class="fa fa-check"></i><b>21.2</b> QUAST</a>
+<ul>
+<li class="chapter" data-level="21.2.1" data-path="21_MEGAHIT.html"><a href="21_MEGAHIT.html#assembly-assessment"><i class="fa fa-check"></i><b>21.2.1</b> Assembly assessment</a></li>
+<li class="chapter" data-level="21.2.2" data-path="21_MEGAHIT.html"><a href="21_MEGAHIT.html#report"><i class="fa fa-check"></i><b>21.2.2</b> Report</a></li>
 </ul></li>
-<li class="chapter" data-level="21" data-path="21_Megahit.html"><a href="21_Megahit.html"><i class="fa fa-check"></i><b>21</b> Megahit Assembly</a>
-<ul>
-<li class="chapter" data-level="21.1" data-path="21_Megahit.html"><a href="21_Megahit.html#megahit"><i class="fa fa-check"></i><b>21.1</b> MEGAHIT</a></li>
-<li class="chapter" data-level="21.2" data-path="21_Megahit.html"><a href="21_Megahit.html#quast"><i class="fa fa-check"></i><b>21.2</b> QUAST</a>
-<ul>
-<li class="chapter" data-level="21.2.1" data-path="21_Megahit.html"><a href="21_Megahit.html#quast-run"><i class="fa fa-check"></i><b>21.2.1</b> QUAST: run</a></li>
-<li class="chapter" data-level="21.2.2" data-path="21_Megahit.html"><a href="21_Megahit.html#quast-visualise"><i class="fa fa-check"></i><b>21.2.2</b> QUAST: visualise</a></li>
-<li class="chapter" data-level="21.2.3" data-path="21_Megahit.html"><a href="21_Megahit.html#quast-mcqs"><i class="fa fa-check"></i><b>21.2.3</b> QUAST: MCQs</a></li>
+<li class="chapter" data-level="21.3" data-path="21_MEGAHIT.html"><a href="21_MEGAHIT.html#mcqs-6"><i class="fa fa-check"></i><b>21.3</b> MCQs</a></li>
+<li class="chapter" data-level="21.4" data-path="21_MEGAHIT.html"><a href="21_MEGAHIT.html#metagenome-assembly-summary"><i class="fa fa-check"></i><b>21.4</b> Metagenome assembly summary</a></li>
 </ul></li>
-<li class="chapter" data-level="21.3" data-path="21_Megahit.html"><a href="21_Megahit.html#metagenome-assembly-summary"><i class="fa fa-check"></i><b>21.3</b> Metagenome assembly summary</a></li>
+<li class="part"><span><b>Binning</b></span></li>
+<li class="chapter" data-level="22" data-path="22-Genome_binning.html"><a href="22-Genome_binning.html"><i class="fa fa-check"></i><b>22</b> Metagenome binning</a></li>
+<li class="chapter" data-level="23" data-path="23-Depth_calculation.html"><a href="23-Depth_calculation.html"><i class="fa fa-check"></i><b>23</b> Depth calculation</a>
+<ul>
+<li class="chapter" data-level="23.1" data-path="23-Depth_calculation.html"><a href="23-Depth_calculation.html#index-assembly"><i class="fa fa-check"></i><b>23.1</b> Index assembly</a></li>
+<li class="chapter" data-level="23.2" data-path="23-Depth_calculation.html"><a href="23-Depth_calculation.html#alignment-1"><i class="fa fa-check"></i><b>23.2</b> Alignment</a></li>
+<li class="chapter" data-level="23.3" data-path="23-Depth_calculation.html"><a href="23-Depth_calculation.html#sam-to-sorted-bam"><i class="fa fa-check"></i><b>23.3</b> SAM to sorted BAM</a></li>
+<li class="chapter" data-level="23.4" data-path="23-Depth_calculation.html"><a href="23-Depth_calculation.html#summarise-depths"><i class="fa fa-check"></i><b>23.4</b> Summarise depths</a></li>
+<li class="chapter" data-level="23.5" data-path="23-Depth_calculation.html"><a href="23-Depth_calculation.html#view-depths"><i class="fa fa-check"></i><b>23.5</b> View depths</a></li>
+<li class="chapter" data-level="23.6" data-path="23-Depth_calculation.html"><a href="23-Depth_calculation.html#summarise-with-r"><i class="fa fa-check"></i><b>23.6</b> Summarise with R</a>
+<ul>
+<li class="chapter" data-level="23.6.1" data-path="23-Depth_calculation.html"><a href="23-Depth_calculation.html#column-summaries"><i class="fa fa-check"></i><b>23.6.1</b> Column summaries</a></li>
+<li class="chapter" data-level="23.6.2" data-path="23-Depth_calculation.html"><a href="23-Depth_calculation.html#filter-then-summarise"><i class="fa fa-check"></i><b>23.6.2</b> Filter then summarise</a></li>
+<li class="chapter" data-level="23.6.3" data-path="23-Depth_calculation.html"><a href="23-Depth_calculation.html#quit-r"><i class="fa fa-check"></i><b>23.6.3</b> Quit R</a></li>
 </ul></li>
-<li class="chapter" data-level="22" data-path="22-Genome_binning.html"><a href="22-Genome_binning.html"><i class="fa fa-check"></i><b>22</b> Genome binning</a>
-<ul>
-<li class="chapter" data-level="22.1" data-path="22-Genome_binning.html"><a href="22-Genome_binning.html#metabat2"><i class="fa fa-check"></i><b>22.1</b> MetaBAT2</a></li>
-<li class="chapter" data-level="22.2" data-path="22-Genome_binning.html"><a href="22-Genome_binning.html#depth-calculation"><i class="fa fa-check"></i><b>22.2</b> Depth calculation</a>
-<ul>
-<li class="chapter" data-level="22.2.1" data-path="22-Genome_binning.html"><a href="22-Genome_binning.html#index-assembly"><i class="fa fa-check"></i><b>22.2.1</b> Index assembly</a></li>
-<li class="chapter" data-level="22.2.2" data-path="22-Genome_binning.html"><a href="22-Genome_binning.html#alignment-1"><i class="fa fa-check"></i><b>22.2.2</b> Alignment</a></li>
-<li class="chapter" data-level="22.2.3" data-path="22-Genome_binning.html"><a href="22-Genome_binning.html#sam-to-sorted-bam"><i class="fa fa-check"></i><b>22.2.3</b> Sam to sorted bam</a></li>
-<li class="chapter" data-level="22.2.4" data-path="22-Genome_binning.html"><a href="22-Genome_binning.html#summarise-depths"><i class="fa fa-check"></i><b>22.2.4</b> Summarise depths</a></li>
-<li class="chapter" data-level="22.2.5" data-path="22-Genome_binning.html"><a href="22-Genome_binning.html#view-summary-depth"><i class="fa fa-check"></i><b>22.2.5</b> View summary depth</a></li>
+<li class="chapter" data-level="23.7" data-path="23-Depth_calculation.html"><a href="23-Depth_calculation.html#remove-sam-and-bam-files"><i class="fa fa-check"></i><b>23.7</b> Remove SAM and BAM files</a></li>
 </ul></li>
-<li class="chapter" data-level="22.3" data-path="22-Genome_binning.html"><a href="22-Genome_binning.html#run-1"><i class="fa fa-check"></i><b>22.3</b> Run</a></li>
-<li class="chapter" data-level="22.4" data-path="22-Genome_binning.html"><a href="22-Genome_binning.html#output-2"><i class="fa fa-check"></i><b>22.4</b> Output</a></li>
+<li class="chapter" data-level="24" data-path="24-MetaBAT2.html"><a href="24-MetaBAT2.html"><i class="fa fa-check"></i><b>24</b> MetaBAT2</a>
+<ul>
+<li class="chapter" data-level="24.1" data-path="24-MetaBAT2.html"><a href="24-MetaBAT2.html#metabat2-1"><i class="fa fa-check"></i><b>24.1</b> MetaBAT2</a></li>
+<li class="chapter" data-level="24.2" data-path="24-MetaBAT2.html"><a href="24-MetaBAT2.html#bins"><i class="fa fa-check"></i><b>24.2</b> Bins</a></li>
 </ul></li>
-<li class="chapter" data-level="23" data-path="23-Bin_quality.html"><a href="23-Bin_quality.html"><i class="fa fa-check"></i><b>23</b> Bin quality</a>
+<li class="chapter" data-level="25" data-path="25-CoCoPyE.html"><a href="25-CoCoPyE.html"><i class="fa fa-check"></i><b>25</b> CoCoPyE</a>
 <ul>
-<li class="chapter" data-level="23.1" data-path="23-Bin_quality.html"><a href="23-Bin_quality.html#workflow-concept"><i class="fa fa-check"></i><b>23.1</b> Workflow concept</a>
+<li class="chapter" data-level="25.1" data-path="25-CoCoPyE.html"><a href="25-CoCoPyE.html#workflow-concept"><i class="fa fa-check"></i><b>25.1</b> Workflow concept</a>
 <ul>
-<li class="chapter" data-level="23.1.1" data-path="23-Bin_quality.html"><a href="23-Bin_quality.html#input-pre-processing"><i class="fa fa-check"></i><b>23.1.1</b> Input Pre-processing</a></li>
-<li class="chapter" data-level="23.1.2" data-path="23-Bin_quality.html"><a href="23-Bin_quality.html#stage-i"><i class="fa fa-check"></i><b>23.1.2</b> Stage I</a></li>
-<li class="chapter" data-level="23.1.3" data-path="23-Bin_quality.html"><a href="23-Bin_quality.html#stage-ii"><i class="fa fa-check"></i><b>23.1.3</b> Stage II</a></li>
+<li class="chapter" data-level="25.1.1" data-path="25-CoCoPyE.html"><a href="25-CoCoPyE.html#input-pre-processing"><i class="fa fa-check"></i><b>25.1.1</b> Input Pre-processing</a></li>
+<li class="chapter" data-level="25.1.2" data-path="25-CoCoPyE.html"><a href="25-CoCoPyE.html#stage-i"><i class="fa fa-check"></i><b>25.1.2</b> Stage I</a></li>
+<li class="chapter" data-level="25.1.3" data-path="25-CoCoPyE.html"><a href="25-CoCoPyE.html#stage-ii"><i class="fa fa-check"></i><b>25.1.3</b> Stage II</a></li>
 </ul></li>
-<li class="chapter" data-level="23.2" data-path="23-Bin_quality.html"><a href="23-Bin_quality.html#mamba-1"><i class="fa fa-check"></i><b>23.2</b> Mamba</a></li>
-<li class="chapter" data-level="23.3" data-path="23-Bin_quality.html"><a href="23-Bin_quality.html#run-2"><i class="fa fa-check"></i><b>23.3</b> Run</a>
+<li class="chapter" data-level="25.2" data-path="25-CoCoPyE.html"><a href="25-CoCoPyE.html#mamba-1"><i class="fa fa-check"></i><b>25.2</b> Mamba</a></li>
+<li class="chapter" data-level="25.3" data-path="25-CoCoPyE.html"><a href="25-CoCoPyE.html#run"><i class="fa fa-check"></i><b>25.3</b> Run</a>
 <ul>
-<li class="chapter" data-level="" data-path="23-Bin_quality.html"><a href="23-Bin_quality.html#parameters-10"><i class="fa fa-check"></i>Parameters</a></li>
+<li class="chapter" data-level="" data-path="25-CoCoPyE.html"><a href="25-CoCoPyE.html#parameters-10"><i class="fa fa-check"></i>Parameters</a></li>
 </ul></li>
-<li class="chapter" data-level="23.4" data-path="23-Bin_quality.html"><a href="23-Bin_quality.html#output-3"><i class="fa fa-check"></i><b>23.4</b> Output</a></li>
-<li class="chapter" data-level="23.5" data-path="23-Bin_quality.html"><a href="23-Bin_quality.html#quality-score"><i class="fa fa-check"></i><b>23.5</b> Quality score</a>
+<li class="chapter" data-level="25.4" data-path="25-CoCoPyE.html"><a href="25-CoCoPyE.html#output-1"><i class="fa fa-check"></i><b>25.4</b> Output</a></li>
+<li class="chapter" data-level="25.5" data-path="25-CoCoPyE.html"><a href="25-CoCoPyE.html#quality-score"><i class="fa fa-check"></i><b>25.5</b> Quality score</a>
 <ul>
-<li class="chapter" data-level="" data-path="23-Bin_quality.html"><a href="23-Bin_quality.html#quality-file"><i class="fa fa-check"></i>Quality file</a></li>
-<li class="chapter" data-level="" data-path="23-Bin_quality.html"><a href="23-Bin_quality.html#calculate-quality-with-awk"><i class="fa fa-check"></i>Calculate quality with awk</a></li>
-<li class="chapter" data-level="" data-path="23-Bin_quality.html"><a href="23-Bin_quality.html#add-quality-to-the-checkm-results-file"><i class="fa fa-check"></i>Add quality to the checkm results file</a></li>
+<li class="chapter" data-level="" data-path="25-CoCoPyE.html"><a href="25-CoCoPyE.html#quality-file"><i class="fa fa-check"></i>Quality file</a></li>
+<li class="chapter" data-level="" data-path="25-CoCoPyE.html"><a href="25-CoCoPyE.html#calculate-quality-with-awk"><i class="fa fa-check"></i>Calculate quality with awk</a></li>
+<li class="chapter" data-level="" data-path="25-CoCoPyE.html"><a href="25-CoCoPyE.html#add-quality-to-the-checkm-results-file"><i class="fa fa-check"></i>Add quality to the checkm results file</a></li>
 </ul></li>
-<li class="chapter" data-level="23.6" data-path="23-Bin_quality.html"><a href="23-Bin_quality.html#mcqs-6"><i class="fa fa-check"></i><b>23.6</b> MCQs</a></li>
-<li class="chapter" data-level="23.7" data-path="23-Bin_quality.html"><a href="23-Bin_quality.html#bin-quality-summary"><i class="fa fa-check"></i><b>23.7</b> Bin quality summary</a></li>
+<li class="chapter" data-level="25.6" data-path="25-CoCoPyE.html"><a href="25-CoCoPyE.html#mcqs-7"><i class="fa fa-check"></i><b>25.6</b> MCQs</a></li>
+<li class="chapter" data-level="25.7" data-path="25-CoCoPyE.html"><a href="25-CoCoPyE.html#bin-quality-summary"><i class="fa fa-check"></i><b>25.7</b> Bin quality summary</a></li>
 </ul></li>
-<li class="chapter" data-level="24" data-path="24-Assembly_functional_annotation.html"><a href="24-Assembly_functional_annotation.html"><i class="fa fa-check"></i><b>24</b> Assembly functional annotation</a>
+<li class="chapter" data-level="26" data-path="26-Bin_quality_scores.html"><a href="26-Bin_quality_scores.html"><i class="fa fa-check"></i><b>26</b> Bin quality</a>
 <ul>
-<li class="chapter" data-level="24.1" data-path="24-Assembly_functional_annotation.html"><a href="24-Assembly_functional_annotation.html#taxonomic-annotation"><i class="fa fa-check"></i><b>24.1</b> Taxonomic annotation</a></li>
-<li class="chapter" data-level="24.2" data-path="24-Assembly_functional_annotation.html"><a href="24-Assembly_functional_annotation.html#bakta"><i class="fa fa-check"></i><b>24.2</b> Bakta</a>
+<li class="chapter" data-level="26.1" data-path="26-Bin_quality_scores.html"><a href="26-Bin_quality_scores.html#workflow-concept-1"><i class="fa fa-check"></i><b>26.1</b> Workflow concept</a>
 <ul>
-<li class="chapter" data-level="24.2.1" data-path="24-Assembly_functional_annotation.html"><a href="24-Assembly_functional_annotation.html#bakta-run"><i class="fa fa-check"></i><b>24.2.1</b> Bakta: run</a></li>
-<li class="chapter" data-level="24.2.2" data-path="24-Assembly_functional_annotation.html"><a href="24-Assembly_functional_annotation.html#bakta-premade-results"><i class="fa fa-check"></i><b>24.2.2</b> Bakta: premade results</a></li>
-<li class="chapter" data-level="24.2.3" data-path="24-Assembly_functional_annotation.html"><a href="24-Assembly_functional_annotation.html#bakta-output"><i class="fa fa-check"></i><b>24.2.3</b> Bakta: output</a></li>
+<li class="chapter" data-level="26.1.1" data-path="26-Bin_quality_scores.html"><a href="26-Bin_quality_scores.html#input-pre-processing-1"><i class="fa fa-check"></i><b>26.1.1</b> Input Pre-processing</a></li>
+<li class="chapter" data-level="26.1.2" data-path="26-Bin_quality_scores.html"><a href="26-Bin_quality_scores.html#stage-i-1"><i class="fa fa-check"></i><b>26.1.2</b> Stage I</a></li>
+<li class="chapter" data-level="26.1.3" data-path="26-Bin_quality_scores.html"><a href="26-Bin_quality_scores.html#stage-ii-1"><i class="fa fa-check"></i><b>26.1.3</b> Stage II</a></li>
 </ul></li>
-<li class="chapter" data-level="24.3" data-path="24-Assembly_functional_annotation.html"><a href="24-Assembly_functional_annotation.html#minpath"><i class="fa fa-check"></i><b>24.3</b> MinPath</a>
+<li class="chapter" data-level="26.2" data-path="26-Bin_quality_scores.html"><a href="26-Bin_quality_scores.html#mamba-2"><i class="fa fa-check"></i><b>26.2</b> Mamba</a></li>
+<li class="chapter" data-level="26.3" data-path="26-Bin_quality_scores.html"><a href="26-Bin_quality_scores.html#run-1"><i class="fa fa-check"></i><b>26.3</b> Run</a>
 <ul>
-<li class="chapter" data-level="24.3.1" data-path="24-Assembly_functional_annotation.html"><a href="24-Assembly_functional_annotation.html#minpath-ec-extraction"><i class="fa fa-check"></i><b>24.3.1</b> MinPath: EC extraction</a></li>
-<li class="chapter" data-level="24.3.2" data-path="24-Assembly_functional_annotation.html"><a href="24-Assembly_functional_annotation.html#minpathrun"><i class="fa fa-check"></i><b>24.3.2</b> MinPath: run</a></li>
-<li class="chapter" data-level="24.3.3" data-path="24-Assembly_functional_annotation.html"><a href="24-Assembly_functional_annotation.html#minpath-output"><i class="fa fa-check"></i><b>24.3.3</b> MinPath: output</a></li>
-<li class="chapter" data-level="24.3.4" data-path="24-Assembly_functional_annotation.html"><a href="24-Assembly_functional_annotation.html#keggs"><i class="fa fa-check"></i><b>24.3.4</b> KEGGs</a></li>
+<li class="chapter" data-level="" data-path="26-Bin_quality_scores.html"><a href="26-Bin_quality_scores.html#parameters-11"><i class="fa fa-check"></i>Parameters</a></li>
+</ul></li>
+<li class="chapter" data-level="26.4" data-path="26-Bin_quality_scores.html"><a href="26-Bin_quality_scores.html#output-2"><i class="fa fa-check"></i><b>26.4</b> Output</a></li>
+<li class="chapter" data-level="26.5" data-path="26-Bin_quality_scores.html"><a href="26-Bin_quality_scores.html#quality-score-1"><i class="fa fa-check"></i><b>26.5</b> Quality score</a>
+<ul>
+<li class="chapter" data-level="" data-path="26-Bin_quality_scores.html"><a href="26-Bin_quality_scores.html#quality-file-1"><i class="fa fa-check"></i>Quality file</a></li>
+<li class="chapter" data-level="" data-path="26-Bin_quality_scores.html"><a href="26-Bin_quality_scores.html#calculate-quality-with-awk-1"><i class="fa fa-check"></i>Calculate quality with awk</a></li>
+<li class="chapter" data-level="" data-path="26-Bin_quality_scores.html"><a href="26-Bin_quality_scores.html#add-quality-to-the-checkm-results-file-1"><i class="fa fa-check"></i>Add quality to the checkm results file</a></li>
+</ul></li>
+<li class="chapter" data-level="26.6" data-path="26-Bin_quality_scores.html"><a href="26-Bin_quality_scores.html#mcqs-8"><i class="fa fa-check"></i><b>26.6</b> MCQs</a></li>
+<li class="chapter" data-level="26.7" data-path="26-Bin_quality_scores.html"><a href="26-Bin_quality_scores.html#bin-quality-summary-1"><i class="fa fa-check"></i><b>26.7</b> Bin quality summary</a></li>
+</ul></li>
+<li class="chapter" data-level="27" data-path="27-Assembly_functional_annotation.html"><a href="27-Assembly_functional_annotation.html"><i class="fa fa-check"></i><b>27</b> Assembly functional annotation</a>
+<ul>
+<li class="chapter" data-level="27.1" data-path="27-Assembly_functional_annotation.html"><a href="27-Assembly_functional_annotation.html#taxonomic-annotation"><i class="fa fa-check"></i><b>27.1</b> Taxonomic annotation</a></li>
+<li class="chapter" data-level="27.2" data-path="27-Assembly_functional_annotation.html"><a href="27-Assembly_functional_annotation.html#bakta"><i class="fa fa-check"></i><b>27.2</b> Bakta</a>
+<ul>
+<li class="chapter" data-level="27.2.1" data-path="27-Assembly_functional_annotation.html"><a href="27-Assembly_functional_annotation.html#bakta-run"><i class="fa fa-check"></i><b>27.2.1</b> Bakta: run</a></li>
+<li class="chapter" data-level="27.2.2" data-path="27-Assembly_functional_annotation.html"><a href="27-Assembly_functional_annotation.html#bakta-premade-results"><i class="fa fa-check"></i><b>27.2.2</b> Bakta: premade results</a></li>
+<li class="chapter" data-level="27.2.3" data-path="27-Assembly_functional_annotation.html"><a href="27-Assembly_functional_annotation.html#bakta-output"><i class="fa fa-check"></i><b>27.2.3</b> Bakta: output</a></li>
+</ul></li>
+<li class="chapter" data-level="27.3" data-path="27-Assembly_functional_annotation.html"><a href="27-Assembly_functional_annotation.html#minpath"><i class="fa fa-check"></i><b>27.3</b> MinPath</a>
+<ul>
+<li class="chapter" data-level="27.3.1" data-path="27-Assembly_functional_annotation.html"><a href="27-Assembly_functional_annotation.html#minpath-ec-extraction"><i class="fa fa-check"></i><b>27.3.1</b> MinPath: EC extraction</a></li>
+<li class="chapter" data-level="27.3.2" data-path="27-Assembly_functional_annotation.html"><a href="27-Assembly_functional_annotation.html#minpathrun"><i class="fa fa-check"></i><b>27.3.2</b> MinPath: run</a></li>
+<li class="chapter" data-level="27.3.3" data-path="27-Assembly_functional_annotation.html"><a href="27-Assembly_functional_annotation.html#minpath-output"><i class="fa fa-check"></i><b>27.3.3</b> MinPath: output</a></li>
+<li class="chapter" data-level="27.3.4" data-path="27-Assembly_functional_annotation.html"><a href="27-Assembly_functional_annotation.html#keggs"><i class="fa fa-check"></i><b>27.3.4</b> KEGGs</a></li>
 </ul></li>
 </ul></li>
 <li class="appendix"><span><b>Appendix</b></span></li>
-<li class="chapter" data-level="A" data-path="25-Appendix.html"><a href="25-Appendix.html"><i class="fa fa-check"></i><b>A</b> Mamba installs</a>
+<li class="chapter" data-level="A" data-path="28-Appendix.html"><a href="28-Appendix.html"><i class="fa fa-check"></i><b>A</b> Mamba installs</a>
 <ul>
-<li class="chapter" data-level="A.1" data-path="25-Appendix.html"><a href="25-Appendix.html#mamba_install"><i class="fa fa-check"></i><b>A.1</b> Mamba installation and environment</a></li>
+<li class="chapter" data-level="A.1" data-path="28-Appendix.html"><a href="28-Appendix.html#mamba_install"><i class="fa fa-check"></i><b>A.1</b> Mamba installation and environment</a></li>
 </ul></li>
-<li class="chapter" data-level="B" data-path="25-Appendix.html"><a href="25-Appendix.html#next-steps"><i class="fa fa-check"></i><b>B</b> Next steps</a></li>
-<li class="chapter" data-level="C" data-path="25-Appendix.html"><a href="25-Appendix.html#manuals"><i class="fa fa-check"></i><b>C</b> Manuals</a></li>
-<li class="chapter" data-level="D" data-path="25-Appendix.html"><a href="25-Appendix.html#obtaining-read-data"><i class="fa fa-check"></i><b>D</b> Obtaining Read Data</a></li>
+<li class="chapter" data-level="B" data-path="28-Appendix.html"><a href="28-Appendix.html#next-steps"><i class="fa fa-check"></i><b>B</b> Next steps</a></li>
+<li class="chapter" data-level="C" data-path="28-Appendix.html"><a href="28-Appendix.html#manuals"><i class="fa fa-check"></i><b>C</b> Manuals</a></li>
+<li class="chapter" data-level="D" data-path="28-Appendix.html"><a href="28-Appendix.html#obtaining-read-data"><i class="fa fa-check"></i><b>D</b> Obtaining Read Data</a></li>
 <li class="divider"></li>
 <li><a href="https://github.com/rstudio/bookdown" target="blank">Published with bookdown</a></li>
 
@@ -379,70 +407,70 @@ code span.wa { color: #60a0b0; font-weight: bold; font-style: italic; } /* Warni
           <div class="page-inner">
 
             <section class="normal" id="section-">
-<div id="mamba-installs" class="section level1 hasAnchor" number="25">
-<h1><span class="header-section-number">A</span> Mamba installs<a href="25-Appendix.html#mamba-installs" class="anchor-section" aria-label="Anchor link to header"></a></h1>
+<div id="mamba-installs" class="section level1 hasAnchor" number="28">
+<h1><span class="header-section-number">A</span> Mamba installs<a href="28-Appendix.html#mamba-installs" class="anchor-section" aria-label="Anchor link to header"></a></h1>
 <center>
 <img src="figures/mamba_logo.png" style="width:200px; border-radius:5px" />
 </center>
-<div id="mamba_install" class="section level2 hasAnchor" number="25.1">
-<h2><span class="header-section-number">A.1</span> Mamba installation and environment<a href="25-Appendix.html#mamba_install" class="anchor-section" aria-label="Anchor link to header"></a></h2>
+<div id="mamba_install" class="section level2 hasAnchor" number="28.1">
+<h2><span class="header-section-number">A.1</span> Mamba installation and environment<a href="28-Appendix.html#mamba_install" class="anchor-section" aria-label="Anchor link to header"></a></h2>
 <p>Mamba is a reimplementation of conda. It is a great tool for installing bioinformatic packages including R packages.</p>
 <p>Mamba github: <a href="https://github.com/mamba-org/mamba" class="uri">https://github.com/mamba-org/mamba</a></p>
 <p>The best way to use Mamba is to install Miniforge. It has both Conda and Mamba commands.</p>
 <p>Miniforge installation: <a href="https://github.com/conda-forge/miniforge" class="uri">https://github.com/conda-forge/miniforge</a></p>
 <p>Mamba guide: <a href="https://mamba.readthedocs.io/en/latest/user_guide/mamba.html" class="uri">https://mamba.readthedocs.io/en/latest/user_guide/mamba.html</a></p>
 <p>To create the mamba environment <code>shotgun_meta</code> run the below commands in your bash. You will need to have installed <code>mamba</code> first.</p>
-<div class="sourceCode" id="cb119"><pre class="sourceCode bash Rchunk"><code class="sourceCode bash"><span id="cb119-1"><a href="25-Appendix.html#cb119-1" tabindex="-1"></a><span class="co">#shotgun_meta</span></span>
-<span id="cb119-2"><a href="25-Appendix.html#cb119-2" tabindex="-1"></a><span class="ex">mamba</span> create <span class="at">-n</span> shotgun_meta</span>
-<span id="cb119-3"><a href="25-Appendix.html#cb119-3" tabindex="-1"></a><span class="ex">mamba</span> activate shotgun_meta</span>
-<span id="cb119-4"><a href="25-Appendix.html#cb119-4" tabindex="-1"></a><span class="co">#Install packages</span></span>
-<span id="cb119-5"><a href="25-Appendix.html#cb119-5" tabindex="-1"></a><span class="ex">mamba</span> install <span class="at">-c</span> bioconda fastqc trim-galore multiqc bowtie2 kraken2 <span class="dt">\</span></span>
-<span id="cb119-6"><a href="25-Appendix.html#cb119-6" tabindex="-1"></a>krona bracken lefse flash megahit quast metabat2 prokka bbmap bakta circos</span>
-<span id="cb119-7"><a href="25-Appendix.html#cb119-7" tabindex="-1"></a><span class="co">#Update krona taxonomy database</span></span>
-<span id="cb119-8"><a href="25-Appendix.html#cb119-8" tabindex="-1"></a><span class="ex">ktUpdateTaxonomy.sh</span></span>
-<span id="cb119-9"><a href="25-Appendix.html#cb119-9" tabindex="-1"></a><span class="co">#Install GenoVi via pip</span></span>
-<span id="cb119-10"><a href="25-Appendix.html#cb119-10" tabindex="-1"></a><span class="ex">pip</span> install genovi</span></code></pre></div>
+<div class="sourceCode" id="cb134"><pre class="sourceCode bash Rchunk"><code class="sourceCode bash"><span id="cb134-1"><a href="28-Appendix.html#cb134-1" tabindex="-1"></a><span class="co">#shotgun_meta</span></span>
+<span id="cb134-2"><a href="28-Appendix.html#cb134-2" tabindex="-1"></a><span class="ex">mamba</span> create <span class="at">-n</span> shotgun_meta</span>
+<span id="cb134-3"><a href="28-Appendix.html#cb134-3" tabindex="-1"></a><span class="ex">mamba</span> activate shotgun_meta</span>
+<span id="cb134-4"><a href="28-Appendix.html#cb134-4" tabindex="-1"></a><span class="co">#Install packages</span></span>
+<span id="cb134-5"><a href="28-Appendix.html#cb134-5" tabindex="-1"></a><span class="ex">mamba</span> install <span class="at">-c</span> bioconda fastqc trim-galore multiqc bowtie2 kraken2 <span class="dt">\</span></span>
+<span id="cb134-6"><a href="28-Appendix.html#cb134-6" tabindex="-1"></a>krona bracken lefse flash megahit quast metabat2 prokka bbmap bakta circos</span>
+<span id="cb134-7"><a href="28-Appendix.html#cb134-7" tabindex="-1"></a><span class="co">#Update krona taxonomy database</span></span>
+<span id="cb134-8"><a href="28-Appendix.html#cb134-8" tabindex="-1"></a><span class="ex">ktUpdateTaxonomy.sh</span></span>
+<span id="cb134-9"><a href="28-Appendix.html#cb134-9" tabindex="-1"></a><span class="co">#Install GenoVi via pip</span></span>
+<span id="cb134-10"><a href="28-Appendix.html#cb134-10" tabindex="-1"></a><span class="ex">pip</span> install genovi</span></code></pre></div>
 <p>You will need to install the <code>Bakta</code> database as well. This requires you have a directory to store the database. In the below example you will need a directory with the path <code>~/databases/bakta_db</code>, of course feel free to use a different location you have.</p>
-<div class="sourceCode" id="cb120"><pre class="sourceCode bash Rchunk"><code class="sourceCode bash"><span id="cb120-1"><a href="25-Appendix.html#cb120-1" tabindex="-1"></a><span class="ex">bakta_db</span> download <span class="at">--output</span> ~/databases/bakta <span class="at">--type</span> full</span></code></pre></div>
+<div class="sourceCode" id="cb135"><pre class="sourceCode bash Rchunk"><code class="sourceCode bash"><span id="cb135-1"><a href="28-Appendix.html#cb135-1" tabindex="-1"></a><span class="ex">bakta_db</span> download <span class="at">--output</span> ~/databases/bakta <span class="at">--type</span> full</span></code></pre></div>
 <p>Install <a href="https://github.com/mgtools/MinPath">MinPath</a> via <code>git</code>.
 I suggest creating a directory called "git_installs" in your home directory and running this code there.</p>
-<div class="sourceCode" id="cb121"><pre class="sourceCode bash Rchunk"><code class="sourceCode bash"><span id="cb121-1"><a href="25-Appendix.html#cb121-1" tabindex="-1"></a><span class="co">#git_installs directory</span></span>
-<span id="cb121-2"><a href="25-Appendix.html#cb121-2" tabindex="-1"></a><span class="fu">mkdir</span> ~/git_installs</span>
-<span id="cb121-3"><a href="25-Appendix.html#cb121-3" tabindex="-1"></a><span class="bu">cd</span> ~/git_installs</span>
-<span id="cb121-4"><a href="25-Appendix.html#cb121-4" tabindex="-1"></a><span class="co">#MinPath</span></span>
-<span id="cb121-5"><a href="25-Appendix.html#cb121-5" tabindex="-1"></a><span class="fu">git</span> clone https://github.com/mgtools/MinPath</span></code></pre></div>
+<div class="sourceCode" id="cb136"><pre class="sourceCode bash Rchunk"><code class="sourceCode bash"><span id="cb136-1"><a href="28-Appendix.html#cb136-1" tabindex="-1"></a><span class="co">#git_installs directory</span></span>
+<span id="cb136-2"><a href="28-Appendix.html#cb136-2" tabindex="-1"></a><span class="fu">mkdir</span> ~/git_installs</span>
+<span id="cb136-3"><a href="28-Appendix.html#cb136-3" tabindex="-1"></a><span class="bu">cd</span> ~/git_installs</span>
+<span id="cb136-4"><a href="28-Appendix.html#cb136-4" tabindex="-1"></a><span class="co">#MinPath</span></span>
+<span id="cb136-5"><a href="28-Appendix.html#cb136-5" tabindex="-1"></a><span class="fu">git</span> clone https://github.com/mgtools/MinPath</span></code></pre></div>
 <p>To run <code>MinPath</code> in your own machines you will need to use the full path of the python file.
 If you installed these in your "~/git_installs" examples are below.</p>
-<div class="sourceCode" id="cb122"><pre class="sourceCode bash Rchunk"><code class="sourceCode bash"><span id="cb122-1"><a href="25-Appendix.html#cb122-1" tabindex="-1"></a><span class="co">#MinPath help page</span></span>
-<span id="cb122-2"><a href="25-Appendix.html#cb122-2" tabindex="-1"></a><span class="ex">python</span> ~/git_installs/Minpath/MinPath.py <span class="at">-h</span></span></code></pre></div>
+<div class="sourceCode" id="cb137"><pre class="sourceCode bash Rchunk"><code class="sourceCode bash"><span id="cb137-1"><a href="28-Appendix.html#cb137-1" tabindex="-1"></a><span class="co">#MinPath help page</span></span>
+<span id="cb137-2"><a href="28-Appendix.html#cb137-2" tabindex="-1"></a><span class="ex">python</span> ~/git_installs/Minpath/MinPath.py <span class="at">-h</span></span></code></pre></div>
 <p>To create the mamba environment <code>cocopye</code> run the below commands in your bash. You will need to have installed <code>mamba</code> first.</p>
-<div class="sourceCode" id="cb123"><pre class="sourceCode bash Rchunk"><code class="sourceCode bash"><span id="cb123-1"><a href="25-Appendix.html#cb123-1" tabindex="-1"></a><span class="co">#checkm</span></span>
-<span id="cb123-2"><a href="25-Appendix.html#cb123-2" tabindex="-1"></a><span class="ex">mamba</span> create <span class="at">-n</span> cocopye</span>
-<span id="cb123-3"><a href="25-Appendix.html#cb123-3" tabindex="-1"></a><span class="ex">mamba</span> activate checkm2</span>
-<span id="cb123-4"><a href="25-Appendix.html#cb123-4" tabindex="-1"></a><span class="ex">mamba</span> install bioconda::checkm2=1.1.0</span>
-<span id="cb123-5"><a href="25-Appendix.html#cb123-5" tabindex="-1"></a><span class="co">#Download required databases</span></span>
-<span id="cb123-6"><a href="25-Appendix.html#cb123-6" tabindex="-1"></a><span class="ex">checkm2</span> database <span class="at">--download</span></span></code></pre></div>
+<div class="sourceCode" id="cb138"><pre class="sourceCode bash Rchunk"><code class="sourceCode bash"><span id="cb138-1"><a href="28-Appendix.html#cb138-1" tabindex="-1"></a><span class="co">#checkm</span></span>
+<span id="cb138-2"><a href="28-Appendix.html#cb138-2" tabindex="-1"></a><span class="ex">mamba</span> create <span class="at">-n</span> cocopye</span>
+<span id="cb138-3"><a href="28-Appendix.html#cb138-3" tabindex="-1"></a><span class="ex">mamba</span> activate checkm2</span>
+<span id="cb138-4"><a href="28-Appendix.html#cb138-4" tabindex="-1"></a><span class="ex">mamba</span> install bioconda::checkm2=1.1.0</span>
+<span id="cb138-5"><a href="28-Appendix.html#cb138-5" tabindex="-1"></a><span class="co">#Download required databases</span></span>
+<span id="cb138-6"><a href="28-Appendix.html#cb138-6" tabindex="-1"></a><span class="ex">checkm2</span> database <span class="at">--download</span></span></code></pre></div>
 <p>To create the mamba environment <code>biobakery3.9</code> run the below commands in your bash. You will need to have installed <code>mamba</code> first.</p>
-<div class="sourceCode" id="cb124"><pre class="sourceCode bash Rchunk"><code class="sourceCode bash"><span id="cb124-1"><a href="25-Appendix.html#cb124-1" tabindex="-1"></a><span class="co">#biobakery3</span></span>
-<span id="cb124-2"><a href="25-Appendix.html#cb124-2" tabindex="-1"></a><span class="ex">mamba</span> create <span class="at">-n</span> biobakery3.9</span>
-<span id="cb124-3"><a href="25-Appendix.html#cb124-3" tabindex="-1"></a><span class="ex">mamba</span> activate biobakery3.9</span>
-<span id="cb124-4"><a href="25-Appendix.html#cb124-4" tabindex="-1"></a><span class="co">#Add required channels</span></span>
-<span id="cb124-5"><a href="25-Appendix.html#cb124-5" tabindex="-1"></a><span class="ex">conda</span> config <span class="at">--add</span> channels defaults</span>
-<span id="cb124-6"><a href="25-Appendix.html#cb124-6" tabindex="-1"></a><span class="ex">conda</span> config <span class="at">--add</span> channels bioconda</span>
-<span id="cb124-7"><a href="25-Appendix.html#cb124-7" tabindex="-1"></a><span class="ex">conda</span> config <span class="at">--add</span> channels conda-forge</span>
-<span id="cb124-8"><a href="25-Appendix.html#cb124-8" tabindex="-1"></a><span class="ex">conda</span> config <span class="at">--add</span> channels biobakery</span>
-<span id="cb124-9"><a href="25-Appendix.html#cb124-9" tabindex="-1"></a><span class="co">#Install huamnn3.9</span></span>
-<span id="cb124-10"><a href="25-Appendix.html#cb124-10" tabindex="-1"></a><span class="ex">mamba</span> install <span class="at">-c</span> biobakery humann=3.9</span>
-<span id="cb124-11"><a href="25-Appendix.html#cb124-11" tabindex="-1"></a><span class="co">#Install hclust2 and matplotlib</span></span>
-<span id="cb124-12"><a href="25-Appendix.html#cb124-12" tabindex="-1"></a><span class="ex">mamba</span> install bioncda::hclust2=1.0.0 conda-forge::matplotlib=3.7.3</span></code></pre></div>
+<div class="sourceCode" id="cb139"><pre class="sourceCode bash Rchunk"><code class="sourceCode bash"><span id="cb139-1"><a href="28-Appendix.html#cb139-1" tabindex="-1"></a><span class="co">#biobakery3</span></span>
+<span id="cb139-2"><a href="28-Appendix.html#cb139-2" tabindex="-1"></a><span class="ex">mamba</span> create <span class="at">-n</span> biobakery3.9</span>
+<span id="cb139-3"><a href="28-Appendix.html#cb139-3" tabindex="-1"></a><span class="ex">mamba</span> activate biobakery3.9</span>
+<span id="cb139-4"><a href="28-Appendix.html#cb139-4" tabindex="-1"></a><span class="co">#Add required channels</span></span>
+<span id="cb139-5"><a href="28-Appendix.html#cb139-5" tabindex="-1"></a><span class="ex">conda</span> config <span class="at">--add</span> channels defaults</span>
+<span id="cb139-6"><a href="28-Appendix.html#cb139-6" tabindex="-1"></a><span class="ex">conda</span> config <span class="at">--add</span> channels bioconda</span>
+<span id="cb139-7"><a href="28-Appendix.html#cb139-7" tabindex="-1"></a><span class="ex">conda</span> config <span class="at">--add</span> channels conda-forge</span>
+<span id="cb139-8"><a href="28-Appendix.html#cb139-8" tabindex="-1"></a><span class="ex">conda</span> config <span class="at">--add</span> channels biobakery</span>
+<span id="cb139-9"><a href="28-Appendix.html#cb139-9" tabindex="-1"></a><span class="co">#Install huamnn3.9</span></span>
+<span id="cb139-10"><a href="28-Appendix.html#cb139-10" tabindex="-1"></a><span class="ex">mamba</span> install <span class="at">-c</span> biobakery humann=3.9</span>
+<span id="cb139-11"><a href="28-Appendix.html#cb139-11" tabindex="-1"></a><span class="co">#Install hclust2 and matplotlib</span></span>
+<span id="cb139-12"><a href="28-Appendix.html#cb139-12" tabindex="-1"></a><span class="ex">mamba</span> install bioncda::hclust2=1.0.0 conda-forge::matplotlib=3.7.3</span></code></pre></div>
 <p>Next you will need to install the <code>HUMAnN</code> and <code>MetaPhlAn</code> databases.</p>
-<div class="sourceCode" id="cb125"><pre class="sourceCode bash Rchunk"><code class="sourceCode bash"><span id="cb125-1"><a href="25-Appendix.html#cb125-1" tabindex="-1"></a><span class="co">#Ensure you have biobakery3 mamba environment activated</span></span>
-<span id="cb125-2"><a href="25-Appendix.html#cb125-2" tabindex="-1"></a><span class="co">#Update HUMAnN databases</span></span>
-<span id="cb125-3"><a href="25-Appendix.html#cb125-3" tabindex="-1"></a><span class="ex">humann_databases</span> <span class="at">--download</span> chocophlan full /path/to/databases <span class="at">--update-config</span> yes</span>
-<span id="cb125-4"><a href="25-Appendix.html#cb125-4" tabindex="-1"></a><span class="ex">humann_databases</span> <span class="at">--download</span> uniref uniref90_diamond /path/to/databases <span class="at">--update-config</span> yes</span>
-<span id="cb125-5"><a href="25-Appendix.html#cb125-5" tabindex="-1"></a><span class="ex">humann_databases</span> <span class="at">--download</span> utility_mapping full /path/to/databases <span class="at">--update-config</span> yes</span>
-<span id="cb125-6"><a href="25-Appendix.html#cb125-6" tabindex="-1"></a><span class="co">#Install MetaPhlAn databases</span></span>
-<span id="cb125-7"><a href="25-Appendix.html#cb125-7" tabindex="-1"></a><span class="ex">metaphlan</span> <span class="at">--install</span> <span class="at">--index</span> mpa_vOct22_CHOCOPhlAnSGB_202403</span></code></pre></div>
+<div class="sourceCode" id="cb140"><pre class="sourceCode bash Rchunk"><code class="sourceCode bash"><span id="cb140-1"><a href="28-Appendix.html#cb140-1" tabindex="-1"></a><span class="co">#Ensure you have biobakery3 mamba environment activated</span></span>
+<span id="cb140-2"><a href="28-Appendix.html#cb140-2" tabindex="-1"></a><span class="co">#Update HUMAnN databases</span></span>
+<span id="cb140-3"><a href="28-Appendix.html#cb140-3" tabindex="-1"></a><span class="ex">humann_databases</span> <span class="at">--download</span> chocophlan full /path/to/databases <span class="at">--update-config</span> yes</span>
+<span id="cb140-4"><a href="28-Appendix.html#cb140-4" tabindex="-1"></a><span class="ex">humann_databases</span> <span class="at">--download</span> uniref uniref90_diamond /path/to/databases <span class="at">--update-config</span> yes</span>
+<span id="cb140-5"><a href="28-Appendix.html#cb140-5" tabindex="-1"></a><span class="ex">humann_databases</span> <span class="at">--download</span> utility_mapping full /path/to/databases <span class="at">--update-config</span> yes</span>
+<span id="cb140-6"><a href="28-Appendix.html#cb140-6" tabindex="-1"></a><span class="co">#Install MetaPhlAn databases</span></span>
+<span id="cb140-7"><a href="28-Appendix.html#cb140-7" tabindex="-1"></a><span class="ex">metaphlan</span> <span class="at">--install</span> <span class="at">--index</span> mpa_vOct22_CHOCOPhlAnSGB_202403</span></code></pre></div>
 <p>Installing the <code>MetaPhlAn</code> databases may not work with the command above. If not follow the below instructions.</p>
 <ul>
 <li>Go to the following link: <a href="http://cmprod1.cibio.unitn.it/biobakery4/metaphlan_databases/" class="uri">http://cmprod1.cibio.unitn.it/biobakery4/metaphlan_databases/</a></li>
@@ -466,11 +494,11 @@ If you installed these in your "~/git_installs" examples are below.</p>
 </ul></li>
 </ul>
 <p>Once the databses are all setup you can test <code>HUMAnN</code>.</p>
-<div class="sourceCode" id="cb126"><pre class="sourceCode bash Rchunk"><code class="sourceCode bash"><span id="cb126-1"><a href="25-Appendix.html#cb126-1" tabindex="-1"></a><span class="ex">humann_test</span></span></code></pre></div>
+<div class="sourceCode" id="cb141"><pre class="sourceCode bash Rchunk"><code class="sourceCode bash"><span id="cb141-1"><a href="28-Appendix.html#cb141-1" tabindex="-1"></a><span class="ex">humann_test</span></span></code></pre></div>
 </div>
 </div>
-<div id="next-steps" class="section level1 hasAnchor" number="26">
-<h1><span class="header-section-number">B</span> Next steps<a href="25-Appendix.html#next-steps" class="anchor-section" aria-label="Anchor link to header"></a></h1>
+<div id="next-steps" class="section level1 hasAnchor" number="29">
+<h1><span class="header-section-number">B</span> Next steps<a href="28-Appendix.html#next-steps" class="anchor-section" aria-label="Anchor link to header"></a></h1>
 <center>
 <img src="figures/step.png" style="width:200px" />
 </center>
@@ -512,8 +540,8 @@ _ Methods for Metagenomic data visualisation and analysis</li>
 </ul></li>
 </ul>
 </div>
-<div id="manuals" class="section level1 hasAnchor" number="27">
-<h1><span class="header-section-number">C</span> Manuals<a href="25-Appendix.html#manuals" class="anchor-section" aria-label="Anchor link to header"></a></h1>
+<div id="manuals" class="section level1 hasAnchor" number="30">
+<h1><span class="header-section-number">C</span> Manuals<a href="28-Appendix.html#manuals" class="anchor-section" aria-label="Anchor link to header"></a></h1>
 <center>
 <img src="figures/manual.png" style="width:150px" />
 </center>
@@ -542,57 +570,57 @@ _ Methods for Metagenomic data visualisation and analysis</li>
 <p>MinPath: <a href="https://github.com/mgtools/MinPath/blob/master/readme" class="uri">https://github.com/mgtools/MinPath/blob/master/readme</a></p>
 <p>MetaCyc: <a href="https://metacyc.org/" class="uri">https://metacyc.org/</a></p>
 </div>
-<div id="obtaining-read-data" class="section level1 hasAnchor" number="28">
-<h1><span class="header-section-number">D</span> Obtaining Read Data<a href="25-Appendix.html#obtaining-read-data" class="anchor-section" aria-label="Anchor link to header"></a></h1>
+<div id="obtaining-read-data" class="section level1 hasAnchor" number="31">
+<h1><span class="header-section-number">D</span> Obtaining Read Data<a href="28-Appendix.html#obtaining-read-data" class="anchor-section" aria-label="Anchor link to header"></a></h1>
 <p>The following commands can be used to obtain the sequence data used in this practical, directly from the EBI metagenomics site. It is worth noting that these are the full set of data, not like the miniaturised version you have used in the tutorial.</p>
-<div class="sourceCode" id="cb127"><pre class="sourceCode bash Rchunk"><code class="sourceCode bash"><span id="cb127-1"><a href="25-Appendix.html#cb127-1" tabindex="-1"></a><span class="fu">wget</span> <span class="at">-O</span> K1_R1.fastq.gz ftp://ftp.sra.ebi.ac.uk/vol1/fastq/ERR505/ERR505102/ERR505102_1.fastq.gz</span>
-<span id="cb127-2"><a href="25-Appendix.html#cb127-2" tabindex="-1"></a><span class="fu">wget</span> <span class="at">-O</span> K1_R2.fastq.gz ftp://ftp.sra.ebi.ac.uk/vol1/fastq/ERR505/ERR505102/ERR505102_2.fastq.gz</span>
-<span id="cb127-3"><a href="25-Appendix.html#cb127-3" tabindex="-1"></a><span class="fu">wget</span> <span class="at">-O</span> K2_R1.fastq.gz ftp://ftp.sra.ebi.ac.uk/vol1/fastq/ERR505/ERR505104/ERR505104_1.fastq.gz</span>
-<span id="cb127-4"><a href="25-Appendix.html#cb127-4" tabindex="-1"></a><span class="fu">wget</span> <span class="at">-O</span> K2_R2.fastq.gz ftp://ftp.sra.ebi.ac.uk/vol1/fastq/ERR505/ERR505104/ERR505104_2.fastq.gz</span>
-<span id="cb127-5"><a href="25-Appendix.html#cb127-5" tabindex="-1"></a><span class="fu">wget</span> <span class="at">-O</span> K3_R1.fastq.gz ftp://ftp.sra.ebi.ac.uk/vol1/fastq/ERR505/ERR505095/ERR505095_1.fastq.gz</span>
-<span id="cb127-6"><a href="25-Appendix.html#cb127-6" tabindex="-1"></a><span class="fu">wget</span> <span class="at">-O</span> K3_R2.fastq.gz ftp://ftp.sra.ebi.ac.uk/vol1/fastq/ERR505/ERR505095/ERR505095_2.fastq.gz</span>
-<span id="cb127-7"><a href="25-Appendix.html#cb127-7" tabindex="-1"></a><span class="fu">wget</span> <span class="at">-O</span> K4_R1.fastq.gz ftp://ftp.sra.ebi.ac.uk/vol1/fastq/ERR505/ERR505096/ERR505096_1.fastq.gz</span>
-<span id="cb127-8"><a href="25-Appendix.html#cb127-8" tabindex="-1"></a><span class="fu">wget</span> <span class="at">-O</span> K4_R2.fastq.gz ftp://ftp.sra.ebi.ac.uk/vol1/fastq/ERR505/ERR505096/ERR505096_2.fastq.gz</span>
-<span id="cb127-9"><a href="25-Appendix.html#cb127-9" tabindex="-1"></a><span class="fu">wget</span> <span class="at">-O</span> K5_R1.fastq.gz ftp://ftp.sra.ebi.ac.uk/vol1/fastq/ERR505/ERR505097/ERR505097_1.fastq.gz</span>
-<span id="cb127-10"><a href="25-Appendix.html#cb127-10" tabindex="-1"></a><span class="fu">wget</span> <span class="at">-O</span> K5_R2.fastq.gz ftp://ftp.sra.ebi.ac.uk/vol1/fastq/ERR505/ERR505097/ERR505097_2.fastq.gz</span>
-<span id="cb127-11"><a href="25-Appendix.html#cb127-11" tabindex="-1"></a><span class="fu">wget</span> <span class="at">-O</span> K6_R1.fastq.gz ftp://ftp.sra.ebi.ac.uk/vol1/fastq/ERR505/ERR505098/ERR505098_1.fastq.gz</span>
-<span id="cb127-12"><a href="25-Appendix.html#cb127-12" tabindex="-1"></a><span class="fu">wget</span> <span class="at">-O</span> K6_R2.fastq.gz ftp://ftp.sra.ebi.ac.uk/vol1/fastq/ERR505/ERR505098/ERR505098_2.fastq.gz</span>
-<span id="cb127-13"><a href="25-Appendix.html#cb127-13" tabindex="-1"></a><span class="fu">wget</span> <span class="at">-O</span> K7_R1.fastq.gz ftp://ftp.sra.ebi.ac.uk/vol1/fastq/ERR505/ERR505099/ERR505099_1.fastq.gz</span>
-<span id="cb127-14"><a href="25-Appendix.html#cb127-14" tabindex="-1"></a><span class="fu">wget</span> <span class="at">-O</span> K7_R2.fastq.gz ftp://ftp.sra.ebi.ac.uk/vol1/fastq/ERR505/ERR505099/ERR505099_2.fastq.gz</span>
-<span id="cb127-15"><a href="25-Appendix.html#cb127-15" tabindex="-1"></a><span class="fu">wget</span> <span class="at">-O</span> K8_R1.fastq.gz ftp://ftp.sra.ebi.ac.uk/vol1/fastq/ERR505/ERR505100/ERR505100_1.fastq.gz</span>
-<span id="cb127-16"><a href="25-Appendix.html#cb127-16" tabindex="-1"></a><span class="fu">wget</span> <span class="at">-O</span> K8_R2.fastq.gz ftp://ftp.sra.ebi.ac.uk/vol1/fastq/ERR505/ERR505100/ERR505100_2.fastq.gz</span>
-<span id="cb127-17"><a href="25-Appendix.html#cb127-17" tabindex="-1"></a><span class="fu">wget</span> <span class="at">-O</span> K9_R1.fastq.gz ftp://ftp.sra.ebi.ac.uk/vol1/fastq/ERR505/ERR505101/ERR505101_1.fastq.gz</span>
-<span id="cb127-18"><a href="25-Appendix.html#cb127-18" tabindex="-1"></a><span class="fu">wget</span> <span class="at">-O</span> K9_R2.fastq.gz ftp://ftp.sra.ebi.ac.uk/vol1/fastq/ERR505/ERR505101/ERR505101_2.fastq.gz</span>
-<span id="cb127-19"><a href="25-Appendix.html#cb127-19" tabindex="-1"></a><span class="fu">wget</span> <span class="at">-O</span> K10_R1.fastq.gz ftp://ftp.sra.ebi.ac.uk/vol1/fastq/ERR505/ERR505103/ERR505103_1.fastq.gz</span>
-<span id="cb127-20"><a href="25-Appendix.html#cb127-20" tabindex="-1"></a><span class="fu">wget</span> <span class="at">-O</span> K10_R2.fastq.gz ftp://ftp.sra.ebi.ac.uk/vol1/fastq/ERR505/ERR505103/ERR505103_2.fastq.gz</span>
-<span id="cb127-21"><a href="25-Appendix.html#cb127-21" tabindex="-1"></a><span class="fu">wget</span> <span class="at">-O</span> K11_R1.fastq.gz ftp://ftp.sra.ebi.ac.uk/vol1/fastq/ERR505/ERR505105/ERR505105_1.fastq.gz</span>
-<span id="cb127-22"><a href="25-Appendix.html#cb127-22" tabindex="-1"></a><span class="fu">wget</span> <span class="at">-O</span> K11_R2.fastq.gz ftp://ftp.sra.ebi.ac.uk/vol1/fastq/ERR505/ERR505105/ERR505105_2.fastq.gz</span>
-<span id="cb127-23"><a href="25-Appendix.html#cb127-23" tabindex="-1"></a><span class="fu">wget</span> <span class="at">-O</span> K12_R1.fastq.gz ftp://ftp.sra.ebi.ac.uk/vol1/fastq/ERR505/ERR505106/ERR505106_1.fastq.gz</span>
-<span id="cb127-24"><a href="25-Appendix.html#cb127-24" tabindex="-1"></a><span class="fu">wget</span> <span class="at">-O</span> K12_R2.fastq.gz ftp://ftp.sra.ebi.ac.uk/vol1/fastq/ERR505/ERR505106/ERR505106_2.fastq.gz</span>
-<span id="cb127-25"><a href="25-Appendix.html#cb127-25" tabindex="-1"></a><span class="fu">wget</span> <span class="at">-O</span> W1_R1.fastq.gz ftp://ftp.sra.ebi.ac.uk/vol1/fastq/ERR505/ERR505090/ERR505090_1.fastq.gz</span>
-<span id="cb127-26"><a href="25-Appendix.html#cb127-26" tabindex="-1"></a><span class="fu">wget</span> <span class="at">-O</span> W1_R2.fastq.gz ftp://ftp.sra.ebi.ac.uk/vol1/fastq/ERR505/ERR505090/ERR505090_2.fastq.gz</span>
-<span id="cb127-27"><a href="25-Appendix.html#cb127-27" tabindex="-1"></a><span class="fu">wget</span> <span class="at">-O</span> W2_R1.fastq.gz ftp://ftp.sra.ebi.ac.uk/vol1/fastq/ERR505/ERR505088/ERR505088_1.fastq.gz</span>
-<span id="cb127-28"><a href="25-Appendix.html#cb127-28" tabindex="-1"></a><span class="fu">wget</span> <span class="at">-O</span> W2_R2.fastq.gz ftp://ftp.sra.ebi.ac.uk/vol1/fastq/ERR505/ERR505088/ERR505088_2.fastq.gz</span>
-<span id="cb127-29"><a href="25-Appendix.html#cb127-29" tabindex="-1"></a><span class="fu">wget</span> <span class="at">-O</span> W3_R1.fastq.gz ftp://ftp.sra.ebi.ac.uk/vol1/fastq/ERR505/ERR505084/ERR505084_1.fastq.gz</span>
-<span id="cb127-30"><a href="25-Appendix.html#cb127-30" tabindex="-1"></a><span class="fu">wget</span> <span class="at">-O</span> W3_R2.fastq.gz ftp://ftp.sra.ebi.ac.uk/vol1/fastq/ERR505/ERR505084/ERR505084_2.fastq.gz</span>
-<span id="cb127-31"><a href="25-Appendix.html#cb127-31" tabindex="-1"></a><span class="fu">wget</span> <span class="at">-O</span> W4_R1.fastq.gz ftp://ftp.sra.ebi.ac.uk/vol1/fastq/ERR505/ERR505085/ERR505085_1.fastq.gz</span>
-<span id="cb127-32"><a href="25-Appendix.html#cb127-32" tabindex="-1"></a><span class="fu">wget</span> <span class="at">-O</span> W4_R2.fastq.gz ftp://ftp.sra.ebi.ac.uk/vol1/fastq/ERR505/ERR505085/ERR505085_2.fastq.gz</span>
-<span id="cb127-33"><a href="25-Appendix.html#cb127-33" tabindex="-1"></a><span class="fu">wget</span> <span class="at">-O</span> W5_R1.fastq.gz ftp://ftp.sra.ebi.ac.uk/vol1/fastq/ERR505/ERR505086/ERR505086_1.fastq.gz</span>
-<span id="cb127-34"><a href="25-Appendix.html#cb127-34" tabindex="-1"></a><span class="fu">wget</span> <span class="at">-O</span> W5_R2.fastq.gz ftp://ftp.sra.ebi.ac.uk/vol1/fastq/ERR505/ERR505086/ERR505086_2.fastq.gz</span>
-<span id="cb127-35"><a href="25-Appendix.html#cb127-35" tabindex="-1"></a><span class="fu">wget</span> <span class="at">-O</span> W6_R1.fastq.gz ftp://ftp.sra.ebi.ac.uk/vol1/fastq/ERR505/ERR505087/ERR505087_1.fastq.gz</span>
-<span id="cb127-36"><a href="25-Appendix.html#cb127-36" tabindex="-1"></a><span class="fu">wget</span> <span class="at">-O</span> W6_R2.fastq.gz ftp://ftp.sra.ebi.ac.uk/vol1/fastq/ERR505/ERR505087/ERR505087_2.fastq.gz</span>
-<span id="cb127-37"><a href="25-Appendix.html#cb127-37" tabindex="-1"></a><span class="fu">wget</span> <span class="at">-O</span> W7_R1.fastq.gz ftp://ftp.sra.ebi.ac.uk/vol1/fastq/ERR505/ERR505089/ERR505089_1.fastq.gz</span>
-<span id="cb127-38"><a href="25-Appendix.html#cb127-38" tabindex="-1"></a><span class="fu">wget</span> <span class="at">-O</span> W7_R2.fastq.gz ftp://ftp.sra.ebi.ac.uk/vol1/fastq/ERR505/ERR505089/ERR505089_2.fastq.gz</span>
-<span id="cb127-39"><a href="25-Appendix.html#cb127-39" tabindex="-1"></a><span class="fu">wget</span> <span class="at">-O</span> W8_R1.fastq.gz ftp://ftp.sra.ebi.ac.uk/vol1/fastq/ERR505/ERR505091/ERR505091_1.fastq.gz</span>
-<span id="cb127-40"><a href="25-Appendix.html#cb127-40" tabindex="-1"></a><span class="fu">wget</span> <span class="at">-O</span> W8_R2.fastq.gz ftp://ftp.sra.ebi.ac.uk/vol1/fastq/ERR505/ERR505091/ERR505091_2.fastq.gz</span>
-<span id="cb127-41"><a href="25-Appendix.html#cb127-41" tabindex="-1"></a><span class="fu">wget</span> <span class="at">-O</span> W9_R1.fastq.gz ftp://ftp.sra.ebi.ac.uk/vol1/fastq/ERR505/ERR505092/ERR505092_1.fastq.gz</span>
-<span id="cb127-42"><a href="25-Appendix.html#cb127-42" tabindex="-1"></a><span class="fu">wget</span> <span class="at">-O</span> W9_R2.fastq.gz ftp://ftp.sra.ebi.ac.uk/vol1/fastq/ERR505/ERR505092/ERR505092_2.fastq.gz</span>
-<span id="cb127-43"><a href="25-Appendix.html#cb127-43" tabindex="-1"></a><span class="fu">wget</span> <span class="at">-O</span> W10_R1.fastq.gz ftp://ftp.sra.ebi.ac.uk/vol1/fastq/ERR505/ERR505093/ERR505093_1.fastq.gz</span>
-<span id="cb127-44"><a href="25-Appendix.html#cb127-44" tabindex="-1"></a><span class="fu">wget</span> <span class="at">-O</span> W10_R2.fastq.gz ftp://ftp.sra.ebi.ac.uk/vol1/fastq/ERR505/ERR505093/ERR505093_2.fastq.gz</span>
-<span id="cb127-45"><a href="25-Appendix.html#cb127-45" tabindex="-1"></a><span class="fu">wget</span> <span class="at">-O</span> W11_R1.fastq.gz ftp://ftp.sra.ebi.ac.uk/vol1/fastq/ERR505/ERR505094/ERR505094_1.fastq.gz</span>
-<span id="cb127-46"><a href="25-Appendix.html#cb127-46" tabindex="-1"></a><span class="fu">wget</span> <span class="at">-O</span> W11_R2.fastq.gz ftp://ftp.sra.ebi.ac.uk/vol1/fastq/ERR505/ERR505094/ERR505094_2.fastq.gz</span>
-<span id="cb127-47"><a href="25-Appendix.html#cb127-47" tabindex="-1"></a><span class="fu">wget</span> <span class="at">-O</span> W12_R1.fastq.gz ftp://ftp.sra.ebi.ac.uk/vol1/fastq/ERR505/ERR505083/ERR505083_1.fastq.gz</span>
-<span id="cb127-48"><a href="25-Appendix.html#cb127-48" tabindex="-1"></a><span class="fu">wget</span> <span class="at">-O</span> W12_R2.fastq.gz ftp://ftp.sra.ebi.ac.uk/vol1/fastq/ERR505/ERR505083/ERR505083_2.fastq.gz</span></code></pre></div>
+<div class="sourceCode" id="cb142"><pre class="sourceCode bash Rchunk"><code class="sourceCode bash"><span id="cb142-1"><a href="28-Appendix.html#cb142-1" tabindex="-1"></a><span class="fu">wget</span> <span class="at">-O</span> K1_R1.fastq.gz ftp://ftp.sra.ebi.ac.uk/vol1/fastq/ERR505/ERR505102/ERR505102_1.fastq.gz</span>
+<span id="cb142-2"><a href="28-Appendix.html#cb142-2" tabindex="-1"></a><span class="fu">wget</span> <span class="at">-O</span> K1_R2.fastq.gz ftp://ftp.sra.ebi.ac.uk/vol1/fastq/ERR505/ERR505102/ERR505102_2.fastq.gz</span>
+<span id="cb142-3"><a href="28-Appendix.html#cb142-3" tabindex="-1"></a><span class="fu">wget</span> <span class="at">-O</span> K2_R1.fastq.gz ftp://ftp.sra.ebi.ac.uk/vol1/fastq/ERR505/ERR505104/ERR505104_1.fastq.gz</span>
+<span id="cb142-4"><a href="28-Appendix.html#cb142-4" tabindex="-1"></a><span class="fu">wget</span> <span class="at">-O</span> K2_R2.fastq.gz ftp://ftp.sra.ebi.ac.uk/vol1/fastq/ERR505/ERR505104/ERR505104_2.fastq.gz</span>
+<span id="cb142-5"><a href="28-Appendix.html#cb142-5" tabindex="-1"></a><span class="fu">wget</span> <span class="at">-O</span> K3_R1.fastq.gz ftp://ftp.sra.ebi.ac.uk/vol1/fastq/ERR505/ERR505095/ERR505095_1.fastq.gz</span>
+<span id="cb142-6"><a href="28-Appendix.html#cb142-6" tabindex="-1"></a><span class="fu">wget</span> <span class="at">-O</span> K3_R2.fastq.gz ftp://ftp.sra.ebi.ac.uk/vol1/fastq/ERR505/ERR505095/ERR505095_2.fastq.gz</span>
+<span id="cb142-7"><a href="28-Appendix.html#cb142-7" tabindex="-1"></a><span class="fu">wget</span> <span class="at">-O</span> K4_R1.fastq.gz ftp://ftp.sra.ebi.ac.uk/vol1/fastq/ERR505/ERR505096/ERR505096_1.fastq.gz</span>
+<span id="cb142-8"><a href="28-Appendix.html#cb142-8" tabindex="-1"></a><span class="fu">wget</span> <span class="at">-O</span> K4_R2.fastq.gz ftp://ftp.sra.ebi.ac.uk/vol1/fastq/ERR505/ERR505096/ERR505096_2.fastq.gz</span>
+<span id="cb142-9"><a href="28-Appendix.html#cb142-9" tabindex="-1"></a><span class="fu">wget</span> <span class="at">-O</span> K5_R1.fastq.gz ftp://ftp.sra.ebi.ac.uk/vol1/fastq/ERR505/ERR505097/ERR505097_1.fastq.gz</span>
+<span id="cb142-10"><a href="28-Appendix.html#cb142-10" tabindex="-1"></a><span class="fu">wget</span> <span class="at">-O</span> K5_R2.fastq.gz ftp://ftp.sra.ebi.ac.uk/vol1/fastq/ERR505/ERR505097/ERR505097_2.fastq.gz</span>
+<span id="cb142-11"><a href="28-Appendix.html#cb142-11" tabindex="-1"></a><span class="fu">wget</span> <span class="at">-O</span> K6_R1.fastq.gz ftp://ftp.sra.ebi.ac.uk/vol1/fastq/ERR505/ERR505098/ERR505098_1.fastq.gz</span>
+<span id="cb142-12"><a href="28-Appendix.html#cb142-12" tabindex="-1"></a><span class="fu">wget</span> <span class="at">-O</span> K6_R2.fastq.gz ftp://ftp.sra.ebi.ac.uk/vol1/fastq/ERR505/ERR505098/ERR505098_2.fastq.gz</span>
+<span id="cb142-13"><a href="28-Appendix.html#cb142-13" tabindex="-1"></a><span class="fu">wget</span> <span class="at">-O</span> K7_R1.fastq.gz ftp://ftp.sra.ebi.ac.uk/vol1/fastq/ERR505/ERR505099/ERR505099_1.fastq.gz</span>
+<span id="cb142-14"><a href="28-Appendix.html#cb142-14" tabindex="-1"></a><span class="fu">wget</span> <span class="at">-O</span> K7_R2.fastq.gz ftp://ftp.sra.ebi.ac.uk/vol1/fastq/ERR505/ERR505099/ERR505099_2.fastq.gz</span>
+<span id="cb142-15"><a href="28-Appendix.html#cb142-15" tabindex="-1"></a><span class="fu">wget</span> <span class="at">-O</span> K8_R1.fastq.gz ftp://ftp.sra.ebi.ac.uk/vol1/fastq/ERR505/ERR505100/ERR505100_1.fastq.gz</span>
+<span id="cb142-16"><a href="28-Appendix.html#cb142-16" tabindex="-1"></a><span class="fu">wget</span> <span class="at">-O</span> K8_R2.fastq.gz ftp://ftp.sra.ebi.ac.uk/vol1/fastq/ERR505/ERR505100/ERR505100_2.fastq.gz</span>
+<span id="cb142-17"><a href="28-Appendix.html#cb142-17" tabindex="-1"></a><span class="fu">wget</span> <span class="at">-O</span> K9_R1.fastq.gz ftp://ftp.sra.ebi.ac.uk/vol1/fastq/ERR505/ERR505101/ERR505101_1.fastq.gz</span>
+<span id="cb142-18"><a href="28-Appendix.html#cb142-18" tabindex="-1"></a><span class="fu">wget</span> <span class="at">-O</span> K9_R2.fastq.gz ftp://ftp.sra.ebi.ac.uk/vol1/fastq/ERR505/ERR505101/ERR505101_2.fastq.gz</span>
+<span id="cb142-19"><a href="28-Appendix.html#cb142-19" tabindex="-1"></a><span class="fu">wget</span> <span class="at">-O</span> K10_R1.fastq.gz ftp://ftp.sra.ebi.ac.uk/vol1/fastq/ERR505/ERR505103/ERR505103_1.fastq.gz</span>
+<span id="cb142-20"><a href="28-Appendix.html#cb142-20" tabindex="-1"></a><span class="fu">wget</span> <span class="at">-O</span> K10_R2.fastq.gz ftp://ftp.sra.ebi.ac.uk/vol1/fastq/ERR505/ERR505103/ERR505103_2.fastq.gz</span>
+<span id="cb142-21"><a href="28-Appendix.html#cb142-21" tabindex="-1"></a><span class="fu">wget</span> <span class="at">-O</span> K11_R1.fastq.gz ftp://ftp.sra.ebi.ac.uk/vol1/fastq/ERR505/ERR505105/ERR505105_1.fastq.gz</span>
+<span id="cb142-22"><a href="28-Appendix.html#cb142-22" tabindex="-1"></a><span class="fu">wget</span> <span class="at">-O</span> K11_R2.fastq.gz ftp://ftp.sra.ebi.ac.uk/vol1/fastq/ERR505/ERR505105/ERR505105_2.fastq.gz</span>
+<span id="cb142-23"><a href="28-Appendix.html#cb142-23" tabindex="-1"></a><span class="fu">wget</span> <span class="at">-O</span> K12_R1.fastq.gz ftp://ftp.sra.ebi.ac.uk/vol1/fastq/ERR505/ERR505106/ERR505106_1.fastq.gz</span>
+<span id="cb142-24"><a href="28-Appendix.html#cb142-24" tabindex="-1"></a><span class="fu">wget</span> <span class="at">-O</span> K12_R2.fastq.gz ftp://ftp.sra.ebi.ac.uk/vol1/fastq/ERR505/ERR505106/ERR505106_2.fastq.gz</span>
+<span id="cb142-25"><a href="28-Appendix.html#cb142-25" tabindex="-1"></a><span class="fu">wget</span> <span class="at">-O</span> W1_R1.fastq.gz ftp://ftp.sra.ebi.ac.uk/vol1/fastq/ERR505/ERR505090/ERR505090_1.fastq.gz</span>
+<span id="cb142-26"><a href="28-Appendix.html#cb142-26" tabindex="-1"></a><span class="fu">wget</span> <span class="at">-O</span> W1_R2.fastq.gz ftp://ftp.sra.ebi.ac.uk/vol1/fastq/ERR505/ERR505090/ERR505090_2.fastq.gz</span>
+<span id="cb142-27"><a href="28-Appendix.html#cb142-27" tabindex="-1"></a><span class="fu">wget</span> <span class="at">-O</span> W2_R1.fastq.gz ftp://ftp.sra.ebi.ac.uk/vol1/fastq/ERR505/ERR505088/ERR505088_1.fastq.gz</span>
+<span id="cb142-28"><a href="28-Appendix.html#cb142-28" tabindex="-1"></a><span class="fu">wget</span> <span class="at">-O</span> W2_R2.fastq.gz ftp://ftp.sra.ebi.ac.uk/vol1/fastq/ERR505/ERR505088/ERR505088_2.fastq.gz</span>
+<span id="cb142-29"><a href="28-Appendix.html#cb142-29" tabindex="-1"></a><span class="fu">wget</span> <span class="at">-O</span> W3_R1.fastq.gz ftp://ftp.sra.ebi.ac.uk/vol1/fastq/ERR505/ERR505084/ERR505084_1.fastq.gz</span>
+<span id="cb142-30"><a href="28-Appendix.html#cb142-30" tabindex="-1"></a><span class="fu">wget</span> <span class="at">-O</span> W3_R2.fastq.gz ftp://ftp.sra.ebi.ac.uk/vol1/fastq/ERR505/ERR505084/ERR505084_2.fastq.gz</span>
+<span id="cb142-31"><a href="28-Appendix.html#cb142-31" tabindex="-1"></a><span class="fu">wget</span> <span class="at">-O</span> W4_R1.fastq.gz ftp://ftp.sra.ebi.ac.uk/vol1/fastq/ERR505/ERR505085/ERR505085_1.fastq.gz</span>
+<span id="cb142-32"><a href="28-Appendix.html#cb142-32" tabindex="-1"></a><span class="fu">wget</span> <span class="at">-O</span> W4_R2.fastq.gz ftp://ftp.sra.ebi.ac.uk/vol1/fastq/ERR505/ERR505085/ERR505085_2.fastq.gz</span>
+<span id="cb142-33"><a href="28-Appendix.html#cb142-33" tabindex="-1"></a><span class="fu">wget</span> <span class="at">-O</span> W5_R1.fastq.gz ftp://ftp.sra.ebi.ac.uk/vol1/fastq/ERR505/ERR505086/ERR505086_1.fastq.gz</span>
+<span id="cb142-34"><a href="28-Appendix.html#cb142-34" tabindex="-1"></a><span class="fu">wget</span> <span class="at">-O</span> W5_R2.fastq.gz ftp://ftp.sra.ebi.ac.uk/vol1/fastq/ERR505/ERR505086/ERR505086_2.fastq.gz</span>
+<span id="cb142-35"><a href="28-Appendix.html#cb142-35" tabindex="-1"></a><span class="fu">wget</span> <span class="at">-O</span> W6_R1.fastq.gz ftp://ftp.sra.ebi.ac.uk/vol1/fastq/ERR505/ERR505087/ERR505087_1.fastq.gz</span>
+<span id="cb142-36"><a href="28-Appendix.html#cb142-36" tabindex="-1"></a><span class="fu">wget</span> <span class="at">-O</span> W6_R2.fastq.gz ftp://ftp.sra.ebi.ac.uk/vol1/fastq/ERR505/ERR505087/ERR505087_2.fastq.gz</span>
+<span id="cb142-37"><a href="28-Appendix.html#cb142-37" tabindex="-1"></a><span class="fu">wget</span> <span class="at">-O</span> W7_R1.fastq.gz ftp://ftp.sra.ebi.ac.uk/vol1/fastq/ERR505/ERR505089/ERR505089_1.fastq.gz</span>
+<span id="cb142-38"><a href="28-Appendix.html#cb142-38" tabindex="-1"></a><span class="fu">wget</span> <span class="at">-O</span> W7_R2.fastq.gz ftp://ftp.sra.ebi.ac.uk/vol1/fastq/ERR505/ERR505089/ERR505089_2.fastq.gz</span>
+<span id="cb142-39"><a href="28-Appendix.html#cb142-39" tabindex="-1"></a><span class="fu">wget</span> <span class="at">-O</span> W8_R1.fastq.gz ftp://ftp.sra.ebi.ac.uk/vol1/fastq/ERR505/ERR505091/ERR505091_1.fastq.gz</span>
+<span id="cb142-40"><a href="28-Appendix.html#cb142-40" tabindex="-1"></a><span class="fu">wget</span> <span class="at">-O</span> W8_R2.fastq.gz ftp://ftp.sra.ebi.ac.uk/vol1/fastq/ERR505/ERR505091/ERR505091_2.fastq.gz</span>
+<span id="cb142-41"><a href="28-Appendix.html#cb142-41" tabindex="-1"></a><span class="fu">wget</span> <span class="at">-O</span> W9_R1.fastq.gz ftp://ftp.sra.ebi.ac.uk/vol1/fastq/ERR505/ERR505092/ERR505092_1.fastq.gz</span>
+<span id="cb142-42"><a href="28-Appendix.html#cb142-42" tabindex="-1"></a><span class="fu">wget</span> <span class="at">-O</span> W9_R2.fastq.gz ftp://ftp.sra.ebi.ac.uk/vol1/fastq/ERR505/ERR505092/ERR505092_2.fastq.gz</span>
+<span id="cb142-43"><a href="28-Appendix.html#cb142-43" tabindex="-1"></a><span class="fu">wget</span> <span class="at">-O</span> W10_R1.fastq.gz ftp://ftp.sra.ebi.ac.uk/vol1/fastq/ERR505/ERR505093/ERR505093_1.fastq.gz</span>
+<span id="cb142-44"><a href="28-Appendix.html#cb142-44" tabindex="-1"></a><span class="fu">wget</span> <span class="at">-O</span> W10_R2.fastq.gz ftp://ftp.sra.ebi.ac.uk/vol1/fastq/ERR505/ERR505093/ERR505093_2.fastq.gz</span>
+<span id="cb142-45"><a href="28-Appendix.html#cb142-45" tabindex="-1"></a><span class="fu">wget</span> <span class="at">-O</span> W11_R1.fastq.gz ftp://ftp.sra.ebi.ac.uk/vol1/fastq/ERR505/ERR505094/ERR505094_1.fastq.gz</span>
+<span id="cb142-46"><a href="28-Appendix.html#cb142-46" tabindex="-1"></a><span class="fu">wget</span> <span class="at">-O</span> W11_R2.fastq.gz ftp://ftp.sra.ebi.ac.uk/vol1/fastq/ERR505/ERR505094/ERR505094_2.fastq.gz</span>
+<span id="cb142-47"><a href="28-Appendix.html#cb142-47" tabindex="-1"></a><span class="fu">wget</span> <span class="at">-O</span> W12_R1.fastq.gz ftp://ftp.sra.ebi.ac.uk/vol1/fastq/ERR505/ERR505083/ERR505083_1.fastq.gz</span>
+<span id="cb142-48"><a href="28-Appendix.html#cb142-48" tabindex="-1"></a><span class="fu">wget</span> <span class="at">-O</span> W12_R2.fastq.gz ftp://ftp.sra.ebi.ac.uk/vol1/fastq/ERR505/ERR505083/ERR505083_2.fastq.gz</span></code></pre></div>
 
 </div>
 <script>
@@ -806,7 +834,7 @@ window.onload = function() {
           </div>
         </div>
       </div>
-<a href="24-Assembly_functional_annotation.html" class="navigation navigation-prev navigation-unique" aria-label="Previous page"><i class="fa fa-angle-left"></i></a>
+<a href="27-Assembly_functional_annotation.html" class="navigation navigation-prev navigation-unique" aria-label="Previous page"><i class="fa fa-angle-left"></i></a>
 
     </div>
   </div>

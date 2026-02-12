@@ -1,0 +1,72 @@
+# MetaBAT2
+<center>
+![](figures/bat.png){style="width:200px; background: white; border-radius:5px"}
+</center>
+
+We will use `MetaBAT2` for genome binning. 
+It has three major upsides that makes it very popular:
+
+1. It has very reliable default parameters meaning virtually no parameter optimisation is required.
+2. It performs very well amongst genome binners.
+3. It is computationally efficient compared to other binners (requires less RAM, cores etc.).
+
+Make a new directory and move into it.
+
+```{bash eval=FALSE}
+#Make directory
+mkdir -p ~/7-Binning/K1
+#Move into it
+cd ~/7-Binning/K1
+```
+
+## MetaBAT2
+<center>
+![](figures/play_orange.png){style="width:100px; background: white; border-radius:5px; border: white solid 5px"}
+</center>
+
+With our assembly and its depth information we can run `MetaBAT2` for binning.
+
+```{bash eval=FALSE}
+#make a diretcory for the bins
+mkdir bins
+#Run MetaBAT2
+metabat2 \
+--inFile ~/6-Assembly/K1/final.contigs.fa \
+--outFile bins/K1 \
+--abdFile K1.depth.txt \
+--minContig 1500
+```
+
+#### Parameters {-}
+<center>
+![](figures/parameter_orange.png){style="width:100px; background: white; border-radius:5px; border: white solid 5px"}
+</center>
+
+- `--inFile`: Input metagenome assembly fasta file.
+- `--outFile`: Prefix of output files.
+- `--abdFile`: Contig depth file.
+  - Caluclated in the previous [Depth calculation chapter](#depth_calc)
+- `--minContig`: Minimum size of contigs to be used for binning.
+  - The default is 2500.
+  - We used the minimum value of 1500 as we are using tutorial data. We recommend using the default in your own analysis.
+
+## Bins
+<center>
+![](figures/output_file_orange.png){style="width:100px"}
+</center>
+
+List the contents of the output directory and you'll see there is 1 fasta file with the prefix of `K1`. This is a bin that will hopefully contain 1 <u id='mag'>MAG</u>. In your future analysis you may get many bins, each hopefully containing only one <u id='mag'>MAG</u>.
+
+```{bash eval=FALSE}
+ls bins
+```
+
+Super!
+In the next chapter we will assess the quality of these bins.
+
+```{r, echo=FALSE}
+#Tippy tooltips
+tippy::tippy_this(elementId = "mag", 
+                  tooltip = "Metagenome-Assembled Genome",
+                  arrow = TRUE, placement = "bottom")
+```
