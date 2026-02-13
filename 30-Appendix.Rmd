@@ -17,6 +17,8 @@ Miniforge installation: <https://github.com/conda-forge/miniforge>
 
 Mamba guide: <https://mamba.readthedocs.io/en/latest/user_guide/mamba.html>
 
+### shotgun_meta
+
 To create the mamba environment `shotgun_meta` run the below commands in your bash. You will need to have installed `mamba` first.
 
 ```{bash, eval=FALSE}
@@ -57,6 +59,8 @@ If you installed these in your "~/git_installs" examples are below.
 python ~/git_installs/Minpath/MinPath.py -h
 ```
 
+### cocopye
+
 To create the mamba environment `cocopye` run the below commands in your bash. You will need to have installed `mamba` first.
 
 ```{bash, eval=FALSE}
@@ -67,6 +71,8 @@ mamba install bioconda::checkm2=1.1.0
 #Download required databases
 checkm2 database --download
 ```
+
+### bibakery3.9
 
 To create the mamba environment `biobakery3.9` run the below commands in your bash. You will need to have installed `mamba` first.
 

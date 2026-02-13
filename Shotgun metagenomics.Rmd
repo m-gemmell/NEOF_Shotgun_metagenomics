@@ -707,6 +707,10 @@ library(webexercises)
 
 There are a number of methods for determining the species composition of a metagenomic dataset, but for the purposes of this practical we will use `Kraken2` & `Bracken` (Bayesian Reestimation of Abundance with KrakEN).  `Kraken2` classifies short DNA with taxonomic labels and is frequently used for metagenomic studies. `Bracken` uses the taxonomic labels assigned by `Kraken2` to compute the abundance of species in a set of DNA sequences.
 
+We will utilise `Krona` to create interactive tiered pie charts from the `Kraken2` output.
+Finally, we will carry out biomarker detection of the `Braken2` restimated baundances with `LEfSe`.
+
+
 First, we'll make a new directory for it and move into it, after returning home:
 
 ```{bash eval=FALSE}
@@ -2090,7 +2094,7 @@ Run `QUAST`.
 quast -o quast/K1 K1/final.contigs.fa
 ```
 
-### Report
+### Report {#quast_report}
 <center>
 ![](figures/eye_green.png){style="width:100px; background: white; border-radius:5px; border: white solid 5px"}
 </center>
@@ -2480,7 +2484,7 @@ Many proteins consist of several domains and a domain can appear in many differe
 
 `CoCoPyE` estimates quality of a genome by estimating completeness and contamination through an input-preprocessing step followed by a two stage prediction step. 
 
-Below is the workflow as a diagram followed by some quick information on how it works. 
+Below is the workflow as a diagram followed by a breif description on how it works. 
 For full details please see the CoCoPyE publication: https://academic.oup.com/gigascience/article/doi/10.1093/gigascience/giae079/7841111
 
 <center>
@@ -2500,7 +2504,7 @@ The completeness of the query genome is estimated based on one of 2 universal ma
 The universal marker sets contain the protein domains found in either all reference bacterial genomes or all reference archaeal genomes.
 Query genomes (<u id='mag'>MAGs</u>/bins) with a completeness score <10% are rejected and removed from further analysis.
 
-### Stage I
+### Prediction: Stage I
 <center>
 ![](figures/cocopye_workflow_stage_1.png){style="width: 800px; border-radius: 5px"}
 </center>
@@ -2534,7 +2538,7 @@ We therefore acquire the below results:
 Any query genomes with a completeness value of <60% or contamination value >30% have their values recorded as their output but they do not move onto stage II.
 Other query genomes move onto the neural network stage (stage II).
 
-### Stage II
+### Predition: Stage II
 <center>
 ![](figures/cocopye_workflow_stage_2.png){style="width: 800px; border-radius: 5px"}
 </center>
@@ -2597,10 +2601,10 @@ The main features of a CRH are:
 The machine learning step uses the CRHs of the query genomes to improve/refine the marker-based estimations from stage I.
 
 Two neural networks are used in this prediction refinement step.
-One neural network is used to improve the completeness estimation and one neural network is used to improve the contamination estimation.
+One is used to improve the completeness estimation and one is used to improve the contamination estimation.
 
 The neural network implementations are from `sklearn`.
-If you are interested in how the machine learning step work please see the CoCoPyE publication: https://academic.oup.com/gigascience/article/doi/10.1093/gigascience/giae079/7841111
+If you are interested in how the machine learning step works please see the `CoCoPyE` publication: https://academic.oup.com/gigascience/article/doi/10.1093/gigascience/giae079/7841111
 
 ## Mamba
 <center>
@@ -2621,7 +2625,7 @@ Ensure you are in the correct directory.
 cd ~/7-Binning/K1/
 ```
 
-## Run
+## Predict bin quality
 <center>
 ![](figures/play_black.png){style="width:100px; background: white; border-radius: 5px; border: 5px white solid"}
 </center>
@@ -2655,7 +2659,7 @@ Other options include:
   - More information on the output below.
   
 
-## Output
+## Stats
 <center>
 ![](figures/output_file_black.png){style="width:100px"}
 </center>
@@ -2696,193 +2700,8 @@ Output columns when `-v` set to `standard` (also the default)
 Please see the full list of statistics definitions from [CoCoPyE wiki](https://github.com/gobics/cocopye/wiki/Output). This includes the defintions when `-v` is set to `extended` or `full`.
 `r unhide()`
 
-## Quality score
-<center>
-![](figures/quality_ribbon.png){style="width:150px; background: white ; border-radius: 5px; border: white solid 5px"}
-</center>
-
-One quick way to calculate the overall quality of a <u id='mag'>MAG</u>/bin is with the following equation:
-
-$$
-q = comp - (5 * cont)
-$$
-Where:
-
-- __q__ = Overall quality
-- __comp__ = Completeness
-- __cont__ = Contamination
-
-A score of at least 70-80% (i.e. 0.7 to 0.8) would be the aim, with a maximum/perfect value being 100% (100% completeness, 0% contamination). Therefore let us calculate this for the bins with some bash and `awk` scripting.
-
-__Note__: Values will range from:
-
-- 100% (i.e. 1): 1 Completeness - (5 * 0 Contamination)
-- -500% (i.e. -5): 0 Completeness - (5 * 1 Contamination)
-
-### Quality file {-}
-
-We will create a new file with only the quality information. We'll start by making a file with only a header.
-
-```{bash eval=FALSE}
-echo "quality" > MAGS_quality.csv
-```
-
-### Calculate quality with awk {-}
-
-Next is the most complicated command. We will be calculating the Overall quality (see calculation above) for each row except the header row.
-
-We will be using a complicated linux based language called `awk`. This is very useful as it can carry out calculations on columns or as `awk` calls them, __fields__.
-
-As this is new and complicated we will build up our command step by step.
-
-#### Extract fields/columns {-}
-
-__The first step__ is to extract the completeness and contamination fields/columns.
-
-```{bash eval=FALSE}
-awk -F, '{print $2,$3}' cocopye_output.csv
-```
-
-- `-F,`: Indicates the input fields are separated by commas (`,`).
-- `''`: All the `awk` options are contained within the quotes.
-- `{}`: We can supply a function to `awk` within the braces.
-- `print $2,$3`: This function instructs `awk` to print the 2nd (completeness) and 3rd (contamination) fields. It is common to put commas (`,`) between fields if printing multiple fields.
-- `cocopye_output.csv`: Our last parameter is the input file. We are not changing the contents of the file, only printing information to screen/stdout.
-
-#### Ignore header {-}
-
-__We do not want the header__ in our calculation so we will add an extra `awk` option.
-
-```{bash eval=FALSE}
-awk -F, 'NR>1 {print $2,$3}' cocopye_output.csv
-```
-
-- `NR>1`: `NR` stands for number of records. Rows are called records in `awk`. Therefore `NR>1` means `awk` will only carry out the functions on the records numbered greater than 1. I.e. skip row 1, the header row.
-
-#### Calculate quality {-}
-
-__The next step__ is to carry out the overall quality calculation and append the information to the "MAGS_quality.csv" file.
-
-```{bash eval=FALSE}
-awk -F, 'NR>1 {print $2 - (5 * $3)}' cocopye_output.csv
-```
-
-Our new function, `{print $2 - (5 * 13)}`, carries out the overall quality calculation and prints it for each record/row except the first (`NR>1`).
-
-You will notice that we have values that equal 4.
-Let us fix that.
-
-#### Fix values {-}
-
-Some quality values come out as 4.
-This is not correct and comes about as the completeness and contamination values have been set to -1 (-1 - (5 * -1) = 4).
-If you look at the file `cocopye_output.csv` you will notice the bins with -1 values have the `rejected` for their `method` value.
-These are bins which failed the Input Pre-procesing step.
-
-We will therefore change these quality values to the lowest possible value of -5 (0 - (5 * 1) = -5).
-
-```{bash eval=FALSE}
-awk -F, 'NR>1 {print $2 - (5 * $3)}' cocopye_output.csv | \
-sed "s/^4$/-5/"
-```
-
-In this case we [pipe (`|`)](https://neof-workshops.github.io/Unix_nxcdf7/Course/12-Advanced_linux_practice.html#pipes) our output to [`sed`](https://neof-workshops.github.io/Unix_nxcdf7/Course/12-Advanced_linux_practice.html#sed) to substitute lines that start with (`^`) and end with (`$`) the same `4` with `-5`.
-
-In other words we replace lines that only contain a 4 with a -5.
-
-#### Append to quality file {-}
-
-Finally we can append the quality values to our `MAGS_quality.csv` file.
-
-```{bash eval=FALSE}
-awk -F, 'NR>1 {print $2 - (5 * $3)}' cocopye_output.csv | \
-sed "s/^4$/-5/" >> MAGS_quality.csv
-```
-
-In the above case we use `>>` to append the information to the file `MAGS_quality.csv`. We append because we want to retain the header we added to the file earlier.
-
-You can view the file to ensure it worked. The first and second values should be 0.9838 and 0.493
-
-```{bash eval=FALSE}
-less MAGS_quality.csv
-```
-
-### Add quality to the checkm results file {-}
-
-Now we can combine the files `cocopye_output.csv` and `MAGS_quality.csv` with the `paste` command into a new file called `cocopye_quality.csv`. The `-d ","` option indicates the merged files will be separated by commas (`,`), matching the column separation in `cocopye_output.csv`.
-
-```{bash eval=FALSE}
-paste -d "," cocopye_output.csv MAGS_quality.csv > cocopye_quality.csv
-```
-
-## MCQs
-<center>
-![](figures/question_bubble_blue.png){style="width:100px; background: white; border-radius: 5px; border: 5px white solid"}
-</center>
-
-Viewing the file `cocopye_output.csv` attempt the below questions.
-
-__Tip__: You can use the `cut` command to look at specific columns. For example:
-
-```{bash eval=FALSE}
-#look at the "bin" and "quality" columns
-#Convert the printed output's commas to tabs for readability
-cut -d "," -f 1,8 cocopye_quality.csv | tr "," "\t"
-```
-
-```{r, echo = FALSE}
-opts_p <- c("__Bacteria__", answer="__Bacteroides__", "__Lachnospiraceae__")
-```
-1. What lineage was assigned to bin __K1.1__? `r longmcq(opts_p)`
-
-```{r, echo = FALSE}
-opts_p <- c("__Bacteria__", "__Bacteroides__", answer="__Lachnospiraceae__")
-```
-2. What lineage was assigned to bin __K1.22__? `r longmcq(opts_p)`
-
-```{r, echo = FALSE}
-opts_p <- c(answer="__Bacteria__", "__Bacteroides__", "__Lachnospiraceae__")
-```
-3. What lineage was assigned to bin __K1.8__? `r longmcq(opts_p)`
-
-```{r, echo = FALSE}
-opts_p <- c("__0.0202__", answer="__0.6724__", "__0.9769__")
-```
-4. What is the quality value of __K1.1__? `r longmcq(opts_p)`
-
-```{r, echo = FALSE}
-opts_p <- c("__0.0202__", "__0.6724__", answer="__0.9769__")
-```
-5. What is the completeness value of __K1.30__? `r longmcq(opts_p)`
-
-```{r, echo = FALSE}
-opts_p <- c(answer="__0.0202__", "__0.6724__", "__0.9769__")
-```
-6. What is the contamination value of __K1.12__ bin? `r longmcq(opts_p)`
-
-```{r, echo = FALSE}
-opts_p <- c("__K1.20__", "__K1.26__", answer="__K1.22__")
-```
-7. Which bin has the highest quality value (98.38%)? `r longmcq(opts_p)`
-
-```{r, echo = FALSE}
-opts_p <- c(answer="__K1.20__", "__K1.26__", "__K1.22__")
-```
-8. Which bin has the quality value of -2.9215? `r longmcq(opts_p)`
-
-```{r, echo = FALSE}
-opts_p <- c("__K1.20__", answer="__K1.26__", "__K1.22__")
-```
-9. Which bin has the highest completeness value (98.59%)? `r longmcq(opts_p)`
-
-## Bin quality summary
-<center>
-![](figures/sum_black.png){style="width:100px; background: white ; border-radius:5px; border: 5px white solid"}
-</center>
-
-It is always useful to know the quality of your bins so you know which are more reliable than others. With that information you can be more or less certain when concluding your findings.
-
-We have some good quality bins but many poorer quality bins too. Ultimately binning is trying to separate all the genomes from each other. A better metagenome assembly would most likely have led to better binning.
+There is a lot of information.
+In the next chapter we'll calculate a bin quality score value with the `CoCoPyE` statistics.
 
 ```{r, echo=FALSE}
 #Tippy tooltips
@@ -2896,241 +2715,7 @@ tippy::tippy_this(elementId = "mag",
 ```{r include=FALSE, cache=FALSE}
 library(webexercises)
 ```
-# Bin quality
-
-<center>
-![](figures/bin_quality.png){style="width: 400px; border-radius: 5px; background: white; border: white 5px solid"}
-</center>
-
-`CoCoPyE` is a useful tool to assess the quality of assembled microbial genomes. 
-This can be used on assemblies produced from single cell, single isolate, or metagenome data. 
-
-## Workflow concept
-
-The tool utilises protein domain families from the Pfam database.
-A protein domain is a region of a protein that folds independently from the rest of the protein.
-They vary in length from ~50-250 amino acids.
-Many proteins consist of several domains and a domain can appear in many different proteins.
-
-`CoCoPyE` estimates quality of a genome by estimating completeness and contamination through an input-preprocessing step followed by a two stage prediction step. 
-
-Below is the workflow as a diagram followed by some quick information on how it works. 
-For full details please see the CoCoPyE publication: https://academic.oup.com/gigascience/article/doi/10.1093/gigascience/giae079/7841111
-
-<center>
-![](figures/cocopye_workflow.jpeg){style="width: 800px; border-radius: 5px; border: white 5px solid"}
-</center>
-
-### Input Pre-processing
-
-<center>
-![](figures/cocopye_workflow_step_1.png){style="width: 800px; border-radius: 5px"}
-</center>
-
-A protein domain search is carried out on all translated open reading frames of our our query genomes, <u id='mag'>MAGs</u>/bins in our case.
-The Pfam protein database is used and the tool produces protein domain counts for our query genomes.
-
-The completeness of the query genome is estimated based on one of 2 universal marker sets.
-The universal marker sets contain the protein domains found in either all reference bacterial genomes or all reference archaeal genomes.
-Query genomes (<u id='mag'>MAGs</u>/bins) with a completeness score <10% are rejected and removed from further analysis.
-
-### Stage I
-<center>
-![](figures/cocopye_workflow_stage_1.png){style="width: 800px; border-radius: 5px"}
-</center>
-
-In Stage I the nearest neighbours of our query's protein domains are searched for in the Pfam database.
-This creates a list of reference protein domains for our query.
-
-Next a specific marker prediction is carried out to create the stage I (i.e. marker based) completeness & contamination values.
-The Pfam database has information on which taxa these domains are present in.
-Therefore, sets of domains can be used as markers for specific lineages.
-
-#### Prediction example {-}
-
-Let's go through a fictional example where we have 26 protein domains PDA-Z which cover 2 different lineages: Gigabacteria and Birthobacteria.
-
-- Both Gigabacteria and Birthobacteria contain domains PDA-F
-- Domains PDG-P are only present in Gigabacteria
-- Domains PDQ-Z are only present in Birthobacteria
-
-Analysis finds that our query genome contains the domain families PDD-R. 
-We therefore acquire the below results:
-
-- The query genome is classified as belonging to the Gigabacteria lineage as it contains many (in this case all) the domains unique to Gigabacteria (PDG-P) and many of the domains shared by both bacteria.
-- Completeness: 81.25%
-  - It is missing 3 of the domains found in Gigabacteria (PDA-C) 13/16 = 0.8125 = 81.25%
-- Contamination: 13.33%
-  - Of the 15 domains our query has 2 of them do not belong to it in the reference (PDQ & PDR) 2/15 = 0.1333 = 13.33%.
-
-#### Thresholds {-}
-
-Any query genomes with a completeness value of <60% or contamination value >30% have their values recorded as their output but they do not move onto stage II.
-Other query genomes move onto the neural network stage (stage II).
-
-### Stage II
-<center>
-![](figures/cocopye_workflow_stage_2.png){style="width: 800px; border-radius: 5px"}
-</center>
-
-
-The next step utilises the domain database neighbours found in stage I.
-With this it creates a count ratio histogram (CRH) to use for a machine learning (ML)/neural network approach.
-This is carried out to reduce the dimensionality of the data to improve iterative training and reduce the risk of overfitting.
-But what is a CRH?
-
-#### Count Ratio Histogram {-}
-
-Each Pfam domain family is given a count ratio of Cq:Cr.
-
-- Cq: The count of the domain family in the query genome.
-- Cr: The count of the domain family in the reference genome. 
-  - The reference genome is determined in stage I.
-
-Examples:
-
-- __PDA__ domain
-  - Appears __2__ times in the __query__
-  - Appears __2__ times in the __reference__
-  - __Count ratio__ = __1/1__
-  - This indicates high completeness and low contamination.
-- __PDH__ domain
-  - Appears __4__ times in the __query__
-  - Appears __2__ times in the __reference__
-  - __Count ratio__ = __2/1__
-  - This indicates __contamination__ because there are too many copies of the domain in our query
-- __PDS__ domain
-  - Appears __4__ times in the __query__
-  - Appears __12__ times in the __reference__
-  - __Count ratio__ = __1/3__
-  - This indicates low __completeness__ because there are too few copies of the domain in our query
-
-The relative frequency of all the different domain count ratios are used to create a histogram, the CRH.
-The process itself will use a text histogram but below are two visualisations of CRHs.
-
-The main features of a CRH are:
-
-- __The central point (1/1):__ This indicates high completeness and low contamination.
-  - If the central peak contained 100% of the count ratios this would indicate 100% completeness and 0% contamination.
-- __Right of the central point:__ Histogram bins on the right hand side indicate contamination.
-- __Left of the central point:__ Histogram bins on the left hand side indicate decreasing completeness.
-
-<center>
-![](figures/crh1.png){style="width: 600px; border-radius: 5px; border: white 5px solid"} 
-<br>*The Above plot was created from a query genome with 61% completeness and 30% contamination.*
-</center>
-<br>
-
-<center>
-![](figures/crh2.png){style="width: 600px; border-radius: 5px; border: white 5px solid"}
-<br> *The Above plot was created from a query genome with 90% completeness and 10% contamination.*
-</center>
-
-#### Machine learning {-}
-
-The machine learning step uses the CRHs of the query genomes to improve/refine the marker-based estimations from stage I.
-
-Two neural networks are used in this prediction refinement step.
-One neural network is used to improve the completeness estimation and one neural network is used to improve the contamination estimation.
-
-The neural network implementations are from `sklearn`.
-If you are interested in how the machine learning step work please see the CoCoPyE publication: https://academic.oup.com/gigascience/article/doi/10.1093/gigascience/giae079/7841111
-
-## Mamba
-<center>
-![](figures/mamba_logo.png){style="width: 200px; border-radius: 5px"}
-</center>
-
-Due to program version conflicts we will use the `CoCoPyE` conda environment for this section.
-
-Open a new terminal and activate the `CoCoPyE` environment.
-
-```{bash eval=FALSE}
-. usecocopye
-```
-
-Ensure you are in the correct directory.
-
-```{bash eval=FALSE}
-cd ~/7-Binning/K1/
-```
-
-## Run
-<center>
-![](figures/play_black.png){style="width:100px; background: white; border-radius: 5px; border: 5px white solid"}
-</center>
-
-`cocopye` has one main command to predict bin quality: `cocopye run`. 
-
-Run the `cocopye` command (this will take a while):
-
-```{bash eval=FALSE}
-cocopye run \
--t 12 \
--i bins/ \
--o cocopye_output.csv
-```
-
-### Parameters {-}
-<center>
-![](figures/parameter_black.png){style="width:100px; background: white; border-radius: 5px; border: 5px white solid"}
-</center>
-
-- `-t` : Number of threads/cores/CPUs to utilise for the process.
-- `-i` : Input directory containing the bins in FASTA format.
-- `-o` : Output file (more info below).
-
-Other options include:
-
-- `--file-extensions` : The allowed file extensions for input files within the input directory.
-  - The default is `fasta,fna,fa`. Our bin files produced from `MetaBAT2` have the file extension/suffix of `.fa` so the default works.
-- `-v` : The output file verbosity. 
-  - Values are: `standard` (default), `extended`, and `full`.
-  - More information on the output below.
-  
-
-## Output
-<center>
-![](figures/output_file_black.png){style="width:100px"}
-</center>
-
-As we have only used a subset of data the results are not very good. We'll therefore look at premade results. 
-These premade results were produced using the entire K1 dataset. 
-First you will need to copy them.
-
-```{bash eval=FALSE}
-cd ~/7-Binning
-mkdir K1_fullset
-cd K1_fullset
-ln -s /pub14/tea/nsc206/NEOF/Shotgun_metagenomics/binning/K1_fullset/* .
-```
-
-Now we can look at the results table that is in your current directory.
-
-```{bash eval=FALSE}
-#Use tr to tranform commas (,) to tabs (\t)
-#This makes it easier to visually parse the columns
-cat cocopye_output.csv | tr "," "\t" | less
-```
-
-`r hide("CoCoPye statistics definitions")`
-Output columns when `-v` set to `standard` (also the default)
-
-- `bin`: Name of the input bin (filename excluding file extension)
-- `completeness`: Completeness value between 0 and 1
-- `contamination`: Contamination value between 0 and 1
-- `method`: One of three results:
-  - __rejected__: Failed the threshold in the input-preprocessing step.
-  - __markers__: Values based on stage I as failed to pass onto stage II due to the stage I thresholds
-  - __markers + neural network__: Values based on stage II as passed all thresholds
-- `taxonomy`: Taxonomy estimate based on a consensus between the nearest neighbors
-- `taxonomy_level`: Rank of the taxonomy estimate
-- `notes`: Additional notes (currently this is always empty, but we might add some notes in the future)
-
-Please see the full list of statistics definitions from [CoCoPyE wiki](https://github.com/gobics/cocopye/wiki/Output). This includes the defintions when `-v` is set to `extended` or `full`.
-`r unhide()`
-
-## Quality score
+# Bin quality scores
 <center>
 ![](figures/quality_ribbon.png){style="width:150px; background: white ; border-radius: 5px; border: white solid 5px"}
 </center>
@@ -3146,22 +2731,31 @@ Where:
 - __comp__ = Completeness
 - __cont__ = Contamination
 
-A score of at least 70-80% (i.e. 0.7 to 0.8) would be the aim, with a maximum/perfect value being 100% (100% completeness, 0% contamination). Therefore let us calculate this for the bins with some bash and `awk` scripting.
+A score of at least 70-80% (i.e. 0.7 to 0.8) would be the aim, with a maximum/perfect value being 100% (100% completeness, 0% contamination). We'll therefore calculate this for the bins with some bash and `awk` scripting.
 
 __Note__: Values will range from:
 
 - 100% (i.e. 1): 1 Completeness - (5 * 0 Contamination)
 - -500% (i.e. -5): 0 Completeness - (5 * 1 Contamination)
 
-### Quality file {-}
+## Quality file
+<center>
+![](figures/header_2.png){style="width:100px; background: white ; border-radius: 5px"}
+</center>
 
-We will create a new file with only the quality information. We'll start by making a file with only a header.
+We will create a new file with only the quality information called "MAGS_quality.csv". 
+
+Make the file with it only containing the header "quality.
+We will add the quality scores to this later.
 
 ```{bash eval=FALSE}
 echo "quality" > MAGS_quality.csv
 ```
 
-### Calculate quality with awk {-}
+## Calculate quality with awk
+<center>
+![](figures/calculator_3.png){style="width:150px; background: white ; border-radius: 5px"}
+</center>
 
 Next is the most complicated command. We will be calculating the Overall quality (see calculation above) for each row except the header row.
 
@@ -3169,7 +2763,7 @@ We will be using a complicated linux based language called `awk`. This is very u
 
 As this is new and complicated we will build up our command step by step.
 
-#### Extract fields/columns {-}
+### Extract fields/columns
 
 __The first step__ is to extract the completeness and contamination fields/columns.
 
@@ -3183,7 +2777,7 @@ awk -F, '{print $2,$3}' cocopye_output.csv
 - `print $2,$3`: This function instructs `awk` to print the 2nd (completeness) and 3rd (contamination) fields. It is common to put commas (`,`) between fields if printing multiple fields.
 - `cocopye_output.csv`: Our last parameter is the input file. We are not changing the contents of the file, only printing information to screen/stdout.
 
-#### Ignore header {-}
+### Ignore header
 
 __We do not want the header__ in our calculation so we will add an extra `awk` option.
 
@@ -3193,9 +2787,9 @@ awk -F, 'NR>1 {print $2,$3}' cocopye_output.csv
 
 - `NR>1`: `NR` stands for number of records. Rows are called records in `awk`. Therefore `NR>1` means `awk` will only carry out the functions on the records numbered greater than 1. I.e. skip row 1, the header row.
 
-#### Calculate quality {-}
+### Calculate quality
 
-__The next step__ is to carry out the overall quality calculation and append the information to the "MAGS_quality.csv" file.
+__The next step__ is to carry out the overall quality calculation.
 
 ```{bash eval=FALSE}
 awk -F, 'NR>1 {print $2 - (5 * $3)}' cocopye_output.csv
@@ -3206,10 +2800,10 @@ Our new function, `{print $2 - (5 * 13)}`, carries out the overall quality calcu
 You will notice that we have values that equal 4.
 Let us fix that.
 
-#### Fix values {-}
+### Fix values
 
 Some quality values come out as 4.
-This is not correct and comes about as the completeness and contamination values have been set to -1 (-1 - (5 * -1) = 4).
+This is not correct and comes about as some completeness and contamination values have been set to -1 (-1 - (5 * -1) = 4).
 If you look at the file `cocopye_output.csv` you will notice the bins with -1 values have the `rejected` for their `method` value.
 These are bins which failed the Input Pre-procesing step.
 
@@ -3224,7 +2818,7 @@ In this case we [pipe (`|`)](https://neof-workshops.github.io/Unix_nxcdf7/Course
 
 In other words we replace lines that only contain a 4 with a -5.
 
-#### Append to quality file {-}
+### Append to quality file
 
 Finally we can append the quality values to our `MAGS_quality.csv` file.
 
@@ -3241,7 +2835,10 @@ You can view the file to ensure it worked. The first and second values should be
 less MAGS_quality.csv
 ```
 
-### Add quality to the checkm results file {-}
+## Add quality to the checkm results file
+<center>
+![](figures/two_columns.png){style="width:150px; background: white ; border-radius: 5px"}
+</center>
 
 Now we can combine the files `cocopye_output.csv` and `MAGS_quality.csv` with the `paste` command into a new file called `cocopye_quality.csv`. The `-d ","` option indicates the merged files will be separated by commas (`,`), matching the column separation in `cocopye_output.csv`.
 
@@ -3311,7 +2908,7 @@ opts_p <- c("__K1.20__", answer="__K1.26__", "__K1.22__")
 
 ## Bin quality summary
 <center>
-![](figures/sum_black.png){style="width:100px; background: white ; border-radius:5px; border: 5px white solid"}
+![](figures/sum_blue.png){style="width:100px; background: white ; border-radius:5px; border: 5px white solid"}
 </center>
 
 It is always useful to know the quality of your bins so you know which are more reliable than others. With that information you can be more or less certain when concluding your findings.
@@ -3330,21 +2927,44 @@ tippy::tippy_this(elementId = "mag",
 ```{r include=FALSE, cache=FALSE}
 library(webexercises)
 ```
+# (PART\*) Functional annotation of bins {.unnumbered}
+
 # Assembly functional annotation {#funcanno}
 <center>
 ![](figures/pathways.png){style="width:200px; background:white; border-radius:5px"}
 </center>
 
-## Taxonomic annotation
+In this section we will carry out carry out functional annotation of our <u id='mag'>MAGs</u>/bin/bins.
+There are many different ways to carry this.
+In this tutorial we will use 2 tools:
+
+- [Bakta](#bakta_chap): Annotation of Bacterial genomes and plasmids.
+- [MinPath](#minpath_chap): Prediction of metabolic pathways.
+  - Include MetaCyc and KEGG pathways.
+
+__Conda Environment__: Go back to your shotgun_meta terminal (or create a new one and use `. useshotgun`).
+
+## Taxonomic annotation {-}
 <center>
 ![](figures/classification.png){style="width:150px; background:white; border-radius:5px"}
 </center>
 
-Taxonomic annotation of bins can be carried out with `Kraken2`. As we have already done this for the reads and taxonomic results from read and assembly approaches have similar performances we will not cover it here. Instead we will move straight onto functional annotation with [`Bakta`](https://github.com/oschwengers/bakta).
+Taxonomic annotation of bins can be carried out with `Kraken2`. As we have already done this for the reads and taxonomic results from read and assembly approaches have similar performances we will not cover it here.
 
-__Conda Environment__: Go back to your shotgun_meta terminal (or create a new one and use `. useshotgun`).
 
-## Bakta
+```{r, echo=FALSE}
+#Tippy tooltips
+tippy::tippy_this(elementId = "mag", 
+                  tooltip = "Metagenome-Assembled Genome",
+                  arrow = TRUE, placement = "bottom")
+```
+
+<!--chapter:end:27-Assembly_functional_annotation.Rmd-->
+
+```{r include=FALSE, cache=FALSE}
+library(webexercises)
+```
+# Bakta {#bakta_chap}
 <center>
 ![](figures/bakta_logo.png){style="border-radius: 15px; width: 250px; border: 5px solid white"}
 </center>
@@ -3358,7 +2978,7 @@ mkdir ~/8-Annotation
 cd ~/8-Annotation
 ```
 
-### Bakta: run
+## Annotation
 <center>
 ![](figures/play_blue.png){style="width:100px"}
 </center>
@@ -3392,7 +3012,7 @@ Link the pre-made results for all the K1 bins.
 ln -s /pub14/tea/nsc206/NEOF/Shotgun_metagenomics/bakta/K1_fullset/* .
 ```
 
-### Bakta: output
+## Annotation files
 <center>
 ![](figures/output_file_blue.png){style="width:100px"}
 </center>
@@ -3406,15 +3026,15 @@ List the files in the newly created K1.1 directory. Each of the files has the pr
 - __<prefix>.fna__: replicon/contig DNA sequences as FASTA
 - __<prefix>.ffn__: feature nucleotide sequences as FASTA
 - __<prefix>.faa__: CDS/sORF amino acid sequences as FASTA
-- __<prefix>.hypotheticals.tsv__: further information on hypothetical protein CDS as simple human readble tab separated values
+- __<prefix>.hypotheticals.tsv__: further information on hypothetical protein CDS as simple human readable tab separated values
 - __<prefix>.hypotheticals.faa__: hypothetical protein CDS amino acid sequences as FASTA
 - __<prefix>.json__: all (internal) annotation & sequence information as JSON
 - __<prefix>.txt__: summary as TXT
 - __<prefix>.png__: circular genome annotation plot as PNG
-  - These are only useful for complete/near complete circular genomes.
-  - I would suggest looking at [GenoVi](https://github.com/robotoD/GenoVi/wiki/User-guide#tutorials-) for circular genome plots.
+  - These are only useful for complete/near complete circular genomes
+  - I would suggest looking at [GenoVi](https://github.com/robotoD/GenoVi/wiki/User-guide#tutorials-) for circular genome plots
 - __<prefix>.svg__: circular genome annotation plot as SVG
-- __<prefix>.log__: Log file of command.
+- __<prefix>.log__: Log file of command
 
 View the summary file for bin K1.1.
 
@@ -3425,30 +3045,30 @@ less -S K1.1/K1.1.txt
 `r hide("Summary fields")`
 Sequence information
 
-- Length: Number of bases.
-- Count: Number of contigs/scaffolds.
-- GC: GC%.
-- N50: [N50](#quast-visualise).
-- N ratio: Ratio of N bases to non-N bases.
-- coding density: Percentage of bases within coding regions.
+- Length: Number of bases
+- Count: Number of contigs/scaffolds
+- GC: GC%
+- N50: [N50](#quast_report)
+- N ratio: Ratio of N bases to non-N bases
+- coding density: Percentage of bases within coding regions
 
 Annotation information.
 
-- tRNAs: Transfer RNAs.
-- tmRNAs: Transfer-messenger RNA.
-- rRNAs: Ribosomal RNAs.
-- ncRNAs: Non-coding RNAs.
-- ncRNA regions: Non-coding RNA regions.
-- CRISPR arrays: CRISPR arrays.
-- CDSs: Coding sequences.
+- tRNAs: Transfer RNAs
+- tmRNAs: Transfer-messenger RNA
+- rRNAs: Ribosomal RNAs
+- ncRNAs: Non-coding RNAs
+- ncRNA regions: Non-coding RNA regions
+- CRISPR arrays: CRISPR arrays
+- CDSs: Coding sequences
 - pseudogenes: Segments of DNA that structurally resembles a gene but is not capable of coding for a protein
-- hypotheticals: Hypothetical genes, which are predicted solely by computer algorithms, are experimentally uncharacterized genes.
-- signal peptides: Short peptides (usually 16-30 amino acids long) normally present at the N-terminus of most newly synthesized proteins that are destined toward the secretory pathway.
-- sORFs: Short open reading frames (<100 amino acids).
-- gaps: Gaps in the genome assembly.
-- oriCs: Chromosome replication origin for bacteria.
-- oriVs: Plasmid replication origin.
-- oriTs: An origin of transfer (oriT) is a short sequence ranging from 40-500 base pairs in length. It is necessary for the transfer of DNA from a gram-negative bacterial donor to recipient during bacterial conjugation.
+- hypotheticals: Hypothetical genes, which are predicted solely by computer algorithms, are experimentally uncharacterized genes
+- signal peptides: Short peptides (usually 16-30 amino acids long) normally present at the N-terminus of most newly synthesized proteins that are destined toward the secretory pathway
+- sORFs: Short open reading frames (<100 amino acids)
+- gaps: Gaps in the genome assembly
+- oriCs: Chromosome replication origin for bacteria
+- oriVs: Plasmid replication origin
+- oriTs: An origin of transfer (oriT) is a short sequence ranging from 40-500 base pairs in length. It is necessary for the transfer of DNA from a gram-negative bacterial donor to recipient during bacterial conjugation
 `r unhide()`
 
 View the gff file for bin K1.1.
@@ -3474,7 +3094,7 @@ bakta --db /pub14/tea/nsc206/databases/bakta/db/ \
 ```
 `r unhide()`
 
-A quick thing we can do with these files is to see if any of the bins contain a specific annotation. For example, if we wanted to know if there were any ATP-binding proteins in any of the bins we could carry out the below command.
+We can quickly see if any of the bins contain a specific annotation. For example, if we wanted to know if there were any ATP-binding proteins in any of the bins we could carry out the below command:
 
 ```{bash eval=FALSE}
 grep "ATP-binding protein" */*gff3 | less -S
@@ -3486,7 +3106,19 @@ In your future analyses you can expect these files further with excel, R, or vis
 
 What if you want to know about pathways?
 
-## MinPath
+```{r, echo=FALSE}
+#Tippy tooltips
+tippy::tippy_this(elementId = "mag", 
+                  tooltip = "Metagenome-Assembled Genome",
+                  arrow = TRUE, placement = "bottom")
+```
+
+<!--chapter:end:28-Bakta.Rmd-->
+
+```{r include=FALSE, cache=FALSE}
+library(webexercises)
+```
+# MinPath {#minpath_chap}
 
 <center>
 ![](figures/pathways_2.png){style="width:150px; background:white;border-radius:5px"}
@@ -3496,7 +3128,7 @@ What if you want to know about pathways?
 
 Ensure you start in the `~/8-Annotation` directory.
 
-### MinPath: EC extraction
+## EC extraction
 <center>
 ![](figures/exctractor.png){style="width:150px; background:white;border-radius:5px"}
 </center>
@@ -3524,7 +3156,7 @@ The input `.ec` files required for `MinPath` are tab delimited with two columns:
 
 __Note__: The lack of `\` at the end of most of the lines is intentional. 
 The below is all one command over multiple lines but loops work slightly different and don't need `\` in certain parts. 
-Ensure you do press enter at the end of each line.
+Ensure you press enter at the end of each line.
 
 ```{bash eval=FALSE}
 ls -1 */*gff3 | sed "s|.*/||" | sed "s/.gff3//" | while read bin
@@ -3534,16 +3166,21 @@ sed "s/;.*EC:/\t/" | sed "s/,.*//" > EC/${bin}.ec
 done
 ```
 
-#### Code explanation
+### Code explanation
 
 That is quite a bit of code. You don't need to understand it as it should always work for `Bakta` output. 
-If you are not currently interested you can skip to the [`MinPath`: run section](#minpathrun)
+If you are not currently interested you can skip to the [MetaCyc prediction step](#minpathrun)
 
-If you are interested in how it works we'll break it down with examples for you to run. 
+If you are interested check out the contents of the 2 expandable boxes below.
+They contain explanations and example code to break down the code. 
 
-The first part lists all our `.gff` files on one line each (`ls -1 *gff`).
-Next, we remove the directory name (`sed "s|.*||"`).
-Then the suffix `.gff` is substituted with nothing `sed "s/.gff//"`. 
+`r hide("Loop exterior")`
+We'll explain the code that initialises the loop.
+
+- First we list all our `.gff` files on one line each (`ls -1 *gff`).
+- Next, we remove the directory name (`sed "s|.*||"`).
+- Then the suffix `.gff` is substituted with nothing `sed "s/.gff//"`. 
+
 This gives us the name of each bin (e.g. `K1.1`, `K1.2`).
 
 ```{bash eval=FALSE}
@@ -3559,7 +3196,7 @@ ls -1 */*gff3 | sed "s|.*/||" | sed "s/.gff3//"
 
 With the above code we can loop through each file prefix and use the variable `bin` (arbitrarily chosen) which contains the file prefix. 
 This is carried out with `while read bin`. 
-All the lines between the `do` (start of the loop) and `done` (end of loop) are line run in the loop.
+All lines between the `do` (start of the loop) and `done` (end of loop) are lines run in the loop.
 
 Run the loop with an echo command to show we are using the `${bin}` variable to specify the input and output files.
 
@@ -3569,7 +3206,9 @@ do
 echo "${bin}/${bin}.gff3 ../EC/${bin}.ec"
 done
 ```
+`r unhide()`
 
+`r hide("Loop interior")`
 Now to look at the command within the loop:
 
 ```{bash eval=FALSE}
@@ -3626,8 +3265,9 @@ sed "s/;.*EC:/\t/" | sed "s/,.*//" | head
 ```
 
 In the looped command, output is written into files: `> EC/${bin}.ec`.
+`r unhide()`
 
-### MinPath: run {#minpathrun}
+## MetaCyc predictions {#minpathrun}
 <center>
 ![](figures/play_green.png){style="width:100px"}
 </center>
@@ -3654,7 +3294,7 @@ done
 
 A lot of output will be printed to screen but this can be ignored unless you see warnings.
 
-### MinPath: output
+## MetaCyc report
 <center>
 ![](figures/output_file_green.png){style="width:100px"}
 </center>
@@ -3668,7 +3308,7 @@ cd ../MetaCyc
 ls
 ```
 
-From the `CheckM` results we found that bin K1.22 was very good with a quality score >96%. We will therefore have a look at its output.
+From the `CoCoPyE` results we found that bin K1.22 was very good with a quality score >98%. We will therefore have a look at its output.
 
 Have a look at the `.minpath` `-report` file for K1.22.
 
@@ -3697,12 +3337,13 @@ wc -l *minpath
 grep "PWY-6972" *minpath | less
 ```
 
-### KEGGs
+## KEGGs
 <center>
 ![](figures/KEGG.png){style="width:100px"}
 </center>
 
 You can also get KEGG information with `MinPath`.
+
 The code:
 
 ```{bash eval=FALSE}
@@ -3731,7 +3372,18 @@ done
 
 With these files you can then investigate what bins have which pathways. Additionally, with more samples analysed you can determine which samples have which pathways present.
 
-<!--chapter:end:27-Assembly_functional_annotation.Rmd-->
+Splendid!
+That is the end of the workshop materials aside from the appendix in the next chapter.
+I hope you enjoyed it and foudn it useful.
+
+```{r, echo=FALSE}
+#Tippy tooltips
+tippy::tippy_this(elementId = "mag", 
+                  tooltip = "Metagenome-Assembled Genome",
+                  arrow = TRUE, placement = "bottom")
+```
+
+<!--chapter:end:29-Minpath.Rmd-->
 
 ```{r include=FALSE, cache=FALSE}
 library(webexercises)
@@ -3754,6 +3406,8 @@ The best way to use Mamba is to install Miniforge. It has both Conda and Mamba c
 Miniforge installation: <https://github.com/conda-forge/miniforge>
 
 Mamba guide: <https://mamba.readthedocs.io/en/latest/user_guide/mamba.html>
+
+### shotgun_meta
 
 To create the mamba environment `shotgun_meta` run the below commands in your bash. You will need to have installed `mamba` first.
 
@@ -3795,6 +3449,8 @@ If you installed these in your "~/git_installs" examples are below.
 python ~/git_installs/Minpath/MinPath.py -h
 ```
 
+### cocopye
+
 To create the mamba environment `cocopye` run the below commands in your bash. You will need to have installed `mamba` first.
 
 ```{bash, eval=FALSE}
@@ -3805,6 +3461,8 @@ mamba install bioconda::checkm2=1.1.0
 #Download required databases
 checkm2 database --download
 ```
+
+### bibakery3.9
 
 To create the mamba environment `biobakery3.9` run the below commands in your bash. You will need to have installed `mamba` first.
 
@@ -3992,5 +3650,5 @@ wget -O W12_R1.fastq.gz ftp://ftp.sra.ebi.ac.uk/vol1/fastq/ERR505/ERR505083/ERR5
 wget -O W12_R2.fastq.gz ftp://ftp.sra.ebi.ac.uk/vol1/fastq/ERR505/ERR505083/ERR505083_2.fastq.gz
 ```
 
-<!--chapter:end:28-Appendix.Rmd-->
+<!--chapter:end:30-Appendix.Rmd-->
 

@@ -1,0 +1,148 @@
+# Bakta {#bakta_chap}
+<center>
+![](figures/bakta_logo.png){style="border-radius: 15px; width: 250px; border: 5px solid white"}
+</center>
+
+We will carry out `Bakta` functional annotation. `Bakta` can annotate bacterial genomes and plasmids from both isolates and MAGs.
+
+Make a new directory and move into it.
+
+```{bash eval=FALSE}
+mkdir ~/8-Annotation
+cd ~/8-Annotation
+```
+
+## Annotation
+<center>
+![](figures/play_blue.png){style="width:100px"}
+</center>
+
+Now we can annotate one of the bins.
+
+The below will take a long time to run (>1 hour). Instead of running it skip onto the next section to copy pre-made output to continue with. This command is here so you know what to run in your own future analyses.
+
+```{bash eval=FALSE}
+bakta \
+--db /pub14/tea/nsc206/databases/bakta/db/ \
+-o K1.1 \
+~/7-Binning/K1_fullset/bins/K1.1.fa
+```
+
+#### Parameters {-}
+<center>
+![](figures/parameter_blue.png){style="width:100px"}
+</center>
+
+- `--db`: Location of `Bakta` database. You will need to install this in your own installation. Instructions are in the [appendix](#mamba_install).
+- `-o`: The output directory. This must not exist before running the command.
+- The last parameter is the fasta file containing the genome/plasmid you would like annotated.
+
+### Bakta: premade results
+
+Link the pre-made results for all the K1 bins.
+
+```{bash eval=FALSE}
+#Link all data
+ln -s /pub14/tea/nsc206/NEOF/Shotgun_metagenomics/bakta/K1_fullset/* .
+```
+
+## Annotation files
+<center>
+![](figures/output_file_blue.png){style="width:100px"}
+</center>
+
+List the files in the newly created K1.1 directory. Each of the files has the prefix "K1.1" and contains the following information:
+
+- __<prefix>.tsv__: annotations as simple human readble TSV
+- __<prefix>.gff3__: annotations & sequences in GFF3 format
+- __<prefix>.gbff__: annotations & sequences in (multi) GenBank format
+- __<prefix>.embl__: annotations & sequences in (multi) EMBL format
+- __<prefix>.fna__: replicon/contig DNA sequences as FASTA
+- __<prefix>.ffn__: feature nucleotide sequences as FASTA
+- __<prefix>.faa__: CDS/sORF amino acid sequences as FASTA
+- __<prefix>.hypotheticals.tsv__: further information on hypothetical protein CDS as simple human readable tab separated values
+- __<prefix>.hypotheticals.faa__: hypothetical protein CDS amino acid sequences as FASTA
+- __<prefix>.json__: all (internal) annotation & sequence information as JSON
+- __<prefix>.txt__: summary as TXT
+- __<prefix>.png__: circular genome annotation plot as PNG
+  - These are only useful for complete/near complete circular genomes
+  - I would suggest looking at [GenoVi](https://github.com/robotoD/GenoVi/wiki/User-guide#tutorials-) for circular genome plots
+- __<prefix>.svg__: circular genome annotation plot as SVG
+- __<prefix>.log__: Log file of command
+
+View the summary file for bin K1.1.
+
+```{bash eval=FALSE}
+less -S K1.1/K1.1.txt
+```
+
+`r hide("Summary fields")`
+Sequence information
+
+- Length: Number of bases
+- Count: Number of contigs/scaffolds
+- GC: GC%
+- N50: [N50](#quast_report)
+- N ratio: Ratio of N bases to non-N bases
+- coding density: Percentage of bases within coding regions
+
+Annotation information.
+
+- tRNAs: Transfer RNAs
+- tmRNAs: Transfer-messenger RNA
+- rRNAs: Ribosomal RNAs
+- ncRNAs: Non-coding RNAs
+- ncRNA regions: Non-coding RNA regions
+- CRISPR arrays: CRISPR arrays
+- CDSs: Coding sequences
+- pseudogenes: Segments of DNA that structurally resembles a gene but is not capable of coding for a protein
+- hypotheticals: Hypothetical genes, which are predicted solely by computer algorithms, are experimentally uncharacterized genes
+- signal peptides: Short peptides (usually 16-30 amino acids long) normally present at the N-terminus of most newly synthesized proteins that are destined toward the secretory pathway
+- sORFs: Short open reading frames (<100 amino acids)
+- gaps: Gaps in the genome assembly
+- oriCs: Chromosome replication origin for bacteria
+- oriVs: Plasmid replication origin
+- oriTs: An origin of transfer (oriT) is a short sequence ranging from 40-500 base pairs in length. It is necessary for the transfer of DNA from a gram-negative bacterial donor to recipient during bacterial conjugation
+`r unhide()`
+
+View the gff file for bin K1.1.
+
+```{bash eval=FALSE}
+less K1.1/K1.1.gff3
+```
+
+The GFF file is a tab delimited file containing annotation information for the features in the assembly/bin. In this case it is a GFF3 file (most curent version of GFF).
+
+There is quite a lot of information contained in each row so instead of listing all the columns here please have a look at the official documentation:
+
+https://github.com/The-Sequence-Ontology/Specifications/blob/master/gff3.md
+
+`r hide("Loop used to analyse all bins")`
+The code below is for your future analysis, do not run it now as it will take too long.
+```{bash eval=FALSE}
+ls -1 ~/7-Biinning/K1_fullset/bins/*fa | while read f ; \
+do s=$(basename $f | sed "s/.fa//") ; echo $s ; \
+bakta --db /pub14/tea/nsc206/databases/bakta/db/ \
+-o ${s} \
+~/7-Binning/K1_fullset/bins/K1.1.fa
+```
+`r unhide()`
+
+We can quickly see if any of the bins contain a specific annotation. For example, if we wanted to know if there were any ATP-binding proteins in any of the bins we could carry out the below command:
+
+```{bash eval=FALSE}
+grep "ATP-binding protein" */*gff3 | less -S
+```
+
+We can now view the lines containing "ATP-binding protein" with the start of the line containing the file name the line belongs to.
+
+In your future analyses you can expect these files further with excel, R, or visualisation software like `IGV` (https://software.broadinstitute.org/software/igv/GFF).
+
+What if you want to know about pathways?
+
+```{r, echo=FALSE}
+#Tippy tooltips
+tippy::tippy_this(elementId = "mag", 
+                  tooltip = "Metagenome-Assembled Genome",
+                  arrow = TRUE, placement = "bottom")
+```

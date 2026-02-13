@@ -89,7 +89,7 @@ Run `QUAST`.
 quast -o quast/K1 K1/final.contigs.fa
 ```
 
-### Report
+### Report {#quast_report}
 <center>
 ![](figures/eye_green.png){style="width:100px; background: white; border-radius:5px; border: white solid 5px"}
 </center>

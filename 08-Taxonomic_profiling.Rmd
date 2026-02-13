@@ -7,6 +7,10 @@
 
 There are a number of methods for determining the species composition of a metagenomic dataset, but for the purposes of this practical we will use `Kraken2` & `Bracken` (Bayesian Reestimation of Abundance with KrakEN).  `Kraken2` classifies short DNA with taxonomic labels and is frequently used for metagenomic studies. `Bracken` uses the taxonomic labels assigned by `Kraken2` to compute the abundance of species in a set of DNA sequences.
 
+We will utilise `Krona` to create interactive tiered pie charts from the `Kraken2` output.
+Finally, we will carry out biomarker detection of the `Braken2` restimated baundances with `LEfSe`.
+
+
 First, we'll make a new directory for it and move into it, after returning home:
 
 ```{bash eval=FALSE}
