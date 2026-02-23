@@ -33,7 +33,7 @@ mkdir bins
 metabat2 \
 --inFile ~/6-Assembly/K1/final.contigs.fa \
 --outFile bins/K1 \
---abdFile K1.depth.txt \
+--abdFile ~/6-Assembly/K1.depth.txt \
 --minContig 1500
 ```
 
