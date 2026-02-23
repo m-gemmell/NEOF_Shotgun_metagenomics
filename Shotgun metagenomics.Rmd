@@ -2184,7 +2184,7 @@ tippy::tippy_this(elementId = "kmer",
                   arrow = TRUE, placement = "bottom")
 ```
 
-<!--chapter:end:21_MEGAHIT.Rmd-->
+<!--chapter:end:21-MEGAHIT.Rmd-->
 
 ```{r include=FALSE, cache=FALSE}
 library(webexercises)
