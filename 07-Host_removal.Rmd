@@ -20,7 +20,7 @@ cp /pub14/tea/nsc206/NEOF/Shotgun_metagenomics/GRCh38_slice.fasta .
 ![](figures/index.png){style="width:150px; background: white; border-radius:5px; border: white solid 5px"}
 </center>
 
-We will will use the `Bowtie2` aligner for mapping/aligning. Prior to alignment/mapping we need to index our reference.
+We will use the `Bowtie2` aligner for mapping/aligning. Prior to alignment/mapping we need to index our reference.
 
 ```{bash eval=FALSE}
 bowtie2-build GRCh38_slice.fasta GRCh38_slice.fasta

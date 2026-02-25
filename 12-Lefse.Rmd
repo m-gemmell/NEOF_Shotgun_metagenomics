@@ -80,8 +80,8 @@ lefse_run.py all_num.lefse all_num.lefse.out
 ![](figures/output_file_purple.png){style="width:100px"}
 </center>
 
-The output file (`all_num_lefse.out`) is a tab-delimited file which contains a row for each species. 
-Biomarkers will have the five columns below whilst non-biomarkers will have the first two followed by a "-" .
+The output file (`all_num.lefse.out`) is a tab-delimited file which contains a row for each species. 
+Biomarkers will have the five columns below whilst non-biomarkers will have the first two followed by a "-".
 
 - __Biomarker name__
 - __Log of highest class average__: I.e. get the class with the greater amounts of the biomarker, average the counts and then get the log of this value.

@@ -12,6 +12,17 @@ favicon: figures/NEOF_favicon.png
 description: NEOF book for the Microbial shotgun metagenomics workshop resources
 cover-image: "figures/NEOF.png"
 ---
+```{r include=FALSE, cache=FALSE}
+library(webexercises)
+```
+
+```{r cite-packages, include = FALSE}
+# automatically create a bib database for R packages
+# add any packages you want to cite here
+knitr::write_bib(c(
+  .packages(), 'bookdown', 'webexercises'
+), 'packages.bib')
+```
 
 ```{r, fig.align = 'center',out.width= '30%', echo=FALSE }
 knitr::include_graphics(path = "figures/NEOF.png", auto_pdf = TRUE)
@@ -26,18 +37,35 @@ knitr::include_graphics(path = "figures/squid.png", auto_pdf = TRUE)
 ## Introduction
 
 <div class="container">
+<iframe src="https://www.youtube.com/embed/eHCtfMQx9oE" 
+frameborder="0" allowfullscreen class="video"></iframe>
+</div>
+
+
+`r hide("08 APR 2025")`
+<div class="container">
 <iframe src="https://www.youtube.com/embed/3K3SGSKwTRQ" 
 frameborder="0" allowfullscreen class="video"></iframe>
 </div>
+`r unhide()`
+
 
 [__Slides__](https://docs.google.com/presentation/d/1e22Q77AgLZ0phD8-L90SAVmS8_eNV820_91OM5YiZvE/edit?usp=sharing)
 
 ## Kraken 2
 
 <div class="container">
+<iframe src="https://www.youtube.com/embed/zylm7KJx95A" 
+frameborder="0" allowfullscreen class="video"></iframe>
+</div>
+
+`r hide("08 APR 2025")`
+<div class="container">
 <iframe src="https://www.youtube.com/embed/9IcQymXbsgw" 
 frameborder="0" allowfullscreen class="video"></iframe>
 </div>
+`r unhide()`
+
 
 [__Slides__](https://docs.google.com/presentation/d/1mBt8cZOpq5Nz7UlFdho7lg0FB0qvION8yIUsXfnXNAM/edit?usp=sharing)
 
@@ -48,6 +76,13 @@ frameborder="0" allowfullscreen class="video"></iframe>
 frameborder="0" allowfullscreen class="video"></iframe>
 </div>
 
+`r hide("10 APR 2025")`
+<div class="container">
+<iframe src="https://www.youtube.com/embed/Y3Lk5bMNcOI" 
+frameborder="0" allowfullscreen class="video"></iframe>
+</div>
+`r unhide()`
+
 [__Slides__](https://docs.google.com/presentation/d/19x8AdMMf9fl1j4mPIG20X6gCI43yyA6nZHcX6w39QMI/edit?usp=sharing)
 
 ## Assembly approach
@@ -56,6 +91,13 @@ frameborder="0" allowfullscreen class="video"></iframe>
 <iframe src="https://www.youtube.com/embed/IGItfZM7q8w" 
 frameborder="0" allowfullscreen class="video"></iframe>
 </div>
+
+`r hide("10 APR 2025")`
+<div class="container">
+<iframe src="https://www.youtube.com/embed/IGItfZM7q8w" 
+frameborder="0" allowfullscreen class="video"></iframe>
+</div>
+`r unhide()`
 
 [__Slides__](https://docs.google.com/presentation/d/1FSctCGM71y-SPq1gfeumkPqSPaOwFVLPExUYqoaHQTk/edit?usp=sharing)
 

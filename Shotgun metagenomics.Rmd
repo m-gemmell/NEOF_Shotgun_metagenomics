@@ -584,7 +584,7 @@ cp /pub14/tea/nsc206/NEOF/Shotgun_metagenomics/GRCh38_slice.fasta .
 ![](figures/index.png){style="width:150px; background: white; border-radius:5px; border: white solid 5px"}
 </center>
 
-We will will use the `Bowtie2` aligner for mapping/aligning. Prior to alignment/mapping we need to index our reference.
+We will use the `Bowtie2` aligner for mapping/aligning. Prior to alignment/mapping we need to index our reference.
 
 ```{bash eval=FALSE}
 bowtie2-build GRCh38_slice.fasta GRCh38_slice.fasta
@@ -1084,10 +1084,10 @@ Repeat the above commands for K2 and W1
 ```{bash eval=FALSE}
 #K2
 bracken -d $KRAKEN2_DB_PATH/minikraken2_v1_8GB \
--i K2.kreport2 -o K2.bracken -r 100 -l S -t 5
+-i K2.kreport2 -o K2.bracken -w K2.breport2 -r 100 -l S -t 5
 #W1
 bracken -d $KRAKEN2_DB_PATH/minikraken2_v1_8GB \
--i W1.kreport2 -o W1.bracken -r 100 -l S -t 5
+-i W1.kreport2 -o W1.bracken -w W1.breport2 -r 100 -l S -t 5
 ```
 `r unhide()`
 
@@ -1251,8 +1251,8 @@ lefse_run.py all_num.lefse all_num.lefse.out
 ![](figures/output_file_purple.png){style="width:100px"}
 </center>
 
-The output file (`all_num_lefse.out`) is a tab-delimited file which contains a row for each species. 
-Biomarkers will have the five columns below whilst non-biomarkers will have the first two followed by a "-" .
+The output file (`all_num.lefse.out`) is a tab-delimited file which contains a row for each species. 
+Biomarkers will have the five columns below whilst non-biomarkers will have the first two followed by a "-".
 
 - __Biomarker name__
 - __Log of highest class average__: I.e. get the class with the greater amounts of the biomarker, average the counts and then get the log of this value.

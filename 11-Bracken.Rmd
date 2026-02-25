@@ -75,10 +75,10 @@ Repeat the above commands for K2 and W1
 ```{bash eval=FALSE}
 #K2
 bracken -d $KRAKEN2_DB_PATH/minikraken2_v1_8GB \
--i K2.kreport2 -o K2.bracken -r 100 -l S -t 5
+-i K2.kreport2 -o K2.bracken -w K2.breport2 -r 100 -l S -t 5
 #W1
 bracken -d $KRAKEN2_DB_PATH/minikraken2_v1_8GB \
--i W1.kreport2 -o W1.bracken -r 100 -l S -t 5
+-i W1.kreport2 -o W1.bracken -w W1.breport2 -r 100 -l S -t 5
 ```
 `r unhide()`
 
