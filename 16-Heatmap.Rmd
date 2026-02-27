@@ -10,7 +10,7 @@ Now that we have our combined, unstratified, and normalised table, we can visual
 
 To visualise this we will create a heatmap with `hclust2`.
 
-## File edit
+## File edit {#heatmap_file_edit}
 
 Before carrying out the command we will need to edit the file. Carry out the following alterations:
 
@@ -20,15 +20,23 @@ Remove the `_Abundance` part of the sample names whilst creating a copy that we 
 cat diet_unstratified.relab.tsv | sed "s/_Abundance//g" > diet_unstratified.relab.comp.tsv
 ```
 
+Next using your text editor of choice (we recommend `nano`) carry out the following changes on the file `diet_unstratified.relab.comp.tsv`.
+
+-   Remove the `#` (including the one space after the `#`) from the start of the header so it starts as `Pathway`
+-   Add in the same metadata line as we did for [12.1](#kraken2_lefse_metadata) but this time below the header line, i.e. as the 2nd line (ensure you are using tabs instead of spaces)
+
+Your top 2 lines of `diet_unstratified.relab.comp.tsv` should then look like the below (fields/columns are separated by tabs):
+
+```{bash, eval=FALSE}
+Pathway K10 K11 K12 K1  K2  K3  K4  K5  K6  K7  K8  K9  W10 W11 W12 W1  W2  W3  W4  W5  W6  W7  W8  W9
+diet  K K K K K K K K K K K K W W W W W W W W W W W W
+```
+
 **Intro to unix links**:
 
 -   [Text editing with **`sed`**](https://neof-workshops.github.io/Unix_nxcdf7/Course/12-Advanced_linux_practice.html#sed)
 -   [Redirection with **`>`**](https://neof-workshops.github.io/Unix_nxcdf7/Course/12-Advanced_linux_practice.html#redirection)
-
-Next using your text editor of choice carry out the following changes on the file `diet_unstratified.relab.comp.tsv`.
-
--   Remove the `#` (including the one space after the `#`) from the start of the header so it starts as `Pathway`.
--   Add in the same metadata line as we did for [12.1](#kraken2_lefse_metadata) but this time below the header line, i.e. as the 2nd line (ensure you are using tabs instead of spaces).
+-   [Text editor `nano`](https://neof-workshops.github.io/Unix_nxcdf7/Course/08-File_reading_and_processing.html#nano)
 
 `r hide("Issues with creating file?")` If you are having issues with creating and editing the file `all_num.lefse.bracken` you can copy a pre-made version.
 
@@ -75,6 +83,8 @@ firefox diet_unstratified.relab.heatmap.png
 ```
 
 From this, we can see that there is a small amount of clustering caused by the differences between the Korean and Western diet. Other factors that we do not know about the samples must also be casuing an effect. This is normal as we cannot account for everything but it is good to try to account for as much as possible.
+
+__Note:__ Your plot should look the same as the below. If it does not you may not have carried out the [file edit](#heatmap_file_edit) step correctly.
 
 <center>
 ![](figures/humann_heatmap.png){style="border-radius: 15px; width: 750px; border: 5px solid white"}

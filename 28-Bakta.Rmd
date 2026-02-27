@@ -120,7 +120,7 @@ https://github.com/The-Sequence-Ontology/Specifications/blob/master/gff3.md
 `r hide("Loop used to analyse all bins")`
 The code below is for your future analysis, do not run it now as it will take too long.
 ```{bash eval=FALSE}
-ls -1 ~/7-Biinning/K1_fullset/bins/*fa | while read f ; \
+ls -1 ~/7-Binning/K1_fullset/bins/*fa | while read f ; \
 do s=$(basename $f | sed "s/.fa//") ; echo $s ; \
 bakta --db /pub14/tea/nsc206/databases/bakta/db/ \
 -o ${s} \
