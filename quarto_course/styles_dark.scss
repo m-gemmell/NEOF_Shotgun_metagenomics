@@ -14,17 +14,14 @@ $neof-green: #00af37;
 $neof-grey: #333e47;
 $code-purple: #7D12BA;
 $light-grey: #F8F9FA;
-$cgr-blue: #4772ae;
-$cgr-light-blue: #3abaff;
-$cgr-grey: #dfe2eb;
 
 // Base document colors
 $navbar-bg: $neof-grey;
-$navbar-hl: $cgr-light-blue; // highlight color when hovering over navbar links
+$navbar-hl: $neof-green; // highlight color when hovering over navbar links
 $footer-bg: $neof-grey; // footer
-$sidebar-hl: $cgr-light-blue;
+$sidebar-hl: $neof-green;
 
-$link-color: $cgr-light-blue;
+$link-color: $ibm-blue;
 
 //Inline code
 $code-bg: #383838;

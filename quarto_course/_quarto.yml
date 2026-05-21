@@ -4,12 +4,12 @@ editor:
   render-on-save: true
 website:
   bread-crumbs: false
-  favicon: /images/CGR_favicon.png
+  favicon: /images/NEOF_favicon.png
   page-navigation: true
-  title: CGR Shotgun Metagenomics
+  title: NEOF Shotgun Metagenomics
   description: Shotgun Metagenomics course by CGR
   navbar:
-    title: CGR Shotgun Metagenomics
+    title: NEOF Shotgun Metagenomics
     collapse-below: lg
     left:
     - text: Intro
@@ -28,14 +28,19 @@ website:
       href: appendix\mamba.qmd
     right:
     - icon: house-fill
-      href: https://www.liverpool.ac.uk/genomic-research/
-      aria-label: CGR website
+      href: https://neof.org.uk/training/
+      aria-label: NEOF website
     - icon: linkedin
-      href: https://www.linkedin.com/showcase/liverpool-shared-research-facilities
+      href: https://www.linkedin.com/in/training-neof/
       aria-label: LinkedIn
+    - icon: bluesky
+      href: https://bsky.app/profile/nerc-eof.bsky.social
+      aria-label: bluesky
   page-footer:
+    left: |
+      [![](https://i.creativecommons.org/l/by-nc-sa/4.0/88x31.png){fig-alt="CC BY-SA 4.0" height=30px}](https://creativecommons.org/licenses/by-nc-sa/4.0/)
     center: |
-      [![](/images/CGR_large.png){fig-alt="CGR" height=60px}](https://www.liverpool.ac.uk/genomic-research/)
+      [![](/images/NEOF_rounded_corners.png){fig-alt="NEOF" height=60px}](https://neof.org.uk/)
   sidebar:
   - id: Intro
     title: Intro
