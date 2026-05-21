@@ -66,14 +66,16 @@ hclust2.py \
 
 #### Parameters {.unnumbered}
 
--   `-i`: The input table file.
--   `-o`: The output image file. The tool does not specify what types of image files you can use but `.png` is always a good image file format.
--   `--ftop`: Specifies how many of the top features (pathways in this case) to be included in the heatmap.
--   `--metadata_rows`: Specifies which row/s contain the metadata information to be used for the group colouring at the top of the heatmap.
-    -   Row numbers start at 0 for this tool. Therefore our sample names are in row 0 and the diet info is in row 1.
-    -   Multiple rows can be specified if you have multiple rows of metadata.
-        -   e.g. `--metadata_rows 1,2,3`.
--   `--dpi`: The image resolution in dpi (dots per inch). 300 dpi is used for publication quality images.
+-   `-i`: The input table file
+-   `-o`: The output image file
+    - The tool does not specify what types of image files you can use but `.png` is always a good image file format
+-   `--ftop`: Specifies how many of the top features (pathways in this case) to be included in the heatmap
+-   `--metadata_rows`: Specifies which row/s contain the metadata information to be used for the group colouring at the top of the heatmap
+    -   Row numbers start at 0 for this tool, therefore our sample names are in row 0 and the diet info is in row 1.
+    -   Multiple rows can be specified if you have multiple rows of metadata
+        -   e.g. `--metadata_rows 1,2,3`
+-   `--dpi`: The image resolution in dpi (dots per inch)
+    - 300 dpi is used for publication quality images.
 
 There are many more options that can be seen on the [hclust2 github](https://github.com/SegataLab/hclust2).
 

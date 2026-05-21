@@ -3,7 +3,7 @@ engine: knitr
 ---
 # Metagenome assembly {#metagenomeassembly}
 <center>
-![](/images/jigsaw.png){style="width:300px; background: white; border-radius:5px"}
+![](/images/jigsaw.png){style="width:250px; background: white; border-radius:5px"}
 </center>
 
 So far we have directly analysed the read data itself which is perfectly fine for taxonomic profiling and for certain methods of functional profiling. However, Illumina reads are generally short and therefore can not provide us with much data on larger constructs that are in the metagenomic samples, e.g. genes. While it is possible to predict from which gene a sequence read might originate, the short nature of the query can sometimes lead to ambiguous results.
@@ -12,8 +12,11 @@ Additionally, depending on the application it can become computationally intensi
 
 For this reason, it is sometimes advantageous to assemble the reads into contigs, using a meta-genome assembler. This has the dual effect of:
 
--   Reducing the overall size of the data for analysis. If a metagenome was sequenced at 50x depth, then by assembling it you could theoretically reduce the amount of sequence to analyse by 50-fold.
--   Increase the size of the fragments you will analyse. This is the main advantage of an assembly, as the \~100 bp reads can be pieced together to form 100,000 kb+ contigs. These contigs will contain complete genes, operons and regulatory elements: Reconstructed genome sections.
+-   Reducing the overall size of the data for analysis
+    - If a metagenome was sequenced at 50x depth, then by assembling it you could theoretically reduce the amount of sequence to analyse by 50-fold
+-   Increase the size of the fragments you will analyse
+    - This is the main advantage of an assembly, as the \~100 bp reads can be pieced together to form 100,000 kb+ contigs
+    - These contigs will contain complete genes, operons and regulatory elements: Reconstructed genome sections
 
 Here, we will carry out a couple of assemblies on our dataset.
 

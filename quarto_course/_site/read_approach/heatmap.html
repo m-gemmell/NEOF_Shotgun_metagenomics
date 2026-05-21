@@ -313,7 +313,7 @@ pre > code.sourceCode > span > a:first-child::before { text-decoration: underlin
 <span class="menu-text">QC</span></a>
   </li>  
   <li class="nav-item">
-    <a class="nav-link" href="../read_approach/taxonomic_profiling.html"> 
+    <a class="nav-link" href="../read_approach/read_approach.html"> 
 <span class="menu-text">Reads</span></a>
   </li>  
   <li class="nav-item">
@@ -364,6 +364,12 @@ pre > code.sourceCode > span > a:first-child::before { text-decoration: underlin
       </div>
     <div class="sidebar-menu-container"> 
     <ul class="list-unstyled mt-1">
+        <li class="sidebar-item">
+  <div class="sidebar-item-container"> 
+  <a href="../read_approach/read_approach.html" class="sidebar-item-text sidebar-link">
+ <span class="menu-text">Read approach</span></a>
+  </div>
+</li>
         <li class="sidebar-item sidebar-item-section">
       <div class="sidebar-item-container"> 
             <a class="sidebar-item-text sidebar-link text-start" data-bs-toggle="collapse" data-bs-target="#quarto-sidebar-section-1" role="navigation" aria-expanded="true">
@@ -536,18 +542,24 @@ Issues with creating file?
 <section id="parameters" class="level4 unnumbered">
 <h4 class="unnumbered anchored" data-anchor-id="parameters">Parameters</h4>
 <ul>
-<li><code>-i</code>: The input table file.</li>
-<li><code>-o</code>: The output image file. The tool does not specify what types of image files you can use but <code>.png</code> is always a good image file format.</li>
-<li><code>--ftop</code>: Specifies how many of the top features (pathways in this case) to be included in the heatmap.</li>
-<li><code>--metadata_rows</code>: Specifies which row/s contain the metadata information to be used for the group colouring at the top of the heatmap.
+<li><code>-i</code>: The input table file</li>
+<li><code>-o</code>: The output image file
 <ul>
-<li>Row numbers start at 0 for this tool. Therefore our sample names are in row 0 and the diet info is in row 1.</li>
-<li>Multiple rows can be specified if you have multiple rows of metadata.
+<li>The tool does not specify what types of image files you can use but <code>.png</code> is always a good image file format</li>
+</ul></li>
+<li><code>--ftop</code>: Specifies how many of the top features (pathways in this case) to be included in the heatmap</li>
+<li><code>--metadata_rows</code>: Specifies which row/s contain the metadata information to be used for the group colouring at the top of the heatmap
 <ul>
-<li>e.g.&nbsp;<code>--metadata_rows 1,2,3</code>.</li>
+<li>Row numbers start at 0 for this tool, therefore our sample names are in row 0 and the diet info is in row 1.</li>
+<li>Multiple rows can be specified if you have multiple rows of metadata
+<ul>
+<li>e.g.&nbsp;<code>--metadata_rows 1,2,3</code></li>
 </ul></li>
 </ul></li>
-<li><code>--dpi</code>: The image resolution in dpi (dots per inch). 300 dpi is used for publication quality images.</li>
+<li><code>--dpi</code>: The image resolution in dpi (dots per inch)
+<ul>
+<li>300 dpi is used for publication quality images.</li>
+</ul></li>
 </ul>
 <p>There are many more options that can be seen on the <a href="https://github.com/SegataLab/hclust2">hclust2 github</a>.</p>
 </section>
@@ -567,20 +579,20 @@ Issues with creating file?
 <h4 class="unnumbered anchored" data-anchor-id="mcqs">MCQs</h4>
 <ol type="1">
 <li>Which pathway stands out the most?
-<div id="radio_QXVSGVEZWJ" class="webex-radiogroup">
-<label><input type="radio" autocomplete="off" name="radio_QXVSGVEZWJ" value=""> <span><strong>ARO-PWY</strong></span></label><label><input type="radio" autocomplete="off" name="radio_QXVSGVEZWJ" value="answer"> <span><strong>DTDPRHAMSYN</strong></span></label><label><input type="radio" autocomplete="off" name="radio_QXVSGVEZWJ" value=""> <span><strong>PWY-6385</strong></span></label>
+<div id="radio_RMUHBQOLSR" class="webex-radiogroup">
+<label><input type="radio" autocomplete="off" name="radio_RMUHBQOLSR" value=""> <span><strong>ARO-PWY</strong></span></label><label><input type="radio" autocomplete="off" name="radio_RMUHBQOLSR" value="answer"> <span><strong>DTDPRHAMSYN</strong></span></label><label><input type="radio" autocomplete="off" name="radio_RMUHBQOLSR" value=""> <span><strong>PWY-6385</strong></span></label>
 </div></li>
 </ol>
 <ol start="2" type="1">
 <li>How many clusters are formed based on diet (Colours on tree at top of heatmap)?
-<div id="radio_SOVXTRRCAN" class="webex-radiogroup">
-<label><input type="radio" autocomplete="off" name="radio_SOVXTRRCAN" value=""> <span><strong>1</strong></span></label><label><input type="radio" autocomplete="off" name="radio_SOVXTRRCAN" value="answer"> <span><strong>2</strong></span></label><label><input type="radio" autocomplete="off" name="radio_SOVXTRRCAN" value=""> <span><strong>3</strong></span></label>
+<div id="radio_RMSTTGHUQF" class="webex-radiogroup">
+<label><input type="radio" autocomplete="off" name="radio_RMSTTGHUQF" value=""> <span><strong>1</strong></span></label><label><input type="radio" autocomplete="off" name="radio_RMSTTGHUQF" value="answer"> <span><strong>2</strong></span></label><label><input type="radio" autocomplete="off" name="radio_RMSTTGHUQF" value=""> <span><strong>3</strong></span></label>
 </div></li>
 </ol>
 <ol start="3" type="1">
 <li>How many clusters are formed based on pathways (Colours on tree at the side of heatmap)?
-<div id="radio_ZNTMRRKTEQ" class="webex-radiogroup">
-<label><input type="radio" autocomplete="off" name="radio_ZNTMRRKTEQ" value=""> <span><strong>1</strong></span></label><label><input type="radio" autocomplete="off" name="radio_ZNTMRRKTEQ" value=""> <span><strong>2</strong></span></label><label><input type="radio" autocomplete="off" name="radio_ZNTMRRKTEQ" value="answer"> <span><strong>3</strong></span></label>
+<div id="radio_TKKDWPEBGD" class="webex-radiogroup">
+<label><input type="radio" autocomplete="off" name="radio_TKKDWPEBGD" value=""> <span><strong>1</strong></span></label><label><input type="radio" autocomplete="off" name="radio_TKKDWPEBGD" value=""> <span><strong>2</strong></span></label><label><input type="radio" autocomplete="off" name="radio_TKKDWPEBGD" value="answer"> <span><strong>3</strong></span></label>
 </div></li>
 </ol>
 <p>You can look up the pathway names in the table file to see a fuller description.</p>

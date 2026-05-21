@@ -313,7 +313,7 @@ pre > code.sourceCode > span > a:first-child::before { text-decoration: underlin
 <span class="menu-text">QC</span></a>
   </li>  
   <li class="nav-item">
-    <a class="nav-link" href="../read_approach/taxonomic_profiling.html"> 
+    <a class="nav-link" href="../read_approach/read_approach.html"> 
 <span class="menu-text">Reads</span></a>
   </li>  
   <li class="nav-item">
@@ -364,6 +364,12 @@ pre > code.sourceCode > span > a:first-child::before { text-decoration: underlin
       </div>
     <div class="sidebar-menu-container"> 
     <ul class="list-unstyled mt-1">
+        <li class="sidebar-item">
+  <div class="sidebar-item-container"> 
+  <a href="../read_approach/read_approach.html" class="sidebar-item-text sidebar-link">
+ <span class="menu-text">Read approach</span></a>
+  </div>
+</li>
         <li class="sidebar-item sidebar-item-section">
       <div class="sidebar-item-container"> 
             <a class="sidebar-item-text sidebar-link text-start" data-bs-toggle="collapse" data-bs-target="#quarto-sidebar-section-1" role="navigation" aria-expanded="true">
@@ -533,11 +539,22 @@ Issues with creating file?
 <img src="..\images/parameter_purple.png" class="img-fluid" style="width:100px; background: white; border-radius:5px; border: white solid 5px">
 </center>
 <ul>
-<li><code>all_num.lefse.bracken</code> : Input <code>Bracken</code> file.</li>
-<li><code>all_num.lefse</code> : Output file formatted for the run_lefse command, which we will soon run.</li>
-<li><code>-c 1</code> : Specifies the row with the class info. This is used to determine which samples will be compared against which samples. In this case it is the first row with the Ks and Ws.</li>
-<li><code>-u 2</code> : Specifies the row with the sample names. This is the second row in this case.</li>
-<li><code>-o 1000000</code> : An integer can be indicated to determine to what size (count sum value) each sample should be normalised to. <code>LEfSe</code> developers recommend 1000000 (1 million) when very low values are present. We generally always use 1 million for consistency.</li>
+<li><code>all_num.lefse.bracken</code> : Input <code>Bracken</code> file</li>
+<li><code>all_num.lefse</code> : Output file formatted for the run_lefse command, which we will soon run</li>
+<li><code>-c 1</code> : Specifies the row with the class info
+<ul>
+<li>This is used to determine which samples will be compared against which samples</li>
+<li>In this case it is the first row with the Ks and Ws</li>
+</ul></li>
+<li><code>-u 2</code> : Specifies the row with the sample names
+<ul>
+<li>This is the second row in this case</li>
+</ul></li>
+<li><code>-o 1000000</code> : An integer can be indicated to determine to what size (count sum value) each sample should be normalised to
+<ul>
+<li><code>LEfSe</code> developers recommend 1000000 (1 million) when very low values are present</li>
+<li>We generally always use 1 million for consistency</li>
+</ul></li>
 </ul>
 </section>
 </section>
@@ -559,10 +576,10 @@ Issues with creating file?
 <p>The output file (<code>all_num.lefse.out</code>) is a tab-delimited file which contains a row for each species. Biomarkers will have the five columns below whilst non-biomarkers will have the first two followed by a “-”.</p>
 <ul>
 <li><strong>Biomarker name</strong></li>
-<li><strong>Log of highest class average</strong>: I.e. get the class with the greater amounts of the biomarker, average the counts and then get the log of this value.</li>
+<li><strong>Log of highest class average</strong>: I.e. get the class with the greater amounts of the biomarker, average the counts and then get the log of this value</li>
 <li><strong>Class with the greater amounts of biomarker</strong></li>
-<li><strong>LDA effect size</strong>: A statistical figure for <code>LEfSe</code>.</li>
-<li><strong>p-value</strong>: Biomarkers must have a p-value of &lt;0.05 to be considered significant.</li>
+<li><strong>LDA effect size</strong>: A statistical figure for <code>LEfSe</code></li>
+<li><strong>p-value</strong>: Biomarkers must have a p-value of &lt;0.05 to be considered significant</li>
 </ul>
 <p>The <strong>LDA effect</strong> size indicates how much of an effect each biomarker has. The default is to only count a species with an LDA effect size of greater than 2 or less than -2 as a biomarker. The further the LDA effect size is from 0 the greater the effect the species causes. Generally, it can be thought of as the order of magnitude difference in the abundance of the biomarker between the sample groups.</p>
 </section>
@@ -576,10 +593,21 @@ Issues with creating file?
 <div class="code-copy-outer-scaffold"><div class="sourceCode cell-code" id="cb5"><pre class="sourceCode bash code-with-copy"><code class="sourceCode bash"><span id="cb5-1"><a href="#cb5-1" aria-hidden="true" tabindex="-1"></a><span class="ex">lefse_plot_res.py</span> <span class="at">--dpi</span> 200 <span class="at">--format</span> png all_num.lefse.out biomarkers.png</span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
 </div>
 <ul>
-<li><code>--dpi 200</code> : Dots per inch. This refers to the resolution of the output image. Normally publications want 300 dpi. We’ve chosen 200 as it is good quality and we will not be publishing these results.</li>
-<li><code>--format png</code> : Format of output file. png is a commonly used file format for images.</li>
-<li><code>all_num.lefse.out</code> : <code>LEfSe</code> output to visualise.</li>
-<li><code>biomarkers.png</code> : Plot showing the LDA scores of the species detected as biomarkers. Colouring shows which class (K or W) the species is found in higher abundance.</li>
+<li><code>--dpi 200</code> : Dots per inch
+<ul>
+<li>This refers to the resolution of the output image</li>
+<li>Normally publications want 300 dpi</li>
+<li>We’ve chosen 200 as it is good quality and we will not be publishing these results</li>
+</ul></li>
+<li><code>--format png</code> : Format of output file
+<ul>
+<li>png is a commonly used file format for images</li>
+</ul></li>
+<li><code>all_num.lefse.out</code> : <code>LEfSe</code> output to visualise</li>
+<li><code>biomarkers.png</code> : Plot showing the LDA scores of the species detected as biomarkers
+<ul>
+<li>Colouring shows which class (K or W) the species is found in higher abundance</li>
+</ul></li>
 </ul>
 <p>Look at the figure with <code>firefox</code>:</p>
 <div class="cell">
@@ -595,44 +623,44 @@ Issues with creating file?
 <p><strong>Note</strong>: In this instance green bars represent biomarkers in higher abundance in the W samples whilst the red bars represent biomarkers in higher abundance in the K samples.</p>
 <ol type="1">
 <li>Which species biomarker causes the biggest effect in the <strong>W</strong> class?
-<div id="radio_HGRMYLBJYM" class="webex-radiogroup">
-<label><input type="radio" autocomplete="off" name="radio_HGRMYLBJYM" value=""> <span><strong>Adlercreutziaequolifaciens</strong></span></label><label><input type="radio" autocomplete="off" name="radio_HGRMYLBJYM" value="answer"> <span><strong>Alistipesshahii</strong></span></label><label><input type="radio" autocomplete="off" name="radio_HGRMYLBJYM" value=""> <span><strong>Methanosphaerastadtmanae</strong></span></label>
+<div id="radio_RUILZVSIBY" class="webex-radiogroup">
+<label><input type="radio" autocomplete="off" name="radio_RUILZVSIBY" value=""> <span><strong>Adlercreutziaequolifaciens</strong></span></label><label><input type="radio" autocomplete="off" name="radio_RUILZVSIBY" value="answer"> <span><strong>Alistipesshahii</strong></span></label><label><input type="radio" autocomplete="off" name="radio_RUILZVSIBY" value=""> <span><strong>Methanosphaerastadtmanae</strong></span></label>
 </div></li>
 </ol>
 <ol start="2" type="1">
 <li>Which species biomarker causes the biggest effect in the <strong>K</strong> class?
-<div id="radio_SOFLXEXLLL" class="webex-radiogroup">
-<label><input type="radio" autocomplete="off" name="radio_SOFLXEXLLL" value=""> <span><strong>Adlercreutziaequolifaciens</strong></span></label><label><input type="radio" autocomplete="off" name="radio_SOFLXEXLLL" value=""> <span><strong>Alistipesshahii</strong></span></label><label><input type="radio" autocomplete="off" name="radio_SOFLXEXLLL" value="answer"> <span><strong>Methanosphaerastadtmanae</strong></span></label>
+<div id="radio_HBGFEXMRZV" class="webex-radiogroup">
+<label><input type="radio" autocomplete="off" name="radio_HBGFEXMRZV" value=""> <span><strong>Adlercreutziaequolifaciens</strong></span></label><label><input type="radio" autocomplete="off" name="radio_HBGFEXMRZV" value=""> <span><strong>Alistipesshahii</strong></span></label><label><input type="radio" autocomplete="off" name="radio_HBGFEXMRZV" value="answer"> <span><strong>Methanosphaerastadtmanae</strong></span></label>
 </div></li>
 </ol>
 <ol start="3" type="1">
 <li>Which species biomarker (i.e.&nbsp;present in the plot) causes the lowest effect in the <strong>W</strong> class?
-<div id="radio_GROIYGUAUR" class="webex-radiogroup">
-<label><input type="radio" autocomplete="off" name="radio_GROIYGUAUR" value="answer"> <span><strong>Adlercreutziaequolifaciens</strong></span></label><label><input type="radio" autocomplete="off" name="radio_GROIYGUAUR" value=""> <span><strong>Alistipesshahii</strong></span></label><label><input type="radio" autocomplete="off" name="radio_GROIYGUAUR" value=""> <span><strong>Methanosphaerastadtmanae</strong></span></label>
+<div id="radio_TPHDCGXSSW" class="webex-radiogroup">
+<label><input type="radio" autocomplete="off" name="radio_TPHDCGXSSW" value="answer"> <span><strong>Adlercreutziaequolifaciens</strong></span></label><label><input type="radio" autocomplete="off" name="radio_TPHDCGXSSW" value=""> <span><strong>Alistipesshahii</strong></span></label><label><input type="radio" autocomplete="off" name="radio_TPHDCGXSSW" value=""> <span><strong>Methanosphaerastadtmanae</strong></span></label>
 </div></li>
 </ol>
 <ol start="4" type="1">
 <li>Which class has more biomarkers associated with it?
-<div id="radio_BOWZVLNADO" class="webex-radiogroup">
-<label><input type="radio" autocomplete="off" name="radio_BOWZVLNADO" value=""> <span><strong>Korean</strong></span></label><label><input type="radio" autocomplete="off" name="radio_BOWZVLNADO" value="answer"> <span><strong>Western</strong></span></label>
+<div id="radio_XFMKYOKRSR" class="webex-radiogroup">
+<label><input type="radio" autocomplete="off" name="radio_XFMKYOKRSR" value=""> <span><strong>Korean</strong></span></label><label><input type="radio" autocomplete="off" name="radio_XFMKYOKRSR" value="answer"> <span><strong>Western</strong></span></label>
 </div></li>
 </ol>
 <ol start="5" type="1">
 <li>What is the LEfSe p-value for <strong>Campylobactercoli</strong>?
-<div id="radio_QZDCFGEHHV" class="webex-radiogroup">
-<label><input type="radio" autocomplete="off" name="radio_QZDCFGEHHV" value="answer"> <span><strong>0.0022136919545913936</strong></span></label><label><input type="radio" autocomplete="off" name="radio_QZDCFGEHHV" value=""> <span><strong>3.0266165524513937</strong></span></label><label><input type="radio" autocomplete="off" name="radio_QZDCFGEHHV" value=""> <span><strong>3.314396201978439</strong></span></label>
+<div id="radio_MNBPNTDHSA" class="webex-radiogroup">
+<label><input type="radio" autocomplete="off" name="radio_MNBPNTDHSA" value="answer"> <span><strong>0.0022136919545913936</strong></span></label><label><input type="radio" autocomplete="off" name="radio_MNBPNTDHSA" value=""> <span><strong>3.0266165524513937</strong></span></label><label><input type="radio" autocomplete="off" name="radio_MNBPNTDHSA" value=""> <span><strong>3.314396201978439</strong></span></label>
 </div></li>
 </ol>
 <ol start="6" type="1">
 <li>What is the Log of highest class average for <strong>Streptococcussuis</strong>?
-<div id="radio_CMJTPSKZDQ" class="webex-radiogroup">
-<label><input type="radio" autocomplete="off" name="radio_CMJTPSKZDQ" value=""> <span><strong>0.0022136919545913936</strong></span></label><label><input type="radio" autocomplete="off" name="radio_CMJTPSKZDQ" value="answer"> <span><strong>3.0266165524513937</strong></span></label><label><input type="radio" autocomplete="off" name="radio_CMJTPSKZDQ" value=""> <span><strong>3.314396201978439</strong></span></label>
+<div id="radio_WDPNYSQOED" class="webex-radiogroup">
+<label><input type="radio" autocomplete="off" name="radio_WDPNYSQOED" value=""> <span><strong>0.0022136919545913936</strong></span></label><label><input type="radio" autocomplete="off" name="radio_WDPNYSQOED" value="answer"> <span><strong>3.0266165524513937</strong></span></label><label><input type="radio" autocomplete="off" name="radio_WDPNYSQOED" value=""> <span><strong>3.314396201978439</strong></span></label>
 </div></li>
 </ol>
 <ol start="7" type="1">
 <li>What is the LDA effect size for <strong>Bifidobacteriumlongum</strong>?
-<div id="radio_UORBGJYBAO" class="webex-radiogroup">
-<label><input type="radio" autocomplete="off" name="radio_UORBGJYBAO" value=""> <span><strong>0.0022136919545913936</strong></span></label><label><input type="radio" autocomplete="off" name="radio_UORBGJYBAO" value=""> <span><strong>3.0266165524513937</strong></span></label><label><input type="radio" autocomplete="off" name="radio_UORBGJYBAO" value="answer"> <span><strong>3.314396201978439</strong></span></label>
+<div id="radio_NNCAINTHPB" class="webex-radiogroup">
+<label><input type="radio" autocomplete="off" name="radio_NNCAINTHPB" value=""> <span><strong>0.0022136919545913936</strong></span></label><label><input type="radio" autocomplete="off" name="radio_NNCAINTHPB" value=""> <span><strong>3.0266165524513937</strong></span></label><label><input type="radio" autocomplete="off" name="radio_NNCAINTHPB" value="answer"> <span><strong>3.314396201978439</strong></span></label>
 </div></li>
 </ol>
 </section>
@@ -645,13 +673,13 @@ Issues with creating file?
 <ul>
 <li><code>Kraken2</code>
 <ul>
-<li>Standard <code>Kraken2</code> databases: https://github.com/DerrickWood/kraken2/wiki/Manual#standard-kraken-2-database</li>
-<li>Custom <code>Kraken2</code> databases: https://github.com/DerrickWood/kraken2/wiki/Manual#custom-databases</li>
+<li>Standard <code>Kraken2</code> databases: <a href="https://github.com/DerrickWood/kraken2/wiki/Manual#standard-kraken-2-database">https://github.com/DerrickWood/kraken2/wiki/Manual#standard-kraken-2-database</a></li>
+<li>Custom <code>Kraken2</code> databases: <a href="https://github.com/DerrickWood/kraken2/wiki/Manual#custom-databases">https://github.com/DerrickWood/kraken2/wiki/Manual#custom-databases</a></li>
 </ul></li>
 <li><code>Bracken</code>
 <ul>
-<li>https://ccb.jhu.edu/software/bracken/index.shtml?t=manual#step1</li>
-<li>This requires a <code>Kraken2</code> database to be built first.</li>
+<li><a href="https://ccb.jhu.edu/software/bracken/index.shtml?t=manual#step1">https://ccb.jhu.edu/software/bracken/index.shtml?t=manual#step1</a></li>
+<li>This requires a <code>Kraken2</code> database to be built first</li>
 </ul></li>
 </ul>
 

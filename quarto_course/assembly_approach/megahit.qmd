@@ -39,15 +39,15 @@ megahit \
 ![](/images/parameter_blue.png){style="width:100px; background: white; border-radius:5px; border: white solid 5px"}
 </center>
 
-- `-r`: Single-end reads to be used for assembly.
-  - We are using our successfully stitched reads.
-- `-1`: Forward reads of paired end reads to be used for assembly. 
-  - We are using the reads that did not stitch as they still have useful information.
-- `-2`: Reverse reads of paired end reads to be used for assembly. 
-   - We are using the reads that did not stitch as they still have useful information.
-- `-o`: Output directory.
-- `-t`: Number of threads to be used for process.
-- `--k-list`: <u id='kmer'>K-mer</u> list.
+- `-r`: Single-end reads to be used for assembly
+  - We are using our successfully stitched reads
+- `-1`: Forward reads of paired end reads to be used for assembly.
+  - We are using the reads that did not stitch as they still have useful information
+- `-2`: Reverse reads of paired end reads to be used for assembly.
+   - We are using the reads that did not stitch as they still have useful information
+- `-o`: Output directory
+- `-t`: Number of threads to be used for process
+- `--k-list`: <u id='kmer'>K-mer</u> list
 
 The __<u id='kmer'>k-mer</u> list__ instructs `MEGAHIT` to first generate an assembly using a <u id='kmer'>k-mer</u> size of 29 bp and when that is complete, integrate the results into an assembly using a <u id='kmer'>k-mer</u> size of 49 bp, and so on up to a final iteration using a <u id='kmer'>k-mer</u> size of 189 bp. 
 This large range of <u id='kmer'>k-mer</u> lengths should give us a good assembly, given the data. 
@@ -105,11 +105,11 @@ firefox quast/K1/report.html
 
 The report tells us quite a bit about the assembly quality. Two definitions that you may not be aware of are __N50__ and __L50__. To calculate these values:
 
-- Order the contigs from largest to smallest.
-- Total up the sizes from biggest downwards.
-- The contig we reach where our total is at least 50% of the size of the whole assembly is the N50 contig.
-- __N50__ equals the length of the N50 contig. 
-- __L50__ is the number of contigs with a length equal to or greater than N50.
+- Order the contigs from largest to smallest
+- Total up the sizes from biggest downwards
+- The contig we reach where our total is at least 50% of the size of the whole assembly is the N50 contig
+- __N50__ equals the length of the N50 contig
+- __L50__ is the number of contigs with a length equal to or greater than N50
 
 <center>
 ![](/images/n50_n90.png){style="border-radius: 15px; width: 400px; border: 5px solid white"}

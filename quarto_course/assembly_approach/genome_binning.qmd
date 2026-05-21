@@ -9,8 +9,8 @@ engine: knitr
 
 A metagenome assembly consists of contigs from many different genomes. At this stage we don't know which contigs are from which species. We could try to taxonomically classify each contig but there are 2 problems with this approach:
 
-1. Some contigs may be misclassified which can lead to multiple contigs from the same genome/organism being classified as various taxa.
-2. Databases are incomplete and so some contigs will not be classified at all (microbial dark matter).
+1. Some contigs may be misclassified which can lead to multiple contigs from the same genome/organism being classified as various taxa
+2. Databases are incomplete and so some contigs will not be classified at all (microbial dark matter)
 
 To alleviate these issues genomic binning can be carried out. This will cluster contigs into bins based on:
 

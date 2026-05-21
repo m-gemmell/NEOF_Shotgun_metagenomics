@@ -57,11 +57,13 @@ __The first step__ is to extract the completeness and contamination fields/colum
 awk -F, '{print $2,$3}' cocopye_output.csv
 ```
 
-- `-F,`: Indicates the input fields are separated by commas (`,`).
-- `''`: All the `awk` options are contained within the quotes.
-- `{}`: We can supply a function to `awk` within the braces.
-- `print $2,$3`: This function instructs `awk` to print the 2nd (completeness) and 3rd (contamination) fields. It is common to put commas (`,`) between fields if printing multiple fields.
-- `cocopye_output.csv`: Our last parameter is the input file. We are not changing the contents of the file, only printing information to screen/stdout.
+- `-F,`: Indicates the input fields are separated by commas (`,`)
+- `''`: All the `awk` options are contained within the quotes
+- `{}`: We can supply a function to `awk` within the braces
+- `print $2,$3`: This function instructs `awk` to print the 2nd (completeness) and 3rd (contamination) fields
+    - It is common to put commas (`,`) between fields if printing multiple fields
+- `cocopye_output.csv`: Our last parameter is the input file
+    - We are not changing the contents of the file, only printing information to screen/stdout.
 
 ### Ignore header
 
@@ -71,7 +73,9 @@ __We do not want the header__ in our calculation so we will add an extra `awk` o
 awk -F, 'NR>1 {print $2,$3}' cocopye_output.csv
 ```
 
-- `NR>1`: `NR` stands for number of records. Rows are called records in `awk`. Therefore `NR>1` means `awk` will only carry out the functions on the records numbered greater than 1. I.e. skip row 1, the header row.
+- `NR>1`: `NR` stands for number of records
+    - Rows are called records in `awk`
+    - Therefore, `NR>1` means `awk` will only carry out the functions on the records numbered greater than 1. I.e. skip row 1, the header row
 
 ### Calculate quality
 

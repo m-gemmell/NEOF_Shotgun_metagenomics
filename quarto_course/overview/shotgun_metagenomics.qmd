@@ -28,5 +28,10 @@ While much can be learned from studying the genome of a single microbial species
 
 Broadly speaking, there are two families of metagenomic analysis: 
 
-- __Amplicon-based__: This utilises sequencing data generated from amplified marker sequences, for example, regions of the 16S rRNA. Sequences are clustered together and taxonomically assigned to estimate the species abundance in a sample. This is sometimes referred to as metagenetics, as it does not consist of any genomic analysis beyond the marker gene regions.
-- __Shotgun__: This utilises sequencing data generated from random fragments from total genomic DNA from environmental samples, rather than targeting specific genes. This approach allows for not only species abundance determination but direct functional analysis, too, due to having information on a wide range of genetic data sampled from the population. This is sometimes referred to as metagenomics, as it involves genome-wide analyses. Shotgun metagenomics is the focus of this practical session.
+### Amplicon-based
+
+This utilises sequencing data generated from amplified marker sequences, for example, regions of the 16S rRNA. Sequences are clustered together and taxonomically assigned to estimate the species abundance in a sample. This is sometimes referred to as metagenetics, as it does not consist of any genomic analysis beyond the marker gene regions.
+
+### Shotgun
+
+This utilises sequencing data generated from random fragments from total genomic DNA from environmental samples, rather than targeting specific genes. This approach allows for not only species abundance determination but direct functional analysis, too, due to having information on a wide range of genetic data sampled from the population. This is sometimes referred to as metagenomics, as it involves genome-wide analyses. Shotgun metagenomics is the focus of this practical session.

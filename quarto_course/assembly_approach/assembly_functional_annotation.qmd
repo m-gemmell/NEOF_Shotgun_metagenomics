@@ -11,11 +11,16 @@ In this section we will carry out carry out functional annotation of our <u id='
 There are many different ways to carry this.
 In this tutorial we will use 2 tools:
 
-- [Bakta](#bakta_chap): Annotation of Bacterial genomes and plasmids.
-- [MinPath](#minpath_chap): Prediction of metabolic pathways.
-  - Include MetaCyc and KEGG pathways.
+- [Bakta](#bakta_chap): Annotation of Bacterial genomes and plasmids
+- [MinPath](#minpath_chap): Prediction of metabolic pathways
+  - Include MetaCyc and KEGG pathways
 
-__Conda Environment__: Go back to your shotgun_meta terminal (or create a new one and use `. useshotgun`).
+## Mamba
+<center>
+![](/images/mamba_logo.png){style="width:200px; border-radius:5px"}
+</center>
+
+Go back to your shotgun_meta terminal (or create a new one and use `. useshotgun`).
 
 ## Taxonomic annotation {-}
 <center>

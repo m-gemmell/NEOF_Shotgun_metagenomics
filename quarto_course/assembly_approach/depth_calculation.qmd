@@ -85,7 +85,7 @@ Many contigs have low depths of less than 10 (`totalAvgDepth`) and short lengths
 ![](/images/R.png){style="width:150px; background: white; border-radius:5px; border: white solid 5px"}
 </center>
 
-For tutorial purposes we will have a better at the depth by summarising the contig depths with `R`.
+For tutorial purposes we will have a better look at the depth by summarising the contig depths with `R`.
 
 Activate `R`:
 

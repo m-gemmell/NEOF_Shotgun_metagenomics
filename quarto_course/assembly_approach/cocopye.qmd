@@ -62,11 +62,11 @@ Let's go through a fictional example where we have 26 protein domains PDA-Z whic
 Analysis finds that our query genome contains the domain families PDD-R. 
 We therefore acquire the below results:
 
-- The query genome is classified as belonging to the Gigabacteria lineage as it contains many (in this case all) the domains unique to Gigabacteria (PDG-P) and many of the domains shared by both bacteria.
+- The query genome is classified as belonging to the Gigabacteria lineage as it contains many (in this case all) the domains unique to Gigabacteria (PDG-P) and many of the domains shared by both bacteria
 - Completeness: 81.25%
   - It is missing 3 of the domains found in Gigabacteria (PDA-C) 13/16 = 0.8125 = 81.25%
 - Contamination: 13.33%
-  - Of the 15 domains our query has 2 of them do not belong to it in the reference (PDQ & PDR) 2/15 = 0.1333 = 13.33%.
+  - Of the 15 domains our query has 2 of them do not belong to it in the reference (PDQ & PDR) 2/15 = 0.1333 = 13.33%
 
 #### Thresholds {-}
 
@@ -88,9 +88,9 @@ But what is a CRH?
 
 Each Pfam domain family is given a count ratio of Cq:Cr.
 
-- Cq: The count of the domain family in the query genome.
-- Cr: The count of the domain family in the reference genome. 
-  - The reference genome is determined in stage I.
+- Cq: The count of the domain family in the query genome
+- Cr: The count of the domain family in the reference genome
+  - The reference genome is determined in stage I
 
 Examples:
 
@@ -115,10 +115,10 @@ The process itself will use a text histogram but below are two visualisations of
 
 The main features of a CRH are:
 
-- __The central point (1/1):__ This indicates high completeness and low contamination.
-  - If the central peak contained 100% of the count ratios this would indicate 100% completeness and 0% contamination.
-- __Right of the central point:__ Histogram bins on the right hand side indicate contamination.
-- __Left of the central point:__ Histogram bins on the left hand side indicate decreasing completeness.
+- __The central point (1/1):__ This indicates high completeness and low contamination
+  - If the central peak contained 100% of the count ratios this would indicate 100% completeness and 0% contamination
+- __Right of the central point:__ Histogram bins on the right hand side indicate contamination
+- __Left of the central point:__ Histogram bins on the left hand side indicate decreasing completeness
 
 <center>
 ![](/images/crh1.png){style="width: 600px; border-radius: 5px; border: white 5px solid"} 
@@ -181,17 +181,18 @@ cocopye run \
 ![](/images/parameter_black.png){style="width:100px; background: white; border-radius: 5px; border: 5px white solid"}
 </center>
 
-- `-t` : Number of threads/cores/CPUs to utilise for the process.
-- `-i` : Input directory containing the bins in FASTA format.
-- `-o` : Output file (more info below).
+- `-t` : Number of threads/cores/CPUs to utilise for the process
+- `-i` : Input directory containing the bins in FASTA format
+- `-o` : Output file (more info below)
 
 Other options include:
 
-- `--file-extensions` : The allowed file extensions for input files within the input directory.
-  - The default is `fasta,fna,fa`. Our bin files produced from `MetaBAT2` have the file extension/suffix of `.fa` so the default works.
-- `-v` : The output file verbosity. 
-  - Values are: `standard` (default), `extended`, and `full`.
-  - More information on the output below.
+- `--file-extensions` : The allowed file extensions for input files within the input directory
+  - The default is `fasta,fna,fa`
+  - Our bin files produced from `MetaBAT2` have the file extension/suffix of `.fa` so the default works
+- `-v` : The output file verbosity.
+  - Values are: `standard` (default), `extended`, and `full`
+  - More information on the output below
   
 
 ## Stats

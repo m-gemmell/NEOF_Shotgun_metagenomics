@@ -11,7 +11,7 @@ For the final part of this section, we will see if there are any statistically s
 There are several ways in which this can be achieved but we will use `LEfSe` again.
 
 **Task**: Go back to your `shotgun_meta` terminal (or create a new terminal and use `. useshotgun`). 
-Then change directory to `4-FunctionalProfiling`).
+Then change directory to `4-FunctionalProfiling`.
 
 Thankfully we already formatted the file to work with `LEfSe` when we formatted it for `hclust2`.
 

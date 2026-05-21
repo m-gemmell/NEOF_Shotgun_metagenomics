@@ -25,7 +25,8 @@ This practical is broken up into the following sections and parts.
 1. __[Intro](/index.qmd):__ Introduction and learning outcomes
 2. __[Overview](/index.qmd):__ A quick overview of Shotgun metagenomics and the course structure
 3. __Data & QC__
-    - __[Raw data](/data_and_qc/raw_data.qmd)__: We will first link to a dataset that we have downloaded for this tutorial. We will take a quick look at what the sequence files look like and briefly discuss the origin of the samples.
+    - __[Raw data](/data_and_qc/raw_data.qmd)__: We will first link to a dataset that we have downloaded for this tutorial.
+        - We will take a quick look at what the sequence files look like and briefly discuss the origin of the samples.
     - __[Trimming data](/data_and_qc/trimming_data.qmd)__: This entails preprocessing our data to ensure that it is of good quality.
     - __[Host removal](/data_and_qc/host_removal.qmd)__: When sequencing the genomic content of a host's microbiota (bacteriome, archaeome, mycobiome, and more) it is likely you will also sequence the host's genome. This step shows a method of removing possible host contamination.
 4. __[Read approach](/read_approach/read_approach.qmd)__
@@ -36,9 +37,9 @@ This practical is broken up into the following sections and parts.
     - __[Binning](/assembly_approach/genome_binning.qmd)__: This step attempts to separate each assembled genomes into bins. These genome assemblies are called Metagenome-assembled Genomes (MAGs).
     - __[Functional annotation](/assembly_approach/assembly_functional_annotation.qmd)__: We will take our MAGs, predict genes and then functionally annotate them with MetaCyc.
 6. __Appendix__
-    - [Mamba](/appendix\mamba.qmd): Software and tool installation instructions using mamba
-    - [Next steps](/appendix\next_steps.qmd): Suggestions on various websites to explore for further tools
-    - [Manual](/appendix\manuals.qmd): Links to the manuals of the various tools and software used in this course
+    - [Mamba](/appendix\mamba.qmd): Software and tool installation instructions using mamba.
+    - [Next steps](/appendix\next_steps.qmd): Suggestions on various websites to explore for further tools.
+    - [Manual](/appendix\manuals.qmd): Links to the manuals of the various tools and software used in this course.
 
 ## Next section
 <center>

@@ -547,9 +547,9 @@ pre > code.sourceCode > span > a:first-child::before { text-decoration: underlin
 <p>Before we can estimate the pathways we need to extract the EC numbers predictions from the GFF file. EC (Enzyme Commission) numbers are a numerical classification for enzymes based on the reaction they catalyse.</p>
 <p>Unless you know the EC scheme well they are generally not helpful by themselves. An example EC number is EC 3.1.1. The numbers represents the group the enzyme belongs to with the first number being the biggest group. From highest to the lowest grouping 3.1.1 represents:</p>
 <ul>
-<li><strong>3</strong>: Hydrolase enzymes.</li>
-<li><strong>3.1</strong>: Hydrolase enzymes that act on ester bonds.</li>
-<li><strong>3.1.1</strong>: Carboxylic Ester Hydrolases.</li>
+<li><strong>3</strong>: Hydrolase enzymes</li>
+<li><strong>3.1</strong>: Hydrolase enzymes that act on ester bonds</li>
+<li><strong>3.1.1</strong>: Carboxylic Ester Hydrolases</li>
 </ul>
 <p>With all that information we will extract the EC annotations from the GFF files. First we’ll create a directory for the output.</p>
 <div class="cell">
@@ -558,8 +558,8 @@ pre > code.sourceCode > span > a:first-child::before { text-decoration: underlin
 </div>
 <p>We will now use a loop with various parts to create EC annotation files. The input <code>.ec</code> files required for <code>MinPath</code> are tab delimited with two columns:</p>
 <ol type="1">
-<li>Protein/sequence id. E.g. GDGAPA_12670.</li>
-<li>EC annotation. E.g. 6.1.1.4.</li>
+<li>Protein/sequence id. E.g. GDGAPA_12670</li>
+<li>EC annotation. E.g. 6.1.1.4</li>
 </ol>
 <p><strong>Note</strong>: The lack of <code>\</code> at the end of most of the lines is intentional. The below is all one command over multiple lines but loops work slightly different and don’t need <code>\</code> in certain parts. Ensure you press enter at the end of each line.</p>
 <div class="cell">
@@ -579,9 +579,9 @@ Loop exterior
 </button>
 <p>We’ll explain the code that initialises the loop.</p>
 <ul>
-<li>First we list all our <code>.gff</code> files on one line each (<code>ls -1 *gff</code>).</li>
-<li>Next, we remove the directory name (<code>sed "s|.*||"</code>).</li>
-<li>Then the suffix <code>.gff</code> is substituted with nothing <code>sed "s/.gff//"</code>.</li>
+<li>First we list all our <code>.gff</code> files on one line each (<code>ls -1 *gff</code>)</li>
+<li>Next, we remove the directory name (<code>sed "s|.*||"</code>)</li>
+<li>Then the suffix <code>.gff</code> is substituted with nothing <code>sed "s/.gff//"</code></li>
 </ul>
 <p>This gives us the name of each bin (e.g.&nbsp;<code>K1.1</code>, <code>K1.2</code>).</p>
 <div class="cell">
@@ -699,12 +699,12 @@ Loop interior
 <p>The file contains the following columns</p>
 <ol type="1">
 <li><strong>Pathway ID</strong></li>
-<li><strong>Pathway reconstruction</strong>: Only available for genomes annotated in MetaCyc database.</li>
-<li><strong>Naive</strong>: Indicates if pathway was reconstructed by the naive mapping approach (1) or not (0).</li>
-<li><strong>Minpath</strong>: Indicates if the pathway was kept (1) or removed (0) by <code>MinPath</code>.</li>
-<li><strong>Fam0</strong>: The number of families involved in the pathway.</li>
-<li><strong>Fam-found</strong>: Number of families in pathway that were annotated/found.</li>
-<li><strong>Name</strong>: Description of pathway.</li>
+<li><strong>Pathway reconstruction</strong>: Only available for genomes annotated in MetaCyc database</li>
+<li><strong>Naive</strong>: Indicates if pathway was reconstructed by the naive mapping approach (1) or not (0)</li>
+<li><strong>Minpath</strong>: Indicates if the pathway was kept (1) or removed (0) by <code>MinPath</code></li>
+<li><strong>Fam0</strong>: The number of families involved in the pathway</li>
+<li><strong>Fam-found</strong>: Number of families in pathway that were annotated/found</li>
+<li><strong>Name</strong>: Description of pathway</li>
 </ol>
 <p>Quit (<code>q</code>) <code>less</code> when you are happy.</p>
 <p>There are some quick things we can do in bash with these files.</p>
@@ -756,8 +756,8 @@ Loop interior
 <p>There is also an <a href="../appendix/mamba.html">appendix</a> with further information and resources.</p>
 <div class="cell">
 <div class="cell-output-display">
-<span class="tippy html-widget html-fill-item" height="382px" id="htmlwidget-f487ba36bb190a3d4b5c" width="100%"></span>
-<script type="application/json" data-for="htmlwidget-f487ba36bb190a3d4b5c">{"x":{"element":"mag","opts":{"content":"Metagenome-Assembled Genome","arrow":true,"placement":"bottom"}},"evals":[],"jsHooks":[]}</script>
+<span class="tippy html-widget html-fill-item" height="382px" id="htmlwidget-d09b63454dcea2d68328" width="100%"></span>
+<script type="application/json" data-for="htmlwidget-d09b63454dcea2d68328">{"x":{"element":"mag","opts":{"content":"Metagenome-Assembled Genome","arrow":true,"placement":"bottom"}},"evals":[],"jsHooks":[]}</script>
 </div>
 </div>
 

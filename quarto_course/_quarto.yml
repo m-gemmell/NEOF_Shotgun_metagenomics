@@ -120,6 +120,7 @@ website:
     - href: appendix\mamba.qmd
     - href: appendix\next_steps.qmd
     - href: appendix\manuals.qmd
+    - href: appendix\read_data.qmd
 format:
   html:
     engine: knitr

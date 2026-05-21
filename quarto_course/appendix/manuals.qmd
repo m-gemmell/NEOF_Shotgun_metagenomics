@@ -4,53 +4,53 @@ engine: knitr
 
 # Manuals
 <center>
-![](/images/manual.png){style="width:150px"}
+![](/images/manual.png){style="width:150px; background: white; border-radius:5px"}
 </center>
 
-Conda: https://conda.io/projects/conda/en/latest/user-guide/getting-started.html
+Conda: [https://conda.io/projects/conda/en/latest/user-guide/getting-started.html](https://conda.io/projects/conda/en/latest/user-guide/getting-started.html)
 
-FastQC: https://www.bioinformatics.babraham.ac.uk/projects/fastqc/
+FastQC: [https://www.bioinformatics.babraham.ac.uk/projects/fastqc/](https://www.bioinformatics.babraham.ac.uk/projects/fastqc/)
 
-MultiQC: https://multiqc.info/
+MultiQC: [https://multiqc.info/](https://multiqc.info/)
 
-Trim Galore: https://www.bioinformatics.babraham.ac.uk/projects/trim_galore/
+Trim Galore: [https://www.bioinformatics.babraham.ac.uk/projects/trim_galore/](https://www.bioinformatics.babraham.ac.uk/projects/trim_galore/)
 
-Bowtie2: http://bowtie-bio.sourceforge.net/bowtie2/manual.shtml
+Bowtie2: [http://bowtie-bio.sourceforge.net/bowtie2/manual.shtml](http://bowtie-bio.sourceforge.net/bowtie2/manual.shtml)
 
-samtools: http://www.htslib.org/
+samtools: [http://www.htslib.org/](http://www.htslib.org/)
 
-BBTools: https://jgi.doe.gov/data-and-tools/bbtools/
+BBTools: [https://jgi.doe.gov/data-and-tools/bbtools/](https://jgi.doe.gov/data-and-tools/bbtools/)
 
-Kraken2: https://github.com/DerrickWood/kraken2/wiki/Manual
+Kraken2: [https://github.com/DerrickWood/kraken2/wiki/Manual](https://github.com/DerrickWood/kraken2/wiki/Manual)
 
-Krona: https://github.com/marbl/Krona/wiki/KronaTools
+Krona: [https://github.com/marbl/Krona/wiki/KronaTools](https://github.com/marbl/Krona/wiki/KronaTools)
 
-Bracken: https://ccb.jhu.edu/software/bracken/index.shtml?t=manual
+Bracken: [https://ccb.jhu.edu/software/bracken/index.shtml?t=manual](https://ccb.jhu.edu/software/bracken/index.shtml?t=manual)
 
-LEfSe: https://huttenhower.sph.harvard.edu/lefse/
+LEfSe: [https://huttenhower.sph.harvard.edu/lefse/](https://huttenhower.sph.harvard.edu/lefse/)
 
-HUMAnN 3.0: https://huttenhower.sph.harvard.edu/humann/
+HUMAnN 3.0: [https://huttenhower.sph.harvard.edu/humann/](https://huttenhower.sph.harvard.edu/humann/)
 
-MetaPhlAn 4.0: https://github.com/biobakery/MetaPhlAn/wiki/MetaPhlAn-4
+MetaPhlAn 4.0: [https://github.com/biobakery/MetaPhlAn/wiki/MetaPhlAn-4](https://github.com/biobakery/MetaPhlAn/wiki/MetaPhlAn-4)
 
-Biobakery: https://github.com/biobakery/biobakery
+Biobakery: [https://github.com/biobakery/biobakery](https://github.com/biobakery/biobakery)
 
-hclust2: https://github.com/SegataLab/hclust2
+hclust2: [https://github.com/SegataLab/hclust2](https://github.com/SegataLab/hclust2)
 
-MegaHit: https://github.com/voutcn/megahit
+MegaHit: [https://github.com/voutcn/megahit](https://github.com/voutcn/megahit)
 
-BWA: https://github.com/lh3/bwa
+BWA: [https://github.com/lh3/bwa](https://github.com/lh3/bwa)
 
-minimap2: https://github.com/lh3/minimap2
+minimap2: [https://github.com/lh3/minimap2](https://github.com/lh3/minimap2)
 
-MetaBAT2: https://bitbucket.org/berkeleylab/metabat/src/master/
+MetaBAT2: [https://bitbucket.org/berkeleylab/metabat/src/master/](https://bitbucket.org/berkeleylab/metabat/src/master/)
 
-CoCoPyE: https://github.com/gobics/cocopye
+CoCoPyE: [https://github.com/gobics/cocopye](https://github.com/gobics/cocopye)
 
-PhyloPhlAn: https://github.com/biobakery/phylophlan/wiki
+PhyloPhlAn: [https://github.com/biobakery/phylophlan/wiki](https://github.com/biobakery/phylophlan/wiki)
 
-Prokka: https://github.com/tseemann/prokka
+Prokka: [https://github.com/tseemann/prokka](https://github.com/tseemann/prokka)
 
-MinPath: https://github.com/mgtools/MinPath/blob/master/readme
+MinPath: [https://github.com/mgtools/MinPath/blob/master/readme](https://github.com/mgtools/MinPath/blob/master/readme)
 
-MetaCyc: https://metacyc.org/
+MetaCyc: [https://metacyc.org/](https://metacyc.org/)

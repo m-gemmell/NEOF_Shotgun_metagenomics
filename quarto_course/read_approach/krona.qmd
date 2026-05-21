@@ -21,8 +21,8 @@ ktImportTaxonomy -o kraken2.krona.html *.kreport2
 ```
 
 - `-o` is our output html file
-- The final argument `*.kreport2` represents all of our `.kreport2` files in the current directory.
-  - The `*` is a wild-card, meaning any characters any number of times. Therefore `*.kreport2` identifies the files `K1.kreport2` `K2.kreport2` and `W1.kreport2`.
+- The final argument `*.kreport2` represents all of our `.kreport2` files in the current directory
+  - The `*` is a wild-card, meaning any characters any number of times. Therefore `*.kreport2` identifies the files `K1.kreport2` `K2.kreport2` and `W1.kreport2`
 
 You will get a warning that not all taxonomy IDs were found. We will ignore this but in your own future installations this should be addressed with `Krona`'s `updateTaxonomy.sh` command.
 
@@ -39,14 +39,14 @@ firefox kraken2.krona.html &
 
 This is an interactive multi-tiered pie chart with many options. Some of the interactivity is described below:
 
-- To choose a sample to view, click on the sample name in the top left.
-- To zoom into a lower taxonomy, double click on the taxonomy's name on the pie chart.
-  - E.g. double click the word "Bacteria" on the pie chart to zoom into Bacteria and therefore ignore Eukaryota, and "[other Root]".
-- To zoom out to a higher taxonomy, click on the taxonomy's name in the middle of the pie chart.
-  - E.g. click the word "root" in the middle of the pie chart to zoom back out from any lower level of taxonomy.
-- To view percentage stats of a taxonomy, click on the taxonomy name on the pie chart. 
-  - This will display the percentage this taxonomy covers of all the different taxonomies above it that it belongs to. This is displayed on the right side of the screen.
-  - E.g. Click on Pseudomonadota to see the percentage of the Root it accounts for and to see the percentage of Bacteria it accounts for in the sample.
+- To choose a sample to view, click on the sample name in the top left
+- To zoom into a lower taxonomy, double click on the taxonomy's name on the pie chart
+  - E.g. double click the word "Bacteria" on the pie chart to zoom into Bacteria and therefore ignore Eukaryota, and "[other Root]"
+- To zoom out to a higher taxonomy, click on the taxonomy's name in the middle of the pie chart
+  - E.g. click the word "root" in the middle of the pie chart to zoom back out from any lower level of taxonomy
+- To view percentage stats of a taxonomy, click on the taxonomy name on the pie chart.
+  - This will display the percentage this taxonomy covers of all the different taxonomies above it that it belongs to. This is displayed on the right side of the screen
+  - E.g. Click on Pseudomonadota to see the percentage of the Root it accounts for and to see the percentage of Bacteria it accounts for in the sample
 
 ## MCQs
 <center>

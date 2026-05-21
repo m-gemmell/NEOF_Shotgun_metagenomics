@@ -313,7 +313,7 @@ pre > code.sourceCode > span > a:first-child::before { text-decoration: underlin
 <span class="menu-text">QC</span></a>
   </li>  
   <li class="nav-item">
-    <a class="nav-link" href="../read_approach/taxonomic_profiling.html"> 
+    <a class="nav-link" href="../read_approach/read_approach.html"> 
 <span class="menu-text">Reads</span></a>
   </li>  
   <li class="nav-item">
@@ -364,6 +364,12 @@ pre > code.sourceCode > span > a:first-child::before { text-decoration: underlin
       </div>
     <div class="sidebar-menu-container"> 
     <ul class="list-unstyled mt-1">
+        <li class="sidebar-item">
+  <div class="sidebar-item-container"> 
+  <a href="../read_approach/read_approach.html" class="sidebar-item-text sidebar-link">
+ <span class="menu-text">Read approach</span></a>
+  </div>
+</li>
         <li class="sidebar-item sidebar-item-section">
       <div class="sidebar-item-container"> 
             <a class="sidebar-item-text sidebar-link text-start" data-bs-toggle="collapse" data-bs-target="#quarto-sidebar-section-1" role="navigation" aria-expanded="true">
@@ -545,8 +551,14 @@ pre > code.sourceCode > span > a:first-child::before { text-decoration: underlin
 </center>
 <p>For this tutorial we do not want the species stratification information. We will therefore split the table to create 2 new files:</p>
 <ul>
-<li><code>diet_unstratified.tsv</code>: This table only contains the total abundance values for the pathways. It does not contain any species stratification information.</li>
-<li><code>diet_stratified.tsv</code>: This table only contains the species stratification abundance values for the pathways. It does not contain the total abundance information.</li>
+<li><code>diet_unstratified.tsv</code>: Table containing the total abundance values for the pathways
+<ul>
+<li>Does not contain any species stratification information.</li>
+</ul></li>
+<li><code>diet_stratified.tsv</code>: Table containing the species stratification abundance values for the pathways
+<ul>
+<li>Does not contain the total abundance information.</li>
+</ul></li>
 </ul>
 <p>To create the split files and output them to your current directory, run the following command:</p>
 <div class="cell">

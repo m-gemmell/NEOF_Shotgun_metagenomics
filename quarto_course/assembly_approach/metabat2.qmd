@@ -9,9 +9,9 @@ engine: knitr
 We will use `MetaBAT2` for genome binning. 
 It has three major upsides that makes it very popular:
 
-1. It has very reliable default parameters meaning virtually no parameter optimisation is required.
-2. It performs very well amongst genome binners.
-3. It is computationally efficient compared to other binners (requires less RAM, cores etc.).
+1. It has very reliable default parameters meaning virtually no parameter optimisation is required
+2. It performs very well amongst genome binners
+3. It is computationally efficient compared to other binners (requires less RAM, cores etc.)
 
 Make a new directory and move into it.
 
@@ -45,13 +45,13 @@ metabat2 \
 ![](/images/parameter_orange.png){style="width:100px; background: white; border-radius:5px; border: white solid 5px"}
 </center>
 
-- `--inFile`: Input metagenome assembly fasta file.
-- `--outFile`: Prefix of output files.
-- `--abdFile`: Contig depth file.
-  - Caluclated in the previous [Depth calculation chapter](#depth_calc)
-- `--minContig`: Minimum size of contigs to be used for binning.
-  - The default is 2500.
-  - We used the minimum value of 1500 as we are using tutorial data. We recommend using the default in your own analysis.
+- `--inFile`: Input metagenome assembly fasta file
+- `--outFile`: Prefix of output files
+- `--abdFile`: Contig depth file
+  - Calculated in the previous [Depth calculation chapter](#depth_calc)
+- `--minContig`: Minimum size of contigs to be used for binning
+  - The default is 2500
+  - We used the minimum value of 1500 as we are using tutorial data. We recommend using the default in your own analysis
 
 ## Bins
 <center>

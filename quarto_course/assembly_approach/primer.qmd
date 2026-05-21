@@ -22,7 +22,7 @@ Illumina reads are too short and numerous to use traditional overlap-layout-cons
 <center>
 ![](/images/graph_complex.png){style="border-radius: 10px; width: 800px"}
 </center>
-
+<br>
 The example here is a vast oversimplification of the complexity of a De Bruijn graph (i.e. there are no branches!). Routing through the graph is never as simple as this as some <u id='kmer'>k-mers</u> will lead to multiple <u id='kmer'>k-mers</u>, which can result in the break point of a contig. This is especially true for complex metagenomic data.
 
 Generally speaking, the shorter the <u id='kmer'>k-mer</u>, the more branches there will be, the trickier the graph is to resolve, so the resulting contigs are smaller. Assemblers usually perform better with longer <u id='kmer'>k-mer</u> lengths but even then there might not be enough depth of sequencing to generate all k-mers that form overlaps, therefore leading to break points. Finding the right <u id='kmer'>k-mer</u> size usually involves testing several.

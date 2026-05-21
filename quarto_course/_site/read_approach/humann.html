@@ -313,7 +313,7 @@ pre > code.sourceCode > span > a:first-child::before { text-decoration: underlin
 <span class="menu-text">QC</span></a>
   </li>  
   <li class="nav-item">
-    <a class="nav-link" href="../read_approach/taxonomic_profiling.html"> 
+    <a class="nav-link" href="../read_approach/read_approach.html"> 
 <span class="menu-text">Reads</span></a>
   </li>  
   <li class="nav-item">
@@ -364,6 +364,12 @@ pre > code.sourceCode > span > a:first-child::before { text-decoration: underlin
       </div>
     <div class="sidebar-menu-container"> 
     <ul class="list-unstyled mt-1">
+        <li class="sidebar-item">
+  <div class="sidebar-item-container"> 
+  <a href="../read_approach/read_approach.html" class="sidebar-item-text sidebar-link">
+ <span class="menu-text">Read approach</span></a>
+  </div>
+</li>
         <li class="sidebar-item sidebar-item-section">
       <div class="sidebar-item-container"> 
             <a class="sidebar-item-text sidebar-link text-start" data-bs-toggle="collapse" data-bs-target="#quarto-sidebar-section-1" role="navigation" aria-expanded="true">
@@ -544,13 +550,24 @@ pre > code.sourceCode > span > a:first-child::before { text-decoration: underlin
 <p>You will see that there are three files and one directory. The directory (<code>demo_humann_temp</code>) contains intermediate temporary files and can be disregarded for now.</p>
 <p>The three output files are:</p>
 <ul>
-<li><strong><code>demo_genefamilies.tsv</code></strong>: A table file showing the number of reads mapping to each UniRef90 gene family. Values are normalised by the length of each gene family (i.e.&nbsp;RPK, or Reads per Kilobase). Additionally, the values are stratified so that they show the overall community abundance but also a breakdown of abundance per species detected. This allows researchers to delve into species specific functions, rather than only looking at the metagenomic functions as a whole.</li>
-<li><strong><code>demo_pathabundance.tsv</code></strong>: A table file showing the normalised abundance of MetaCyc pathways (RPKs). These abundances are calculated based on the UniRef90 gene family mapping data and are also stratified by species.</li>
-<li><strong><code>demo_pathcoverage.tsv</code></strong>: A table file that shows the coverage, or completeness, of pathways. For example, a pathway may contain 5 components (or genes/proteins)
+<li><strong><code>demo_genefamilies.tsv</code></strong>: A table file showing the number of reads mapping to each UniRef90 gene family
+<ul>
+<li>Values are normalised by the length of each gene family (i.e.&nbsp;RPK, or Reads per Kilobase)</li>
+<li>Additionally, the values are stratified so that they show the overall community abundance but also a breakdown of abundance per species detected</li>
+<li>This allows researchers to delve into species specific functions, rather than only looking at the metagenomic functions as a whole</li>
+</ul></li>
+<li><strong><code>demo_pathabundance.tsv</code></strong>: A table file showing the normalised abundance of MetaCyc pathways (RPKs)
+<ul>
+<li>These abundances are calculated based on the UniRef90 gene family mapping data and are also stratified by species</li>
+</ul></li>
+<li><strong><code>demo_pathcoverage.tsv</code></strong>: A table file that shows the coverage, or completeness, of pathways
+<ul>
+<li>For example, a pathway may contain 5 components (or genes/proteins)
 <ul>
 <li>Pathway1 : A → B → C → D → E 100% complete</li>
 <li>A species identified in the sample may only have four of the components, meaning that the pathway is only 80% complete (represented as 0.8)</li>
 <li>Pathway1 : A → B → C → <del>D</del> → E 80% complete</li>
+</ul></li>
 </ul></li>
 </ul>
 <p>The basic format of these three output files is the same, so let’s take a look at the pathway abundance table.</p>
@@ -559,12 +576,12 @@ pre > code.sourceCode > span > a:first-child::before { text-decoration: underlin
 </div>
 <p>You will see that there are two columns:</p>
 <ol type="1">
-<li>The first column shows the pathways.
+<li>The first column shows the pathways
 <ul>
-<li><strong>UNMAPPED</strong> indicates reads that could not be aligned.</li>
-<li><strong>UNINTEGRATED</strong> indicates reads that aligned to targets not implicated in any pathways.</li>
+<li><strong>UNMAPPED</strong> indicates reads that could not be aligned</li>
+<li><strong>UNINTEGRATED</strong> indicates reads that aligned to targets not implicated in any pathways</li>
 </ul></li>
-<li>The second column shows the abundance.</li>
+<li>The second column shows the abundance</li>
 </ol>
 <p>This file is not too interesting to look at as it is only demo data. Therefore, press <code>q</code> to exit <code>less</code> and let’s look at some real data.</p>
 <p><strong>Note</strong>: Link to more detail on <a href="https://github.com/biobakery/humann#output-files">Output files</a></p>

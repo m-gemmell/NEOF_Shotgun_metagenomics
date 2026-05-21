@@ -36,9 +36,12 @@ bakta \
 ![](/images/parameter_blue.png){style="width:100px"}
 </center>
 
-- `--db`: Location of `Bakta` database. You will need to install this in your own installation. Instructions are in the [appendix](#mamba_install).
-- `-o`: The output directory. This must not exist before running the command.
-- The last parameter is the fasta file containing the genome/plasmid you would like annotated.
+- `--db`: Location of `Bakta` database
+  - You will need to install this in your own installation
+  - Instructions are in the [appendix](#mamba_install).
+- `-o`: The output directory
+  - This __must not exist__ before running the command
+- The last parameter is the fasta file containing the genome/plasmid you would like annotated
 
 ### Bakta: premade results
 

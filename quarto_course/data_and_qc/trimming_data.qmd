@@ -12,9 +12,9 @@ Now that we've obtained the raw data and had a look at it, we should clean it up
 
 There are two main methods employed to clean sequence data, and a third method specific to some metagenomic datasets.
 
-- Remove low quality bases from the end of the reads: These are more likely to be incorrect, so are best trimmed off.
-- Remove adapters: Sometimes sequencing adapters can be sequenced if the sequencing runs off the end of a fragment. 
-- Host removal: If a metagenomic sample derives from a host species then it may be advisable to remove any reads associated with the host genome.
+- Remove low quality bases from the end of the reads: These are more likely to be incorrect, so are best trimmed off
+- Remove adapters: Sometimes sequencing adapters can be sequenced if the sequencing runs off the end of a fragment
+- Host removal: If a metagenomic sample derives from a host species then it may be advisable to remove any reads associated with the host genome
 
 ## Removing adapters and low quality bases
 <center>

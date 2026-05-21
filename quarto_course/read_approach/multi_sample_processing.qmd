@@ -86,8 +86,10 @@ less -S diet.tsv
 
 For this tutorial we do not want the species stratification information. We will therefore split the table to create 2 new files:
 
--   `diet_unstratified.tsv`: This table only contains the total abundance values for the pathways. It does not contain any species stratification information.
--   `diet_stratified.tsv`: This table only contains the species stratification abundance values for the pathways. It does not contain the total abundance information.
+-   `diet_unstratified.tsv`: Table containing the total abundance values for the pathways
+    - Does not contain any species stratification information.
+-   `diet_stratified.tsv`: Table containing the species stratification abundance values for the pathways
+    - Does not contain the total abundance information.
 
 To create the split files and output them to your current directory, run the following command:
 

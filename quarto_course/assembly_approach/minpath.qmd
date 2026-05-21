@@ -20,9 +20,9 @@ Before we can estimate the pathways we need to extract the EC numbers prediction
 
 Unless you know the EC scheme well they are generally not helpful by themselves. An example EC number is EC 3.1.1. The numbers represents the group the enzyme belongs to with the first number being the biggest group. From highest to the lowest grouping 3.1.1 represents:
 
-- __3__: Hydrolase enzymes.
-- __3.1__: Hydrolase enzymes that act on ester bonds.
-- __3.1.1__: Carboxylic Ester Hydrolases.
+- __3__: Hydrolase enzymes
+- __3.1__: Hydrolase enzymes that act on ester bonds
+- __3.1.1__: Carboxylic Ester Hydrolases
 
 With all that information we will extract the EC annotations from the GFF files. First we'll create a directory for the output.
 
@@ -34,8 +34,8 @@ mkdir EC
 We will now use a loop with various parts to create EC annotation files.
 The input `.ec` files required for `MinPath` are tab delimited with two columns:
 
-1. Protein/sequence id. E.g. GDGAPA_12670.
-2. EC annotation. E.g. 6.1.1.4.
+1. Protein/sequence id. E.g. GDGAPA_12670
+2. EC annotation. E.g. 6.1.1.4
 
 __Note__: The lack of `\` at the end of most of the lines is intentional. 
 The below is all one command over multiple lines but loops work slightly different and don't need `\` in certain parts. 
@@ -60,9 +60,9 @@ They contain explanations and example code to break down the code.
 `r hide("Loop exterior")`
 We'll explain the code that initialises the loop.
 
-- First we list all our `.gff` files on one line each (`ls -1 *gff`).
-- Next, we remove the directory name (`sed "s|.*||"`).
-- Then the suffix `.gff` is substituted with nothing `sed "s/.gff//"`. 
+- First we list all our `.gff` files on one line each (`ls -1 *gff`)
+- Next, we remove the directory name (`sed "s|.*||"`)
+- Then the suffix `.gff` is substituted with nothing `sed "s/.gff//"`
 
 This gives us the name of each bin (e.g. `K1.1`, `K1.2`).
 
@@ -202,12 +202,12 @@ less K1.22.minpath
 The file contains the following columns
 
 1. __Pathway ID__
-2. __Pathway reconstruction__: Only available for genomes annotated in MetaCyc database.
-3. __Naive__: Indicates if pathway was reconstructed by the naive mapping approach (1) or not (0).
-4. __Minpath__: Indicates if the pathway was kept (1) or removed (0) by `MinPath`.
-5. __Fam0__: The number of families involved in the pathway.
-6. __Fam-found__: Number of families in pathway that were annotated/found.
-7. __Name__: Description of pathway.
+2. __Pathway reconstruction__: Only available for genomes annotated in MetaCyc database
+3. __Naive__: Indicates if pathway was reconstructed by the naive mapping approach (1) or not (0)
+4. __Minpath__: Indicates if the pathway was kept (1) or removed (0) by `MinPath`
+5. __Fam0__: The number of families involved in the pathway
+6. __Fam-found__: Number of families in pathway that were annotated/found
+7. __Name__: Description of pathway
 
 Quit (`q`) `less` when you are happy.
 
