@@ -1,0 +1,29 @@
+---
+engine: knitr
+---
+
+# Next steps
+<center>
+![](/images/step.png){style="width:200px"}
+</center>
+
+Below are some good links to start with before carrying out your own projects.
+
+- `KrakenTools`: A suite of scripts to be used alongside the Kraken, KrakenUniq, Kraken 2, or Bracken programs. 
+  - https://github.com/jenniferlu717/KrakenTools
+- A review of computational tools for generating metagenome-assembled genomes from metagenomic sequencing data
+  - https://www.sciencedirect.com/science/article/pii/S2001037021004931
+- A review paper on metagenome assembly approaches
+   - Genome-resolved metagenomics using environmental and clinical samples: https://academic.oup.com/bib/advance-article/doi/10.1093/bib/bbab030/6184411
+- bioBakery tools for meta'omic profiling
+   - https://github.com/biobakery/biobakery
+- Assessing the performance of different approaches for functional and taxonomic annotation of metagenomes
+   - https://bmcgenomics.biomedcentral.com/articles/10.1186/s12864-019-6289-6
+- MicrobeAnnotator: Easy-to-use pipeline for the comprehensive metabolic annotation of microbial genomes.
+   - https://github.com/cruizperez/MicrobeAnnotator
+- MetaEuk: Functional annotation of eukaryotic metagenome
+   - https://github.com/soedinglab/metaeuk
+_ Methods for Metagenomic data visualisation and analysis
+   - https://www.researchgate.net/publication/318252633_Methods_for_The_Metagenomic_Data_Visualization_and_Analysis
+- Visualizing metagenomic and metatranscriptomic data: A comprehensive review
+  - https://www.sciencedirect.com/science/article/pii/S2001037024001430

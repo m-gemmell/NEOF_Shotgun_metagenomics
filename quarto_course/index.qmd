@@ -1,0 +1,51 @@
+---
+title: "Introduction"
+---
+
+<center>
+![](/images/squid.png){style="width:200px; background: white; border-radius:5px"}
+</center>
+
+There are many unknown and unculturable microbes found in a vast array of different environments. Shotgun metagenomics is an approach to capture all the genetic information in a sample, providing the taxonomic and metabolic information of all present organisms. In this course we will analyse shotgun metagenomic sequencing data from stool samples to compare Western and Korean diets.
+
+Sessions will start with a brief presentation followed by self-paced computer practicals guided by this online interactive book. This book will contain theory and practice code. Multiple choice questions will guide the interpretation of results.
+
+## Learning outcomes
+<center>
+![](/images/chalkboard.png){style="width:200px; background: white; border-radius:5px"}
+</center>
+
+At the end of the course learners will be able to:
+
+-   Carry out quality control of sequencing data, including host removal.
+-   Explain how Kraken2 utilises <u id='kmer'>k-mers</u> to taxonomically classify sequence data.
+-   Quantify taxonomic composition of shotgun metagenomic data with Kraken2 & Bracken.
+-   View taxonomic abundances with Krona.
+-   Utilise LEfSe for biomarker detection.
+-   Profile the microbial pathways in metagenomic sequencing data with the bioBakery suite of tools, including HUMAnN.
+-   Perform a metagenome assembly with MEGAHIT, and assess it with QUAST.
+-   Carry out genomic binning of the metagenome assembly with MetaBAT2 to try to separate the different species present into Metagenome Assembled Genomes (<u id='mag'>MAGs</u>).
+-   Assess the quality, completeness, and contamination levels of MAGs with CoCoPyE.
+-   Functional annotation of the bins with Bakta.
+
+## Start
+<center>
+![](/images/overview.png){style="width:150px; background: white; border-radius:5px; border: white solid 5px"}
+</center>
+
+Please start in the [overview section](/overview/shotgun_metagenomics.qmd) and read through the website in order.
+
+```{r, echo=FALSE}
+#Tippy tooltips
+#Note, &#013; is a newline entity (\n does not work)
+tippy::tippy_this(elementId = "kmer", 
+                  tooltip = "K-mers are substrings of length k within a DNA/RNA sequence. 
+                              The 1-mers of 'AGCT' are 'A', 'G', 'C', and 'T'. 
+                              Its 2-mers are 'AG', 'GC' and 'CT'. 
+                              Its 3-mers are 'AGC' and GCT'. 
+                              Its 4-mer is 'AGCT'.",
+                  arrow = TRUE, placement = "bottom")
+tippy::tippy_this(elementId = "mag", 
+                  tooltip = "Metagenome-Assembled Genome",
+                  arrow = TRUE, placement = "bottom")
+```

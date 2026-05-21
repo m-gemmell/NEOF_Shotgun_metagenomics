@@ -1,0 +1,39 @@
+# Read approach
+<center>
+![](/images/read.png){style="width:200px; background:white; border-radius:5px"}
+</center>
+
+There are two mains ways to analyse shotgun metagenomic datasets: read approaches, and assembly approaches.
+This section will cover an introduction to the read approach.
+
+## Taxonomic profiling
+<center>
+![](/images/classification.png){style="width:200px; background:white; border-radius:5px"}
+</center>
+
+We will first carry out taxonomic profiling with the following pages:
+
+1. [Taxonomic profiling](/read_approach/taxonomic_profiling.qmd): Intro and start of taxonomic profiling part
+2. [Kraken2](/read_approach/kraken2.qmd): Assign taxonomies to reads
+3. [Krona](/read_approach/krona.qmd): Create interactive tiered pie charts read counts
+4. [Bracken](/read_approach/bracken.qmd): Estimate abundances of taxa using the Kraken2 output
+5. [LEfSe](/read_approach/lefse.qmd): Biomarker detection i.e. detected differential abundance of taxa based on sample groupings (Korean vs Western diet)
+
+## Functional profiling
+<center>
+![](/images/profile.png){style="width:150px; background:white;border-radius:5px; border: white solid 5px"}
+</center>
+
+After taxonomic profiling we will carry out functional profiling.
+In your future analysis you could run these in parallel.
+The functional profiling workflow does not need output from the taxonomic profiling workflow and vice versa.
+
+This part's pages are:
+
+1. [Functional profiling](/read_approach/functional_profiling.qmd): Intro and overview of the HUMAnN pipeline
+2. [HUMAnN](/read_approach/humann.qmd): Running of the HUMANnN pipeline for read based functional profiling
+    - Includes description of output files
+3. [Multi sample processing](/read_approach/multi_sample_processing.qmd): Combining, splitting, and normalising HUMANnN output
+4. [Heatmap](/read_approach/heatmap.qmd): Creation of heatmap showing functional counts of the samples
+5. [LEfSe](/read_approach/lefse_humann.qmd): LEfSe biomarker detection of the functional abundances
+6. [Optional task](/read_approach/humann_task.qmd): Tasks related to different forms of normalisation

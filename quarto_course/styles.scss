@@ -1,0 +1,39 @@
+/*-- scss:defaults --*/
+
+// Import fonts
+@import url('https://fonts.googleapis.com/css2?family=Fira+Mono&family=Lexend&display=swap');;
+
+// Colors
+$ibm-blue: #648fff;
+$ibm-purple: #785ef0;
+$ibm-maroon: #dc267f;
+$ibm-orange: #fe6100;
+$ibm-yellow: #ffb000;
+$neof-green: #00af37;
+$neof-grey: #333e47;
+$cgr-blue: #0088d1;
+$cgr-light-blue: #3abaff;
+$cgr-grey: #dfe2eb;
+
+// Base document colors
+$navbar-bg: $cgr-grey;
+$navbar-hl: $cgr-blue; // highlight color when hovering over navbar links
+$footer-bg: $cgr-grey; // footer
+$sidebar-hl: $cgr-blue;
+
+$link-color: $cgr-blue;
+
+/*-- scss:rules --*/
+body {
+  font-family: "Lexend";
+}
+h1 {
+  font-family: "Lexend";
+  text-align: center;
+}
+h2, h3, h4, h5, h6 {
+  font-family: "Lexend";
+}
+monofont {
+  font-family: "Fira+Mono";
+}

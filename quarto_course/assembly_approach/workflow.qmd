@@ -1,0 +1,41 @@
+# Workflow
+
+There are a lot of steps to our metagenome assembly approach. 
+This page contains an overview of the workflow and this section.
+
+## Metagenome intro
+<center>
+![](/images/jigsaw.png){style="width:200px; background: white; border-radius:5px"}
+</center>
+
+1. [Metagenome assembly](/assembly_approach/metagenome_assembly.qmd): Introduction to the metagenome assembly section
+2. [Workflow](/assembly_approach/workflow.qmd): Overview of the workflow and this section (this page)
+3. [A primer on short read assembly](/assembly_approach/primer.qmd): Primer on the use of Illumina reads for metagenome assembly
+
+## Assembly
+<center>
+![](/images/puzzle.png){style="width: 200px; border-radius: 15px; background-color: white"}
+</center>
+
+1. [FLASH](/assembly_approach/flash.qmd): Read stitching to improve assembly
+2. [MEGAHIT](/assembly_approach/megahit.qmd): Metagenome assembly through an iterative k-mer approach
+
+## Binning
+<center>
+![](/images/yarn_binning.png){style="width:300px; background: white; border-radius:5px; border: white solid 5px"}
+</center>
+
+1. [Genome binning](/assembly_approach\genome_binning.qmd): Introduction to genome binning
+2. [Depth calculation](/assembly_approach\depth_calculation.qmd): Depth calculation required for binning
+3. [MetaBAT2](/assembly_approach\metabat2.qmd): Binning the metagenome into MAGs
+4. [CoCoPyE](/assembly_approach\cocopye.qmd): Quality assessment microbial genomes through completeness and contamination estimation
+5. [Bin quality scores](/assembly_approach\bin_quality_scores.qmd): Calculation of bin quality using contamination and completeness scores
+
+## Functional annotation of bins
+<center>
+![](/images/pathways.png){style="width:200px; background:white; border-radius:5px"}
+</center>
+
+1. [Assembly functional annotation](/assembly_approach\assembly_functional_annotation.qmd): Introduction to assembly functional annotation
+2. [Bakta](/assembly_approach\bakta.qmd): Functional annotation of the microbial MAGs
+3. [MinPath](/assembly_approach\minpath.qmd): Metabolic pathway prediction

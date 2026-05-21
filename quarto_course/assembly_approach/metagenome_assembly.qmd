@@ -1,0 +1,37 @@
+---
+engine: knitr
+---
+# Metagenome assembly {#metagenomeassembly}
+<center>
+![](/images/jigsaw.png){style="width:300px; background: white; border-radius:5px"}
+</center>
+
+So far we have directly analysed the read data itself which is perfectly fine for taxonomic profiling and for certain methods of functional profiling. However, Illumina reads are generally short and therefore can not provide us with much data on larger constructs that are in the metagenomic samples, e.g. genes. While it is possible to predict from which gene a sequence read might originate, the short nature of the query can sometimes lead to ambiguous results.
+
+Additionally, depending on the application it can become computationally intensive to analyse large numbers of reads. Here, we are only using samples with 1 million reads. Some metagenome samples consist of 50-100 million+ read pairs. If such a sample belonged to a set of 100 samples, that would be up to 10 billion read pairs, or 2 trillion bases of sequence data, with many of these being redundant.
+
+For this reason, it is sometimes advantageous to assemble the reads into contigs, using a meta-genome assembler. This has the dual effect of:
+
+-   Reducing the overall size of the data for analysis. If a metagenome was sequenced at 50x depth, then by assembling it you could theoretically reduce the amount of sequence to analyse by 50-fold.
+-   Increase the size of the fragments you will analyse. This is the main advantage of an assembly, as the \~100 bp reads can be pieced together to form 100,000 kb+ contigs. These contigs will contain complete genes, operons and regulatory elements: Reconstructed genome sections.
+
+Here, we will carry out a couple of assemblies on our dataset.
+
+## Mamba
+<center>
+![](/images/mamba_logo.png){style="width:200px; border-radius:5px"}
+</center>
+
+We will use the `shotgun_meta` conda environment so use a terminal where this is activated or open a new one and run `. useshotgun`.
+
+```{r, echo=FALSE}
+#Tippy tooltips
+#Note, &#013; is a newline entitiy (\n does not work)
+tippy::tippy_this(elementId = "kmer", 
+                  tooltip = "Substrings of length k within a DNA/RNA sequence. 
+                              The 1-mers of 'AGCT' are 'A', 'G', 'C', and 'T'. 
+                              Its 2-mers are 'AG', 'GC' and 'CT'. 
+                              Its 3-mers are 'AGC' and GCT'. 
+                              Its 4-mer is 'AGCT'.",
+                  arrow = TRUE, placement = "bottom")
+```

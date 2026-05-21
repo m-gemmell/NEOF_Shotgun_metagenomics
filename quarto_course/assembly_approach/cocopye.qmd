@@ -1,0 +1,246 @@
+---
+engine: knitr
+---
+# CoCoPyE
+
+<center>
+![](/images/bin_quality.png){style="width: 400px; border-radius: 5px; background: white; border: white 5px solid"}
+</center>
+
+`CoCoPyE` is a useful tool to assess the quality of assembled microbial genomes. 
+This can be used on assemblies produced from single cell, single isolate, or metagenome data. 
+
+## Workflow concept
+
+The tool utilises protein domain families from the Pfam database.
+A protein domain is a region of a protein that folds independently from the rest of the protein.
+They vary in length from ~50-250 amino acids.
+Many proteins consist of several domains and a domain can appear in many different proteins.
+
+`CoCoPyE` estimates quality of a genome by estimating completeness and contamination through an input-preprocessing step followed by a two stage prediction step. 
+
+Below is the workflow as a diagram followed by a breif description on how it works. 
+For full details please see the CoCoPyE publication: https://academic.oup.com/gigascience/article/doi/10.1093/gigascience/giae079/7841111
+
+<center>
+![](/images/cocopye_workflow.jpeg){style="width: 800px; border-radius: 5px; border: white 5px solid"}
+</center>
+
+### Input Pre-processing
+
+<center>
+![](/images/cocopye_workflow_step_1.png){style="width: 800px; border-radius: 5px"}
+</center>
+
+A protein domain search is carried out on all translated open reading frames of our our query genomes, <u id='mag'>MAGs</u>/bins in our case.
+The Pfam protein database is used and the tool produces protein domain counts for our query genomes.
+
+The completeness of the query genome is estimated based on one of 2 universal marker sets.
+The universal marker sets contain the protein domains found in either all reference bacterial genomes or all reference archaeal genomes.
+Query genomes (<u id='mag'>MAGs</u>/bins) with a completeness score <10% are rejected and removed from further analysis.
+
+### Prediction: Stage I
+<center>
+![](/images/cocopye_workflow_stage_1.png){style="width: 800px; border-radius: 5px"}
+</center>
+
+In Stage I the nearest neighbours of our query's protein domains are searched for in the Pfam database.
+This creates a list of reference protein domains for our query.
+
+Next a specific marker prediction is carried out to create the stage I (i.e. marker based) completeness & contamination values.
+The Pfam database has information on which taxa these domains are present in.
+Therefore, sets of domains can be used as markers for specific lineages.
+
+#### Prediction example {-}
+
+Let's go through a fictional example where we have 26 protein domains PDA-Z which cover 2 different lineages: Gigabacteria and Birthobacteria.
+
+- Both Gigabacteria and Birthobacteria contain domains PDA-F
+- Domains PDG-P are only present in Gigabacteria
+- Domains PDQ-Z are only present in Birthobacteria
+
+Analysis finds that our query genome contains the domain families PDD-R. 
+We therefore acquire the below results:
+
+- The query genome is classified as belonging to the Gigabacteria lineage as it contains many (in this case all) the domains unique to Gigabacteria (PDG-P) and many of the domains shared by both bacteria.
+- Completeness: 81.25%
+  - It is missing 3 of the domains found in Gigabacteria (PDA-C) 13/16 = 0.8125 = 81.25%
+- Contamination: 13.33%
+  - Of the 15 domains our query has 2 of them do not belong to it in the reference (PDQ & PDR) 2/15 = 0.1333 = 13.33%.
+
+#### Thresholds {-}
+
+Any query genomes with a completeness value of <60% or contamination value >30% have their values recorded as their output but they do not move onto stage II.
+Other query genomes move onto the neural network stage (stage II).
+
+### Predition: Stage II
+<center>
+![](/images/cocopye_workflow_stage_2.png){style="width: 800px; border-radius: 5px"}
+</center>
+
+
+The next step utilises the domain database neighbours found in stage I.
+With this it creates a count ratio histogram (CRH) to use for a machine learning (ML)/neural network approach.
+This is carried out to reduce the dimensionality of the data to improve iterative training and reduce the risk of overfitting.
+But what is a CRH?
+
+#### Count Ratio Histogram {-}
+
+Each Pfam domain family is given a count ratio of Cq:Cr.
+
+- Cq: The count of the domain family in the query genome.
+- Cr: The count of the domain family in the reference genome. 
+  - The reference genome is determined in stage I.
+
+Examples:
+
+- __PDA__ domain
+  - Appears __2__ times in the __query__
+  - Appears __2__ times in the __reference__
+  - __Count ratio__ = __1/1__
+  - This indicates high completeness and low contamination.
+- __PDH__ domain
+  - Appears __4__ times in the __query__
+  - Appears __2__ times in the __reference__
+  - __Count ratio__ = __2/1__
+  - This indicates __contamination__ because there are too many copies of the domain in our query
+- __PDS__ domain
+  - Appears __4__ times in the __query__
+  - Appears __12__ times in the __reference__
+  - __Count ratio__ = __1/3__
+  - This indicates low __completeness__ because there are too few copies of the domain in our query
+
+The relative frequency of all the different domain count ratios are used to create a histogram, the CRH.
+The process itself will use a text histogram but below are two visualisations of CRHs.
+
+The main features of a CRH are:
+
+- __The central point (1/1):__ This indicates high completeness and low contamination.
+  - If the central peak contained 100% of the count ratios this would indicate 100% completeness and 0% contamination.
+- __Right of the central point:__ Histogram bins on the right hand side indicate contamination.
+- __Left of the central point:__ Histogram bins on the left hand side indicate decreasing completeness.
+
+<center>
+![](/images/crh1.png){style="width: 600px; border-radius: 5px; border: white 5px solid"} 
+<br>*The Above plot was created from a query genome with 61% completeness and 30% contamination.*
+</center>
+<br>
+
+<center>
+![](/images/crh2.png){style="width: 600px; border-radius: 5px; border: white 5px solid"}
+<br> *The Above plot was created from a query genome with 90% completeness and 10% contamination.*
+</center>
+
+#### Machine learning {-}
+
+The machine learning step uses the CRHs of the query genomes to improve/refine the marker-based estimations from stage I.
+
+Two neural networks are used in this prediction refinement step.
+One is used to improve the completeness estimation and one is used to improve the contamination estimation.
+
+The neural network implementations are from `sklearn`.
+If you are interested in how the machine learning step works please see the `CoCoPyE` publication: https://academic.oup.com/gigascience/article/doi/10.1093/gigascience/giae079/7841111
+
+## Mamba
+<center>
+![](/images/mamba_logo.png){style="width: 200px; border-radius: 5px"}
+</center>
+
+Due to program version conflicts we will use the `CoCoPyE` conda environment for this section.
+
+Open a new terminal and activate the `CoCoPyE` environment.
+
+```{bash eval=FALSE}
+. usecocopye
+```
+
+Ensure you are in the correct directory.
+
+```{bash eval=FALSE}
+cd ~/7-Binning/K1/
+```
+
+## Predict bin quality
+<center>
+![](/images/play_black.png){style="width:100px; background: white; border-radius: 5px; border: 5px white solid"}
+</center>
+
+`cocopye` has one main command to predict bin quality: `cocopye run`. 
+
+Run the `cocopye` command (this will take a while):
+
+```{bash eval=FALSE}
+cocopye run \
+-t 12 \
+-i bins/ \
+-o cocopye_output.csv
+```
+
+### Parameters {-}
+<center>
+![](/images/parameter_black.png){style="width:100px; background: white; border-radius: 5px; border: 5px white solid"}
+</center>
+
+- `-t` : Number of threads/cores/CPUs to utilise for the process.
+- `-i` : Input directory containing the bins in FASTA format.
+- `-o` : Output file (more info below).
+
+Other options include:
+
+- `--file-extensions` : The allowed file extensions for input files within the input directory.
+  - The default is `fasta,fna,fa`. Our bin files produced from `MetaBAT2` have the file extension/suffix of `.fa` so the default works.
+- `-v` : The output file verbosity. 
+  - Values are: `standard` (default), `extended`, and `full`.
+  - More information on the output below.
+  
+
+## Stats
+<center>
+![](/images/output_file_black.png){style="width:100px"}
+</center>
+
+As we have only used a subset of data the results are not very good. We'll therefore look at premade results. 
+These premade results were produced using the entire K1 dataset. 
+First you will need to copy them.
+
+```{bash eval=FALSE}
+cd ~/7-Binning
+mkdir K1_fullset
+cd K1_fullset
+ln -s /pub14/tea/nsc206/NEOF/Shotgun_metagenomics/binning/K1_fullset/* .
+```
+
+Now we can look at the results table that is in your current directory.
+
+```{bash eval=FALSE}
+#Use tr to tranform commas (,) to tabs (\t)
+#This makes it easier to visually parse the columns
+cat cocopye_output.csv | tr "," "\t" | less
+```
+
+`r hide("CoCoPye statistics definitions")`
+Output columns when `-v` set to `standard` (also the default)
+
+- `bin`: Name of the input bin (filename excluding file extension)
+- `completeness`: Completeness value between 0 and 1
+- `contamination`: Contamination value between 0 and 1
+- `method`: One of three results:
+  - __rejected__: Failed the threshold in the input-preprocessing step.
+  - __markers__: Values based on stage I as failed to pass onto stage II due to the stage I thresholds
+  - __markers + neural network__: Values based on stage II as passed all thresholds
+- `taxonomy`: Taxonomy estimate based on a consensus between the nearest neighbors
+- `taxonomy_level`: Rank of the taxonomy estimate
+- `notes`: Additional notes (currently this is always empty, but we might add some notes in the future)
+
+Please see the full list of statistics definitions from [CoCoPyE wiki](https://github.com/gobics/cocopye/wiki/Output). This includes the defintions when `-v` is set to `extended` or `full`.
+`r unhide()`
+
+There is a lot of information.
+In the next chapter we'll calculate a bin quality score value with the `CoCoPyE` statistics.
+
+```{r, echo=FALSE}
+#Tippy tooltips
+tippy::tippy_this(elementId = "mag", 
+                  tooltip = "Metagenome-Assembled Genome",
+                  arrow = TRUE, placement = "bottom")
+```

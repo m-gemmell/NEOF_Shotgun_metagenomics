@@ -1,0 +1,33 @@
+---
+engine: knitr
+---
+
+# Assembly functional annotation {#funcanno}
+<center>
+![](/images/pathways.png){style="width:200px; background:white; border-radius:5px"}
+</center>
+
+In this section we will carry out carry out functional annotation of our <u id='mag'>MAGs</u>/bin/bins.
+There are many different ways to carry this.
+In this tutorial we will use 2 tools:
+
+- [Bakta](#bakta_chap): Annotation of Bacterial genomes and plasmids.
+- [MinPath](#minpath_chap): Prediction of metabolic pathways.
+  - Include MetaCyc and KEGG pathways.
+
+__Conda Environment__: Go back to your shotgun_meta terminal (or create a new one and use `. useshotgun`).
+
+## Taxonomic annotation {-}
+<center>
+![](/images/classification.png){style="width:150px; background:white; border-radius:5px"}
+</center>
+
+Taxonomic annotation of bins can be carried out with `Kraken2`. As we have already done this for the reads and taxonomic results from read and assembly approaches have similar performances we will not cover it here.
+
+
+```{r, echo=FALSE}
+#Tippy tooltips
+tippy::tippy_this(elementId = "mag", 
+                  tooltip = "Metagenome-Assembled Genome",
+                  arrow = TRUE, placement = "bottom")
+```

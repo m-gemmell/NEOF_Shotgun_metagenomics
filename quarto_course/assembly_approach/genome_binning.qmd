@@ -1,0 +1,31 @@
+---
+engine: knitr
+---
+
+# Metagenome binning {#binning}
+<center>
+![](/images/yarn_binning.png){style="width:400px; background: white; border-radius:5px; border: white solid 5px"}
+</center>
+
+A metagenome assembly consists of contigs from many different genomes. At this stage we don't know which contigs are from which species. We could try to taxonomically classify each contig but there are 2 problems with this approach:
+
+1. Some contigs may be misclassified which can lead to multiple contigs from the same genome/organism being classified as various taxa.
+2. Databases are incomplete and so some contigs will not be classified at all (microbial dark matter).
+
+To alleviate these issues genomic binning can be carried out. This will cluster contigs into bins based on:
+
+- __Depth__: Contigs with similar depth are more likely to be from the same genome
+- __Composition__: Contigs with similar GC content are more likely to belong to the same genome
+
+Genomic binning has been used to discover many new genomes. Additionally, it makes downstream analyses quicker as the downstream steps will be carried out on the sets of bins rather than on one large metagenome assembly.
+
+Binning produces "bins" of contigs of various quality (e.g. draft, complete). These bins are also known as <u id='mag'>MAGs</u> . In other words a <u id='mag'>MAG</u>  is a single genome assembly that was assembled with other genomes in a metagenome assembly but later separated from the other assemblies. The term <u id='mag'>MAGs</u>  has been adopted by the GSC (Genomics Standards Consortium).
+
+It is recommended to ensure you do not have a poor quality metagenome assembly. Binning requires contigs of good length and good coverage. Extremely low coverage and very short contigs will be excluded from binning.
+
+```{r, echo=FALSE}
+#Tippy tooltips
+tippy::tippy_this(elementId = "mag", 
+                  tooltip = "Metagenome-Assembled Genome",
+                  arrow = TRUE, placement = "bottom")
+```

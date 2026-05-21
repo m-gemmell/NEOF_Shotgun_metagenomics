@@ -1,0 +1,22 @@
+---
+engine: knitr
+---
+# Optional task
+<center>
+![](/images/tasks.png){style="width:150px; background: white; border-radius:5px"}
+</center>
+
+Carry out all the steps starting from [Multi sample processing](#humannmultisampleprocessing) with the gene families information.
+
+-   Copy the gene families data from `/pub14/tea/nsc206/NEOF/Shotgun_metagenomics/DietGeneFamilies`
+-   Ensure you set the `--units` option to `cpm` in the [renormalising data](#humannrenormalise) step
+-   On top of analysing the unstratified data you can also analyse the stratified data
+
+Amazing! That completes the non assembly approach to shotgun metagenomic analysis. 
+
+## Next section
+<center>
+![](/images/jigsaw.png){style="width:200px; background: white; border-radius:5px"}
+</center>
+
+The next section is the [assembly approach section](/assembly_approach/metagenome_assembly.qmd).

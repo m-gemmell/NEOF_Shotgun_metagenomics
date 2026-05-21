@@ -1,0 +1,48 @@
+# Tutorial overview
+<center>
+![](/images/tutorial.png){style="width:200px; background: white; border-radius:5px; border: white solid 5px"}
+</center>
+
+## Basics
+
+This tutorial and practical session focuses on performing a range of metagenomic analyses using shotgun sequence data from the Illumina platforms. 
+
+The analyses discussed here are by no means exhaustive and are instead intended to provide a sample of what can be done with a metagenomic dataset. 
+
+## Structure
+
+We prefer to allow people to work at a pace that they are comfortable with rather than ensuring that everyone is at the same point of the tutorial at the same time. There will be no instructor telling you what to type and click. Instead, everything you require to carry out the practical is written in this document. Take your time; it's important to spend some time understanding why you are running the commands, rather than simply typing them out. 
+
+If at any point you are having trouble or have a question, let one of us know and we'll provide 1-to-1 assistance.
+
+## Content
+<center>
+![](/images/sections.png){style="width:100px; border-radius:5px; background-color:white; border: solid white 5px"}
+</center>
+
+This practical is broken up into the following sections and parts.
+
+1. __[Intro](/index.qmd):__ Introduction and learning outcomes
+2. __[Overview](/index.qmd):__ A quick overview of Shotgun metagenomics and the course structure
+3. __Data & QC__
+    - __[Raw data](/data_and_qc/raw_data.qmd)__: We will first link to a dataset that we have downloaded for this tutorial. We will take a quick look at what the sequence files look like and briefly discuss the origin of the samples.
+    - __[Trimming data](/data_and_qc/trimming_data.qmd)__: This entails preprocessing our data to ensure that it is of good quality.
+    - __[Host removal](/data_and_qc/host_removal.qmd)__: When sequencing the genomic content of a host's microbiota (bacteriome, archaeome, mycobiome, and more) it is likely you will also sequence the host's genome. This step shows a method of removing possible host contamination.
+4. __[Read approach](/read_approach/read_approach.qmd)__
+    - __[Taxonomic profiling](/read_approach/taxonomic_profiling.qmd)__: We will analyse the dataset to determine the species abundance in each sample. Following this, we will visualise the data and compare the samples.
+    - __[Functional profiling](/read_approach/functional_profiling.qmd)__: We will analyse the dataset to determine the pathway abundance and completeness in each sample. Following this, we will visualise the data and compare the samples.
+5. __[Assembly approach](/assembly_approach\metagenome_assembly.qmd)__
+    - __[Metagenome assembly](/assembly_approach/flash.qmd)__: Here, we will move away from just analysing the reads directly and will assemble the metagenome into contigs. Prior to this, we will 'stitch' the reads together to ensure we get the best assembly possible.
+    - __[Binning](/assembly_approach/genome_binning.qmd)__: This step attempts to separate each assembled genomes into bins. These genome assemblies are called Metagenome-assembled Genomes (MAGs).
+    - __[Functional annotation](/assembly_approach/assembly_functional_annotation.qmd)__: We will take our MAGs, predict genes and then functionally annotate them with MetaCyc.
+6. __Appendix__
+    - [Mamba](/appendix\mamba.qmd): Software and tool installation instructions using mamba
+    - [Next steps](/appendix\next_steps.qmd): Suggestions on various websites to explore for further tools
+    - [Manual](/appendix\manuals.qmd): Links to the manuals of the various tools and software used in this course
+
+## Next section
+<center>
+![](/images/cluster.png){style="width:150px; background: white; border-radius:5px; border: white solid 5px"}
+</center>
+
+The next section is the [Setup section](/setup/cluster_intro.qmd).
