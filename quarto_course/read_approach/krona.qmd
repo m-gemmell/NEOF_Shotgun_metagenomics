@@ -9,22 +9,59 @@ engine: knitr
 `Krona` is an interactive metagenome species abundance visualisation tool.
 We will use it to produce interactive tiered pie charts from our `Kraken2` output.
 
+## Kraken2 report to krona
+
+Prior to creating our html pie charts we need to convert our kraken2 reports to krona text files.
+We'll carry this out with the [`KrakenTools`](https://github.com/jenniferlu717/KrakenTools) script: `kreport2krona.py`.
+
+::: {.callout-note}
+Ensure you type the full python script as it is below. <br>
+For information on how to download and use the python script in your own computer/environment please see the [appendix](/appendix/mamba/qmd#shotgun_meta)
+:::
+
+```{bash, eval=FALSE}
+#Krona conversion for K1
+python ~/git_installs/KrakenTools/kreport2krona.py -r K1.kreport2 -o K1.krona
+#Krona conversion for K2
+python ~/git_installs/KrakenTools/kreport2krona.py -r K2.kreport2 -o K2.krona
+#Krona conversion for W1
+python ~/git_installs/KrakenTools/kreport2krona.py -r W1.kreport2 -o W1.krona
+```
+
+- `-r` is our input report file
+- `-o` is our output krona text file
+
+`r hide("Loop method")`
+Rather than running the command for each line you can carry it out with a loop.
+If you run the below first ensure your current directory only has `.kreport2` files that you want included.
+
+```{bash, eval=FALSE}
+ls -1 *kreport2 | sed "s/.kreport2//" | while read sample
+do 
+python /pub14/tea/nsc206/git_installs/KrakenTools/kreport2krona.py \
+-r ${sample}.kreport2 \
+-o ${sample}.krona
+done
+```
+`r unhide()`
+
+The actual content of the krona text file is not of interest as the file is only really useful for creating the interactive krona charts.
+
 ## Import taxonomy
 <center>
 ![](/images/play_red.png){style="width:100px; background: white; border-radius:5px; border: white solid 5px"}
 </center>
 
-We can use the `Kraken2` report files to create our Krona plots. With the below command we can import our `Kraken2` taxonomy (within the report file) into a `Krona` html.
+Time to make our `krona` charts. 
+With the below command we can import our `krona` text files into one `Krona` html.
 
 ```{bash eval=FALSE}
-ktImportTaxonomy -o kraken2.krona.html *.kreport2
+ktImportText -o kraken2.krona.html *.krona
 ```
 
 - `-o` is our output html file
-- The final argument `*.kreport2` represents all of our `.kreport2` files in the current directory
-  - The `*` is a wild-card, meaning any characters any number of times. Therefore `*.kreport2` identifies the files `K1.kreport2` `K2.kreport2` and `W1.kreport2`
-
-You will get a warning that not all taxonomy IDs were found. We will ignore this but in your own future installations this should be addressed with `Krona`'s `updateTaxonomy.sh` command.
+- The final argument `*.krona` represents all of our `.krona` files in the current directory
+  - The `*` is a wild-card, meaning any characters any number of times. Therefore `*.krona` identifies the files `K1.krona` `K2.krona` and `W1.krona`
 
 ## Tiered piecharts
 <center>
@@ -41,12 +78,15 @@ This is an interactive multi-tiered pie chart with many options. Some of the int
 
 - To choose a sample to view, click on the sample name in the top left
 - To zoom into a lower taxonomy, double click on the taxonomy's name on the pie chart
-  - E.g. double click the word "Bacteria" on the pie chart to zoom into Bacteria and therefore ignore Eukaryota, and "[other Root]"
+  - E.g. double click the word "Bacteria" on the pie chart to zoom into Bacteria and therefore ignore the Unclassified, Viral, and Archaeal
 - To zoom out to a higher taxonomy, click on the taxonomy's name in the middle of the pie chart
-  - E.g. click the word "root" in the middle of the pie chart to zoom back out from any lower level of taxonomy
+  - E.g. click the word "all" in the middle of the pie chart to zoom back out from any lower level of taxonomy
 - To view percentage stats of a taxonomy, click on the taxonomy name on the pie chart.
   - This will display the percentage this taxonomy covers of all the different taxonomies above it that it belongs to. This is displayed on the right side of the screen
-  - E.g. Click on Pseudomonadota to see the percentage of the Root it accounts for and to see the percentage of Bacteria it accounts for in the sample
+  - E.g. Click on Pseudomonadota to see the percentage of all the taxa it accounts for and to see the percentage of Bacteria it accounts for in the sample
+- With our method of kraken2 to krona the top right of the screen shows the following 2 metrics for the slected taxa:
+  - __Total:__ This is the "Number of paired reads covered by the clade rooted at this taxon" (i.e. column 2 of the kreport file)
+  - __Unassigned:__ This is appears to be the "Number of paired reads assigned directly to this taxon". However, the number for "k_Bacteria" does not seem to match anything in the `.kreport2` files
 
 ## MCQs
 <center>
@@ -56,31 +96,31 @@ This is an interactive multi-tiered pie chart with many options. Some of the int
 Viewing the Krona, attempt the below MCQs.
 
 ```{r, echo = FALSE}
-opts_p <- c("__2%__", "__34%__", answer="__35%__")
+opts_p <- c("__34%__", answer="__44%__", "__67%__")
 ```
-1. What percentage of the __root__ was classified to __Bacteria__ for __K1__? `r longmcq(opts_p)`
+1. What percentage of __all__ was classified to __Bacteria__ for __K1__? `r longmcq(opts_p)`
 
 ```{r, echo = FALSE}
-opts_p <- c("__2%__",answer="__34%__", "__35%__")
+opts_p <- c(answer="__14%__", "__44%__","__67%__")
 ```
-2. What percentage of __bacteria__ was classified to __Pseudomonadota__ for __K2__? `r longmcq(opts_p)`
+2. What percentage of __bacteria__ was classified to __Firmicutes__ (also known as Bacillota) for __K2__? `r longmcq(opts_p)`
 
 ```{r, echo = FALSE}
-opts_p <- c(answer="__2%__","__34%__", "__35%__")
+opts_p <- c("__14%__", "__44%__", answer="__67%__")
 ```
-3. What percentage of the __root__ was classified to __Myxococcota__ for __W1__? `r longmcq(opts_p)`
+3. What percentage of the __bacteroidetes__ was classified to __Bacteroides__ for __W1__? `r longmcq(opts_p)`
 
 ```{r, echo = FALSE}
-opts_p <- c(answer="__39%__", "__8%__", "__6%__")
+opts_p <- c("**15**",answer="**17,244**","**105,847**")
 ```
-4. What percentage of the __Terrabacteria groups__ was classified to __Cellulomonas gilvus__ for __K2__? `r longmcq(opts_p)`
+4. What is the number of paired reads covered by the clade rooted at _Anaerostipes hadrus_ (i.e. Total) for K2? `r longmcq(opts_p)`
 
 ```{r, echo = FALSE}
-opts_p <- c("__39%__", "__8%__", answer="__6%__")
+opts_p <- c("**15**","**17,244**",answer="**105,847**")
 ```
-5. What percentage of __Alphaproteobacteria__ was classified to __Phenylobacterium immobile__ for __K1__? `r longmcq(opts_p)`
+5. What is the number of paired reads covered by the clade rooted at _Bacteroides ovatus_ (i.e. Total) for __K1__? `r longmcq(opts_p)`
 
 ```{r, echo = FALSE}
-opts_p <- c("__39%__", answer="__8%__", "__6%__")
+opts_p <- c(answer="**15**","**17,244**","**105,847**")
 ```
-6. What percentage of __Viridiplantae__ (in Eukaryota) was classified to __Parasponia__ for __W1__?  `r longmcq(opts_p)`
+6. What is the number of paired reads assigned directly to __Clostridia__ (i.e. Unassigned) for __W1__?  `r longmcq(opts_p)`
