@@ -21,11 +21,11 @@ For information on how to download and use the python script in your own compute
 
 ```{bash, eval=FALSE}
 #Krona conversion for K1
-python ~/git_installs/KrakenTools/kreport2krona.py -r K1.kreport2 -o K1.krona
+python /pub14/tea/nsc206/git_installs/KrakenTools/kreport2krona.py -r K1.kreport2 -o K1.krona
 #Krona conversion for K2
-python ~/git_installs/KrakenTools/kreport2krona.py -r K2.kreport2 -o K2.krona
+python /pub14/tea/nsc206/git_installs/KrakenTools/kreport2krona.py -r K2.kreport2 -o K2.krona
 #Krona conversion for W1
-python ~/git_installs/KrakenTools/kreport2krona.py -r W1.kreport2 -o W1.krona
+python /pub14/tea/nsc206/git_installs/KrakenTools/kreport2krona.py -r W1.kreport2 -o W1.krona
 ```
 
 - `-r` is our input report file
@@ -86,7 +86,7 @@ This is an interactive multi-tiered pie chart with many options. Some of the int
   - E.g. Click on Pseudomonadota to see the percentage of all the taxa it accounts for and to see the percentage of Bacteria it accounts for in the sample
 - With our method of kraken2 to krona the top right of the screen shows the following 2 metrics for the slected taxa:
   - __Total:__ This is the "Number of paired reads covered by the clade rooted at this taxon" (i.e. column 2 of the kreport file)
-  - __Unassigned:__ This is appears to be the "Number of paired reads assigned directly to this taxon". However, the number for "k_Bacteria" does not seem to match anything in the `.kreport2` files
+  - __Unassigned:__ This appears to be the "Number of paired reads assigned directly to this taxon". However, the number for "k_Bacteria" does not seem to match anything in the `.kreport2` files
 
 ## MCQs
 <center>
@@ -103,12 +103,12 @@ opts_p <- c("__34%__", answer="__44%__", "__67%__")
 ```{r, echo = FALSE}
 opts_p <- c(answer="__14%__", "__44%__","__67%__")
 ```
-2. What percentage of __bacteria__ was classified to __Firmicutes__ (also known as Bacillota) for __K2__? `r longmcq(opts_p)`
+2. What percentage of __Bacteria__ was classified to __Firmicutes__ (also known as Bacillota) for __K2__? `r longmcq(opts_p)`
 
 ```{r, echo = FALSE}
 opts_p <- c("__14%__", "__44%__", answer="__67%__")
 ```
-3. What percentage of the __bacteroidetes__ was classified to __Bacteroides__ for __W1__? `r longmcq(opts_p)`
+3. What percentage of the __Bacteroidetes__ was classified to __Bacteroides__ for __W1__? `r longmcq(opts_p)`
 
 ```{r, echo = FALSE}
 opts_p <- c("**15**",answer="**17,244**","**105,847**")
