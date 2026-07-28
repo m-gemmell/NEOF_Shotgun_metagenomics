@@ -2,14 +2,16 @@ project:
   type: website
 editor:
   render-on-save: true
+knitr: true
 website:
   bread-crumbs: false
   favicon: /images/NEOF_favicon.png
   page-navigation: true
   title: NEOF Shotgun Metagenomics
-  description: Shotgun Metagenomics course by CGR
+  description: Shotgun Metagenomics course by NEOF
   navbar:
-    title: NEOF Shotgun Metagenomics
+    title: Shotgun Metagenomics
+    logo: "images/NEOF_logo_no_background.png"
     collapse-below: lg
     left:
     - text: Intro
@@ -131,22 +133,26 @@ format:
     engine: knitr
     fig-width: 10.2
     fig-height: 6
+###Page size
     grid:
+####Width of sidebar
       sidebar-width: 200px
-      body-width: 1000px
-      margin-width: 200px
-      gutter-width: 0.75em
+####Max width of main page
+      body-width: 1200px
+####Width of empty margin at right of toc
+#### needed to give room for long headers
+      margin-width: 150px
+####Space separating body from sidebar and toc  
+      gutter-width: 10px
     css: include/webex.css
     include-after-body: include/webex.js
+###Themes
+###HTML themes: https://quarto.org/docs/output-formats/html-themes.html
     theme:
-      light:
-      - cosmo
-      - styles.scss
-      dark:
-      - darkly
-      - styles_dark.scss
+####Dark theme with scss file
+      dark: [darkly, styles_dark.scss]
+####Light theme with scss
+      light: [styles_light.scss]
+    highlight-style: a11y
     embed-resources: false
     toc: true
-knitr:
-  opts_knit:
-    verbose: true

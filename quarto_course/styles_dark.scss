@@ -1,7 +1,9 @@
 /*-- scss:defaults --*/
 
-// Import fonts
-@import url('https://fonts.googleapis.com/css2?family=Fira+Mono&family=Lexend&display=swap');;
+// Lexend
+@import url('https://fonts.googleapis.com/css2?family=Lexend:wght@100..900&display=swap');
+// Fira mono
+@import url('https://fonts.googleapis.com/css2?family=Fira+Mono:wght@400;500;700&family=Lexend:wght@100..900&display=swap');
 
 // Colors
 $ibm-blue: #648fff;
@@ -23,10 +25,13 @@ $sidebar-hl: $neof-green;
 
 $link-color: $ibm-blue;
 
-//Inline code
-$code-bg: #383838;
-
+//CSS code
 /*-- scss:rules --*/
+
+.navbar-logo {
+  max-height: 40px;
+}
+
 body {
   font-family: "Lexend";
 }
@@ -46,94 +51,22 @@ code {
   color: $ibm-yellow ;
 }
 
-// Placement of hex image rows in main index page
-.hexrowtop {
-  position: relative;
-  left:-50px;
-  display: flex;
-  flex-wrap:nowrap;
-  justify-content: center;
+.tippy-tooltip {
+  font-size: 16px;
+  padding: 3px 5px;
 }
-.hexrowmid {
-  position: relative;
-  top: -47px;
-  display: flex;
-  flex-wrap:nowrap;
-  justify-content: center;
+ 
+// Embed videos
+.container {
+    position: relative;
+    width: 100%;
+    height: 0;
+    padding-bottom: 56.25%;
 }
-.hexrowbottom {
-  position: relative;
-  top: -94px;
-  left: 50px;
-  display: flex;
-  justify-content: center;
-  height: 40px;
-}
-
-// Placement of hex image in one row
-.hexrow {
-  position: relative;
-  display: flex;
-  flex-wrap:nowrap;
-  justify-content: center;
-}
-
-// Placement of hex image rows in /tibble/tibble.qmd at others
-.hextblrowbottom {
-  left: -37.5px;
-  top:-61px;
-  height:130px;
-  position: relative;
-  display: flex;
-  flex-wrap:nowrap;
-  justify-content: center;
-}
-
-// Placement of hex image rows in /dplyr/dplyr.qmd at others
-.hexdplyrcolumnstop {
-  left: -37.5px;
-  position: relative;
-  display: flex;
-  flex-wrap:nowrap;
-  justify-content: center;
-}
-.hexdplyrcolumnsbottom{
-  left:37.5px;
-  top:-61px;
-  height:130px;
-  position: relative;
-  display: flex;
-  flex-wrap:nowrap;
-  justify-content: center;
-}
-
-// Placement of hex images in /ggplot2/ggplot2.qmd
-.hexggplotcolumnsbottom{
-  left:-37.5px;
-  top:-61px;
-  height:130px;
-  position: relative;
-  display: flex;
-  flex-wrap:nowrap;
-  justify-content: center;
-}
-.hexggplot2customisationcolumnsbottom{
-  left:37.5px;
-  top:-63px;
-  height:130px;
-  position: relative;
-  display: flex;
-  flex-wrap:nowrap;
-  justify-content: center;
-}
-
-.hexcollast {
-}
-
-
-// Make images disappear if size of viewport is too small
-@media (max-width: 450px) {
-  .hexcollast {
-    display: none;
-  }
+.video {
+    position: absolute;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
 }
