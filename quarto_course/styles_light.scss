@@ -1,10 +1,7 @@
 /*-- scss:defaults --*/
 
-// Lexend
-@import url('https://fonts.googleapis.com/css2?family=Lexend:wght@100..900&display=swap');
-// Fira mono
-@import url('https://fonts.googleapis.com/css2?family=Fira+Mono:wght@400;500;700&family=Lexend:wght@100..900&display=swap');
-
+// Import fonts
+@import url('https://fonts.googleapis.com/css2?family=Fira+Code:wght@300..700&family=Lexend:wght@100..900&display=swap');
 // Colors
 $ibm-blue: #648fff;
 $ibm-purple: #785ef0;
@@ -13,12 +10,23 @@ $ibm-orange: #fe6100;
 $ibm-yellow: #ffb000;
 $neof-green: #00af37;
 $neof-grey: #333e47;
+$black: #000000;
 
 // Base document colors
 $navbar-bg: $neof-grey;
 $navbar-hl: $neof-green; // highlight color when hovering over navbar links
 $footer-bg: $neof-grey; // footer
 $sidebar-hl: $neof-green;
+
+// Text of side bar (i.e. left)
+$sidebar-fg: $black; //Text colour
+
+// Colour of links
+$link-color: $ibm-blue;
+ 
+$font-family-sans-serif: "Lexend";
+$font-family-monospace: "Fira Code";
+
 
 //CSS code
 /*-- scss:rules --*/
@@ -41,9 +49,18 @@ monofont {
   font-family: "Fira+Mono";
 }
 
-// Code font
 code {
-  color: $ibm-yellow ;
+  font-family: "Fira Code", monospace;
+  font-optical-sizing: auto;
+  font-weight: 500;
+  font-style: normal; 
+}
+ 
+.fira-code-medium {
+  font-family: "Fira Code", monospace;
+  font-optical-sizing: auto;
+  font-weight: 500;
+  font-style: normal;
 }
 
 .tippy-tooltip {
